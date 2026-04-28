@@ -1,20 +1,53 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# UK Visa Info
 
-# Run and deploy your AI Studio app
+Live at **[ukvisainfo.co.uk](https://ukvisainfo.co.uk)** — Next.js 15 SSR site with up-to-date 2026 UK visa guidance.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/f5e65318-f206-4c26-9134-9c347b3cfc13
+- Next.js 15 (App Router) + React 19
+- Tailwind CSS v4 (`@tailwindcss/postcss`)
+- TypeScript 5.8
+- motion/react for animations
+- react-markdown + remark-gfm for blog content
+- Vercel hosting + analytics
+- Cloudflare DNS for `ukvisainfo.co.uk`
 
-## Run Locally
+## Routes (25 prerendered pages)
 
-**Prerequisites:**  Node.js
+- `/` — homepage
+- `/visa-types` — directory of visa routes
+- `/eligibility` — interactive 4-step quiz
+- `/costs` — fee calculator
+- `/visa/[slug]` — 8 detail pages (skilled-worker, student, visitor, family, health, talent, graduate, innovator-founder)
+- `/blog` — article index
+- `/blog/[slug]` — 9 long-form articles
 
+## Local development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev   # http://localhost:3000
+npm run build
+npm run lint  # tsc --noEmit
+```
+
+## Deploy
+
+Connected to Vercel — pushing to `main` triggers a production deploy.
+
+Manual deploy (fallback):
+```bash
+npx vercel --prod
+```
+
+## SEO
+
+- Sitemap: `public/sitemap.xml` (submitted to Google Search Console)
+- robots.txt: `public/robots.txt`
+- Per-page metadata via Next.js Metadata API
+- BlogPosting + Article JSON-LD on detail pages
+- WebSite + Organization JSON-LD in root layout
+
+## Status
+
+Indexable pages: 25 · Blog articles: 9 · Monetization: not yet wired
