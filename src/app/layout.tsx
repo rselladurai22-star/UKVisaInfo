@@ -88,11 +88,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
+        <AdSenseScript />
       </head>
       <body>
         <AppShell>{children}</AppShell>
         <Analytics />
-        <AdSenseScript />
       </body>
     </html>
   );
