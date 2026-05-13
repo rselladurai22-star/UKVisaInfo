@@ -1206,6 +1206,887 @@ Be wary of unregulated agents charging £500+ for simple reapplications. The Hom
 See our [Visitor visa guide](/visa/visitor) for the full document list and application walkthrough.
 `.trim(),
   },
+
+  {
+    slug: 'uk-health-care-worker-visa-2026-complete-guide',
+    title: 'UK Health and Care Worker Visa 2026 — Complete Guide',
+    description:
+      'Full 2026 guide to the UK Health and Care Worker visa: eligible roles, £25,600 salary minimum, IHS exemption, care worker route closure, and how to apply.',
+    date: '2026-04-29',
+    updated: '2026-04-29',
+    readMinutes: 8,
+    tags: ['Health & Care', 'Healthcare workers', 'NHS'],
+    body: `
+The Health and Care Worker visa is the UK's most generous work route — cheaper fees, IHS exemption, and a lower salary threshold than Skilled Worker. But in 2026 it has also been the most-reformed: the care worker sub-route is closed to new overseas applicants, sponsor scrutiny is tighter than ever, and English requirements have been raised for certain roles. This guide covers who still qualifies, how the route differs from Skilled Worker, and the steps to apply.
+
+## How Health and Care differs from Skilled Worker
+
+Health and Care Worker visa is a sub-category of the Skilled Worker route, but with significant benefits:
+
+| Feature | Skilled Worker | Health and Care |
+|---|---|---|
+| Application fee (3 years, out of UK) | £827 | £304 |
+| Application fee (5 years, out of UK) | £1,636 | £590 |
+| Immigration Health Surcharge | £1,035/year | **Exempt** |
+| General salary minimum | £38,700 | £25,600 (or going rate) |
+| New-entrant minimum | £30,960 | £20,960 (or going rate) |
+| Sponsorship licence required | Yes | Yes (different category) |
+| Path to ILR | 5 years | 5 years |
+| Dependants allowed | Yes | Yes (with restrictions) |
+
+The IHS exemption alone saves £3,105 over a 3-year visa — usually more than the entire visa fee. This is the most underused fact about the route.
+
+## Who qualifies in 2026
+
+You must be sponsored for one of these eligible roles by an approved health or care sector employer:
+
+**Eligible roles (current):**
+- Registered nurse (SOC 2231) — including adult, child, mental health, learning disability
+- Doctor (SOC 2211, 2212)
+- Midwife (SOC 2232)
+- Paramedic (SOC 3213)
+- Dentist (SOC 2215)
+- Pharmacist (SOC 2213)
+- Allied health professional (physiotherapist, occupational therapist, dietitian, radiographer, etc. — SOC 22XX series)
+- Social worker (SOC 2442) — England-only restrictions apply
+- Senior care worker (SOC 6135) — limited; see below
+
+**Eligible employer types:**
+- NHS trusts and foundation trusts
+- NHS-commissioned organisations
+- Private hospitals delivering NHS services
+- Care homes registered with CQC (England), Care Inspectorate (Scotland), CIW (Wales), RQIA (NI)
+- Adult social care providers regulated by the relevant national body
+
+## Care worker route — what changed
+
+In March 2025 the standard **care worker** role (SOC 6135 at non-senior level) was closed to new overseas applicants on the Health and Care visa. The government acted after widespread sponsor abuse cases — including over 470 sponsor licences revoked between 2022 and 2025.
+
+What this means in 2026:
+
+- New overseas applicants **cannot** apply for care worker positions (non-senior).
+- Senior care worker positions remain open but at the higher £25,600+ salary.
+- People already in the UK on care worker visas can extend; they are not affected.
+- Switching from another visa (e.g. Student) to care worker is now also blocked for the standard role.
+
+If you're in the UK on another visa, you can still switch to senior care worker, registered nursing, or other eligible roles — but not into entry-level care work.
+
+## Salary thresholds in 2026
+
+You must clear the highest of three:
+
+1. **£25,600 general minimum** (or £20,960 for new entrants)
+2. **Going rate for your SOC 2020 code**
+3. **£12.82 per hour**
+
+Going rates for common roles:
+
+- Registered nurse (band 5) — £31,081 (NHS pay scale)
+- Senior care worker — £25,600
+- Care home manager (registered) — £34,000+
+- Junior doctor (FY1) — £36,616 (NHS pay scale)
+- Consultant — £93,666+ (NHS scale)
+- Physiotherapist (band 5) — £31,081
+- Pharmacist — £41,659 (NHS scale, or private going rate)
+
+NHS positions follow the Agenda for Change pay bands; these salaries are already above the threshold for most roles. Private care home positions typically sit at or just above £25,600 — leaving little headroom.
+
+## English language requirement
+
+The Home Office requires CEFR B1 for most roles. In 2026, **nurses and doctors must now meet B2** (raised from B1) following the 2024 white paper changes.
+
+Accepted tests:
+- IELTS Academic 4.0 (B1) or 5.5 (B2)
+- OET (Occupational English Test) — specifically designed for healthcare; widely accepted
+- Pearson PTE Academic, Trinity ISE, LanguageCert
+- Degree taught in English from a recognised institution
+
+Most NHS roles also require professional English certification (NMC for nurses, GMC for doctors), which is typically a higher bar than the Home Office's.
+
+## Costs in 2026
+
+| Item | Out of UK | In UK switch |
+|---|---|---|
+| Application fee (3 years) | £304 | £304 |
+| Application fee (5 years) | £590 | £590 |
+| IHS | £0 (exempt) | £0 (exempt) |
+| Priority service | £500 | £500 |
+| Super priority | n/a | £1,000 |
+
+Total for 3 years: as low as **£304**. A Skilled Worker visa for the same period costs around £4,400. The savings are enormous and almost always covered by the sponsor.
+
+## Documents you'll need
+
+- Current passport
+- Certificate of Sponsorship reference number from your employer
+- Proof of English (IELTS, OET, etc.) or evidence of qualifying nationality
+- Tuberculosis test result (if from a listed country)
+- Criminal record certificate from each country you've lived in for 12+ months in the last 10 years (for roles working with children or vulnerable adults — virtually all healthcare)
+- Evidence of maintenance funds (£1,270 for 28 days, OR A-rated sponsor certifies it)
+- Professional registration evidence (NMC PIN, GMC number, HCPC registration, etc.) — must be obtained before applying
+
+## Sponsorship — choosing the right employer
+
+Health and Care sponsors fall into roughly three tiers:
+
+**Tier 1 — High-trust, low-risk:**
+- NHS trusts (all)
+- Major teaching hospitals
+- Top 50 care home chains (HC-One, Barchester, Care UK, Bupa, etc.)
+
+**Tier 2 — Mid-trust, check track record:**
+- Mid-sized NHS-commissioned providers
+- Regional care home groups
+- Private hospitals (BMI Healthcare, Spire, Nuffield)
+
+**Tier 3 — Higher risk, due diligence essential:**
+- Small single-site care homes
+- Care agencies (many had licences revoked in 2023–25)
+- Newly licensed sponsors
+
+For Tier 3, check the sponsor licence register at gov.uk, look up CQC inspection ratings, search Companies House for the company structure, and ask current overseas staff about working conditions. Sponsor licence revocation cancels your visa.
+
+## Dependants in 2026
+
+Most Health and Care visa holders can bring:
+- Spouse / civil partner / unmarried partner
+- Children under 18
+
+**Exception added January 2024:** care workers can no longer bring dependants on new applications. This restriction does not apply to registered nurses, doctors, midwives, or allied health professionals — they can still bring family.
+
+Each dependant pays the standard £582 application fee (3 years) plus IHS at the dependant rate of £776/year (dependants on Health and Care are **not** IHS-exempt — only the main applicant is).
+
+## Path to ILR
+
+The Health and Care Worker visa counts toward Indefinite Leave to Remain in the same way as Skilled Worker — 5 years of continuous residence with up to 180 days absent per rolling 12 months. The 5-year clock starts from the date your Health and Care visa takes effect.
+
+At extension and at ILR application, you'll need:
+- Continuing employment in an eligible role (or having moved between eligible roles with new sponsor licence)
+- Salary at the prevailing threshold at the time of application
+- HMRC tax records consistent with declared salary
+- Life in the UK Test pass
+- B1 English (or B2 for nurses/doctors as required by profession)
+
+## Application process — step by step
+
+1. **Find an eligible sponsor.** Use the sponsor licence register (filtered for Health and Care category) at gov.uk.
+2. **Pass the English test** if not exempt.
+3. **Get professional registration** with the relevant UK body (NMC for nurses takes 2–6 months; GMC for doctors takes 3–9 months including PLAB). Start this before applying for visa.
+4. **Receive Certificate of Sponsorship** from employer (digital reference number).
+5. **Gather documents** including TB test, criminal record certificates, qualifications.
+6. **Apply online** at gov.uk — pick the Health and Care Worker visa option.
+7. **Attend biometrics appointment** at VFS / TLS / Visa Application Centre.
+8. **Wait for decision** — 3 weeks standard, 5 working days priority.
+9. **Collect BRP or activate eVisa** on arrival in the UK.
+
+## Common mistakes
+
+1. **Confusing Health and Care with Skilled Worker.** The lower fees and IHS exemption only apply if you select Health and Care on the application form. Selecting Skilled Worker by accident costs you thousands.
+2. **Applying before professional registration is complete.** Without NMC PIN / GMC number, the application fails.
+3. **Using a sponsor on the wrong licence.** Some sponsors hold a Skilled Worker licence but not Health and Care category. Confirm before accepting a CoS.
+4. **Forgetting criminal record certificates.** For healthcare roles, certificates from every country you've lived in for 12+ months in the last 10 years are mandatory.
+5. **Missing the senior vs non-senior care worker distinction.** Senior care worker still works; standard care worker is closed.
+
+## What's coming in 2026–2027
+
+The Migration Advisory Committee is reviewing the entire Health and Care route in late 2026. Possible changes:
+- Salary threshold harmonisation with Skilled Worker (would raise to £38,700)
+- IHS exemption review (most likely to be retained for cost reasons)
+- Further restrictions on care worker dependants
+- Mandatory English certification renewal at extension
+
+If you're considering this route, applying in 2026 is likely cheaper and easier than waiting for the next review cycle.
+
+See our [Health visa guide](/visa/health) for the application walkthrough, or our [eligibility checker](/eligibility) to see if you qualify.
+`.trim(),
+  },
+
+  {
+    slug: 'uk-dependant-visa-rules-2026-spouse-children',
+    title: 'UK Dependant Visa Rules 2026 — Spouse and Children Explained',
+    description:
+      'Who can bring dependants on a UK visa in 2026: rules for Skilled Worker, Student, Health and Care, and Family visas, fees, income requirements, and the dependant ban that affects students.',
+    date: '2026-04-29',
+    updated: '2026-04-29',
+    readMinutes: 8,
+    tags: ['Dependants', 'Spouse', 'Children'],
+    body: `
+The right to bring your spouse and children to the UK depends entirely on which visa **you** hold — and in 2026 the rules are stricter than at any point in the last decade. Three major restrictions have come in since 2024: Student visa dependant ban for most courses, care worker dependant ban, and tighter income evidence at Skilled Worker level. This guide walks through who can bring family in 2026, what it costs, and the documents needed.
+
+## Who counts as a "dependant"?
+
+The Home Office defines a dependant as:
+
+- A **spouse** or **civil partner** (legally married/registered in the relevant country)
+- An **unmarried partner** living together in a relationship akin to marriage for **2+ years**
+- A **child under 18** at the date of application
+
+Children turning 18 during the visa can extend as dependants. Adult children, parents and siblings are **not** dependants on most routes — they must apply separately under specific routes (Adult Dependent Relative is the main one, and it is famously restrictive).
+
+## Visa-by-visa rules in 2026
+
+### Skilled Worker visa — full dependant rights
+
+You **can** bring spouse and children. Each dependant:
+- Pays application fee (£827 for 3 years, £1,636 for 5 years) — same as you
+- Pays IHS at £1,035/year (adult) / £776/year (child) — full amount, no exemption
+- Counts toward your maintenance requirement (extra £285 per dependant for 28 days, unless A-rated sponsor certifies)
+
+Cost example: Skilled Worker + spouse + one child for 3 years (out-of-UK initial application):
+- 3 × £827 = £2,481 fees
+- IHS: £1,035 × 3 + £776 × 3 = £5,538
+- **Total: ~£8,019**
+
+Dependants on Skilled Worker can work in any job (no sponsorship needed for them), study, and access NHS but not most public benefits.
+
+### Student visa — dependant ban (huge change)
+
+From January 2024, Student visa dependants are **banned** for almost all courses. The exceptions:
+
+- **Government-sponsored students** (Chevening, Commonwealth, etc.) on courses 6+ months
+- **PhD or doctoral students** (research degrees only)
+- **Students whose course is 6+ months and started before January 2024** (legacy)
+
+Most master's and undergraduate students cannot bring family in 2026. This is the single biggest visa change of the last decade for South Asian and African students, who have historically brought spouses on Student dependant visas.
+
+If you're not in the eligible group above and want to bring family, the practical paths are:
+1. Spouse applies as a Skilled Worker independently (if they have UK employment offer)
+2. Wait until you switch to Skilled Worker post-graduation and add dependants then
+3. PhD route — research degrees still allow dependants
+
+### Health and Care Worker visa — split rules
+
+Most roles (nurses, doctors, allied health) **can** bring dependants on standard terms.
+
+**Care workers cannot** bring dependants on new applications since January 2024. This affects roughly 100,000 new applicants per year.
+
+Salary applies for the main applicant; dependants don't need to meet any threshold themselves.
+
+### Family visa — this IS the dependant route
+
+If you don't have UK status but your spouse/partner does (British citizen, settled, or refugee/humanitarian status), they can sponsor you on a Family visa. This is a separate route, not a "dependant" sub-category.
+
+Requirements (sponsor side):
+- £29,000 annual income (or qualifying savings)
+- Suitable accommodation
+- Genuine relationship evidence
+- English language at A1 (initial) / A2 (extension) / B1 (ILR)
+
+See our [Family visa article](/blog/uk-family-visa-minimum-income-2026-what-counts) for the £29,000 breakdown.
+
+### Visitor visa — 6 months for family visits
+
+If you only want family to visit short-term, they don't need a "dependant" visa — they apply for a standard Visitor visa, valid up to 6 months. They cannot work, study (more than recreational courses), or settle on this route.
+
+### Graduate visa — restricted
+
+Graduate visa allows dependants **only if** they were already on your Student visa as dependants. New dependants cannot be added. This catches out students who married during their UK studies.
+
+### Global Talent and Innovator Founder — full rights
+
+Both allow dependants on standard terms — fees, IHS, no income test for the main applicant (since the visa itself proves capacity).
+
+## Documents required for dependant applications
+
+For spouse/civil partner:
+- Marriage / civil partnership certificate (translated and apostilled if foreign)
+- Cohabitation evidence (joint bills, tenancy, photos with dates, communications during separation)
+- Spouse's passport
+- Spouse's TB test (if from a listed country)
+- Spouse's biometrics enrolment
+- Two recent photos of the couple together
+
+For unmarried partner:
+- 2 years of cohabitation evidence — joint tenancy, joint bills, both names on bank statements, etc.
+- Statement from each partner about the relationship
+- Evidence of relationship over time (photos with dates, communications)
+
+For children under 18:
+- Birth certificate showing the parents' names
+- Both parents' passports
+- If only one parent is applying or already in the UK, consent letter from the other parent
+- Custody documentation if applicable
+- Child's TB test (if from listed country and child is over 11)
+- Two recent photos of the child
+
+## Income evidence for dependants
+
+For Skilled Worker:
+- £285 per dependant for 28 days in savings, OR
+- A-rated sponsor confirms maintenance in the CoS / sponsor letter
+
+For Family visa (where you are the dependant):
+- The £29,000 sponsor income test applies — sponsor's job, savings, or pension evidence
+
+## Common mistakes
+
+1. **Marrying mid-Student-visa, then trying to add dependant.** The student dependant ban applies — they cannot join you while you're on Student visa. Wait until Skilled Worker.
+2. **Applying for partner separately for cost savings.** Each application is a separate fee. There is no discount for batched family applications.
+3. **Missing apostille on overseas documents.** Marriage certificates from many countries (India, Pakistan, Nigeria, Egypt, etc.) need apostille / legalisation. Get this in your home country before applying.
+4. **Forgetting child consent letter.** Single parent or separated parents cases need explicit consent from the other parent for the child to travel and apply.
+5. **Bringing children turning 18.** Apply before their 18th birthday. After 18, they need a separate visa route — usually Student or Skilled Worker.
+
+## When dependants arrive — practical setup
+
+Once granted, dependants can:
+- Enter the UK on the same date or after the main applicant
+- Get a BRP / eVisa with the same expiry as the main applicant
+- Work without restriction (Skilled Worker dependants, unlike main applicant, are not tied to a sponsor)
+- Use NHS (paid for via IHS)
+- Open UK bank accounts (need to bring proof of address and visa)
+
+If their relationship to the main applicant ends (separation, divorce, death), they typically have 60 days to apply for an alternative visa or leave the UK. Skilled Worker dependants who have built their own career may switch to Skilled Worker in their own right at that point.
+
+## Strategic planning
+
+Optimal timing for dependant applications:
+- **Apply together at initial visa stage.** Cheaper than adding later (no separate biometrics scheduling, single solicitor consultation).
+- **Children born in the UK** while parents are on visa get British citizenship only if at least one parent is settled (ILR or British) at the time of birth. Otherwise they get the same status as the parent.
+- **ILR for dependants** is achievable at the same 5-year mark as the main applicant, assuming continuous residence.
+
+See our visa guides for [Skilled Worker](/visa/skilled-worker), [Health & Care](/visa/health), [Family](/visa/family), and [Student](/visa/student) for route-specific dependant detail.
+`.trim(),
+  },
+
+  {
+    slug: 'uk-visa-english-language-requirement-2026',
+    title: 'UK Visa English Language Requirement 2026 — Tests & Exemptions',
+    description:
+      'Full 2026 guide to UK visa English language tests: CEFR levels required by route, accepted tests (IELTS, OET, PTE), exemptions for native speakers and degree holders, and the new B2 rules for nurses and doctors.',
+    date: '2026-04-29',
+    updated: '2026-04-29',
+    readMinutes: 7,
+    tags: ['English language', 'IELTS', 'Tests'],
+    body: `
+Every UK visa applicant — whether for work, study, family or settlement — must demonstrate they meet a specific English language standard. The required level varies dramatically by route, and the rules around accepted tests and exemptions changed significantly in 2024–25. This 2026 guide explains exactly what level you need for your visa, which tests to take, and the exemptions that save many applicants £200–£300 in testing fees.
+
+## CEFR levels required by visa route
+
+The UK uses the Common European Framework of Reference (CEFR) standard. Each visa specifies a minimum level:
+
+| Route | Required level | Notes |
+|---|---|---|
+| Student visa (degree level RQF 6+) | B2 | Universities often require higher |
+| Student visa (below degree RQF 3–5) | B1 | Foundation, A-level, etc. |
+| Skilled Worker | B1 | Same for Health & Care, Scale-up |
+| Health & Care (nurses, doctors) | **B2** (raised from B1 in 2024) | Professional registration may demand higher |
+| Family visa — initial application | A1 | Lowest UK threshold |
+| Family visa — extension after 30 months | A2 | |
+| Family visa — ILR | B1 | Same as Skilled Worker |
+| ILR (most routes) | B1 | |
+| Naturalisation (citizenship) | B1 | Plus Life in the UK Test |
+| Global Talent | None (route-specific) | |
+| Innovator Founder | B2 | Higher than most work routes |
+| Visit visa | None | |
+| Graduate visa | None (proven at Student stage) | |
+
+The biggest pitfall: Family visa applicants must clear three different levels at three different stages — A1, A2, then B1. Many forget to retake at extension.
+
+## What CEFR levels mean in practice
+
+- **A1 (Beginner)** — Can introduce yourself, ask simple questions, understand short slow speech.
+- **A2 (Elementary)** — Can have simple conversations on familiar topics, write short messages.
+- **B1 (Intermediate)** — Can handle most travel situations, describe experiences, give short reasoned opinions.
+- **B2 (Upper-intermediate)** — Can converse fluently with native speakers, write clear detailed text, follow complex arguments.
+
+Roughly speaking: B1 is where most applicants who studied English in secondary school land naturally; B2 takes deliberate practice or having lived in an English environment.
+
+## Accepted tests for UKVI in 2026
+
+The Home Office maintains a Secure English Language Test (SELT) list. Tests not on this list are **not accepted** for visa purposes — even if internationally recognised.
+
+**SELT-approved providers (2026):**
+
+1. **IELTS for UKVI** — Academic or General Training. Most popular globally. ~£230. Centres in 140+ countries.
+2. **IELTS Life Skills** — A1, A2 and B1 only (no reading/writing). For Family and ILR. Cheaper at ~£175.
+3. **Pearson PTE Academic UKVI** — All levels. Computer-based, fast turnaround. ~£200.
+4. **LanguageCert International ESOL SELT** — All levels. Increasingly popular for being £140–£190.
+5. **Trinity College London ISE SELT** — Available in UK only. ~£175.
+6. **OET (Occupational English Test)** — Healthcare-specific. Required by NMC/GMC anyway. ~£500.
+
+### Which test to choose
+
+- **IELTS** — safest default; accepted everywhere, widely available. Choose Academic if also applying to UK universities.
+- **PTE Academic** — fastest results (often 2 days vs 13 for IELTS), computer-based, no human examiner subjectivity.
+- **LanguageCert** — cheapest option; appearing in more centres each year.
+- **IELTS Life Skills** — cheapest for Family / ILR applicants who only need A1, A2 or B1.
+- **OET** — only worth it if you're a nurse/doctor already needing it for professional registration. Double-purpose test.
+
+Test results expire **2 years** from the date sat. Apply for your visa within that window or you'll need to retake.
+
+## Exemptions — when you don't need a test
+
+You are **exempt** from the test if any one of these applies:
+
+### 1. Majority English-speaking country nationality
+
+You are a national (passport holder, not just resident) of:
+- Antigua and Barbuda
+- Australia
+- Bahamas
+- Barbados
+- Belize
+- Canada
+- Dominica
+- Grenada
+- Guyana
+- Ireland (separate route anyway)
+- Jamaica
+- Malta
+- New Zealand
+- St Kitts and Nevis
+- St Lucia
+- St Vincent and the Grenadines
+- Trinidad and Tobago
+- USA
+
+Note: India, Nigeria, Pakistan, the Philippines, Kenya, Ghana etc. are **not** on this list despite widespread English use.
+
+### 2. Degree taught in English
+
+You hold a UK academic degree (Bachelor's, Master's, or PhD) — automatically counts.
+
+You hold a non-UK degree taught entirely in English. You'll need:
+- An **Ecctis (formerly UK ENIC) verification statement** that the qualification is equivalent to a UK Bachelor's / Master's / PhD
+- An **English Medium of Instruction (EMI) confirmation** from the institution
+
+Ecctis statements cost £210 and take 10–15 working days. Plan ahead.
+
+### 3. Previously approved in earlier UK visa
+
+If you have already met a particular English level on a prior successful UK visa application, you usually do not need to re-prove it for the same or lower level. The Home Office checks your file.
+
+Example: a Student visa applicant who passed B2 IELTS in 2022. They can switch to Skilled Worker (B1) without retesting. The B2 evidence is on file and covers the lower B1 requirement.
+
+This is the most-overlooked exemption. Always check your prior UK application file before booking a new test.
+
+### 4. Specific other exemptions
+
+- **Under 18** — child applicants do not test.
+- **65 or over** — exempt from English at all stages including ILR (but still need Life in the UK Test).
+- **Long-term physical or mental condition** preventing testing — requires evidence (GP letter, specialist report).
+
+## Booking and sitting the test
+
+1. **Choose a SELT centre** at gov.uk/find-test-centre.
+2. **Book online** — usually 1–4 weeks ahead in popular cities; 1–2 days in less busy centres.
+3. **ID requirements** — passport only. Driving licence and other ID are not accepted at SELT centres.
+4. **Bring exam confirmation** — printed or on phone.
+5. **Allow 3–4 hours** for IELTS / PTE; OET takes longer.
+6. **Get results** — IELTS 13 days; PTE 2–5 days; LanguageCert 5–7 days.
+
+Test centres are stricter than general IELTS — phones must be off and stowed; food and water only in clear bottles; bathroom breaks are escorted.
+
+## When tests get rejected
+
+The most common reasons your test won't be accepted:
+
+1. **Wrong test type.** "IELTS Academic" (regular) is not the same as "IELTS for UKVI Academic." The UKVI version is the one Home Office accepts.
+2. **Expired results.** 2 years from test sitting date, not from result date.
+3. **Wrong CEFR mapping.** IELTS 4.0 is B1 in reading/listening but A2 in writing/speaking; minimum scores in **each component** must reach the required CEFR level, not just the overall band.
+4. **Counterfeit certificates.** The Home Office cross-checks every test with the awarding body's database. Even genuine certificates from suspended test centres (this has happened with several centres in the past 5 years) cause refusal.
+5. **Name discrepancy.** Name on test must match passport exactly. Initials, missing middle name, or character differences trigger refusal.
+
+## Family visa special — the three levels
+
+Family visa applicants face the trickiest English journey:
+
+1. **A1 at initial application** (entry clearance or in-country switch) — easiest level, often passed with IELTS Life Skills.
+2. **A2 at 30-month extension** — must be retested unless higher previous evidence.
+3. **B1 at ILR application** — must be retested unless higher previous evidence.
+
+Plan ahead: if you take an A2 test at initial application stage, you'll need to retest at A2 minimum (or B1) at extension. Taking B1 at initial application saves you the A2 retest — useful if your English is already that level.
+
+## Cost summary
+
+| Test | Levels covered | Approx. cost |
+|---|---|---|
+| IELTS Life Skills | A1, A2, B1 only | £175 |
+| LanguageCert SELT | A1–C2 | £140–£190 |
+| Pearson PTE UKVI | A1–C2 | £200 |
+| IELTS for UKVI Academic | A1–C2 | £230 |
+| Trinity ISE SELT (UK only) | A1–C2 | £175 |
+| OET | B1+ healthcare | £500 |
+
+Plus Ecctis statement if claiming exemption via foreign degree: £210.
+
+## What to do next
+
+1. **Check if you're exempt first.** Save the £140+ test fee if you can.
+2. **Identify your required level** for your specific visa.
+3. **Pick the cheapest SELT test that covers your level.**
+4. **Book at least 4 weeks before your visa application** to allow time for results and resits if needed.
+5. **Sit the test in person** — there are no remote SELT options (a common misconception).
+
+See our route-specific guides for full English requirements at each stage: [Family visa](/blog/uk-family-visa-minimum-income-2026-what-counts), [Skilled Worker](/visa/skilled-worker), [ILR](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements).
+`.trim(),
+  },
+
+  {
+    slug: 'uk-eta-electronic-travel-authorisation-2026',
+    title: 'UK ETA Electronic Travel Authorisation 2026 — Who Needs It & How to Apply',
+    description:
+      'The UK ETA scheme is now mandatory for most non-visa nationals visiting the UK. Who needs one in 2026, how to apply (£10, 3 days), validity, and what to do if refused.',
+    date: '2026-04-29',
+    updated: '2026-04-29',
+    readMinutes: 6,
+    tags: ['ETA', 'Visitor', 'Travel authorisation'],
+    body: `
+The UK Electronic Travel Authorisation (ETA) scheme rolled out in phases between 2023 and 2025, and as of 2026 it is now mandatory for almost all non-visa-required nationals visiting the UK. Coming for a holiday from the US, Canada, Australia, the EU or 30+ other countries? You almost certainly need an ETA before you board. This guide covers who needs one, the £10 application process, validity rules, and what to do if denied.
+
+## What is an ETA?
+
+An ETA is a digital pre-travel authorisation, similar to:
+- US ESTA
+- Canadian eTA
+- Australian ETA
+
+It is **not** a visa. It is permission to *travel to* the UK; the final decision to enter is still made by Border Force when you arrive. But without an ETA, the airline will refuse to board you.
+
+## Who needs an ETA in 2026
+
+You need an ETA if **all** of the following are true:
+
+1. You are a national of one of the eligible countries (see list below)
+2. You are visiting the UK for tourism, business, short study (under 6 months), or transit
+3. You do not already hold a UK visa or other UK immigration status (e.g. Family permit, settled status)
+4. You are not a British or Irish citizen
+
+### Countries that need an ETA in 2026
+
+Full list as of 2026 (subject to expansion):
+- All EU/EEA member states + Switzerland
+- USA, Canada, Australia, New Zealand
+- Japan, South Korea, Singapore, Hong Kong (BNO holders separate route)
+- Gulf states: Bahrain, Kuwait, Oman, Qatar, Saudi Arabia, UAE
+- Israel, Brunei
+- Antigua and Barbuda, Bahamas, Barbados, St Kitts and Nevis, St Lucia, etc. (Caribbean Commonwealth)
+- Argentina, Chile, Uruguay
+- Taiwan, Malaysia, Mauritius
+
+### Who does NOT need an ETA
+
+- British and Irish citizens
+- Holders of a current UK visa (Skilled Worker, Student, Visitor, etc.)
+- Holders of UK settled status (ILR, EUSS)
+- Holders of a UK Family Permit
+- Nationals of "visa national" countries (India, China, Pakistan, Nigeria, etc.) — these still need a full visit visa, not just an ETA
+- Children under 18 if travelling with a parent who has an ETA — wait, this is wrong: **every traveller including infants needs their own ETA**
+
+## How to apply
+
+**Where:** UK ETA app (iOS / Android) or gov.uk/guidance/apply-for-an-electronic-travel-authorisation
+
+**Cost:** £10 per person (free for under-3s but they still need an ETA submission)
+
+**Time:** Most decisions are returned within minutes; the official target is **3 business days**.
+
+### What you need to apply
+
+- A valid passport (must remain valid for at least the duration of your stay)
+- A recent digital photo (or live face scan via app)
+- A credit/debit card
+- An email address for notifications
+
+### Step by step
+
+1. Download the UK ETA app or go to the gov.uk page.
+2. Choose "Apply for an ETA."
+3. Scan the photo page of your passport.
+4. Take a live selfie (the app checks it matches your passport photo).
+5. Answer questions about employment, recent travel, criminal history, immigration history.
+6. Pay £10 by card.
+7. Receive ETA decision by email — usually within 30 minutes.
+
+## ETA validity rules
+
+- Valid for **2 years** from issue, OR until your passport expires (whichever is sooner)
+- Allows **multiple visits** during validity
+- Each visit can be up to **6 months** (the standard visitor allowance)
+- Allows **transit** through UK airports
+
+You do not need to apply for a new ETA for each visit during the 2-year validity. If your passport is renewed during this period, your old ETA does not transfer — you must apply for a new one linked to the new passport.
+
+## What you can do on an ETA visit
+
+The ETA permits the same activities as a standard Visitor visa:
+
+- Tourism, leisure, sightseeing
+- Visiting family and friends
+- Short business activities (meetings, training, conferences)
+- Short-term study courses under 6 months
+- Transit through UK airports
+- Marriage / civil partnership if pre-arranged at a registered venue
+
+You **cannot**:
+- Work or run a business in the UK
+- Live in the UK long-term
+- Study a course over 6 months
+- Access public funds or NHS-eligible long-term services
+- Claim asylum on entry (separate process)
+
+## ETA refusals and what to do
+
+ETA refusal rates are low — around 1–2% — but rising as Home Office screens more carefully. Common refusal reasons:
+
+### 1. Previous UK immigration breach
+Overstayers, deportees, or those with prior UK refusals will usually be refused an ETA and must apply for a full visitor visa instead.
+
+### 2. Serious criminal convictions
+You must declare convictions in any country. Serious convictions (12+ months custodial in last 10 years; offences against children; drug trafficking; serious violence) result in refusal.
+
+### 3. Inconsistent passport / identity issues
+- Damaged passport
+- Different name from previous visa applications
+- Recent passport issued without supporting biographical detail
+
+### 4. Recent travel patterns suggesting overstay risk
+Frequent short trips with quick returns can flag concerns.
+
+### 5. Application errors
+Wrong nationality, wrong date of birth, mismatched photo — these are rejected automatically and require new application + new £10 fee.
+
+## If refused
+
+A refusal letter explains the ground. You can:
+1. **Apply for a standard Visitor visa instead** — this allows fuller documentation and more discretion, though costs more (£127) and takes longer (3 weeks).
+2. **Reapply for ETA** if the refusal was due to a fixable error (wrong details, recoverable identity issue). You'll pay £10 again.
+3. **Address the underlying issue first** if refusal cited immigration history or criminal record — apply for visa with detailed explanation rather than ETA.
+
+There is no formal ETA appeal route — your remedy is to reapply (for fixable issues) or escalate to a visitor visa application.
+
+## ETA and connecting flights / transit
+
+If you transit through a UK airport (e.g. London Heathrow connecting to another country), you need an ETA in 2026 — even if you don't pass through immigration. The exceptions are:
+
+- **Same terminal, airside transit** at LHR / LGW under 24 hours — some routes still don't require ETA
+- **Direct Airside Transit Visa (DATV) routes** for certain nationals — different scheme
+
+The rules around transit have shifted multiple times. If your itinerary involves a UK stopover, check the most current gov.uk transit guidance before booking.
+
+## Common mistakes
+
+1. **Booking flights before getting ETA.** While ETA approval is fast, the few applications that go to manual review can take 3+ business days. Apply at least a week before travel.
+2. **One ETA for a family.** Each person — including infants — needs their own.
+3. **Assuming ETA works for work or long study.** It doesn't. Misusing ETA for work activity triggers entry refusal and a future ban.
+4. **Forgetting ETA when boarding a UK-bound flight.** Airlines check ETA at check-in. No ETA = no boarding. You don't get a chance to "explain at the gate."
+5. **Renewing passport mid-validity and assuming ETA carries over.** It doesn't.
+
+## What's coming next
+
+- **Phase 4 expansion** in 2026: more nationalities expected to be added to the ETA-eligible list, moving some current visa nationals (e.g. South Africa is being discussed) into ETA territory.
+- **EU national rollout** completed October 2024; most teething issues at borders resolved by 2026.
+- **Possible integration with eVisa system** for status verification at borders.
+
+## ETA vs Visit visa — which do you need?
+
+| Situation | Use |
+|---|---|
+| US/EU/Australian tourist | ETA |
+| Visit visa national (India, China, etc.) tourist | Visit visa |
+| Already hold Skilled Worker visa | Neither |
+| Long study (12 months) | Student visa |
+| Working short-term | Work visa |
+| Family member of UK national wanting to live | Family visa |
+
+See our [Visitor visa guide](/visa/visitor) if you're a visa national, or our [eligibility checker](/eligibility) if unsure which route applies.
+`.trim(),
+  },
+
+  {
+    slug: 'uk-innovator-founder-visa-2026-endorsement-guide',
+    title: 'UK Innovator Founder Visa 2026 — Endorsement and Business Plan Guide',
+    description:
+      'Complete 2026 guide to the UK Innovator Founder visa: endorsing bodies, business plan requirements, no minimum investment, 3-year route to ILR, and the bar most applicants underestimate.',
+    date: '2026-04-29',
+    updated: '2026-04-29',
+    readMinutes: 9,
+    tags: ['Innovator Founder', 'Entrepreneur', 'Business'],
+    body: `
+The Innovator Founder visa replaced the older Innovator and Start-up visas in April 2023 and is the UK's primary route for entrepreneurs in 2026. It has three rare benefits: no minimum investment requirement, a faster 3-year path to ILR, and full work rights including other employment alongside your business. But the bar — endorsement by an approved body for a genuinely innovative, viable and scalable business — is significantly higher than headline guides suggest. This article walks through what it takes to actually get endorsed in 2026.
+
+## What is the Innovator Founder visa?
+
+A 3-year visa for non-UK entrepreneurs who:
+- Have a **new business idea** that is innovative, viable and scalable
+- Have been **endorsed** by a Home Office-approved endorsing body
+- Meet financial maintenance, English, and good character requirements
+
+Key features:
+- No minimum investment (the previous £50,000 requirement was dropped in 2023)
+- Settle (ILR) after 3 years — fastest non-Global-Talent route
+- Can work for another employer alongside running the business
+- Full dependant rights
+- Renewable indefinitely if you don't reach ILR criteria
+
+## The three endorsement criteria
+
+The bar is set by these three words. They are assessed separately and you must satisfy **all three**.
+
+### Innovative
+Your business idea must be original or address a market gap in a meaningfully new way. Endorsers look for:
+- A novel product, service or business model
+- Clear differentiation from competitors
+- Defensible IP, technology, or unique market insight
+- "Why now" — what makes this idea timely
+
+What does **not** count as innovative:
+- A new restaurant, café or retail store
+- A standard import/export business
+- A consulting / professional services firm offering generic services
+- A franchise of an existing chain
+
+### Viable
+The business must be capable of running successfully — i.e. the founder has the skills, market knowledge and plan to make it work. Endorsers look for:
+- A founder with relevant industry experience or technical expertise
+- A realistic financial plan with sensible revenue assumptions
+- Identified customers, contracts or pilot users
+- Adequate funding identified (even if not raised yet)
+
+### Scalable
+The business must have potential to grow significantly — creating jobs, generating substantial revenue, and reaching beyond a single locality. Endorsers look for:
+- Total addressable market size
+- Path to £1m+ revenue within 3–5 years
+- Plans to hire UK staff
+- Distribution channels that scale
+
+## Approved endorsing bodies in 2026
+
+There are currently four endorsing bodies for new Innovator Founder applications (as of early 2026):
+
+1. **Envestors Limited** — generalist, broad industry coverage
+2. **UK Endorsement Services Limited** — generalist
+3. **Innovator International** — international entrepreneurs, generalist
+4. **The Global Entrepreneurs Programme (GEP)** — for established founders relocating to the UK (high bar; typically £1m+ revenue)
+
+The old list of 10+ endorsing bodies has been pruned. Some previously-approved bodies (Tech Nation, etc.) no longer endorse new applicants.
+
+### Endorsement application process
+
+Each body has its own application portal and assessment process. Typical flow:
+
+1. Submit initial expression of interest with elevator pitch and biography
+2. Submit detailed business plan (15–40 pages)
+3. Pay assessment fee (£500–£3,000 depending on body)
+4. Interview with endorser's review panel (60–90 minutes)
+5. Decision: endorse, defer (more work needed), or decline
+
+Endorsement takes **6–12 weeks** end to end. Decline rates vary by body — Envestors and UK Endorsement Services report approval rates around 30–40%.
+
+The endorser writes you an endorsement letter referencing the three criteria. You upload this to your Home Office visa application.
+
+## The business plan — what endorsers actually want
+
+The plan is the document the endorser will spend most time on. Best practice in 2026:
+
+**Mandatory sections:**
+- Executive summary (1 page)
+- Problem and solution
+- Market analysis with TAM/SAM/SOM (total/serviceable/obtainable market)
+- Competitive analysis with named competitors and your differentiators
+- Product/technology description — for tech businesses, this should include architecture or IP claims
+- Go-to-market strategy
+- Financial model — 3-year projection with monthly view in year 1
+- Funding plan — how much you'll raise, from whom, and when
+- Founder background and team
+- UK economic contribution — projected jobs, exports, tax revenue
+
+**Red flags endorsers look for:**
+- Vague TAM figures ("$10 trillion AI market")
+- No identified customers or pilot users
+- Founder with no relevant industry experience
+- Generic financial projections (linear growth, no seasonality)
+- No mention of competitors (suggests poor market research)
+- Heavy reliance on "we'll figure it out as we go"
+
+**Length:** 15–25 pages is typical. Don't pad. Endorsers prefer dense, well-evidenced documents to fluffy 60-page essays.
+
+## Eligibility checklist
+
+To apply for the visa itself (after endorsement):
+
+1. Endorsement letter from approved body
+2. Age 18 or over
+3. £1,270 maintenance funds in your account for 28+ days
+4. CEFR B2 English (higher than Skilled Worker)
+5. TB test if from listed country
+6. Genuine intention to operate the business in the UK
+7. No serious criminal record
+
+There is **no minimum personal investment** required. You can come with £0 personal funds, provided the business plan shows the funding model works.
+
+## Costs in 2026
+
+| Item | Amount |
+|---|---|
+| Endorsement fee | £500–£3,000 (varies by body) |
+| Visa application fee (out of UK) | £1,191 |
+| Visa application fee (in UK switch) | £1,486 |
+| IHS (3 years × £1,035) | £3,105 |
+| Priority service | £500 |
+| Dependant fee (each) | £1,191 + IHS |
+
+Total minimum (single applicant, no dependants): around **£5,800** including a mid-range endorsement fee.
+
+## The 3-year route to ILR
+
+Innovator Founder is one of the few routes offering ILR in 3 years instead of 5. To qualify for ILR at the 3-year mark, you must demonstrate the business has met at least **two of the following seven indicators**:
+
+1. **Investment**: at least £50,000 invested in the business from any source (founder funds, angel, VC) — this is now an ILR test, not a visa entry test.
+2. **Jobs**: created at least 10 full-time UK jobs at standard pay (or 5 jobs each paying £25,000+).
+3. **Revenue**: business turnover of £1m+ in the last full year.
+4. **Customers**: turnover £500,000+ from non-UK customers.
+5. **Innovation**: significant R&D activity / IP development.
+6. **Investment institution**: investment from a recognised UK or international institutional investor.
+7. **Profitability** or paid taxes at certain levels.
+
+Most successful Innovator Founders meet criteria 1 + 2 or 1 + 3.
+
+## Switching from another visa
+
+You can switch into Innovator Founder from inside the UK if you currently hold:
+- Start-up visa (legacy route, transitioning)
+- Skilled Worker visa
+- Student visa or Graduate visa (must have completed UK degree)
+- Most other long-term visas
+
+You cannot switch from visitor visas, transit, or short-term student.
+
+For Graduate visa holders specifically: the Innovator Founder route is increasingly popular as the UK's structured path from graduation to entrepreneurship. The endorsing bodies look favourably on UK-educated founders with relevant degree-related ventures.
+
+## Common mistakes
+
+1. **Targeting the wrong endorsing body.** Each has industry preferences. Tech-heavy ideas do better at certain bodies; sustainability or social impact at others. Research recent endorsements.
+2. **Submitting a thin business plan.** The biggest single reason for decline. Endorsers want depth, not slogans.
+3. **Treating the interview lightly.** The panel will probe weaknesses in the plan. Founders who can't defend their numbers fail at this stage.
+4. **Claiming innovation that isn't.** "First X in the UK" is often dismissed if the concept exists elsewhere. Be honest about differentiation.
+5. **Forgetting B2 English.** Higher than Skilled Worker — many entrepreneurs assume their existing B1 evidence is enough.
+6. **Underestimating the timeline.** Most successful applicants spend 6–12 months on the plan and endorsement process before applying.
+
+## What to do if endorsement is declined
+
+Each body has its own appeal process — usually allowing one resubmission within 6 months if you significantly strengthen the plan. Alternative paths:
+
+- **Try a different endorsing body.** Each has different preferences; a decline at one is not a death sentence elsewhere.
+- **Pivot the business idea** to address the specific feedback.
+- **Consider Skilled Worker** if your business plan isn't endorsable but you have employable skills.
+- **Consider Global Talent** if your endorsement letter route includes founder-level recognition in your field.
+
+## Practical preparation timeline
+
+Realistic timeline from "I want to do this" to landing in the UK:
+
+- **Months 1–3:** Develop business plan, build founder credentials, secure pilot customers/partners
+- **Months 4–6:** Submit endorsement application; respond to follow-ups; sit interview
+- **Months 7–8:** Receive endorsement; gather visa application documents; sit B2 English test
+- **Months 9–10:** Submit Home Office visa application; biometrics; await decision
+- **Month 11+:** Move to UK
+
+Compressing this is risky. Founders who try to do it in under 6 months typically submit weaker plans and decline rates rise.
+
+See our [Innovator Founder visa guide](/visa/innovator-founder) for the full document list, or our [eligibility checker](/eligibility) if you're unsure which route fits.
+`.trim(),
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
