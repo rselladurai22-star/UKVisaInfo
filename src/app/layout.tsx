@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import AppShell from '../components/AppShell';
+import AdSenseScript from '../components/AdSenseScript';
 
 const SITE_URL = 'https://ukvisainfo.co.uk';
 
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AppShell>{children}</AppShell>
         <Analytics />
+        <AdSenseScript />
       </body>
     </html>
   );

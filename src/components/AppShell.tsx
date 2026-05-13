@@ -7,6 +7,7 @@ import ScrollProgress from './ScrollProgress';
 import ScrollToTop from './ScrollToTop';
 import NewsTicker from './NewsTicker';
 import ApplyWizard from './ApplyWizard';
+import CookieBanner from './CookieBanner';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const [applyOpen, setApplyOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <Footer />
       <ScrollToTop />
       <ApplyWizard open={applyOpen} onClose={() => setApplyOpen(false)} />
+      <CookieBanner />
     </div>
   );
 }
