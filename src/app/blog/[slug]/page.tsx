@@ -5,6 +5,8 @@ import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { BLOG_POSTS, getPost } from '../../../data/blog';
+import AffiliateCallouts from '../../../components/AffiliateCallouts';
+import RelatedPosts from '../../../components/RelatedPosts';
 
 interface RouteParams {
   params: Promise<{ slug: string }>;
@@ -186,6 +188,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
             {post.body}
           </ReactMarkdown>
         </div>
+
+        <AffiliateCallouts tags={post.tags} />
+        <RelatedPosts current={post} />
 
         <footer className="mt-12 pt-8 border-t border-outline-variant/30">
           <div className="bg-surface-container-low rounded-xl p-6">

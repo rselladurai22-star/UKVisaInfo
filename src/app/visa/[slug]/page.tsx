@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, CheckCircle2, FileText, ListChecks, Sparkles, Clock, Banknote, ShieldCheck, Calendar } from 'lucide-react';
 import { VISA_DETAILS } from '../../../data/visaDetails';
+import { VISA_FAQS } from '../../../data/visaFaqs';
+import VisaFaqSection from '../../../components/VisaFaqSection';
+import RelatedBlogToVisa from '../../../components/RelatedBlogToVisa';
 
 interface RouteParams {
   params: Promise<{ slug: string }>;
@@ -36,7 +39,9 @@ export default async function VisaPage({ params }: RouteParams) {
   const v = VISA_DETAILS[slug];
   if (!v) notFound();
 
-  const jsonLd = {
+  const faqs = VISA_FAQS[slug] ?? [];
+
+  const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: v.title,
@@ -48,12 +53,33 @@ export default async function VisaPage({ params }: RouteParams) {
     mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}`,
   };
 
+  const faqJsonLd = faqs.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.answer,
+          },
+        })),
+      }
+    : null;
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <article className="max-w-4xl mx-auto px-6 py-12">
         <Link
           href="/visa-types"
@@ -141,6 +167,9 @@ export default async function VisaPage({ params }: RouteParams) {
         >
           Apply on gov.uk <ExternalLink className="w-4 h-4" />
         </a>
+
+        <VisaFaqSection faqs={faqs} />
+        <RelatedBlogToVisa visaSlug={slug} />
       </article>
     </>
   );
