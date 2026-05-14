@@ -2087,6 +2087,480 @@ Compressing this is risky. Founders who try to do it in under 6 months typically
 See our [Innovator Founder visa guide](/visa/innovator-founder) for the full document list, or our [eligibility checker](/eligibility) if you're unsure which route fits.
 `.trim(),
   },
+
+  {
+    slug: 'uk-visit-visa-documents-checklist-2026',
+    title: 'UK Visit Visa Documents Checklist 2026 — Complete List by Purpose',
+    description:
+      'Full 2026 checklist of documents for a UK Visit visa: passport, finances, ties, sponsor letter, itinerary and purpose-specific evidence. With examples by country and visit type.',
+    date: '2026-05-14',
+    updated: '2026-05-14',
+    readMinutes: 9,
+    tags: ['Visitor visa', 'Documents', 'Checklist'],
+    body: `
+A UK Visit visa application succeeds or fails on the strength of its document bundle. The Home Office gives Entry Clearance Officers 15–25 minutes per case, so the easier it is to verify your story from the paperwork, the higher your chance of approval. This 2026 checklist covers every document type the Home Office accepts, ordered by category, with notes on what makes each one a strong piece of evidence versus a weak one.
+
+## How the checklist works
+
+There is no single "required document list" published by the Home Office for Visit visas. Instead, the decision is made on **balance of probabilities** that you meet the [genuine visitor test](/blog/uk-visitor-visa-refused-top-reasons-2026). Your job is to submit enough credible evidence in four categories:
+
+1. **Identity** — who you are
+2. **Finances** — you can afford the trip without working
+3. **Ties to home country** — you'll return
+4. **Purpose** — credible reason for visiting, evidenced
+
+Every document should serve at least one of these four. Documents that don't are noise and dilute the application.
+
+## Category 1 — Identity documents
+
+### Required for everyone
+
+- **Current passport** — must have at least one blank page and validity beyond your planned departure date from the UK. The Home Office recommends 6 months minimum validity.
+- **Previous passports** if they contain visa stamps relevant to your travel history (especially Schengen, US, Canadian, Australian visas).
+- **A digital photo** taken within the last 6 months meeting the gov.uk photo specifications (white background, neutral expression, no glasses).
+
+### Required if applicable
+
+- **Marriage certificate or civil partnership certificate** if travelling with spouse or for marriage visitor purposes.
+- **Birth certificates of children** if children are part of the application.
+- **Old name documents** (deed poll, name change certificate) if your name on documents differs from current passport.
+
+### Strong vs weak
+
+- Strong: passport with multiple recent Schengen, US, or Australian visa stamps demonstrating travel discipline.
+- Weak: passport less than 6 months old with no prior travel history.
+
+## Category 2 — Financial documents
+
+### Required
+
+- **6 months of bank statements** from your main current account or salary account. Must show:
+  - Account holder name matching passport
+  - Account number, bank name and address on each page
+  - Regular salary or business income credits
+  - Average balance comfortably covering trip costs
+
+If your most recent statement is more than 30 days old, the Home Office may consider it stale.
+
+### Strong financial evidence
+
+- Salary credits every month for 6+ months, consistent in amount.
+- Average closing balance well above the cost of the planned trip (rule of thumb: 3× total trip cost).
+- No suspicious deposits — large unexplained credits weeks before application destroy credibility.
+
+### Weak financial evidence
+
+- Statements showing balance build-up immediately before application.
+- Single large deposit from an unverified source.
+- Heavy gambling, betting, or crypto transaction history.
+- Account balance below trip cost.
+
+### Optional but very useful
+
+- **Payslips** for the last 6 months matching the bank deposits.
+- **P60 / annual tax return** showing annual income consistent with monthly payslips.
+- **Fixed deposit certificates** or savings account statements showing assets beyond the current account.
+- **Pension statements** for retired applicants.
+- **Property ownership documents** (title deeds, registered land ownership) — particularly powerful for demonstrating ties.
+
+## Category 3 — Ties to home country
+
+This is the single most scrutinised category. ECOs need to believe you'll leave the UK at the end of your stay.
+
+### Employment ties
+
+- **Employer letter** on letterhead, dated within 4 weeks of application, stating:
+  - Your name, position, start date with the company
+  - Confirmation that you're employed at the company
+  - Approved leave dates (must include the dates of your UK visit)
+  - Confirmation that you're expected to return to work after the visit
+  - HR contact name, phone number, email address
+- **Employment contract** signed and current.
+- **Recent payslips** (also evidence of finances).
+
+### Self-employment / business ties
+
+- **Business registration certificate** (Certificate of Incorporation, partnership registration, sole trader registration).
+- **Recent tax returns** showing the business is active.
+- **VAT registration certificate** if applicable.
+- **Recent business bank statements** showing ongoing activity.
+- **Contracts or invoices** from the last 3–6 months demonstrating active operation.
+
+### Family ties
+
+- **Marriage certificate** if married and spouse is not travelling.
+- **Birth certificates of children** if children are not travelling.
+- **School enrolment letters** for school-age children showing they will be in school in your home country during your trip.
+- **Letters from spouse or family confirming your expected return** — these have limited weight but can support a wider picture.
+
+### Property and economic ties
+
+- **Property ownership documents** in your name (title deed, registered ownership).
+- **Tenancy agreements** showing ongoing lease commitments in home country.
+- **Mortgage statements** showing active loan repayments.
+- **Council tax bills, utility bills** in your name showing ongoing residence.
+- **Bank loan documents** showing committed financial obligations at home.
+
+### Strong vs weak ties
+
+- Strong: long-term employed with senior position, owned property, school-age children remaining in home country, multiple verified travel returns.
+- Weak: self-employed without business registration, single with no dependants, no property, no prior international travel.
+
+You cannot fabricate ties you don't have. If your situation has thin ties, compensate with strong financial evidence, detailed itinerary, and reliable sponsor.
+
+## Category 4 — Purpose-specific documents
+
+### Tourism visit
+
+- **Flight booking confirmations** (return flights from the UK). Refundable bookings are fine if you prefer not to commit before approval.
+- **Hotel reservations** for the entire stay, or sponsor's address details if staying with family/friends.
+- **Day-by-day itinerary** — typed, one page maximum, listing where you'll be each day with key activities (sightseeing locations, train journeys, etc).
+- **Tickets to specific events** (concerts, sporting events) if relevant.
+
+### Visiting family or friends
+
+- **Sponsor's invitation letter** signed and dated, including:
+  - Sponsor's full name, address, phone number
+  - Relationship to applicant
+  - Dates of the planned visit
+  - Confirmation of accommodation offered (own room, shared, etc.)
+  - Confirmation of any financial support being provided
+  - Sponsor's signature and date
+- **Sponsor's immigration status documents**:
+  - British citizen — passport bio page
+  - Settled person — eVisa share code or BRP scan
+  - On valid visa — eVisa share code or BRP scan
+- **Sponsor's most recent 3–6 months of bank statements** if they're providing financial support.
+- **Sponsor's payslips and employer letter** if employed.
+- **Sponsor's proof of accommodation**:
+  - Tenancy agreement (if renting)
+  - Mortgage statement (if owner)
+  - Council tax bill
+  - Recent utility bill in sponsor's name
+
+### Business visit
+
+- **Invitation letter from UK company** on letterhead, including:
+  - UK company name, address, Companies House registration number, VAT number
+  - UK contact's name and position
+  - Purpose of visit (meetings, training, conference)
+  - Dates of visit
+  - Confirmation of who is paying expenses
+- **Your employer letter** confirming the trip is sponsored by your employer.
+- **Conference / event registration confirmations** if attending an event.
+
+### Marriage visitor
+
+- **Confirmation of marriage venue** with a licensed registrar in the UK.
+- **Notice of marriage** documentation if already filed.
+- **Evidence of relationship** — photos with dates, communications, joint trips.
+- **Evidence of intention to leave** the UK after the ceremony.
+
+### Transit visitor
+
+- **Onward flight booking** showing departure within 48 hours of arrival.
+- **Visa for destination country** if required.
+
+## Category 5 — Previous travel history
+
+This is technically not a separate category but is checked carefully by the ECO.
+
+- **Old passports** with stamps showing visits to Schengen, US, Canada, Australia, UK (if any).
+- **Confirmation pages from prior visa grants** if not stamped in passport.
+- **Departure stamps** showing compliance with previous visa conditions.
+
+Travel history cannot be fabricated. If thin, focus other categories.
+
+## Document quality standards
+
+### Translations
+
+Every non-English document must be translated by a certified translator. The translation must include:
+- The translator's full name and contact details
+- The translator's signature
+- The date of translation
+- A confirmation that the translation is accurate
+
+Translations from family members or unqualified translators are not accepted.
+
+### Originals vs copies
+
+The Home Office now accepts digital uploads of documents for most Visit visa applications. Original documents are usually not requested. However:
+- Bank statements should show bank name and stamp/seal on each page if you can get them stamped.
+- Employer letters should be on letterhead with the HR contact's signature.
+
+### Common rejection patterns
+
+- **Photocopies of photocopies** — too blurry, hard to verify.
+- **Bank statements without account holder name visible** — must show your name on the same page as transactions.
+- **Employer letter with no contact details** — looks suspicious; ECOs cannot verify.
+- **Translations done by family members** — not accepted; must be by certified translator.
+- **Documents older than 6 months** — considered stale.
+
+## Putting the bundle together
+
+Recommended structure for upload (most applicants upload PDFs combining multiple documents):
+
+1. **Cover letter** (optional but recommended) — 1 page introducing yourself, the purpose of the visit, and a brief list of supporting documents.
+2. **Passport bio page**
+3. **Photo**
+4. **Financial bundle** (bank statements + payslips + P60 in one PDF)
+5. **Employment bundle** (employer letter + contract in one PDF)
+6. **Ties bundle** (property docs + family docs in one PDF)
+7. **Purpose bundle** (sponsor letter + sponsor docs + itinerary in one PDF)
+8. **Travel history** (passport stamps, prior visas)
+
+Total bundle size should be **15–35 pages** for most applicants. Thinner bundles risk weak-evidence refusals. Thicker bundles (over 50 pages) make the ECO's job harder and risk key documents being missed.
+
+## Cover letter — a quiet advantage
+
+A 1-page cover letter is optional, but for applicants from higher-refusal countries (Pakistan, Nigeria, Bangladesh, certain African nations), it materially raises approval odds. A good cover letter:
+
+- States your name, age, occupation, and country in the first line.
+- Explains the purpose of the visit in 2–3 sentences.
+- Lists your ties to your home country (job, family, property) in 3–4 bullets.
+- Confirms who is funding the trip.
+- Lists key supporting documents by reference.
+- Closes by stating your intention to return on a specific date.
+
+No legal language needed. Plain English, factually accurate, dated and signed.
+
+## What NOT to include
+
+- **Fake or altered documents.** Detection is sophisticated; the consequence is a 10-year ban under deception provisions.
+- **Documents in your sponsor's name** that don't relate to you. Only the sponsor's own immigration, accommodation and financial documents are relevant.
+- **Lengthy emotional letters** about why you want to visit. Stick to facts.
+- **Documents older than 6 months** unless specifically required (e.g. marriage certificate, property deed).
+- **Newspaper articles, awards, certificates** unrelated to the visit purpose.
+
+## Final pre-submission checklist
+
+Before clicking submit:
+
+- [ ] Passport bio page scanned clearly, all four corners visible
+- [ ] 6 months of bank statements, every page legible
+- [ ] Employer letter dated within last 30 days
+- [ ] All non-English documents have certified translations attached
+- [ ] Sponsor (if applicable) has provided all their immigration + accommodation + financial documents
+- [ ] Flight bookings and hotel reservations (or sponsor address)
+- [ ] Day-by-day itinerary
+- [ ] No file over 6MB (Home Office limit)
+- [ ] All files in PDF, JPG or PNG format
+
+See our companion article on [the top reasons Visit visas get refused](/blog/uk-visitor-visa-refused-top-reasons-2026) for what to avoid, and our [Visitor visa guide](/visa/visitor) for the application walkthrough.
+`.trim(),
+  },
+
+  {
+    slug: 'uk-skilled-worker-sponsor-licence-how-to-find-2026',
+    title: 'UK Skilled Worker Sponsor Licence — How to Find a Licensed Employer (2026)',
+    description:
+      'How to find a UK Skilled Worker sponsor in 2026: the official register, filtering by industry, what makes a good vs bad sponsor, and how to verify before accepting an offer.',
+    date: '2026-05-14',
+    updated: '2026-05-14',
+    readMinutes: 8,
+    tags: ['Sponsorship', 'Skilled Worker', 'Job search'],
+    body: `
+The single hardest thing about getting a UK Skilled Worker visa isn't the application — it's finding a licensed sponsor willing to hire you. Of the 1.5 million UK businesses, fewer than 60,000 hold a Skilled Worker Sponsor Licence. Less than half of those actively sponsor non-UK workers in a typical year. This guide explains exactly how to find sponsors in 2026, how to filter them by industry and salary credibility, and how to spot the warning signs of unethical sponsors that lead to revoked visas.
+
+## What a Sponsor Licence actually is
+
+A Skilled Worker Sponsor Licence is permission granted by the UK Home Office for an employer to sponsor non-UK workers. Holding a licence means the employer has:
+
+- Demonstrated it is a genuine UK business
+- Paid the licence fee (£574 for small/charity, £1,579 for medium/large)
+- Committed to meeting sponsor compliance duties (record-keeping, reporting changes, monitoring attendance)
+- Identified key personnel responsible for compliance
+
+Without a licence, an employer **cannot** sponsor you. Even if they want to. Even if they will pay above threshold. Job offers from unlicensed employers are a dead end.
+
+## The official sponsor register
+
+The Home Office publishes the complete list of approved sponsors every working day at:
+
+**https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers**
+
+The file is an Excel/CSV download. It contains:
+
+- **Organisation name** — exact legal name
+- **Town/City** — primary licence address
+- **County** — region
+- **Type of rating** — A (premium), B (limited), or "Provisional" for newly licensed
+- **Route** — the visa categories the licence covers (e.g. Skilled Worker, Senior or Specialist Worker, Graduate Trainee, etc.)
+- **Sub-tier** (older terminology, still referenced)
+
+The list runs to roughly 100,000 lines in 2026 — most lines are duplicate rows for sponsors holding multiple route licences. Filtering by "Worker" or "Skilled Worker" route narrows it to about 60,000.
+
+## How to use the register effectively
+
+### Step 1 — Download and filter
+
+Open the file in Excel or Google Sheets. Filter:
+- **Route** contains "Worker" (the Skilled Worker visa)
+- **Type of rating** is "A" or "A (Premium)" — avoid B-rated and Provisional sponsors as starting choices (more on this below)
+
+### Step 2 — Filter by location
+
+If you have a city preference, filter **Town/City** column. Common patterns:
+- "London" gives ~16,000 sponsors
+- "Manchester" ~2,500
+- "Birmingham" ~2,000
+- "Edinburgh" ~900
+- "Leeds" ~1,000
+
+### Step 3 — Filter by industry signal
+
+The register itself doesn't include industry codes. To filter by sector:
+- Cross-reference each company name against Companies House (free at find-and-update.company-information.service.gov.uk).
+- Look up SIC codes (Standard Industrial Classification) of each filtered company.
+- Use bulk lookup tools — third-party Sponsor Licence search platforms layer SIC data on top of the official register for easier filtering. Most are free for basic search.
+
+### Step 4 — Cross-check with LinkedIn
+
+For each shortlisted sponsor, search the company on LinkedIn. Check:
+- **Total employees** — small companies (<50) sponsor far less often than mid-size (50–500).
+- **Job postings** — companies posting roles with "visa sponsorship considered" wording in 2025–26 are actively sponsoring.
+- **Existing international hires** — check current employees' profiles. If many are visibly international, the company has a sponsorship track record.
+
+## A-rated vs B-rated vs Provisional
+
+The Type of rating column is critical:
+
+| Rating | Meaning |
+|---|---|
+| **A (premium)** | Standard compliant sponsor in good standing. Choose these first. |
+| **A (basic)** | Same as premium for practical purposes. |
+| **B** | Sponsor has been put on a B-rating after a compliance issue. Must work on a Home Office-approved action plan. Cannot issue new Certificates of Sponsorship until upgraded back to A. |
+| **Provisional** | Newly licensed sponsor on initial probation. Compliance not yet demonstrated. Use with caution. |
+
+For job seekers, focus on **A-rated** sponsors. B-rated sponsors can't issue you a CoS while on B-rating, and Provisional sponsors carry higher revocation risk.
+
+## Sponsorship is sector-specific
+
+Some sectors have very high sponsor density and pay well above the £38,700 threshold:
+
+- **Technology** — banks, fintech, big tech UK offices, mid-size SaaS, consulting tech practices. Heavy sponsorship, salaries usually £45k–£90k.
+- **Healthcare** — NHS trusts, private hospitals, registered nursing care. Use the Health & Care Worker visa route here (separate, cheaper).
+- **Investment banking & financial services** — JP Morgan, Goldman, HSBC, Barclays, etc. All licensed.
+- **Engineering** — civil, mechanical, aerospace majors (Rolls-Royce, BAE Systems, Atkins, AECOM, Arup).
+- **Consulting** — Big Four (Deloitte, PwC, EY, KPMG), strategy firms (McKinsey, BCG, Bain).
+- **Legal services** — magic circle and US-headquartered firms. All licensed but limited to qualified lawyers.
+- **Education** — state schools (DfE-coordinated for teacher shortage areas), private schools, universities.
+
+Sectors with **low** sponsorship density:
+- Hospitality and retail (most below threshold even when licensed).
+- Marketing and creative agencies (small teams, threshold issues).
+- Non-profit and charity sector (limited budgets for sponsor compliance overhead).
+- Construction labour (mostly below threshold; some senior management roles eligible).
+
+## What to do once you've found candidates
+
+You have a list of, say, 80 A-rated sponsors in your sector and city. Now:
+
+### Step 1 — Check current open roles
+
+Search each on:
+- LinkedIn Jobs
+- Indeed
+- The company's career page directly
+- Otta, Hired, AngelList for tech
+
+Focus on roles posted in the last 30 days that match your skill level.
+
+### Step 2 — Filter for visa-friendly language
+
+Job descriptions that explicitly say "we offer visa sponsorship" or "international applicants welcome" are gold. Job descriptions that say "must have right to work" are a hard no — they're filtering out anyone who needs sponsorship.
+
+For ambiguous descriptions, check Glassdoor or LinkedIn for prior employees on visas; it tells you whether the company actually sponsors in practice.
+
+### Step 3 — Salary check
+
+The role must clear:
+- **£38,700** general minimum (or £30,960 new-entrant rate if you're under 26 / recent graduate / switching from Student visa)
+- The **going rate for your SOC 2020 code** (look up in our [Skilled Worker salary guide](/blog/uk-skilled-worker-visa-salary-threshold-2026))
+- **£15.88/hour** minimum
+
+If a job pays £35,000, it fails — apply elsewhere.
+
+### Step 4 — Tailor your application
+
+- **CV in UK format** — 2 pages, no photo, no date of birth, no marital status, no nationality at the top (but visa status can be in cover letter).
+- **Cover letter** stating clearly: "I require Skilled Worker visa sponsorship from start date. I meet the £38,700 / new-entrant £30,960 threshold based on the salary advertised."
+- **Apply via the company's own portal** when possible — third-party recruiters often filter out non-UK candidates pre-screening.
+
+## Red flags — sponsors to avoid
+
+### 1. Pay-to-sponsor schemes
+
+If an employer asks **you** to pay for your CoS, the Immigration Skills Charge, or any administrative cost of sponsorship — it's illegal under UK law. Walk away. These schemes are widespread in care work and sometimes in IT contracting; sponsors that engage in them get their licences revoked en masse.
+
+### 2. Sponsors with recent compliance issues
+
+Check the Home Office's sponsor revocation register at gov.uk. Companies recently downgraded to B-rating or revoked have ongoing compliance problems that could affect your visa.
+
+### 3. Tiny new sponsors
+
+Sponsors registered in the last 12 months with no LinkedIn footprint, no Companies House filings, and no visible UK office are higher risk. Compliance training is hard; many new sponsors fail their first Home Office compliance audit.
+
+### 4. Sponsors offering exactly threshold salary
+
+If a company is offering precisely £38,700 (or £30,960 for new entrants), with no headroom, it's a thin margin. Any tax change or annual review error could push you below threshold at extension and refuse the renewal.
+
+### 5. Recruitment agencies running visa schemes
+
+Some agencies advertise "visa sponsorship guaranteed" packages where you pay upfront. Many are scams. Legitimate sponsors don't charge candidates.
+
+## Verify the sponsor before accepting
+
+Once you have an offer, do these checks **before** signing:
+
+1. **Check the official sponsor register** — confirm the exact legal name of the offering company appears as A-rated for Skilled Worker.
+2. **Check Companies House** — confirm the company is active, filings up to date, registered address makes sense.
+3. **Check CQC / Ofsted / equivalent regulator** if applicable to the sector.
+4. **Search the company on Glassdoor and Indeed** — look for employee reviews mentioning sponsorship experience.
+5. **Ask current employees** — find a current or recent international hire on LinkedIn and politely message asking about their sponsorship experience.
+
+A two-hour verification check now saves years of trouble if the sponsor turns out to be problematic.
+
+## The Certificate of Sponsorship (CoS)
+
+When you accept the offer, the sponsor issues a **Certificate of Sponsorship** — a unique alphanumeric reference number on the Home Office's Sponsorship Management System. It contains:
+
+- Your name, date of birth, nationality
+- The job title and SOC 2020 code
+- Salary, hours, start date
+- Sponsor's licence number
+- Certificate validity period (you must apply for visa within 3 months)
+
+You then use this CoS reference to apply for your Skilled Worker visa. The sponsor cannot pre-issue CoSs in bulk; each is for a specific named worker for a specific role.
+
+## Costs the sponsor pays (not you)
+
+- **Sponsor Licence fee** — £574 small/charity, £1,579 medium/large, paid every 4 years.
+- **CoS issuance fee** — £239 per certificate.
+- **Immigration Skills Charge** — £1,000/year for medium/large, £364/year for small/charity. Paid upfront for full visa duration.
+
+For a 5-year Skilled Worker visa, the medium/large employer pays the Home Office around £6,800 in fees + Skills Charge before you arrive. This is why some smaller sponsors are slow to offer sponsorship: the cost matters.
+
+## What you pay
+
+- Visa application fee: £827 (3 years) or £1,636 (5 years)
+- Immigration Health Surcharge: £1,035/year × duration
+- Optional priority service: £500
+
+Many sponsors will cover all or part of these for you as part of the offer package. Always negotiate this; it can be the difference between a job offer that costs you nothing and one that costs you £6,000.
+
+## Final tactical advice
+
+1. **Start broad, narrow systematically.** 80 candidates filtered to 15 with active roles is realistic.
+2. **Apply to 20–30 roles per week.** Conversion is low; volume is necessary.
+3. **Don't waste effort on unlicensed companies.** Confirm sponsor licence before applying.
+4. **Prepare for rejections.** Most non-UK candidates need 50–200 applications to land a sponsored role.
+5. **Use the new-entrant rate** if eligible — £30,960 unlocks roles below £38,700 that were otherwise blocked.
+
+See our [Skilled Worker salary guide](/blog/uk-skilled-worker-visa-salary-threshold-2026) for occupation-specific thresholds, or our [Switch to Skilled Worker guide](/blog/switch-student-to-skilled-worker-visa-uk-2026) if you're moving from a Student or Graduate visa.
+`.trim(),
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
