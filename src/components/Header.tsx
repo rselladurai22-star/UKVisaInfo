@@ -1,190 +1,214 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  Landmark, UserCircle2, Menu, X, ChevronDown,
-  Briefcase, GraduationCap, Plane, Users,
-  ExternalLink, FileCheck2, Sparkles
-} from 'lucide-react';
+import { Menu, X, Sparkles, ArrowUpRight, Crown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+const LINKS: { href: string; label: string }[] = [
+  { href: '/visa-types', label: 'Visas' },
+  { href: '/eligibility', label: 'Eligibility' },
+  { href: '/costs', label: 'Costs' },
+  { href: '/blog', label: 'Guides' },
+];
 
 export default function Header({ onApply }: { onApply: () => void }) {
   const pathname = usePathname();
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close drawer on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [open]);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
-  const visaCategories = [
-    { title: 'Work Visas', icon: Briefcase, desc: 'Skilled Worker, Health & Care' },
-    { title: 'Study Visas', icon: GraduationCap, desc: 'Student, Graduate, Child' },
-    { title: 'Visit Visas', icon: Plane, desc: 'Tourism, Business, Transit' },
-    { title: 'Family Visas', icon: Users, desc: 'Spouse, Partner, Dependents' },
-  ];
-
   return (
-    <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-diplomat border-b border-primary/10 shadow-diplomat">
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
-        <Link href="/" className="text-xl font-bold text-primary flex items-center gap-2">
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2"
+    <>
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled ? 'glass shadow-soft' : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between gap-4">
+          {/* Brand */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 group"
+            aria-label="UK Visa Info — home"
           >
-            <Landmark className="text-secondary w-6 h-6" />
-            UK Visa Info
-          </motion.div>
-        </Link>
+            <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-secondary to-[#8b001d] text-white shadow-soft">
+              <Crown className="w-4 h-4" />
+            </span>
+            <span className="font-display font-bold text-base md:text-lg tracking-tight text-primary">
+              UK Visa <span className="text-secondary">Info</span>
+            </span>
+          </Link>
 
-        <nav className="hidden md:flex items-center gap-6 font-sans tracking-tight text-sm font-medium h-full">
-          <div
-            className="relative h-full flex items-center"
-            onMouseEnter={() => setActiveDropdown('types')}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <Link
-              href="/visa-types"
-              className={`flex items-center gap-1 transition-all hover:text-secondary h-20 px-2 ${
-                isActive('/visa-types') ? 'text-primary border-b-2 border-secondary font-bold' : 'text-primary/70'
-              }`}
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  isActive(l.href)
+                    ? 'text-primary'
+                    : 'text-on-surface-variant hover:text-primary'
+                }`}
+              >
+                {l.label}
+                {isActive(l.href) && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute left-3 right-3 -bottom-0.5 h-0.5 bg-secondary rounded-full"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onApply}
+              className="hidden sm:inline-flex items-center gap-1.5 bg-primary text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-primary-container transition-colors ring-soft"
             >
-              Visa Types
-              <ChevronDown className={`w-3 h-3 transition-transform ${activeDropdown === 'types' ? 'rotate-180' : ''}`} />
-            </Link>
-            <AnimatePresence>
-              {activeDropdown === 'types' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 5 }}
-                  className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-surface-container-lowest border border-primary/10 shadow-2xl rounded-b-xl overflow-hidden z-50 p-2"
-                >
-                  <div className="space-y-1">
-                    {visaCategories.map((cat, i) => (
-                      <Link
-                        key={i}
-                        href="/visa-types"
-                        onClick={() => setActiveDropdown(null)}
-                        className="w-full flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors text-left group"
-                      >
-                        <div className="mt-1 p-1 bg-primary-container text-white rounded group-hover:bg-secondary transition-colors">
-                          <cat.icon className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-primary">{cat.title}</div>
-                          <div className="text-[10px] text-on-surface-variant leading-tight">{cat.desc}</div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
+              <Sparkles className="w-3.5 h-3.5" />
+              Apply
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              className="md:hidden w-10 h-10 inline-flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-colors"
+            >
+              {open ? (
+                <X className="w-5 h-5 text-primary" />
+              ) : (
+                <Menu className="w-5 h-5 text-primary" />
               )}
-            </AnimatePresence>
+            </button>
           </div>
-
-          <Link
-            href="/visa-types"
-            className={`flex items-center h-20 px-2 transition-all hover:text-secondary ${
-              isActive('/visa-types') ? 'text-primary font-bold' : 'text-primary/70'
-            }`}
-          >
-            Requirements
-          </Link>
-          <Link
-            href="/eligibility"
-            className={`flex items-center h-20 px-2 transition-all hover:text-secondary ${
-              isActive('/eligibility') ? 'text-primary border-b-2 border-secondary font-bold' : 'text-primary/70'
-            }`}
-          >
-            Eligibility
-          </Link>
-          <Link
-            href="/costs"
-            className={`flex items-center h-20 px-2 transition-all hover:text-secondary ${
-              isActive('/costs') ? 'text-primary border-b-2 border-secondary font-bold' : 'text-primary/70'
-            }`}
-          >
-            Costs
-          </Link>
-          <button
-            onClick={onApply}
-            className="group inline-flex items-center gap-1.5 bg-secondary text-white px-4 py-2 rounded-md font-bold text-sm hover:bg-secondary/90 transition-all shadow-sm"
-          >
-            <Sparkles className="w-3.5 h-3.5" /> Apply
-          </button>
-          <Link
-            href="/blog"
-            className={`flex items-center h-20 px-2 transition-all hover:text-secondary ${
-              isActive('/blog') ? 'text-primary border-b-2 border-secondary font-bold' : 'text-primary/70'
-            }`}
-          >
-            Blog
-          </Link>
-          <a className="text-primary/70 hover:text-secondary transition-colors px-2" href="https://www.gov.uk/contact-ukvi-inside-outside-uk" target="_blank" rel="noopener noreferrer">Contact</a>
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <button className="text-primary hover:text-secondary transition-all" aria-label="Account">
-            <UserCircle2 className="w-6 h-6" />
-          </button>
-          <button
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setMobileOpen(o => !o)}
-            className="md:hidden text-primary"
-          >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
-      </div>
+      </header>
 
+      {/* Mobile drawer */}
       <AnimatePresence>
-        {mobileOpen && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden bg-surface border-t border-primary/10"
-          >
-            <div className="px-8 py-4 flex flex-col divide-y divide-outline-variant/20">
-              {[
-                { href: '/visa-types', label: 'Visa Types' },
-                { href: '/visa-types', label: 'Requirements' },
-                { href: '/eligibility', label: 'Eligibility' },
-                { href: '/costs', label: 'Costs' },
-                { href: '/blog', label: 'Blog' },
-              ].map((l, i) => (
-                <Link
-                  key={`${l.href}-${i}`}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`text-left py-4 font-bold text-sm ${isActive(l.href) ? 'text-secondary' : 'text-primary'}`}
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-primary/40 backdrop-blur-sm md:hidden"
+              onClick={() => setOpen(false)}
+              aria-hidden="true"
+            />
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 26, stiffness: 240 }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[88%] max-w-sm bg-surface-container-lowest md:hidden flex flex-col shadow-card"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main menu"
+            >
+              <div className="flex items-center justify-between p-5 border-b border-outline-variant/30">
+                <span className="font-display font-bold text-base text-primary">
+                  Menu
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="w-10 h-10 inline-flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-colors"
                 >
-                  {l.label}
-                </Link>
-              ))}
-              <button
-                onClick={() => { onApply(); setMobileOpen(false); }}
-                className="py-4 font-bold text-sm text-secondary flex items-center justify-between"
-              >
-                Apply (Guided) <FileCheck2 className="w-4 h-4" />
-              </button>
-              <a
-                href="https://www.gov.uk/apply-to-come-to-the-uk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-4 font-bold text-sm text-primary flex items-center justify-between"
-                onClick={() => setMobileOpen(false)}
-              >
-                GOV.UK direct <ExternalLink className="w-4 h-4 text-secondary" />
-              </a>
-            </div>
-          </motion.nav>
+                  <X className="w-5 h-5 text-primary" />
+                </button>
+              </div>
+
+              <nav className="flex-1 overflow-y-auto p-5 space-y-1">
+                {LINKS.map((l) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    className={`flex items-center justify-between gap-3 px-4 py-4 rounded-2xl text-base font-semibold transition-colors ${
+                      isActive(l.href)
+                        ? 'bg-secondary-soft text-secondary'
+                        : 'text-primary hover:bg-surface-container-low'
+                    }`}
+                  >
+                    {l.label}
+                    <ArrowUpRight className="w-4 h-4 opacity-60" />
+                  </Link>
+                ))}
+
+                <div className="pt-4 mt-4 border-t border-outline-variant/30 space-y-1">
+                  <Link
+                    href="/about"
+                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/privacy"
+                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+                  >
+                    Privacy
+                  </Link>
+                  <Link
+                    href="/terms"
+                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+                  >
+                    Terms
+                  </Link>
+                </div>
+              </nav>
+
+              <div className="p-5 border-t border-outline-variant/30">
+                <button
+                  type="button"
+                  onClick={() => {
+                    onApply();
+                    setOpen(false);
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-primary text-white font-bold py-3.5 rounded-2xl shadow-soft active:scale-[0.98] transition-transform"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Start guided apply
+                </button>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

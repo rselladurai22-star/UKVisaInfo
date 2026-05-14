@@ -1,57 +1,114 @@
-'use client';
-
 import Link from 'next/link';
-import { Share2, HelpCircle, Mail, Gavel } from 'lucide-react';
+import { Crown, Mail, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white py-16 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="md:col-span-2">
-            <div className="text-xl font-bold text-white mb-6">UK Visa Info</div>
-            <p className="text-white/60 text-sm max-w-sm leading-relaxed">
-              Independent UK immigration guidance. Not a law firm or
-              government agency. Always confirm critical information against
-              the official gov.uk source.
+    <footer className="relative bg-primary text-white mt-12 overflow-hidden">
+      <div className="dot-pattern absolute inset-0 opacity-30" aria-hidden="true" />
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-12">
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-5">
+            <Link href="/" className="inline-flex items-center gap-2 group">
+              <span className="inline-flex w-9 h-9 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-[#8b001d] shadow-soft">
+                <Crown className="w-4 h-4 text-white" />
+              </span>
+              <span className="font-display font-bold text-lg text-white">
+                UK Visa <span className="text-accent">Info</span>
+              </span>
+            </Link>
+            <p className="mt-5 max-w-sm text-sm text-white/55 leading-relaxed">
+              Independent, plainly-written UK immigration guidance. Always
+              confirm critical information against the official gov.uk
+              source.
             </p>
           </div>
 
-          <div>
-            <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Resources</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/visa-types">Visa Types</Link></li>
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/eligibility">Eligibility Quiz</Link></li>
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/costs">Cost Calculator</Link></li>
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/blog">Blog &amp; Guides</Link></li>
-              <li><a target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-secondary transition-colors" href="https://www.gov.uk/browse/visas-immigration">gov.uk Official</a></li>
+          {/* Resources */}
+          <div className="col-span-1 md:col-span-3">
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-white/45 mb-5">
+              Resources
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link href="/visa-types" className="text-white/75 hover:text-white transition-colors">
+                  Visa Types
+                </Link>
+              </li>
+              <li>
+                <Link href="/eligibility" className="text-white/75 hover:text-white transition-colors">
+                  Eligibility Quiz
+                </Link>
+              </li>
+              <li>
+                <Link href="/costs" className="text-white/75 hover:text-white transition-colors">
+                  Cost Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-white/75 hover:text-white transition-colors">
+                  Guides &amp; Blog
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://www.gov.uk/browse/visas-immigration"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/75 hover:text-white transition-colors inline-flex items-center gap-1"
+                >
+                  gov.uk
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/about">About</Link></li>
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/privacy">Privacy Policy</Link></li>
-              <li><Link className="text-white/60 hover:text-secondary transition-colors" href="/terms">Terms of Use</Link></li>
+          {/* Legal */}
+          <div className="col-span-1 md:col-span-2">
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-white/45 mb-5">
+              Legal
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link href="/about" className="text-white/75 hover:text-white transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-white/75 hover:text-white transition-colors">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-white/75 hover:text-white transition-colors">
+                  Terms
+                </Link>
+              </li>
             </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="col-span-2 md:col-span-2">
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-white/45 mb-5">
+              Contact
+            </h4>
+            <a
+              href="mailto:contact@ukvisainfo.co.uk"
+              className="inline-flex items-center gap-2 text-sm text-white/75 hover:text-white transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              contact@ukvisainfo.co.uk
+            </a>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-white/40 text-xs">
-            © 2026 UK Visa Info. All rights reserved. Independent editorial — not affiliated with gov.uk or the Home Office.
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs text-white/40">
+          <div>
+            © 2026 UK Visa Info. Independent editorial — not affiliated with
+            gov.uk or the Home Office.
           </div>
-
-          <div className="flex gap-6">
-            <a aria-label="Help" className="text-white/60 hover:text-white transition-colors" href="https://www.gov.uk/contact-ukvi-inside-outside-uk" target="_blank" rel="noopener noreferrer"><HelpCircle className="w-4 h-4" /></a>
-            <a aria-label="Share" className="text-white/60 hover:text-white transition-colors" href="https://www.gov.uk/browse/visas-immigration" target="_blank" rel="noopener noreferrer"><Share2 className="w-4 h-4" /></a>
-            <a aria-label="Email" className="text-white/60 hover:text-white transition-colors" href="mailto:contact@ukvisainfo.co.uk"><Mail className="w-4 h-4" /></a>
-            <div className="flex items-center gap-2 text-white/60 text-xs">
-              <Gavel className="w-4 h-4" />
-              Editorial site
-            </div>
-          </div>
+          <div>Made in the UK</div>
         </div>
       </div>
     </footer>
