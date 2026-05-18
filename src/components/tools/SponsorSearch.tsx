@@ -1,25 +1,33 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Search, MapPin, Building2, X, Crown, ExternalLink, Filter, Sparkles, Loader2,
+  ChevronLeft, ChevronRight,
 } from 'lucide-react';
 import Link from 'next/link';
 
 interface RawSponsor {
-  n: string;     // organisation name
-  c: string;     // city
-  o?: string;    // county (optional)
-  t: 'AP' | 'A' | 'B' | 'PR';  // rating
-  r: string[];   // route codes
-  g?: string;    // region
+  n: string;
+  c: string;
+  o?: string;
+  t: 'AP' | 'A' | 'B' | 'PR';
+  r: string[];
+  g?: string;
+}
+
+interface ApiResponse {
+  items: RawSponsor[];
+  total: number;
+  page: number;
+  totalPages: number;
 }
 
 const RATING_LABEL: Record<string, { label: string; bg: string; text: string }> = {
-  AP: { label: 'Premium',   bg: 'rgba(255,191,71,0.15)', text: '#9a6800' },
-  A:  { label: 'A-rated',   bg: 'rgba(5,150,105,0.12)',  text: '#057a55' },
+  AP: { label: 'Premium',     bg: 'rgba(255,191,71,0.15)', text: '#9a6800' },
+  A:  { label: 'A-rated',    bg: 'rgba(5,150,105,0.12)',  text: '#057a55' },
   B:  { label: 'B (limited)', bg: 'rgba(217,21,43,0.12)', text: '#b8101f' },
-  PR: { label: 'Provisional', bg: 'rgba(217,119,6,0.12)',  text: '#9a6800' },
+  PR: { label: 'Provisional', bg: 'rgba(217,119,6,0.12)', text: '#9a6800' },
 };
 
 const ROUTE_LABEL: Record<string, string> = {
@@ -41,16 +49,16 @@ const ROUTE_LABEL: Record<string, string> = {
   OT: 'Other',
 };
 
-const RATING_FILTER_OPTIONS = [
-  { value: '', label: 'Any rating' },
+const RATING_OPTIONS = [
+  { value: '',   label: 'Any rating' },
   { value: 'AP', label: 'Premium' },
   { value: 'A',  label: 'A-rated' },
   { value: 'B',  label: 'B-rated' },
   { value: 'PR', label: 'Provisional' },
 ];
 
-const ROUTE_FILTER_OPTIONS = [
-  { value: '', label: 'Any route' },
+const ROUTE_OPTIONS = [
+  { value: '',   label: 'Any route' },
   { value: 'SW', label: 'Skilled Worker' },
   { value: 'HC', label: 'Health & Care' },
   { value: 'SS', label: 'Senior or Specialist Worker' },
@@ -60,75 +68,85 @@ const ROUTE_FILTER_OPTIONS = [
 ];
 
 const PAGE_SIZE = 60;
+const DEBOUNCE_MS = 280;
 
 export default function SponsorSearch() {
-  const [query, setQuery] = useState('');
-  const [region, setRegion] = useState<string>('');
-  const [rating, setRating] = useState<string>('');
-  const [route, setRoute] = useState<string>('SW');
+  const [query,       setQuery]       = useState('');
+  const [debouncedQ,  setDebouncedQ]  = useState('');
+  const [region,      setRegion]      = useState('');
+  const [rating,      setRating]      = useState('');
+  const [route,       setRoute]       = useState('SW');
   const [showFilters, setShowFilters] = useState(false);
+  const [page,        setPage]        = useState(0);
 
-  const [data, setData] = useState<RawSponsor[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [result,   setResult]   = useState<ApiResponse | null>(null);
+  const [loading,  setLoading]  = useState(false);
+  const [error,    setError]    = useState<string | null>(null);
+  const [regions,  setRegions]  = useState<string[]>([]);
 
-  // Lazy-load the full register on first interaction
+  // Debounce the query
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleQueryChange = (v: string) => {
+    setQuery(v);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setDebouncedQ(v);
+      setPage(0);
+    }, DEBOUNCE_MS);
+  };
+
+  // Reset page when filters change
+  const setFilter = <T,>(setter: (v: T) => void) => (v: T) => {
+    setter(v);
+    setPage(0);
+  };
+
+  // Fetch regions once
   useEffect(() => {
+    fetch('/api/sponsors/regions')
+      .then((r) => r.ok ? r.json() : [])
+      .then(setRegions)
+      .catch(() => {});
+  }, []);
+
+  // Fetch results whenever search params change
+  const fetchResults = useCallback(() => {
+    const params = new URLSearchParams();
+    if (debouncedQ) params.set('q', debouncedQ);
+    if (region)     params.set('region', region);
+    if (rating)     params.set('rating', rating);
+    if (route)      params.set('route', route);
+    params.set('page', String(page));
+    params.set('size', String(PAGE_SIZE));
+
+    const url = `/api/sponsors?${params.toString()}`;
     let cancelled = false;
-    if (data || loading) return;
     setLoading(true);
-    fetch('/sponsors-data.json')
+    setError(null);
+
+    fetch(url)
       .then((r) => {
-        if (!r.ok) throw new Error(`Failed to load sponsor data (${r.status})`);
-        return r.json();
+        if (!r.ok) throw new Error(`Server error (${r.status})`);
+        return r.json() as Promise<ApiResponse>;
       })
-      .then((json: RawSponsor[]) => {
-        if (!cancelled) setData(json);
-      })
+      .then((data) => { if (!cancelled) { setResult(data); setLoading(false); } })
       .catch((e: unknown) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : 'Failed to load');
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setError(e instanceof Error ? e.message : 'Failed to load');
+          setLoading(false);
+        }
       });
+
     return () => { cancelled = true; };
-  }, [data, loading]);
+  }, [debouncedQ, region, rating, route, page]);
 
-  // Unique regions from data
-  const regions = useMemo(() => {
-    if (!data) return [];
-    const set = new Set<string>();
-    for (const s of data) {
-      if (s.g) set.add(s.g);
-    }
-    return Array.from(set).sort();
-  }, [data]);
-
-  // Filter pipeline
-  const filtered = useMemo(() => {
-    if (!data) return [];
-    const q = query.trim().toLowerCase();
-    return data.filter((s) => {
-      if (q && !s.n.toLowerCase().includes(q) && !s.c.toLowerCase().includes(q)) return false;
-      if (region && s.g !== region) return false;
-      if (rating && s.t !== rating) return false;
-      if (route && !s.r.includes(route)) return false;
-      return true;
-    });
-  }, [data, query, region, rating, route]);
-
-  const visible = filtered.slice(0, visibleCount);
-
-  // Reset visible count when filters change
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [query, region, rating, route]);
+    const cancel = fetchResults();
+    return cancel;
+  }, [fetchResults]);
 
   const activeFilterCount = [region, rating, route !== 'SW' ? route : ''].filter(Boolean).length;
-  const clearFilters = () => {
-    setRegion(''); setRating(''); setRoute('SW');
-  };
+  const clearFilters = () => { setFilter(setRegion)(''); setFilter(setRating)(''); setFilter(setRoute)('SW'); };
 
   return (
     <div className="bg-white">
@@ -145,9 +163,9 @@ export default function SponsorSearch() {
             UK sponsor licence search
           </h1>
           <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
-            Search the complete Home Office register of licensed UK
-            sponsors. <strong className="text-[#0a1530]">126,530 organisations</strong> across Skilled Worker,
-            Health & Care, Scale-up and other work routes.
+            Search the complete Home Office register of licensed UK sponsors.{' '}
+            <strong className="text-[#0a1530]">126,530 organisations</strong> across Skilled
+            Worker, Health &amp; Care, Scale-up and other work routes.
           </p>
         </div>
       </section>
@@ -163,15 +181,14 @@ export default function SponsorSearch() {
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={loading ? 'Loading sponsor data…' : 'Company name or city…'}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              placeholder="Company name or city…"
               className="w-full pl-10 pr-10 py-3 bg-[#f3f5fb] focus:bg-white border border-transparent focus:border-[#0a1530] rounded-xl text-sm placeholder:text-[#7a8195] outline-none transition-all"
               aria-label="Search sponsors"
-              disabled={loading && !data}
             />
             {query && (
               <button
-                onClick={() => setQuery('')}
+                onClick={() => { setQuery(''); setDebouncedQ(''); setPage(0); }}
                 aria-label="Clear search"
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7a8195] hover:text-[#0a1530]"
               >
@@ -179,6 +196,7 @@ export default function SponsorSearch() {
               </button>
             )}
           </div>
+
           <button
             onClick={() => setShowFilters((v) => !v)}
             className={`inline-flex items-center gap-1.5 px-3 py-3 rounded-xl text-sm font-semibold transition-colors ${
@@ -200,9 +218,24 @@ export default function SponsorSearch() {
         {showFilters && (
           <div className="border-t border-[rgba(14,20,36,0.06)] bg-white">
             <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-4 grid sm:grid-cols-3 gap-3">
-              <Select label="Route" value={route} onChange={setRoute} options={ROUTE_FILTER_OPTIONS} />
-              <Select label="Region" value={region} onChange={setRegion} options={[{ value: '', label: 'Any region' }, ...regions.map((r) => ({ value: r, label: r }))]} />
-              <Select label="Rating" value={rating} onChange={setRating} options={RATING_FILTER_OPTIONS} />
+              <Select
+                label="Route"
+                value={route}
+                onChange={setFilter(setRoute)}
+                options={ROUTE_OPTIONS}
+              />
+              <Select
+                label="Region"
+                value={region}
+                onChange={setFilter(setRegion)}
+                options={[{ value: '', label: 'Any region' }, ...regions.map((r) => ({ value: r, label: r }))]}
+              />
+              <Select
+                label="Rating"
+                value={rating}
+                onChange={setFilter(setRating)}
+                options={RATING_OPTIONS}
+              />
               {activeFilterCount > 0 && (
                 <button
                   onClick={clearFilters}
@@ -221,70 +254,74 @@ export default function SponsorSearch() {
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           {error && (
             <div className="bg-[rgba(217,21,43,0.05)] border border-[rgba(217,21,43,0.2)] rounded-2xl p-5 mb-5 text-sm text-[#0a1530]">
-              <strong className="text-[#b8101f]">Couldn&apos;t load sponsor data:</strong> {error}. Try refreshing the page.
+              <strong className="text-[#b8101f]">Error:</strong> {error}. Try refreshing.
             </div>
           )}
 
-          {loading && !data ? (
-            <div className="bg-white rounded-2xl border border-dashed border-[rgba(14,20,36,0.12)] p-16 text-center">
-              <Loader2 className="w-8 h-8 text-[#2563eb] mx-auto mb-3 animate-spin" />
-              <h3 className="font-display text-base font-bold text-[#0a1530]">
-                Loading sponsor register…
+          {/* Results header */}
+          {result && (
+            <div className="flex items-center justify-between mb-5 min-h-[28px]">
+              <p className="text-sm text-[#52596e]">
+                <span className="font-semibold text-[#0a1530] tabular-nums">
+                  {result.total.toLocaleString('en-GB')}
+                </span>
+                {' '}{result.total === 1 ? 'sponsor' : 'sponsors'} found
+                {loading && <Loader2 className="inline-block w-3 h-3 ml-2 animate-spin text-[#7a8195]" />}
+              </p>
+              {result.totalPages > 1 && (
+                <p className="text-xs text-[#7a8195] tabular-nums">
+                  Page {result.page + 1} of {result.totalPages}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* First load skeleton */}
+          {loading && !result && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl p-4 md:p-5 animate-pulse"
+                >
+                  <div className="h-4 bg-[#f3f5fb] rounded w-3/4 mb-2" />
+                  <div className="h-3 bg-[#f3f5fb] rounded w-1/2 mb-4" />
+                  <div className="h-2 bg-[#f3f5fb] rounded w-full" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty state */}
+          {result && result.total === 0 && !loading && (
+            <div className="bg-white rounded-2xl border border-dashed border-[rgba(14,20,36,0.12)] p-12 text-center">
+              <Building2 className="w-10 h-10 text-[#7a8195] mx-auto mb-3 opacity-50" />
+              <h3 className="font-display text-lg font-bold text-[#0a1530] mb-1">
+                No sponsors match your search
               </h3>
-              <p className="text-sm text-[#7a8195] mt-1.5">
-                One-time load of 126,530 records. Cached after first visit.
+              <p className="text-sm text-[#7a8195] mb-4">
+                Try a broader search term or different filters.
               </p>
             </div>
-          ) : data ? (
-            <>
-              <div className="flex items-center justify-between mb-5">
-                <p className="text-sm text-[#52596e]">
-                  <span className="font-semibold text-[#0a1530] tabular-nums">
-                    {filtered.length.toLocaleString('en-GB')}
-                  </span>
-                  {' '}
-                  {filtered.length === 1 ? 'sponsor' : 'sponsors'} found
-                </p>
-                <p className="text-xs text-[#7a8195]">
-                  Showing {Math.min(visibleCount, filtered.length).toLocaleString('en-GB')}
-                </p>
-              </div>
+          )}
 
-              {filtered.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-dashed border-[rgba(14,20,36,0.12)] p-12 text-center">
-                  <Building2 className="w-10 h-10 text-[#7a8195] mx-auto mb-3 opacity-50" />
-                  <h3 className="font-display text-lg font-bold text-[#0a1530] mb-1">
-                    No sponsors match your search
-                  </h3>
-                  <p className="text-sm text-[#7a8195] mb-4">
-                    Try a broader search or different filters.
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                    {visible.map((s, i) => (
-                      <SponsorCard key={`${s.n}-${i}`} sponsor={s} />
-                    ))}
-                  </ul>
+          {/* Cards */}
+          {result && result.items.length > 0 && (
+            <ul className={`grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 transition-opacity duration-150 ${loading ? 'opacity-50' : 'opacity-100'}`}>
+              {result.items.map((s, i) => (
+                <SponsorCard key={`${s.n}-${i}`} sponsor={s} />
+              ))}
+            </ul>
+          )}
 
-                  {filtered.length > visibleCount && (
-                    <div className="mt-8 text-center">
-                      <button
-                        onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
-                        className="inline-flex items-center gap-2 bg-[#0a1530] text-white text-sm font-semibold px-6 py-3 rounded-xl hover:bg-[#1b2c5b] transition-colors"
-                      >
-                        Show {Math.min(PAGE_SIZE, filtered.length - visibleCount)} more
-                        <span className="text-white/60 text-xs tabular-nums">
-                          ({(filtered.length - visibleCount).toLocaleString('en-GB')} remaining)
-                        </span>
-                      </button>
-                    </div>
-                  )}
-                </>
-              )}
-            </>
-          ) : null}
+          {/* Pagination */}
+          {result && result.totalPages > 1 && (
+            <Pagination
+              page={result.page}
+              totalPages={result.totalPages}
+              onPage={(p) => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            />
+          )}
         </div>
       </section>
 
@@ -295,33 +332,23 @@ export default function SponsorSearch() {
             About this data
           </h2>
           <p className="text-sm text-[#52596e] leading-relaxed">
-            This search covers the complete Home Office Register of Licensed
-            Sponsors as of mid-May 2026 — 126,530 organisations across
-            Skilled Worker, Health and Care, Scale-up, Senior or Specialist
-            Worker, Graduate Trainee and other work routes. The official
-            register is published daily and may include changes since this
-            data was captured.
+            This search covers the complete Home Office Register of Licensed Sponsors as of
+            mid-May 2026 — 126,530 organisations across Skilled Worker, Health and Care,
+            Scale-up, Senior or Specialist Worker, Graduate Trainee and other work routes.
+            Searches are processed server-side so only the matching results are sent to your browser.
           </p>
 
           <div className="mt-6 grid md:grid-cols-3 gap-3">
-            <div className="bg-white rounded-xl border border-[rgba(14,20,36,0.08)] p-4">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">Premium</div>
-              <div className="mt-1 text-sm text-[#0a1530] leading-snug">
-                Top-tier compliant sponsor.
+            {[
+              { key: 'Premium',     desc: 'Top-tier compliant sponsor.' },
+              { key: 'A-rated',     desc: 'Standard compliant sponsor.' },
+              { key: 'B-rated',     desc: 'On Home Office action plan. Cannot issue new CoS while B-rated.' },
+            ].map((item) => (
+              <div key={item.key} className="bg-white rounded-xl border border-[rgba(14,20,36,0.08)] p-4">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">{item.key}</div>
+                <div className="mt-1 text-sm text-[#0a1530] leading-snug">{item.desc}</div>
               </div>
-            </div>
-            <div className="bg-white rounded-xl border border-[rgba(14,20,36,0.08)] p-4">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">A-rated</div>
-              <div className="mt-1 text-sm text-[#0a1530] leading-snug">
-                Standard compliant sponsor.
-              </div>
-            </div>
-            <div className="bg-white rounded-xl border border-[rgba(14,20,36,0.08)] p-4">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">B-rated</div>
-              <div className="mt-1 text-sm text-[#0a1530] leading-snug">
-                On Home Office action plan. Cannot issue new CoS while B-rated.
-              </div>
-            </div>
+            ))}
           </div>
 
           <p className="mt-6 text-xs text-[#7a8195]">
@@ -401,6 +428,77 @@ function SponsorCard({ sponsor: s }: { sponsor: RawSponsor }) {
   );
 }
 
+function Pagination({
+  page,
+  totalPages,
+  onPage,
+}: {
+  page: number;
+  totalPages: number;
+  onPage: (p: number) => void;
+}) {
+  const range = 2;
+  const pages: (number | '…')[] = [];
+
+  for (let p = 0; p < totalPages; p++) {
+    if (p === 0 || p === totalPages - 1 || Math.abs(p - page) <= range) {
+      pages.push(p);
+    } else if (Math.abs(p - page) === range + 1) {
+      pages.push('…');
+    }
+  }
+
+  return (
+    <nav className="mt-10 flex items-center justify-center gap-1.5" aria-label="Pagination">
+      <PagBtn disabled={page === 0} onClick={() => onPage(page - 1)} aria-label="Previous">
+        <ChevronLeft className="w-4 h-4" />
+      </PagBtn>
+
+      {pages.map((p, i) =>
+        p === '…' ? (
+          <span key={`ellipsis-${i}`} className="px-2 text-sm text-[#7a8195]">…</span>
+        ) : (
+          <PagBtn
+            key={p}
+            active={p === page}
+            onClick={() => onPage(p as number)}
+            aria-current={p === page ? 'page' : undefined}
+          >
+            {(p as number) + 1}
+          </PagBtn>
+        )
+      )}
+
+      <PagBtn disabled={page >= totalPages - 1} onClick={() => onPage(page + 1)} aria-label="Next">
+        <ChevronRight className="w-4 h-4" />
+      </PagBtn>
+    </nav>
+  );
+}
+
+function PagBtn({
+  children,
+  active,
+  disabled,
+  onClick,
+  ...rest
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { active?: boolean }) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`min-w-[36px] h-9 px-2.5 rounded-lg text-sm font-semibold flex items-center justify-center transition-colors disabled:opacity-30 disabled:cursor-default ${
+        active
+          ? 'bg-[#0a1530] text-white'
+          : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0a1530]'
+      }`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
+
 function Select({
   label,
   value,
@@ -414,18 +512,14 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">
-        {label}
-      </span>
+      <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full mt-1.5 px-3 py-2.5 bg-[#f3f5fb] focus:bg-white border border-transparent focus:border-[#0a1530] rounded-xl text-sm font-medium text-[#0a1530] outline-none transition-all"
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
+          <option key={o.value} value={o.value}>{o.label}</option>
         ))}
       </select>
     </label>
