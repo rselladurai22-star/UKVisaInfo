@@ -2561,6 +2561,524 @@ Many sponsors will cover all or part of these for you as part of the offer packa
 See our [Skilled Worker salary guide](/blog/uk-skilled-worker-visa-salary-threshold-2026) for occupation-specific thresholds, or our [Switch to Skilled Worker guide](/blog/switch-student-to-skilled-worker-visa-uk-2026) if you're moving from a Student or Graduate visa.
 `.trim(),
   },
+
+  {
+    slug: 'uk-citizenship-10-year-long-residence-2026',
+    title: 'UK Citizenship by 10-Year Long Residence — Complete 2026 Guide',
+    description:
+      'Full 2026 guide to the UK 10-year long residence route: who qualifies, absence rules (540 days), required documents, costs (£3,029 ILR + £1,500 citizenship), and how to apply step by step.',
+    date: '2026-05-18',
+    updated: '2026-05-18',
+    readMinutes: 9,
+    tags: ['Citizenship', 'ILR', 'Long residence', 'Settlement'],
+    body: `
+The 10-year long residence route is the UK\'s safety net for people who have spent a decade lawfully in the country but don\'t fit the standard 5-year visa pathways. It can also be the fastest route to British citizenship for visa holders who switched routes or had gaps in their employment-based path. With Home Office policy tightening in 2026 and refusal rates climbing, the rules matter more than ever. This guide explains exactly who qualifies, the absence trap that disqualifies most applicants, and the 2026 cost breakdown.
+
+## What is the 10-year long residence rule?
+
+Under paragraph 276B of the Immigration Rules (Long Residence — Settlement), you can apply for Indefinite Leave to Remain (ILR) if you have lived in the UK **continuously and lawfully** for 10 years. ILR is the gateway to British citizenship — you can apply for naturalisation 12 months later.
+
+The route exists because many people don\'t follow a clean 5-year visa pathway. You might have switched between Student → Graduate → Skilled Worker, or held multiple visa types over the years. As long as your residence was continuous and lawful, the 10-year clock ticks regardless of which visa you held.
+
+## Who qualifies in 2026
+
+You qualify if **all** of the following are true:
+
+1. You have spent **at least 10 continuous years** in the UK
+2. Each year was on a **valid visa or leave to remain** (not just physical presence)
+3. You have not been absent for more than **540 days in total** across the 10 years
+4. You have not been absent for more than **184 days in any single trip**
+5. You pass the **Life in the UK Test** and meet B1 English
+6. You are of **good character** — no serious criminal convictions, no deception findings
+7. You have not been in the UK on **specific excluded routes** (see below)
+
+## The absence rule — what disqualifies most applicants
+
+The 540-day total absence cap is the single biggest reason long residence applications get refused in 2026. The Home Office counts every day you were outside the UK during the 10-year period — including departure and arrival days in some interpretations.
+
+Action steps:
+- **Pull your passport stamps** for all 10 years. List every trip with dates.
+- **Add up total days outside the UK.** If total exceeds 540, you cannot apply yet — wait for the worst year to roll off the back of the period.
+- **Check no single trip exceeded 184 days.** A single 200-day trip disqualifies the entire application, even if total absences are under 540.
+
+The Home Office has discretion to grant despite breaches in exceptional circumstances (serious illness, family bereavement requiring extended care), but this is rarely exercised in 2026 — the burden of evidence is severe.
+
+## Which visa routes count toward the 10 years?
+
+**Visas that count toward long residence:**
+- Skilled Worker / Tier 2
+- Student / Tier 4
+- Graduate visa (added back to the count in 2024 after policy reversal)
+- Health and Care Worker
+- Global Talent
+- Family / Spouse / Partner
+- Youth Mobility Scheme
+- UK Ancestry
+- Innovator Founder
+- Refugee status / Humanitarian Protection
+- EUSS pre-settled and settled status
+- Most other long-term visas
+
+**Visas that do NOT count:**
+- Visit visas (any duration)
+- Transit visas
+- Periods of overstaying (any duration breaks the clock)
+- Time on temporary admission or immigration bail
+- Time when leave was granted outside the Immigration Rules
+- Domestic Worker in a Private Household visa (specific exclusion)
+
+A common trap: people who spent 6 months on a visitor visa between their Student visa and Skilled Worker visa lose **both** the visitor period and any continuity. The 10-year clock resets to zero.
+
+## Continuous residence — the 28-day grace rule
+
+Continuous residence means no gaps where you had no valid visa. The Home Office historically allowed a **28-day grace period** for late visa applications, but this was tightened in 2023 and effectively removed in 2024 for new applications.
+
+In 2026, you must show:
+- Valid leave to remain (or applied-for extension with statutory protection) on every single day of the 10 years
+- No periods where you were technically overstaying, even by one day
+- No periods of "leave outside the rules" granted in compassionate circumstances
+
+If you ever had a visa lapse and reapplied a week later, that gap likely breaks continuity and resets your clock.
+
+## Costs in 2026
+
+| Item | Amount |
+|---|---|
+| ILR application fee | £3,029 |
+| Premium service (in-person same-day) | £1,000 (limited slots) |
+| Super priority service (5 working days) | £800 |
+| Life in the UK Test | £50 |
+| Biometrics | Included |
+| Citizenship application (separate, 12 months later) | £1,500 |
+| Citizenship ceremony | £80 |
+
+Single-applicant total to citizenship: around **£4,659** (standard service) or **£5,659** (super priority) including the citizenship stage.
+
+For families: each adult applies separately. Children under 18 born in the UK during your residence have separate rules — see citizenship section below.
+
+## Documents you\'ll need
+
+For the ILR application:
+- Current passport (and every prior passport covering the 10 years)
+- All previous BRPs / eVisa records / visa decision letters
+- Sponsor letter if currently on Skilled Worker (confirming continued employment)
+- 12 months of recent payslips and bank statements
+- HMRC tax records covering all 10 years (download from HMRC online account)
+- P60s for each tax year
+- Evidence of every absence (travel itineraries, boarding passes where available)
+- Life in the UK Test pass certificate
+- English language evidence (if not already on file from earlier visa)
+- Council tax bills, tenancy agreements, utility bills demonstrating UK residence
+- HMRC self-assessment records if you were ever self-employed
+
+## English language and Life in the UK
+
+Required for all applicants under 65 and over 18:
+
+- **Life in the UK Test**: 24 multiple-choice questions, pass mark 75% (18 correct), £50, valid forever once passed
+- **English language B1**: same as standard ILR — IELTS Life Skills B1, or evidence of degree taught in English, or majority-English-speaking nationality
+
+Most long residence applicants have already passed these for earlier visa applications. The evidence carries forward.
+
+## Discretionary refusals — what to avoid
+
+Long residence applications are decided on the **balance of probabilities** but the Home Office has wide discretion. Common discretionary refusal reasons in 2026:
+
+1. **Tax inconsistency.** Declared salary on visa applications doesn\'t match HMRC tax records over the 10 years. This has been weaponised under the "deception" provision. Reconcile any discrepancies with HMRC before applying.
+2. **Criminal record below threshold.** Even cautions and spent convictions can be cited. Declare everything.
+3. **Insufficient continuous residence evidence.** Gaps you can\'t document risk refusal even if you were genuinely in the UK.
+4. **NHS debt over £500.** Routine immigration applications are refused if you owe more than £500 to the NHS for non-IHS-covered treatments.
+5. **Public funds claims.** If your dependants claimed certain public funds, the Home Office may refuse even if you yourself did not.
+
+## After ILR — the 12-month wait to citizenship
+
+Once granted ILR via long residence, you can apply for British citizenship via **naturalisation** 12 months later (or immediately if your spouse is British). The citizenship application requires:
+
+- 12 months of ILR (or marriage to British citizen)
+- Maximum 90 days absent in the final 12 months
+- Maximum 450 days absent in the last 5 years
+- Life in the UK Test (same one)
+- B1 English (same one)
+- Good character requirement
+- £1,500 application fee + £80 ceremony fee
+
+The naturalisation route from long residence-based ILR is straightforward provided you maintain residence and don\'t accumulate absences during that final year.
+
+## 10-year route vs 5-year route — which to take
+
+If you\'re close to the 5-year mark on a standard Skilled Worker or Family visa, take the 5-year route — it\'s 5 years vs 10 years. The 10-year long residence route only makes sense if:
+
+1. You don\'t qualify for a 5-year route (e.g. switched between non-qualifying visas)
+2. You had gaps that disrupted a single-route 5-year clock but your overall residence remained lawful
+3. You\'re a refugee with humanitarian protection (different rules apply)
+
+For most clean Skilled Worker / Family visa holders, the 5-year route is the only one to consider. Long residence is the safety net for everyone else.
+
+## When to apply
+
+You can apply at any point after you complete 10 years of continuous lawful residence. Practical recommendations:
+
+- **Apply when within 28 days of 10-year completion** — earlier applications can technically be refused as "premature"
+- **Have a current valid visa** at the date of application — applying when your visa is about to expire risks complications
+- **Use super priority service** at £800 — given the complexity of 10-year documentation, faster decisions reduce risk of supervening events (employment changes, absences)
+
+## Common mistakes to avoid
+
+1. **Counting visitor visa time** — does not count
+2. **Underestimating total absences** — count both travel days as outside-UK days for safety
+3. **Tax inconsistency** — reconcile HMRC records with declared salaries before applying
+4. **Missing original BRPs / decision letters** — keep all immigration documents for the full 10 years
+5. **Applying without Life in the UK Test booked** — test centres book out 2–6 weeks in advance
+6. **Forgetting passport renewal during the period** — you need every passport you held during the 10 years
+
+See our [ILR guide](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements) for general settlement requirements, or our [Skilled Worker guide](/visa/skilled-worker) if you\'re on a 5-year work route.
+`.trim(),
+  },
+
+  {
+    slug: 'bringing-parents-to-uk-adult-dependent-relative-2026',
+    title: 'Bringing Your Parents to the UK in 2026 — Adult Dependent Relative Visa',
+    description:
+      'Full 2026 guide to the UK Adult Dependent Relative visa: who qualifies, the strict care requirement, evidence of long-term care need, fees (£3,250), and why most applications fail.',
+    date: '2026-05-18',
+    updated: '2026-05-18',
+    readMinutes: 8,
+    tags: ['Family visa', 'Dependants', 'Adult Dependent Relative', 'Parents'],
+    body: `
+Bringing your elderly parents to live with you in the UK is one of the hardest things to do under UK immigration law. The Adult Dependent Relative (ADR) visa is the only direct route, and it has a notoriously high refusal rate — over 80% of applications were refused in some recent years. This 2026 guide explains exactly who can qualify, what evidence the Home Office actually accepts, and the alternative options when ADR isn\'t realistic.
+
+## What is the Adult Dependent Relative visa?
+
+The ADR visa lets a UK-based British citizen or settled person sponsor a relative aged 18 or over who needs long-term personal care. Eligible relatives include:
+
+- Parents
+- Grandparents
+- Brothers and sisters (over 18)
+- Children (over 18)
+
+Relatives must be related to either the sponsor or the sponsor\'s spouse. In-laws qualify if the spouse meets the sponsorship requirement.
+
+It is the only direct route for bringing adult parents to settle in the UK. There is no equivalent to the spouse visa for parents.
+
+## The two-part test
+
+To qualify, the applicant must show **both**:
+
+### Part 1 — Long-term personal care need
+
+The applicant must, as a result of age, illness or disability, require **long-term personal care** to perform everyday tasks. "Everyday tasks" means:
+
+- Washing
+- Dressing
+- Cooking
+- Toileting
+
+Standard household tasks like shopping, gardening, or financial admin do not qualify. The need must be for the most basic self-care.
+
+This must be evidenced with:
+- Medical reports from qualified doctors detailing the specific conditions
+- Specialist medical opinions where applicable
+- Letters from healthcare providers describing daily care requirements
+- Photos / videos in severe cases showing the applicant\'s actual condition
+
+### Part 2 — Unable to obtain required care in their home country
+
+The applicant must show that the required level of care is **either unavailable** in their home country, **or unaffordable** even with the help of the UK sponsor.
+
+This is where most applications fail. The Home Office has interpreted this requirement extremely strictly. Successful applicants typically show:
+
+- The required specialist care does not exist in their home country (e.g. specific medical conditions requiring care not available)
+- All affordable care options have been exhausted
+- Cultural / personal factors (e.g. no other relatives, complex care needs)
+- Detailed cost analyses showing private care is unaffordable even with UK financial support
+
+A common refusal scenario: parents from India where home help services and live-in carers cost £200–500/month. The Home Office reasons that a UK-based child earning £40k+ could easily fund this — and refuses on the basis that affordable care IS available.
+
+## The unwritten reality — refusal rates
+
+The ADR visa has the highest refusal rate of any UK family route. Recent years saw 80–90% refusal rates. The bar set by the 2012 reforms was deliberately high to reduce the number of elderly parents joining adult children in the UK.
+
+In practice, successful ADR applications typically involve:
+- Single, widowed parent with no other relatives in the home country
+- Specific medical conditions (dementia, advanced cancer, paralysis)
+- Country where the required care is genuinely unavailable
+- Comprehensive evidence package prepared by an immigration solicitor
+- Strong UK sponsor financial position
+
+If your parents are reasonably healthy and live in a country with available paid care (most countries), the ADR route will almost certainly fail.
+
+## What the UK sponsor must show
+
+The sponsor (you, in the UK) must demonstrate:
+
+- **Status**: British citizen, settled person, or refugee
+- **Accommodation**: suitable property without overcrowding the household
+- **Income or savings**: enough to maintain the relative without recourse to public funds, typically £18,600+ income or equivalent savings
+- **Long-term commitment**: declaration that you will provide care, accommodation and financial support for at least 5 years
+
+Note: no specific income threshold is set in legislation (unlike spouse visas), but in practice £18,600+ is what most adjudicators accept.
+
+## Costs in 2026
+
+| Item | Amount |
+|---|---|
+| Application fee (out of UK) | £3,250 |
+| Application fee (in UK switch) | £1,048 (rare; few in-UK applicants) |
+| IHS (5 years) | £5,175 |
+| Priority service | £573 |
+| Total minimum out-of-UK | £8,425 |
+
+If granted, the visa allows immediate ILR (settlement). The applicant does not need a 5-year qualifying period.
+
+## Documents required
+
+For the applicant:
+- Birth certificate establishing relationship to sponsor
+- Death certificate of spouse (if applicable)
+- Detailed medical reports
+- Letters from healthcare providers
+- Evidence of current care arrangements
+- Cost analysis of available care in home country
+- Statement explaining why care cannot be obtained / afforded
+- Passport and standard immigration documents
+
+For the sponsor:
+- British / settled status evidence
+- Marriage certificate (if relating through spouse)
+- Property ownership / tenancy documents
+- 6 months of bank statements
+- Payslips and employer letter
+- P60
+- Statement of support and commitment
+
+## Why most ADR applications fail
+
+The single most common reason: **the Home Office decides that care is available and affordable in the home country**, even with the sponsor\'s help.
+
+Other common refusal reasons:
+1. **Medical evidence too generic** — applicant must demonstrate specific care needs, not generic "old age"
+2. **No exploration of in-country alternatives** — application must show care options were investigated and exhausted
+3. **Other relatives available in home country** — if there\'s a sibling or close relative locally, refusal is likely
+4. **Sponsor income insufficient** — typically need £25k+ to comfortably support a parent
+
+## What to do if ADR isn\'t realistic
+
+For most families, the ADR route will not succeed. Realistic alternatives:
+
+### 1. Long-term visit visas
+Parents can apply for 2, 5 or 10-year multi-entry Visit visas, each allowing visits of up to 6 months at a time. They cannot be in the UK for more than 6 months in any 12-month period as a general rule.
+
+This works for parents who can travel back and forth but cannot settle permanently.
+
+### 2. Family visit visa multiple-entry
+Standard 6-month visit visas can be applied for repeatedly. Some parents make 4–6 visits per year, especially around major family events.
+
+### 3. Settled status via citizenship
+If you have UK citizen children, your parents may have indirect routes through extended family connections — though these are rare and complex.
+
+### 4. Private medical visit visa
+For specific medical treatment requiring time in the UK, the visitor visa allows medical treatment up to 11 months in some cases. Not a settlement route.
+
+### 5. UK Ancestry visa (limited scope)
+Only available to Commonwealth citizens with UK-born grandparents (the parents\' grandparent must be UK-born). Few people qualify.
+
+## Practical timeline if you decide to apply
+
+1. **Months 1–3**: Build medical evidence — multiple specialist reports, current care logs
+2. **Months 4–5**: Conduct in-country care cost analysis with quotes from providers
+3. **Months 6–7**: Prepare sponsor evidence and statement of support
+4. **Month 8**: Consider immigration solicitor consultation (£300–800 for a strategic review)
+5. **Month 9**: Submit application; expect 12+ weeks decision
+
+If refused, you can appeal on human rights grounds (Article 8 family life), which is the most common successful path. Appeals add 6–18 months to the process.
+
+## Common scams to avoid
+
+The ADR visa\'s low success rate has spawned several scams:
+- **"Guaranteed approval" solicitors** charging £5,000–15,000 — no one can guarantee Home Office approval
+- **Fake medical reports** — Home Office routinely cross-checks with stated providers
+- **Made-up "in-country care unavailability"** — claims about non-existent care that are easily verified
+
+Stick to genuine OISC-registered advisers or SRA-regulated solicitors.
+
+## The honest assessment
+
+If you\'re considering ADR for your parents, here\'s the realistic check:
+
+- **Are your parents physically dependent on others for basic tasks?** If no, refusal is almost certain.
+- **Is care genuinely unavailable in their country?** If you live in a major Indian/Nigerian/Pakistani/Bangladeshi/Filipino city, care is available — refusal almost certain.
+- **Do they have NO other relatives in the country?** If they have siblings or other adult relatives locally, refusal is likely.
+
+For 90%+ of applicants, the practical answer is repeated long-term visit visas, not ADR. This isn\'t ideal but it\'s the reality of current UK immigration policy.
+
+See our [Family visa guide](/visa/family) for related routes, or our [Visit visa article](/blog/uk-visit-visa-documents-checklist-2026) for long-term visit visa planning.
+`.trim(),
+  },
+
+  {
+    slug: 'uk-evisa-final-deadline-2026-how-to-migrate',
+    title: 'UK eVisa Final Deadline 2026 — How to Migrate Before You Get Stuck',
+    description:
+      'Critical 2026 guide to migrating from BRP to eVisa before key deadlines. How to create your UKVI account, link your passport, and avoid the boarding refusals that hit thousands of travellers in 2025–26.',
+    date: '2026-05-18',
+    updated: '2026-05-18',
+    readMinutes: 7,
+    tags: ['eVisa', 'BRP', 'Immigration status', 'Travel'],
+    body: `
+The UK\'s shift from physical Biometric Residence Permits (BRPs) to digital eVisas is reaching its final stages in 2026. Travellers who haven\'t migrated have been stranded at airports across the world over the past 12 months, with airlines refusing boarding because they can\'t verify status without an eVisa share code. This guide explains exactly what you must do before the next major deadline, why thousands are still failing to complete migration, and the specific actions that prevent travel disasters.
+
+## What\'s actually happening in 2026
+
+The Home Office stopped issuing physical BRPs to most applicants on **31 December 2024**. Anyone granted leave from January 2025 onwards received an eVisa only — no physical card.
+
+BRPs already in circulation have a printed expiry date of 31 December 2024 on most cards, **regardless of when your underlying visa actually expires**. This is intentional: the card\'s legal status as a stand-alone identity document ended on that date, but your immigration leave continues as originally granted.
+
+Throughout 2025 and into 2026, airlines progressively integrated with the Home Office\'s electronic verification system. By mid-2026, **most major airlines refuse to board passengers who cannot produce a current eVisa share code at check-in or boarding gate**, even if their underlying leave is valid.
+
+## Who still needs to act
+
+You need to create or update your UKVI account immediately if **any** of the following applies:
+
+1. You hold a current physical BRP and have never logged into the gov.uk UKVI account portal
+2. You created a UKVI account but never tested generating a share code
+3. You renewed your passport at any point since your visa was granted, and haven\'t updated your UKVI account with the new passport number
+4. You hold ILR (Indefinite Leave to Remain) granted before 2020 and have a paper "no time limit" stamp in an old passport, not a BRP
+5. You hold EUSS (EU Settlement Scheme) status but have never tested your share code recently
+
+The single biggest cause of boarding refusals in 2026 is **passport renewal without UKVI account update**. The airline\'s system looks up your status against your current passport number. If the number doesn\'t match what\'s in your UKVI account, no match returns and the airline refuses to board.
+
+## The 30-minute migration checklist
+
+If you haven\'t done this yet, set aside 30 minutes and complete all steps:
+
+### Step 1 — Create or access your UKVI account
+
+- Go to **gov.uk/evisa**
+- Click "Create a UKVI account" or "Sign in"
+- Use the passport you used for your original UK visa application
+- Verify your email and phone number
+
+### Step 2 — Link your eVisa
+
+- Inside the account, navigate to "View and prove your immigration status"
+- Confirm your immigration details match Home Office records
+- If they don\'t match, contact UKVI Resolution Centre via the linked form
+
+### Step 3 — Update passport details
+
+- If your current passport is different from the one you applied for your visa with, click "Update details"
+- Enter the new passport number
+- Submit a clear photo of your current passport bio page
+
+This is the step most people skip and the one that causes airport refusals. **Do this for every passport renewal, not just at deadlines.**
+
+### Step 4 — Generate and test a share code
+
+- Click "Prove your right to work / rent / status"
+- Generate a share code (valid 90 days; you can generate as many as you want)
+- Open the code in a private browser window and verify your status displays correctly with date of birth check
+
+If the code works, your eVisa is fully operational.
+
+### Step 5 — Save key information
+
+Record (somewhere secure, not on your phone\'s lock screen):
+- Your UKVI account email and password
+- A note of your immigration status type and expiry date
+- The phone number used for verification
+
+## The 2026 deadline timeline
+
+| Date | What changes |
+|---|---|
+| **31 Dec 2024** | Physical BRPs no longer issued; existing cards lose stand-alone validity |
+| **Throughout 2025** | Airlines progressively integrate eVisa verification |
+| **Mid-2026** | Most major airlines refuse boarding without eVisa share code |
+| **End 2026** | Some carriers may still accept BRP with manual phone verification, but reliability drops |
+| **2027** | All remaining paper-based and legacy document holders expected to be fully migrated |
+
+Note: your underlying immigration **leave** does not expire because of this transition. ILR is permanent. Visa expiry dates are unchanged. Only the practical ability to prove your status at airports and to UK officials is affected.
+
+## What happens at airports right now
+
+The current reality at major international airports (as of May 2026):
+
+- **London Heathrow, Gatwick**: full eVisa integration. Boarding refused without share code at originating airport.
+- **EU airports (Schengen → UK flights)**: most major carriers integrated. Refusals common.
+- **Indian airports**: hit-and-miss — some carriers still accept BRP with phone verification.
+- **US airports**: mostly integrated. Refusals common since late 2025.
+- **Middle Eastern hubs (Dubai, Doha)**: variable by carrier.
+
+If you\'re refused boarding:
+1. Call the **Home Office Carrier Liaison Centre** (number on gov.uk/contact-ukvi-inside-outside-uk)
+2. They can sometimes verify status by phone in real time, but airlines aren\'t obligated to accept this
+3. If not resolved, you\'ll need to rebook flights — often at significant cost
+
+This is why migrating before any planned travel is critical.
+
+## Specific situations and what to do
+
+### "I lost or damaged my BRP"
+Don\'t apply for a replacement BRP — they\'re no longer issued. Instead, create your UKVI account using your decision letter reference or contact the BRP team for identity recovery.
+
+### "I never received my decision letter"
+For older grants (pre-2018) you may not have a letter. Use the support form at gov.uk/evisa with your full name, date of birth, nationality and visa type. The Home Office can verify and issue a recovery link.
+
+### "I have ILR from before 2010 — paper-only in an old passport"
+You urgently need to create a UKVI account. The Home Office\'s "no time limit" stamp in an expired passport is increasingly unrecognised at borders. Use the "I have ILR but no current document" path on gov.uk/evisa.
+
+### "I\'m on EUSS pre-settled or settled status"
+You already have a digital status — you only need to verify the UKVI account works and your current passport is linked.
+
+### "I have dual nationality and travel on a different passport"
+Each immigration status is linked to a specific passport. If you travel on a passport not linked to your UKVI account, the airline won\'t find your status. Update or add the passport you actually travel on.
+
+### "I have multiple visa records (e.g. Student visa then Skilled Worker)"
+Your UKVI account should show only your current status. Old expired statuses don\'t affect anything. Make sure the current one is linked to your current passport.
+
+## The myths that cause problems
+
+1. **"My BRP doesn\'t expire until 2027, so I\'m fine."** False. The BRP physical card became unusable as standalone evidence after 31 Dec 2024.
+2. **"ILR is permanent, so I don\'t need an eVisa."** Your ILR is permanent, but proving it without a working eVisa is increasingly impossible.
+3. **"The airline will figure it out at check-in."** Airlines lose £2,000–10,000 per "carrier liability" for transporting someone without valid status. They won\'t risk it.
+4. **"I\'ll do it when I next travel."** Travel days are the worst time to discover your account doesn\'t work or your passport isn\'t linked. Do it now.
+
+## Family members and children
+
+Each person has their own UKVI account and eVisa. Parents must create accounts for children under 18, but the account belongs to the child and transfers to their control at 18.
+
+If your spouse or children are dependants on your visa, they each need:
+- Their own UKVI account
+- Their current passport linked
+- Their own ability to generate share codes
+
+Frequent issue: parents create their own account but forget about children\'s accounts. Children get stuck at airports while parents pass through.
+
+## What to do before any international travel
+
+Pre-flight checklist (do this 1 week before any UK-bound trip):
+
+- [ ] Log into UKVI account at gov.uk/evisa
+- [ ] Confirm current passport number matches the one you\'ll travel on
+- [ ] Generate a share code, test it works
+- [ ] Save the share code somewhere accessible (email it to yourself)
+- [ ] Confirm your underlying immigration status is still valid for the travel dates
+- [ ] For children: repeat the entire process for each child
+
+If anything fails, contact UKVI Resolution Centre **before** booking flights, not on the day.
+
+## What\'s coming next
+
+The Home Office roadmap through 2026–2027:
+- **Late 2026**: integration with EU/Schengen entry system for border-side verification
+- **2027**: phase-out of phone-based airline verification; eVisa share code becomes mandatory
+- **Long-term**: integration with biometric facial recognition at UK borders
+
+For now, the action is simple but urgent: create the account, link the current passport, test the share code, save the details. The 30 minutes you spend now prevents a stranded-at-airport disaster later.
+
+See our companion article on [BRP vs eVisa changes](/blog/brp-vs-evisa-2026-whats-changing) for the underlying policy, or [Visit visa documents](/blog/uk-visit-visa-documents-checklist-2026) if you\'re helping family members travel to the UK.
+`.trim(),
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
