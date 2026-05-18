@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, Search, ArrowUpRight, Briefcase, Scale } from 'lucide-react';
+import { Calculator, Search, ArrowUpRight, Briefcase, Scale, FileSearch } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Free UK Visa Tools — Salary Checker, Sponsor Search, Cost Calculator',
@@ -50,6 +50,15 @@ const TOOLS = [
     cta: 'Compare visa routes',
     accent: '#059669',
     soft: 'rgba(5,150,105,0.06)',
+  },
+  {
+    href: '/tools/refusal-analyzer',
+    icon: FileSearch,
+    title: 'Refusal letter analyzer',
+    desc: 'Paste your UK visa refusal letter and get a plain-English breakdown of each ground — severity, what it means, and what to do next. Runs in your browser.',
+    cta: 'Decode my refusal',
+    accent: '#e11d48',
+    soft: 'rgba(225,29,72,0.06)',
   },
 ];
 

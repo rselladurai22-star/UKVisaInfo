@@ -10,6 +10,7 @@ import ArticleToc from '../../../components/blog/ArticleToc';
 import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
 import SidebarAffiliate from '../../../components/blog/SidebarAffiliate';
+import Comments from '../../../components/blog/Comments';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import { extractH2Headings } from '../../../components/blog/slug';
@@ -234,6 +235,8 @@ export default async function BlogPostPage({ params }: RouteParams) {
               />
 
               <RelatedPosts current={post} />
+
+              <Comments term={post.slug} />
 
               {/* Bottom CTA */}
               <div className="mt-14 relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-10">

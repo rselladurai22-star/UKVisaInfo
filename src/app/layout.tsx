@@ -21,7 +21,10 @@ export const metadata: Metadata = {
     'Family visa UK', 'Graduate visa', 'Global Talent visa', 'Health and Care Worker',
     'UK visa cost', 'UK visa requirements', 'UK visa application', 'IHS', 'eVisa',
   ],
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    types: { 'application/rss+xml': '/rss.xml' },
+  },
   openGraph: {
     type: 'website',
     locale: 'en_GB',
