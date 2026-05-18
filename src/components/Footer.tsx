@@ -15,8 +15,17 @@ const LOGO_ICON = (
 const RESOURCES = [
   { href: '/visa-types', label: 'Visa Routes' },
   { href: '/eligibility', label: 'Eligibility Quiz' },
-  { href: '/costs', label: 'Cost Calculator' },
+  { href: '/tools', label: 'Free Tools' },
   { href: '/blog', label: 'Guides & Blog' },
+  { href: '/news', label: 'News & Updates' },
+];
+
+const EXPLORE = [
+  { href: '/from', label: 'By Country' },
+  { href: '/uk-cities', label: 'UK City Guides' },
+  { href: '/salary', label: 'Salary by SOC Code' },
+  { href: '/tools/refusal-analyzer', label: 'Refusal Analyzer' },
+  { href: '/my-journey', label: 'My Visa Journey' },
 ];
 
 const LEGAL = [
@@ -64,7 +73,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-white/[0.08]">
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-5">
+          <div className="col-span-2 md:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center shadow-[0_1px_4px_rgba(217,21,43,0.4)]">
                 {LOGO_ICON}
@@ -87,7 +96,7 @@ export default function Footer() {
           </div>
 
           {/* Resources */}
-          <div className="col-span-1 md:col-span-3 md:col-start-7">
+          <div className="col-span-1 md:col-span-3 md:col-start-5">
             <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
               Resources
             </h4>
@@ -107,6 +116,31 @@ export default function Footer() {
                   className="inline-flex items-center gap-1.5 text-sm text-white/55 hover:text-white transition-colors"
                 >
                   gov.uk
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Explore */}
+          <div className="col-span-1 md:col-span-3">
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
+              Explore
+            </h4>
+            <ul className="space-y-3">
+              {EXPLORE.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-white/55 hover:text-white transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="/rss.xml"
+                  className="inline-flex items-center gap-1.5 text-sm text-white/55 hover:text-white transition-colors"
+                >
+                  RSS feed
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </li>

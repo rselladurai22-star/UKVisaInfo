@@ -7,7 +7,8 @@ import {
   Briefcase, GraduationCap, Plane, Users, Stethoscope, LayoutGrid, Rocket,
   History, Calculator, Search, Scale, Compass, Sparkles, ArrowUpRight,
   FileText, Tag, Crown, ShieldCheck, Globe, Flag, RefreshCw, Home as HomeIcon,
-  ChevronLeft, ArrowRight, Menu, X, BookOpen,
+  ChevronLeft, ArrowRight, Menu, X, BookOpen, MapPin, Building2, Newspaper,
+  ListChecks, FileSearch, TrendingUp,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -77,17 +78,37 @@ const SECTIONS: Section[] = [
     id: 'tools', label: 'Tools', emoji: '⚡',
     columns: [
       { heading: 'Calculators & Search', items: [
-        { href: '/tools/salary-checker',  label: 'Salary checker',  desc: 'SOC code threshold',     icon: Briefcase,  accent: '#d9152b' },
-        { href: '/tools/sponsor-search',  label: 'Sponsor search',  desc: 'Find licensed employers', icon: Search,     accent: '#2563eb' },
-        { href: '/tools/cost-calculator', label: 'Cost calculator', desc: 'Fees + IHS + dependants', icon: Calculator, accent: '#7c3aed' },
-        { href: '/tools/compare',         label: 'Visa comparison', desc: 'Side-by-side analysis',   icon: Scale,      accent: '#059669' },
+        { href: '/tools/salary-checker',    label: 'Salary checker',    desc: 'SOC code threshold',     icon: Briefcase,  accent: '#d9152b' },
+        { href: '/tools/sponsor-search',    label: 'Sponsor search',    desc: 'Find licensed employers', icon: Search,     accent: '#2563eb' },
+        { href: '/tools/cost-calculator',   label: 'Cost calculator',   desc: 'Fees + IHS + dependants', icon: Calculator, accent: '#7c3aed' },
+        { href: '/tools/compare',           label: 'Visa comparison',   desc: 'Side-by-side analysis',   icon: Scale,      accent: '#059669' },
       ]},
-      { heading: 'Guides', items: [
-        { href: '/eligibility', label: 'Eligibility quiz', desc: '60-second match',     icon: Compass, accent: '#d9152b' },
-        { href: '/costs',       label: 'Quick cost view',  desc: 'Simple fee overview', icon: Tag,     accent: '#0d9488' },
+      { heading: 'Personal & analysis', items: [
+        { href: '/tools/refusal-analyzer',  label: 'Refusal analyzer',  desc: 'Decode your refusal letter', icon: FileSearch, accent: '#e11d48' },
+        { href: '/my-journey',              label: 'My visa journey',   desc: 'Save your plan locally',     icon: ListChecks, accent: '#10b981' },
+        { href: '/eligibility',             label: 'Eligibility quiz',  desc: '60-second match',            icon: Compass,    accent: '#d9152b' },
+        { href: '/salary',                  label: 'Salary by SOC code', desc: 'All 270 occupations',       icon: TrendingUp, accent: '#d97706' },
       ]},
     ],
     feature: { title: 'All tools in one place', desc: 'Free interactive calculators and searches built from official data.', href: '/tools', cta: 'Open tools hub' },
+  },
+  {
+    id: 'explore', label: 'Explore', emoji: '🗺️',
+    columns: [
+      { heading: 'By your country', items: [
+        { href: '/from/india',       label: 'From India 🇮🇳',       desc: 'Top source country',     icon: Globe,    accent: '#d9152b' },
+        { href: '/from/nigeria',     label: 'From Nigeria 🇳🇬',     desc: 'NHS + Skilled Worker',   icon: Globe,    accent: '#059669' },
+        { href: '/from/pakistan',    label: 'From Pakistan 🇵🇰',    desc: 'Study + Family',         icon: Globe,    accent: '#0d9488' },
+        { href: '/from',             label: 'All country guides',    desc: '8 countries covered',    icon: Flag,     accent: '#2563eb' },
+      ]},
+      { heading: 'By UK city + sponsor', items: [
+        { href: '/uk-cities/london',     label: 'Living in London',      desc: 'Cost + sectors + areas', icon: MapPin,    accent: '#d9152b' },
+        { href: '/uk-cities/manchester', label: 'Living in Manchester',  desc: 'Tech + media hub',       icon: MapPin,    accent: '#0891b2' },
+        { href: '/sponsors/sector/technology', label: 'Tech sponsors',   desc: 'By sector',              icon: Building2, accent: '#2563eb' },
+        { href: '/sponsors/sector/healthcare', label: 'Healthcare sponsors', desc: 'NHS trusts + care',   icon: Stethoscope, accent: '#059669' },
+      ]},
+    ],
+    feature: { title: 'Personalised by origin & destination', desc: 'Country guides, UK city briefs and sponsor directories — all cross-linked.', href: '/uk-cities', cta: 'Browse city guides' },
   },
   {
     id: 'guides', label: 'Guides', emoji: '📖',
@@ -98,10 +119,10 @@ const SECTIONS: Section[] = [
         { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate',    label: 'eVisa migration',        desc: 'Beat the deadline',  icon: ShieldCheck,accent: '#d9152b' },
         { href: '/blog/uk-visitor-visa-refused-top-reasons-2026',       label: 'Visit visa refused',     desc: 'How to reapply',     icon: FileText,   accent: '#0891b2' },
       ]},
-      { heading: 'New & trending', items: [
+      { heading: 'News & guides', items: [
+        { href: '/news',                                                      label: 'Latest UK visa news',    desc: 'Rule + fee updates',      icon: Newspaper,     accent: '#d9152b' },
         { href: '/blog/uk-citizenship-10-year-long-residence-2026',           label: '10-year long residence', desc: 'Path to citizenship',     icon: Crown,         accent: '#d97706' },
         { href: '/blog/bringing-parents-to-uk-adult-dependent-relative-2026', label: 'Bringing parents',       desc: 'Adult Dependent Relative',icon: Users,         accent: '#7c3aed' },
-        { href: '/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026',   label: 'Find a sponsor',         desc: 'Practical search guide',  icon: Search,        accent: '#2563eb' },
         { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',              label: 'Graduate visa',          desc: 'No sponsor needed',       icon: GraduationCap, accent: '#0d9488' },
       ]},
     ],

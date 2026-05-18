@@ -5,7 +5,8 @@ import Link from 'next/link';
 import {
   Briefcase, GraduationCap, Plane, Users, Stethoscope, Rocket, History,
   LayoutGrid, ArrowRight, ArrowUpRight, Sparkles, ShieldCheck, Search,
-  Calculator, Compass, Scale, BookOpen, CheckCircle2,
+  Calculator, Compass, Scale, BookOpen, CheckCircle2, MapPin, Globe2,
+  FileSearch, ListChecks, Newspaper, TrendingUp,
 } from 'lucide-react';
 import VisaDetailModal from './VisaDetailModal';
 import { VISA_DETAILS } from '../data/visaDetails';
@@ -248,6 +249,77 @@ export default function Home() {
             {TOOLS.map((t, i) => (
               <ToolCard key={t.label} tool={t} index={i} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          EXPLORE — discoverability bento for new pages
+      ════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-[#fafbfd] border-y border-[rgba(14,20,36,0.06)]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <RevealBlock>
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <span className="inline-block text-[11px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-3">
+                Explore the site
+              </span>
+              <h2 className="font-display text-[2rem] md:text-[2.6rem] font-bold text-[#0a1530] tracking-[-0.025em] leading-[1.05]">
+                Built for every angle of your move.
+              </h2>
+              <p className="mt-4 text-[#52596e] text-[15px] leading-relaxed">
+                Country guides, UK city briefs, salary lookups by SOC code, and tools that run entirely in your browser — all cross-linked.
+              </p>
+            </div>
+          </RevealBlock>
+
+          <div className="grid grid-cols-12 gap-3 md:gap-4 auto-rows-[170px]">
+            {/* HERO TILE — country guides */}
+            <Link
+              href="/from"
+              className="group col-span-12 md:col-span-7 row-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-9 text-white"
+            >
+              <div className="absolute inset-0 opacity-25 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
+              <div className="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#d9152b]/20 blur-3xl pointer-events-none" />
+              <div className="relative z-10 h-full flex flex-col justify-between">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.14] text-[#ffbf47] text-[10.5px] font-bold uppercase tracking-[0.1em]">
+                    <Globe2 className="w-3 h-3" />
+                    Country guides
+                  </span>
+                  <h3 className="mt-5 font-display font-bold text-[1.75rem] md:text-[2.25rem] leading-[1.05] tracking-tight">
+                    UK visa for your country <span className="ml-1">🇮🇳 🇳🇬 🇵🇰 🇵🇭</span>
+                  </h3>
+                  <p className="mt-3 text-white/55 text-[14px] md:text-[15px] max-w-md leading-relaxed">
+                    8 country-specific guides covering top routes, application centres, TB-test rules and processing patterns.
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-2 text-[#ffbf47] font-bold text-sm group-hover:gap-3 transition-[gap] duration-100">
+                  Explore country guides <ArrowUpRight className="w-4 h-4" />
+                </span>
+              </div>
+            </Link>
+
+            <BentoMini href="/uk-cities" icon={MapPin}    label="UK City guides"      desc="Cost of living + sectors"   accent="#2563eb" tint="rgba(37,99,235,0.08)" />
+            <BentoMini href="/salary"    icon={TrendingUp} label="Salary by SOC code" desc="All 270 occupations"        accent="#d97706" tint="rgba(217,119,6,0.08)" />
+
+            <BentoMini href="/tools/refusal-analyzer" icon={FileSearch} label="Refusal analyzer" desc="Decode your letter"     accent="#e11d48" tint="rgba(225,29,72,0.08)" />
+            <BentoMini href="/my-journey"             icon={ListChecks} label="My visa journey"  desc="Save your plan locally" accent="#10b981" tint="rgba(16,185,129,0.08)" />
+
+            {/* NEWS TILE — wide */}
+            <Link
+              href="/news"
+              className="group col-span-12 md:col-span-5 row-span-1 relative overflow-hidden rounded-3xl bg-white border border-[rgba(14,20,36,0.08)] p-5 hover:border-[#0a1530] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(10,21,48,0.08)] transition-[transform,border-color,box-shadow] duration-150 flex items-center gap-4"
+            >
+              <span className="w-12 h-12 rounded-2xl bg-[rgba(217,21,43,0.08)] text-[#d9152b] flex items-center justify-center flex-shrink-0">
+                <Newspaper className="w-5 h-5" />
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8]">Updates</div>
+                <div className="text-[15px] font-bold text-[#0a1530] leading-tight mt-0.5">UK visa news &amp; rule changes</div>
+                <div className="text-[12px] text-[#7a8195] mt-0.5">Updated weekly · subscribe to the brief</div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#cfd5e0] group-hover:text-[#d9152b] group-hover:translate-x-0.5 transition-all duration-150 flex-shrink-0" />
+            </Link>
           </div>
         </div>
       </section>
@@ -599,6 +671,39 @@ function GuideCard({
           <span className="inline-flex items-center gap-1 text-[12.5px] font-bold text-[#d9152b] transition-[gap] duration-100 group-hover:gap-2">
             Read <ArrowRight className="w-3.5 h-3.5" />
           </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function BentoMini({
+  href, icon: Icon, label, desc, accent, tint,
+}: {
+  href: string; icon: React.ComponentType<{ className?: string }>;
+  label: string; desc: string; accent: string; tint: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group col-span-6 md:col-span-2 lg:col-span-2 relative overflow-hidden rounded-3xl bg-white border border-[rgba(14,20,36,0.08)] p-5 hover:border-[#0a1530] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(10,21,48,0.08)] transition-[transform,border-color,box-shadow] duration-150 flex flex-col justify-between"
+    >
+      <span
+        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+        style={{ background: `linear-gradient(90deg, ${accent}, ${accent}00)` }}
+        aria-hidden="true"
+      />
+      <span
+        className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
+        style={{ background: tint, color: accent }}
+      >
+        <Icon className="w-[18px] h-[18px]" />
+      </span>
+      <div>
+        <div className="text-[13.5px] font-bold text-[#0a1530] leading-tight">{label}</div>
+        <div className="text-[11.5px] text-[#8892a4] mt-0.5 leading-tight">{desc}</div>
+        <div className="mt-2 inline-flex items-center gap-1 text-[11.5px] font-semibold" style={{ color: accent }}>
+          Open <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-100" />
         </div>
       </div>
     </Link>
