@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import {
   Briefcase, GraduationCap, Plane, Users, Stethoscope, Rocket, History, LayoutGrid,
   ArrowRight, ArrowUpRight, Sparkles, ShieldCheck, RefreshCw, BookOpen, Calculator, Compass,
-  CheckCircle2,
+  CheckCircle2, Search, Scale,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import VisaDetailModal from './VisaDetailModal';
@@ -58,31 +58,64 @@ const VISA_CARDS = [
 const TOOLS = [
   {
     label: 'Eligibility quiz',
-    desc: 'Answer 4 quick questions to find the right visa route for your situation.',
+    desc: 'Answer 4 quick questions to find the right visa route for you.',
     icon: Compass,
     href: '/eligibility',
     cta: 'Start quiz',
+    accent: '#d9152b',
+    tint: 'rgba(217,21,43,0.07)',
+  },
+  {
+    label: 'Salary checker',
+    desc: 'Check if your offered salary clears the Skilled Worker threshold by SOC code.',
+    icon: Briefcase,
+    href: '/tools/salary-checker',
+    cta: 'Check salary',
+    accent: '#0891b2',
+    tint: 'rgba(8,145,178,0.07)',
+  },
+  {
+    label: 'Sponsor search',
+    desc: 'Find UK employers who hold a Skilled Worker sponsor licence.',
+    icon: Search,
+    href: '/tools/sponsor-search',
+    cta: 'Find sponsors',
+    accent: '#2563eb',
+    tint: 'rgba(37,99,235,0.07)',
   },
   {
     label: 'Cost calculator',
-    desc: 'Add up Home Office fees, IHS, and priority service options.',
+    desc: 'Estimate Home Office fees, IHS and priority services for any route.',
     icon: Calculator,
-    href: '/costs',
-    cta: 'Calculate costs',
+    href: '/tools/cost-calculator',
+    cta: 'Calculate',
+    accent: '#7c3aed',
+    tint: 'rgba(124,58,237,0.07)',
+  },
+  {
+    label: 'Compare visas',
+    desc: 'Side-by-side comparison of any two UK visa routes.',
+    icon: Scale,
+    href: '/tools/compare',
+    cta: 'Compare',
+    accent: '#059669',
+    tint: 'rgba(5,150,105,0.07)',
   },
   {
     label: 'Guides & blog',
-    desc: '16 in-depth articles on UK visa rules, updated for 2026 thresholds.',
+    desc: '19 in-depth articles on UK visa rules, updated for 2026 thresholds.',
     icon: BookOpen,
     href: '/blog',
     cta: 'Read guides',
+    accent: '#d97706',
+    tint: 'rgba(217,119,6,0.07)',
   },
 ];
 
 const STATS = [
-  { v: 16, suf: '+', label: 'Long-form guides' },
+  { v: 19, suf: '+', label: 'Long-form guides' },
+  { v: 6, suf: '', label: 'Interactive tools' },
   { v: 8, suf: '', label: 'Visa routes covered' },
-  { v: 190, suf: '+', label: 'Nationalities supported' },
   { v: 100, suf: '%', label: 'gov.uk sourced' },
 ];
 
@@ -258,45 +291,70 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FREE TOOLS ── */}
+      {/* ── EVERYTHING INSIDE ── */}
       <section className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#d9152b]">
-              Free tools
-            </span>
-            <h2 className="mt-2 font-display text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] font-bold text-[#0a1530] leading-tight">
-              Plan your application
-            </h2>
-            <p className="mt-2.5 text-[#52596e] text-sm md:text-base max-w-md leading-relaxed">
-              Free, no signup required.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#d9152b]">
+                Everything inside
+              </span>
+              <h2 className="mt-2 font-display text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] font-bold text-[#0a1530] leading-tight">
+                Free tools &amp; long-form guides
+              </h2>
+              <p className="mt-2.5 text-[#52596e] text-sm md:text-base max-w-lg leading-relaxed">
+                Six interactive tools and 19 deep-dive articles — all free,
+                no signup. Built on official Home Office data.
+              </p>
+            </div>
+            <button
+              onClick={() => router.push('/tools')}
+              className="self-start md:self-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[#0a1530] hover:text-[#d9152b] transition-colors whitespace-nowrap"
+            >
+              All tools
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {TOOLS.map((t, i) => (
               <motion.button
                 key={i}
                 onClick={() => router.push(t.href)}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: i * 0.07 }}
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.97 }}
-                className="group text-left bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl p-7 shadow-soft hover:shadow-card transition-all"
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ delay: i * 0.05 }}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden text-left bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl p-6 md:p-7 shadow-soft hover:shadow-card transition-all"
               >
-                <span className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-[rgba(217,21,43,0.07)] mb-5">
-                  <t.icon className="w-5 h-5 text-[#d9152b]" />
-                </span>
-                <div className="font-display font-bold text-[1.125rem] md:text-[1.25rem] text-[#0a1530]">
-                  {t.label}
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-8 -right-8 w-28 h-28 rounded-full opacity-70 blur-2xl"
+                  style={{ background: t.tint }}
+                />
+                <div className="relative z-10">
+                  <span
+                    className="inline-flex w-11 h-11 items-center justify-center rounded-xl mb-5"
+                    style={{ background: t.tint, color: t.accent }}
+                  >
+                    <t.icon className="w-5 h-5" />
+                  </span>
+                  <div className="font-display font-bold text-[1.0625rem] md:text-[1.125rem] text-[#0a1530]">
+                    {t.label}
+                  </div>
+                  <p className="mt-1.5 text-[13px] text-[#52596e] leading-relaxed">
+                    {t.desc}
+                  </p>
+                  <span
+                    className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-semibold"
+                    style={{ color: t.accent }}
+                  >
+                    {t.cta}
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </div>
-                <p className="mt-2 text-sm text-[#52596e] leading-relaxed">{t.desc}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#d9152b]">
-                  {t.cta}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
               </motion.button>
             ))}
           </div>
