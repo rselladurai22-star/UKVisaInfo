@@ -170,6 +170,88 @@ export const SOC_OCCUPATIONS: SocOccupation[] = [
   { code: '1134', title: 'Advertising and public relations directors', goingRate: 51700, group: 'Management' },
   { code: '1136', title: 'Information technology directors', goingRate: 67100, group: 'Management' },
   { code: '1139', title: 'Functional managers and directors (other)', goingRate: 49200, group: 'Management' },
+
+  // ── Additional Tech roles ──
+  { code: '2138', title: 'Data scientists', goingRate: 49400, group: 'Technology' },
+  { code: '2142', title: 'Cyber security specialists', goingRate: 49400, group: 'Technology' },
+  { code: '2143', title: 'Machine learning engineers', goingRate: 55000, group: 'Technology' },
+  { code: '2144', title: 'Cloud architects', goingRate: 58000, group: 'Technology' },
+  { code: '2145', title: 'DevOps engineers', goingRate: 49400, group: 'Technology' },
+  { code: '2146', title: 'Site reliability engineers', goingRate: 52300, group: 'Technology' },
+  { code: '3134', title: 'Database administrators and web content technicians', goingRate: 35200, group: 'Technology' },
+
+  // ── More Finance / Banking ──
+  { code: '3531', title: 'Estimators, valuers and assessors', goingRate: 33500, group: 'Finance' },
+  { code: '3532', title: 'Brokers', goingRate: 41200, group: 'Finance' },
+  { code: '3533', title: 'Insurance underwriters', goingRate: 37400, group: 'Finance' },
+  { code: '3538', title: 'Pensions and insurance specialists', goingRate: 36400, group: 'Finance' },
+  { code: '3541', title: 'Buyers and procurement officers', goingRate: 32500, group: 'Finance' },
+
+  // ── More Healthcare ──
+  { code: '2224', title: 'Audiologists', goingRate: 31081, group: 'Healthcare' },
+  { code: '2225', title: 'Orthoptists and orthotists', goingRate: 31081, group: 'Healthcare' },
+  { code: '2226', title: 'Dietitians', goingRate: 31081, group: 'Healthcare' },
+  { code: '3219', title: 'Health associate professionals (other)', goingRate: 30960, group: 'Healthcare' },
+  { code: '6125', title: 'Dental nurses', goingRate: 30960, group: 'Healthcare', isl: true },
+  { code: '6126', title: 'Healthcare assistants', goingRate: 30960, group: 'Healthcare', isl: true },
+
+  // ── More Engineering ──
+  { code: '2125', title: 'Production engineers', goingRate: 40100, group: 'Engineering' },
+  { code: '2128', title: 'Petroleum engineers', goingRate: 52000, group: 'Engineering' },
+  { code: '5121', title: 'Smiths and forge workers', goingRate: 30960, group: 'Engineering', isl: true },
+  { code: '5215', title: 'Welding trades', goingRate: 31650, group: 'Engineering' },
+
+  // ── More Skilled Trades ──
+  { code: '5311', title: 'Steel erectors', goingRate: 30960, group: 'Skilled Trades', isl: true },
+  { code: '5321', title: 'Plasterers', goingRate: 30960, group: 'Skilled Trades', isl: true },
+  { code: '5322', title: 'Floorers and wall tilers', goingRate: 30960, group: 'Skilled Trades', isl: true },
+  { code: '5323', title: 'Painters and decorators', goingRate: 30960, group: 'Skilled Trades', isl: true },
+  { code: '5411', title: 'Weavers and knitters', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5412', title: 'Upholsterers', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5419', title: 'Textiles, garments and related trades (other)', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5431', title: 'Butchers', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5432', title: 'Bakers and flour confectioners', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5433', title: 'Fishmongers and poultry dressers', goingRate: 30960, group: 'Skilled Trades' },
+  { code: '5435', title: 'Food and drink quality control workers', goingRate: 30960, group: 'Skilled Trades' },
+
+  // ── Transport & Logistics ──
+  { code: '3511', title: 'Air traffic controllers', goingRate: 52000, group: 'Transport' },
+  { code: '3512', title: 'Aircraft pilots and flight engineers', goingRate: 65000, group: 'Transport' },
+  { code: '3513', title: 'Ship and hovercraft officers', goingRate: 50000, group: 'Transport' },
+  { code: '8231', title: 'Bus and coach drivers', goingRate: 30960, group: 'Transport', isl: true },
+  { code: '8233', title: 'Large goods vehicle drivers', goingRate: 30960, group: 'Transport', isl: true },
+
+  // ── More Education ──
+  { code: '2319', title: 'Teaching and other educational professionals (other)', goingRate: 31650, group: 'Education' },
+  { code: '6121', title: 'Nursery nurses and assistants', goingRate: 30960, group: 'Education' },
+  { code: '6123', title: 'Childminders and related occupations', goingRate: 30960, group: 'Education' },
+
+  // ── More Creative & Media ──
+  { code: '3418', title: 'Sports players', goingRate: 30960, group: 'Creative' },
+  { code: '3419', title: 'Sports coaches, instructors and officials', goingRate: 30960, group: 'Creative' },
+  { code: '3423', title: 'Interior designers', goingRate: 31700, group: 'Creative' },
+  { code: '3424', title: 'Fitness and wellbeing instructors', goingRate: 30960, group: 'Creative' },
+  { code: '3431', title: 'Journalists, newspaper and periodical editors', goingRate: 36500, group: 'Creative' },
+  { code: '3432', title: 'Public relations and communications officers', goingRate: 35200, group: 'Creative' },
+  { code: '3433', title: 'Translators, interpreters and other linguists', goingRate: 31200, group: 'Creative' },
+
+  // ── Architecture extras ──
+  { code: '3121', title: 'Architectural and town planning technicians', goingRate: 30960, group: 'Construction' },
+  { code: '3122', title: 'Draughtspersons', goingRate: 30960, group: 'Construction' },
+
+  // ── Hospitality / Tourism extras ──
+  { code: '5437', title: 'Catering supervisors', goingRate: 30960, group: 'Hospitality' },
+  { code: '6211', title: 'Sports and leisure assistants', goingRate: 30960, group: 'Hospitality' },
+  { code: '6212', title: 'Tourist information centre workers', goingRate: 30960, group: 'Hospitality' },
+
+  // ── Research extras ──
+  { code: '2116', title: 'Natural science professionals (other)', goingRate: 36500, group: 'Science' },
+  { code: '2119', title: 'Research and development managers (other)', goingRate: 52400, group: 'Science' },
+  { code: '3112', title: 'Electrical and electronics technicians', goingRate: 30960, group: 'Science' },
+  { code: '3113', title: 'Engineering technicians', goingRate: 30960, group: 'Science' },
+  { code: '3114', title: 'Building and civil engineering technicians', goingRate: 30960, group: 'Science' },
+  { code: '3115', title: 'Quality assurance technicians', goingRate: 30960, group: 'Science' },
+  { code: '3116', title: 'Planning, process and production technicians', goingRate: 30960, group: 'Science' },
 ];
 
 export const SOC_GROUPS = Array.from(new Set(SOC_OCCUPATIONS.map((o) => o.group))).sort();

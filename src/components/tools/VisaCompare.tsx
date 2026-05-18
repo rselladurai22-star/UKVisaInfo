@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import {
   Scale, CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles,
   Briefcase, GraduationCap, Plane, Users, Stethoscope, LayoutGrid,
-  Rocket, History,
+  Rocket, History, ShieldCheck, Crown, Globe, Flag,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ interface VisaRow {
   ihsExempt: boolean;
   sponsorRequired: boolean;
   dependantsAllowed: boolean;
-  workRights: 'Sponsored only' | 'Unrestricted' | 'Limited' | 'None';
+  workRights: string;
   pathToIlr: string;
   englishLevel: string;
   ageLimit?: string;
@@ -99,6 +99,42 @@ const VISAS: Record<string, VisaRow> = {
     sponsorRequired: false, dependantsAllowed: true,
     workRights: 'Unrestricted',
     pathToIlr: '3 or 5 years', englishLevel: 'None (route-specific)',
+  },
+  'ilr': {
+    id: 'ilr', name: 'Indefinite Leave to Remain', icon: ShieldCheck, accent: '#059669',
+    fee: '£3,029', feeRange: '£3,029', ihs: 'None',
+    salaryMin: 'N/A (route-specific)', duration: 'Permanent',
+    processing: '6 months / 5 days super priority', ihsExempt: true,
+    sponsorRequired: false, dependantsAllowed: true,
+    workRights: 'Unrestricted',
+    pathToIlr: 'This IS settlement', englishLevel: 'B1',
+  },
+  'citizenship': {
+    id: 'citizenship', name: 'British Citizenship', icon: Crown, accent: '#d97706',
+    fee: '£1,500', feeRange: '£1,580 with ceremony', ihs: 'None',
+    salaryMin: 'N/A', duration: 'For life',
+    processing: '6 months standard', ihsExempt: true,
+    sponsorRequired: false, dependantsAllowed: false,
+    workRights: 'Unrestricted (full citizen)',
+    pathToIlr: 'Already settled', englishLevel: 'B1',
+  },
+  'euss': {
+    id: 'euss', name: 'EU Settlement Scheme', icon: Globe, accent: '#2563eb',
+    fee: 'Free', feeRange: 'Free', ihs: 'None',
+    salaryMin: 'N/A', duration: 'Pre-settled: 5 yrs / Settled: permanent',
+    processing: '~30 days', ihsExempt: true,
+    sponsorRequired: false, dependantsAllowed: true,
+    workRights: 'Unrestricted',
+    pathToIlr: 'Settled status = ILR equivalent', englishLevel: 'None',
+  },
+  'bno': {
+    id: 'bno', name: 'Hong Kong BNO', icon: Flag, accent: '#d9152b',
+    fee: '£298', feeRange: '£180 (2.5y) – £298 (5y)', ihs: '£1,035/year',
+    salaryMin: 'N/A', duration: '2.5 or 5 years',
+    processing: '12 weeks (out)', ihsExempt: false,
+    sponsorRequired: false, dependantsAllowed: true,
+    workRights: 'Unrestricted',
+    pathToIlr: '5 years', englishLevel: 'None at entry, B1 at ILR',
   },
 };
 

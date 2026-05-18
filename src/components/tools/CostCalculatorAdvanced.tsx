@@ -89,6 +89,39 @@ const VISAS: VisaPreset[] = [
     allowsDependants: true, defaultYears: 3,
     notes: 'Two-stage fee: £561 endorsement + £161 visa.',
   },
+  {
+    id: 'ilr',
+    label: 'ILR (Settlement)',
+    baseFee: { out3yr: 3029, in3yr: 3029 },
+    ihsAdult: 0, ihsChild: 0,
+    superPriorityFee: 800,
+    allowsDependants: true, defaultYears: 1,
+    notes: 'One-off settlement fee. No IHS at ILR stage. Life in the UK Test £50 extra.',
+  },
+  {
+    id: 'citizenship',
+    label: 'British Citizenship',
+    baseFee: { out3yr: 1500, in3yr: 1500 },
+    ihsAdult: 0, ihsChild: 0,
+    allowsDependants: false, defaultYears: 1,
+    notes: 'Includes ceremony fee component. Plus passport application £88.50 (separate).',
+  },
+  {
+    id: 'bno',
+    label: 'Hong Kong BNO',
+    baseFee: { out3yr: 180, out5yr: 298, in3yr: 180, in5yr: 298 },
+    ihsAdult: 1035, ihsChild: 776,
+    allowsDependants: true, defaultYears: 5,
+  },
+  {
+    id: 'ancestry',
+    label: 'UK Ancestry',
+    baseFee: { out3yr: 637, out5yr: 637 },
+    ihsAdult: 1035, ihsChild: 776,
+    priorityFee: 500,
+    allowsDependants: true, defaultYears: 5,
+    notes: 'For Commonwealth citizens with UK-born grandparent.',
+  },
 ];
 
 type Currency = 'GBP' | 'USD' | 'EUR' | 'INR' | 'NGN' | 'PKR' | 'AUD' | 'CAD';

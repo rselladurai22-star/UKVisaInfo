@@ -231,4 +231,52 @@ export const VISA_FAQS: Record<string, FAQ[]> = {
         'It must be innovative, viable and scalable. Endorsers look for novel products, business models or market approaches with potential to scale beyond a single locality and generate jobs. Generic restaurants, retail stores, franchises and standard consultancies typically do not qualify.',
     },
   ],
+
+  'ilr': [
+    { question: 'How long do I need to be in the UK before ILR?', answer: '5 years on a qualifying route (Skilled Worker, Health & Care, Family, Global Talent, etc.). Innovator Founder and Global Talent allow 3 years in some cases. Time on Student, Graduate, Visit visas does NOT count.' },
+    { question: 'How much does ILR cost?', answer: '£3,029 application fee. Optional super priority service £800. Life in the UK Test £50. There is no IHS at ILR stage. Family applicants each apply separately at full fee.' },
+    { question: 'What is the absence rule for ILR?', answer: 'You must not have been absent from the UK for more than 180 days in any rolling 12-month period during your 5-year qualifying residence. The rule is rolling, not calendar — Home Office checks every possible 12-month window.' },
+    { question: 'Can I lose ILR?', answer: 'Yes. ILR can be lost by 2+ years of continuous absence from the UK, or revoked for serious criminal conduct or deception. It does not lapse from short absences.' },
+    { question: 'When can I apply for British citizenship after ILR?', answer: '12 months after holding ILR (or immediately if married to a British citizen). Final 12 months absences must be under 90 days.' },
+  ],
+
+  'citizenship': [
+    { question: 'How long after ILR can I apply for citizenship?', answer: '12 months from the date your ILR was granted. If you are married to a British citizen, you can apply immediately after ILR with no 12-month wait.' },
+    { question: 'How much does citizenship cost?', answer: '£1,500 application fee + £80 citizenship ceremony fee = £1,580 total. British passport (separate) is around £88.50 for adults.' },
+    { question: 'What is the absence rule for citizenship?', answer: 'No more than 450 days outside UK in the last 5 years, AND no more than 90 days in the final 12 months before application.' },
+    { question: 'Will I lose my original citizenship?', answer: 'The UK allows dual citizenship. However your country of birth may not — India, China, and some others require renunciation. Check your home country\'s rules before applying.' },
+    { question: 'Can my children become British?', answer: 'Children born in the UK to a parent with ILR are British at birth automatically. Children born abroad to British citizens are usually British by descent. Adopted children have a separate registration process.' },
+  ],
+
+  'euss': [
+    { question: 'Can I still apply for EUSS in 2026?', answer: 'Yes — late applications are still accepted with reasonable grounds. The original deadline was 30 June 2021 but the Home Office continues to consider late applications where there is a credible explanation.' },
+    { question: 'What is the difference between pre-settled and settled status?', answer: 'Pre-settled status is granted to those with less than 5 years of UK residence and lasts 5 years. Settled status is granted after 5 years and is permanent — equivalent to ILR.' },
+    { question: 'Does EUSS cost anything?', answer: 'No, EUSS applications are completely free. There is no application fee, no IHS, and no biometrics fee.' },
+    { question: 'Can my non-EU partner join me?', answer: 'Yes, family members of EUSS holders can apply for EU Settlement Scheme Family Permits (out of UK) or EUSS status (in UK). Non-EU partners married before 31 Dec 2020 have stronger rights.' },
+    { question: 'How long does EUSS take?', answer: 'Most straightforward applications are decided within 30 days. Complex cases or those with insufficient residence evidence take longer.' },
+  ],
+
+  'bno': [
+    { question: 'Who qualifies for the BNO visa?', answer: 'Anyone who holds British National (Overseas) status (registered before 1997) and is ordinarily resident in Hong Kong or the UK. Spouse, partner and dependent children can also apply as dependants.' },
+    { question: 'How much does the BNO visa cost?', answer: '£180 for 2.5 years or £298 for 5 years, plus IHS of £1,035/year per adult and £776/year per child. A family of 4 on 5-year visas can expect £15,000–£20,000 total upfront.' },
+    { question: 'Is there an English language requirement?', answer: 'No, not at initial application stage. English is only required at ILR (after 5 years) — typically passed via the Life in the UK Test and one of the standard B1 routes.' },
+    { question: 'Can BNO visa holders bring children born after 1997?', answer: 'Yes, dependent children under 18 can be included even if they don\'t have BNO status themselves, as long as one parent holds BNO status. Adult children (18+) face stricter eligibility rules.' },
+    { question: 'How fast can I get British citizenship via BNO?', answer: '5 years on BNO visa → ILR → 12 months → citizenship application. Total minimum: 6 years from arrival to citizenship (one of the fastest civilian routes).' },
+  ],
+
+  'long-residence': [
+    { question: 'How is "10 years continuous residence" calculated?', answer: 'Every day of the 10 years must have been on a valid visa or leave to remain. Even a single day of overstaying breaks continuity. The 28-day grace period for late applications was effectively removed in 2024.' },
+    { question: 'What is the absence limit for long residence ILR?', answer: '540 days total outside the UK across the 10 years, AND no single trip exceeding 184 days. Both limits must be met.' },
+    { question: 'Does time on Student visa count?', answer: 'Yes — Student visa time fully counts toward the 10-year long residence clock, unlike for the standard 5-year ILR routes where Student time is not qualifying.' },
+    { question: 'Should I use 5-year ILR or 10-year long residence?', answer: 'Always 5-year ILR if you qualify — it\'s faster, cleaner, and more reliably approved. 10-year long residence is for those who don\'t fit a single 5-year route (e.g. switched between non-qualifying visas).' },
+    { question: 'What documents do I need?', answer: 'All passports for 10 years, all previous BRPs/decision letters, full HMRC tax records, council tax bills, utility bills, complete absence log, Life in the UK Test pass, and B1 English evidence.' },
+  ],
+
+  'ancestry': [
+    { question: 'Who qualifies for the UK Ancestry visa?', answer: 'Commonwealth citizens aged 17 or over with at least one grandparent born in the UK, Channel Islands or Isle of Man. You must be able to work and intend to work in the UK.' },
+    { question: 'How do I prove my UK grandparent?', answer: 'Get a copy of the grandparent\'s UK birth certificate from the General Register Office (£11). You also need birth certificates linking through your parent — if names changed via marriage, include those certificates too.' },
+    { question: 'Is there a salary or job offer requirement?', answer: 'No — unlike Skilled Worker, you don\'t need a job offer or to meet a salary threshold. You can work in any role, run a business, or be self-employed once granted the visa.' },
+    { question: 'How much does the UK Ancestry visa cost?', answer: '£637 application fee + 5 × £1,035 IHS = £5,812 total for the 5-year visa. Plus optional priority service.' },
+    { question: 'What countries are "Commonwealth"?', answer: 'The 56 member states of the Commonwealth of Nations, including Australia, Canada, New Zealand, India, South Africa, Nigeria, Pakistan, Jamaica, Kenya, Singapore, Malaysia and many others. Full list at thecommonwealth.org.' },
+  ],
 };

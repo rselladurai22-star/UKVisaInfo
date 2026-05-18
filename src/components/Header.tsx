@@ -7,6 +7,7 @@ import {
   Menu, X, ChevronDown, ChevronRight, Briefcase, GraduationCap, Plane, Users,
   Stethoscope, LayoutGrid, Rocket, History, Calculator, Search, Scale, Compass,
   BookOpen, Sparkles, ArrowUpRight, FileText, Tag, Crown, ShieldCheck,
+  Globe, Flag, RefreshCw, Home as HomeIcon,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -69,6 +70,62 @@ const MEGA: MegaSection[] = [
       desc: 'Full directory with fees, processing times and direct gov.uk links.',
       href: '/visa-types',
       cta: 'Visa directory',
+    },
+  },
+  {
+    id: 'settlement',
+    label: 'Settlement',
+    columns: [
+      {
+        heading: 'Stay long-term',
+        items: [
+          { href: '/visa/ilr', label: 'Indefinite Leave to Remain', desc: 'Permanent settlement after 5 years', icon: ShieldCheck, accent: '#059669' },
+          { href: '/visa/citizenship', label: 'British Citizenship', desc: 'Naturalisation after ILR', icon: Crown, accent: '#d97706' },
+          { href: '/visa/long-residence', label: '10-year long residence', desc: 'Alternative ILR route', icon: HomeIcon, accent: '#7c3aed' },
+        ],
+      },
+      {
+        heading: 'Special routes',
+        items: [
+          { href: '/visa/euss', label: 'EU Settlement Scheme', desc: 'For EU/EEA nationals', icon: Globe, accent: '#2563eb' },
+          { href: '/visa/bno', label: 'Hong Kong BNO visa', desc: 'British National Overseas', icon: Flag, accent: '#d9152b' },
+          { href: '/visa/ancestry', label: 'UK Ancestry visa', desc: 'Commonwealth + UK grandparent', icon: History, accent: '#0d9488' },
+        ],
+      },
+    ],
+    feature: {
+      title: 'Settle in the UK',
+      desc: 'Routes to permanent residence and British citizenship, with fees and timelines.',
+      href: '/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements',
+      cta: 'ILR & citizenship guide',
+    },
+  },
+  {
+    id: 'switching',
+    label: 'Switch',
+    columns: [
+      {
+        heading: 'Common switching paths',
+        items: [
+          { href: '/blog/switch-student-to-skilled-worker-visa-uk-2026', label: 'Student → Skilled Worker', desc: 'New-entrant £30,960 rate applies', icon: RefreshCw, accent: '#d9152b' },
+          { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed', label: 'Graduate → Skilled Worker', desc: '18-month bridge window', icon: RefreshCw, accent: '#0d9488' },
+          { href: '/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements', label: 'Skilled Worker → ILR', desc: 'After 5 years continuous', icon: RefreshCw, accent: '#059669' },
+        ],
+      },
+      {
+        heading: 'Tools to check eligibility',
+        items: [
+          { href: '/tools/salary-checker', label: 'Will my salary qualify?', desc: 'New-entrant + going rate check', icon: Briefcase, accent: '#d9152b' },
+          { href: '/tools/compare', label: 'Compare routes', desc: 'Side-by-side analysis', icon: Scale, accent: '#059669' },
+          { href: '/eligibility', label: 'Eligibility quiz', desc: '60-second match', icon: Compass, accent: '#d9152b' },
+        ],
+      },
+    ],
+    feature: {
+      title: 'Switch visa routes',
+      desc: 'Plan a clean move between Student, Graduate, Skilled Worker and Family routes.',
+      href: '/blog/switch-student-to-skilled-worker-visa-uk-2026',
+      cta: 'Switching guide',
     },
   },
   {
@@ -184,7 +241,9 @@ export default function Header({ onApply }: { onApply: () => void }) {
   };
   const closeMegaHover = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpenMega(null), 150);
+    // Short grace period only — lets cursor traverse the gap between
+    // trigger and panel without flicker, but doesn't feel sticky.
+    closeTimer.current = setTimeout(() => setOpenMega(null), 60);
   };
 
   return (
@@ -283,10 +342,10 @@ export default function Header({ onApply }: { onApply: () => void }) {
         <AnimatePresence>
           {openMega && (
             <motion.div
-              initial={{ opacity: 0, y: -6 }}
+              initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.1, ease: 'easeOut' }}
               className="absolute left-0 right-0 top-full hidden lg:block"
               onMouseEnter={() => openMegaHover(openMega)}
               onMouseLeave={closeMegaHover}
@@ -307,7 +366,7 @@ export default function Header({ onApply }: { onApply: () => void }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.1 }}
             className="fixed inset-0 top-[62px] md:top-[70px] z-30 bg-[rgba(10,21,48,0.18)] backdrop-blur-[2px] hidden lg:block"
             onClick={() => setOpenMega(null)}
             aria-hidden="true"
