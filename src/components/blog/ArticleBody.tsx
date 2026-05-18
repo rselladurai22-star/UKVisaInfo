@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Link as LinkIcon } from 'lucide-react';
@@ -9,6 +10,49 @@ import StepsTimeline from './blocks/StepsTimeline';
 import Checklist from './blocks/Checklist';
 import FaqAccordion from './blocks/FaqAccordion';
 import PullQuote from './blocks/PullQuote';
+import GlossaryTerm from '../GlossaryTerm';
+import { GLOSSARY } from '../../data/glossary';
+
+/* Build a single regex for all glossary terms, longest first to avoid
+   partial matches (e.g. "ILR" vs "Indefinite Leave to Remain"). */
+const GLOSSARY_KEYS = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const GLOSSARY_RE = GLOSSARY_KEYS.length
+  ? new RegExp(`\\b(${GLOSSARY_KEYS.map(escapeRe).join('|')})\\b`, 'g')
+  : null;
+
+/**
+ * Walk a string and wrap the first occurrence of each glossary term in
+ * a <GlossaryTerm> tooltip. Tracking via a Set prevents wrapping the
+ * same term twice in the same block.
+ */
+function glossify(text: string, seen: Set<string>): React.ReactNode {
+  if (!GLOSSARY_RE) return text;
+  GLOSSARY_RE.lastIndex = 0;
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = GLOSSARY_RE.exec(text)) !== null) {
+    const term = m[1];
+    if (seen.has(term)) continue;
+    seen.add(term);
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push(
+      <GlossaryTerm key={`${term}-${m.index}`} term={term}>{term}</GlossaryTerm>
+    );
+    last = m.index + term.length;
+  }
+  if (last === 0) return text;
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+function processChildren(children: React.ReactNode, seen: Set<string>): React.ReactNode {
+  return React.Children.map(children, (child) => {
+    if (typeof child === 'string') return glossify(child, seen);
+    return child;
+  });
+}
 
 interface Props { body: string; articleSlug: string }
 
@@ -42,6 +86,9 @@ export default function ArticleBody({ body, articleSlug }: Props) {
 }
 
 function MarkdownChunk({ content }: { content: string }) {
+  // First-occurrence tracking is per-chunk (good balance: glossary
+  // tooltips help readers without overwhelming the page).
+  const seen = new Set<string>();
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
@@ -70,7 +117,7 @@ function MarkdownChunk({ content }: { content: string }) {
         ),
         p: ({ children }) => (
           <p className="text-[#1a2240] text-[1.0625rem] md:text-[1.125rem] leading-[1.75] mb-5">
-            {children}
+            {processChildren(children, seen)}
           </p>
         ),
         ul: ({ children }) => <ul className="my-6 space-y-2.5 pl-0">{children}</ul>,
@@ -78,7 +125,7 @@ function MarkdownChunk({ content }: { content: string }) {
         li: ({ children }) => (
           <li className="flex gap-3 items-start text-[#1a2240] text-[1.0625rem] leading-[1.7]">
             <span className="mt-[10px] w-1.5 h-1.5 rounded-full bg-[#d9152b] flex-shrink-0" />
-            <span className="flex-1">{children}</span>
+            <span className="flex-1">{processChildren(children, seen)}</span>
           </li>
         ),
         a: ({ href, children }) => (

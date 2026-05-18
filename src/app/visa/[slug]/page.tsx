@@ -461,6 +461,25 @@ export default async function VisaPage({ params }: RouteParams) {
         external
         accent={accent}
       />
+
+      {/* Print stylesheet — clean output for offline reference */}
+      <style>{`
+        @media print {
+          nav, header[class*="fixed"], aside, .sticky,
+          [class*="StickyMobileCta"], [aria-label="Pagination"],
+          [aria-label="Share"], [aria-label="Section navigation"] {
+            display: none !important;
+          }
+          a[href]::after { content: " (" attr(href) ")"; font-size: 10pt; color: #555; }
+          a[href^="#"]::after, a[href^="/"]::after { content: ""; }
+          body { background: white !important; color: #000 !important; }
+          h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; }
+          section { page-break-inside: avoid; }
+          .grid { display: block !important; }
+          [class*="bg-gradient"], [class*="bg-["] { background: white !important; color: #000 !important; }
+          [class*="text-white"] { color: #000 !important; }
+        }
+      `}</style>
     </>
   );
 }

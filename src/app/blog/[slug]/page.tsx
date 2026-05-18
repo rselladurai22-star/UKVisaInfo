@@ -9,6 +9,7 @@ import ReadingProgress from '../../../components/blog/ReadingProgress';
 import ArticleToc from '../../../components/blog/ArticleToc';
 import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
+import SidebarAffiliate from '../../../components/blog/SidebarAffiliate';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import { extractH2Headings } from '../../../components/blog/slug';
@@ -264,10 +265,11 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
             </article>
 
-            {/* ── RIGHT RAIL: SHARE ── */}
+            {/* ── RIGHT RAIL: SHARE + AFFILIATE ── */}
             <aside className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-[110px]">
+              <div className="sticky top-[110px] space-y-6">
                 <ShareRail title={post.title} />
+                <SidebarAffiliate tags={post.tags} />
               </div>
             </aside>
           </div>
