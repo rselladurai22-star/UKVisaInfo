@@ -25,6 +25,10 @@ export const BLOG_POSTS: BlogPost[] = [
     body: `
 The Skilled Worker visa is the UK's main work route, and in 2026 the salary rules are stricter than ever. If your salary doesn't clear the threshold, your application is refused — no judgement, no appeal on that ground. This guide walks you through every threshold that applies in April 2026, who each one hits, and how to check whether your specific job code qualifies.
 
+> [!STAT] £38,700 | The 2026 general minimum salary for new Skilled Worker applicants
+
+> [!WARNING] If your salary falls **below all three thresholds** (general minimum, going rate, hourly minimum), your application will be refused at the salary stage with no judgement and no appeal on that ground.
+
 ## The three numbers you need to know
 
 There is no single "Skilled Worker salary threshold." Your application must clear **three** separate salary tests simultaneously:
@@ -48,6 +52,8 @@ Five groups get a discount from the £38,700 headline figure:
 | **Health & Care visa (eligible healthcare roles)** | £25,600 or going rate | Separate route; see our Health & Care guide |
 
 The new-entrant discount is the most commonly missed. If you're 25, graduated within the last 2 years, or switching from a UK Student visa — apply it. It saves £7,740 per year on the threshold.
+
+> [!TIP] **New-entrant rate stacks with the Immigration Salary List discount.** If you qualify for both, your floor drops to £24,768 — the lowest possible starting threshold in the Skilled Worker route.
 
 ## Going rates by occupation — the ones most people apply for
 
@@ -99,14 +105,46 @@ Your threshold is locked at the time your Certificate of Sponsorship is issued. 
 
 This bites hardest at **extension stage**. Applicants granted leave in 2023 at the old £26,200 threshold now face £38,700 when they extend in 2028. Many will need to negotiate a pay rise or switch employer.
 
-## What to do next
+## What to do next — your salary-check workflow
 
-1. **Find your SOC 2020 code.** Your sponsor should know; if not, the ONS's SOC 2020 tool is the definitive source.
-2. **Check your going rate.** Home Office Appendix Skilled Occupations lists every code and rate.
-3. **Confirm which threshold group you're in.** New entrant? ISL? PhD-STEM? Apply the discount.
-4. **Verify £15.88/hour on your actual working hours.**
+> [!STEPS]
+> 1. **Find your SOC 2020 code** — Your sponsor should know; if not, the ONS SOC 2020 tool is the definitive source.
+> 2. **Check your going rate** — Home Office *Appendix Skilled Occupations* lists every code and the published rate.
+> 3. **Confirm your threshold group** — New entrant? ISL? PhD-STEM? Apply the discount that's most generous to you.
+> 4. **Verify £15.88/hour** — Calculate this against your actual contracted weekly hours, not the full-time equivalent.
 
 If all three clear with a margin of at least £500, you're safe. Thin margins are risky — Home Office caseworkers round down, not up.
+
+## Document checklist before you apply
+
+> [!CHECKLIST] salary-evidence
+> - Current passport valid for the duration of the visa
+> - Certificate of Sponsorship (CoS) from your employer
+> - Signed offer letter showing gross annual salary
+> - Contract of employment with weekly hours
+> - English language evidence (B2 level or higher)
+> - TB test certificate if applying from a listed country
+> - Bank statements for the last 90 days (if not exempt)
+> - Criminal record certificate for healthcare/education roles
+
+## Common questions
+
+> [!FAQ]
+> Q: Can my £36,000 offer be topped up with bonuses to clear £38,700?
+> A: **No.** Only basic gross salary counts. Bonuses, commission, overtime and pension contributions are excluded from the threshold calculation, even if they're guaranteed in your contract.
+>
+> Q: I'm 25 and switching from a Student visa. Can I use the new-entrant rate forever?
+> A: You can use it for up to 4 years total on the Skilled Worker route. After that you must meet the full going rate to extend or switch.
+>
+> Q: Does London weighting count toward the threshold?
+> A: Usually yes if it's a guaranteed allowance written into the CoS, but it must be paid regardless of performance. Discretionary uplifts do not count.
+>
+> Q: My role isn't on the Immigration Salary List. Can I still apply?
+> A: Yes. The ISL only provides a discount on the general minimum. You can apply for any eligible SOC 2020 occupation at RQF Level 6 or higher provided you meet £38,700 and the going rate.
+
+> [!QUOTE]
+> The salary stage is the single biggest cause of Skilled Worker refusals in 2026. Get this number right before you pay any application fee.
+> — UK Visa Info editorial team
 
 Our [UK Skilled Worker visa guide](/visa/skilled-worker) covers the full application process, document list and fee breakdown.
 `.trim(),
