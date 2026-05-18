@@ -3,15 +3,25 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Sparkles, ArrowUpRight, Crown } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const LINKS: { href: string; label: string }[] = [
-  { href: '/visa-types', label: 'Visas' },
+const LINKS = [
+  { href: '/visa-types', label: 'Visa Routes' },
   { href: '/eligibility', label: 'Eligibility' },
   { href: '/costs', label: 'Costs' },
   { href: '/blog', label: 'Guides' },
 ];
+
+const LOGO_ICON = (
+  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
+    <path d="M1 7L8 1.5L15 7" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="2.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
+    <rect x="6" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
+    <rect x="9.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
+    <rect x="1" y="12.5" width="14" height="1.5" rx="0.5" fill="#ffbf47"/>
+  </svg>
+);
 
 export default function Header({ onApply }: { onApply: () => void }) {
   const pathname = usePathname();
@@ -19,26 +29,19 @@ export default function Header({ onApply }: { onApply: () => void }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close drawer on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
   }, [open]);
 
   const isActive = (href: string) =>
@@ -47,45 +50,48 @@ export default function Header({ onApply }: { onApply: () => void }) {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass shadow-soft' : 'bg-transparent'
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${
+          scrolled
+            ? 'bg-white/95 backdrop-blur-xl shadow-[0_1px_0_rgba(14,20,36,0.09)]'
+            : 'bg-white/88 backdrop-blur-lg'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[62px] md:h-[70px] flex items-center justify-between gap-6">
+
           {/* Brand */}
           <Link
             href="/"
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 flex-shrink-0 group"
             aria-label="UK Visa Info — home"
           >
-            <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-secondary to-[#8b001d] text-white shadow-soft">
-              <Crown className="w-4 h-4" />
+            <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center flex-shrink-0 shadow-[0_1px_4px_rgba(217,21,43,0.35)] group-hover:shadow-[0_2px_8px_rgba(217,21,43,0.45)] transition-shadow">
+              {LOGO_ICON}
             </span>
-            <span className="font-display font-bold text-base md:text-lg tracking-tight text-primary">
-              UK Visa <span className="text-secondary">Info</span>
+            <span className="font-display font-bold text-[15px] tracking-tight text-[#0a1530]">
+              UK Visa <span className="text-[#d9152b]">Info</span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5 flex-1 justify-center max-w-sm mx-auto">
             {LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`relative px-3.5 py-2 text-sm font-medium rounded-lg transition-colors ${
                   isActive(l.href)
-                    ? 'text-primary'
-                    : 'text-on-surface-variant hover:text-primary'
+                    ? 'text-[#0a1530]'
+                    : 'text-[#52596e] hover:text-[#0a1530] hover:bg-[rgba(14,20,36,0.04)]'
                 }`}
               >
-                {l.label}
                 {isActive(l.href) && (
                   <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-3 right-3 -bottom-0.5 h-0.5 bg-secondary rounded-full"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    layoutId="nav-bg"
+                    className="absolute inset-0 bg-[rgba(14,20,36,0.06)] rounded-lg"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                   />
                 )}
+                <span className="relative z-10">{l.label}</span>
               </Link>
             ))}
           </nav>
@@ -95,23 +101,21 @@ export default function Header({ onApply }: { onApply: () => void }) {
             <button
               type="button"
               onClick={onApply}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-primary text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-primary-container transition-colors ring-soft"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-[#d9152b] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#b8101f] active:scale-[0.97] transition-all shadow-[0_1px_4px_rgba(217,21,43,0.3)]"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              Apply
+              Apply now
             </button>
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
-              className="md:hidden w-10 h-10 inline-flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-colors"
+              className="md:hidden w-9 h-9 inline-flex items-center justify-center rounded-lg hover:bg-[rgba(14,20,36,0.06)] transition-colors"
             >
-              {open ? (
-                <X className="w-5 h-5 text-primary" />
-              ) : (
-                <Menu className="w-5 h-5 text-primary" />
-              )}
+              {open
+                ? <X className="w-[18px] h-[18px] text-[#0a1530]" />
+                : <Menu className="w-[18px] h-[18px] text-[#0a1530]" />
+              }
             </button>
           </div>
         </div>
@@ -125,8 +129,8 @@ export default function Header({ onApply }: { onApply: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-primary/40 backdrop-blur-sm md:hidden"
+              transition={{ duration: 0.18 }}
+              className="fixed inset-0 z-40 bg-[rgba(10,21,48,0.45)] backdrop-blur-sm md:hidden"
               onClick={() => setOpen(false)}
               aria-hidden="true"
             />
@@ -134,75 +138,73 @@ export default function Header({ onApply }: { onApply: () => void }) {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 26, stiffness: 240 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[88%] max-w-sm bg-surface-container-lowest md:hidden flex flex-col shadow-card"
+              transition={{ type: 'spring', damping: 28, stiffness: 260 }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[82%] max-w-[320px] bg-white md:hidden flex flex-col shadow-[−4px_0_32px_rgba(10,21,48,0.15)]"
               role="dialog"
               aria-modal="true"
-              aria-label="Main menu"
+              aria-label="Main navigation"
             >
-              <div className="flex items-center justify-between p-5 border-b border-outline-variant/30">
-                <span className="font-display font-bold text-base text-primary">
-                  Menu
-                </span>
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-5 h-[62px] border-b border-[rgba(14,20,36,0.08)]">
+                <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+                  <span className="w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center">
+                    {LOGO_ICON}
+                  </span>
+                  <span className="font-display font-bold text-sm text-[#0a1530]">
+                    UK Visa <span className="text-[#d9152b]">Info</span>
+                  </span>
+                </Link>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  className="w-10 h-10 inline-flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[rgba(14,20,36,0.06)] transition-colors"
                 >
-                  <X className="w-5 h-5 text-primary" />
+                  <X className="w-4 h-4 text-[#0a1530]" />
                 </button>
               </div>
 
-              <nav className="flex-1 overflow-y-auto p-5 space-y-1">
+              {/* Nav links */}
+              <nav className="flex-1 overflow-y-auto p-4 space-y-0.5">
                 {LINKS.map((l) => (
                   <Link
                     key={l.href}
                     href={l.href}
-                    className={`flex items-center justify-between gap-3 px-4 py-4 rounded-2xl text-base font-semibold transition-colors ${
+                    className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-semibold transition-colors ${
                       isActive(l.href)
-                        ? 'bg-secondary-soft text-secondary'
-                        : 'text-primary hover:bg-surface-container-low'
+                        ? 'bg-[rgba(217,21,43,0.07)] text-[#d9152b]'
+                        : 'text-[#0a1530] hover:bg-[rgba(14,20,36,0.04)]'
                     }`}
                   >
                     {l.label}
-                    <ArrowUpRight className="w-4 h-4 opacity-60" />
+                    <ChevronRight className="w-4 h-4 opacity-35" />
                   </Link>
                 ))}
-
-                <div className="pt-4 mt-4 border-t border-outline-variant/30 space-y-1">
-                  <Link
-                    href="/about"
-                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
-                  >
-                    About
-                  </Link>
-                  <Link
-                    href="/privacy"
-                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
-                  >
-                    Privacy
-                  </Link>
-                  <Link
-                    href="/terms"
-                    className="block px-4 py-3 rounded-2xl text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
-                  >
-                    Terms
-                  </Link>
+                <div className="pt-2 mt-2 border-t border-[rgba(14,20,36,0.07)] space-y-0.5">
+                  {[
+                    { href: '/about', label: 'About' },
+                    { href: '/privacy', label: 'Privacy' },
+                    { href: '/terms', label: 'Terms' },
+                  ].map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      className="block px-4 py-3 text-sm text-[#52596e] hover:text-[#0a1530] hover:bg-[rgba(14,20,36,0.04)] rounded-xl transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
                 </div>
               </nav>
 
-              <div className="p-5 border-t border-outline-variant/30">
+              {/* Apply CTA */}
+              <div className="p-4 border-t border-[rgba(14,20,36,0.08)]">
                 <button
                   type="button"
-                  onClick={() => {
-                    onApply();
-                    setOpen(false);
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-primary text-white font-bold py-3.5 rounded-2xl shadow-soft active:scale-[0.98] transition-transform"
+                  onClick={() => { onApply(); setOpen(false); }}
+                  className="w-full bg-[#d9152b] text-white font-bold py-3.5 rounded-xl text-sm hover:bg-[#b8101f] active:scale-[0.98] transition-all"
                 >
-                  <Sparkles className="w-4 h-4" />
-                  Start guided apply
+                  Apply now
                 </button>
               </div>
             </motion.aside>
