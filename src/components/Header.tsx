@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from 'motion/react';
 
 const LINKS = [
   { href: '/visa-types', label: 'Visa Routes' },
+  { href: '/tools', label: 'Tools' },
   { href: '/eligibility', label: 'Eligibility' },
-  { href: '/costs', label: 'Costs' },
   { href: '/blog', label: 'Guides' },
 ];
 
