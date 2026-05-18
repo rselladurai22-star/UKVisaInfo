@@ -11,6 +11,7 @@ import { VISA_FAQS } from '../../../data/visaFaqs';
 import VisaTabNav from '../../../components/visa/VisaTabNav';
 import VisaFaq from '../../../components/visa/VisaFaq';
 import RelatedBlogToVisa from '../../../components/RelatedBlogToVisa';
+import StickyMobileCta from '../../../components/StickyMobileCta';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
@@ -452,6 +453,14 @@ export default async function VisaPage({ params }: RouteParams) {
           </div>
         </div>
       </div>
+
+      <StickyMobileCta
+        context={`${v.category} visa`}
+        label={`Apply on gov.uk`}
+        href={v.applyUrl}
+        external
+        accent={accent}
+      />
     </>
   );
 }

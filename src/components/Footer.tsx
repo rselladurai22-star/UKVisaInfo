@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ExternalLink, Mail } from 'lucide-react';
+import { ExternalLink, Mail, Sparkles } from 'lucide-react';
+import FooterNewsletter from './FooterNewsletter';
 
 const LOGO_ICON = (
   <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
@@ -27,7 +28,37 @@ const LEGAL = [
 export default function Footer() {
   return (
     <footer className="bg-[#08112a] text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-16 md:pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-10">
+
+        {/* Newsletter strip */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#13204a] to-[#0a1530] border border-white/[0.06] p-6 md:p-8 mb-12 md:mb-14">
+          <div
+            className="absolute inset-0 opacity-[0.18] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+              backgroundSize: '18px 18px',
+            }}
+          />
+          <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/22 blur-3xl pointer-events-none" />
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+                <Sparkles className="w-3 h-3" />
+                Weekly UK Visa Brief
+              </div>
+              <h3 className="font-display font-bold text-white text-[20px] md:text-[24px] leading-tight tracking-[-0.015em]">
+                Rule changes, fee updates and route news.<br className="hidden md:block" />
+                <span className="text-white/55">Straight to your inbox, every Tuesday.</span>
+              </h3>
+              <p className="mt-3 text-[12.5px] text-white/45">
+                3-minute read · Free · Unsubscribe in one click.
+              </p>
+            </div>
+            <div>
+              <FooterNewsletter />
+            </div>
+          </div>
+        </div>
 
         {/* Top grid */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-white/[0.08]">

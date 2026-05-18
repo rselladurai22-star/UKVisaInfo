@@ -9,6 +9,8 @@ import ReadingProgress from '../../../components/blog/ReadingProgress';
 import ArticleToc from '../../../components/blog/ArticleToc';
 import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
+import EmailCapture from '../../../components/EmailCapture';
+import StickyMobileCta from '../../../components/StickyMobileCta';
 import { extractH2Headings } from '../../../components/blog/slug';
 import { parseSegments } from '../../../components/blog/parseSegments';
 
@@ -222,6 +224,14 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
 
               <AffiliateCallouts tags={post.tags} />
+
+              <EmailCapture
+                title="Stay on top of UK visa changes"
+                subtitle="Rule updates, fee changes and route news in a weekly 3-minute brief."
+                cta="Get the brief"
+                source={`blog:${post.slug}`}
+              />
+
               <RelatedPosts current={post} />
 
               {/* Bottom CTA */}
@@ -283,6 +293,12 @@ export default async function BlogPostPage({ params }: RouteParams) {
           }
         }
       `}</style>
+
+      <StickyMobileCta
+        context="Find your route"
+        label="Take the 60-second quiz"
+        href="/eligibility"
+      />
     </>
   );
 }
