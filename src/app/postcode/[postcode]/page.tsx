@@ -160,6 +160,11 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
             value={data.mp ?? 'See constituency'}
             sub={data.mpParty ? `${data.mpParty}${data.mpSince ? ` · since ${data.mpSince}` : ''}` : data.constituency}
             extras={[{ k: 'Constituency', v: data.constituency }]}
+            cta={{
+              label: 'Write to your MP',
+              href: `https://www.writetothem.com/who?pc=${encodeURIComponent(data.postcode)}`,
+              external: true,
+            }}
           />
 
           {/* NHS */}
@@ -167,8 +172,13 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
             icon={Stethoscope}
             label="NHS region"
             value={data.nhsRegion}
-            sub={data.icb ? `ICB: ${data.icb}` : undefined}
+            sub={data.icb ? `ICB: ${data.icb}` : 'Find a GP, dentist or pharmacy near you'}
             extras={[]}
+            cta={{
+              label: 'Find a GP near you',
+              href: `https://www.nhs.uk/service-search/find-a-gp/results/${encodeURIComponent(data.postcode)}`,
+              external: true,
+            }}
           />
 
           {/* POLICE */}
@@ -179,8 +189,8 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
             sub={`Crimes mapped by ${data.policeForce}`}
             extras={[]}
             cta={{
-              label: 'View local crime data',
-              href: `https://www.police.uk/pu/your-area/${encodeURIComponent(data.policeForce.toLowerCase().replace(/\s+/g, '-'))}/`,
+              label: 'Crime map on police.uk',
+              href: 'https://www.police.uk/pu/your-area/',
               external: true,
             }}
           />
@@ -236,9 +246,9 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
               desc="Find licensed Skilled Worker sponsors in your area."
             />
             <RelatedLink
-              href={`/sponsors/city/${encodeURIComponent(data.council.toLowerCase().replace(/\s+/g, '-'))}`}
-              title={`Sponsors in ${data.council}`}
-              desc="Skilled Worker sponsor licence holders for your area."
+              href="/visa/skilled-worker"
+              title="Skilled Worker visa guide"
+              desc={`Apply from any postcode — fee, salary thresholds and process for ${data.country === 'Northern Ireland' ? 'NI' : data.country}.`}
             />
             <RelatedLink
               href="/visa-types"

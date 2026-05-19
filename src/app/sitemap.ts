@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/news',            prio: 0.9,  freq: 'daily' },
     { p: '/settlement',      prio: 0.9,  freq: 'monthly' },
     { p: '/postcode',        prio: 0.95, freq: 'monthly' },
+    { p: '/take-home-pay',   prio: 0.95, freq: 'monthly' },
     { p: '/tools',           prio: 0.8,  freq: 'monthly' },
     { p: '/tools/salary-checker',     prio: 0.85, freq: 'monthly' },
     { p: '/tools/sponsor-search',     prio: 0.85, freq: 'monthly' },

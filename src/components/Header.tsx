@@ -8,7 +8,7 @@ import {
   History, Calculator, Search, Scale, Compass, Sparkles, ArrowUpRight,
   FileText, Tag, Crown, ShieldCheck, Globe, Flag, RefreshCw, Home as HomeIcon,
   ChevronLeft, ArrowRight, Menu, X, BookOpen, MapPin, Building2, Newspaper,
-  ListChecks, FileSearch, TrendingUp, ChevronDown,
+  ListChecks, FileSearch, TrendingUp, ChevronDown, Banknote,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -34,6 +34,7 @@ const NAV_ITEMS: NavItem[] = [
   { kind: 'dropdown', id: 'switch',      label: 'Switch Visa' },
   { kind: 'link',     id: 'cost',        label: 'Cost Calculator', href: '/tools/cost-calculator', icon: Calculator, accent: true },
   { kind: 'link',     id: 'postcode',    label: 'Postcode',        href: '/postcode',              icon: MapPin,     accent: true },
+  { kind: 'link',     id: 'takehome',    label: 'Take-Home Pay',   href: '/take-home-pay',         icon: Banknote,   accent: true },
   { kind: 'dropdown', id: 'tools',       label: 'Tools' },
   { kind: 'dropdown', id: 'guides',      label: 'Guides' },
   { kind: 'link',     id: 'community',   label: 'Community',       href: '/community',             icon: Users },
