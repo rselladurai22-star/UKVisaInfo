@@ -33,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
   { kind: 'dropdown', id: 'settlement',  label: 'Settlement' },
   { kind: 'dropdown', id: 'switch',      label: 'Switch Visa' },
   { kind: 'link',     id: 'cost',        label: 'Cost Calculator', href: '/tools/cost-calculator', icon: Calculator, accent: true },
+  { kind: 'link',     id: 'postcode',    label: 'Postcode',        href: '/postcode',              icon: MapPin,     accent: true },
   { kind: 'dropdown', id: 'tools',       label: 'Tools' },
   { kind: 'dropdown', id: 'guides',      label: 'Guides' },
   { kind: 'link',     id: 'community',   label: 'Community',       href: '/community',             icon: Users },
