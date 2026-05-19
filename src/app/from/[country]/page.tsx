@@ -133,7 +133,7 @@ export default async function CountryPage({ params }: RouteParams) {
       </header>
 
       {/* CONTENT */}
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
@@ -192,7 +192,7 @@ export default async function CountryPage({ params }: RouteParams) {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {c.applicationCentres.map((centre) => (
-                    <div key={centre} className="flex items-center gap-2 p-3 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] text-[13px] text-[#1a2240]">
+                    <div key={centre} className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[rgba(14,20,36,0.05)] text-[13px] text-[#1a2240]">
                       <MapPin className="w-3.5 h-3.5 text-[#00C4B4] flex-shrink-0" />
                       <span className="truncate">{centre}</span>
                     </div>
@@ -203,7 +203,7 @@ export default async function CountryPage({ params }: RouteParams) {
               <Section eyebrow="What to watch" title={`Country-specific notes for ${c.demonym} applicants`}>
                 <ul className="space-y-2.5">
                   {c.notes.map((note, i) => (
-                    <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
+                    <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">
                       <span className="mt-0.5 w-5 h-5 rounded-md bg-[#fef3c7] text-[#C9A14A] flex items-center justify-center flex-shrink-0">
                         <Sparkles className="w-3 h-3" />
                       </span>
@@ -306,7 +306,7 @@ export default async function CountryPage({ params }: RouteParams) {
                   </div>
                 </Link>
 
-                <div className="rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4">
+                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.05)] p-4">
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-2 flex items-center gap-1.5">
                     <Globe2 className="w-3 h-3" /> Source
                   </div>

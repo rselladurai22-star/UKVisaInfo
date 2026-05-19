@@ -35,7 +35,7 @@ export default function UkCitiesIndex() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-[#fafbfd]">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {cities.map((c) => (

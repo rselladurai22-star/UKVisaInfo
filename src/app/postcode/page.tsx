@@ -39,7 +39,7 @@ const EXAMPLES = [
 
 export default function PostcodeLandingPage() {
   return (
-    <div className="bg-[#f8f9fa] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Subtle ambient dot pattern */}
       <div
         aria-hidden="true"

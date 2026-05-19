@@ -148,7 +148,7 @@ export default function SettlementHub() {
         </div>
       </header>
 
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16 space-y-10">
 
           {/* Comparison table */}
@@ -181,7 +181,7 @@ export default function SettlementHub() {
                 </thead>
                 <tbody>
                   {ROWS.map((r) => (
-                    <tr key={r.id} className="border-t border-[rgba(14,20,36,0.06)] hover:bg-[#fafbfd] transition-colors duration-100">
+                    <tr key={r.id} className="border-t border-[rgba(14,20,36,0.06)] hover:bg-white transition-colors duration-100">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
                           <span className="text-[1.5rem] leading-none">{r.emoji}</span>
@@ -219,7 +219,7 @@ export default function SettlementHub() {
             </div>
 
             {/* Source row */}
-            <div className="px-5 py-3 bg-[#fafbfd] border-t border-[rgba(14,20,36,0.06)] text-[11.5px] text-[#7a8195] flex items-center gap-2">
+            <div className="px-5 py-3 bg-white border-t border-[rgba(14,20,36,0.06)] text-[11.5px] text-[#7a8195] flex items-center gap-2">
               <ShieldCheck className="w-3 h-3 text-[#10b981]" />
               All figures verified against gov.uk on {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.
               <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table" target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1 text-[#00C4B4] font-semibold hover:underline">
@@ -316,7 +316,7 @@ export default function SettlementHub() {
                 { q: 'I\'ve been in the UK lawfully for 10+ years but never hit a 5-year route', a: '10-year Long Residence ILR', href: '/visa/long-residence' },
                 { q: 'I\'ve held ILR for 12+ months and want a British passport', a: 'British naturalisation', href: '/visa/citizenship' },
               ].map((c, i) => (
-                <Link key={i} href={c.href} className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-[#fafbfd] hover:border-[#0A2540] hover:bg-white transition-colors duration-150">
+                <Link key={i} href={c.href} className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:bg-white transition-colors duration-150">
                   <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0 font-display font-bold text-[13px]">
                     {i + 1}
                   </span>

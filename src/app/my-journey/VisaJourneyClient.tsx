@@ -95,7 +95,7 @@ export default function VisaJourneyClient() {
         </div>
       </header>
 
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
 
           {!journey ? (
@@ -164,7 +164,7 @@ export default function VisaJourneyClient() {
                 </div>
 
                 {visa && (
-                  <div className="mt-4 p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] flex items-center gap-3">
+                  <div className="mt-4 p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)] flex items-center gap-3">
                     <Briefcase className="w-4 h-4 text-[#00C4B4]" />
                     <div className="flex-1 text-[12.5px] text-[#52596e]">
                       Processing <strong className="text-[#0A2540]">{visa.processing.outside}</strong> outside the UK · Fee {visa.fee}
@@ -207,7 +207,7 @@ export default function VisaJourneyClient() {
                           setJourney({ ...journey, steps: next, updated: Date.now() });
                         }}
                         aria-pressed={s.done}
-                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#fafbfd] transition-colors duration-100 group"
+                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white transition-colors duration-100 group"
                       >
                         <span
                           className={`flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center border-2 transition-[background,border-color,transform] duration-150 ${
@@ -237,7 +237,7 @@ export default function VisaJourneyClient() {
                   value={journey.notes}
                   onChange={(e) => setJourney({ ...journey, notes: e.target.value, updated: Date.now() })}
                   placeholder="Reference numbers, appointment dates, anything you want to remember…"
-                  className="w-full min-h-[120px] p-3.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-[#fafbfd] focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#1a2240] placeholder:text-[#9aa3b8] resize-y"
+                  className="w-full min-h-[120px] p-3.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-white focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#1a2240] placeholder:text-[#9aa3b8] resize-y"
                 />
               </section>
 
@@ -292,7 +292,7 @@ function StartCard({ onStart }: { onStart: () => void }) {
           { icon: CalendarDays, t: 'Target countdown', d: 'See how many days to your planned travel.' },
           { icon: BookOpen, t: 'Linked to your route', d: 'Pulls in fees and processing time from your visa guide.' },
         ].map((b, i) => (
-          <div key={i} className="p-4 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
+          <div key={i} className="p-4 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">
             <b.icon className="w-4 h-4 text-[#00C4B4] mb-2" />
             <div className="text-[13.5px] font-bold text-[#0A2540]">{b.t}</div>
             <div className="text-[11.5px] text-[#7a8195] mt-0.5 leading-snug">{b.d}</div>

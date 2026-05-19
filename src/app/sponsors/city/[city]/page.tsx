@@ -73,7 +73,7 @@ export default async function SponsorCityPage({ params }: RouteParams) {
         </div>
       </header>
 
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
             <main className="col-span-12 lg:col-span-8 space-y-5">
@@ -90,7 +90,7 @@ export default async function SponsorCityPage({ params }: RouteParams) {
                   </div>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {items.map((s) => (
-                      <li key={s.name} className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-[#fafbfd]">
+                      <li key={s.name} className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-white">
                         <span className="w-8 h-8 rounded-lg bg-[rgba(14,20,36,0.05)] text-[#0A2540] flex items-center justify-center flex-shrink-0">
                           <Building2 className="w-3.5 h-3.5" />
                         </span>

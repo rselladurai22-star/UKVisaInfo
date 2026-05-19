@@ -59,7 +59,7 @@ export default function RefusalAnalyzerClient() {
       </header>
 
       {/* Tool */}
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
@@ -82,7 +82,7 @@ export default function RefusalAnalyzerClient() {
                   value={text}
                   onChange={(e) => { setText(e.target.value); if (submitted) setSubmitted(false); }}
                   placeholder="Paste the full refusal letter or the &quot;Reasons for Refusal&quot; section here…&#10;&#10;Example: &quot;Your application has been refused under paragraph 320(7A) of the Immigration Rules because…&quot;"
-                  className="w-full min-h-[260px] md:min-h-[320px] p-4 rounded-2xl border border-[rgba(14,20,36,0.1)] bg-[#fafbfd] focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#0A2540] placeholder:text-[#9aa3b8] font-mono resize-y"
+                  className="w-full min-h-[260px] md:min-h-[320px] p-4 rounded-2xl border border-[rgba(14,20,36,0.1)] bg-white focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#0A2540] placeholder:text-[#9aa3b8] font-mono resize-y"
                   spellCheck={false}
                 />
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
@@ -95,7 +95,7 @@ export default function RefusalAnalyzerClient() {
                       <button
                         type="button"
                         onClick={onReset}
-                        className="inline-flex items-center gap-1.5 bg-white border border-[rgba(14,20,36,0.1)] text-[#52596e] font-semibold px-4 py-2.5 rounded-xl text-[13px] hover:border-[rgba(14,20,36,0.18)] hover:bg-[#fafbfd] transition-colors duration-100"
+                        className="inline-flex items-center gap-1.5 bg-white border border-[rgba(14,20,36,0.1)] text-[#52596e] font-semibold px-4 py-2.5 rounded-xl text-[13px] hover:border-[rgba(14,20,36,0.18)] hover:bg-white transition-colors duration-100"
                       >
                         <RotateCcw className="w-3.5 h-3.5" /> Clear
                       </button>
@@ -180,7 +180,7 @@ export default function RefusalAnalyzerClient() {
                       { t: 'We scan for known patterns', d: 'The text is matched against Home Office paragraph numbers and decision-letter wording, all in your browser — nothing is uploaded.' },
                       { t: 'You get a plain-English breakdown', d: 'Each ground is categorised by severity (critical / high / medium) with what it means and what to do next.' },
                     ].map((s, i) => (
-                      <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
+                      <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">
                         <span className="w-7 h-7 rounded-full bg-[#0A2540] text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0">{i + 1}</span>
                         <div>
                           <div className="text-[14.5px] font-bold text-[#0A2540]">{s.t}</div>
@@ -244,7 +244,7 @@ export default function RefusalAnalyzerClient() {
 
                 <SidebarAffiliate tags={['Skilled Worker', 'Family', 'Student']} />
 
-                <div className="rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4">
+                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.05)] p-4">
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <Lock className="w-3 h-3" /> Private by design
                   </div>

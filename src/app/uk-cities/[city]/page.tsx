@@ -65,7 +65,7 @@ export default async function CityPage({ params }: RouteParams) {
         </div>
       </header>
 
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
@@ -134,7 +134,7 @@ export default async function CityPage({ params }: RouteParams) {
               <Section eyebrow="Local notes" title={`${c.name}-specific tips`}>
                 <ul className="space-y-2.5">
                   {c.notes.map((n, i) => (
-                    <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
+                    <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">
                       <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A14A]" />
                       <span className="text-[#1a2240] text-[14px] leading-[1.6]">{n}</span>
                     </li>
@@ -190,7 +190,7 @@ export default async function CityPage({ params }: RouteParams) {
                   </ul>
                 </div>
 
-                <a href="https://www.gov.uk/check-uk-visa" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4">
+                <a href="https://www.gov.uk/check-uk-visa" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-white border border-[rgba(14,20,36,0.05)] p-4">
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3" /> Source
                   </div>
@@ -238,7 +238,7 @@ function FactPill({ icon: Icon, label, value }: { icon: React.ComponentType<{ cl
 
 function CostRow({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
-    <li className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-[#fafbfd]">
+    <li className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-white">
       <span className="w-8 h-8 rounded-lg bg-white text-[#0A2540] flex items-center justify-center"><Icon className="w-3.5 h-3.5" /></span>
       <span className="text-[14px] font-semibold text-[#0A2540] flex-1">{label}</span>
       <span className="text-[14px] font-bold text-[#0A2540] tabular-nums">{value}</span>

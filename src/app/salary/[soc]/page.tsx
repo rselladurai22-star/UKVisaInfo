@@ -133,7 +133,7 @@ export default async function SalaryPage({ params }: RouteParams) {
       </header>
 
       {/* Body */}
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
@@ -361,7 +361,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                   href="https://www.gov.uk/government/publications/skilled-worker-visa-going-rates-for-eligible-occupations"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4 hover:border-[rgba(14,20,36,0.12)] transition-colors duration-100"
+                  className="block rounded-2xl bg-white border border-[rgba(14,20,36,0.05)] p-4 hover:border-[rgba(14,20,36,0.12)] transition-colors duration-100"
                 >
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3" /> Source
@@ -414,7 +414,7 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string;
 
 function ThresholdRow({ num, label, value, note, highlight }: { num: number; label: string; value: string; note: string; highlight?: boolean }) {
   return (
-    <li className={`flex items-start gap-3 p-3.5 rounded-xl border ${highlight ? 'border-[rgba(0, 196, 180,0.25)] bg-[rgba(0, 196, 180,0.05)]' : 'border-[rgba(14,20,36,0.06)] bg-[#fafbfd]'}`}>
+    <li className={`flex items-start gap-3 p-3.5 rounded-xl border ${highlight ? 'border-[rgba(0, 196, 180,0.25)] bg-[rgba(0, 196, 180,0.05)]' : 'border-[rgba(14,20,36,0.06)] bg-white'}`}>
       <span className={`w-7 h-7 rounded-full text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0 ${highlight ? 'bg-[#00C4B4]' : 'bg-[#0A2540]'}`}>
         {num}
       </span>

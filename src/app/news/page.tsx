@@ -40,7 +40,7 @@ export default function NewsIndex() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-[#fafbfd]">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 space-y-4">
           {items.map((n) => {
             const c = CAT_COLORS[n.category] ?? { bg: 'rgba(14,20,36,0.06)', text: '#52596e' };

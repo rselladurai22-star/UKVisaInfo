@@ -51,7 +51,7 @@ export default function SalaryIndex() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-[#fafbfd]">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 space-y-10">
           {SOC_GROUPS.map((group) => {
             const items = grouped[group] ?? [];

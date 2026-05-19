@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function TakeHomePayPage() {
   return (
-    <div className="bg-[#f8f9fa] min-h-screen relative">
+    <div className="bg-white min-h-screen relative">
       {/* Subtle dot pattern */}
       <div
         aria-hidden="true"

@@ -98,7 +98,7 @@ export default async function VariantPage({ params }: RouteParams) {
         </div>
       </header>
 
-      <div className="bg-[#fafbfd]">
+      <div className="bg-white">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
@@ -112,7 +112,7 @@ export default async function VariantPage({ params }: RouteParams) {
                 </h2>
                 <ul className="space-y-2.5">
                   {v.eligibilityHighlights.map((line, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-[#fafbfd]">
+                    <li key={i} className="flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white">
                       <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: accent }} />
                       <span className="text-[14.5px] text-[#1a2240] leading-[1.6]">{line}</span>
                     </li>
@@ -218,7 +218,7 @@ export default async function VariantPage({ params }: RouteParams) {
                 <a
                   href={v.source}
                   target="_blank" rel="noopener noreferrer"
-                  className="block rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4 hover:border-[#0A2540] transition-colors duration-100"
+                  className="block rounded-2xl bg-white border border-[rgba(14,20,36,0.05)] p-4 hover:border-[#0A2540] transition-colors duration-100"
                 >
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3" /> Source

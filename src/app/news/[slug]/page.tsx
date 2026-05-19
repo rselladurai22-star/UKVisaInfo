@@ -90,7 +90,7 @@ export default async function NewsItemPage({ params }: RouteParams) {
             <a
               href={n.source}
               target="_blank" rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.07)] text-[#0A2540] text-[13px] font-semibold hover:border-[#0A2540] transition-colors duration-100"
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[rgba(14,20,36,0.07)] text-[#0A2540] text-[13px] font-semibold hover:border-[#0A2540] transition-colors duration-100"
             >
               Read the official source <ExternalLink className="w-3.5 h-3.5" />
             </a>

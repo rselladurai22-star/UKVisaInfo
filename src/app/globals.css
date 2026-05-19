@@ -32,13 +32,13 @@
   --color-accent: #C9A14A;
   --color-accent-soft: #FAF3E2;
 
-  /* Surfaces — off-white with warm tint */
-  --color-surface: #FAFAF7;
+  /* Surfaces — pure white background with neutral grey scale for elevation */
+  --color-surface: #ffffff;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #F4F4EF;
-  --color-surface-container: #ECECE5;
-  --color-surface-container-high: #E2E2DA;
-  --color-surface-container-highest: #D5D5CB;
+  --color-surface-container-low: #f8f9fa;
+  --color-surface-container: #f3f4f5;
+  --color-surface-container-high: #ebecee;
+  --color-surface-container-highest: #e0e2e5;
 
   /* Text */
   --color-on-surface: #0A2540;
@@ -99,7 +99,7 @@ html.dark body {
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    @apply bg-[#f9fafb] text-on-surface antialiased;
+    @apply bg-white text-on-surface antialiased;
     font-feature-settings: "ss01", "cv02", "cv11";
   }
   @media (pointer: coarse) {

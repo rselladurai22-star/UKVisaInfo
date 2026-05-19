@@ -99,7 +99,7 @@ export default function VariantPicker({ variants, visaId, accent = '#00C4B4' }: 
 
         {/* Meta panel */}
         <div className="col-span-12 md:col-span-5">
-          <dl className="rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.06)] p-4 space-y-3 text-[13px]">
+          <dl className="rounded-2xl bg-white border border-[rgba(14,20,36,0.06)] p-4 space-y-3 text-[13px]">
             {typeof v.feeAmount === 'number' && (
               <Row label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />
             )}

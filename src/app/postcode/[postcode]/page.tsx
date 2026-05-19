@@ -31,7 +31,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
   const data = await lookupPostcode(postcode);
   if (!data) {
     return (
-      <div className="bg-[#f8f9fa] min-h-screen">
+      <div className="bg-white min-h-screen">
         <div className="max-w-2xl mx-auto px-4 md:px-8 pt-[140px] text-center">
           <p
             className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#D9152B] mb-2"
@@ -68,7 +68,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
   const mapUrl = `https://www.openstreetmap.org/?mlat=${data.latitude}&mlon=${data.longitude}#map=15/${data.latitude}/${data.longitude}`;
 
   return (
-    <div className="bg-[#f8f9fa] min-h-screen relative">
+    <div className="bg-white min-h-screen relative">
       {/* Dot pattern background */}
       <div
         aria-hidden="true"
