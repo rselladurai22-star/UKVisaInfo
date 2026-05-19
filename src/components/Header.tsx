@@ -35,6 +35,7 @@ const NAV_ITEMS: NavItem[] = [
   { kind: 'link',     id: 'cost',        label: 'Cost Calculator', href: '/tools/cost-calculator', icon: Calculator, accent: true },
   { kind: 'dropdown', id: 'tools',       label: 'Tools' },
   { kind: 'dropdown', id: 'guides',      label: 'Guides' },
+  { kind: 'link',     id: 'community',   label: 'Community',       href: '/community',             icon: Users },
 ];
 
 const SECTIONS: Section[] = [
