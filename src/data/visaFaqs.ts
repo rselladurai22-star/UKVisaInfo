@@ -12,7 +12,7 @@ export const VISA_FAQS: Record<string, FAQ[]> = {
     {
       question: 'What is the minimum salary for a UK Skilled Worker visa in 2026?',
       answer:
-        'The general minimum is £38,700 per year. New entrants (under 26, recent graduates, or switching from Student/Graduate visas) qualify for £30,960. Roles on the Immigration Salary List have a £30,960 minimum. You must also meet your occupation\'s going rate and £15.88 per hour minimum, whichever is highest.',
+        'The general minimum is £41,700 per year. New entrants (under 26, recent graduates, or switching from Student/Graduate visas) qualify for £30,960. Roles on the Immigration Salary List have a £30,960 minimum. You must also meet your occupation\'s going rate and £15.88 per hour minimum, whichever is highest.',
     },
     {
       question: 'How long does a Skilled Worker visa last?',

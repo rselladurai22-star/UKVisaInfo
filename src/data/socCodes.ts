@@ -19,14 +19,23 @@ export interface SocOccupation {
   closedToNewOverseas?: boolean;
 }
 
-// 2026 thresholds
+// 2026 thresholds.
+// VERIFIED on gov.uk/skilled-worker-visa/your-job (8 April 2026):
+//   - General: £41,700 per year ("at least £41,700 per year or the going rate, whichever is higher")
+//   - Lower rate: £33,400 per year ("If you do not meet the standard salary
+//     requirements, your salary will be at least £33,400 per year")
+//
+// NOT yet re-verified for post-8-April-2026 (still showing the prior values
+// pending a fresh gov.uk fetch — flag for Phase A7 audit):
+//   - newEntrant, islGeneral, healthCare, healthCareNewEntrant, hourlyMinimum
 export const THRESHOLDS = {
-  general: 38700,
-  newEntrant: 30960,
-  islGeneral: 30960,
-  healthCare: 25600,
-  healthCareNewEntrant: 20960,
-  hourlyMinimum: 15.88,
+  general: 41700,
+  lowerRate: 33400,
+  newEntrant: 30960,        // TODO: re-verify post-April 2026
+  islGeneral: 30960,        // TODO: re-verify post-April 2026
+  healthCare: 25600,        // TODO: re-verify post-April 2026
+  healthCareNewEntrant: 20960, // TODO: re-verify post-April 2026
+  hourlyMinimum: 15.88,     // TODO: re-verify post-April 2026
 };
 
 export const SOC_OCCUPATIONS: SocOccupation[] = [

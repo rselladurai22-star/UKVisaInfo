@@ -16,7 +16,7 @@ import { VISA_DETAILS } from '../data/visaDetails';
 ───────────────────────────────────────────── */
 
 const VISA_CARDS = [
-  { id: 'skilled-worker',    title: 'Skilled Worker',    icon: Briefcase,    blurb: 'Sponsored UK employment — £38,700 threshold',  color: '#d9152b' },
+  { id: 'skilled-worker',    title: 'Skilled Worker',    icon: Briefcase,    blurb: 'Sponsored UK employment — £41,700 threshold',  color: '#d9152b' },
   { id: 'student',           title: 'Student',           icon: GraduationCap,blurb: 'Degree-level study at UK institutions',        color: '#2563eb' },
   { id: 'visitor',           title: 'Standard Visitor',  icon: Plane,        blurb: 'Tourism or business visits up to 6 months',    color: '#0891b2' },
   { id: 'family',            title: 'Family / Spouse',   icon: Users,        blurb: 'Join a settled partner or family member',      color: '#7c3aed' },

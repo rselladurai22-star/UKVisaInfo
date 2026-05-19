@@ -1,9 +1,12 @@
 /**
- * 2026 settlement-route fee constants.
+ * Settlement-route fee constants effective 8 April 2026.
  *
  * Every value here is sourced from gov.uk pages cited in the `source`
  * field. Update each constant against the linked gov.uk page only —
- * do not estimate or extrapolate. Last full audit: 2026-05-19.
+ * do not estimate or extrapolate. Master fee table:
+ * https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026
+ *
+ * Last full audit: 2026-05-19.
  */
 
 export interface FeeFact {
@@ -17,16 +20,20 @@ export interface FeeFact {
 }
 
 const VERIFIED = '2026-05-19';
+const FEE_TABLE_8APR2026 = 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026';
 
-/** Indefinite Leave to Remain — main applicants and dependants. */
+/** Indefinite Leave to Remain — main applicants and dependants.
+ *  Increased from £3,029 → £3,226 from 8 April 2026 per the master table.
+ *  Also confirmed verbatim on gov.uk/british-national-overseas-bno-visa/settle-in-the-uk:
+ *  "It costs £3,226 for each person applying". */
 export const ILR_FEE: FeeFact = {
-  value: 3029,
+  value: 3226,
   label: 'ILR application (Set M/O/F)',
-  source: 'https://www.gov.uk/government/publications/visa-regulations-revised-table',
+  source: FEE_TABLE_8APR2026,
   verified: VERIFIED,
 };
 
-/** 10-year Long Residence (Set LR). gov.uk/long-residence states £3,226. */
+/** 10-year Long Residence (Set LR). Same fee as standard ILR from 8 April 2026. */
 export const LONG_RESIDENCE_FEE: FeeFact = {
   value: 3226,
   label: 'Long Residence ILR (Set LR)',
@@ -34,8 +41,10 @@ export const LONG_RESIDENCE_FEE: FeeFact = {
   verified: VERIFIED,
 };
 
-/** Naturalisation as British citizen — Form AN. gov.uk/apply-citizenship-indefinite-leave-to-remain
- *  page states "£1,839 to apply (this includes the £130 citizenship ceremony fee)". */
+/** Naturalisation as British citizen — Form AN. 8 April 2026 table: £1,709
+ *  application fee + £130 ceremony = £1,839 total.
+ *  gov.uk/apply-citizenship-indefinite-leave-to-remain page states it
+ *  verbatim: "£1,839 to apply (this includes the £130 citizenship ceremony fee)". */
 export const NATURALISATION_AN_TOTAL: FeeFact = {
   value: 1839,
   label: 'British citizenship (Form AN, ceremony incl.)',
@@ -45,15 +54,16 @@ export const NATURALISATION_AN_TOTAL: FeeFact = {
 export const NATURALISATION_CEREMONY_FEE: FeeFact = {
   value: 130,
   label: 'Citizenship ceremony fee (included in £1,839)',
-  source: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain',
+  source: FEE_TABLE_8APR2026,
   verified: VERIFIED,
 };
 
-/** Child citizenship registration — Form MN1. */
+/** Child citizenship registration — Form MN1.
+ *  REDUCED from £1,214 → £1,000 from 8 April 2026. */
 export const REGISTRATION_MN1: FeeFact = {
-  value: 1214,
+  value: 1000,
   label: 'Child citizenship registration (Form MN1)',
-  source: 'https://www.gov.uk/government/publications/visa-regulations-revised-table',
+  source: FEE_TABLE_8APR2026,
   verified: VERIFIED,
 };
 
@@ -143,20 +153,20 @@ export interface RouteBreakdown {
   note: string;
 }
 
-/** ILR — applicant pays one ILR fee + LITUK. */
+/** ILR — applicant pays one ILR fee + LITUK. 8 Apr 2026 fee table: £3,226. */
 export const ILR_BREAKDOWN: RouteBreakdown = {
   id: 'ilr',
   title: 'ILR cost for a single applicant',
   lines: [
-    { label: 'ILR application (Set M/O/F)', amount: 3029, source: 'gov.uk fee table' },
+    { label: 'ILR application (Set M/O/F)', amount: 3226, source: '8 Apr 2026 Home Office fee table' },
     { label: 'Life in the UK Test (one-off)', amount: 50, source: 'gov.uk/life-in-the-uk-test' },
   ],
-  total: 3079,
+  total: 3276,
   perPerson: true,
-  note: 'Each dependent adult or child pays £3,029 application separately. Super Priority adds £1,000 per applicant.',
+  note: 'Each dependent adult or child pays £3,226 application separately. Super Priority adds £1,000 per applicant.',
 };
 
-/** Long Residence — £3,226 fee + LITUK. */
+/** Long Residence — Set(LR) at £3,226 (same as standard ILR from 8 Apr 2026) + LITUK. */
 export const LONG_RESIDENCE_BREAKDOWN: RouteBreakdown = {
   id: 'long-residence',
   title: 'Long Residence ILR cost for a single applicant',
@@ -166,7 +176,7 @@ export const LONG_RESIDENCE_BREAKDOWN: RouteBreakdown = {
   ],
   total: 3276,
   perPerson: true,
-  note: 'Higher than standard ILR because Set(LR) carries an additional fee component. Super Priority adds £1,000.',
+  note: 'Same fee as standard 5-year ILR from 8 April 2026. Super Priority adds £1,000.',
 };
 
 /** Citizenship — single applicant going from ILR. */
@@ -181,34 +191,34 @@ export const CITIZENSHIP_BREAKDOWN: RouteBreakdown = {
   note: 'Includes £130 ceremony fee. Biometrics free. Children register on Form MN1 for £1,214.',
 };
 
-/** BNO 5-year route from arrival to ILR. */
+/** BNO 5-year route from arrival to ILR. ILR rose to £3,226 on 8 Apr 2026. */
 export const BNO_TO_ILR_BREAKDOWN: RouteBreakdown = {
   id: 'bno-to-ilr',
   title: 'BN(O) 5-year route to ILR — single adult',
   lines: [
     { label: 'BN(O) visa (5 years)', amount: 285, source: 'gov.uk/british-national-overseas-bno-visa/how-much-it-costs' },
     { label: 'IHS for 5 years (adult)', amount: 5175, source: 'gov.uk/british-national-overseas-bno-visa/how-much-it-costs' },
-    { label: 'ILR application (Set M)', amount: 3029, source: 'gov.uk fee table' },
+    { label: 'ILR application (Set M)', amount: 3226, source: '8 Apr 2026 fee table + gov.uk/british-national-overseas-bno-visa/settle-in-the-uk' },
     { label: 'Life in the UK Test', amount: 50, source: 'gov.uk/life-in-the-uk-test' },
   ],
-  total: 8539,
+  total: 8736,
   perPerson: true,
-  note: 'After ILR you can naturalise after 12 months (+£1,839). Children pay BNO £285 + IHS £3,880 + ILR £3,029.',
+  note: 'After ILR you can naturalise after 12 months (+£1,839). Children pay BNO £285 + IHS £3,880 + ILR £3,226.',
 };
 
-/** Ancestry 5-year route to ILR. */
+/** Ancestry 5-year route to ILR. ILR rose to £3,226 on 8 Apr 2026. */
 export const ANCESTRY_TO_ILR_BREAKDOWN: RouteBreakdown = {
   id: 'ancestry-to-ilr',
   title: 'UK Ancestry 5-year route to ILR — single adult',
   lines: [
     { label: 'Ancestry visa', amount: 726, source: 'gov.uk/ancestry-visa' },
     { label: 'IHS for 5 years (adult)', amount: 5175, source: 'gov.uk/british-national-overseas-bno-visa/how-much-it-costs (rate)' },
-    { label: 'ILR application (Set O)', amount: 3029, source: 'gov.uk fee table' },
+    { label: 'ILR application (Set O)', amount: 3226, source: '8 Apr 2026 fee table' },
     { label: 'Life in the UK Test', amount: 50, source: 'gov.uk/life-in-the-uk-test' },
   ],
-  total: 8980,
+  total: 9177,
   perPerson: true,
-  note: 'Spouse and dependent adults pay the same per person. Children: visa £726 + IHS £3,880 + ILR £3,029.',
+  note: 'Spouse and dependent adults pay the same per person. Children: visa £726 + IHS £3,880 + ILR £3,226.',
 };
 
 /** EUSS — free at every stage. */

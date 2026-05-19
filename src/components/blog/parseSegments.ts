@@ -10,7 +10,7 @@
  *   > [!TIP] ...
  *   > [!NOTE] ...
  *
- *   > [!STAT] £38,700 | Minimum salary 2026
+ *   > [!STAT] £41,700 | Minimum salary 2026
  *
  *   > [!STEPS]
  *   > 1. **Title** — Description text.
@@ -25,7 +25,7 @@
  *   > A: Yes, switching is allowed in-country.
  *   >
  *   > Q: What is the minimum salary?
- *   > A: £38,700 from April 2026.
+ *   > A: £41,700 from April 2026.
  *
  *   > [!QUOTE]
  *   > The hardest part is finding a sponsor licence holder.

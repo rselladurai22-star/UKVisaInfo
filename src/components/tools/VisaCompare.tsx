@@ -33,7 +33,7 @@ const VISAS: Record<string, VisaRow> = {
   'skilled-worker': {
     id: 'skilled-worker', name: 'Skilled Worker', icon: Briefcase, accent: '#d9152b',
     fee: '£827', feeRange: '£827 – £1,636', ihs: '£1,035/year',
-    salaryMin: '£38,700 (or going rate)', duration: '3 or 5 years',
+    salaryMin: '£41,700 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out) / 8 weeks (in)', ihsExempt: false,
     sponsorRequired: true, dependantsAllowed: true, workRights: 'Sponsored only',
     pathToIlr: '5 years', englishLevel: 'B1',

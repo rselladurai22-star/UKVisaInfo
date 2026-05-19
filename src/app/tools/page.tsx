@@ -19,7 +19,7 @@ const TOOLS = [
     href: '/tools/salary-checker',
     icon: Briefcase,
     title: 'Skilled Worker salary checker',
-    desc: 'Enter your offered salary and SOC 2020 code. See instantly whether you clear the £38,700 general threshold, the £30,960 new-entrant rate, and your occupation\'s going rate.',
+    desc: 'Enter your offered salary and SOC 2020 code. See instantly whether you clear the £41,700 general threshold, the £30,960 new-entrant rate, and your occupation\'s going rate.',
     cta: 'Check salary qualification',
     accent: '#d9152b',
     soft: 'rgba(217,21,43,0.06)',

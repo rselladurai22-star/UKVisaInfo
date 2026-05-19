@@ -210,7 +210,7 @@ export default function SalaryChecker() {
                     inputMode="numeric"
                     value={salaryRaw}
                     onChange={(e) => setSalaryRaw(e.target.value)}
-                    placeholder="38,700"
+                    placeholder="41,700"
                     className="w-full pl-7 pr-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0a1530] rounded-xl text-base font-semibold text-[#0a1530] tabular-nums outline-none transition-all"
                   />
                 </div>
@@ -244,7 +244,7 @@ export default function SalaryChecker() {
                         : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#eaeef7]'
                     }`}
                   >
-                    General (£38,700)
+                    General (£41,700)
                   </button>
                   <button
                     onClick={() => setEntry('newEntrant')}
@@ -382,7 +382,7 @@ export default function SalaryChecker() {
 
           <div className="mt-8 grid md:grid-cols-3 gap-4">
             {[
-              { num: 1, label: 'General minimum', val: '£38,700', desc: 'Reduced to £30,960 for new entrants, ISL roles' },
+              { num: 1, label: 'General minimum', val: '£41,700', desc: 'Reduced to £30,960 for new entrants, ISL roles' },
               { num: 2, label: 'Going rate', val: 'Varies', desc: 'Set by SOC 2020 code at 25th percentile of UK earnings for the role' },
               { num: 3, label: 'Hourly rate', val: '£15.88/hr', desc: 'Mandatory minimum regardless of contract type' },
             ].map((t) => (

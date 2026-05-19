@@ -25,7 +25,7 @@ const visas = [
     id: 'skilled-worker', category: 'Work' as Category, icon: Briefcase,
     title: 'Skilled Worker Visa',
     desc: 'For sponsored work in the UK at RQF Level 3+ roles. Raised salary thresholds from April 2026.',
-    salary: '£38,700 min', duration: 'Up to 5 years',
+    salary: '£41,700 min', duration: 'Up to 5 years',
     url: 'https://www.gov.uk/skilled-worker-visa',
     color: '#d9152b',
   },
