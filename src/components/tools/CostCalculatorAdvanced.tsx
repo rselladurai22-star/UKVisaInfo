@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Calculator, Plus, Minus, Banknote, ShieldCheck, Clock, ArrowRight,
@@ -21,14 +22,19 @@ interface VisaPreset {
   notes?: string;
 }
 
+// 8 April 2026 fees — every value verified against gov.uk. The
+// master fee table lives at:
+//   gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026
+// Last full audit: 2026-05-19.
 const VISAS: VisaPreset[] = [
   {
     id: 'skilled-worker',
     label: 'Skilled Worker',
-    baseFee: { out3yr: 827, out5yr: 1636, in3yr: 827, in5yr: 1636 },
+    baseFee: { out3yr: 819, out5yr: 1618, in3yr: 885, in5yr: 1751 },
     ihsAdult: 1035, ihsChild: 776,
     priorityFee: 500, superPriorityFee: 1000,
     allowsDependants: true, defaultYears: 3,
+    notes: 'Out: £819 (≤3y) / £1,618 (>3y). In-country marginally higher. ISL discount £590 if your SOC is listed.',
   },
   {
     id: 'health-care',
@@ -37,90 +43,94 @@ const VISAS: VisaPreset[] = [
     ihsAdult: 0, ihsChild: 776, // main applicant exempt
     priorityFee: 500,
     allowsDependants: true, defaultYears: 3,
-    notes: 'Main applicant exempt from IHS. Dependants pay normal IHS.',
+    notes: 'Main applicant + dependants IHS-exempt. Care worker SOC 6135/6136 closed to new overseas since 22 Jul 2025.',
   },
   {
     id: 'student',
     label: 'Student',
-    baseFee: { out3yr: 524, out5yr: 524, in3yr: 524, in5yr: 524 },
+    baseFee: { out3yr: 558, out5yr: 558, in3yr: 558, in5yr: 558 },
     ihsAdult: 776, ihsChild: 776, // student rate
     priorityFee: 500,
     allowsDependants: false, defaultYears: 3,
+    notes: '£558 both inside & outside UK from 8 Apr 2026.',
   },
   {
     id: 'graduate',
     label: 'Graduate',
-    baseFee: { out3yr: 880, out5yr: 880 },
+    baseFee: { out3yr: 937, out5yr: 937 },
     ihsAdult: 1035, ihsChild: 776,
     priorityFee: 500,
     allowsDependants: false, defaultYears: 2,
-    notes: 'Cannot extend. 18 months for Bachelor/Master, 3 years for PhD.',
+    notes: '2 yrs if you apply by 31 Dec 2026 · 18 months from 1 Jan 2027 · 3 yrs for PhD. Cannot extend.',
   },
   {
     id: 'family',
     label: 'Family / Spouse',
-    baseFee: { out3yr: 1938, in3yr: 1321 },
+    baseFee: { out3yr: 2064, in3yr: 1407 },
     ihsAdult: 1035, ihsChild: 776,
     priorityFee: 573,
     allowsDependants: true, defaultYears: 2.5,
-    notes: 'Standard duration 30 months; renewable.',
+    notes: '2yr 9 months initial · 2yr 6 months extension · ILR after 5 yrs · £29,000 min income.',
   },
   {
     id: 'visitor',
     label: 'Visit (Standard)',
-    baseFee: { out3yr: 127, out5yr: 127 },
+    baseFee: { out3yr: 135, out5yr: 135 },
     ihsAdult: 0, ihsChild: 0,
     priorityFee: 500, superPriorityFee: 1000,
     allowsDependants: false, defaultYears: 0.5,
+    notes: '£135 for 6 months. Long-term: £475 (2y) / £848 (5y) / £1,059 (10y). ETA £20 for visa-exempt nationals.',
   },
   {
     id: 'innovator-founder',
     label: 'Innovator Founder',
-    baseFee: { out3yr: 1191, in3yr: 1486 },
+    baseFee: { out3yr: 1357, in3yr: 1693 },
     ihsAdult: 1035, ihsChild: 776,
     priorityFee: 500,
     allowsDependants: true, defaultYears: 3,
+    notes: '£1,357 out / £1,693 in. Plus endorsing body fees (~£1,000 endorsement + £500/contact-point meeting).',
   },
   {
     id: 'global-talent',
     label: 'Global Talent',
-    baseFee: { out3yr: 722, out5yr: 722 },
+    baseFee: { out3yr: 766, out5yr: 766 },
     ihsAdult: 1035, ihsChild: 776,
     allowsDependants: true, defaultYears: 3,
-    notes: 'Two-stage fee: £561 endorsement + £161 visa.',
+    notes: '£766 total (direct prize) OR £561 endorsement + £205 visa. 3 yrs to ILR (Leader) or 5 yrs (Potential Leader).',
   },
   {
     id: 'ilr',
     label: 'ILR (Settlement)',
-    baseFee: { out3yr: 3029, in3yr: 3029 },
+    baseFee: { out3yr: 3226, in3yr: 3226 },
     ihsAdult: 0, ihsChild: 0,
-    superPriorityFee: 800,
+    superPriorityFee: 1000,
     allowsDependants: true, defaultYears: 1,
-    notes: 'One-off settlement fee. No IHS at ILR stage. Life in the UK Test £50 extra.',
+    notes: '£3,226 from 8 Apr 2026 (was £3,029). No IHS at ILR stage. Life in the UK Test £50 extra.',
   },
   {
     id: 'citizenship',
-    label: 'British Citizenship',
-    baseFee: { out3yr: 1500, in3yr: 1500 },
+    label: 'British Citizenship (Adult, Form AN)',
+    baseFee: { out3yr: 1839, in3yr: 1839 },
     ihsAdult: 0, ihsChild: 0,
     allowsDependants: false, defaultYears: 1,
-    notes: 'Includes ceremony fee component. Plus passport application £88.50 (separate).',
+    notes: '£1,839 includes £130 citizenship ceremony fee. Plus passport £94.50 (separate). Child MN1 £1,000.',
   },
   {
     id: 'bno',
     label: 'Hong Kong BNO',
-    baseFee: { out3yr: 180, out5yr: 298, in3yr: 180, in5yr: 298 },
+    baseFee: { out3yr: 206, out5yr: 285, in3yr: 206, in5yr: 285 },
     ihsAdult: 1035, ihsChild: 776,
     allowsDependants: true, defaultYears: 5,
+    notes: '£206 (2.5y) / £285 (5y). 5-year route gives lowest per-year cost.',
   },
   {
     id: 'ancestry',
     label: 'UK Ancestry',
-    baseFee: { out3yr: 637, out5yr: 637 },
+    baseFee: { out3yr: 726, out5yr: 726 },
     ihsAdult: 1035, ihsChild: 776,
     priorityFee: 500,
     allowsDependants: true, defaultYears: 5,
-    notes: 'For Commonwealth citizens with UK-born grandparent.',
+    notes: 'For Commonwealth citizens with a UK-born grandparent. 5 years to ILR.',
   },
 ];
 
@@ -139,6 +149,7 @@ const FX: Record<Currency, { rate: number; symbol: string }> = {
 };
 
 export default function CostCalculatorAdvanced() {
+  const searchParams = useSearchParams();
   const [visaId, setVisaId] = useState('skilled-worker');
   const [location, setLocation] = useState<'out' | 'in'>('out');
   const [years, setYears] = useState(3);
@@ -146,6 +157,13 @@ export default function CostCalculatorAdvanced() {
   const [children, setChildren] = useState(0);
   const [priority, setPriority] = useState<'standard' | 'priority' | 'super'>('standard');
   const [currency, setCurrency] = useState<Currency>('GBP');
+
+  /* Deep-link support: ?visa=X&variant=Y from the on-page Variant Picker
+     pre-fills the visa selector. */
+  useEffect(() => {
+    const v = searchParams.get('visa');
+    if (v && VISAS.some((p) => p.id === v)) setVisaId(v);
+  }, [searchParams]);
 
   const visa = VISAS.find((v) => v.id === visaId)!;
 

@@ -97,6 +97,28 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
             { t: 'Funds', d: 'You can support yourself during transit.' }
           ]
         };
+      case 'settle':
+        return {
+          title: 'Indefinite Leave to Remain (ILR)',
+          desc: 'For applicants with 5 years on a qualifying UK visa (Skilled Worker, Family, BN(O), Ancestry, etc.) or 10 years lawful UK residence.',
+          applyUrl: 'https://www.gov.uk/indefinite-leave-to-remain',
+          reasons: [
+            { t: 'Long-term residence', d: 'You\'ve indicated 5+ years (or 10 years lawful) on a qualifying UK route.' },
+            { t: 'Absence rule', d: 'Stay under 180 days/year for 5-year routes — under 548 days total for the 10-year route.' },
+            { t: 'B1 English + Life in the UK Test', d: '£3,226 application fee from 8 April 2026 (gov.uk verified).' }
+          ]
+        };
+      case 'citizenship':
+        return {
+          title: 'British Citizenship (Naturalisation)',
+          desc: 'For ILR holders looking to become British citizens. 12 months on ILR required — or immediately if married to a British citizen.',
+          applyUrl: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain',
+          reasons: [
+            { t: 'Hold ILR', d: 'Standard route needs 12 months on ILR. British-spouse route: apply immediately on ILR.' },
+            { t: 'Absences', d: 'Max 450 days absent in last 5 years; 90 days in final 12 months.' },
+            { t: 'Tests', d: 'B1 English + Life in the UK Test. £1,839 total fee (gov.uk verified 8 April 2026).' }
+          ]
+        };
       default:
         return {
           title: 'Family Visa',
@@ -119,6 +141,8 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
     visit: 'visitor',
     transit: 'visitor',
     join: 'family',
+    settle: 'ilr',
+    citizenship: 'citizenship',
   };
   const recommendedDetail = VISA_DETAILS[purposeToVisaId[purpose || 'join'] || 'family'] || null;
 
@@ -236,11 +260,12 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {[
-                      { id: 'work', title: 'Work', desc: 'Skilled worker, health care, or temporary work visas.', icon: Briefcase },
-                      { id: 'study', title: 'Study', desc: 'Student or child student visas for recognized institutions.', icon: GraduationCap },
-                      { id: 'visit', title: 'Visit family or friends', desc: 'Standard visitor visa for tourism or short stays.', icon: Plane },
-                      { id: 'transit', title: 'Transit', desc: 'Passing through the UK on your way to another country.', icon: Plane },
-                      { id: 'join', title: 'Join family settled in the UK', desc: 'Spouse, partner, or dependent of a UK resident.', icon: HomeIcon, colSpan: 'md:col-span-2' }
+                      { id: 'work', title: 'Work', desc: 'Skilled Worker, Health & Care, Global Talent, Innovator Founder.', icon: Briefcase },
+                      { id: 'study', title: 'Study', desc: 'Student, Child Student or Graduate visa at a licensed sponsor.', icon: GraduationCap },
+                      { id: 'visit', title: 'Visit family or friends', desc: 'Standard Visitor visa or ETA — up to 6 months per visit.', icon: Plane },
+                      { id: 'join', title: 'Join family settled in the UK', desc: 'Partner, parent, child or Adult Dependent Relative of a UK resident.', icon: HomeIcon },
+                      { id: 'settle', title: 'Settle (Indefinite Leave to Remain)', desc: '5 years on a qualifying visa or 10 years lawful UK residence.', icon: ShieldCheck },
+                      { id: 'citizenship', title: 'Become a British citizen', desc: 'Naturalise after 12 months on ILR — or immediately as a British spouse.', icon: Verified },
                     ].map((item) => (
                       <button
                         key={item.id}
@@ -249,7 +274,7 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
                           purpose === item.id
                           ? 'bg-surface-container-lowest border-secondary shadow-lg ring-4 ring-secondary/5'
                           : 'bg-surface-container-low hover:bg-surface-container-lowest border-transparent hover:border-secondary/20'
-                        } ${item.colSpan || ''}`}
+                        }`}
                       >
                         <div className="flex justify-between w-full mb-4">
                           <item.icon className={`w-8 h-8 ${purpose === item.id ? 'text-secondary' : 'text-primary/40'}`} />
