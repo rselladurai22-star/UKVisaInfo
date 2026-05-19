@@ -11,9 +11,11 @@ import { VISA_FAQS } from '../../../data/visaFaqs';
 import VisaTabNav from '../../../components/visa/VisaTabNav';
 import VisaFaq from '../../../components/visa/VisaFaq';
 import SettlementCostStack from '../../../components/visa/SettlementCostStack';
+import VariantPicker from '../../../components/visa/VariantPicker';
 import RelatedBlogToVisa from '../../../components/RelatedBlogToVisa';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import { SETTLEMENT_BREAKDOWNS } from '../../../data/settlementFees';
+import { getVariants } from '../../../data/visaVariants';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
@@ -181,6 +183,15 @@ export default async function VisaPage({ params }: RouteParams) {
 
             {/* MAIN ── */}
             <main className="col-span-12 lg:col-span-8 space-y-5 md:space-y-6">
+
+              {/* Sub-route variant picker (only for routes with verified variants) */}
+              {getVariants(slug).length > 0 && (
+                <VariantPicker
+                  variants={getVariants(slug)}
+                  visaId={slug}
+                  accent={accent}
+                />
+              )}
 
               {/* Overview */}
               <Section id="overview" eyebrow="01 · Overview" title={`What is the ${v.title}?`} accent={accent}>
