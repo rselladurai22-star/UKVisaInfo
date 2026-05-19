@@ -6,6 +6,7 @@ import { SPONSORS, SPONSOR_SECTORS } from '../data/sponsors';
 import { COUNTRIES } from '../data/countries';
 import { CITIES } from '../data/cities';
 import { NEWS_ITEMS } from '../data/news';
+import { VISA_VARIANTS } from '../data/visaVariants';
 import { socSlug, slugify } from '../lib/slug';
 
 const SITE = 'https://ukvisainfo.co.uk';
@@ -54,6 +55,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     });
+  }
+
+  /* ── Sub-route SEO pages ── */
+  for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
+    for (const variant of variants) {
+      urls.push({
+        url: `${SITE}/visa/${slug}/${variant.id}`,
+        lastModified: TODAY,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+    }
   }
 
   /* ── Blog posts ── */
