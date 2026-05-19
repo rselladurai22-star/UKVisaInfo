@@ -22,15 +22,15 @@ export default function SalaryIndex() {
 
   return (
     <div className="bg-white">
-      <section className="pt-[100px] md:pt-[120px] pb-12 md:pb-14 bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] relative isolate overflow-hidden">
+      <section className="pt-[100px] md:pt-[120px] pb-12 md:pb-14 bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] relative isolate overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.18] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }}
+          style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }}
         />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#d9152b]/15 blur-[120px] pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/15 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
             <Briefcase className="w-3 h-3" /> Salary database
           </span>
           <h1 className="font-display text-white text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold leading-[1.05] tracking-[-0.025em]">
@@ -43,7 +43,7 @@ export default function SalaryIndex() {
           <div className="mt-7">
             <Link
               href="/tools/salary-checker"
-              className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100"
+              className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100"
             >
               <Search className="w-4 h-4" /> Interactive salary checker
             </Link>
@@ -59,7 +59,7 @@ export default function SalaryIndex() {
             return (
               <section key={group} id={slugifyGroup(group)} className="scroll-mt-24">
                 <div className="flex items-baseline justify-between gap-3 mb-4">
-                  <h2 className="font-display text-[1.25rem] md:text-[1.5rem] font-bold text-[#0a1530] tracking-[-0.015em]">
+                  <h2 className="font-display text-[1.25rem] md:text-[1.5rem] font-bold text-[#0A2540] tracking-[-0.015em]">
                     {group}
                   </h2>
                   <span className="text-[11.5px] text-[#7a8195] tabular-nums">{items.length} roles</span>
@@ -70,13 +70,13 @@ export default function SalaryIndex() {
                     <li key={occ.code}>
                       <Link
                         href={`/salary/${socSlug(occ.code, occ.title)}`}
-                        className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] hover:shadow-[0_4px_14px_rgba(10,21,48,0.06)] transition-[border-color,box-shadow] duration-150"
+                        className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:shadow-[0_4px_14px_rgba(10, 37, 64,0.06)] transition-[border-color,box-shadow] duration-150"
                       >
                         <span className="text-[10.5px] font-bold tracking-[0.04em] text-[#9aa3b8] tabular-nums w-9 pt-0.5 flex-shrink-0">
                           {occ.code}
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[13.5px] font-semibold text-[#0a1530] leading-snug group-hover:text-[#d9152b] transition-colors duration-100">
+                          <div className="text-[13.5px] font-semibold text-[#0A2540] leading-snug group-hover:text-[#00C4B4] transition-colors duration-100">
                             {occ.title}
                           </div>
                           <div className="text-[11.5px] text-[#7a8195] tabular-nums mt-0.5">

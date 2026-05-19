@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
   ArrowLeft, ExternalLink, CheckCircle2, Clock, Banknote, ShieldCheck,
-  Calendar, ArrowRight, Briefcase, MessageCircle, Star, Calculator,
-  Wallet, Stethoscope, Building2, Globe, IdCard, AlertTriangle,
+  Calendar, ArrowRight, MessageCircle, Star, Calculator,
+  Wallet, Stethoscope, Building2, Globe, IdCard, AlertTriangle, Sparkles,
 } from 'lucide-react';
 import { VISA_DETAILS } from '../../../data/visaDetails';
 import { VISA_FAQS } from '../../../data/visaFaqs';
@@ -18,10 +18,22 @@ import StickyMobileCta from '../../../components/StickyMobileCta';
 import { SETTLEMENT_BREAKDOWNS } from '../../../data/settlementFees';
 import { getVariants } from '../../../data/visaVariants';
 
+/* ────────────────────────────────────────────────────────────
+   Brand palette references (no off-brand greys here)
+   navy   #0A2540   navy-2 #13325F   navy-deep #06192E
+   teal   #00C4B4   teal-dark #00A89A
+   gold   #C9A14A
+   ink    text on white = navy
+   muted  = slate-ish #5A6478
+─────────────────────────────────────────────────────────────── */
+
 interface RouteParams { params: Promise<{ slug: string }> }
 
-const CATEGORY_ACCENT: Record<string, string> = {
-  Work: '#d9152b', Study: '#2563eb', Family: '#7c3aed', Visit: '#0891b2',
+const CATEGORY_META: Record<string, { accent: string; bgTint: string; label: string }> = {
+  Work:   { accent: '#00C4B4', bgTint: 'rgba(0,196,180,0.08)',  label: 'Work route' },
+  Study:  { accent: '#C9A14A', bgTint: 'rgba(201,161,74,0.10)', label: 'Study route' },
+  Family: { accent: '#13325F', bgTint: 'rgba(19,50,95,0.08)',   label: 'Family route' },
+  Visit:  { accent: '#0A2540', bgTint: 'rgba(10,37,64,0.06)',   label: 'Visit route' },
 };
 
 export function generateStaticParams() {
@@ -41,13 +53,12 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   };
 }
 
-/* Auto-categorise documents into 4 buckets for the grid */
 function categoriseDocuments(docs: string[]) {
-  const buckets: { id: string; label: string; icon: typeof IdCard; items: string[] }[] = [
-    { id: 'identity', label: 'Identity', icon: IdCard, items: [] },
-    { id: 'finance',  label: 'Finance',  icon: Wallet,    items: [] },
-    { id: 'sponsor',  label: 'Sponsor / Course', icon: Building2, items: [] },
-    { id: 'health',   label: 'Health & qualifications', icon: Stethoscope, items: [] },
+  const buckets: { id: string; label: string; icon: typeof IdCard; tone: string; items: string[] }[] = [
+    { id: 'identity', label: 'Identity',            icon: IdCard,      tone: '#0A2540', items: [] },
+    { id: 'finance',  label: 'Finance',             icon: Wallet,      tone: '#C9A14A', items: [] },
+    { id: 'sponsor',  label: 'Sponsor / Course',    icon: Building2,   tone: '#00C4B4', items: [] },
+    { id: 'health',   label: 'Health & qualifications', icon: Stethoscope, tone: '#13325F', items: [] },
   ];
   for (const d of docs) {
     const low = d.toLowerCase();
@@ -71,7 +82,8 @@ export default async function VisaPage({ params }: RouteParams) {
   if (!v) notFound();
 
   const faqs = VISA_FAQS[slug] ?? [];
-  const accent = CATEGORY_ACCENT[v.category] ?? '#d9152b';
+  const meta = CATEGORY_META[v.category] ?? CATEGORY_META.Work;
+  const accent = meta.accent;
   const variants = getVariants(slug);
   const docGroups = categoriseDocuments(v.documents);
 
@@ -114,98 +126,93 @@ export default async function VisaPage({ params }: RouteParams) {
 
       <VisaStickyBar title={v.title} fee={v.fee} applyUrl={v.applyUrl} accent={accent} slug={slug} />
 
-      <div className="bg-[#f8f9fa] relative">
-        {/* Subtle ambient dot pattern across the whole page */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(118,119,126,0.18) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            backgroundPosition: '-12px -12px',
-            opacity: 0.18,
-            maskImage: 'linear-gradient(to bottom, black 0%, transparent 80%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 80%)',
-          }}
-        />
+      {/* ═══════════════════════════════════════════════════════════
+          HERO — deep navy, editorial, large display title with
+          ambient gradient + passport-style edge motif on the right
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden bg-[#06192E] text-white pt-[88px] md:pt-[104px] pb-16 md:pb-24">
+        {/* Aurora */}
+        <div aria-hidden className="absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full opacity-[0.22] blur-3xl"
+             style={{ background: `radial-gradient(circle at center, ${accent} 0%, transparent 60%)` }} />
+        <div aria-hidden className="absolute -bottom-40 -right-32 w-[640px] h-[640px] rounded-full opacity-[0.16] blur-3xl"
+             style={{ background: 'radial-gradient(circle at center, #C9A14A 0%, transparent 60%)' }} />
+        {/* UK hairlines */}
+        <div aria-hidden className="absolute inset-0 opacity-[0.05]"
+             style={{
+               backgroundImage:
+                 'linear-gradient(45deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%),' +
+                 'linear-gradient(-45deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%)',
+               backgroundSize: '120px 120px',
+             }} />
 
-        <div className="relative max-w-[1280px] mx-auto px-4 md:px-10 pt-[88px] md:pt-[104px]">
-
-          {/* ── Back link ─────────────────────────── */}
-          <div className="pt-8 pb-2">
+        <div className="relative max-w-[1280px] mx-auto px-5 md:px-10">
+          <div className="pt-4 pb-6">
             <Link
               href="/visa-types"
-              className="inline-flex items-center gap-1.5 text-[#45464d] hover:text-[#101a36] text-[13.5px] font-medium transition-colors duration-100"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-[13px] font-medium transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               All visa routes
             </Link>
           </div>
 
-          {/* ══════════════════════════════════════════
-              HERO — bento grid (title L, stat cards R)
-          ══════════════════════════════════════════ */}
-          <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start pt-6 pb-16">
-            <div className="lg:col-span-7 space-y-6">
-              {/* Pills row */}
-              <div className="flex flex-wrap items-center gap-2">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div className="lg:col-span-7">
+              {/* Pill row */}
+              <div className="flex flex-wrap items-center gap-2 mb-7">
                 <span
-                  className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.06em] px-2.5 py-1 rounded"
-                  style={{ background: '#e1e3e4', color: '#45464d', fontFamily: 'Inter, sans-serif' }}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full"
+                  style={{ background: meta.bgTint, color: accent, border: `1px solid ${accent}33` }}
                 >
-                  {v.category} route
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />
+                  {meta.label}
                 </span>
-                <span
-                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded"
-                  style={{ background: 'rgba(16,185,129,0.12)', color: '#00714d', fontFamily: 'Inter, sans-serif' }}
-                >
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.10em] px-3 py-1.5 rounded-full bg-white/8 text-white/80 border border-white/10">
                   <CheckCircle2 className="w-3 h-3" strokeWidth={2.5} />
                   Verified · {v.updated}
                 </span>
                 <a
                   href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded text-[#45464d] hover:text-[#101a36] transition-colors"
-                  style={{ background: '#f3f4f5', fontFamily: 'Inter, sans-serif' }}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.10em] px-3 py-1.5 rounded-full bg-white/5 text-white/70 hover:text-white hover:bg-white/10 border border-white/10 transition-colors"
                 >
                   <ShieldCheck className="w-3 h-3" />
                   gov.uk source
                 </a>
               </div>
 
-              {/* Display headline */}
               <h1
-                className="font-bold text-[#101a36] tracking-[-0.02em]"
+                className="font-bold tracking-[-0.025em] leading-[1.02]"
                 style={{
                   fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-                  fontSize: 'clamp(2rem, 5vw, 3rem)',
-                  lineHeight: '1.05',
+                  fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)',
                 }}
               >
                 {v.title}
               </h1>
 
-              {/* Tagline */}
-              <p className="text-[#45464d] text-[17px] md:text-[18px] leading-[1.55] max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+              <p className="mt-5 text-white/75 text-[17px] md:text-[19px] leading-[1.55] max-w-2xl"
+                 style={{ fontFamily: 'Inter, sans-serif' }}>
                 {v.tagline}
               </p>
 
-              {/* CTAs — rectangular soft corners */}
-              <div className="flex flex-wrap gap-3 pt-2">
+              {/* CTAs */}
+              <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href={v.applyUrl}
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#101a36] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#1a2444] active:scale-[0.98] transition-all duration-100"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
+                  className="inline-flex items-center gap-2 text-[#06192E] text-[14px] font-bold px-6 py-3.5 rounded-xl active:scale-[0.98] transition-all"
+                  style={{
+                    background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
+                    boxShadow: `0 10px 30px -8px ${accent}80, inset 0 1px 0 rgba(255,255,255,0.4)`,
+                  }}
                 >
                   Apply on gov.uk
                   <ExternalLink className="w-4 h-4" />
                 </a>
                 <Link
                   href={`/tools/cost-calculator?visa=${slug}`}
-                  className="inline-flex items-center gap-2 bg-white text-[#101a36] border border-[#101a36] text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#f3f4f5] transition-colors duration-100"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
+                  className="inline-flex items-center gap-2 bg-white/8 text-white text-[14px] font-semibold px-6 py-3.5 rounded-xl border border-white/15 hover:bg-white/14 transition-colors"
                 >
                   <Calculator className="w-4 h-4" />
                   Calculate full cost
@@ -213,33 +220,41 @@ export default async function VisaPage({ params }: RouteParams) {
               </div>
             </div>
 
-            {/* Bento stat cards (right) */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-              <StatCard label="Fee from" value={headlineFee} accent={accent} />
-              <StatCard label="Decision in" value={v.processing.outside} />
-              <StatCard label="Duration" value={shortDuration} sub={v.duration !== shortDuration ? v.duration : undefined} wide />
+            {/* Stat trio — premium glassy cards */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-3 md:gap-4">
+              <HeroStat label="Fee from" value={headlineFee} accent={accent} icon={Banknote} />
+              <HeroStat label="Decision" value={v.processing.outside} icon={Clock} />
+              <HeroStat label="Duration" value={shortDuration} sub={v.duration !== shortDuration ? v.duration : undefined} wide icon={Calendar} />
             </div>
-          </section>
+          </div>
         </div>
+      </section>
 
-        {/* Anchor nav */}
-        <VisaTabNav tabs={tabs} accent={accent} />
+      {/* Section anchor nav */}
+      <VisaTabNav tabs={tabs} accent={accent} />
 
-        {/* ══════════════════════════════════════════
-            CONTENT
-        ══════════════════════════════════════════ */}
-        <div className="relative max-w-[1280px] mx-auto px-4 md:px-10 pb-16 md:pb-20 pt-8 md:pt-12">
-          <div className="grid grid-cols-12 gap-6 lg:gap-10">
+      {/* ═══════════════════════════════════════════════════════════
+          CONTENT
+      ═══════════════════════════════════════════════════════════ */}
+      <div className="bg-[#FAFAF7]">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-10 py-16 md:py-20">
+          <div className="grid grid-cols-12 gap-8 lg:gap-12">
 
-            <main className="col-span-12 lg:col-span-8 space-y-12 md:space-y-16">
+            <main className="col-span-12 lg:col-span-8 space-y-16 md:space-y-24">
 
-              {/* 01 OVERVIEW — accent-bordered card */}
-              <Section id="overview" eyebrow="01 · Overview" title={`What is the ${v.title}?`}>
+              {/* 01 OVERVIEW */}
+              <Section number="01" eyebrow="Overview" title={`What is the ${v.title}?`}>
                 <div
-                  className="bg-white rounded-xl p-6 md:p-8 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.06)]"
-                  style={{ borderLeft: `4px solid #101a36`, border: '1px solid #E5E7EB', borderLeftWidth: '4px', borderLeftColor: '#101a36' }}
+                  className="relative rounded-2xl p-7 md:p-9 bg-white"
+                  style={{
+                    boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 10px 40px -16px rgba(10,37,64,0.10)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
                 >
-                  <p className="text-[#191c1d] text-[16px] md:text-[18px] leading-[1.7]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <span aria-hidden className="absolute left-0 top-7 bottom-7 w-[3px] rounded-full"
+                        style={{ background: `linear-gradient(180deg, ${accent}, ${accent}33)` }} />
+                  <p className="text-[#0A2540]/85 text-[16px] md:text-[18px] leading-[1.7] pl-5"
+                     style={{ fontFamily: 'Inter, sans-serif' }}>
                     {v.summary}
                   </p>
                 </div>
@@ -252,22 +267,33 @@ export default async function VisaPage({ params }: RouteParams) {
                 </section>
               )}
 
-              {/* 02 ELIGIBILITY — divided list card */}
-              <Section id="eligibility" eyebrow="02 · Eligibility" title="Are you eligible?">
-                <p className="text-[#45464d] text-[15px] md:text-[16px] leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  You must meet <strong className="text-[#101a36] font-semibold">every</strong> condition below — Home Office caseworkers refuse on the first one missed.
+              {/* 02 ELIGIBILITY */}
+              <Section number="02" eyebrow="Eligibility" title="Are you eligible?">
+                <p className="text-[#5A6478] text-[15.5px] md:text-[16.5px] leading-[1.65] mb-7 max-w-2xl"
+                   style={{ fontFamily: 'Inter, sans-serif' }}>
+                  You must meet <strong className="text-[#0A2540] font-semibold">every</strong> condition below — Home Office caseworkers refuse on the first one missed.
                 </p>
-                <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)] p-2 md:p-3">
-                  <ul className="divide-y divide-[#E5E7EB]">
+                <div
+                  className="rounded-2xl bg-white overflow-hidden"
+                  style={{
+                    boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 10px 40px -16px rgba(10,37,64,0.08)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
+                >
+                  <ul>
                     {v.eligibility.map((item, i) => (
-                      <li key={i} className="p-4 md:p-5 flex items-start gap-4">
+                      <li
+                        key={i}
+                        className="px-5 md:px-7 py-4 md:py-5 flex items-start gap-4 border-b border-[rgba(10,37,64,0.06)] last:border-b-0"
+                      >
                         <span
-                          className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                          style={{ background: '#10b981' }}
+                          className="mt-0.5 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: 'rgba(0,196,180,0.12)', color: '#00A89A' }}
                         >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-white" strokeWidth={2.5} fill="none" />
+                          <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2.5} />
                         </span>
-                        <span className="text-[#191c1d] text-[15px] md:text-[16px] leading-[1.55] flex-1" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <span className="text-[#0A2540] text-[15px] md:text-[16px] leading-[1.6] flex-1"
+                              style={{ fontFamily: 'Inter, sans-serif' }}>
                           {item}
                         </span>
                       </li>
@@ -277,8 +303,9 @@ export default async function VisaPage({ params }: RouteParams) {
               </Section>
 
               {/* 03 COSTS */}
-              <Section id="costs" eyebrow="03 · Costs" title="What it costs in 2026">
-                <p className="text-[#45464d] text-[15px] md:text-[16px] leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+              <Section number="03" eyebrow="Costs" title="What it costs in 2026">
+                <p className="text-[#5A6478] text-[15.5px] md:text-[16.5px] leading-[1.65] mb-7 max-w-2xl"
+                   style={{ fontFamily: 'Inter, sans-serif' }}>
                   Two compulsory costs apply: the application fee and the Health Surcharge (IHS). Priority service and dependants sit on top.
                 </p>
 
@@ -289,41 +316,49 @@ export default async function VisaPage({ params }: RouteParams) {
                 )}
               </Section>
 
-              {/* 04 DOCUMENTS — 2x2 card grid */}
-              <Section id="documents" eyebrow="04 · Documents" title="What you'll need to provide">
-                <p className="text-[#45464d] text-[15px] md:text-[16px] leading-relaxed mb-6 max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+              {/* 04 DOCUMENTS */}
+              <Section number="04" eyebrow="Documents" title="What you'll need to provide">
+                <p className="text-[#5A6478] text-[15.5px] md:text-[16.5px] leading-[1.65] mb-7 max-w-2xl"
+                   style={{ fontFamily: 'Inter, sans-serif' }}>
                   Group your evidence under these four headings. Missing or mis-categorised documents are the second most common refusal reason after salary.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {docGroups.map((group) => {
                     const Icon = group.icon;
                     return (
                       <div
                         key={group.id}
-                        className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]"
+                        className="relative rounded-2xl bg-white p-6 transition-transform duration-200 hover:-translate-y-0.5"
+                        style={{
+                          boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 8px 30px -12px rgba(10,37,64,0.10)',
+                          border: '1px solid rgba(10,37,64,0.06)',
+                        }}
                       >
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[rgba(10,37,64,0.06)]">
                           <span
-                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                            style={{ background: '#dae2ff', color: '#101a36' }}
+                            className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{ background: `${group.tone}15`, color: group.tone }}
                           >
-                            <Icon className="w-[18px] h-[18px]" />
+                            <Icon className="w-[18px] h-[18px]" strokeWidth={2.2} />
                           </span>
                           <h3
-                            className="font-semibold text-[#101a36] text-[18px] tracking-[-0.01em]"
+                            className="font-bold text-[#0A2540] text-[16.5px] tracking-[-0.005em]"
                             style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
                           >
                             {group.label}
                           </h3>
+                          <span className="ml-auto text-[11px] font-semibold text-[#5A6478] tabular-nums">
+                            {group.items.length}
+                          </span>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2.5">
                           {group.items.map((doc, i) => (
                             <li
                               key={i}
-                              className="text-[#45464d] text-[14.5px] leading-[1.55] flex items-start gap-2.5"
+                              className="text-[#0A2540]/85 text-[14.5px] leading-[1.55] flex items-start gap-2.5"
                               style={{ fontFamily: 'Inter, sans-serif' }}
                             >
-                              <span className="mt-2.5 w-1 h-1 rounded-full bg-[#76777e] flex-shrink-0" />
+                              <span className="mt-2 w-1 h-1 rounded-full bg-[#5A6478] flex-shrink-0" />
                               <span>{doc}</span>
                             </li>
                           ))}
@@ -334,30 +369,39 @@ export default async function VisaPage({ params }: RouteParams) {
                 </div>
               </Section>
 
-              {/* 05 PROCESS — clean numbered timeline */}
-              <Section id="process" eyebrow="05 · How to apply" title="Step-by-step">
-                <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)] p-6 md:p-8">
+              {/* 05 PROCESS */}
+              <Section number="05" eyebrow="How to apply" title="Step-by-step">
+                <div
+                  className="rounded-2xl bg-white p-7 md:p-9"
+                  style={{
+                    boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 10px 40px -16px rgba(10,37,64,0.10)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
+                >
                   <ol className="relative">
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-[19px] top-4 bottom-4 w-px bg-[#E5E7EB]"
-                    />
+                    <span aria-hidden className="absolute left-[19px] top-4 bottom-4 w-px"
+                          style={{ background: `linear-gradient(180deg, ${accent}55, rgba(10,37,64,0.10))` }} />
                     {v.steps.map((s, i) => (
-                      <li key={i} className="relative pl-14 pb-6 last:pb-0">
+                      <li key={i} className="relative pl-14 pb-7 last:pb-0">
                         <span
-                          aria-hidden="true"
-                          className="absolute left-0 top-0 w-10 h-10 rounded-full bg-[#101a36] text-white text-[14px] font-bold flex items-center justify-center"
-                          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+                          aria-hidden
+                          className="absolute left-0 top-0 w-10 h-10 rounded-full text-white text-[13px] font-bold flex items-center justify-center tabular-nums"
+                          style={{
+                            background: 'linear-gradient(135deg, #0A2540, #13325F)',
+                            boxShadow: `0 4px 12px -2px ${accent}50, inset 0 1px 0 rgba(255,255,255,0.1)`,
+                            fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                          }}
                         >
-                          {i + 1}
+                          {String(i + 1).padStart(2, '0')}
                         </span>
                         <h4
-                          className="font-semibold text-[#101a36] text-[16px] md:text-[17px] leading-tight mb-1.5 tracking-[-0.01em]"
+                          className="font-bold text-[#0A2540] text-[16.5px] md:text-[17.5px] leading-tight mb-2 tracking-[-0.005em]"
                           style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
                         >
                           {s.title}
                         </h4>
-                        <p className="text-[#45464d] text-[14.5px] md:text-[15px] leading-[1.6]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <p className="text-[#0A2540]/75 text-[15px] md:text-[15.5px] leading-[1.65]"
+                           style={{ fontFamily: 'Inter, sans-serif' }}>
                           {s.desc}
                         </p>
                       </li>
@@ -366,20 +410,27 @@ export default async function VisaPage({ params }: RouteParams) {
                 </div>
               </Section>
 
-              {/* 06 NOTES — alert callouts */}
+              {/* 06 NOTES */}
               {v.notes && v.notes.length > 0 && (
-                <Section id="notes" eyebrow="06 · Watch out for" title="Things that catch people out">
+                <Section number="06" eyebrow="Watch out for" title="Things that catch people out">
                   <div className="space-y-3">
                     {v.notes.map((note, i) => (
                       <div
                         key={i}
-                        className="bg-white border border-[#E5E7EB] rounded-xl p-5 md:p-6 flex items-start gap-4 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.04)]"
-                        style={{ borderLeft: '4px solid #D9152B' }}
+                        className="relative rounded-2xl bg-white p-5 md:p-6 flex items-start gap-4 overflow-hidden"
+                        style={{
+                          boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 8px 30px -16px rgba(10,37,64,0.08)',
+                          border: '1px solid rgba(201,161,74,0.30)',
+                        }}
                       >
-                        <span className="w-9 h-9 rounded-full bg-[#fde9ec] text-[#D9152B] flex items-center justify-center flex-shrink-0">
-                          <AlertTriangle className="w-4 h-4" />
+                        <span aria-hidden className="absolute left-0 top-0 bottom-0 w-1"
+                              style={{ background: 'linear-gradient(180deg, #C9A14A, #E6B450)' }} />
+                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                              style={{ background: 'rgba(201,161,74,0.12)', color: '#C9A14A' }}>
+                          <AlertTriangle className="w-4 h-4" strokeWidth={2.2} />
                         </span>
-                        <p className="text-[#191c1d] text-[14.5px] md:text-[15.5px] leading-[1.6]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <p className="text-[#0A2540] text-[14.5px] md:text-[15.5px] leading-[1.6]"
+                           style={{ fontFamily: 'Inter, sans-serif' }}>
                           {note}
                         </p>
                       </div>
@@ -390,31 +441,44 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 07 FAQ */}
               {faqs.length > 0 && (
-                <Section id="faq" eyebrow="07 · FAQ" title="Common questions">
-                  <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)] p-6 md:p-7">
+                <Section number="07" eyebrow="FAQ" title="Common questions">
+                  <div
+                    className="rounded-2xl bg-white p-6 md:p-8"
+                    style={{
+                      boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 10px 40px -16px rgba(10,37,64,0.10)',
+                      border: '1px solid rgba(10,37,64,0.06)',
+                    }}
+                  >
                     <VisaFaq faqs={faqs} />
                   </div>
                 </Section>
               )}
 
-              {/* BOTTOM CTA BANNER — dark navy with emerald action */}
-              <div className="relative overflow-hidden bg-[#101a36] rounded-xl p-7 md:p-10">
-                <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#dae2ff] rounded-full opacity-10 blur-3xl pointer-events-none" />
-                <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              {/* FINAL CTA BANNER */}
+              <div className="relative overflow-hidden rounded-3xl p-8 md:p-12 text-white"
+                   style={{ background: 'linear-gradient(135deg, #06192E 0%, #0A2540 55%, #13325F 100%)' }}>
+                <div aria-hidden className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full opacity-25 blur-3xl"
+                     style={{ background: `radial-gradient(circle at center, ${accent} 0%, transparent 60%)` }} />
+                <div aria-hidden className="absolute -bottom-24 -left-24 w-[300px] h-[300px] rounded-full opacity-20 blur-3xl"
+                     style={{ background: 'radial-gradient(circle at center, #C9A14A 0%, transparent 60%)' }} />
+
+                <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-7">
                   <div className="max-w-md">
                     <span
-                      className="inline-block text-[11px] font-semibold uppercase tracking-[0.08em] text-[#bcc5e9] mb-2"
-                      style={{ fontFamily: 'Inter, sans-serif' }}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] mb-3"
+                      style={{ color: accent, fontFamily: 'Inter, sans-serif' }}
                     >
+                      <Sparkles className="w-3 h-3" />
                       Ready to apply
                     </span>
                     <h3
-                      className="text-white text-[22px] md:text-[28px] font-bold tracking-[-0.01em] leading-tight mb-2"
+                      className="text-white text-[24px] md:text-[30px] font-bold tracking-[-0.02em] leading-[1.15] mb-3"
                       style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
                     >
                       Apply for the {v.title} on gov.uk
                     </h3>
-                    <p className="text-[#bcc5e9] text-[14px] md:text-[15px] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-white/70 text-[14.5px] md:text-[15.5px] leading-[1.6]"
+                       style={{ fontFamily: 'Inter, sans-serif' }}>
                       Free, official, no agents. Bookmark the URL — it's the only place to legally apply.
                     </p>
                   </div>
@@ -422,16 +486,18 @@ export default async function VisaPage({ params }: RouteParams) {
                     <a
                       href={v.applyUrl}
                       target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-[#10b981] text-white text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-[#0ea374] active:scale-[0.98] transition-all duration-100"
-                      style={{ fontFamily: 'Inter, sans-serif' }}
+                      className="inline-flex items-center justify-center gap-2 text-[#06192E] text-[14px] font-bold px-6 py-3.5 rounded-xl active:scale-[0.98] transition-all"
+                      style={{
+                        background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
+                        boxShadow: `0 10px 30px -8px ${accent}90, inset 0 1px 0 rgba(255,255,255,0.4)`,
+                      }}
                     >
                       Apply on gov.uk
                       <ExternalLink className="w-4 h-4" />
                     </a>
                     <Link
                       href="/eligibility"
-                      className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 text-[14px] font-semibold px-6 py-3 rounded-lg hover:bg-white/20 transition-colors duration-100"
-                      style={{ fontFamily: 'Inter, sans-serif' }}
+                      className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 text-[14px] font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-colors"
                     >
                       Run eligibility quiz
                     </Link>
@@ -442,96 +508,125 @@ export default async function VisaPage({ params }: RouteParams) {
               <RelatedBlogToVisa visaSlug={slug} />
             </main>
 
-            {/* SIDEBAR */}
+            {/* ═══════════════════════════════════════════════════════
+                SIDEBAR
+            ═══════════════════════════════════════════════════════ */}
             <aside className="col-span-12 lg:col-span-4">
               <div className="lg:sticky lg:top-[124px] space-y-4">
 
                 {/* Quick facts card */}
-                <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]">
-                  <div
-                    className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-4 pb-3 border-b border-[#E5E7EB]"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
-                  >
+                <div
+                  className="rounded-2xl bg-white p-6"
+                  style={{
+                    boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 8px 30px -12px rgba(10,37,64,0.10)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
+                >
+                  <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#5A6478] mb-5 pb-4 border-b border-[rgba(10,37,64,0.06)]"
+                       style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />
                     Quick facts
                   </div>
-                  <dl className="space-y-3">
-                    <FactRow label="Category" value={`${v.category} route`} icon={Briefcase} />
-                    <FactRow label="Application fee" value={v.fee} icon={Banknote} />
-                    <FactRow label="Health surcharge" value={v.ihs} icon={ShieldCheck} />
-                    <FactRow label="Decision (out)" value={v.processing.outside} icon={Clock} />
-                    <FactRow label="Decision (in)" value={v.processing.inside} icon={Clock} />
-                    <FactRow label="Duration" value={v.duration} icon={Calendar} />
+                  <dl className="space-y-3.5">
+                    <FactRow label="Application fee" value={v.fee} icon={Banknote} accent={accent} />
+                    <FactRow label="Health surcharge" value={v.ihs} icon={ShieldCheck} accent={accent} />
+                    <FactRow label="Decision (out)" value={v.processing.outside} icon={Clock} accent={accent} />
+                    <FactRow label="Decision (in)" value={v.processing.inside} icon={Clock} accent={accent} />
+                    <FactRow label="Duration" value={v.duration} icon={Calendar} accent={accent} />
                   </dl>
                 </div>
 
-                {/* Apply card */}
+                {/* Apply card — accent gradient */}
                 <a
                   href={v.applyUrl}
                   target="_blank" rel="noopener noreferrer"
-                  className="group block bg-[#101a36] text-white rounded-xl p-5 hover:bg-[#1a2444] transition-colors duration-100"
+                  className="group block relative overflow-hidden rounded-2xl p-6 text-white active:scale-[0.99] transition-transform"
+                  style={{
+                    background: 'linear-gradient(135deg, #06192E 0%, #0A2540 100%)',
+                    boxShadow: `0 14px 40px -14px ${accent}60`,
+                  }}
                 >
-                  <div
-                    className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#bcc5e9] mb-1.5"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
-                  >
-                    Official
-                  </div>
-                  <div
-                    className="font-bold text-[18px] leading-tight"
-                    style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
-                  >
-                    Apply on gov.uk
-                  </div>
-                  <div className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-semibold group-hover:gap-2.5 transition-[gap] duration-100" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    Start application <ExternalLink className="w-3.5 h-3.5" />
+                  <div aria-hidden className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-30 blur-2xl"
+                       style={{ background: `radial-gradient(circle, ${accent} 0%, transparent 70%)` }} />
+                  <div className="relative">
+                    <div className="text-[11px] font-bold uppercase tracking-[0.14em] mb-2"
+                         style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>
+                      Official
+                    </div>
+                    <div className="font-bold text-[20px] leading-tight tracking-[-0.01em]"
+                         style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                      Apply on gov.uk
+                    </div>
+                    <div className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold group-hover:gap-3 transition-[gap]"
+                         style={{ fontFamily: 'Inter, sans-serif' }}>
+                      Start application <ExternalLink className="w-3.5 h-3.5" />
+                    </div>
                   </div>
                 </a>
 
                 {/* Solicitor */}
-                <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]">
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <span className="w-9 h-9 rounded-full bg-[rgba(16,185,129,0.12)] text-[#00714d] flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-4 h-4" />
+                <div
+                  className="rounded-2xl bg-white p-6"
+                  style={{
+                    boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 8px 30px -12px rgba(10,37,64,0.10)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                          style={{ background: 'rgba(0,196,180,0.12)', color: '#00A89A' }}>
+                      <MessageCircle className="w-4 h-4" strokeWidth={2.2} />
                     </span>
                     <div>
-                      <div className="font-semibold text-[14px] text-[#101a36] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                      <div className="font-bold text-[14.5px] text-[#0A2540] leading-tight"
+                           style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                         Talk to a solicitor
                       </div>
-                      <div className="text-[11.5px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>Free 15-min consult</div>
+                      <div className="text-[11.5px] text-[#5A6478] mt-0.5"
+                           style={{ fontFamily: 'Inter, sans-serif' }}>
+                        Free 15-min consult
+                      </div>
                     </div>
                   </div>
-                  <p className="text-[13px] text-[#45464d] leading-[1.55] mb-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className="text-[13.5px] text-[#0A2540]/75 leading-[1.6] mb-4"
+                     style={{ fontFamily: 'Inter, sans-serif' }}>
                     Get an OISC-regulated immigration solicitor to review your situation before you apply.
                   </p>
                   <Link
                     href="/eligibility"
-                    className="block text-center bg-[#101a36] text-white text-[13px] font-semibold py-2.5 rounded-lg hover:bg-[#1a2444] transition-colors duration-100"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
+                    className="block text-center text-white text-[13px] font-bold py-3 rounded-xl transition-transform active:scale-[0.98]"
+                    style={{ background: 'linear-gradient(135deg, #0A2540, #13325F)' }}
                   >
                     Get matched →
                   </Link>
-                  <div className="mt-3 flex items-center justify-center gap-1 text-[11px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {[1,2,3,4,5].map((i) => <Star key={i} className="w-3 h-3 fill-[#10b981] text-[#10b981]" />)}
-                    <span className="ml-1">2,400+ applicants</span>
+                  <div className="mt-3 flex items-center justify-center gap-1 text-[11px] text-[#5A6478]"
+                       style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {[1,2,3,4,5].map((i) => <Star key={i} className="w-3 h-3 fill-[#C9A14A] text-[#C9A14A]" />)}
+                    <span className="ml-1.5">2,400+ applicants</span>
                   </div>
                 </div>
 
                 {/* Source */}
-                <div className="bg-[#f3f4f5] border border-[#E5E7EB] rounded-xl p-4">
-                  <div
-                    className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2 flex items-center gap-1.5"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
-                  >
+                <div
+                  className="rounded-2xl p-5"
+                  style={{
+                    background: 'rgba(10,37,64,0.04)',
+                    border: '1px solid rgba(10,37,64,0.06)',
+                  }}
+                >
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#5A6478] mb-2"
+                       style={{ fontFamily: 'Inter, sans-serif' }}>
                     <Globe className="w-3 h-3" /> Source
                   </div>
-                  <p className="text-[12.5px] text-[#45464d] leading-[1.55]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    Every figure verified against the gov.uk fee table effective <strong className="text-[#101a36]">8 April 2026</strong>.
+                  <p className="text-[12.5px] text-[#0A2540]/80 leading-[1.55]"
+                     style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Every figure verified against the gov.uk fee table effective <strong className="text-[#0A2540]">8 April 2026</strong>.
                   </p>
                   <a
                     href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
                     target="_blank" rel="noopener noreferrer"
-                    className="mt-2.5 inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#101a36] hover:underline"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
+                    className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-bold hover:underline"
+                    style={{ color: accent, fontFamily: 'Inter, sans-serif' }}
                   >
                     View on gov.uk <ExternalLink className="w-3 h-3" />
                   </a>
@@ -558,23 +653,36 @@ export default async function VisaPage({ params }: RouteParams) {
 ───────────────────────────────────────────── */
 
 function Section({
-  id, eyebrow, title, children,
+  number, eyebrow, title, children,
 }: {
-  id: string; eyebrow: string; title: string; children: React.ReactNode;
+  number: string; eyebrow: string; title: string; children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-32">
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
-        style={{ fontFamily: 'Inter, sans-serif' }}
-      >
-        {eyebrow}
-      </p>
+    <section id={eyebrow.toLowerCase().replace(/\s+/g, '-').replace('how-to-apply', 'process').replace('watch-out-for', 'notes')} className="scroll-mt-32">
+      <div className="flex items-baseline gap-4 mb-5">
+        <span
+          className="font-bold tabular-nums leading-none"
+          style={{
+            fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+            background: 'linear-gradient(135deg, #C9A14A 0%, #E6B450 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          {number}
+        </span>
+        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#5A6478]"
+           style={{ fontFamily: 'Inter, sans-serif' }}>
+          {eyebrow}
+        </p>
+      </div>
       <h2
-        className="font-bold text-[#101a36] tracking-[-0.015em] leading-[1.15] mb-6"
+        className="font-bold text-[#0A2540] tracking-[-0.02em] leading-[1.1] mb-7"
         style={{
           fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-          fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+          fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
         }}
       >
         {title}
@@ -584,33 +692,39 @@ function Section({
   );
 }
 
-function StatCard({
-  label, value, sub, wide, accent,
+function HeroStat({
+  label, value, sub, wide, accent, icon: Icon,
 }: {
   label: string; value: string; sub?: string; wide?: boolean; accent?: string;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
 }) {
   return (
     <div
-      className={`bg-white border border-[#E5E7EB] rounded-xl p-5 md:p-6 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.06)] ${wide ? 'col-span-2' : 'col-span-2 sm:col-span-1'}`}
+      className={`relative rounded-2xl p-5 backdrop-blur-md ${wide ? 'col-span-2' : ''}`}
+      style={{
+        background: 'rgba(255,255,255,0.06)',
+        border: '1px solid rgba(255,255,255,0.10)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 30px -12px rgba(0,0,0,0.4)',
+      }}
     >
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
-        style={{ fontFamily: 'Inter, sans-serif' }}
-      >
+      <div className="flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-white/55 mb-2"
+           style={{ fontFamily: 'Inter, sans-serif' }}>
+        <Icon className="w-3 h-3" strokeWidth={2.2} />
         {label}
-      </p>
+      </div>
       <p
-        className="font-bold text-[#101a36] tracking-[-0.015em] leading-tight tabular-nums"
+        className="font-bold tracking-[-0.015em] leading-[1.1] tabular-nums text-white"
         style={{
           fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-          fontSize: wide ? 'clamp(1.25rem, 2.5vw, 1.5rem)' : 'clamp(1.5rem, 3vw, 2rem)',
-          color: accent ?? '#101a36',
+          fontSize: wide ? 'clamp(1.1rem, 2vw, 1.4rem)' : 'clamp(1.5rem, 3vw, 1.85rem)',
+          color: accent ?? '#fff',
         }}
       >
         {value}
       </p>
       {sub && (
-        <p className="mt-1 text-[12.5px] text-[#76777e] leading-[1.45]" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <p className="mt-1.5 text-[12px] text-white/55 leading-[1.5]"
+           style={{ fontFamily: 'Inter, sans-serif' }}>
           {sub}
         </p>
       )}
@@ -619,92 +733,105 @@ function StatCard({
 }
 
 function FactRow({
-  label, value, icon: Icon,
+  label, value, icon: Icon, accent,
 }: {
-  label: string; value: string; icon: React.ComponentType<{ className?: string }>;
+  label: string; value: string;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  accent: string;
 }) {
   return (
-    <div className="flex items-start justify-between gap-3 py-0.5">
-      <dt className="flex items-center gap-2 text-[12px] text-[#76777e] font-medium flex-shrink-0" style={{ fontFamily: 'Inter, sans-serif' }}>
-        <Icon className="w-3 h-3" /> {label}
+    <div className="flex items-start justify-between gap-3">
+      <dt className="flex items-center gap-2 text-[12px] text-[#5A6478] font-medium flex-shrink-0"
+          style={{ fontFamily: 'Inter, sans-serif' }}>
+        <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
+        {label}
       </dt>
-      <dd className="text-[12.5px] font-semibold text-[#101a36] text-right max-w-[180px] leading-tight tabular-nums" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <dd className="text-[12.5px] font-bold text-[#0A2540] text-right max-w-[180px] leading-tight tabular-nums"
+          style={{ fontFamily: 'Inter, sans-serif' }}>
         {value}
       </dd>
     </div>
   );
 }
 
-/** Non-settlement cost panel — single white card with big fee + IHS + extras */
 function CostCard({ fee, ihs, accent, slug, headlineFee }: {
   fee: string; ihs: string; accent: string; slug: string; headlineFee: string;
 }) {
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]">
-      {/* Headline fee */}
-      <div className="p-6 md:p-8 border-b border-[#E5E7EB]">
-        <p
-          className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
-          style={{ fontFamily: 'Inter, sans-serif' }}
-        >
-          Application fee
-        </p>
-        <p
-          className="font-bold tabular-nums tracking-[-0.02em] leading-none"
-          style={{
-            fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-            color: accent,
-            fontSize: 'clamp(2rem, 5vw, 2.75rem)',
-          }}
-        >
-          {headlineFee}
-        </p>
-        <p className="mt-2 text-[13.5px] text-[#45464d]" style={{ fontFamily: 'Inter, sans-serif' }}>
-          {fee}
-        </p>
+    <div
+      className="rounded-2xl bg-white overflow-hidden"
+      style={{
+        boxShadow: '0 1px 0 rgba(10,37,64,0.04), 0 10px 40px -16px rgba(10,37,64,0.12)',
+        border: '1px solid rgba(10,37,64,0.06)',
+      }}
+    >
+      {/* Headline fee — dark band */}
+      <div className="relative p-7 md:p-9 text-white overflow-hidden"
+           style={{ background: 'linear-gradient(135deg, #0A2540 0%, #13325F 100%)' }}>
+        <div aria-hidden className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-25 blur-3xl"
+             style={{ background: `radial-gradient(circle, ${accent} 0%, transparent 60%)` }} />
+        <div className="relative">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3"
+             style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>
+            Application fee
+          </p>
+          <p
+            className="font-bold tabular-nums tracking-[-0.03em] leading-none"
+            style={{
+              fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+              color: '#fff',
+              fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
+            }}
+          >
+            {headlineFee}
+          </p>
+          <p className="mt-3 text-[14px] text-white/65"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
+            {fee}
+          </p>
+        </div>
       </div>
 
-      {/* IHS + extras */}
-      <div className="p-6 md:p-8 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10">
+      <div className="p-7 md:p-9 grid grid-cols-1 sm:grid-cols-2 gap-7 md:gap-10">
         <div>
-          <p
-            className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5A6478] mb-2"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Health surcharge (IHS)
           </p>
-          <p className="text-[18px] font-bold text-[#101a36] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+          <p className="text-[20px] font-bold text-[#0A2540] tabular-nums tracking-[-0.01em]"
+             style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
             {ihs}
           </p>
-          <p className="mt-1.5 text-[12.5px] text-[#76777e] leading-[1.55]" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="mt-2 text-[13px] text-[#5A6478] leading-[1.6]"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Paid upfront for the full visa duration — funds NHS access.
           </p>
         </div>
         <div>
-          <p
-            className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5A6478] mb-2"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Optional add-ons
           </p>
-          <ul className="space-y-1.5 text-[13.5px] text-[#191c1d] tabular-nums" style={{ fontFamily: 'Inter, sans-serif' }}>
-            <li className="flex justify-between gap-3"><span>Priority service</span><span className="font-semibold">+£500</span></li>
-            <li className="flex justify-between gap-3"><span>Super-priority</span><span className="font-semibold">+£1,000</span></li>
-            <li className="flex justify-between gap-3"><span>Per dependant</span><span className="font-semibold">+full fee + IHS</span></li>
+          <ul className="space-y-2 text-[14px] text-[#0A2540] tabular-nums"
+              style={{ fontFamily: 'Inter, sans-serif' }}>
+            <li className="flex justify-between gap-3"><span className="text-[#5A6478]">Priority service</span><span className="font-bold">+£500</span></li>
+            <li className="flex justify-between gap-3"><span className="text-[#5A6478]">Super-priority</span><span className="font-bold">+£1,000</span></li>
+            <li className="flex justify-between gap-3"><span className="text-[#5A6478]">Per dependant</span><span className="font-bold">+full fee + IHS</span></li>
           </ul>
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="px-6 md:px-8 py-4 bg-[#f3f4f5] border-t border-[#E5E7EB] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-[12px] text-[#45464d]" style={{ fontFamily: 'Inter, sans-serif' }}>
-          <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
-          Every figure verified against gov.uk (8 April 2026).
+      <div className="px-7 md:px-9 py-5 border-t border-[rgba(10,37,64,0.06)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+           style={{ background: 'rgba(10,37,64,0.02)' }}>
+        <div className="flex items-center gap-2 text-[12.5px] text-[#5A6478]"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
+          <ShieldCheck className="w-4 h-4" style={{ color: accent }} />
+          Verified against gov.uk (8 April 2026)
         </div>
         <Link
           href={`/tools/cost-calculator?visa=${slug}`}
-          className="inline-flex items-center gap-1.5 bg-[#101a36] text-white text-[13px] font-semibold px-4 py-2 rounded-lg hover:bg-[#1a2444] transition-colors duration-100"
-          style={{ fontFamily: 'Inter, sans-serif' }}
+          className="inline-flex items-center gap-1.5 text-white text-[13px] font-bold px-5 py-2.5 rounded-xl transition-transform active:scale-[0.98]"
+          style={{ background: 'linear-gradient(135deg, #0A2540, #13325F)' }}
         >
           <Calculator className="w-3.5 h-3.5" />
           Calculate full cost

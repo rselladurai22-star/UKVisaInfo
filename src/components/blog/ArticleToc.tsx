@@ -74,7 +74,7 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
               {/* active bar */}
               <span
                 aria-hidden="true"
-                className={`absolute left-0 top-0 bottom-0 w-[2px] -translate-x-[1px] bg-[#d9152b] origin-top transition-transform duration-200 ${
+                className={`absolute left-0 top-0 bottom-0 w-[2px] -translate-x-[1px] bg-[#00C4B4] origin-top transition-transform duration-200 ${
                   isActive ? 'scale-y-100' : 'scale-y-0'
                 }`}
               />
@@ -83,8 +83,8 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
                 onClick={(e) => handleClick(e, h.id)}
                 className={`block py-1.5 pl-4 pr-2 leading-snug rounded-r-md transition-colors duration-100 ${
                   isActive
-                    ? 'text-[#0a1530] font-semibold'
-                    : 'text-[#7a8195] hover:text-[#0a1530]'
+                    ? 'text-[#0A2540] font-semibold'
+                    : 'text-[#7a8195] hover:text-[#0A2540]'
                 }`}
               >
                 {h.text}

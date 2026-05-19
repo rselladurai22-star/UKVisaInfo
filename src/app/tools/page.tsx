@@ -21,8 +21,8 @@ const TOOLS = [
     title: 'Skilled Worker salary checker',
     desc: 'Enter your offered salary and SOC 2020 code. See instantly whether you clear the £41,700 general threshold, the £33,400 new-entrant rate, and your occupation\'s going rate.',
     cta: 'Check salary qualification',
-    accent: '#d9152b',
-    soft: 'rgba(217,21,43,0.06)',
+    accent: '#00C4B4',
+    soft: 'rgba(0, 196, 180,0.06)',
   },
   {
     href: '/tools/sponsor-search',
@@ -30,8 +30,8 @@ const TOOLS = [
     title: 'UK sponsor licence search',
     desc: 'Find UK employers who hold a Skilled Worker sponsor licence. Filter by city, region, sector and rating. Built from the official Home Office register.',
     cta: 'Find a licensed sponsor',
-    accent: '#2563eb',
-    soft: 'rgba(37,99,235,0.06)',
+    accent: '#0A2540',
+    soft: 'rgba(10, 37, 64,0.06)',
   },
   {
     href: '/tools/cost-calculator',
@@ -39,8 +39,8 @@ const TOOLS = [
     title: 'Advanced UK visa cost calculator',
     desc: 'Calculate the full cost of any UK visa including Home Office fees, multi-year IHS, dependants and priority service. With currency conversion.',
     cta: 'Estimate visa costs',
-    accent: '#7c3aed',
-    soft: 'rgba(124,58,237,0.06)',
+    accent: '#13325F',
+    soft: 'rgba(19, 50, 95,0.06)',
   },
   {
     href: '/tools/compare',
@@ -48,8 +48,8 @@ const TOOLS = [
     title: 'Visa side-by-side comparison',
     desc: 'Compare any two UK visa routes on fees, IHS, salary thresholds, processing times, work rights and path to ILR. Decide which route fits your situation.',
     cta: 'Compare visa routes',
-    accent: '#059669',
-    soft: 'rgba(5,150,105,0.06)',
+    accent: '#00A89A',
+    soft: 'rgba(0, 168, 154,0.06)',
   },
   {
     href: '/tools/refusal-analyzer',
@@ -57,7 +57,7 @@ const TOOLS = [
     title: 'Refusal letter analyzer',
     desc: 'Paste your UK visa refusal letter and get a plain-English breakdown of each ground — severity, what it means, and what to do next. Runs in your browser.',
     cta: 'Decode my refusal',
-    accent: '#e11d48',
+    accent: '#00C4B4',
     soft: 'rgba(225,29,72,0.06)',
   },
 ];
@@ -68,10 +68,10 @@ export default function ToolsIndex() {
       {/* Hero */}
       <section className="pt-[88px] md:pt-[104px] pb-12 md:pb-16 hero-light">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#d9152b]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
             Free interactive tools
           </span>
-          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0a1530] tracking-tight leading-tight">
+          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0A2540] tracking-tight leading-tight">
             UK visa tools that actually save you time
           </h1>
           <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
@@ -102,7 +102,7 @@ export default function ToolsIndex() {
                   >
                     <t.icon className="w-6 h-6" />
                   </span>
-                  <h2 className="mt-5 font-display text-xl md:text-2xl font-bold text-[#0a1530] leading-tight">
+                  <h2 className="mt-5 font-display text-xl md:text-2xl font-bold text-[#0A2540] leading-tight">
                     {t.title}
                   </h2>
                   <p className="mt-2.5 text-sm md:text-[15px] text-[#52596e] leading-relaxed">

@@ -13,10 +13,10 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   return (
     <section className="my-10">
       <div className="flex items-center gap-2.5 mb-5">
-        <span className="inline-flex w-9 h-9 rounded-xl bg-[rgba(37,99,235,0.08)] items-center justify-center text-[#2563eb]">
+        <span className="inline-flex w-9 h-9 rounded-xl bg-[rgba(10, 37, 64,0.08)] items-center justify-center text-[#0A2540]">
           <HelpCircle className="w-4 h-4" />
         </span>
-        <h3 className="font-display text-[1.25rem] font-bold text-[#0a1530] leading-tight">
+        <h3 className="font-display text-[1.25rem] font-bold text-[#0A2540] leading-tight">
           Frequently asked
         </h3>
       </div>
@@ -32,12 +32,12 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 aria-expanded={open}
                 className="w-full flex items-start gap-4 py-5 text-left group"
               >
-                <span className="flex-1 font-display text-[15.5px] md:text-[16.5px] font-bold text-[#0a1530] leading-snug pr-3">
+                <span className="flex-1 font-display text-[15.5px] md:text-[16.5px] font-bold text-[#0A2540] leading-snug pr-3">
                   {it.q}
                 </span>
                 <span
-                  className={`flex-shrink-0 w-7 h-7 rounded-full bg-[#f3f5fb] flex items-center justify-center text-[#52596e] transition-[transform,background-color] duration-200 group-hover:bg-[#d9152b] group-hover:text-white ${
-                    open ? 'rotate-45 bg-[#d9152b] text-white' : ''
+                  className={`flex-shrink-0 w-7 h-7 rounded-full bg-[#f3f5fb] flex items-center justify-center text-[#52596e] transition-[transform,background-color] duration-200 group-hover:bg-[#00C4B4] group-hover:text-white ${
+                    open ? 'rotate-45 bg-[#00C4B4] text-white' : ''
                   }`}
                 >
                   <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -56,9 +56,9 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                       remarkPlugins={[remarkGfm]}
                       components={{
                         p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
-                        strong: ({ children }) => <strong className="font-semibold text-[#0a1530]">{children}</strong>,
+                        strong: ({ children }) => <strong className="font-semibold text-[#0A2540]">{children}</strong>,
                         a: ({ href, children }) => (
-                          <a href={href} className="text-[#d9152b] underline decoration-[#d9152b]/35 hover:decoration-[#d9152b] font-medium">{children}</a>
+                          <a href={href} className="text-[#00C4B4] underline decoration-[#00C4B4]/35 hover:decoration-[#00C4B4] font-medium">{children}</a>
                         ),
                       }}
                     >

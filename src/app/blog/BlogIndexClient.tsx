@@ -12,13 +12,13 @@ function formatDate(dateStr: string) {
 }
 
 const TAG_COLORS: Record<string, { bg: string; text: string }> = {
-  'Skilled Worker': { bg: 'rgba(217,21,43,0.08)',  text: '#d9152b' },
-  'Student':        { bg: 'rgba(37,99,235,0.08)',  text: '#2563eb' },
-  'Family':         { bg: 'rgba(124,58,237,0.08)', text: '#7c3aed' },
-  'Visitor':        { bg: 'rgba(8,145,178,0.08)',  text: '#0891b2' },
-  'Costs':          { bg: 'rgba(217,119,6,0.08)',  text: '#d97706' },
-  'Health':         { bg: 'rgba(5,150,105,0.08)',  text: '#059669' },
-  'Graduate':       { bg: 'rgba(13,148,136,0.08)', text: '#0d9488' },
+  'Skilled Worker': { bg: 'rgba(0, 196, 180,0.08)',  text: '#00C4B4' },
+  'Student':        { bg: 'rgba(10, 37, 64,0.08)',  text: '#0A2540' },
+  'Family':         { bg: 'rgba(19, 50, 95,0.08)', text: '#13325F' },
+  'Visitor':        { bg: 'rgba(0, 196, 180,0.08)',  text: '#00C4B4' },
+  'Costs':          { bg: 'rgba(201, 161, 74,0.08)',  text: '#C9A14A' },
+  'Health':         { bg: 'rgba(0, 168, 154,0.08)',  text: '#00A89A' },
+  'Graduate':       { bg: 'rgba(0, 127, 118,0.08)', text: '#007F76' },
 };
 const tagStyle = (tag: string) => TAG_COLORS[tag] ?? { bg: 'rgba(14,20,36,0.06)', text: '#52596e' };
 
@@ -46,10 +46,10 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
       {/* Page hero */}
       <section className="pt-[88px] md:pt-[104px] pb-10 md:pb-12 hero-light">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#d9152b]">
+          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
             Blog & Guides
           </span>
-          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0a1530] tracking-tight leading-tight">
+          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0A2540] tracking-tight leading-tight">
             Long-form UK visa guides
           </h1>
           <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
@@ -85,11 +85,11 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
       <section className="py-10 md:py-14">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <p className="text-[12.5px] text-[#7a8195] mb-7">
-            <span className="font-semibold text-[#0a1530] tabular-nums">{filtered.length}</span>
+            <span className="font-semibold text-[#0A2540] tabular-nums">{filtered.length}</span>
             {' '}{filtered.length === 1 ? 'article' : 'articles'}
             {activeTag && (
               <>
-                {' '}tagged <span className="font-semibold text-[#0a1530]">{activeTag}</span>
+                {' '}tagged <span className="font-semibold text-[#0A2540]">{activeTag}</span>
               </>
             )}
           </p>
@@ -109,8 +109,8 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                   <div className="dot-pattern absolute inset-0 opacity-40" aria-hidden="true" />
                   <div className="relative z-10 max-w-3xl">
                     <div className="flex flex-wrap gap-2 mb-5">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[#ffbf47]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#ffbf47]" />
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[#C9A14A]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C9A14A]" />
                         Latest article
                       </span>
                       {featured.tags.slice(0, 2).map((tag) => (
@@ -136,7 +136,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                       <span className="flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" /> {featured.readMinutes} min read
                       </span>
-                      <span className="ml-auto inline-flex items-center gap-1.5 text-[#ffbf47] font-semibold">
+                      <span className="ml-auto inline-flex items-center gap-1.5 text-[#C9A14A] font-semibold">
                         Read article
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </span>
@@ -149,7 +149,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                 {second && (
                   <Link
                     href={`/blog/${second.slug}`}
-                    className="group md:row-span-2 flex flex-col bg-[#0a1530] rounded-2xl p-7 shadow-card hover:-translate-y-1 transition-all overflow-hidden relative"
+                    className="group md:row-span-2 flex flex-col bg-[#0A2540] rounded-2xl p-7 shadow-card hover:-translate-y-1 transition-all overflow-hidden relative"
                   >
                     <div className="dot-pattern absolute inset-0 opacity-25" aria-hidden="true" />
                     <div className="relative z-10 flex flex-col flex-1">
@@ -202,7 +202,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                         );
                       })}
                     </div>
-                    <h3 className="font-display text-[1rem] md:text-[1.0625rem] font-bold text-[#0a1530] leading-snug flex-1 group-hover:text-[#d9152b] transition-colors">
+                    <h3 className="font-display text-[1rem] md:text-[1.0625rem] font-bold text-[#0A2540] leading-snug flex-1 group-hover:text-[#00C4B4] transition-colors">
                       {post.title}
                     </h3>
                     <p className="mt-2 text-sm text-[#52596e] leading-relaxed line-clamp-2">
@@ -212,7 +212,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                       <span className="flex items-center gap-1.5">
                         <Clock className="w-3 h-3" /> {post.readMinutes} min read
                       </span>
-                      <span className="inline-flex items-center gap-1 text-[#d9152b] font-semibold">
+                      <span className="inline-flex items-center gap-1 text-[#00C4B4] font-semibold">
                         Read <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </span>
                     </div>
@@ -240,8 +240,8 @@ function Chip({
         inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold whitespace-nowrap
         transition-colors duration-75 flex-shrink-0
         ${active
-          ? 'bg-[#0a1530] text-white'
-          : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0a1530]'}
+          ? 'bg-[#0A2540] text-white'
+          : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0A2540]'}
       `}
     >
       {!active && accent && <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />}

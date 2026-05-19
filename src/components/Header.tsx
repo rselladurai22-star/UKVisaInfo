@@ -8,136 +8,173 @@ import {
   History, Calculator, Search, Scale, Compass, Sparkles, ArrowUpRight,
   FileText, Tag, Crown, ShieldCheck, Globe, Flag, RefreshCw, Home as HomeIcon,
   ChevronLeft, ArrowRight, Menu, X, BookOpen, MapPin, Building2, Newspaper,
-  ListChecks, FileSearch, TrendingUp,
+  ListChecks, FileSearch, TrendingUp, ChevronDown,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
    NAV DATA
 ───────────────────────────────────────────── */
-type Icon = React.ComponentType<{ className?: string }>;
+type Icon = React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
 interface Item   { href: string; label: string; desc?: string; icon: Icon; accent?: string }
 interface Column { heading: string; items: Item[] }
 interface Section {
-  id: string; label: string; emoji: string;
+  id: string; label: string;
   columns: Column[];
   feature: { title: string; desc: string; href: string; cta: string };
 }
 
+type NavItem =
+  | { kind: 'link';     id: string; label: string; href: string; icon?: Icon; primary?: boolean; accent?: boolean }
+  | { kind: 'dropdown'; id: string; label: string };
+
+const NAV_ITEMS: NavItem[] = [
+  { kind: 'link',     id: 'eligibility', label: 'Eligibility',     href: '/eligibility',           icon: Sparkles,   primary: true },
+  { kind: 'dropdown', id: 'visas',       label: 'Visas' },
+  { kind: 'dropdown', id: 'settlement',  label: 'Settlement' },
+  { kind: 'dropdown', id: 'switch',      label: 'Switch Visa' },
+  { kind: 'link',     id: 'cost',        label: 'Cost Calculator', href: '/tools/cost-calculator', icon: Calculator, accent: true },
+  { kind: 'dropdown', id: 'tools',       label: 'Tools' },
+  { kind: 'dropdown', id: 'guides',      label: 'Guides' },
+];
+
 const SECTIONS: Section[] = [
   {
-    id: 'visas', label: 'Visas', emoji: '🛂',
+    id: 'visas', label: 'Visas',
     columns: [
       { heading: 'Work', items: [
-        { href: '/visa/skilled-worker',    label: 'Skilled Worker',    desc: 'Sponsored employment',  icon: Briefcase,   accent: '#d9152b' },
-        { href: '/visa/health',            label: 'Health & Care',     desc: 'NHS and care roles',    icon: Stethoscope, accent: '#059669' },
-        { href: '/visa/talent',            label: 'Global Talent',     desc: 'Leaders & researchers', icon: LayoutGrid,  accent: '#d97706' },
-        { href: '/visa/innovator-founder', label: 'Innovator Founder', desc: 'Startup founders',      icon: Rocket,      accent: '#e11d48' },
+        { href: '/visa/skilled-worker',    label: 'Skilled Worker',    desc: 'Sponsored employment',  icon: Briefcase,   accent: '#00C4B4' },
+        { href: '/visa/health',            label: 'Health & Care',     desc: 'NHS and care roles',    icon: Stethoscope, accent: '#00A89A' },
+        { href: '/visa/talent',            label: 'Global Talent',     desc: 'Leaders & researchers', icon: LayoutGrid,  accent: '#C9A14A' },
+        { href: '/visa/innovator-founder', label: 'Innovator Founder', desc: 'Startup founders',      icon: Rocket,      accent: '#00C4B4' },
       ]},
       { heading: 'Study & Family', items: [
-        { href: '/visa/student',  label: 'Student',          desc: 'Degree-level study',   icon: GraduationCap, accent: '#2563eb' },
-        { href: '/visa/graduate', label: 'Graduate',         desc: '18 months post-study', icon: History,       accent: '#0d9488' },
-        { href: '/visa/family',   label: 'Family / Spouse',  desc: 'Join settled partner', icon: Users,         accent: '#7c3aed' },
-        { href: '/visa/visitor',  label: 'Standard Visitor', desc: 'Up to 6 months',       icon: Plane,         accent: '#0891b2' },
+        { href: '/visa/student',  label: 'Student',          desc: 'Degree-level study',   icon: GraduationCap, accent: '#0A2540' },
+        { href: '/visa/graduate', label: 'Graduate',         desc: '18 months post-study', icon: History,       accent: '#007F76' },
+        { href: '/visa/family',   label: 'Family / Spouse',  desc: 'Join settled partner', icon: Users,         accent: '#13325F' },
+        { href: '/visa/visitor',  label: 'Standard Visitor', desc: 'Up to 6 months',       icon: Plane,         accent: '#00C4B4' },
       ]},
     ],
     feature: { title: 'All 10+ visa routes', desc: 'Full directory with fees, processing times and direct gov.uk links.', href: '/visa-types', cta: 'Visa directory' },
   },
   {
-    id: 'settlement', label: 'Settlement', emoji: '🏡',
+    id: 'settlement', label: 'Settlement',
     columns: [
       { heading: 'Stay long-term', items: [
-        { href: '/visa/ilr',            label: 'Indefinite Leave to Remain', desc: 'Permanent settlement after 5 years', icon: ShieldCheck, accent: '#059669' },
-        { href: '/visa/citizenship',    label: 'British Citizenship',        desc: 'Naturalisation after ILR',           icon: Crown,       accent: '#d97706' },
-        { href: '/visa/long-residence', label: '10-year long residence',     desc: 'Alternative ILR route',              icon: HomeIcon,    accent: '#7c3aed' },
+        { href: '/visa/ilr',            label: 'ILR (Settlement)',         desc: 'Permanent settlement after 5 years', icon: ShieldCheck, accent: '#00A89A' },
+        { href: '/visa/citizenship',    label: 'British Citizenship',      desc: 'Naturalisation after ILR',           icon: Crown,       accent: '#C9A14A' },
+        { href: '/visa/long-residence', label: '10-year long residence',   desc: 'Alternative ILR route',              icon: HomeIcon,    accent: '#13325F' },
       ]},
       { heading: 'Special routes', items: [
-        { href: '/visa/euss',     label: 'EU Settlement Scheme', desc: 'For EU/EEA nationals',          icon: Globe,   accent: '#2563eb' },
-        { href: '/visa/bno',      label: 'Hong Kong BNO',        desc: 'British National Overseas',     icon: Flag,    accent: '#d9152b' },
-        { href: '/visa/ancestry', label: 'UK Ancestry visa',     desc: 'Commonwealth + UK grandparent', icon: History, accent: '#0d9488' },
+        { href: '/visa/euss',     label: 'EU Settlement Scheme', desc: 'For EU/EEA nationals',          icon: Globe,   accent: '#0A2540' },
+        { href: '/visa/bno',      label: 'Hong Kong BNO',        desc: 'British National Overseas',     icon: Flag,    accent: '#00C4B4' },
+        { href: '/visa/ancestry', label: 'UK Ancestry visa',     desc: 'Commonwealth + UK grandparent', icon: History, accent: '#007F76' },
       ]},
     ],
-    feature: { title: 'Compare all 6 settlement routes', desc: 'Side-by-side fees, time-to-ILR and English requirements — all verified against gov.uk.', href: '/settlement', cta: 'Settlement comparison hub' },
+    feature: { title: 'Compare all 6 settlement routes', desc: 'Side-by-side fees, time-to-ILR and English requirements — all verified against gov.uk.', href: '/settlement', cta: 'Settlement hub' },
   },
   {
-    id: 'switching', label: 'Switch', emoji: '🔄',
+    id: 'switch', label: 'Switch Visa',
     columns: [
-      { heading: 'Switching paths', items: [
-        { href: '/blog/switch-student-to-skilled-worker-visa-uk-2026',        label: 'Student → Skilled Worker',  desc: 'New-entrant £33,400 rate',   icon: RefreshCw, accent: '#d9152b' },
-        { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',              label: 'Graduate → Skilled Worker', desc: '18-month bridge window',    icon: RefreshCw, accent: '#0d9488' },
-        { href: '/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements', label: 'Skilled Worker → ILR',      desc: 'After 5 years continuous',  icon: RefreshCw, accent: '#059669' },
+      { heading: 'From Student', items: [
+        { href: '/visa/skilled-worker',                            label: 'Student → Skilled Worker', desc: 'After graduation with CoS',   icon: Briefcase,     accent: '#00C4B4' },
+        { href: '/visa/graduate',                                  label: 'Student → Graduate',       desc: '2 yrs, no sponsor needed',    icon: GraduationCap, accent: '#007F76' },
+        { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',   label: 'Graduate → Skilled Worker', desc: 'Find a sponsor in 2 years',  icon: RefreshCw,     accent: '#00C4B4' },
       ]},
-      { heading: 'Check eligibility', items: [
-        { href: '/tools/salary-checker', label: 'Will my salary qualify?', desc: 'SOC code threshold check', icon: Briefcase, accent: '#d9152b' },
-        { href: '/tools/compare',        label: 'Compare routes',          desc: 'Side-by-side analysis',    icon: Scale,     accent: '#059669' },
-        { href: '/eligibility',          label: 'Eligibility quiz',        desc: '60-second match',          icon: Compass,   accent: '#7c3aed' },
+      { heading: 'From Work or Family', items: [
+        { href: '/visa/family',                            label: 'Visitor → Family / Spouse',   desc: 'In rare cases · usually go home', icon: Users,       accent: '#13325F' },
+        { href: '/visa/ilr',                               label: 'Work / Family → ILR',         desc: 'Settle after 5 qualifying years', icon: ShieldCheck, accent: '#00A89A' },
+        { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate', label: 'BRP → eVisa migration', desc: 'Move your status online',        icon: Globe,       accent: '#0A2540' },
       ]},
     ],
-    feature: { title: 'Switch visa routes', desc: 'Plan a clean move between Student, Graduate, Skilled Worker and Family.', href: '/blog/switch-student-to-skilled-worker-visa-uk-2026', cta: 'Switching guide' },
+    feature: { title: 'Can I switch visa inside the UK?', desc: 'Check eligibility rules, fees and timing before changing your immigration status. Always verify with gov.uk.', href: '/eligibility', cta: 'Check eligibility' },
   },
   {
-    id: 'tools', label: 'Tools', emoji: '⚡',
+    id: 'tools', label: 'Tools',
     columns: [
       { heading: 'Calculators & Search', items: [
-        { href: '/tools/salary-checker',    label: 'Salary checker',    desc: 'SOC code threshold',     icon: Briefcase,  accent: '#d9152b' },
-        { href: '/tools/sponsor-search',    label: 'Sponsor search',    desc: 'Find licensed employers', icon: Search,     accent: '#2563eb' },
-        { href: '/tools/cost-calculator',   label: 'Cost calculator',   desc: 'Fees + IHS + dependants', icon: Calculator, accent: '#7c3aed' },
-        { href: '/tools/compare',           label: 'Visa comparison',   desc: 'Side-by-side analysis',   icon: Scale,      accent: '#059669' },
+        { href: '/tools/salary-checker',  label: 'Salary checker',   desc: 'SOC code threshold',      icon: Briefcase,  accent: '#00C4B4' },
+        { href: '/tools/sponsor-search',  label: 'Sponsor search',   desc: 'Find licensed employers', icon: Search,     accent: '#0A2540' },
+        { href: '/tools/cost-calculator', label: 'Cost calculator',  desc: 'Fees + IHS + dependants', icon: Calculator, accent: '#C9A14A' },
+        { href: '/tools/compare',         label: 'Visa comparison',  desc: 'Side-by-side analysis',   icon: Scale,      accent: '#00A89A' },
       ]},
-      { heading: 'Personal & analysis', items: [
-        { href: '/tools/refusal-analyzer',  label: 'Refusal analyzer',  desc: 'Decode your refusal letter', icon: FileSearch, accent: '#e11d48' },
-        { href: '/my-journey',              label: 'My visa journey',   desc: 'Save your plan locally',     icon: ListChecks, accent: '#10b981' },
-        { href: '/eligibility',             label: 'Eligibility quiz',  desc: '60-second match',            icon: Compass,    accent: '#d9152b' },
-        { href: '/salary',                  label: 'Salary by SOC code', desc: 'All 270 occupations',       icon: TrendingUp, accent: '#d97706' },
+      { heading: 'Personal & Analysis', items: [
+        { href: '/tools/refusal-analyzer', label: 'Refusal analyzer',  desc: 'Decode your refusal letter', icon: FileSearch,  accent: '#00C4B4' },
+        { href: '/my-journey',             label: 'My visa journey',   desc: 'Save your plan locally',     icon: ListChecks,  accent: '#13325F' },
+        { href: '/eligibility',            label: 'Eligibility quiz',  desc: '60-second match',            icon: Compass,     accent: '#00C4B4' },
+        { href: '/salary',                 label: 'Salary by SOC',     desc: 'All 270 occupations',        icon: TrendingUp,  accent: '#C9A14A' },
       ]},
     ],
-    feature: { title: 'All tools in one place', desc: 'Free interactive calculators and searches built from official data.', href: '/tools', cta: 'Open tools hub' },
+    feature: { title: 'Free interactive tools', desc: 'Calculators and searches built from official gov.uk data. No login required.', href: '/tools', cta: 'Open tools hub' },
   },
   {
-    id: 'explore', label: 'Explore', emoji: '🗺️',
+    id: 'explore', label: 'Explore',
     columns: [
       { heading: 'By your country', items: [
-        { href: '/from/india',       label: 'From India 🇮🇳',       desc: 'Top source country',     icon: Globe,    accent: '#d9152b' },
-        { href: '/from/nigeria',     label: 'From Nigeria 🇳🇬',     desc: 'NHS + Skilled Worker',   icon: Globe,    accent: '#059669' },
-        { href: '/from/pakistan',    label: 'From Pakistan 🇵🇰',    desc: 'Study + Family',         icon: Globe,    accent: '#0d9488' },
-        { href: '/from',             label: 'All country guides',    desc: '8 countries covered',    icon: Flag,     accent: '#2563eb' },
+        { href: '/from/india',   label: 'From India',    desc: 'Top source country',   icon: Globe, accent: '#00C4B4' },
+        { href: '/from/nigeria', label: 'From Nigeria',  desc: 'NHS + Skilled Worker', icon: Globe, accent: '#00A89A' },
+        { href: '/from/pakistan',label: 'From Pakistan', desc: 'Study + Family',       icon: Globe, accent: '#007F76' },
+        { href: '/from',         label: 'All countries', desc: '8 countries covered',  icon: Flag,  accent: '#0A2540' },
       ]},
-      { heading: 'By UK city + sponsor', items: [
-        { href: '/uk-cities/london',     label: 'Living in London',      desc: 'Cost + sectors + areas', icon: MapPin,    accent: '#d9152b' },
-        { href: '/uk-cities/manchester', label: 'Living in Manchester',  desc: 'Tech + media hub',       icon: MapPin,    accent: '#0891b2' },
-        { href: '/sponsors/sector/technology', label: 'Tech sponsors',   desc: 'By sector',              icon: Building2, accent: '#2563eb' },
-        { href: '/sponsors/sector/healthcare', label: 'Healthcare sponsors', desc: 'NHS trusts + care',   icon: Stethoscope, accent: '#059669' },
+      { heading: 'By UK city & sector', items: [
+        { href: '/uk-cities/london',           label: 'London',              desc: 'Cost + sectors + areas', icon: MapPin,     accent: '#00C4B4' },
+        { href: '/uk-cities/manchester',       label: 'Manchester',          desc: 'Tech + media hub',       icon: MapPin,     accent: '#00C4B4' },
+        { href: '/sponsors/sector/technology', label: 'Tech sponsors',       desc: 'Hiring now',             icon: Building2,  accent: '#0A2540' },
+        { href: '/sponsors/sector/healthcare', label: 'Healthcare sponsors', desc: 'NHS trusts + care',      icon: Stethoscope,accent: '#00A89A' },
       ]},
     ],
-    feature: { title: 'Personalised by origin & destination', desc: 'Country guides, UK city briefs and sponsor directories — all cross-linked.', href: '/uk-cities', cta: 'Browse city guides' },
+    feature: { title: 'Personalised by country & city', desc: 'Country guides, UK city briefs and sponsor directories — all cross-linked.', href: '/uk-cities', cta: 'Browse city guides' },
   },
   {
-    id: 'guides', label: 'Guides', emoji: '📖',
+    id: 'guides', label: 'Guides',
     columns: [
       { heading: 'Most read', items: [
-        { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',   label: 'Salary thresholds 2026', desc: 'Full SOC breakdown', icon: Briefcase,  accent: '#d9152b' },
-        { href: '/blog/uk-family-visa-minimum-income-2026-what-counts', label: 'Family visa £29,000',    desc: 'What income counts', icon: Users,      accent: '#7c3aed' },
-        { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate',    label: 'eVisa migration',        desc: 'Beat the deadline',  icon: ShieldCheck,accent: '#d9152b' },
-        { href: '/blog/uk-visitor-visa-refused-top-reasons-2026',       label: 'Visit visa refused',     desc: 'How to reapply',     icon: FileText,   accent: '#0891b2' },
+        { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',   label: 'Salary thresholds 2026', desc: 'Full SOC breakdown', icon: Briefcase,   accent: '#00C4B4' },
+        { href: '/blog/uk-family-visa-minimum-income-2026-what-counts', label: 'Family visa £29,000',    desc: 'What income counts', icon: Users,       accent: '#13325F' },
+        { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate',    label: 'eVisa migration guide',  desc: 'Beat the deadline',  icon: ShieldCheck, accent: '#00C4B4' },
+        { href: '/blog/uk-visitor-visa-refused-top-reasons-2026',       label: 'Visitor visa refusals',  desc: 'How to reapply',     icon: FileText,    accent: '#00C4B4' },
       ]},
-      { heading: 'News & guides', items: [
-        { href: '/news',                                                      label: 'Latest UK visa news',    desc: 'Rule + fee updates',      icon: Newspaper,     accent: '#d9152b' },
-        { href: '/blog/uk-citizenship-10-year-long-residence-2026',           label: '10-year long residence', desc: 'Path to citizenship',     icon: Crown,         accent: '#d97706' },
-        { href: '/blog/bringing-parents-to-uk-adult-dependent-relative-2026', label: 'Bringing parents',       desc: 'Adult Dependent Relative',icon: Users,         accent: '#7c3aed' },
-        { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',              label: 'Graduate visa',          desc: 'No sponsor needed',       icon: GraduationCap, accent: '#0d9488' },
+      { heading: 'News & in-depth', items: [
+        { href: '/news',                                                      label: 'Latest visa news',       desc: 'Rule + fee updates',       icon: Newspaper,     accent: '#00C4B4' },
+        { href: '/blog/uk-citizenship-10-year-long-residence-2026',           label: '10-year long residence', desc: 'Path to citizenship',      icon: Crown,         accent: '#C9A14A' },
+        { href: '/blog/bringing-parents-to-uk-adult-dependent-relative-2026', label: 'Bringing parents to UK', desc: 'Adult Dependent Relative', icon: Users,         accent: '#13325F' },
+        { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',              label: 'Graduate visa',          desc: 'No sponsor needed',        icon: GraduationCap, accent: '#007F76' },
       ]},
     ],
     feature: { title: '19 in-depth guides', desc: 'Long-form articles on every major UK visa route. Updated for 2026.', href: '/blog', cta: 'All articles' },
   },
 ];
 
-const LOGO = (
-  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-    <path d="M1 7L8 1.5L15 7" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="2.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="6"   y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="9.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="1"   y="12.5" width="14" height="1.5" rx="0.5" fill="#ffbf47"/>
+const LOGO_SVG = (
+  <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+    {/* Teal orbit ring */}
+    <circle cx="18" cy="15" r="9" stroke="#00C4B4" strokeWidth="1.3" opacity="0.9"/>
+    {/* Crown silhouette */}
+    <path d="M10 15 L13.5 7.5 L18 11.5 L22.5 7.5 L26 15" stroke="#E6B450" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    {/* Crown base */}
+    <rect x="9" y="15" width="18" height="2.5" rx="1.25" fill="#C9A14A" opacity="0.9"/>
+    {/* MRZ lines */}
+    <rect x="7" y="22" width="22" height="2.2" rx="1.1" fill="white" opacity="0.8"/>
+    <rect x="7" y="26" width="16" height="1.6" rx="0.8" fill="white" opacity="0.38"/>
+    {/* Gold accent bar */}
+    <rect x="4.5" y="31" width="27" height="2.5" rx="1.25" fill="#C9A14A" opacity="0.85"/>
   </svg>
+);
+
+const Brand = ({ onClick }: { onClick?: () => void }) => (
+  <Link href="/" aria-label="UK Visa Info — home" className="flex items-center gap-3 flex-shrink-0" onClick={onClick}>
+    <span
+      className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
+      style={{
+        background: 'linear-gradient(145deg, #0D2D4F 0%, #06192E 100%)',
+        boxShadow: '0 2px 10px rgba(10,37,64,0.4), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 0 1.5px rgba(0,196,180,0.32)',
+      }}>
+      {LOGO_SVG}
+    </span>
+    <span className="font-display font-bold tracking-[-0.02em] text-[#0A2540]" style={{ fontSize: '15.5px', letterSpacing: '-0.015em' }}>
+      UK Visa{' '}
+      <span style={{ color: '#00C4B4' }}>Info</span>
+    </span>
+  </Link>
 );
 
 /* ─────────────────────────────────────────────
@@ -151,10 +188,10 @@ export default function Header({ onApply }: { onApply: () => void }) {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 6);
+    fn();
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   useEffect(() => { setOpenId(null); setMobileOpen(false); }, [pathname]);
@@ -167,208 +204,270 @@ export default function Header({ onApply }: { onApply: () => void }) {
   }, [mobileOpen]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpenId(null); setMobileOpen(false); } };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    const fn = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpenId(null); setMobileOpen(false); } };
+    window.addEventListener('keydown', fn);
+    return () => window.removeEventListener('keydown', fn);
   }, []);
 
-  /* Instant-open, grace-close hover */
-  const handleOpen = useCallback((id: string) => {
+  const open = useCallback((id: string) => {
     if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
     setOpenId(id);
   }, []);
 
-  const handleClose = useCallback(() => {
+  const startClose = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpenId(null), 120);
+    closeTimer.current = setTimeout(() => setOpenId(null), 140);
   }, []);
 
   const cancelClose = useCallback(() => {
     if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
   }, []);
 
-  const sectionActive = (s: Section) =>
+  const isPageInSection = (s: Section) =>
     s.columns.some((c) => c.items.some((i) => pathname.startsWith(i.href)));
 
-  const active = openId ? SECTIONS.find((s) => s.id === openId)! : null;
+  const active = openId ? SECTIONS.find((s) => s.id === openId) ?? null : null;
 
   return (
     <>
+      {/* ═══ HEADER BAR ═══════════════════════════════════════════════ */}
       <header
-        className={`
-          fixed top-0 inset-x-0 z-50 transition-shadow duration-200
-          ${scrolled ? 'bg-white shadow-[0_1px_0_rgba(14,20,36,0.08)]' : 'bg-white'}
-        `}
-        onMouseLeave={handleClose}
+        className="fixed top-0 inset-x-0 z-50 transition-all duration-200"
+        style={{
+          background: scrolled ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,1)',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(10,37,64,0.08)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 2px 20px -4px rgba(10,37,64,0.10)' : 'none',
+        }}
+        onMouseLeave={startClose}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[60px] md:h-[64px] flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 h-[62px] md:h-[66px] flex items-center gap-2">
 
-          {/* Brand */}
-          <Link href="/" aria-label="UK Visa Info — home" className="flex items-center gap-2.5 flex-shrink-0 group">
-            <span className="w-[32px] h-[32px] rounded-[9px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center shadow-[0_2px_6px_rgba(217,21,43,0.3)]">
-              {LOGO}
-            </span>
-            <span className="font-display font-bold text-[15px] tracking-tight text-[#0a1530]">
-              UK Visa <span className="text-[#d9152b]">Info</span>
-            </span>
-          </Link>
+          <Brand />
 
-          {/* Desktop nav — pill buttons */}
-          <nav className="hidden lg:flex items-center gap-1 flex-1">
-            {SECTIONS.map((s) => {
+          {/* ── Desktop nav ── */}
+          <nav className="hidden lg:flex items-center gap-1 flex-1 ml-4" aria-label="Main navigation">
+            {NAV_ITEMS.map((item) => {
+              /* ── DIRECT LINK ── */
+              if (item.kind === 'link') {
+                const Icon       = item.icon;
+                const isOnPage   = pathname.startsWith(item.href);
+                if (item.primary) {
+                  // Eligibility — solid teal pill (primary CTA)
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      onMouseEnter={() => setOpenId(null)}
+                      className="relative inline-flex items-center gap-1.5 h-9 px-3.5 rounded-lg text-[13px] font-semibold transition-all duration-100"
+                      style={{
+                        background: 'linear-gradient(135deg, #00C4B4 0%, #00A89A 100%)',
+                        color: '#fff',
+                        boxShadow: '0 2px 10px -2px rgba(0,196,180,0.45)',
+                      }}
+                    >
+                      {Icon && <Icon className="w-3.5 h-3.5" />}
+                      {item.label}
+                    </Link>
+                  );
+                }
+                // Cost Calculator — accent link (icon + label)
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onMouseEnter={() => setOpenId(null)}
+                    className="relative inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100"
+                    style={{
+                      background: isOnPage ? 'rgba(201,161,74,0.10)' : 'transparent',
+                      color: isOnPage ? '#C9A14A' : '#374151',
+                    }}
+                    onMouseOver={(e) => { if (!isOnPage) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                    onMouseOut={(e)  => { if (!isOnPage) e.currentTarget.style.background = 'transparent'; }}
+                  >
+                    {Icon && <Icon className="w-3.5 h-3.5" style={{ color: isOnPage ? '#C9A14A' : '#5A6478' }} />}
+                    {item.label}
+                    {isOnPage && (
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#C9A14A' }} />
+                    )}
+                  </Link>
+                );
+              }
+
+              /* ── DROPDOWN ── */
+              const s = SECTIONS.find((x) => x.id === item.id);
+              if (!s) return null;
               const isOpen   = openId === s.id;
-              const isActive = sectionActive(s);
+              const isActive = isPageInSection(s);
               return (
                 <button
                   key={s.id}
                   type="button"
-                  onMouseEnter={() => handleOpen(s.id)}
-                  onFocus={() => handleOpen(s.id)}
+                  onMouseEnter={() => open(s.id)}
+                  onFocus={() => open(s.id)}
                   onClick={() => setOpenId(isOpen ? null : s.id)}
                   aria-expanded={isOpen}
-                  className={`
-                    relative h-9 px-3.5 text-[13.5px] font-semibold rounded-full
-                    transition-colors duration-75 select-none outline-none
-                    ${isOpen
-                      ? 'bg-[#0a1530] text-white'
-                      : isActive
-                        ? 'text-[#d9152b] hover:bg-[rgba(217,21,43,0.08)]'
-                        : 'text-[#52596e] hover:text-[#0a1530] hover:bg-[#f3f5fb]'}
-                  `}
+                  aria-haspopup="true"
+                  className="relative h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100 select-none outline-none inline-flex items-center gap-1"
+                  style={{
+                    background: isOpen ? '#0A2540' : 'transparent',
+                    color: isOpen ? '#fff' : isActive ? '#00C4B4' : '#374151',
+                    fontWeight: isOpen ? 600 : 500,
+                  }}
+                  onMouseOver={(e) => { if (!isOpen) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                  onMouseOut={(e)  => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
                 >
                   {s.label}
-                  {/* page-active dot */}
+                  <ChevronDown
+                    className="w-3 h-3 transition-transform duration-150"
+                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.55 }}
+                  />
                   {isActive && !isOpen && (
-                    <span className="absolute -bottom-px left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#d9152b]" />
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#00C4B4' }} />
                   )}
                 </button>
               );
             })}
-            <Link
-              href="/tools/cost-calculator"
-              className={`
-                h-9 px-3.5 text-[13.5px] font-semibold rounded-full inline-flex items-center gap-1.5
-                transition-colors duration-75 border
-                ${pathname.startsWith('/tools/cost-calculator')
-                  ? 'text-[#d9152b] border-[#d9152b]/30 bg-[rgba(217,21,43,0.06)]'
-                  : 'text-[#0a1530] border-[rgba(14,20,36,0.12)] hover:border-[#d9152b] hover:text-[#d9152b]'}
-              `}
-            >
-              💰 Visa Cost
-            </Link>
-            <Link
-              href="/eligibility"
-              className={`
-                h-9 px-3.5 text-[13.5px] font-semibold rounded-full flex items-center
-                transition-colors duration-75
-                ${pathname.startsWith('/eligibility')
-                  ? 'text-[#d9152b] hover:bg-[rgba(217,21,43,0.08)]'
-                  : 'text-[#52596e] hover:text-[#0a1530] hover:bg-[#f3f5fb]'}
-              `}
-            >
-              Eligibility
-            </Link>
           </nav>
 
-          {/* Right actions */}
+          {/* ── Right actions ── */}
           <div className="flex items-center gap-2 ml-auto">
-            <button
-              type="button"
-              onClick={onApply}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-[#d9152b] text-white text-[13px] font-semibold h-9 px-4 rounded-full hover:bg-[#b8101f] active:scale-[0.97] transition-[background,transform] duration-100"
+            {/* Subtle "Get matched in 60s" hint on desktop (links to eligibility) */}
+            <Link
+              href="/news"
+              className="hidden xl:inline-flex items-center gap-1.5 h-9 px-3 text-[12.5px] font-medium rounded-lg transition-colors duration-100"
+              style={{
+                color: pathname.startsWith('/news') ? '#0A2540' : '#5A6478',
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+              onMouseOut={(e)  => { e.currentTarget.style.background = 'transparent'; }}
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              Apply now
-            </button>
+              <Newspaper className="w-3.5 h-3.5" />
+              News
+            </Link>
+
+            {/* Mobile hamburger */}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              aria-label="Open menu"
-              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#f3f5fb] transition-colors duration-75"
+              aria-label="Open navigation menu"
+              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-100 hover:bg-gray-100"
             >
-              <Menu className="w-[18px] h-[18px] text-[#0a1530]" />
+              <Menu className="w-[18px] h-[18px] text-[#0A2540]" />
             </button>
           </div>
         </div>
 
-        {/* ─── SINGLE shared mega panel ─── */}
+        {/* ── MEGA PANEL ─────────────────────────────────────────────── */}
         <div
           onMouseEnter={cancelClose}
-          onMouseLeave={handleClose}
-          className={`
-            absolute left-0 right-0 top-full hidden lg:block
-            transition-[opacity,transform] duration-100 ease-out
-            ${openId
-              ? 'opacity-100 translate-y-0 pointer-events-auto'
-              : 'opacity-0 -translate-y-1 pointer-events-none'}
-          `}
+          onMouseLeave={startClose}
+          className="absolute left-0 right-0 top-full hidden lg:block pointer-events-none"
+          style={{
+            opacity: openId ? 1 : 0,
+            transform: openId ? 'translateY(0)' : 'translateY(-6px)',
+            transition: 'opacity 120ms ease, transform 120ms ease',
+            pointerEvents: openId ? 'auto' : 'none',
+          }}
         >
           {active && (
-            <div className="bg-white border-t border-[rgba(14,20,36,0.07)] shadow-[0_24px_60px_-12px_rgba(10,21,48,0.22)]">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 grid grid-cols-12 gap-7">
-
-                {active.columns.map((col) => (
+            <div
+              className="overflow-hidden"
+              style={{
+                background: '#fff',
+                borderTop: '1px solid rgba(10,37,64,0.07)',
+                boxShadow: '0 24px 60px -8px rgba(10,37,64,0.18), 0 8px 20px -8px rgba(10,37,64,0.10)',
+              }}
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-12 gap-6">
+                {/* Two content columns */}
+                {active.columns.map((col, ci) => (
                   <div key={col.heading} className="col-span-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-2.5 px-2.5">
+                    <p
+                      className="text-[10.5px] font-bold uppercase tracking-[0.14em] mb-3 px-2"
+                      style={{ color: '#9CA3AF' }}
+                    >
                       {col.heading}
                     </p>
-                    <ul>
-                      {col.items.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            onClick={() => setOpenId(null)}
-                            className="group flex items-center gap-3 px-2.5 py-2 rounded-xl hover:bg-[#f4f6fb] transition-colors duration-75"
-                          >
-                            <span
-                              className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-                              style={{ background: `${item.accent ?? '#0a1530'}14`, color: item.accent ?? '#0a1530' }}
+                    <ul className="space-y-0.5">
+                      {col.items.map((item) => {
+                        const isActive = pathname.startsWith(item.href);
+                        return (
+                          <li key={item.href}>
+                            <Link
+                              href={item.href}
+                              onClick={() => setOpenId(null)}
+                              className="group flex items-center gap-3 px-2.5 py-2.5 rounded-xl transition-all duration-75"
+                              style={{
+                                background: isActive ? 'rgba(0,196,180,0.06)' : 'transparent',
+                              }}
+                              onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = '#F9FAFB'; }}
+                              onMouseLeave={(e) => { e.currentTarget.style.background = isActive ? 'rgba(0,196,180,0.06)' : 'transparent'; }}
                             >
-                              <item.icon className="w-[15px] h-[15px]" />
-                            </span>
-                            <div className="min-w-0 flex-1">
-                              <div className="text-[13.5px] font-semibold text-[#0a1530] leading-tight">
-                                {item.label}
-                              </div>
-                              {item.desc && (
-                                <div className="text-[11.5px] text-[#8892a4] mt-0.5 leading-tight">
-                                  {item.desc}
+                              <span
+                                className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-transform duration-100 group-hover:scale-110"
+                                style={{
+                                  background: `${item.accent ?? '#0A2540'}18`,
+                                  color: item.accent ?? '#0A2540',
+                                }}
+                              >
+                                <item.icon className="w-[15px] h-[15px]" />
+                              </span>
+                              <div className="min-w-0 flex-1">
+                                <div
+                                  className="text-[13.5px] font-semibold leading-tight"
+                                  style={{ color: isActive ? '#00C4B4' : '#0A2540' }}
+                                >
+                                  {item.label}
                                 </div>
-                              )}
-                            </div>
-                            <ArrowRight className="w-3.5 h-3.5 text-[#cfd5e0] opacity-0 group-hover:opacity-100 transition-opacity duration-75 flex-shrink-0" />
-                          </Link>
-                        </li>
-                      ))}
+                                {item.desc && (
+                                  <div className="text-[11.5px] mt-0.5 leading-tight" style={{ color: '#9CA3AF' }}>
+                                    {item.desc}
+                                  </div>
+                                )}
+                              </div>
+                              <ArrowRight
+                                className="w-3.5 h-3.5 flex-shrink-0 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-100"
+                                style={{ color: '#C9A14A' }}
+                              />
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}
 
+                {/* Feature card */}
                 <div className="col-span-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-2.5 px-2.5">
+                  <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] mb-3 px-2" style={{ color: '#9CA3AF' }}>
                     Quick start
                   </p>
                   <Link
                     href={active.feature.href}
                     onClick={() => setOpenId(null)}
-                    className="group block rounded-2xl p-6 text-white relative overflow-hidden h-[calc(100%-22px)] min-h-[200px] bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63]"
+                    className="group block rounded-2xl p-6 text-white relative overflow-hidden"
+                    style={{
+                      background: 'linear-gradient(135deg, #06192E 0%, #0A2540 55%, #13325F 100%)',
+                      minHeight: '180px',
+                    }}
                   >
-                    <div className="absolute inset-0 opacity-[0.18] pointer-events-none" aria-hidden="true"
-                      style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.55) 1px, transparent 0)', backgroundSize: '14px 14px' }}
-                    />
-                    <div className="absolute -right-12 -bottom-12 w-44 h-44 rounded-full bg-[#d9152b]/22 blur-3xl pointer-events-none" />
+                    <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden
+                         style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201,161,74,0.6) 1px, transparent 0)', backgroundSize: '14px 14px' }} />
+                    <div className="absolute -right-12 -bottom-12 w-44 h-44 rounded-full blur-3xl pointer-events-none"
+                         style={{ background: 'rgba(0,196,180,0.20)' }} />
                     <div className="relative z-10 flex flex-col h-full">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: '#C9A14A' }}>
                         <BookOpen className="w-3 h-3" />
                         {active.label}
                       </span>
-                      <h4 className="font-display font-bold text-[19px] leading-tight">
+                      <h4 className="font-display font-bold text-[18px] leading-tight text-white">
                         {active.feature.title}
                       </h4>
-                      <p className="mt-1.5 text-[12.5px] text-white/55 leading-relaxed flex-1">
+                      <p className="mt-2 text-[12.5px] leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.55)' }}>
                         {active.feature.desc}
                       </p>
-                      <span className="mt-3 inline-flex items-center gap-1.5 text-[#ffbf47] text-[13px] font-bold group-hover:gap-2.5 transition-[gap] duration-100">
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold group-hover:gap-2.5 transition-[gap] duration-100" style={{ color: '#C9A14A' }}>
                         {active.feature.cta}
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </span>
@@ -376,33 +475,51 @@ export default function Header({ onApply }: { onApply: () => void }) {
                   </Link>
                 </div>
               </div>
+
+              {/* Bottom trust bar */}
+              <div className="border-t px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-5" style={{ borderColor: 'rgba(10,37,64,0.06)', background: 'rgba(10,37,64,0.02)' }}>
+                {[
+                  { icon: ShieldCheck, text: '100% gov.uk sourced' },
+                  { icon: Tag,         text: 'Free forever' },
+                  { icon: Globe,       text: 'Updated May 2026' },
+                ].map(({ icon: I, text }) => (
+                  <div key={text} className="flex items-center gap-1.5 text-[11.5px] font-medium" style={{ color: '#5A6478' }}>
+                    <I className="w-3 h-3" style={{ color: '#00C4B4' } as React.CSSProperties} />
+                    {text}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
       </header>
 
-      {/* Subtle backdrop tint when mega open (no blur — instant) */}
+      {/* Backdrop */}
       <div
-        className={`
-          fixed inset-0 top-[60px] md:top-[64px] z-40 hidden lg:block
-          bg-[rgba(10,21,48,0.10)]
-          transition-opacity duration-150
-          ${openId ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
-        `}
+        className="fixed inset-0 z-40 hidden lg:block transition-opacity duration-150"
+        style={{
+          top: '66px',
+          background: 'rgba(10,37,64,0.08)',
+          opacity: openId ? 1 : 0,
+          pointerEvents: openId ? 'auto' : 'none',
+        }}
         onClick={() => setOpenId(null)}
         aria-hidden="true"
       />
 
-      {/* MOBILE drawer */}
+      {/* Mobile overlay */}
       <div
-        className={`
-          fixed inset-0 z-50 lg:hidden bg-[rgba(10,21,48,0.5)]
-          transition-opacity duration-200
-          ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
-        `}
+        className="fixed inset-0 z-50 lg:hidden transition-opacity duration-200"
+        style={{
+          background: 'rgba(10,37,64,0.45)',
+          opacity: mobileOpen ? 1 : 0,
+          pointerEvents: mobileOpen ? 'auto' : 'none',
+        }}
         onClick={() => setMobileOpen(false)}
         aria-hidden="true"
       />
+
+      {/* ── MOBILE DRAWER ─────────────────────────────────────────── */}
       <MobileDrawer
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
@@ -414,7 +531,7 @@ export default function Header({ onApply }: { onApply: () => void }) {
 }
 
 /* ─────────────────────────────────────────────
-   MOBILE DRAWER — stack navigation, CSS-only animation
+   MOBILE DRAWER
 ───────────────────────────────────────────── */
 function MobileDrawer({
   open, onClose, onApply, pathname,
@@ -428,100 +545,150 @@ function MobileDrawer({
 
   return (
     <aside
-      className={`
-        fixed top-0 right-0 bottom-0 z-50 w-[88%] max-w-[400px] lg:hidden
-        flex flex-col overflow-hidden bg-white shadow-[-8px_0_40px_rgba(10,21,48,0.18)]
-        transition-transform duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]
-        ${open ? 'translate-x-0' : 'translate-x-full'}
-      `}
+      className="fixed top-0 right-0 bottom-0 z-50 w-[88%] max-w-[400px] lg:hidden flex flex-col overflow-hidden"
+      style={{
+        background: '#fff',
+        boxShadow: '-8px 0 40px rgba(10,37,64,0.16)',
+        transform: open ? 'translateX(0)' : 'translateX(100%)',
+        transition: 'transform 240ms cubic-bezier(0.32,0.72,0,1)',
+      }}
       role="dialog" aria-modal="true" aria-label="Main navigation"
     >
-      {/* header */}
-      <div className="flex items-center justify-between px-4 h-[60px] border-b border-[rgba(14,20,36,0.07)] flex-shrink-0">
+      {/* Drawer header */}
+      <div className="flex items-center justify-between px-4 h-[62px] flex-shrink-0"
+           style={{ borderBottom: '1px solid rgba(10,37,64,0.07)' }}>
         {section ? (
           <button
             type="button"
             onClick={() => setDrillId(null)}
-            className="flex items-center gap-1 text-[14px] font-semibold text-[#0a1530] -ml-1 px-2 h-8 rounded-lg hover:bg-[#f3f5fb] transition-colors duration-75"
+            className="flex items-center gap-1.5 text-[14px] font-semibold text-[#0A2540] -ml-1 px-2 h-9 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <ChevronLeft className="w-4 h-4 text-[#52596e]" />
+            <ChevronLeft className="w-4 h-4 text-[#5A6478]" />
             Back
           </button>
         ) : (
-          <Link href="/" onClick={onClose} className="flex items-center gap-2">
-            <span className="w-[28px] h-[28px] rounded-[8px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center">{LOGO}</span>
-            <span className="font-display font-bold text-[14px] tracking-tight text-[#0a1530]">
-              UK Visa <span className="text-[#d9152b]">Info</span>
-            </span>
-          </Link>
+          <Brand onClick={onClose} />
         )}
         <button
           type="button"
           onClick={onClose}
           aria-label="Close menu"
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f3f5fb] transition-colors duration-75"
+          className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
         >
-          <X className="w-4 h-4 text-[#0a1530]" />
+          <X className="w-4.5 h-4.5 text-[#0A2540]" />
         </button>
       </div>
 
-      {/* body — two sliding views */}
+      {/* Drawer body — two sliding views */}
       <div className="relative flex-1 overflow-hidden">
-        {/* ROOT view */}
+        {/* ROOT */}
         <div
-          className={`
-            absolute inset-0 overflow-y-auto
-            transition-transform duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]
-            ${drillId ? '-translate-x-full' : 'translate-x-0'}
-          `}
+          className="absolute inset-0 overflow-y-auto"
+          style={{
+            transform: drillId ? 'translateX(-100%)' : 'translateX(0)',
+            transition: 'transform 240ms cubic-bezier(0.32,0.72,0,1)',
+          }}
         >
-          <div className="px-3 py-3">
-            {SECTIONS.map((s) => {
-              const active = s.columns.some((c) => c.items.some((i) => pathname.startsWith(i.href)));
-              const itemCount = s.columns.flatMap((c) => c.items).length;
+          <div className="px-3 py-4 space-y-1">
+            {/* Primary CTA — Eligibility */}
+            <Link
+              href="/eligibility"
+              onClick={onClose}
+              className="flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl text-white mb-2"
+              style={{
+                background: 'linear-gradient(135deg, #00C4B4 0%, #00A89A 100%)',
+                boxShadow: '0 4px 14px -2px rgba(0,196,180,0.40)',
+              }}
+            >
+              <div className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4" />
+                <div>
+                  <div className="text-[14.5px] font-bold leading-tight">Eligibility Quiz</div>
+                  <div className="text-[11.5px]" style={{ color: 'rgba(255,255,255,0.75)' }}>Get matched in 60 seconds</div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            {NAV_ITEMS.map((item) => {
+              if (item.kind === 'link' && item.id === 'eligibility') return null; // already rendered above
+
+              if (item.kind === 'link') {
+                const Icon = item.icon;
+                const isOnPage = pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onClick={onClose}
+                    className="flex items-center gap-3 px-3 py-3.5 rounded-xl transition-colors"
+                    style={{ background: isOnPage ? 'rgba(201,161,74,0.08)' : 'transparent' }}
+                    onMouseEnter={(e) => { if (!isOnPage) e.currentTarget.style.background = '#F9FAFB'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = isOnPage ? 'rgba(201,161,74,0.08)' : 'transparent'; }}
+                  >
+                    <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                          style={{ background: 'rgba(201,161,74,0.10)' }}>
+                      {Icon && <Icon className="w-[15px] h-[15px]" style={{ color: '#C9A14A' }} />}
+                    </span>
+                    <div className="flex-1">
+                      <div className="text-[14.5px] font-semibold leading-tight"
+                           style={{ color: isOnPage ? '#C9A14A' : '#0A2540' }}>
+                        {item.label}
+                      </div>
+                      <div className="text-[11.5px] mt-0.5" style={{ color: '#9CA3AF' }}>
+                        Estimate fees, IHS & dependants
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4" style={{ color: '#D1D5DB' }} />
+                  </Link>
+                );
+              }
+
+              const s = SECTIONS.find((x) => x.id === item.id);
+              if (!s) return null;
+              const isActive = s.columns.some((c) => c.items.some((i) => pathname.startsWith(i.href)));
               return (
                 <button
                   key={s.id}
                   type="button"
                   onClick={() => setDrillId(s.id)}
-                  className={`
-                    w-full flex items-center justify-between gap-3 px-3 py-3 rounded-2xl text-left mb-1
-                    transition-colors duration-75 active:bg-[#eef1f8]
-                    ${active ? 'bg-[rgba(217,21,43,0.06)]' : 'hover:bg-[#f3f5fb]'}
-                  `}
+                  className="w-full flex items-center justify-between gap-3 px-3 py-3.5 rounded-xl text-left transition-colors duration-75"
+                  style={{ background: isActive ? 'rgba(0,196,180,0.06)' : 'transparent' }}
+                  onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = '#F9FAFB'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = isActive ? 'rgba(0,196,180,0.06)' : 'transparent'; }}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <span
-                      className="text-[20px] w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: active ? 'rgba(217,21,43,0.10)' : '#f3f5fb' }}
-                    >
-                      {s.emoji}
-                    </span>
                     <div className="min-w-0">
-                      <div className={`text-[14.5px] font-bold leading-tight ${active ? 'text-[#d9152b]' : 'text-[#0a1530]'}`}>
+                      <div className="text-[15px] font-semibold leading-tight"
+                           style={{ color: isActive ? '#00C4B4' : '#0A2540' }}>
                         {s.label}
                       </div>
-                      <div className="text-[11.5px] text-[#8892a4] mt-0.5">{itemCount} topics</div>
+                      <div className="text-[12px] mt-0.5" style={{ color: '#9CA3AF' }}>
+                        {s.columns.flatMap((c) => c.items).length} topics
+                      </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#c4cad6] flex-shrink-0" />
+                  <ChevronDown className="w-4 h-4 -rotate-90" style={{ color: '#D1D5DB' }} />
                 </button>
               );
             })}
 
-            <div className="mt-3 pt-3 border-t border-[rgba(14,20,36,0.06)]">
+            <div className="mt-2 pt-3 space-y-0.5" style={{ borderTop: '1px solid rgba(10,37,64,0.06)' }}>
               {[
-                { href: '/eligibility', label: 'Eligibility quiz', icon: Compass },
-                { href: '/blog',        label: 'All guides',       icon: BookOpen },
-                { href: '/about',       label: 'About',            icon: Globe },
+                { href: '/blog', label: 'All guides', icon: BookOpen  },
+                { href: '/news', label: 'Visa news',  icon: Newspaper },
+                { href: '/about', label: 'About us',   icon: Globe     },
               ].map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}
                   href={href}
                   onClick={onClose}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-medium text-[#52596e] hover:text-[#0a1530] hover:bg-[#f3f5fb] transition-colors duration-75"
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-[14px] font-medium transition-colors"
+                  style={{ color: pathname.startsWith(href) ? '#00C4B4' : '#374151' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#F9FAFB'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4" style={{ color: '#5A6478' } as React.CSSProperties} />
                   {label}
                 </Link>
               ))}
@@ -529,59 +696,55 @@ function MobileDrawer({
           </div>
         </div>
 
-        {/* DRILL view */}
+        {/* DRILL */}
         <div
-          className={`
-            absolute inset-0 overflow-y-auto
-            transition-transform duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]
-            ${drillId ? 'translate-x-0' : 'translate-x-full'}
-          `}
+          className="absolute inset-0 overflow-y-auto"
+          style={{
+            transform: drillId ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 240ms cubic-bezier(0.32,0.72,0,1)',
+          }}
         >
           {section && (
-            <div className="px-4 py-4">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="text-[22px] w-11 h-11 rounded-2xl bg-[rgba(217,21,43,0.08)] flex items-center justify-center">
-                  {section.emoji}
-                </span>
-                <div>
-                  <div className="text-[17px] font-bold text-[#0a1530] leading-tight">{section.label}</div>
-                  <div className="text-[12px] text-[#8892a4]">{section.feature.title}</div>
-                </div>
+            <div className="px-4 py-5">
+              <div className="mb-5">
+                <div className="text-[18px] font-bold text-[#0A2540]">{section.label}</div>
+                <div className="text-[12.5px] mt-0.5" style={{ color: '#9CA3AF' }}>{section.feature.title}</div>
               </div>
 
               {section.columns.map((col) => (
-                <div key={col.heading} className="mb-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-1.5 px-1">
+                <div key={col.heading} className="mb-5">
+                  <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] mb-2 px-1" style={{ color: '#9CA3AF' }}>
                     {col.heading}
                   </p>
-                  <ul>
+                  <ul className="space-y-0.5">
                     {col.items.map((item) => {
-                      const active = pathname.startsWith(item.href);
+                      const isActive = pathname.startsWith(item.href);
                       return (
                         <li key={item.href}>
                           <Link
                             href={item.href}
                             onClick={onClose}
-                            className={`
-                              flex items-center gap-3 px-2.5 py-2.5 rounded-xl transition-colors duration-75
-                              ${active ? 'bg-[rgba(217,21,43,0.07)]' : 'hover:bg-[#f3f5fb]'}
-                            `}
+                            className="flex items-center gap-3 px-2.5 py-2.5 rounded-xl transition-colors"
+                            style={{ background: isActive ? 'rgba(0,196,180,0.07)' : 'transparent' }}
+                            onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = '#F9FAFB'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = isActive ? 'rgba(0,196,180,0.07)' : 'transparent'; }}
                           >
                             <span
                               className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-                              style={{ background: `${item.accent ?? '#0a1530'}14`, color: item.accent ?? '#0a1530' }}
+                              style={{ background: `${item.accent ?? '#0A2540'}18`, color: item.accent ?? '#0A2540' }}
                             >
                               <item.icon className="w-[15px] h-[15px]" />
                             </span>
                             <div className="min-w-0 flex-1">
-                              <div className={`text-[13.5px] font-semibold leading-tight ${active ? 'text-[#d9152b]' : 'text-[#0a1530]'}`}>
+                              <div className="text-[13.5px] font-semibold leading-tight"
+                                   style={{ color: isActive ? '#00C4B4' : '#0A2540' }}>
                                 {item.label}
                               </div>
                               {item.desc && (
-                                <div className="text-[11.5px] text-[#8892a4] mt-0.5">{item.desc}</div>
+                                <div className="text-[11.5px] mt-0.5" style={{ color: '#9CA3AF' }}>{item.desc}</div>
                               )}
                             </div>
-                            <ArrowRight className="w-3.5 h-3.5 text-[#c4cad6] flex-shrink-0" />
+                            <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#D1D5DB' }} />
                           </Link>
                         </li>
                       );
@@ -590,24 +753,27 @@ function MobileDrawer({
                 </div>
               ))}
 
+              {/* Feature card */}
               <Link
                 href={section.feature.href}
                 onClick={onClose}
-                className="group block rounded-2xl p-5 text-white relative overflow-hidden mt-2 bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63]"
+                className="group block rounded-2xl p-5 text-white relative overflow-hidden mt-2"
+                style={{ background: 'linear-gradient(135deg, #06192E 0%, #0A2540 55%, #13325F 100%)' }}
               >
-                <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-[#d9152b]/25 blur-2xl pointer-events-none" />
+                <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full blur-2xl pointer-events-none"
+                     style={{ background: 'rgba(0,196,180,0.22)' }} />
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-2">
+                  <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] mb-2" style={{ color: '#C9A14A' }}>
                     <Sparkles className="w-3 h-3" />
                     Quick start
                   </div>
-                  <div className="font-display font-bold text-[15.5px] leading-tight mb-1.5">
+                  <div className="font-display font-bold text-[15.5px] leading-tight mb-2 text-white">
                     {section.feature.title}
                   </div>
-                  <div className="text-[11.5px] text-white/55 leading-relaxed mb-3">
+                  <div className="text-[11.5px] leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.55)' }}>
                     {section.feature.desc}
                   </div>
-                  <div className="inline-flex items-center gap-1.5 text-[#ffbf47] text-[12.5px] font-bold group-hover:gap-2.5 transition-[gap] duration-100">
+                  <div className="inline-flex items-center gap-1.5 text-[12.5px] font-bold group-hover:gap-2.5 transition-[gap] duration-100" style={{ color: '#C9A14A' }}>
                     {section.feature.cta} <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -617,16 +783,20 @@ function MobileDrawer({
         </div>
       </div>
 
-      {/* footer */}
-      <div className="p-4 border-t border-[rgba(14,20,36,0.07)] flex-shrink-0">
-        <button
-          type="button"
-          onClick={onApply}
-          className="w-full bg-[#d9152b] text-white font-bold py-3.5 rounded-2xl text-[13.5px] hover:bg-[#b8101f] active:scale-[0.98] transition-all duration-100 inline-flex items-center justify-center gap-2 shadow-[0_2px_12px_rgba(217,21,43,0.28)]"
+      {/* Drawer footer CTA */}
+      <div className="p-4 flex-shrink-0" style={{ borderTop: '1px solid rgba(10,37,64,0.07)' }}>
+        <Link
+          href="/tools/cost-calculator"
+          onClick={onClose}
+          className="w-full flex items-center justify-center gap-2 text-white font-bold py-3.5 rounded-2xl text-[14px] transition-all active:scale-[0.98]"
+          style={{
+            background: 'linear-gradient(135deg, #0A2540 0%, #13325F 100%)',
+            boxShadow: '0 4px 18px rgba(10,37,64,0.20)',
+          }}
         >
-          <Sparkles className="w-4 h-4" />
-          Start guided apply
-        </button>
+          <Calculator className="w-4 h-4" style={{ color: '#C9A14A' } as React.CSSProperties} />
+          Open Cost Calculator
+        </Link>
       </div>
     </aside>
   );

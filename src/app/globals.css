@@ -12,35 +12,85 @@
   --color-success-soft: rgba(16, 185, 129, 0.10);
   --color-success-strong: #006c49;
 
-  /* Brand palette */
-  --color-primary: #0a1530;
-  --color-primary-container: #1b2c5b;
-  --color-primary-soft: #eef1fb;
+  /* ════════════════════════════════════════════
+     BRAND PALETTE — May 2026 redesign
+     Deep navy + teal + refined gold + warm gray
+  ════════════════════════════════════════════ */
 
-  --color-secondary: #d9152b;
-  --color-secondary-soft: #fde9ec;
+  /* Primary — deep navy */
+  --color-primary: #0A2540;
+  --color-primary-container: #13325F;
+  --color-primary-soft: #EEF2F8;
+  --color-primary-ink: #061730;
 
-  --color-accent: #ffbf47;
+  /* Secondary — teal accent */
+  --color-secondary: #00C4B4;
+  --color-secondary-soft: #E6FAF7;
+  --color-secondary-strong: #007F76;
 
-  /* Surfaces */
-  --color-surface: #f9fafb;
+  /* Accent — refined warm gold */
+  --color-accent: #C9A14A;
+  --color-accent-soft: #FAF3E2;
+
+  /* Surfaces — off-white with warm tint */
+  --color-surface: #FAFAF7;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f3f5fb;
-  --color-surface-container: #eaeef7;
-  --color-surface-container-high: #dfe5f0;
-  --color-surface-container-highest: #d3dae8;
+  --color-surface-container-low: #F4F4EF;
+  --color-surface-container: #ECECE5;
+  --color-surface-container-high: #E2E2DA;
+  --color-surface-container-highest: #D5D5CB;
 
   /* Text */
-  --color-on-surface: #0e1424;
-  --color-on-surface-variant: #52596e;
+  --color-on-surface: #0A2540;
+  --color-on-surface-variant: #5A6478;
 
   /* Borders */
-  --color-outline: #c1c8d6;
-  --color-outline-variant: #dde2ec;
+  --color-outline: #C7CCD6;
+  --color-outline-variant: #E0E4EC;
 
   /* Consistent card border — used everywhere */
-  --color-border: rgba(14, 20, 36, 0.08);
-  --color-border-strong: rgba(14, 20, 36, 0.14);
+  --color-border: rgba(10, 37, 64, 0.08);
+  --color-border-strong: rgba(10, 37, 64, 0.14);
+}
+
+/* ════════════════════════════════════════════
+   DARK MODE — opt-in via .dark on <html>
+════════════════════════════════════════════ */
+html.dark {
+  --color-primary: #E6F2FF;
+  --color-primary-container: #14365C;
+  --color-primary-soft: #14365C;
+  --color-primary-ink: #FFFFFF;
+
+  --color-secondary: #2DD4C2;
+  --color-secondary-soft: rgba(0, 196, 180, 0.12);
+  --color-secondary-strong: #5EEAD9;
+
+  --color-accent: #E6B450;
+  --color-accent-soft: rgba(201, 161, 74, 0.10);
+
+  --color-surface: #06192E;
+  --color-surface-container-lowest: #0A2540;
+  --color-surface-container-low: #0F2C4B;
+  --color-surface-container: #133456;
+  --color-surface-container-high: #173D63;
+  --color-surface-container-highest: #1C4670;
+
+  --color-on-surface: #F1F4FA;
+  --color-on-surface-variant: #A3AFC5;
+
+  --color-outline: #2A4368;
+  --color-outline-variant: #1B324F;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+
+  color-scheme: dark;
+}
+
+html.dark body {
+  background: #06192E;
+  color: #F1F4FA;
 }
 
 @layer base {
@@ -68,19 +118,28 @@
 
 /* ────── Hero backgrounds ────── */
 
-/* Dark navy hero — clean mesh, no competing effects */
+/* Dark navy hero — premium calm, teal/gold mesh */
 .hero-dark {
   background:
-    radial-gradient(ellipse at 18% 30%, rgba(217, 21, 43, 0.16) 0px, transparent 55%),
-    radial-gradient(ellipse at 82% 70%, rgba(46, 84, 165, 0.22) 0px, transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(255, 191, 71, 0.08) 0px, transparent 45%),
-    linear-gradient(160deg, #08112a 0%, #0f1d40 100%);
+    radial-gradient(ellipse at 15% 25%, rgba(0, 196, 180, 0.22) 0px, transparent 55%),
+    radial-gradient(ellipse at 85% 70%, rgba(19, 50, 95, 0.55) 0px, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(201, 161, 74, 0.14) 0px, transparent 50%),
+    linear-gradient(165deg, #06192E 0%, #0A2540 60%, #0F2C4B 100%);
+}
+
+/* Premium passport-paper hero — warm off-white with subtle teal mist */
+.hero-paper {
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(0, 196, 180, 0.08) 0px, transparent 55%),
+    radial-gradient(ellipse at 88% 80%, rgba(10, 37, 64, 0.06) 0px, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(201, 161, 74, 0.06) 0px, transparent 50%),
+    #FAFAF7;
 }
 
 /* Light tinted page-hero for directories / blog index */
 .hero-light {
   background:
-    radial-gradient(ellipse at 10% 0%, rgba(217, 21, 43, 0.05) 0px, transparent 50%),
+    radial-gradient(ellipse at 10% 0%, rgba(0, 196, 180, 0.05) 0px, transparent 50%),
     radial-gradient(ellipse at 90% 100%, rgba(27, 44, 91, 0.06) 0px, transparent 50%),
     #f3f5fb;
 }
@@ -88,15 +147,15 @@
 /* Old mesh-bg kept for backward compat */
 .mesh-bg {
   background:
-    radial-gradient(at 12% 18%, rgba(217, 21, 43, 0.18) 0px, transparent 50%),
+    radial-gradient(at 12% 18%, rgba(0, 196, 180, 0.18) 0px, transparent 50%),
     radial-gradient(at 88% 22%, rgba(27, 44, 91, 0.22) 0px, transparent 50%),
-    radial-gradient(at 50% 90%, rgba(255, 191, 71, 0.14) 0px, transparent 50%),
-    linear-gradient(180deg, #0a1530 0%, #0f1b3c 100%);
+    radial-gradient(at 50% 90%, rgba(201, 161, 74, 0.14) 0px, transparent 50%),
+    linear-gradient(180deg, #0A2540 0%, #0E2B49 100%);
 }
 
 .mesh-bg-light {
   background:
-    radial-gradient(at 8% 8%, rgba(217, 21, 43, 0.05) 0px, transparent 45%),
+    radial-gradient(at 8% 8%, rgba(0, 196, 180, 0.05) 0px, transparent 45%),
     radial-gradient(at 92% 12%, rgba(27, 44, 91, 0.06) 0px, transparent 45%),
     #f3f5fb;
 }
@@ -135,8 +194,58 @@
 
 .shadow-glow {
   box-shadow:
-    0 0 0 1px rgba(217, 21, 43, 0.2),
-    0 8px 32px -8px rgba(217, 21, 43, 0.35);
+    0 0 0 1px rgba(0, 196, 180, 0.22),
+    0 8px 32px -8px rgba(0, 196, 180, 0.32);
+}
+
+/* Premium aurora shadow for hero CTAs */
+.shadow-aurora {
+  box-shadow:
+    0 0 0 1px rgba(10, 37, 64, 0.6),
+    0 12px 40px -10px rgba(0, 196, 180, 0.45),
+    0 6px 20px -8px rgba(10, 37, 64, 0.35);
+}
+
+/* ────── Premium new-design utilities ────── */
+
+/* Abstract Union-Jack hairlines for hero decoration */
+.uk-hairlines {
+  background-image:
+    linear-gradient(115deg, transparent 48.5%, rgba(0, 196, 180, 0.10) 49%, rgba(0, 196, 180, 0.10) 51%, transparent 51.5%),
+    linear-gradient(65deg, transparent 48.5%, rgba(201, 161, 74, 0.10) 49%, rgba(201, 161, 74, 0.10) 51%, transparent 51.5%),
+    linear-gradient(0deg, transparent 49%, rgba(10, 37, 64, 0.06) 49.5%, rgba(10, 37, 64, 0.06) 50.5%, transparent 51%),
+    linear-gradient(90deg, transparent 49%, rgba(10, 37, 64, 0.06) 49.5%, rgba(10, 37, 64, 0.06) 50.5%, transparent 51%);
+}
+
+/* Soft warm-paper grain */
+.paper-grain {
+  background-image:
+    radial-gradient(rgba(10, 37, 64, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* Crisp hairline border for premium cards */
+.hairline {
+  border: 1px solid rgba(10, 37, 64, 0.09);
+}
+html.dark .hairline {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Soft teal underline keyword highlight */
+.kw-teal {
+  background-image: linear-gradient(transparent 62%, rgba(0, 196, 180, 0.22) 62%, rgba(0, 196, 180, 0.22) 92%, transparent 92%);
+  padding: 0 2px;
+}
+
+/* Card lift effect */
+.lift-on-hover {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 200ms;
+}
+.lift-on-hover:hover {
+  transform: translateY(-2px);
 }
 
 /* ────── Dot pattern (footer, CTA bands) ────── */
@@ -145,14 +254,14 @@
   background-size: 24px 24px;
 }
 
-/* ────── Gradient animated text ────── */
+/* ────── Gradient animated text — calm teal→gold sweep ────── */
 .gradient-text {
-  background: linear-gradient(90deg, #ff6b8a, #ffbf47, #ff6b8a);
+  background: linear-gradient(90deg, #00C4B4 0%, #C9A14A 50%, #00C4B4 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradient-pan 8s linear infinite;
+  animation: gradient-pan 10s linear infinite;
 }
 
 @keyframes gradient-pan {
@@ -184,7 +293,7 @@
 /* ────── Focus ring alternative ────── */
 .ring-soft:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(217, 21, 43, 0.25);
+  box-shadow: 0 0 0 3px rgba(0, 196, 180, 0.25);
 }
 
 /* ────── Reduced motion ────── */
@@ -196,6 +305,55 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── Float animation for hero illustrations ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+.float-anim {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Shimmer sweep (skeleton / highlight) ─── */
+@keyframes shimmer-x {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shimmer-x 2.5s linear infinite;
+}
+
+/* ─── Subtle pulse ring for live indicators ─── */
+@keyframes ping-slow {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  80%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.ping-slow { animation: ping-slow 2.4s ease-out infinite; }
+
+/* ─── Counter number reveal ─── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up { animation: count-up 0.55s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+/* ─── Fade-slide stagger helper ─── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ─── Rotate slow (stamp) ─── */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.rotate-slow { animation: rotate-slow 24s linear infinite; }
 
 /* ════════════════════════════════════════════════════════
    EDITORIAL TYPE SYSTEM (used by /visa/[slug] redesign)
@@ -257,7 +415,7 @@
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.45;
-  color: #0a1530;
+  color: #0A2540;
   letter-spacing: -0.01em;
 }
 @media (min-width: 768px) {

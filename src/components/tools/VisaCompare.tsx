@@ -31,7 +31,7 @@ interface VisaRow {
 
 const VISAS: Record<string, VisaRow> = {
   'skilled-worker': {
-    id: 'skilled-worker', name: 'Skilled Worker', icon: Briefcase, accent: '#d9152b',
+    id: 'skilled-worker', name: 'Skilled Worker', icon: Briefcase, accent: '#00C4B4',
     fee: '£827', feeRange: '£827 – £1,636', ihs: '£1,035/year',
     salaryMin: '£41,700 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out) / 8 weeks (in)', ihsExempt: false,
@@ -39,7 +39,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: '5 years', englishLevel: 'B1',
   },
   'health-care': {
-    id: 'health-care', name: 'Health & Care', icon: Stethoscope, accent: '#059669',
+    id: 'health-care', name: 'Health & Care', icon: Stethoscope, accent: '#00A89A',
     fee: '£304', feeRange: '£304 – £590', ihs: 'Exempt (main)',
     salaryMin: '£25,000 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out)', ihsExempt: true,
@@ -47,7 +47,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: '5 years', englishLevel: 'B1 (B2 for nurses/doctors)',
   },
   'student': {
-    id: 'student', name: 'Student', icon: GraduationCap, accent: '#2563eb',
+    id: 'student', name: 'Student', icon: GraduationCap, accent: '#0A2540',
     fee: '£524', feeRange: '£524', ihs: '£776/year',
     salaryMin: 'N/A', duration: 'Length of course',
     processing: '3 weeks (out) / 8 weeks (in)', ihsExempt: false,
@@ -56,7 +56,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'Does not count toward ILR', englishLevel: 'B2 (degree level)',
   },
   'graduate': {
-    id: 'graduate', name: 'Graduate', icon: History, accent: '#0d9488',
+    id: 'graduate', name: 'Graduate', icon: History, accent: '#007F76',
     fee: '£880', feeRange: '£880', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '18 months (3 yrs PhD)',
     processing: '8 weeks', ihsExempt: false,
@@ -65,7 +65,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'Does not count toward ILR', englishLevel: 'N/A (proved at Student stage)',
   },
   'family': {
-    id: 'family', name: 'Family / Spouse', icon: Users, accent: '#7c3aed',
+    id: 'family', name: 'Family / Spouse', icon: Users, accent: '#13325F',
     fee: '£1,938', feeRange: '£1,321 – £1,938', ihs: '£1,035/year',
     salaryMin: '£29,000 (sponsor income)', duration: '30 months (renewable)',
     processing: '12 weeks', ihsExempt: false,
@@ -74,7 +74,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: '5 years', englishLevel: 'A1 / A2 / B1 (staged)',
   },
   'visitor': {
-    id: 'visitor', name: 'Standard Visitor', icon: Plane, accent: '#0891b2',
+    id: 'visitor', name: 'Standard Visitor', icon: Plane, accent: '#00C4B4',
     fee: '£127', feeRange: '£127 – £963', ihs: 'None',
     salaryMin: 'N/A', duration: 'Up to 6 months',
     processing: '3 weeks (out)', ihsExempt: true,
@@ -83,7 +83,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'Does not lead to settlement', englishLevel: 'None',
   },
   'innovator-founder': {
-    id: 'innovator-founder', name: 'Innovator Founder', icon: Rocket, accent: '#e11d48',
+    id: 'innovator-founder', name: 'Innovator Founder', icon: Rocket, accent: '#00C4B4',
     fee: '£1,191', feeRange: '£1,191 – £1,486', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '3 years',
     processing: '3 weeks (out)', ihsExempt: false,
@@ -92,7 +92,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: '3 years (fastest route)', englishLevel: 'B2',
   },
   'global-talent': {
-    id: 'global-talent', name: 'Global Talent', icon: LayoutGrid, accent: '#d97706',
+    id: 'global-talent', name: 'Global Talent', icon: LayoutGrid, accent: '#C9A14A',
     fee: '£722', feeRange: '£722', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '1 to 5 years',
     processing: '3 weeks (out)', ihsExempt: false,
@@ -101,7 +101,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: '3 or 5 years', englishLevel: 'None (route-specific)',
   },
   'ilr': {
-    id: 'ilr', name: 'Indefinite Leave to Remain', icon: ShieldCheck, accent: '#059669',
+    id: 'ilr', name: 'Indefinite Leave to Remain', icon: ShieldCheck, accent: '#00A89A',
     fee: '£3,029', feeRange: '£3,029', ihs: 'None',
     salaryMin: 'N/A (route-specific)', duration: 'Permanent',
     processing: '6 months / 5 days super priority', ihsExempt: true,
@@ -110,7 +110,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'This IS settlement', englishLevel: 'B1',
   },
   'citizenship': {
-    id: 'citizenship', name: 'British Citizenship', icon: Crown, accent: '#d97706',
+    id: 'citizenship', name: 'British Citizenship', icon: Crown, accent: '#C9A14A',
     fee: '£1,500', feeRange: '£1,580 with ceremony', ihs: 'None',
     salaryMin: 'N/A', duration: 'For life',
     processing: '6 months standard', ihsExempt: true,
@@ -119,7 +119,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'Already settled', englishLevel: 'B1',
   },
   'euss': {
-    id: 'euss', name: 'EU Settlement Scheme', icon: Globe, accent: '#2563eb',
+    id: 'euss', name: 'EU Settlement Scheme', icon: Globe, accent: '#0A2540',
     fee: 'Free', feeRange: 'Free', ihs: 'None',
     salaryMin: 'N/A', duration: 'Pre-settled: 5 yrs / Settled: permanent',
     processing: '~30 days', ihsExempt: true,
@@ -128,7 +128,7 @@ const VISAS: Record<string, VisaRow> = {
     pathToIlr: 'Settled status = ILR equivalent', englishLevel: 'None',
   },
   'bno': {
-    id: 'bno', name: 'Hong Kong BNO', icon: Flag, accent: '#d9152b',
+    id: 'bno', name: 'Hong Kong BNO', icon: Flag, accent: '#00C4B4',
     fee: '£298', feeRange: '£180 (2.5y) – £298 (5y)', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '2.5 or 5 years',
     processing: '12 weeks (out)', ihsExempt: false,
@@ -182,12 +182,12 @@ export default function VisaCompare() {
       <section className="pt-[88px] md:pt-[104px] pb-10 hero-light">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 mb-3">
-            <Scale className="w-4 h-4 text-[#059669]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#059669]">
+            <Scale className="w-4 h-4 text-[#00A89A]" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00A89A]">
               Tool · Comparison
             </span>
           </div>
-          <h1 className="font-display text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-[#0a1530] tracking-tight leading-tight">
+          <h1 className="font-display text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-[#0A2540] tracking-tight leading-tight">
             UK visa comparison
           </h1>
           <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
@@ -253,10 +253,10 @@ export default function VisaCompare() {
                       <td className="px-4 py-3 text-xs font-semibold text-[#52596e]">
                         {f.label}
                       </td>
-                      <td className="px-4 py-3 text-[#0a1530]">
+                      <td className="px-4 py-3 text-[#0A2540]">
                         {f.format ? f.format(va) : String(va)}
                       </td>
-                      <td className="px-4 py-3 text-[#0a1530]">
+                      <td className="px-4 py-3 text-[#0A2540]">
                         {f.format ? f.format(vb) : String(vb)}
                       </td>
                     </tr>
@@ -270,14 +270,14 @@ export default function VisaCompare() {
           <div className="mt-8 grid sm:grid-cols-2 gap-3">
             <Link
               href={`/visa/${a.id}`}
-              className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#0a1530] text-white text-sm font-semibold rounded-xl hover:bg-[#1b2c5b] transition-colors"
+              className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#0A2540] text-white text-sm font-semibold rounded-xl hover:bg-[#13325F] transition-colors"
             >
               <span>Full {a.name} guide</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href={`/visa/${b.id}`}
-              className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#0a1530] text-white text-sm font-semibold rounded-xl hover:bg-[#1b2c5b] transition-colors"
+              className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#0A2540] text-white text-sm font-semibold rounded-xl hover:bg-[#13325F] transition-colors"
             >
               <span>Full {b.name} guide</span>
               <ArrowRight className="w-4 h-4" />
@@ -288,7 +288,7 @@ export default function VisaCompare() {
 
       <section className="py-12 md:py-16 bg-[#f9fafb]">
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
-          <h2 className="font-display text-xl md:text-2xl font-bold text-[#0a1530] mb-4">
+          <h2 className="font-display text-xl md:text-2xl font-bold text-[#0A2540] mb-4">
             How to use this comparison
           </h2>
           <p className="text-sm text-[#52596e] leading-relaxed">
@@ -302,14 +302,14 @@ export default function VisaCompare() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/eligibility"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#d9152b] text-white text-sm font-semibold rounded-xl hover:bg-[#b8101f] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#00C4B4] text-white text-sm font-semibold rounded-xl hover:bg-[#009E91] transition-colors"
             >
               <Sparkles className="w-4 h-4" />
               Try our eligibility quiz
             </Link>
             <Link
               href="/tools/cost-calculator"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-[rgba(14,20,36,0.12)] text-[#0a1530] text-sm font-semibold rounded-xl hover:border-[#0a1530] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-[rgba(14,20,36,0.12)] text-[#0A2540] text-sm font-semibold rounded-xl hover:border-[#0A2540] transition-colors"
             >
               Calculate exact costs
             </Link>
@@ -334,7 +334,7 @@ function VisaSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full mt-1.5 px-3 py-3 bg-white border border-[rgba(14,20,36,0.12)] focus:border-[#0a1530] rounded-xl text-sm font-semibold text-[#0a1530] outline-none transition-all"
+        className="w-full mt-1.5 px-3 py-3 bg-white border border-[rgba(14,20,36,0.12)] focus:border-[#0A2540] rounded-xl text-sm font-semibold text-[#0A2540] outline-none transition-all"
       >
         {VISA_IDS.map((id) => (
           <option key={id} value={id} disabled={id === disabledValue}>
@@ -392,7 +392,7 @@ function Stat({ label, value }: { label: string; value: string }) {
       <div className="text-[10px] font-bold uppercase tracking-wider text-[#7a8195]">
         {label}
       </div>
-      <div className="text-xs font-semibold text-[#0a1530] mt-0.5 leading-tight">
+      <div className="text-xs font-semibold text-[#0A2540] mt-0.5 leading-tight">
         {value}
       </div>
     </div>

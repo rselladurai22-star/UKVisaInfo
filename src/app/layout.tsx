@@ -45,13 +45,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23000613'/><stop offset='1' stop-color='%23001f3f'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><path d='M12 26 L32 12 L52 26' stroke='%23bb0027' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/><rect x='17' y='26' width='4' height='20' fill='white'/><rect x='25' y='26' width='4' height='20' fill='white'/><rect x='35' y='26' width='4' height='20' fill='white'/><rect x='43' y='26' width='4' height='20' fill='white'/><rect x='12' y='46' width='40' height='4' rx='1' fill='%23bb0027'/><circle cx='32' cy='20' r='2' fill='%23bb0027'/></svg>", type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#000613',
+  themeColor: '#06192E',
   width: 'device-width',
   initialScale: 1,
 };

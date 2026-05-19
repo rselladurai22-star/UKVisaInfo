@@ -58,7 +58,7 @@ export default function EmailCapture({
             <Check className="w-4 h-4" strokeWidth={3} />
           </span>
           <div>
-            <div className="font-display font-bold text-[16px] text-[#0a1530] leading-tight">
+            <div className="font-display font-bold text-[16px] text-[#0A2540] leading-tight">
               You&apos;re in 🎉
             </div>
             <p className="mt-1 text-[13px] text-[#475569] leading-snug">
@@ -71,25 +71,25 @@ export default function EmailCapture({
   }
 
   return (
-    <div className={compact ? '' : 'my-10 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-6 md:p-7 text-white'}>
+    <div className={compact ? '' : 'my-10 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-6 md:p-7 text-white'}>
       {!compact && (
         <>
           <div
             className="absolute inset-0 opacity-[0.2] pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
               backgroundSize: '18px 18px',
             }}
           />
-          <div className="absolute -right-12 -bottom-12 w-44 h-44 rounded-full bg-[#d9152b]/30 blur-3xl pointer-events-none" />
+          <div className="absolute -right-12 -bottom-12 w-44 h-44 rounded-full bg-[#00C4B4]/30 blur-3xl pointer-events-none" />
         </>
       )}
       <div className={compact ? '' : 'relative z-10'}>
-        <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: compact ? '#d9152b' : '#ffbf47' }}>
+        <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: compact ? '#00C4B4' : '#C9A14A' }}>
           <Sparkles className="w-3 h-3" />
           Newsletter
         </div>
-        <h3 className={`font-display font-bold text-[18px] md:text-[20px] leading-tight tracking-[-0.015em] ${compact ? 'text-[#0a1530]' : 'text-white'}`}>
+        <h3 className={`font-display font-bold text-[18px] md:text-[20px] leading-tight tracking-[-0.015em] ${compact ? 'text-[#0A2540]' : 'text-white'}`}>
           {title}
         </h3>
         <p className={`mt-2 text-[13.5px] leading-relaxed ${compact ? 'text-[#52596e]' : 'text-white/55'}`}>
@@ -109,7 +109,7 @@ export default function EmailCapture({
               placeholder="you@example.com"
               className={`w-full pl-10 pr-4 py-3 rounded-xl text-[14px] font-medium outline-none transition-colors duration-100 ${
                 compact
-                  ? 'bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0a1530] text-[#0a1530] placeholder:text-[#9aa3b8]'
+                  ? 'bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0A2540] text-[#0A2540] placeholder:text-[#9aa3b8]'
                   : 'bg-white/[0.08] border border-white/[0.14] focus:bg-white/[0.13] focus:border-white/30 text-white placeholder:text-white/40'
               }`}
               disabled={state === 'loading'}
@@ -119,7 +119,7 @@ export default function EmailCapture({
           <button
             type="submit"
             disabled={state === 'loading'}
-            className="bg-[#d9152b] text-white font-bold px-5 py-3 rounded-xl text-[13.5px] hover:bg-[#b8101f] active:scale-[0.98] transition-[background,transform] duration-100 disabled:opacity-50 shadow-[0_4px_14px_rgba(217,21,43,0.32)]"
+            className="bg-[#00C4B4] text-white font-bold px-5 py-3 rounded-xl text-[13.5px] hover:bg-[#009E91] active:scale-[0.98] transition-[background,transform] duration-100 disabled:opacity-50 shadow-[0_4px_14px_rgba(0, 196, 180,0.32)]"
           >
             {state === 'loading' ? 'Subscribing…' : cta}
           </button>

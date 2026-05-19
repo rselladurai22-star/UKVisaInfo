@@ -28,7 +28,7 @@ export default function ShareRail({ title }: { title: string }) {
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 
   const btn =
-    'group w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[rgba(14,20,36,0.08)] text-[#52596e] hover:text-[#0a1530] hover:border-[rgba(14,20,36,0.18)] hover:shadow-[0_4px_14px_rgba(10,21,48,0.08)] transition-[color,border-color,box-shadow] duration-150';
+    'group w-10 h-10 flex items-center justify-center rounded-full bg-white border border-[rgba(14,20,36,0.08)] text-[#52596e] hover:text-[#0A2540] hover:border-[rgba(14,20,36,0.18)] hover:shadow-[0_4px_14px_rgba(10, 37, 64,0.08)] transition-[color,border-color,box-shadow] duration-150';
 
   return (
     <div className="flex flex-col gap-2">
@@ -43,7 +43,7 @@ export default function ShareRail({ title }: { title: string }) {
         className={btn}
       >
         {copied
-          ? <Check className="w-[15px] h-[15px] text-[#059669]" />
+          ? <Check className="w-[15px] h-[15px] text-[#00A89A]" />
           : <Link2 className="w-[15px] h-[15px]" />}
       </button>
 

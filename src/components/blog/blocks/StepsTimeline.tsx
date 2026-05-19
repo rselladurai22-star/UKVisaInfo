@@ -9,7 +9,7 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
       {/* connector line behind the badges */}
       <span
         aria-hidden="true"
-        className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-[#d9152b]/40 via-[#0a1530]/15 to-[#d9152b]/40"
+        className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-[#00C4B4]/40 via-[#0A2540]/15 to-[#00C4B4]/40"
       />
 
       {items.map((step, i) => (
@@ -17,11 +17,11 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
           {/* numbered badge */}
           <span
             aria-hidden="true"
-            className="absolute left-0 top-0 w-[32px] h-[32px] rounded-full bg-white border-2 border-[#d9152b] text-[#d9152b] font-display font-bold text-[13px] flex items-center justify-center shadow-[0_2px_8px_rgba(217,21,43,0.18)]"
+            className="absolute left-0 top-0 w-[32px] h-[32px] rounded-full bg-white border-2 border-[#00C4B4] text-[#00C4B4] font-display font-bold text-[13px] flex items-center justify-center shadow-[0_2px_8px_rgba(0, 196, 180,0.18)]"
           >
             {i + 1}
           </span>
-          <h4 className="font-display text-[1.0625rem] md:text-[1.1875rem] font-bold text-[#0a1530] leading-tight mb-1.5">
+          <h4 className="font-display text-[1.0625rem] md:text-[1.1875rem] font-bold text-[#0A2540] leading-tight mb-1.5">
             {step.title}
           </h4>
           {step.body && (
@@ -30,9 +30,9 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
                 remarkPlugins={[remarkGfm]}
                 components={{
                   p: ({ children }) => <p>{children}</p>,
-                  strong: ({ children }) => <strong className="font-semibold text-[#0a1530]">{children}</strong>,
+                  strong: ({ children }) => <strong className="font-semibold text-[#0A2540]">{children}</strong>,
                   a: ({ href, children }) => (
-                    <a href={href} className="text-[#d9152b] underline decoration-[#d9152b]/35 hover:decoration-[#d9152b] font-medium">{children}</a>
+                    <a href={href} className="text-[#00C4B4] underline decoration-[#00C4B4]/35 hover:decoration-[#00C4B4] font-medium">{children}</a>
                   ),
                 }}
               >

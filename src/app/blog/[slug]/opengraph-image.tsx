@@ -18,7 +18,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         style={{
           width: '100%', height: '100%',
           display: 'flex', flexDirection: 'column',
-          background: 'linear-gradient(135deg, #0a1530 0%, #13204a 60%, #1c2c63 100%)',
+          background: 'linear-gradient(135deg, #0A2540 0%, #0F2C4B 60%, #1c2c63 100%)',
           padding: 64,
           color: 'white',
           fontFamily: 'system-ui, sans-serif',
@@ -29,7 +29,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         <div
           style={{
             position: 'absolute', inset: 0,
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.4) 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.4) 1px, transparent 0)',
             backgroundSize: '24px 24px',
             opacity: 0.25,
           }}
@@ -39,7 +39,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           style={{
             position: 'absolute', right: -120, top: -120,
             width: 480, height: 480, borderRadius: 9999,
-            background: 'rgba(217,21,43,0.25)', filter: 'blur(100px)',
+            background: 'rgba(0, 196, 180,0.25)', filter: 'blur(100px)',
           }}
         />
 
@@ -47,14 +47,14 @@ export default async function Image({ params }: { params: { slug: string } }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
           <div style={{
             width: 48, height: 48, borderRadius: 12,
-            background: 'linear-gradient(135deg, #c9112a, #8b001d)',
+            background: 'linear-gradient(135deg, #00A89A, #007F76)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 26, fontWeight: 800,
           }}>
             🇬🇧
           </div>
           <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.02em' }}>
-            UK Visa <span style={{ color: '#d9152b' }}>Info</span>
+            UK Visa <span style={{ color: '#00C4B4' }}>Info</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             marginTop: 'auto', marginBottom: 20,
             fontSize: 16, fontWeight: 700, letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: '#ffbf47',
+            color: '#C9A14A',
             position: 'relative',
           }}
         >
@@ -97,7 +97,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           }}
         >
           <span>ukvisainfo.co.uk</span>
-          <span style={{ marginLeft: 'auto', color: '#ffbf47', fontWeight: 700 }}>
+          <span style={{ marginLeft: 'auto', color: '#C9A14A', fontWeight: 700 }}>
             Read the full guide →
           </span>
         </div>

@@ -75,12 +75,12 @@ export default function VisaJourneyClient() {
 
   return (
     <>
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
-        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
+        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
         <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#10b981]/18 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
             <Sparkles className="w-3 h-3" /> Personal planner
           </span>
           <h1 className="font-display text-white text-[1.875rem] sm:text-[2.5rem] md:text-[2.875rem] font-bold leading-[1.05] tracking-[-0.025em]">
@@ -103,12 +103,12 @@ export default function VisaJourneyClient() {
           ) : (
             <div className="space-y-5">
               {/* Progress card */}
-              <section className="rounded-3xl bg-gradient-to-br from-[#0a1530] to-[#13204a] text-white p-6 md:p-7 relative overflow-hidden">
+              <section className="rounded-3xl bg-gradient-to-br from-[#0A2540] to-[#0F2C4B] text-white p-6 md:p-7 relative overflow-hidden">
                 <div className="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-[#10b981]/30 blur-3xl pointer-events-none" />
                 <div className="relative z-10">
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div>
-                      <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47]">Progress</div>
+                      <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A]">Progress</div>
                       <div className="mt-1 font-display font-bold text-[1.75rem] tabular-nums leading-none">
                         {doneCount}<span className="text-white/40">/{totalCount}</span>
                       </div>
@@ -124,7 +124,7 @@ export default function VisaJourneyClient() {
                   </div>
                   <div className="mt-4 h-2 bg-white/[0.08] rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#10b981] via-[#34d399] to-[#ffbf47] rounded-full transition-[width] duration-500 ease-out"
+                      className="h-full bg-gradient-to-r from-[#10b981] via-[#34d399] to-[#C9A14A] rounded-full transition-[width] duration-500 ease-out"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -133,8 +133,8 @@ export default function VisaJourneyClient() {
 
               {/* Route + target form */}
               <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7">
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">01 · Your route</div>
-                <h2 className="font-display text-[1.25rem] font-bold text-[#0a1530] tracking-[-0.015em] mb-5">
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">01 · Your route</div>
+                <h2 className="font-display text-[1.25rem] font-bold text-[#0A2540] tracking-[-0.015em] mb-5">
                   Visa route &amp; target date
                 </h2>
 
@@ -144,7 +144,7 @@ export default function VisaJourneyClient() {
                     <select
                       value={journey.visa}
                       onChange={(e) => setJourney({ ...journey, visa: e.target.value, updated: Date.now() })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-white text-[14px] font-semibold text-[#0a1530] focus:border-[#0a1530] outline-none transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-white text-[14px] font-semibold text-[#0A2540] focus:border-[#0A2540] outline-none transition-colors"
                     >
                       <option value="">Choose a route…</option>
                       {Object.values(VISA_DETAILS).map((v) => (
@@ -158,18 +158,18 @@ export default function VisaJourneyClient() {
                       type="date"
                       value={journey.targetDate}
                       onChange={(e) => setJourney({ ...journey, targetDate: e.target.value, updated: Date.now() })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-white text-[14px] font-semibold text-[#0a1530] focus:border-[#0a1530] outline-none transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-white text-[14px] font-semibold text-[#0A2540] focus:border-[#0A2540] outline-none transition-colors"
                     />
                   </label>
                 </div>
 
                 {visa && (
                   <div className="mt-4 p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] flex items-center gap-3">
-                    <Briefcase className="w-4 h-4 text-[#d9152b]" />
+                    <Briefcase className="w-4 h-4 text-[#00C4B4]" />
                     <div className="flex-1 text-[12.5px] text-[#52596e]">
-                      Processing <strong className="text-[#0a1530]">{visa.processing.outside}</strong> outside the UK · Fee {visa.fee}
+                      Processing <strong className="text-[#0A2540]">{visa.processing.outside}</strong> outside the UK · Fee {visa.fee}
                     </div>
-                    <Link href={`/visa/${visa.id}`} className="text-[12px] font-semibold text-[#d9152b] hover:underline">
+                    <Link href={`/visa/${visa.id}`} className="text-[12px] font-semibold text-[#00C4B4] hover:underline">
                       Open guide →
                     </Link>
                   </div>
@@ -180,16 +180,16 @@ export default function VisaJourneyClient() {
               <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7">
                 <div className="flex items-center justify-between gap-3 mb-5">
                   <div>
-                    <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">02 · Checklist</div>
-                    <h2 className="font-display text-[1.25rem] font-bold text-[#0a1530] tracking-[-0.015em] flex items-center gap-2">
-                      <ListChecks className="w-4 h-4 text-[#d9152b]" /> Application steps
+                    <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">02 · Checklist</div>
+                    <h2 className="font-display text-[1.25rem] font-bold text-[#0A2540] tracking-[-0.015em] flex items-center gap-2">
+                      <ListChecks className="w-4 h-4 text-[#00C4B4]" /> Application steps
                     </h2>
                   </div>
                   {doneCount > 0 && (
                     <button
                       type="button"
                       onClick={() => setJourney({ ...journey, steps: journey.steps.map((s) => ({ ...s, done: false })), updated: Date.now() })}
-                      className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#7a8195] hover:text-[#d9152b] px-2.5 py-1.5 rounded-lg hover:bg-[rgba(217,21,43,0.06)] transition-colors duration-100"
+                      className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#7a8195] hover:text-[#00C4B4] px-2.5 py-1.5 rounded-lg hover:bg-[rgba(0, 196, 180,0.06)] transition-colors duration-100"
                     >
                       <RotateCcw className="w-3 h-3" /> Reset
                     </button>
@@ -229,15 +229,15 @@ export default function VisaJourneyClient() {
 
               {/* Notes */}
               <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7">
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">03 · Notes</div>
-                <h2 className="font-display text-[1.25rem] font-bold text-[#0a1530] tracking-[-0.015em] mb-4">
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">03 · Notes</div>
+                <h2 className="font-display text-[1.25rem] font-bold text-[#0A2540] tracking-[-0.015em] mb-4">
                   Personal notes
                 </h2>
                 <textarea
                   value={journey.notes}
                   onChange={(e) => setJourney({ ...journey, notes: e.target.value, updated: Date.now() })}
                   placeholder="Reference numbers, appointment dates, anything you want to remember…"
-                  className="w-full min-h-[120px] p-3.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-[#fafbfd] focus:bg-white focus:border-[#0a1530] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#1a2240] placeholder:text-[#9aa3b8] resize-y"
+                  className="w-full min-h-[120px] p-3.5 rounded-xl border border-[rgba(14,20,36,0.1)] bg-[#fafbfd] focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#1a2240] placeholder:text-[#9aa3b8] resize-y"
                 />
               </section>
 
@@ -268,11 +268,11 @@ export default function VisaJourneyClient() {
 
 function StartCard({ onStart }: { onStart: () => void }) {
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-7 md:p-10 text-center shadow-[0_4px_18px_rgba(10,21,48,0.04)]">
-      <span className="inline-flex w-12 h-12 rounded-2xl bg-[rgba(217,21,43,0.08)] text-[#d9152b] items-center justify-center mb-4">
+    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-7 md:p-10 text-center shadow-[0_4px_18px_rgba(10, 37, 64,0.04)]">
+      <span className="inline-flex w-12 h-12 rounded-2xl bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] items-center justify-center mb-4">
         <CalendarDays className="w-5 h-5" />
       </span>
-      <h2 className="font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0a1530] tracking-[-0.02em]">
+      <h2 className="font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0A2540] tracking-[-0.02em]">
         Build your visa plan
       </h2>
       <p className="mt-3 max-w-md mx-auto text-[#52596e] text-[14.5px] leading-relaxed">
@@ -281,7 +281,7 @@ function StartCard({ onStart }: { onStart: () => void }) {
       <button
         type="button"
         onClick={onStart}
-        className="mt-7 inline-flex items-center gap-2 bg-[#d9152b] text-white font-bold px-6 py-3.5 rounded-xl text-[14px] hover:bg-[#b8101f] active:scale-[0.98] transition-[background,transform] duration-100 shadow-[0_4px_16px_rgba(217,21,43,0.32)]"
+        className="mt-7 inline-flex items-center gap-2 bg-[#00C4B4] text-white font-bold px-6 py-3.5 rounded-xl text-[14px] hover:bg-[#009E91] active:scale-[0.98] transition-[background,transform] duration-100 shadow-[0_4px_16px_rgba(0, 196, 180,0.32)]"
       >
         <Plus className="w-4 h-4" /> Start my journey
       </button>
@@ -293,15 +293,15 @@ function StartCard({ onStart }: { onStart: () => void }) {
           { icon: BookOpen, t: 'Linked to your route', d: 'Pulls in fees and processing time from your visa guide.' },
         ].map((b, i) => (
           <div key={i} className="p-4 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
-            <b.icon className="w-4 h-4 text-[#d9152b] mb-2" />
-            <div className="text-[13.5px] font-bold text-[#0a1530]">{b.t}</div>
+            <b.icon className="w-4 h-4 text-[#00C4B4] mb-2" />
+            <div className="text-[13.5px] font-bold text-[#0A2540]">{b.t}</div>
             <div className="text-[11.5px] text-[#7a8195] mt-0.5 leading-snug">{b.d}</div>
           </div>
         ))}
       </div>
 
       <div className="mt-7 text-[11px] text-[#9aa3b8] flex items-center justify-center gap-1.5">
-        <Lock className="w-3 h-3 text-[#10b981]" /> Stored only in your browser. <Link href="/eligibility" className="text-[#d9152b] font-semibold ml-1">Not sure which route? <ArrowRight className="inline w-3 h-3" /></Link>
+        <Lock className="w-3 h-3 text-[#10b981]" /> Stored only in your browser. <Link href="/eligibility" className="text-[#00C4B4] font-semibold ml-1">Not sure which route? <ArrowRight className="inline w-3 h-3" /></Link>
       </div>
     </section>
   );

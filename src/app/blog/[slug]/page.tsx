@@ -21,13 +21,13 @@ interface RouteParams {
 }
 
 const TAG_COLORS: Record<string, { bg: string; text: string }> = {
-  'skilled-worker': { bg: 'rgba(217,21,43,0.1)',  text: '#c0112a' },
-  'student':        { bg: 'rgba(37,99,235,0.1)',  text: '#1d4ed8' },
-  'family':         { bg: 'rgba(124,58,237,0.1)', text: '#6d28d9' },
-  'visitor':        { bg: 'rgba(8,145,178,0.1)',  text: '#0e7490' },
-  'costs':          { bg: 'rgba(217,119,6,0.1)',  text: '#b45309' },
-  'health':         { bg: 'rgba(5,150,105,0.1)',  text: '#047857' },
-  'graduate':       { bg: 'rgba(13,148,136,0.1)', text: '#0f766e' },
+  'skilled-worker': { bg: 'rgba(0, 196, 180,0.1)',  text: '#c0112a' },
+  'student':        { bg: 'rgba(10, 37, 64,0.1)',  text: '#1d4ed8' },
+  'family':         { bg: 'rgba(19, 50, 95,0.1)', text: '#6d28d9' },
+  'visitor':        { bg: 'rgba(0, 196, 180,0.1)',  text: '#0e7490' },
+  'costs':          { bg: 'rgba(201, 161, 74,0.1)',  text: '#b45309' },
+  'health':         { bg: 'rgba(0, 168, 154,0.1)',  text: '#047857' },
+  'graduate':       { bg: 'rgba(0, 127, 118,0.1)', text: '#0f766e' },
 };
 const tagStyle = (tag: string) =>
   TAG_COLORS[tag.toLowerCase().replace(/\s+/g, '-')] ?? { bg: 'rgba(14,20,36,0.07)', text: '#52596e' };
@@ -111,18 +111,18 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* ═══════════════════════
           EDITORIAL HERO
       ═══════════════════════ */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-b from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-14 md:pb-20">
+      <header className="relative isolate overflow-hidden bg-gradient-to-b from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-14 md:pb-20">
         {/* decorative bg */}
         <div
           className="absolute inset-0 opacity-[0.18] pointer-events-none"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+              'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
             backgroundSize: '22px 22px',
           }}
         />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#d9152b]/15 blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#2563eb]/10 blur-[140px] pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/15 blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#0A2540]/10 blur-[140px] pointer-events-none" />
 
         <div className="relative max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Back nav */}
@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
           {/* Category + freshness pill */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
-            <span className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-[#ffbf47] text-[#0a1530]">
+            <span className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-[#C9A14A] text-[#0A2540]">
               {primaryTag}
             </span>
             {isFresh && (
@@ -239,17 +239,17 @@ export default async function BlogPostPage({ params }: RouteParams) {
               <Comments term={post.slug} />
 
               {/* Bottom CTA */}
-              <div className="mt-14 relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-10">
+              <div className="mt-14 relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-10">
                 <div
                   className="absolute inset-0 opacity-[0.22] pointer-events-none"
                   style={{
-                    backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+                    backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
                     backgroundSize: '18px 18px',
                   }}
                 />
-                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/25 blur-3xl pointer-events-none" />
+                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
                 <div className="relative z-10 max-w-md">
-                  <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#ffbf47] mb-4">
+                  <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#C9A14A] mb-4">
                     Start here
                   </span>
                   <h3 className="font-display text-white text-[1.25rem] md:text-[1.625rem] font-bold leading-tight tracking-[-0.015em]">
@@ -260,7 +260,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
                   </p>
                   <Link
                     href="/eligibility"
-                    className="mt-6 inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
+                    className="mt-6 inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
                   >
                     Start eligibility check <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -288,7 +288,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           line-height: 0.9;
           font-weight: 800;
           padding: 0.35rem 0.7rem 0 0;
-          color: #d9152b;
+          color: #00C4B4;
           letter-spacing: -0.03em;
         }
         @media (max-width: 640px) {

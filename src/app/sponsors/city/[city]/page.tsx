@@ -53,15 +53,15 @@ export default async function SponsorCityPage({ params }: RouteParams) {
 
   return (
     <>
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
-        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#d9152b]/15 blur-[120px] pointer-events-none" />
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
+        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/15 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <Link href="/tools/sponsor-search" className="inline-flex items-center gap-1.5 text-white/55 hover:text-white text-sm font-medium mb-6 transition-colors duration-100">
             <ArrowLeft className="w-4 h-4" /> Sponsor search
           </Link>
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
             <MapPin className="w-3 h-3" /> City directory
           </span>
           <h1 className="font-display text-white text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold leading-[1.05] tracking-[-0.025em]">
@@ -78,24 +78,24 @@ export default async function SponsorCityPage({ params }: RouteParams) {
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
             <main className="col-span-12 lg:col-span-8 space-y-5">
               {sectors.map(([sector, items]) => (
-                <section key={sector} className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+                <section key={sector} className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
                   <div className="mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)] flex items-baseline justify-between gap-3">
-                    <h2 className="font-display text-[1.25rem] font-bold text-[#0a1530] tracking-[-0.015em] flex items-center gap-2">
-                      <Building2 className="w-4 h-4 text-[#2563eb]" />
+                    <h2 className="font-display text-[1.25rem] font-bold text-[#0A2540] tracking-[-0.015em] flex items-center gap-2">
+                      <Building2 className="w-4 h-4 text-[#0A2540]" />
                       {sector}
                     </h2>
-                    <Link href={`/sponsors/sector/${slugify(sector)}`} className="text-[12px] font-semibold text-[#d9152b] hover:underline">
+                    <Link href={`/sponsors/sector/${slugify(sector)}`} className="text-[12px] font-semibold text-[#00C4B4] hover:underline">
                       All {sector} →
                     </Link>
                   </div>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {items.map((s) => (
                       <li key={s.name} className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-[#fafbfd]">
-                        <span className="w-8 h-8 rounded-lg bg-[rgba(14,20,36,0.05)] text-[#0a1530] flex items-center justify-center flex-shrink-0">
+                        <span className="w-8 h-8 rounded-lg bg-[rgba(14,20,36,0.05)] text-[#0A2540] flex items-center justify-center flex-shrink-0">
                           <Building2 className="w-3.5 h-3.5" />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[13.5px] font-semibold text-[#0a1530] truncate">{s.name}</div>
+                          <div className="text-[13.5px] font-semibold text-[#0A2540] truncate">{s.name}</div>
                           <div className="text-[11px] text-[#7a8195]">{s.region}</div>
                         </div>
                         <span className={`text-[10px] font-bold uppercase tracking-[0.08em] px-2 py-0.5 rounded-full flex-shrink-0 ${
@@ -135,7 +135,7 @@ export default async function SponsorCityPage({ params }: RouteParams) {
 
                 <Link
                   href="/tools/sponsor-search"
-                  className="group block rounded-2xl bg-gradient-to-br from-[#d9152b] to-[#b8101f] p-5 text-white relative overflow-hidden"
+                  className="group block rounded-2xl bg-gradient-to-br from-[#00C4B4] to-[#009E91] p-5 text-white relative overflow-hidden"
                 >
                   <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-white/15 blur-2xl pointer-events-none" />
                   <div className="relative z-10">
@@ -152,13 +152,13 @@ export default async function SponsorCityPage({ params }: RouteParams) {
                 <a
                   href="https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers"
                   target="_blank" rel="noopener noreferrer"
-                  className="block rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-4 hover:border-[#0a1530] transition-colors duration-100"
+                  className="block rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-4 hover:border-[#0A2540] transition-colors duration-100"
                 >
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3" /> Source
                   </div>
                   <p className="text-[12px] text-[#52596e] leading-snug">From the Home Office Register of Licensed Sponsors (workers).</p>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#d9152b]">
+                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4]">
                     Open register <ExternalLink className="w-3 h-3" />
                   </div>
                 </a>

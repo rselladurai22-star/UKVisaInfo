@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Work: '#d9152b', Study: '#2563eb', Family: '#7c3aed', Visit: '#0891b2',
+  Work: '#00C4B4', Study: '#0A2540', Family: '#13325F', Visit: '#00C4B4',
 };
 
 export default async function VariantPage({ params }: RouteParams) {
@@ -44,7 +44,7 @@ export default async function VariantPage({ params }: RouteParams) {
   const v = getVariants(slug).find((x) => x.id === variant);
   if (!visa || !v) notFound();
 
-  const accent = CATEGORY_COLORS[visa.category] ?? '#d9152b';
+  const accent = CATEGORY_COLORS[visa.category] ?? '#00C4B4';
   const otherVariants = getVariants(slug).filter((x) => x.id !== variant);
 
   const jsonLd = {
@@ -62,8 +62,8 @@ export default async function VariantPage({ params }: RouteParams) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
-        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
+        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
         <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full pointer-events-none blur-[120px]" style={{ background: `${accent}26` }} />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -105,9 +105,9 @@ export default async function VariantPage({ params }: RouteParams) {
             <main className="col-span-12 lg:col-span-8 space-y-5">
 
               {/* Eligibility */}
-              <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">01 · Eligibility</div>
-                <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0a1530] tracking-[-0.015em] leading-tight mb-5">
+              <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">01 · Eligibility</div>
+                <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] tracking-[-0.015em] leading-tight mb-5">
                   Are you eligible for the {v.label.toLowerCase()} route?
                 </h2>
                 <ul className="space-y-2.5">
@@ -122,15 +122,15 @@ export default async function VariantPage({ params }: RouteParams) {
 
               {/* Notes */}
               {v.notes && v.notes.length > 0 && (
-                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
-                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">02 · Watch out for</div>
-                  <h2 className="font-display text-[1.375rem] font-bold text-[#0a1530] tracking-[-0.015em] mb-5">
+                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
+                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">02 · Watch out for</div>
+                  <h2 className="font-display text-[1.375rem] font-bold text-[#0A2540] tracking-[-0.015em] mb-5">
                     Key conditions
                   </h2>
                   <ul className="space-y-2.5">
                     {v.notes.map((note, i) => (
                       <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-gradient-to-br from-[#fff7ed] to-[#fffbeb] border border-[#fde68a]">
-                        <span className="text-[#d97706] text-lg leading-none mt-0.5">!</span>
+                        <span className="text-[#C9A14A] text-lg leading-none mt-0.5">!</span>
                         <span className="text-[14px] text-[#78350f] leading-[1.6]">{note}</span>
                       </li>
                     ))}
@@ -140,18 +140,18 @@ export default async function VariantPage({ params }: RouteParams) {
 
               {/* Other variants */}
               {otherVariants.length > 0 && (
-                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
-                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">03 · Other sub-routes</div>
-                  <h2 className="font-display text-[1.375rem] font-bold text-[#0a1530] tracking-[-0.015em] mb-5">
+                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
+                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">03 · Other sub-routes</div>
+                  <h2 className="font-display text-[1.375rem] font-bold text-[#0A2540] tracking-[-0.015em] mb-5">
                     Compare with other {visa.title} routes
                   </h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {otherVariants.map((o) => (
                       <li key={o.id}>
-                        <Link href={`/visa/${slug}/${o.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-100">
+                        <Link href={`/visa/${slug}/${o.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
                           <div className="min-w-0 flex-1">
                             <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9aa3b8]">Sub-route</div>
-                            <div className="text-[13.5px] font-semibold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 truncate">
+                            <div className="text-[13.5px] font-semibold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 truncate">
                               {o.label}
                             </div>
                             <div className="text-[11.5px] text-[#7a8195] mt-0.5">{o.headline}</div>
@@ -165,8 +165,8 @@ export default async function VariantPage({ params }: RouteParams) {
               )}
 
               {/* Apply CTA */}
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-9">
-                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
+              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-9">
+                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
                 <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full blur-3xl pointer-events-none" style={{ background: `${accent}40` }} />
                 <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="max-w-md">
@@ -178,7 +178,7 @@ export default async function VariantPage({ params }: RouteParams) {
                   <a
                     href={visa.applyUrl}
                     target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100"
+                    className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100"
                   >
                     Apply on gov.uk <ExternalLink className="w-4 h-4" />
                   </a>
@@ -191,13 +191,13 @@ export default async function VariantPage({ params }: RouteParams) {
               <div className="lg:sticky lg:top-[100px] space-y-4">
 
                 {/* Cost preview */}
-                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${accent}13`, color: accent }}>
                       <Calculator className="w-3.5 h-3.5" />
                     </span>
                     <div>
-                      <div className="text-[13.5px] font-bold text-[#0a1530] leading-tight">Full cost</div>
+                      <div className="text-[13.5px] font-bold text-[#0A2540] leading-tight">Full cost</div>
                       <div className="text-[11px] text-[#7a8195]">Pre-filled for this variant</div>
                     </div>
                   </div>
@@ -218,13 +218,13 @@ export default async function VariantPage({ params }: RouteParams) {
                 <a
                   href={v.source}
                   target="_blank" rel="noopener noreferrer"
-                  className="block rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4 hover:border-[#0a1530] transition-colors duration-100"
+                  className="block rounded-2xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] p-4 hover:border-[#0A2540] transition-colors duration-100"
                 >
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-3 h-3" /> Source
                   </div>
                   <p className="text-[12px] text-[#52596e] leading-snug">All figures on this page verified against the gov.uk page below on 19 May 2026.</p>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#d9152b]">
+                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4]">
                     Open gov.uk source <ExternalLink className="w-3 h-3" />
                   </div>
                 </a>

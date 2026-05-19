@@ -20,18 +20,18 @@ interface Props {
  * eligibility highlights, source citation, and pre-filled calculator
  * link. Renders inline; no extra routes needed.
  */
-export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: Props) {
+export default function VariantPicker({ variants, visaId, accent = '#00C4B4' }: Props) {
   const [activeIdx, setActiveIdx] = useState(0);
   if (!variants.length) return null;
   const v = variants[activeIdx];
 
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
       <div className="mb-4">
         <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] mb-1.5" style={{ color: accent }}>
           Sub-routes
         </div>
-        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0a1530] tracking-[-0.015em] leading-tight">
+        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] tracking-[-0.015em] leading-tight">
           Which sub-route applies to you?
         </h2>
         <p className="mt-2 text-[13.5px] text-[#52596e] leading-relaxed">
@@ -51,7 +51,7 @@ export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: 
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors duration-100 ${
                 isActive
                   ? 'text-white'
-                  : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0a1530]'
+                  : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0A2540]'
               }`}
               style={isActive ? { background: accent } : undefined}
             >
@@ -67,11 +67,11 @@ export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: 
           <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#9aa3b8]">
             {v.label}
           </div>
-          <div className="mt-1 font-display font-bold text-[18px] text-[#0a1530] leading-tight">
+          <div className="mt-1 font-display font-bold text-[18px] text-[#0A2540] leading-tight">
             {v.headline}
           </div>
           {v.fee && (
-            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] text-[12.5px] font-semibold text-[#0a1530] tabular-nums">
+            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] text-[12.5px] font-semibold text-[#0A2540] tabular-nums">
               {v.fee}
             </div>
           )}
@@ -89,7 +89,7 @@ export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: 
             <ul className="mt-4 space-y-1.5">
               {v.notes.map((n, i) => (
                 <li key={i} className="flex items-start gap-2 text-[12.5px] text-[#7a8195] leading-snug">
-                  <span className="text-[#d9152b]">•</span>
+                  <span className="text-[#00C4B4]">•</span>
                   <span>{n}</span>
                 </li>
               ))}
@@ -118,7 +118,7 @@ export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: 
           <div className="mt-3 space-y-2">
             <Link
               href={`/tools/cost-calculator?visa=${visaId}&variant=${v.id}`}
-              className="group flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-white font-bold text-[13px] shadow-[0_4px_14px_rgba(217,21,43,0.32)] active:scale-[0.98] transition-transform"
+              className="group flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-white font-bold text-[13px] shadow-[0_4px_14px_rgba(0, 196, 180,0.32)] active:scale-[0.98] transition-transform"
               style={{ background: accent }}
             >
               <span className="flex items-center gap-2">
@@ -129,7 +129,7 @@ export default function VariantPicker({ variants, visaId, accent = '#d9152b' }: 
             <a
               href={v.source}
               target="_blank" rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-white border border-[rgba(14,20,36,0.1)] text-[12.5px] font-semibold text-[#52596e] hover:border-[#0a1530] hover:text-[#0a1530] transition-colors duration-100"
+              className="group flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-white border border-[rgba(14,20,36,0.1)] text-[12.5px] font-semibold text-[#52596e] hover:border-[#0A2540] hover:text-[#0A2540] transition-colors duration-100"
             >
               <span className="flex items-center gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
@@ -150,7 +150,7 @@ function Row({ label, value }: { label: string; value: string }) {
       <dt className="text-[11.5px] uppercase tracking-[0.08em] text-[#9aa3b8] font-semibold flex-shrink-0">
         {label}
       </dt>
-      <dd className="text-[12.5px] font-semibold text-[#0a1530] text-right tabular-nums leading-tight">
+      <dd className="text-[12.5px] font-semibold text-[#0A2540] text-right tabular-nums leading-tight">
         {value}
       </dd>
     </div>

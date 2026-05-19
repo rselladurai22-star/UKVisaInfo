@@ -77,7 +77,7 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
               <li key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block h-full bg-white border border-[rgba(14,20,36,0.07)] rounded-2xl p-4 hover:border-[#0a1530] hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(10,21,48,0.08)] transition-[transform,border-color,box-shadow] duration-150"
+                  className="group block h-full bg-white border border-[rgba(14,20,36,0.07)] rounded-2xl p-4 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(10, 37, 64,0.08)] transition-[transform,border-color,box-shadow] duration-150"
                 >
                   <div className="flex flex-wrap gap-1.5 mb-2.5">
                     {post.tags.slice(0, 2).map((t) => (
@@ -86,13 +86,13 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
                       </span>
                     ))}
                   </div>
-                  <div className="text-[13.5px] font-bold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 leading-snug mb-2">
+                  <div className="text-[13.5px] font-bold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 leading-snug mb-2">
                     {post.title}
                   </div>
                   <div className="flex items-center gap-2 text-[11px] text-[#7a8195]">
                     <Clock className="w-3 h-3" />
                     {post.readMinutes} min read
-                    <ArrowRight className="w-3 h-3 ml-auto text-[#d9152b] opacity-0 group-hover:opacity-100 transition-opacity duration-100" />
+                    <ArrowRight className="w-3 h-3 ml-auto text-[#00C4B4] opacity-0 group-hover:opacity-100 transition-opacity duration-100" />
                   </div>
                 </Link>
               </li>
@@ -109,13 +109,13 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
           <ul className="grid gap-2 sm:grid-cols-2 mb-3">
             {visas.map((v) => (
               <li key={v.id}>
-                <Link href={`/visa/${v.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-[rgba(217,21,43,0.08)] text-[#d9152b] flex items-center justify-center flex-shrink-0">
+                <Link href={`/visa/${v.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
+                  <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0">
                     <Briefcase className="w-3.5 h-3.5" />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9aa3b8]">Visa guide</div>
-                    <div className="text-[13.5px] font-semibold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 truncate">
+                    <div className="text-[13.5px] font-semibold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 truncate">
                       {v.title}
                     </div>
                   </div>
@@ -126,13 +126,13 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
 
             {countries.map((c) => (
               <li key={c.code}>
-                <Link href={`/from/${c.code}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-[rgba(37,99,235,0.08)] text-[#2563eb] flex items-center justify-center flex-shrink-0">
+                <Link href={`/from/${c.code}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
+                  <span className="w-8 h-8 rounded-lg bg-[rgba(10, 37, 64,0.08)] text-[#0A2540] flex items-center justify-center flex-shrink-0">
                     <Globe2 className="w-3.5 h-3.5" />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9aa3b8]">Country guide</div>
-                    <div className="text-[13.5px] font-semibold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 truncate">
+                    <div className="text-[13.5px] font-semibold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 truncate">
                       UK visa for {c.demonym} <span className="text-lg">{c.flag}</span>
                     </div>
                   </div>
@@ -143,13 +143,13 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
 
             {featuredSoc && (
               <li className="sm:col-span-2">
-                <Link href={`/salary/${socSlug(featuredSoc.code, featuredSoc.title)}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-[rgba(13,148,136,0.08)] text-[#0d9488] flex items-center justify-center flex-shrink-0">
+                <Link href={`/salary/${socSlug(featuredSoc.code, featuredSoc.title)}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
+                  <span className="w-8 h-8 rounded-lg bg-[rgba(0, 127, 118,0.08)] text-[#007F76] flex items-center justify-center flex-shrink-0">
                     <Building2 className="w-3.5 h-3.5" />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9aa3b8]">Salary page</div>
-                    <div className="text-[13.5px] font-semibold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 truncate">
+                    <div className="text-[13.5px] font-semibold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 truncate">
                       {featuredSoc.title} (SOC {featuredSoc.code}) — £{featuredSoc.goingRate.toLocaleString()}
                     </div>
                   </div>

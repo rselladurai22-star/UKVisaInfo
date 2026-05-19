@@ -80,12 +80,12 @@ export default async function SalaryPage({ params }: RouteParams) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
         <div
           className="absolute inset-0 opacity-[0.18] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }}
+          style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }}
         />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#d9152b]/20 blur-[120px] pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/20 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <Link href="/tools/salary-checker" className="inline-flex items-center gap-1.5 text-white/55 hover:text-white text-sm font-medium mb-6 transition-colors duration-100">
@@ -93,7 +93,7 @@ export default async function SalaryPage({ params }: RouteParams) {
           </Link>
 
           <div className="flex flex-wrap items-center gap-2 mb-5">
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47]">
+            <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A]">
               <Briefcase className="w-3 h-3" /> SOC {occ.code}
             </span>
             <span className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.14] text-white/65">
@@ -120,7 +120,7 @@ export default async function SalaryPage({ params }: RouteParams) {
 
           {/* Big stat row */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-            <StatCard label="Going rate" value={`£${occ.goingRate.toLocaleString()}`} sub="standard" accent="#ffbf47" />
+            <StatCard label="Going rate" value={`£${occ.goingRate.toLocaleString()}`} sub="standard" accent="#C9A14A" />
             <StatCard label="Per hour" value={`£${occ.hourlyGoingRate?.toFixed(2) ?? '—'}`} sub="at 37.5h/week" />
             {occ.lowerGoingRate ? (
               <StatCard label="New-entrant" value={`£${occ.lowerGoingRate.toLocaleString()}`} sub="discounted rate" />
@@ -158,7 +158,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                     <TrendingUp className="w-3.5 h-3.5" />
                     Your effective threshold
                   </div>
-                  <div className="font-display font-bold text-[1.75rem] md:text-[2rem] text-[#0a1530] tracking-[-0.02em] tabular-nums">
+                  <div className="font-display font-bold text-[1.75rem] md:text-[2rem] text-[#0A2540] tracking-[-0.02em] tabular-nums">
                     £{effectiveThreshold.toLocaleString()}{' '}
                     <span className="text-[14px] font-medium text-[#52596e]">/year</span>
                   </div>
@@ -220,7 +220,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                     'Build in a £500+ margin: Home Office caseworkers round down, not up.',
                   ].map((step, i) => (
                     <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white">
-                      <span className="w-7 h-7 rounded-full bg-[#0a1530] text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0">
+                      <span className="w-7 h-7 rounded-full bg-[#0A2540] text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0">
                         {i + 1}
                       </span>
                       <span className="text-[#1a2240] text-[14.5px] leading-[1.6]">{step}</span>
@@ -229,7 +229,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                 </ol>
                 <Link
                   href="/tools/salary-checker"
-                  className="inline-flex items-center gap-1.5 text-[#d9152b] text-sm font-bold hover:gap-2.5 transition-[gap] duration-100"
+                  className="inline-flex items-center gap-1.5 text-[#00C4B4] text-sm font-bold hover:gap-2.5 transition-[gap] duration-100"
                 >
                   Use the interactive salary checker <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -243,11 +243,11 @@ export default async function SalaryPage({ params }: RouteParams) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {relatedSponsors.map((s) => (
                       <div key={s.name} className="flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white">
-                        <span className="mt-0.5 w-7 h-7 rounded-lg bg-[rgba(37,99,235,0.1)] text-[#2563eb] flex items-center justify-center flex-shrink-0">
+                        <span className="mt-0.5 w-7 h-7 rounded-lg bg-[rgba(10, 37, 64,0.1)] text-[#0A2540] flex items-center justify-center flex-shrink-0">
                           <Building2 className="w-3.5 h-3.5" />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[14px] font-semibold text-[#0a1530] truncate">{s.name}</div>
+                          <div className="text-[14px] font-semibold text-[#0A2540] truncate">{s.name}</div>
                           <div className="text-[11.5px] text-[#7a8195] flex items-center gap-1.5">
                             <span>{s.city}</span>
                             <span className="text-[#cfd5e0]">·</span>
@@ -259,7 +259,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                   </div>
                   <Link
                     href={`/sponsors/sector/${sectorBucket.toLowerCase()}`}
-                    className="mt-5 inline-flex items-center gap-1.5 text-[#d9152b] text-sm font-bold hover:gap-2.5 transition-[gap] duration-100"
+                    className="mt-5 inline-flex items-center gap-1.5 text-[#00C4B4] text-sm font-bold hover:gap-2.5 transition-[gap] duration-100"
                   >
                     All {sectorBucket} sponsors <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -273,13 +273,13 @@ export default async function SalaryPage({ params }: RouteParams) {
                       <li key={r.code}>
                         <Link
                           href={`/salary/${socSlug(r.code, r.title)}`}
-                          className="group flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-100"
+                          className="group flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100"
                         >
                           <span className="text-[11px] font-bold text-[#9aa3b8] tabular-nums w-10 flex-shrink-0">
                             {r.code}
                           </span>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[13.5px] font-semibold text-[#0a1530] truncate group-hover:text-[#d9152b] transition-colors duration-100">
+                            <div className="text-[13.5px] font-semibold text-[#0A2540] truncate group-hover:text-[#00C4B4] transition-colors duration-100">
                               {r.title}
                             </div>
                             <div className="text-[11.5px] text-[#7a8195] tabular-nums">
@@ -295,9 +295,9 @@ export default async function SalaryPage({ params }: RouteParams) {
               )}
 
               {/* CTA */}
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-9">
-                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
-                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/25 blur-3xl pointer-events-none" />
+              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-9">
+                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
+                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
                 <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="max-w-md">
                     <h3 className="font-display text-white text-[1.25rem] md:text-[1.5rem] font-bold leading-tight tracking-[-0.015em]">
@@ -309,7 +309,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                   </div>
                   <Link
                     href="/tools/salary-checker"
-                    className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
+                    className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
                   >
                     Open salary checker <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -320,7 +320,7 @@ export default async function SalaryPage({ params }: RouteParams) {
             {/* Sidebar */}
             <aside className="col-span-12 lg:col-span-4">
               <div className="lg:sticky lg:top-[100px] space-y-4">
-                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-3">
                     Reference card
                   </div>
@@ -339,7 +339,7 @@ export default async function SalaryPage({ params }: RouteParams) {
 
                 <Link
                   href="/visa/skilled-worker"
-                  className="group block rounded-2xl bg-gradient-to-br from-[#d9152b] to-[#b8101f] p-5 text-white relative overflow-hidden"
+                  className="group block rounded-2xl bg-gradient-to-br from-[#00C4B4] to-[#009E91] p-5 text-white relative overflow-hidden"
                 >
                   <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-white/15 blur-2xl pointer-events-none" />
                   <div className="relative z-10">
@@ -369,7 +369,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                   <p className="text-[12px] text-[#52596e] leading-snug">
                     Going rates verified against Home Office Appendix Skilled Occupations published on gov.uk.
                   </p>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#d9152b]">
+                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4]">
                     View source <ExternalLink className="w-3 h-3" />
                   </div>
                 </a>
@@ -388,10 +388,10 @@ export default async function SalaryPage({ params }: RouteParams) {
 
 function Section({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
       <div className="mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
-        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">{eyebrow}</div>
-        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0a1530] leading-tight tracking-[-0.015em]">
+        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">{eyebrow}</div>
+        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] leading-tight tracking-[-0.015em]">
           {title}
         </h2>
       </div>
@@ -414,14 +414,14 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string;
 
 function ThresholdRow({ num, label, value, note, highlight }: { num: number; label: string; value: string; note: string; highlight?: boolean }) {
   return (
-    <li className={`flex items-start gap-3 p-3.5 rounded-xl border ${highlight ? 'border-[rgba(217,21,43,0.25)] bg-[rgba(217,21,43,0.05)]' : 'border-[rgba(14,20,36,0.06)] bg-[#fafbfd]'}`}>
-      <span className={`w-7 h-7 rounded-full text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0 ${highlight ? 'bg-[#d9152b]' : 'bg-[#0a1530]'}`}>
+    <li className={`flex items-start gap-3 p-3.5 rounded-xl border ${highlight ? 'border-[rgba(0, 196, 180,0.25)] bg-[rgba(0, 196, 180,0.05)]' : 'border-[rgba(14,20,36,0.06)] bg-[#fafbfd]'}`}>
+      <span className={`w-7 h-7 rounded-full text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0 ${highlight ? 'bg-[#00C4B4]' : 'bg-[#0A2540]'}`}>
         {num}
       </span>
       <div className="flex-1">
         <div className="flex items-baseline justify-between gap-3">
-          <div className="text-[14.5px] font-bold text-[#0a1530]">{label}</div>
-          <div className="font-display font-bold text-[16px] tabular-nums text-[#0a1530]">{value}</div>
+          <div className="text-[14.5px] font-bold text-[#0A2540]">{label}</div>
+          <div className="font-display font-bold text-[16px] tabular-nums text-[#0A2540]">{value}</div>
         </div>
         <div className="text-[12px] text-[#7a8195] mt-0.5">{note}</div>
       </div>
@@ -433,7 +433,7 @@ function DiscountCard({ title, value, eligibility, effective }: { title: string;
   return (
     <div className="rounded-2xl bg-gradient-to-br from-[#dcfce7] to-white border border-[#bbf7d0] p-5">
       <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#047857] mb-2">{title}</div>
-      <div className="font-display font-bold text-[1.5rem] text-[#0a1530] tracking-[-0.015em] tabular-nums">{value}</div>
+      <div className="font-display font-bold text-[1.5rem] text-[#0A2540] tracking-[-0.015em] tabular-nums">{value}</div>
       <p className="mt-2 text-[12.5px] text-[#475569] leading-snug">{eligibility}</p>
       <div className="mt-3 pt-3 border-t border-[#bbf7d0] text-[11.5px] text-[#047857]">
         <strong>Effective floor: {effective}</strong>
@@ -448,7 +448,7 @@ function Row({ label, value, icon: Icon }: { label: string; value: string; icon:
       <dt className="flex items-center gap-2 text-[12px] text-[#7a8195] font-medium">
         <Icon className="w-3 h-3" /> {label}
       </dt>
-      <dd className="text-[12.5px] font-semibold text-[#0a1530] text-right tabular-nums">{value}</dd>
+      <dd className="text-[12.5px] font-semibold text-[#0A2540] text-right tabular-nums">{value}</dd>
     </div>
   );
 }

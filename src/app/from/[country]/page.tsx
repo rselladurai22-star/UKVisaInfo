@@ -57,16 +57,16 @@ export default async function CountryPage({ params }: RouteParams) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
 
       {/* HERO */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
         <div
           className="absolute inset-0 opacity-[0.18] pointer-events-none"
           style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
             backgroundSize: '22px 22px',
           }}
         />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#d9152b]/20 blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#2563eb]/12 blur-[140px] pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/20 blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#0A2540]/12 blur-[140px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <Link
@@ -79,7 +79,7 @@ export default async function CountryPage({ params }: RouteParams) {
           <div className="flex items-center gap-4 mb-5">
             <div className="text-[3.5rem] md:text-[4.5rem] leading-none">{c.flag}</div>
             <div>
-              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-1.5">
+              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-1.5">
                 <Globe2 className="w-3 h-3" />
                 Country guide
               </span>
@@ -116,7 +116,7 @@ export default async function CountryPage({ params }: RouteParams) {
                 </p>
                 {c.status === 'stub' && (
                   <div className="mt-5 flex items-start gap-3 p-4 rounded-xl bg-[#fffbeb] border border-[#fde68a]">
-                    <AlertCircle className="w-4 h-4 text-[#d97706] flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-[#C9A14A] flex-shrink-0 mt-0.5" />
                     <p className="text-[13px] text-[#78350f] leading-snug">
                       This guide is being expanded. For the most detailed information,
                       see the relevant visa route page linked below or our latest blog guides.
@@ -136,18 +136,18 @@ export default async function CountryPage({ params }: RouteParams) {
                       <li key={r.slug}>
                         <Link
                           href={`/visa/${r.slug}`}
-                          className="group flex items-center gap-4 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] hover:shadow-[0_8px_24px_rgba(10,21,48,0.08)] transition-[border-color,box-shadow] duration-150"
+                          className="group flex items-center gap-4 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:shadow-[0_8px_24px_rgba(10, 37, 64,0.08)] transition-[border-color,box-shadow] duration-150"
                         >
-                          <span className="w-9 h-9 rounded-xl bg-[#0a1530] text-white font-display font-bold text-[13px] flex items-center justify-center flex-shrink-0">
+                          <span className="w-9 h-9 rounded-xl bg-[#0A2540] text-white font-display font-bold text-[13px] flex items-center justify-center flex-shrink-0">
                             {i + 1}
                           </span>
                           <div className="flex-1 min-w-0">
-                            <div className="text-[14.5px] font-bold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100">
+                            <div className="text-[14.5px] font-bold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100">
                               {r.title}{v ? <span className="text-[#9aa3b8] font-normal"> · from {extractFee(v.fee)}</span> : null}
                             </div>
                             <div className="text-[12.5px] text-[#7a8195] mt-0.5">{r.reason}</div>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-[#cfd5e0] group-hover:text-[#d9152b] group-hover:translate-x-0.5 transition-all duration-150 flex-shrink-0" />
+                          <ArrowRight className="w-4 h-4 text-[#cfd5e0] group-hover:text-[#00C4B4] group-hover:translate-x-0.5 transition-all duration-150 flex-shrink-0" />
                         </Link>
                       </li>
                     );
@@ -163,7 +163,7 @@ export default async function CountryPage({ params }: RouteParams) {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {c.applicationCentres.map((centre) => (
                     <div key={centre} className="flex items-center gap-2 p-3 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)] text-[13px] text-[#1a2240]">
-                      <MapPin className="w-3.5 h-3.5 text-[#d9152b] flex-shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#00C4B4] flex-shrink-0" />
                       <span className="truncate">{centre}</span>
                     </div>
                   ))}
@@ -174,7 +174,7 @@ export default async function CountryPage({ params }: RouteParams) {
                 <ul className="space-y-2.5">
                   {c.notes.map((note, i) => (
                     <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
-                      <span className="mt-0.5 w-5 h-5 rounded-md bg-[#fef3c7] text-[#d97706] flex items-center justify-center flex-shrink-0">
+                      <span className="mt-0.5 w-5 h-5 rounded-md bg-[#fef3c7] text-[#C9A14A] flex items-center justify-center flex-shrink-0">
                         <Sparkles className="w-3 h-3" />
                       </span>
                       <span className="text-[#1a2240] text-[14px] leading-[1.6]">{note}</span>
@@ -190,13 +190,13 @@ export default async function CountryPage({ params }: RouteParams) {
                       <li key={b.slug}>
                         <Link
                           href={`/blog/${b.slug}`}
-                          className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] transition-colors duration-150"
+                          className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-150"
                         >
-                          <span className="w-8 h-8 rounded-lg bg-[rgba(217,21,43,0.08)] text-[#d9152b] flex items-center justify-center flex-shrink-0">
+                          <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0">
                             <BookOpen className="w-3.5 h-3.5" />
                           </span>
                           <div className="flex-1 min-w-0">
-                            <div className="text-[14px] font-bold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100 leading-snug">
+                            <div className="text-[14px] font-bold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 leading-snug">
                               {b.title}
                             </div>
                             <div className="text-[11.5px] text-[#7a8195] mt-0.5">
@@ -212,15 +212,15 @@ export default async function CountryPage({ params }: RouteParams) {
               )}
 
               {/* CTA */}
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-9">
+              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-9">
                 <div
                   className="absolute inset-0 opacity-[0.2] pointer-events-none"
                   style={{
-                    backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+                    backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
                     backgroundSize: '18px 18px',
                   }}
                 />
-                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/25 blur-3xl pointer-events-none" />
+                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
                 <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="max-w-md">
                     <h3 className="font-display text-white text-[1.25rem] md:text-[1.5rem] font-bold leading-tight tracking-[-0.015em]">
@@ -233,7 +233,7 @@ export default async function CountryPage({ params }: RouteParams) {
                   </div>
                   <Link
                     href="/eligibility"
-                    className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
+                    className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
                   >
                     Start eligibility quiz <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -245,7 +245,7 @@ export default async function CountryPage({ params }: RouteParams) {
             <aside className="col-span-12 lg:col-span-4">
               <div className="lg:sticky lg:top-[100px] space-y-4">
 
-                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+                <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-3">
                     Quick reference
                   </div>
@@ -260,7 +260,7 @@ export default async function CountryPage({ params }: RouteParams) {
 
                 <Link
                   href="/eligibility"
-                  className="group block rounded-2xl bg-gradient-to-br from-[#d9152b] to-[#b8101f] p-5 text-white relative overflow-hidden"
+                  className="group block rounded-2xl bg-gradient-to-br from-[#00C4B4] to-[#009E91] p-5 text-white relative overflow-hidden"
                 >
                   <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-white/15 blur-2xl pointer-events-none" />
                   <div className="relative z-10">
@@ -288,7 +288,7 @@ export default async function CountryPage({ params }: RouteParams) {
                     href="https://www.gov.uk/check-uk-visa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-[#d9152b] hover:underline"
+                    className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4] hover:underline"
                   >
                     gov.uk visa check <ExternalLink className="w-3 h-3" />
                   </a>
@@ -312,12 +312,12 @@ export default async function CountryPage({ params }: RouteParams) {
 
 function Section({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
       <div className="mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
-        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">
+        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
           {eyebrow}
         </div>
-        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0a1530] leading-tight tracking-[-0.015em]">
+        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] leading-tight tracking-[-0.015em]">
           {title}
         </h2>
       </div>
@@ -337,7 +337,7 @@ function KeyFact({ ok, okLabel, badLabel }: { ok: boolean; okLabel: string; badL
       }`}
     >
       {positive
-        ? <AlertCircle className="w-3 h-3 text-[#ffbf47]" />
+        ? <AlertCircle className="w-3 h-3 text-[#C9A14A]" />
         : <CheckCircle2 className="w-3 h-3 text-[#34d399]" />}
       {positive ? okLabel : (badLabel ?? okLabel)}
     </div>
@@ -354,7 +354,7 @@ function FactRow({
       <dt className="flex items-center gap-2 text-[12px] text-[#7a8195] font-medium">
         <Icon className="w-3 h-3" /> {label}
       </dt>
-      <dd className="text-[12.5px] font-semibold text-[#0a1530] text-right">{value}</dd>
+      <dd className="text-[12.5px] font-semibold text-[#0A2540] text-right">{value}</dd>
     </div>
   );
 }

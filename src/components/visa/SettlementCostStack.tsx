@@ -19,14 +19,14 @@ export default function SettlementCostStack({
   const max = Math.max(1, ...breakdown.lines.map((l) => l.amount));
 
   return (
-    <div className="my-8 rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+    <div className="my-8 rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
       <div className="flex items-start justify-between gap-3 mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
         <div>
-          <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5 inline-flex items-center gap-1.5">
+          <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5 inline-flex items-center gap-1.5">
             <Calculator className="w-3 h-3" />
             Cost stack
           </div>
-          <h3 className="font-display text-[1.125rem] md:text-[1.25rem] font-bold text-[#0a1530] leading-tight tracking-[-0.015em]">
+          <h3 className="font-display text-[1.125rem] md:text-[1.25rem] font-bold text-[#0A2540] leading-tight tracking-[-0.015em]">
             {breakdown.title}
           </h3>
         </div>
@@ -47,11 +47,11 @@ export default function SettlementCostStack({
               </span>
               <div className="col-span-9 sm:col-span-5 relative h-7 bg-[#f3f5fb] rounded-lg overflow-hidden">
                 <div
-                  className="absolute inset-y-0 left-0 rounded-lg bg-gradient-to-r from-[#d9152b] via-[#e11d48] to-[#d97706] transition-[width] duration-500 ease-out"
+                  className="absolute inset-y-0 left-0 rounded-lg bg-gradient-to-r from-[#00C4B4] via-[#00C4B4] to-[#C9A14A] transition-[width] duration-500 ease-out"
                   style={{ width: `${Math.max(2, pct)}%` }}
                 />
               </div>
-              <span className="col-span-3 sm:col-span-2 text-right text-[13.5px] font-bold text-[#0a1530] tabular-nums">
+              <span className="col-span-3 sm:col-span-2 text-right text-[13.5px] font-bold text-[#0A2540] tabular-nums">
                 {POUND(line.amount)}
               </span>
               {/* Source on its own line, full width */}
@@ -64,9 +64,9 @@ export default function SettlementCostStack({
       </ol>
 
       {/* Total bar */}
-      <div className="rounded-2xl bg-gradient-to-br from-[#0a1530] to-[#13204a] text-white p-4 md:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="rounded-2xl bg-gradient-to-br from-[#0A2540] to-[#0F2C4B] text-white p-4 md:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47]">Total {breakdown.perPerson ? 'per person' : ''}</div>
+          <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A]">Total {breakdown.perPerson ? 'per person' : ''}</div>
           <div className="mt-1 font-display font-bold text-[2rem] md:text-[2.25rem] leading-none tabular-nums tracking-[-0.02em]">
             {POUND(breakdown.total)}
           </div>
@@ -74,7 +74,7 @@ export default function SettlementCostStack({
         {calculatorVisaParam !== undefined && (
           <Link
             href={`/tools/cost-calculator${calculatorVisaParam ? `?visa=${calculatorVisaParam}` : ''}`}
-            className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-4 py-2.5 rounded-xl text-[13px] hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-100"
+            className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-4 py-2.5 rounded-xl text-[13px] hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-100"
           >
             <Calculator className="w-3.5 h-3.5" />
             Calculate your full cost
@@ -86,7 +86,7 @@ export default function SettlementCostStack({
       {/* Note */}
       {breakdown.note && (
         <div className="mt-4 flex items-start gap-2.5 p-3.5 rounded-xl bg-[#fffbeb] border border-[#fde68a]">
-          <AlertCircle className="w-4 h-4 text-[#d97706] flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-4 h-4 text-[#C9A14A] flex-shrink-0 mt-0.5" />
           <p className="text-[12.5px] text-[#78350f] leading-snug">{breakdown.note}</p>
         </div>
       )}
@@ -97,7 +97,7 @@ export default function SettlementCostStack({
         <a
           href="https://www.gov.uk/government/publications/visa-regulations-revised-table"
           target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-[#d9152b] font-semibold hover:underline"
+          className="inline-flex items-center gap-1 text-[#00C4B4] font-semibold hover:underline"
         >
           gov.uk fee table <ExternalLink className="w-3 h-3" />
         </a>

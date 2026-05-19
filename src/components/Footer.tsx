@@ -8,7 +8,7 @@ const LOGO_ICON = (
     <rect x="2.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
     <rect x="6" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
     <rect x="9.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="1" y="12.5" width="14" height="1.5" rx="0.5" fill="#ffbf47"/>
+    <rect x="1" y="12.5" width="14" height="1.5" rx="0.5" fill="#C9A14A"/>
   </svg>
 );
 
@@ -37,22 +37,22 @@ const LEGAL = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#08112a] text-white">
+    <footer className="bg-[#06192E] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-10">
 
         {/* Newsletter strip */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#13204a] to-[#0a1530] border border-white/[0.06] p-6 md:p-8 mb-12 md:mb-14">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F2C4B] to-[#0A2540] border border-white/[0.06] p-6 md:p-8 mb-12 md:mb-14">
           <div
             className="absolute inset-0 opacity-[0.18] pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
               backgroundSize: '18px 18px',
             }}
           />
-          <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/22 blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/22 blur-3xl pointer-events-none" />
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+              <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
                 <Sparkles className="w-3 h-3" />
                 Weekly UK Visa Brief
               </div>
@@ -76,11 +76,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
-              <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#c9112a] to-[#8b001d] flex items-center justify-center shadow-[0_1px_4px_rgba(217,21,43,0.4)]">
+              <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#0A2540] to-[#06192E] ring-1 ring-[#00C4B4]/40 flex items-center justify-center shadow-[0_2px_8px_rgba(0,196,180,0.25)]">
                 {LOGO_ICON}
               </span>
               <span className="font-display font-bold text-[15px] text-white">
-                UK Visa <span className="text-[#ffbf47]">Info</span>
+                UK Visa <span className="text-[#C9A14A]">Info</span>
               </span>
             </Link>
             <p className="mt-5 text-sm text-white/40 leading-relaxed max-w-[280px]">

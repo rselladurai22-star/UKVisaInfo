@@ -48,7 +48,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
     >
       <div
         className="bg-white/95 backdrop-blur border-b border-[rgba(14,20,36,0.06)]"
-        style={{ boxShadow: '0 1px 8px rgba(10,21,48,0.04)' }}
+        style={{ boxShadow: '0 1px 8px rgba(10, 37, 64,0.04)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-[52px] flex items-center gap-3">
           <span
@@ -57,7 +57,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
             style={{ background: accent }}
           />
           <div className="flex-1 min-w-0">
-            <div className="font-display font-bold text-[13.5px] text-[#0a1530] tracking-tight leading-none truncate">
+            <div className="font-display font-bold text-[13.5px] text-[#0A2540] tracking-tight leading-none truncate">
               {title}
             </div>
             <div className="mt-1 text-[11px] text-[#52596e] tabular-nums truncate hidden sm:block">
@@ -67,7 +67,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
 
           <Link
             href={`/tools/cost-calculator?visa=${slug}`}
-            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#52596e] hover:text-[#0a1530] transition-colors duration-75 px-3 py-1.5 rounded-lg hover:bg-[#f3f5fb]"
+            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#52596e] hover:text-[#0A2540] transition-colors duration-75 px-3 py-1.5 rounded-lg hover:bg-[#f3f5fb]"
           >
             <Calculator className="w-3.5 h-3.5" />
             Calculate cost

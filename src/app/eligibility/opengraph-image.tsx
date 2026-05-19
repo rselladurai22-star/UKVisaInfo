@@ -12,7 +12,7 @@ export default async function Image() {
         style={{
           width: '100%', height: '100%',
           display: 'flex', flexDirection: 'column',
-          background: 'linear-gradient(135deg, #0a1530 0%, #13204a 60%, #1c2c63 100%)',
+          background: 'linear-gradient(135deg, #0A2540 0%, #0F2C4B 60%, #1c2c63 100%)',
           padding: 64,
           color: 'white',
           fontFamily: 'system-ui, sans-serif',
@@ -22,36 +22,36 @@ export default async function Image() {
         <div
           style={{
             position: 'absolute', inset: 0,
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.4) 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.4) 1px, transparent 0)',
             backgroundSize: '24px 24px',
             opacity: 0.25,
           }}
         />
-        <div style={{ position: 'absolute', right: -150, top: -150, width: 520, height: 520, borderRadius: 9999, background: 'rgba(217,21,43,0.3)', filter: 'blur(120px)' }} />
+        <div style={{ position: 'absolute', right: -150, top: -150, width: 520, height: 520, borderRadius: 9999, background: 'rgba(0, 196, 180,0.3)', filter: 'blur(120px)' }} />
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-          <div style={{ width: 48, height: 48, borderRadius: 12, background: 'linear-gradient(135deg, #c9112a, #8b001d)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26 }}>
+          <div style={{ width: 48, height: 48, borderRadius: 12, background: 'linear-gradient(135deg, #00A89A, #007F76)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26 }}>
             🇬🇧
           </div>
           <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.02em' }}>
-            UK Visa <span style={{ color: '#d9152b' }}>Info</span>
+            UK Visa <span style={{ color: '#00C4B4' }}>Info</span>
           </div>
         </div>
 
         <div style={{ display: 'flex', marginTop: 'auto', marginBottom: 24 }}>
-          <div style={{ display: 'flex', alignItems: 'center', padding: '8px 18px', borderRadius: 9999, background: 'rgba(255,191,71,0.2)', fontSize: 16, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ffbf47' }}>
+          <div style={{ display: 'flex', alignItems: 'center', padding: '8px 18px', borderRadius: 9999, background: 'rgba(201, 161, 74,0.2)', fontSize: 16, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C9A14A' }}>
             ⚡ 60-second quiz
           </div>
         </div>
 
         <div style={{ fontSize: 96, fontWeight: 800, lineHeight: 1.02, letterSpacing: '-0.035em', maxWidth: 1000, position: 'relative' }}>
           Find your UK visa<br />
-          <span style={{ background: 'linear-gradient(90deg, #ffbf47, #ff9f43)', backgroundClip: 'text', color: 'transparent' }}>in 60 seconds.</span>
+          <span style={{ background: 'linear-gradient(90deg, #C9A14A, #ff9f43)', backgroundClip: 'text', color: 'transparent' }}>in 60 seconds.</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: 20, color: 'rgba(255,255,255,0.5)', position: 'relative' }}>
           <span>Free · No signup · gov.uk sourced</span>
-          <span style={{ marginLeft: 'auto', color: '#ffbf47', fontWeight: 700 }}>
+          <span style={{ marginLeft: 'auto', color: '#C9A14A', fontWeight: 700 }}>
             ukvisainfo.co.uk/eligibility →
           </span>
         </div>

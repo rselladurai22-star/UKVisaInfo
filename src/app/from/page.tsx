@@ -17,16 +17,16 @@ export default function FromIndex() {
 
   return (
     <div className="bg-white">
-      <section className="pt-[100px] md:pt-[120px] pb-12 md:pb-16 bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a]">
+      <section className="pt-[100px] md:pt-[120px] pb-12 md:pb-16 bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B]">
         <div
           className="absolute inset-x-0 top-[60px] md:top-[68px] bottom-0 opacity-[0.18] pointer-events-none"
           style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
             backgroundSize: '22px 22px',
           }}
         />
         <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
             <Globe2 className="w-3 h-3" />
             Country guides
           </span>
@@ -48,12 +48,12 @@ export default function FromIndex() {
               <Link
                 key={c.code}
                 href={`/from/${c.code}`}
-                className="group block bg-white rounded-2xl border border-[rgba(14,20,36,0.07)] p-5 hover:border-[#0a1530] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(10,21,48,0.08)] transition-[transform,border-color,box-shadow] duration-150"
+                className="group block bg-white rounded-2xl border border-[rgba(14,20,36,0.07)] p-5 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(10, 37, 64,0.08)] transition-[transform,border-color,box-shadow] duration-150"
               >
                 <div className="flex items-start gap-4 mb-3">
                   <div className="text-[2.25rem] leading-none">{c.flag}</div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-display font-bold text-[16px] text-[#0a1530] leading-tight">
+                    <div className="font-display font-bold text-[16px] text-[#0A2540] leading-tight">
                       UK visa for {c.demonym}
                     </div>
                     <div className="text-[11.5px] text-[#9aa3b8] mt-0.5">
@@ -69,7 +69,7 @@ export default function FromIndex() {
                 <p className="text-[12.5px] text-[#52596e] leading-snug line-clamp-3">
                   {c.tagline}
                 </p>
-                <div className="mt-4 pt-3 border-t border-[rgba(14,20,36,0.06)] inline-flex items-center gap-1.5 text-[12px] font-bold text-[#d9152b] group-hover:gap-2.5 transition-[gap] duration-100">
+                <div className="mt-4 pt-3 border-t border-[rgba(14,20,36,0.06)] inline-flex items-center gap-1.5 text-[12px] font-bold text-[#00C4B4] group-hover:gap-2.5 transition-[gap] duration-100">
                   View country guide <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
@@ -78,7 +78,7 @@ export default function FromIndex() {
 
           <p className="mt-8 text-center text-[12.5px] text-[#7a8195]">
             More country guides coming. Want yours covered?{' '}
-            <a href="mailto:contact@ukvisainfo.co.uk" className="text-[#d9152b] font-semibold">Email us</a>.
+            <a href="mailto:contact@ukvisainfo.co.uk" className="text-[#00C4B4] font-semibold">Email us</a>.
           </p>
         </div>
       </section>

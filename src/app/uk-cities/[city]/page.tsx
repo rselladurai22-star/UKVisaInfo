@@ -38,16 +38,16 @@ export default async function CityPage({ params }: RouteParams) {
 
   return (
     <>
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0e1b3f] to-[#13204a] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
-        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#2563eb]/18 blur-[120px] pointer-events-none" />
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-14">
+        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#0A2540]/18 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <Link href="/uk-cities" className="inline-flex items-center gap-1.5 text-white/55 hover:text-white text-sm font-medium mb-6 transition-colors duration-100">
             <ArrowLeft className="w-4 h-4" /> All cities
           </Link>
 
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#ffbf47] mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-3">
             <MapPin className="w-3 h-3" /> {c.region}
           </span>
           <h1 className="font-display text-white text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold leading-[1.04] tracking-[-0.025em]">
@@ -92,7 +92,7 @@ export default async function CityPage({ params }: RouteParams) {
                 </ul>
                 <div className="rounded-2xl bg-gradient-to-br from-[#dcfce7] to-white border border-[#bbf7d0] p-4 flex items-center justify-between gap-3">
                   <span className="text-[13.5px] font-bold text-[#047857] uppercase tracking-[0.08em]">Total / month</span>
-                  <span className="font-display font-bold text-[1.625rem] text-[#0a1530] tabular-nums">£{c.monthlyCost.total}</span>
+                  <span className="font-display font-bold text-[1.625rem] text-[#0A2540] tabular-nums">£{c.monthlyCost.total}</span>
                 </div>
               </Section>
 
@@ -102,13 +102,13 @@ export default async function CityPage({ params }: RouteParams) {
                     <li key={i}>
                       <Link
                         href={`/sponsors/sector/${slugify(s.sector)}`}
-                        className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0a1530] hover:shadow-[0_4px_14px_rgba(10,21,48,0.06)] transition-[border-color,box-shadow] duration-150"
+                        className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:shadow-[0_4px_14px_rgba(10, 37, 64,0.06)] transition-[border-color,box-shadow] duration-150"
                       >
-                        <span className="w-9 h-9 rounded-xl bg-[rgba(37,99,235,0.08)] text-[#2563eb] flex items-center justify-center flex-shrink-0">
+                        <span className="w-9 h-9 rounded-xl bg-[rgba(10, 37, 64,0.08)] text-[#0A2540] flex items-center justify-center flex-shrink-0">
                           <Briefcase className="w-4 h-4" />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[14.5px] font-bold text-[#0a1530] group-hover:text-[#d9152b] transition-colors duration-100">{s.sector}</div>
+                          <div className="text-[14.5px] font-bold text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100">{s.sector}</div>
                           <div className="text-[12.5px] text-[#7a8195] mt-0.5">{s.reason}</div>
                         </div>
                         <ArrowRight className="w-3.5 h-3.5 text-[#cfd5e0] group-hover:translate-x-0.5 transition-transform duration-150 mt-1 flex-shrink-0" />
@@ -122,8 +122,8 @@ export default async function CityPage({ params }: RouteParams) {
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {c.neighbourhoods.map((n) => (
                     <li key={n.name} className="p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white">
-                      <div className="flex items-center gap-2 text-[14px] font-bold text-[#0a1530]">
-                        <MapPin className="w-3.5 h-3.5 text-[#d9152b]" /> {n.name}
+                      <div className="flex items-center gap-2 text-[14px] font-bold text-[#0A2540]">
+                        <MapPin className="w-3.5 h-3.5 text-[#00C4B4]" /> {n.name}
                       </div>
                       <div className="text-[12.5px] text-[#7a8195] mt-1 leading-snug">{n.vibe}</div>
                     </li>
@@ -135,16 +135,16 @@ export default async function CityPage({ params }: RouteParams) {
                 <ul className="space-y-2.5">
                   {c.notes.map((n, i) => (
                     <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-[#fafbfd] border border-[rgba(14,20,36,0.05)]">
-                      <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#d97706]" />
+                      <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A14A]" />
                       <span className="text-[#1a2240] text-[14px] leading-[1.6]">{n}</span>
                     </li>
                   ))}
                 </ul>
               </Section>
 
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#13204a] to-[#1c2c63] p-7 md:p-9">
-                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,191,71,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
-                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#d9152b]/25 blur-3xl pointer-events-none" />
+              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-9">
+                <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '18px 18px' }} />
+                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
                 <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="max-w-md">
                     <h3 className="font-display text-white text-[1.25rem] md:text-[1.5rem] font-bold leading-tight tracking-[-0.015em]">
@@ -153,7 +153,7 @@ export default async function CityPage({ params }: RouteParams) {
                     <p className="mt-2 text-white/55 text-[13.5px]">Run the salary and cost numbers before you accept.</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <Link href="/tools/salary-checker" className="inline-flex items-center gap-2 bg-[#ffbf47] text-[#0a1530] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100">
+                    <Link href="/tools/salary-checker" className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] transition-colors duration-100">
                       Check salary <ArrowRight className="w-4 h-4" />
                     </Link>
                     <Link href={`/sponsors/city/${slugify(c.name)}`} className="inline-flex items-center gap-2 bg-white/[0.08] border border-white/[0.14] text-white font-semibold px-5 py-3 rounded-xl text-sm hover:bg-white/[0.13] transition-colors duration-100">
@@ -195,7 +195,7 @@ export default async function CityPage({ params }: RouteParams) {
                     <ShieldCheck className="w-3 h-3" /> Source
                   </div>
                   <p className="text-[12px] text-[#52596e] leading-snug">Cost figures sourced from ONS, transport authorities and rental platforms (May 2026).</p>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#d9152b]">
+                  <div className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4]">
                     gov.uk visa check <ExternalLink className="w-3 h-3" />
                   </div>
                 </a>
@@ -212,10 +212,10 @@ export default async function CityPage({ params }: RouteParams) {
 
 function Section({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10,21,48,0.04)]">
+    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
       <div className="mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
-        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#d9152b] mb-1.5">{eyebrow}</div>
-        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0a1530] leading-tight tracking-[-0.015em]">
+        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">{eyebrow}</div>
+        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] leading-tight tracking-[-0.015em]">
           {title}
         </h2>
       </div>
@@ -239,9 +239,9 @@ function FactPill({ icon: Icon, label, value }: { icon: React.ComponentType<{ cl
 function CostRow({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
     <li className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(14,20,36,0.05)] bg-[#fafbfd]">
-      <span className="w-8 h-8 rounded-lg bg-white text-[#0a1530] flex items-center justify-center"><Icon className="w-3.5 h-3.5" /></span>
-      <span className="text-[14px] font-semibold text-[#0a1530] flex-1">{label}</span>
-      <span className="text-[14px] font-bold text-[#0a1530] tabular-nums">{value}</span>
+      <span className="w-8 h-8 rounded-lg bg-white text-[#0A2540] flex items-center justify-center"><Icon className="w-3.5 h-3.5" /></span>
+      <span className="text-[14px] font-semibold text-[#0A2540] flex-1">{label}</span>
+      <span className="text-[14px] font-bold text-[#0A2540] tabular-nums">{value}</span>
     </li>
   );
 }
@@ -252,7 +252,7 @@ function Row({ label, value, icon: Icon }: { label: string; value: string; icon:
       <dt className="flex items-center gap-2 text-[12px] text-[#7a8195] font-medium">
         <Icon className="w-3 h-3" /> {label}
       </dt>
-      <dd className="text-[12.5px] font-semibold text-[#0a1530] text-right">{value}</dd>
+      <dd className="text-[12.5px] font-semibold text-[#0A2540] text-right">{value}</dd>
     </div>
   );
 }

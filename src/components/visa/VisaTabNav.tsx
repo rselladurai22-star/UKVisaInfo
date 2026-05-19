@@ -56,7 +56,7 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: stri
                   onClick={(e) => onClick(e, t.id)}
                   aria-current={isActive ? 'true' : undefined}
                   className={`relative inline-flex items-center h-12 px-3.5 text-[13px] font-semibold transition-colors duration-75 ${
-                    isActive ? 'text-[#0a1530]' : 'text-[#7a8195] hover:text-[#0a1530]'
+                    isActive ? 'text-[#0A2540]' : 'text-[#7a8195] hover:text-[#0A2540]'
                   }`}
                 >
                   {t.label}
