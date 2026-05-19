@@ -245,6 +245,18 @@ export default function Header({ onApply }: { onApply: () => void }) {
               );
             })}
             <Link
+              href="/tools/cost-calculator"
+              className={`
+                h-9 px-3.5 text-[13.5px] font-semibold rounded-full inline-flex items-center gap-1.5
+                transition-colors duration-75 border
+                ${pathname.startsWith('/tools/cost-calculator')
+                  ? 'text-[#d9152b] border-[#d9152b]/30 bg-[rgba(217,21,43,0.06)]'
+                  : 'text-[#0a1530] border-[rgba(14,20,36,0.12)] hover:border-[#d9152b] hover:text-[#d9152b]'}
+              `}
+            >
+              💰 Visa Cost
+            </Link>
+            <Link
               href="/eligibility"
               className={`
                 h-9 px-3.5 text-[13.5px] font-semibold rounded-full flex items-center
