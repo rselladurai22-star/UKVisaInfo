@@ -56,7 +56,7 @@ const SECTIONS: Section[] = [
         { href: '/visa/ancestry', label: 'UK Ancestry visa',     desc: 'Commonwealth + UK grandparent', icon: History, accent: '#0d9488' },
       ]},
     ],
-    feature: { title: 'Settle in the UK', desc: 'Routes to permanent residence and British citizenship.', href: '/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements', cta: 'ILR & citizenship guide' },
+    feature: { title: 'Compare all 6 settlement routes', desc: 'Side-by-side fees, time-to-ILR and English requirements — all verified against gov.uk.', href: '/settlement', cta: 'Settlement comparison hub' },
   },
   {
     id: 'switching', label: 'Switch', emoji: '🔄',

@@ -21,6 +21,7 @@ const RESOURCES = [
 ];
 
 const EXPLORE = [
+  { href: '/settlement', label: 'Settlement Compare' },
   { href: '/from', label: 'By Country' },
   { href: '/uk-cities', label: 'UK City Guides' },
   { href: '/salary', label: 'Salary by SOC Code' },
