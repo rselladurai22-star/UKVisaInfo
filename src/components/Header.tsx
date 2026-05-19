@@ -62,7 +62,7 @@ const SECTIONS: Section[] = [
     id: 'switching', label: 'Switch', emoji: '🔄',
     columns: [
       { heading: 'Switching paths', items: [
-        { href: '/blog/switch-student-to-skilled-worker-visa-uk-2026',        label: 'Student → Skilled Worker',  desc: 'New-entrant £30,960 rate',   icon: RefreshCw, accent: '#d9152b' },
+        { href: '/blog/switch-student-to-skilled-worker-visa-uk-2026',        label: 'Student → Skilled Worker',  desc: 'New-entrant £33,400 rate',   icon: RefreshCw, accent: '#d9152b' },
         { href: '/blog/uk-graduate-visa-2026-no-sponsor-needed',              label: 'Graduate → Skilled Worker', desc: '18-month bridge window',    icon: RefreshCw, accent: '#0d9488' },
         { href: '/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements', label: 'Skilled Worker → ILR',      desc: 'After 5 years continuous',  icon: RefreshCw, accent: '#059669' },
       ]},

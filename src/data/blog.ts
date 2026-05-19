@@ -45,15 +45,15 @@ Five groups get a discount from the £41,700 headline figure:
 
 | Group | Minimum salary | Notes |
 |---|---|---|
-| **New entrants** (under 26, or recent graduate, or moving from Student visa) | £30,960 | Max 4 years on this rate |
+| **New entrants** (under 26, or recent graduate, or moving from Student visa) | £33,400 | Max 4 years on this rate |
 | **PhD in a STEM subject relevant to the role** | £34,830 | Subject must match job |
 | **PhD in a non-STEM subject relevant to the role** | £41,700 (no discount in 2026) | Changed April 2025 |
-| **Immigration Salary List occupation** | £30,960 | Replaced the old Shortage Occupation List |
+| **Immigration Salary List occupation** | £33,400 | Replaced the old Shortage Occupation List |
 | **Health & Care visa (eligible healthcare roles)** | £25,600 or going rate | Separate route; see our Health & Care guide |
 
-The new-entrant discount is the most commonly missed. If you're 25, graduated within the last 2 years, or switching from a UK Student visa — apply it. It saves £7,740 per year on the threshold.
+The new-entrant discount is the most commonly missed. If you're 25, graduated within the last 2 years, or switching from a UK Student visa — apply it. It saves £8,300 per year on the threshold (8 April 2026 rates).
 
-> [!TIP] **New-entrant rate stacks with the Immigration Salary List discount.** If you qualify for both, your floor drops to £24,768 — the lowest possible starting threshold in the Skilled Worker route.
+> [!TIP] **New-entrant beats ISL on going-rate share.** Both ISL and new-entrant share the same £33,400 cash floor under the 8 April 2026 rules, but new-entrant only requires 70% of your occupation's going rate, while ISL still requires 100%. STEM PhD holders need 80% (gov.uk/skilled-worker-visa/when-you-can-be-paid-less).
 
 ## Going rates by occupation — the ones most people apply for
 
@@ -69,8 +69,8 @@ Every SOC 2020 code has its own going rate, set at the 25th percentile of UK ear
 - **Civil engineer (2121)** — £40,500
 - **Mechanical engineer (2122)** — £38,900
 - **Secondary school teacher (2314)** — £31,650 (under education pay scale)
-- **Chef (5434)** — £30,960 (Immigration Salary List)
-- **Graphic designer (3421)** — £30,960 (under new-entrant rate only)
+- **Chef (5434)** — £33,400 (Immigration Salary List)
+- **Graphic designer (3421)** — £33,400 (under new-entrant rate only)
 
 If your role's going rate is **above** £41,700, the going rate applies. If it's below, £41,700 applies (unless you qualify for a discount group).
 
@@ -87,7 +87,7 @@ ISL roles in 2026 include:
 - Boat and ship builders and repairers (5235)
 - Stonemasons and related trades (5311)
 
-If you're on the ISL, the minimum drops from £41,700 to £30,960 — but you still need to clear your occupation's going rate and £15.88/hour.
+If you're on the ISL, the minimum drops from £41,700 to £33,400 — but you still need to clear your occupation's going rate and £15.88/hour.
 
 ## How salary is calculated — the gotchas
 
@@ -713,7 +713,7 @@ Most Graduate visa holders aim to switch to Skilled Worker before the 18 months 
 
 **Months 1–3:** Apply to roles aggressively. Filter heavily for Home Office licensed sponsors — the official register is updated daily. Don't waste applications on companies that aren't licensed.
 
-**Months 4–9:** Negotiate offers. The £41,700 general threshold (or your role's going rate, whichever is higher) is now your benchmark. New entrant discount drops this to £30,960 if you're under 26 or graduated within the last 2 years.
+**Months 4–9:** Negotiate offers. The £41,700 general threshold (or your role's going rate, whichever is higher) is now your benchmark. New entrant discount drops this to £33,400 if you're under 26 or graduated within the last 2 years.
 
 **Months 10–14:** Get the Certificate of Sponsorship (CoS) issued. Apply to switch from Graduate to Skilled Worker.
 
@@ -797,7 +797,7 @@ Apply before your Student visa expires. If it lapses, you must leave the UK and 
 
 ## The salary threshold — and the new-entrant discount
 
-In 2026 the Skilled Worker general minimum is £41,700. But students switching almost always qualify for the **new-entrant rate** of £30,960. New entrant applies if any of these is true:
+In 2026 the Skilled Worker general minimum is £41,700. But students switching almost always qualify for the **new-entrant rate** of £33,400. New entrant applies if any of these is true:
 
 - You are under 26 at application date
 - You are switching from a Student visa (regardless of age)
@@ -1267,7 +1267,7 @@ Health and Care Worker visa is a sub-category of the Skilled Worker route, but w
 | Application fee (5 years, out of UK) | £1,636 | £590 |
 | Immigration Health Surcharge | £1,035/year | **Exempt** |
 | General salary minimum | £41,700 | £25,600 (or going rate) |
-| New-entrant minimum | £30,960 | £20,960 (or going rate) |
+| New-entrant minimum | £33,400 | £20,960 (or going rate) |
 | Sponsorship licence required | Yes | Yes (different category) |
 | Path to ILR | 5 years | 5 years |
 | Dependants allowed | Yes | Yes (with restrictions) |
@@ -2514,7 +2514,7 @@ For ambiguous descriptions, check Glassdoor or LinkedIn for prior employees on v
 ### Step 3 — Salary check
 
 The role must clear:
-- **£41,700** general minimum (or £30,960 new-entrant rate if you're under 26 / recent graduate / switching from Student visa)
+- **£41,700** general minimum (or £33,400 new-entrant rate if you're under 26 / recent graduate / switching from Student visa)
 - The **going rate for your SOC 2020 code** (look up in our [Skilled Worker salary guide](/blog/uk-skilled-worker-visa-salary-threshold-2026))
 - **£15.88/hour** minimum
 
@@ -2523,7 +2523,7 @@ If a job pays £35,000, it fails — apply elsewhere.
 ### Step 4 — Tailor your application
 
 - **CV in UK format** — 2 pages, no photo, no date of birth, no marital status, no nationality at the top (but visa status can be in cover letter).
-- **Cover letter** stating clearly: "I require Skilled Worker visa sponsorship from start date. I meet the £41,700 / new-entrant £30,960 threshold based on the salary advertised."
+- **Cover letter** stating clearly: "I require Skilled Worker visa sponsorship from start date. I meet the £41,700 / new-entrant £33,400 threshold based on the salary advertised."
 - **Apply via the company's own portal** when possible — third-party recruiters often filter out non-UK candidates pre-screening.
 
 ## Red flags — sponsors to avoid
@@ -2542,7 +2542,7 @@ Sponsors registered in the last 12 months with no LinkedIn footprint, no Compani
 
 ### 4. Sponsors offering exactly threshold salary
 
-If a company is offering precisely £41,700 (or £30,960 for new entrants), with no headroom, it's a thin margin. Any tax change or annual review error could push you below threshold at extension and refuse the renewal.
+If a company is offering precisely £41,700 (or £33,400 for new entrants), with no headroom, it's a thin margin. Any tax change or annual review error could push you below threshold at extension and refuse the renewal.
 
 ### 5. Recruitment agencies running visa schemes
 
@@ -2594,7 +2594,7 @@ Many sponsors will cover all or part of these for you as part of the offer packa
 2. **Apply to 20–30 roles per week.** Conversion is low; volume is necessary.
 3. **Don't waste effort on unlicensed companies.** Confirm sponsor licence before applying.
 4. **Prepare for rejections.** Most non-UK candidates need 50–200 applications to land a sponsored role.
-5. **Use the new-entrant rate** if eligible — £30,960 unlocks roles below £41,700 that were otherwise blocked.
+5. **Use the new-entrant rate** if eligible — £33,400 unlocks roles below £41,700 that were otherwise blocked.
 
 See our [Skilled Worker salary guide](/blog/uk-skilled-worker-visa-salary-threshold-2026) for occupation-specific thresholds, or our [Switch to Skilled Worker guide](/blog/switch-student-to-skilled-worker-visa-uk-2026) if you're moving from a Student or Graduate visa.
 `.trim(),

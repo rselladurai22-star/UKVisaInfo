@@ -24,21 +24,39 @@ export interface NewsItem {
 export const NEWS_ITEMS: NewsItem[] = [
   {
     slug: 'spring-2026-fee-uplift',
-    title: 'Spring 2026 visa-fee uplift confirmed',
-    summary: 'Home Office published the April 2026 fee schedule — Skilled Worker fees rise 8–12%, Student visa unchanged, IHS holds at £1,035/year.',
-    date: '2026-04-01',
+    title: '8 April 2026 visa-fee uplift — verified from gov.uk',
+    summary: 'Home Office fee table published 18 March 2026. ILR up 6.5% to £3,226. Skilled Worker, Student, Visitor all up. Child citizenship (MN1) cut to £1,000.',
+    date: '2026-04-08',
     category: 'Fees',
-    body: `The Home Office has published the April 2026 visa-fee schedule. Headline changes:
+    body: `The Home Office immigration and nationality fees effective 8 April 2026 were published on gov.uk (master table updated 18 March 2026). The verified changes are:
 
-- **Skilled Worker visa**: £827 (1-3 years) up from £769; £1,636 (5 years) up from £1,500.
-- **Health & Care visa**: held at £304 / £590 — recognising recruitment pressure on the NHS.
-- **Student visa**: held at £524 from overseas, £490 in-country.
-- **Visitor visa**: unchanged at £127 (short stay).
-- **IHS**: held at £1,035/year for adults, £776/year for students and dependants.
+**Settlement**
 
-The Immigration Skills Charge remains £1,000/year for medium and large sponsors and £364/year for small/charity sponsors.`,
-    source: 'https://www.gov.uk/government/publications/visa-regulations-revised-table',
-    tags: ['Fees', 'Skilled Worker'],
+- **Indefinite Leave to Remain** (all categories Set M/O/F): £3,029 → **£3,226** (+6.5%).
+- **Long Residence ILR**: now matches the standard fee at £3,226.
+- **British citizenship (adult, Form AN)**: £1,605 → **£1,709**, plus £130 ceremony fee (unchanged) = **£1,839 total**.
+- **Child citizenship registration (Form MN1)**: £1,214 → **£1,000** — a £214 reduction.
+
+**Main visas**
+
+- **Skilled Worker** (out-of-country, ≤3 years): £769 → **£819**.
+- **Skilled Worker** (out-of-country, >3 years): £1,519 → **£1,618**.
+- **Student visa**: £524 → **£558**.
+- **Standard Visitor** (6 months): £127 → **£135**.
+- **BN(O) visa**: 30 months £193 → **£206**; 5 years £268 → **£285**.
+
+**Held**
+
+- Priority Visa service: £500 (unchanged).
+- Super Priority service: £1,000 (unchanged).
+- Life in the UK Test: £50 (unchanged).
+- IHS: £1,035 adult / £776 child or student per year (unchanged).
+
+**Salary thresholds (separate from fees)**
+
+The Skilled Worker general minimum was confirmed at **£41,700** per gov.uk/skilled-worker-visa/your-job, with a £33,400 floor for new entrants, ISL roles and STEM PhD holders. Non-STEM PhD holders need £37,500.`,
+    source: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026',
+    tags: ['Fees', 'Skilled Worker', 'ILR', 'Citizenship'],
   },
   {
     slug: 'evisa-transition-2026',

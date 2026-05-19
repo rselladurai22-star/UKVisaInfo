@@ -254,7 +254,7 @@ export default function SalaryChecker() {
                         : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#eaeef7]'
                     }`}
                   >
-                    New entrant (£30,960)
+                    New entrant (£33,400)
                   </button>
                 </div>
                 <p className="mt-2 text-[11px] text-[#7a8195] leading-relaxed">
@@ -382,7 +382,7 @@ export default function SalaryChecker() {
 
           <div className="mt-8 grid md:grid-cols-3 gap-4">
             {[
-              { num: 1, label: 'General minimum', val: '£41,700', desc: 'Reduced to £30,960 for new entrants, ISL roles' },
+              { num: 1, label: 'General minimum', val: '£41,700', desc: 'Reduced to £33,400 for new entrants, ISL roles' },
               { num: 2, label: 'Going rate', val: 'Varies', desc: 'Set by SOC 2020 code at 25th percentile of UK earnings for the role' },
               { num: 3, label: 'Hourly rate', val: '£15.88/hr', desc: 'Mandatory minimum regardless of contract type' },
             ].map((t) => (

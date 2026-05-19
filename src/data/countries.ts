@@ -185,7 +185,7 @@ export const COUNTRIES: Record<string, CountryGuide> = {
     ],
     applicationCentres: ['New York', 'Los Angeles', 'San Francisco', 'Chicago', 'Houston', 'Washington DC'],
     notes: [
-      'ETA required from 2026 for all short visits — costs £16, valid 2 years.',
+      'ETA required from 2026 for all short visits — costs £20, valid 2 years.',
       'No TB test required.',
       'US-issued documents accepted without translation if in English.',
       'Some VFS centres charge significantly higher biometric fees in the US.',
