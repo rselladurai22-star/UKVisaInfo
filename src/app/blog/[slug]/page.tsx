@@ -40,10 +40,12 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: 'Post not found' };
+  const ogImageUrl = `https://ukvisainfo.co.uk/blog/${slug}/opengraph-image`;
   return {
     title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
+    authors: [{ name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' }],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -51,9 +53,16 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.updated,
+      authors: ['https://ukvisainfo.co.uk'],
       tags: post.tags,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
     },
-    twitter: { card: 'summary_large_image', title: post.title, description: post.description },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [ogImageUrl],
+    },
   };
 }
 
@@ -80,10 +89,32 @@ export default async function BlogPostPage({ params }: RouteParams) {
     description: post.description,
     datePublished: post.date,
     dateModified: post.updated,
-    author: { '@type': 'Organization', name: 'UK Visa Info' },
-    publisher: { '@type': 'Organization', name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' },
+    image: `https://ukvisainfo.co.uk/blog/${slug}/opengraph-image`,
+    author: {
+      '@type': 'Organization',
+      name: 'UK Visa Info',
+      url: 'https://ukvisainfo.co.uk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'UK Visa Info',
+      url: 'https://ukvisainfo.co.uk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
     mainEntityOfPage: `https://ukvisainfo.co.uk/blog/${slug}`,
     keywords: post.tags.join(', '),
+    inLanguage: 'en-GB',
+    isPartOf: { '@type': 'Blog', name: 'UK Visa Info Guides', url: 'https://ukvisainfo.co.uk/blog' },
+  };
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://ukvisainfo.co.uk' },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://ukvisainfo.co.uk/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `https://ukvisainfo.co.uk/blog/${slug}` },
+    ],
   };
 
   const faqJsonLd = allFaqs.length
@@ -101,6 +132,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       {faqJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}

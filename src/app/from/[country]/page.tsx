@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const c = getCountry(country);
   if (!c) return { title: 'Country guide not found' };
   const title = `UK Visa for ${c.demonym} Citizens — 2026 Complete Guide`;
-  const description = `Apply for a UK visa from ${c.name}. Routes, fees, document checklist, TB test, biometrics and processing times — updated for 2026.`;
+  const description = `Apply for a UK visa from ${c.name}. Visa routes, fees, document checklist, TB test requirements, biometrics and processing times — updated for 2026. 100% gov.uk sourced.`;
+  const ogImageUrl = `https://ukvisainfo.co.uk/og-default.png`;
   return {
     title, description,
     alternates: { canonical: `/from/${country}` },
@@ -29,6 +30,15 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       title, description,
       url: `https://ukvisainfo.co.uk/from/${country}`,
       type: 'article',
+      publishedTime: '2026-04-01',
+      modifiedTime: '2026-05-15',
+      authors: ['https://ukvisainfo.co.uk'],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title, description,
+      images: [ogImageUrl],
     },
   };
 }
@@ -46,15 +56,35 @@ export default async function CountryPage({ params }: RouteParams) {
     '@context': 'https://schema.org', '@type': 'Article',
     headline: `UK Visa for ${c.demonym} Citizens — Complete Guide`,
     description: c.tagline,
-    datePublished: '2026-04-01', dateModified: '2026-05-15',
-    author: { '@type': 'Organization', name: 'UK Visa Info' },
-    publisher: { '@type': 'Organization', name: 'UK Visa Info' },
+    datePublished: '2026-04-01',
+    dateModified: '2026-05-15',
+    author: {
+      '@type': 'Organization', name: 'UK Visa Info',
+      url: 'https://ukvisainfo.co.uk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
+    publisher: {
+      '@type': 'Organization', name: 'UK Visa Info',
+      url: 'https://ukvisainfo.co.uk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
     mainEntityOfPage: `https://ukvisainfo.co.uk/from/${country}`,
+    inLanguage: 'en-GB',
+  };
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',           item: 'https://ukvisainfo.co.uk' },
+      { '@type': 'ListItem', position: 2, name: 'Country Guides', item: 'https://ukvisainfo.co.uk/country-guides' },
+      { '@type': 'ListItem', position: 3, name: `${c.name} Guide`, item: `https://ukvisainfo.co.uk/from/${country}` },
+    ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       {/* HERO */}
       <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">

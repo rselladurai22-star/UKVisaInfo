@@ -1,0 +1,37 @@
+{
+  "name": "UK Visa Info",
+  "short_name": "UKVisaInfo",
+  "description": "Plain-English guide to every UK visa route — eligibility, fees, tools. 100% gov.uk sourced.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06192E",
+  "theme_color": "#0A2540",
+  "lang": "en-GB",
+  "categories": ["education", "government", "lifestyle"],
+  "icons": [
+    { "src": "/icon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Eligibility Quiz",
+      "short_name": "Quiz",
+      "description": "Find the right UK visa for you in 60 seconds",
+      "url": "/eligibility",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Cost Calculator",
+      "short_name": "Calculator",
+      "description": "Estimate your total UK visa cost",
+      "url": "/tools/cost-calculator",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Visa Routes",
+      "short_name": "Visas",
+      "description": "Browse all UK visa routes",
+      "url": "/visa-types",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    }
+  ]
+}

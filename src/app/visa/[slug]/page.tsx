@@ -45,11 +45,25 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const v = VISA_DETAILS[slug];
   if (!v) return { title: 'Visa not found' };
   const title = `${v.title} 2026 — Fees, Eligibility & How to Apply`;
-  const description = `${v.summary} Fee: ${v.fee}. IHS: ${v.ihs}. Processing: ${v.processing.outside} (outside UK). Updated ${v.updated}.`;
+  const description = `${v.summary} Application fee: ${v.fee}. IHS: ${v.ihs}. Processing time: ${v.processing.outside} (outside UK). Updated ${v.updated}. 100% gov.uk sourced.`;
+  const ogImageUrl = `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`;
   return {
     title, description,
     alternates: { canonical: `/visa/${slug}` },
-    openGraph: { title, description, url: `https://ukvisainfo.co.uk/visa/${slug}`, type: 'article' },
+    openGraph: {
+      title, description,
+      url: `https://ukvisainfo.co.uk/visa/${slug}`,
+      type: 'article',
+      publishedTime: '2026-04-08',
+      modifiedTime: '2026-05-19',
+      authors: ['https://ukvisainfo.co.uk'],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title, description,
+      images: [ogImageUrl],
+    },
   };
 }
 
@@ -103,11 +117,43 @@ export default async function VisaPage({ params }: RouteParams) {
 
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: v.title, description: v.summary,
-    datePublished: '2026-04-08', dateModified: '2026-05-19',
-    author: { '@type': 'Organization', name: 'UK Visa Info' },
-    publisher: { '@type': 'Organization', name: 'UK Visa Info' },
+    headline: v.title,
+    description: v.summary,
+    datePublished: '2026-04-08',
+    dateModified: '2026-05-19',
+    author: { '@type': 'Organization', name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' },
+    publisher: {
+      '@type': 'Organization', name: 'UK Visa Info',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
+    image: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`,
     mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}`,
+    inLanguage: 'en-GB',
+  };
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',        item: 'https://ukvisainfo.co.uk' },
+      { '@type': 'ListItem', position: 2, name: 'Visa Routes', item: 'https://ukvisainfo.co.uk/visa-types' },
+      { '@type': 'ListItem', position: 3, name: v.title,       item: `https://ukvisainfo.co.uk/visa/${slug}` },
+    ],
+  };
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Apply for a ${v.title}`,
+    description: `Step-by-step guide to applying for the ${v.title}. Fee: ${v.fee}. Processing: ${v.processing.outside}.`,
+    totalTime: `P${parseInt(v.processing.outside) || 3}W`,
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'GBP', value: (v.fee.match(/[\d,]+/) ?? ['0'])[0].replace(',', '') },
+    step: [
+      { '@type': 'HowToStep', position: 1, name: 'Check eligibility', text: `Confirm you meet the eligibility criteria for the ${v.title}.`, url: `https://ukvisainfo.co.uk/visa/${slug}#eligibility` },
+      { '@type': 'HowToStep', position: 2, name: 'Gather documents',  text: 'Collect all required supporting documents before applying.', url: `https://ukvisainfo.co.uk/visa/${slug}#documents` },
+      { '@type': 'HowToStep', position: 3, name: 'Pay the fee',       text: `Pay the application fee (${v.fee}) and IHS surcharge (${v.ihs}).`, url: `https://ukvisainfo.co.uk/visa/${slug}#costs` },
+      { '@type': 'HowToStep', position: 4, name: 'Submit online application', text: 'Complete and submit your application on gov.uk.', url: v.applyUrl },
+      { '@type': 'HowToStep', position: 5, name: 'Attend biometrics appointment', text: 'Book and attend a biometrics appointment at a UKVCAS centre.' },
+      { '@type': 'HowToStep', position: 6, name: 'Await decision', text: `Receive your decision. Standard processing: ${v.processing.outside} (outside UK).` },
+    ],
   };
   const faqJsonLd = faqs.length ? {
     '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -120,6 +166,8 @@ export default async function VisaPage({ params }: RouteParams) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
       {faqJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
