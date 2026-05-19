@@ -49,7 +49,7 @@ Five groups get a discount from the £41,700 headline figure:
 | **PhD in a STEM subject relevant to the role** | £34,830 | Subject must match job |
 | **PhD in a non-STEM subject relevant to the role** | £41,700 (no discount in 2026) | Changed April 2025 |
 | **Immigration Salary List occupation** | £33,400 | Replaced the old Shortage Occupation List |
-| **Health & Care visa (eligible healthcare roles)** | £25,600 or going rate | Separate route; see our Health & Care guide |
+| **Health & Care visa (eligible healthcare roles)** | £25,000 or going rate | Separate route; see our Health & Care guide |
 
 The new-entrant discount is the most commonly missed. If you're 25, graduated within the last 2 years, or switching from a UK Student visa — apply it. It saves £8,300 per year on the threshold (8 April 2026 rates).
 
@@ -1249,7 +1249,7 @@ See our [Visitor visa guide](/visa/visitor) for the full document list and appli
     slug: 'uk-health-care-worker-visa-2026-complete-guide',
     title: 'UK Health and Care Worker Visa 2026 — Complete Guide',
     description:
-      'Full 2026 guide to the UK Health and Care Worker visa: eligible roles, £25,600 salary minimum, IHS exemption, care worker route closure, and how to apply.',
+      'Full 2026 guide to the UK Health and Care Worker visa: eligible roles, £25,000 salary minimum, IHS exemption, care worker route closure, and how to apply.',
     date: '2026-04-29',
     updated: '2026-04-29',
     readMinutes: 8,
@@ -1266,7 +1266,7 @@ Health and Care Worker visa is a sub-category of the Skilled Worker route, but w
 | Application fee (3 years, out of UK) | £827 | £304 |
 | Application fee (5 years, out of UK) | £1,636 | £590 |
 | Immigration Health Surcharge | £1,035/year | **Exempt** |
-| General salary minimum | £41,700 | £25,600 (or going rate) |
+| General salary minimum | £41,700 | £25,000 (or going rate) |
 | New-entrant minimum | £33,400 | £20,960 (or going rate) |
 | Sponsorship licence required | Yes | Yes (different category) |
 | Path to ILR | 5 years | 5 years |
@@ -1303,7 +1303,7 @@ In March 2025 the standard **care worker** role (SOC 6135 at non-senior level) w
 What this means in 2026:
 
 - New overseas applicants **cannot** apply for care worker positions (non-senior).
-- Senior care worker positions remain open but at the higher £25,600+ salary.
+- Senior care worker positions remain open but at the higher £25,000+ salary.
 - People already in the UK on care worker visas can extend; they are not affected.
 - Switching from another visa (e.g. Student) to care worker is now also blocked for the standard role.
 
@@ -1313,21 +1313,21 @@ If you're in the UK on another visa, you can still switch to senior care worker,
 
 You must clear the highest of three:
 
-1. **£25,600 general minimum** (or £20,960 for new entrants)
+1. **£25,000 general minimum** (or £20,960 for new entrants)
 2. **Going rate for your SOC 2020 code**
 3. **£12.82 per hour**
 
 Going rates for common roles:
 
 - Registered nurse (band 5) — £31,081 (NHS pay scale)
-- Senior care worker — £25,600
+- Senior care worker — £25,000
 - Care home manager (registered) — £34,000+
 - Junior doctor (FY1) — £36,616 (NHS pay scale)
 - Consultant — £93,666+ (NHS scale)
 - Physiotherapist (band 5) — £31,081
 - Pharmacist — £41,659 (NHS scale, or private going rate)
 
-NHS positions follow the Agenda for Change pay bands; these salaries are already above the threshold for most roles. Private care home positions typically sit at or just above £25,600 — leaving little headroom.
+NHS positions follow the Agenda for Change pay bands; these salaries are already above the threshold for most roles. Private care home positions typically sit at or just above £25,000 — leaving little headroom.
 
 ## English language requirement
 

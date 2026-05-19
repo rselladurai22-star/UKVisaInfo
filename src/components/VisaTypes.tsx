@@ -65,7 +65,7 @@ const visas = [
     id: 'health', category: 'Work' as Category, icon: Stethoscope,
     title: 'Health and Care',
     desc: 'Fast-track for NHS roles and allied health professionals. IHS exempt.',
-    salary: '£25,600 min', duration: 'Up to 5 years',
+    salary: '£25,000 min', duration: 'Up to 5 years',
     url: 'https://www.gov.uk/health-care-worker-visa',
     color: '#059669',
   },

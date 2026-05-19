@@ -127,7 +127,7 @@ export const COUNTRIES: Record<string, CountryGuide> = {
     applicationCentres: ['Manila (Makati)', 'Cebu'],
     notes: [
       'TB test mandatory at IOM Manila for all visas over 6 months.',
-      'Health & Care visa eligible for £25,600 minimum or going rate, whichever is higher.',
+      'Health & Care visa eligible for £25,000 minimum or going rate, whichever is higher.',
       'Care worker route closed to new overseas applications from March 2025 — nursing route remains open.',
     ],
     status: 'stub',

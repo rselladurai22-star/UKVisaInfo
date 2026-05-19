@@ -124,7 +124,7 @@ export const VISA_FAQS: Record<string, FAQ[]> = {
     {
       question: 'What is the minimum salary for the Health and Care Worker visa?',
       answer:
-        'The general minimum is £25,600 per year (or £20,960 for new entrants), or the going rate for your occupation, whichever is higher. NHS roles follow the Agenda for Change pay bands which usually exceed these thresholds — for example, registered nurse band 5 is £31,081.',
+        'The general minimum is £25,000 per year (or £20,960 for new entrants), or the going rate for your occupation, whichever is higher. NHS roles follow the Agenda for Change pay bands which usually exceed these thresholds — for example, registered nurse band 5 is £31,081.',
     },
     {
       question: 'Is the Health and Care visa exempt from the IHS?',

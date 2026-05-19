@@ -41,7 +41,7 @@ const VISAS: Record<string, VisaRow> = {
   'health-care': {
     id: 'health-care', name: 'Health & Care', icon: Stethoscope, accent: '#059669',
     fee: '£304', feeRange: '£304 – £590', ihs: 'Exempt (main)',
-    salaryMin: '£25,600 (or going rate)', duration: '3 or 5 years',
+    salaryMin: '£25,000 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out)', ihsExempt: true,
     sponsorRequired: true, dependantsAllowed: true, workRights: 'Sponsored only',
     pathToIlr: '5 years', englishLevel: 'B1 (B2 for nurses/doctors)',

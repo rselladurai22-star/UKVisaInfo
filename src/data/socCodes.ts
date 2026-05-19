@@ -41,8 +41,12 @@ export const THRESHOLDS = {
   islGeneral: 33400,
   phdStem: 33400,
   phdNonStem: 37500,
-  healthCare: 25600,           // TODO: re-verify post-April 2026
-  healthCareNewEntrant: 20960, // TODO: re-verify post-April 2026
+  // Health & Care visa: gov.uk/health-care-worker-visa/your-job verbatim:
+  // "£25,000 minimum annual salary OR the occupation's going rate, whichever
+  // is higher". Care workers 6135/6136 closed to new overseas since 22 July
+  // 2025 — only legacy holders / extensions allowed.
+  healthCare: 25000,
+  healthCareNewEntrant: 20000, // TODO: re-verify post-April 2026
   hourlyMinimum: 15.88,        // TODO: re-verify post-April 2026
 };
 
