@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import AppShell from '../components/AppShell';
 import AdSenseScript from '../components/AdSenseScript';
+import GoogleAnalytics from '../components/GoogleAnalytics';
 
 const SITE_URL = 'https://ukvisainfo.co.uk';
 
@@ -144,6 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <AdSenseScript />
+        <GoogleAnalytics />
       </head>
       <body>
         <AppShell>{children}</AppShell>
