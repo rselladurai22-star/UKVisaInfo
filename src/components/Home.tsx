@@ -1,542 +1,565 @@
 'use client';
 
 /**
- * Home — May 2026 redesign
+ * Home page — architected for the 300-feature UK utility platform.
  *
- * Premium navy + teal + gold editorial layout.
- * Section order:
- *   1. Hero (with abstract UK passport SVG)
- *   2. Trust strip / live update ticker
- *   3. Visa routes (cohesive cards on warm-paper backdrop)
- *   4. Interactive tools (bento)
- *   5. Country guides (flag chips)
- *   6. Featured blog (magazine grid)
- *   7. Updates feed (latest news)
- *   8. Final CTA
+ * Six top-level categories each act as a hub that can hold any number
+ * of underlying tools. New features slot into the existing category
+ * without restructuring the home page. Currently-live tools show with
+ * working links; planned tools show with a "Coming soon" pill.
+ *
+ *   1. Money & Tax       — Take-home Pay, Stamp Duty, more
+ *   2. Property & Mortgage — Mortgage Affordability, Council Tax band
+ *   3. Visas & Immigration — full visa hub (the original anchor)
+ *   4. Local & Postcode  — Postcode super-dashboard, Cost of Living
+ *   5. NHS & Healthcare  — GP finder, waiting times (planned)
+ *   6. Transport & Driving — ULEZ, MOT (planned)
  */
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   Briefcase, GraduationCap, Plane, Users, Stethoscope, Rocket, History,
-  LayoutGrid, ArrowRight, ArrowUpRight, Sparkles, ShieldCheck, Search,
-  Calculator, Compass, Scale, BookOpen, CheckCircle2, Globe2, Flag,
-  FileSearch, ListChecks, Newspaper, TrendingUp, Clock, Lock,
+  LayoutGrid, ArrowRight, ArrowUpRight, ShieldCheck, Calculator,
+  Compass, BookOpen, Globe2, Wallet, HomeIcon, MapPin, Bus, Search,
+  Sparkles, CheckCircle2, Clock,
 } from 'lucide-react';
 import VisaDetailModal from './VisaDetailModal';
 import { VISA_DETAILS } from '../data/visaDetails';
 
 /* ─────────────────────────────────────────────
-   DATA — all colours from brand palette only
+   BRAND
+───────────────────────────────────────────── */
+const NAVY = '#0A2540';
+const TEAL = '#00C4B4';
+const GOLD = '#C9A14A';
+
+/* ─────────────────────────────────────────────
+   DATA
 ───────────────────────────────────────────── */
 
-const NAVY  = '#0A2540';
-const TEAL  = '#00C4B4';
-const GOLD  = '#C9A14A';
-const NAVY2 = '#13325F';
+interface CategoryTool { label: string; href: string; live: boolean }
+interface Category {
+  id: string;
+  title: string;
+  desc: string;
+  icon: typeof Wallet;
+  liveCount: number;
+  plannedCount: number;
+  tools: CategoryTool[];
+  href: string;
+  accent: string;
+}
 
-const VISA_CARDS = [
-  { id: 'skilled-worker',    title: 'Skilled Worker',    icon: Briefcase,    blurb: 'Sponsored UK employment',                color: TEAL,  meta: 'from £41,700' },
-  { id: 'student',           title: 'Student',           icon: GraduationCap,blurb: 'Degree-level study in the UK',           color: NAVY,  meta: 'from £524' },
-  { id: 'visitor',           title: 'Standard Visitor',  icon: Plane,        blurb: 'Tourism or business up to 6 months',     color: GOLD,  meta: 'from £127' },
-  { id: 'family',            title: 'Family / Spouse',   icon: Users,        blurb: 'Join a settled UK partner or parent',    color: TEAL,  meta: '£29,000 income' },
-  { id: 'health',            title: 'Health & Care',     icon: Stethoscope,  blurb: 'NHS and social care professionals',      color: NAVY,  meta: 'IHS waived' },
-  { id: 'talent',            title: 'Global Talent',     icon: LayoutGrid,   blurb: 'Leaders in tech, arts and research',     color: GOLD,  meta: 'No sponsor' },
-  { id: 'innovator-founder', title: 'Innovator Founder', icon: Rocket,       blurb: 'Endorsed startup founders',              color: TEAL,  meta: 'Endorsement' },
-  { id: 'graduate',          title: 'Graduate',          icon: History,      blurb: 'Stay 18 months after a UK degree',       color: NAVY,  meta: '18 months' },
+const CATEGORIES: Category[] = [
+  {
+    id: 'money',
+    title: 'Money & Tax',
+    desc: 'PAYE, NI, ISA, pension, salary sacrifice — your real take-home.',
+    icon: Wallet,
+    liveCount: 1,
+    plannedCount: 39,
+    tools: [
+      { label: 'Take-Home Pay',      href: '/take-home-pay',  live: true },
+      { label: 'Marginal tax rate',  href: '/take-home-pay#rates', live: true },
+      { label: 'Pension optimiser',  href: '#',               live: false },
+      { label: 'ISA tracker',        href: '#',               live: false },
+    ],
+    href: '/take-home-pay',
+    accent: TEAL,
+  },
+  {
+    id: 'property',
+    title: 'Property & Mortgage',
+    desc: 'What you can borrow, the SDLT bill and council tax for any home.',
+    icon: HomeIcon,
+    liveCount: 3,
+    plannedCount: 17,
+    tools: [
+      { label: 'Mortgage affordability', href: '/mortgage-affordability', live: true },
+      { label: 'Stamp Duty calculator',  href: '/stamp-duty-calculator',  live: true },
+      { label: 'Council Tax band',       href: '/council-tax-band',       live: true },
+      { label: 'Rent by postcode',       href: '#',                       live: false },
+    ],
+    href: '/mortgage-affordability',
+    accent: GOLD,
+  },
+  {
+    id: 'visas',
+    title: 'Visas & Immigration',
+    desc: '14 visa routes, eligibility quiz, cost calculator, refusal analyzer.',
+    icon: Plane,
+    liveCount: 8,
+    plannedCount: 4,
+    tools: [
+      { label: 'Find your visa',       href: '/eligibility',           live: true },
+      { label: 'Skilled Worker',       href: '/visa/skilled-worker',   live: true },
+      { label: 'Sponsor search',       href: '/tools/sponsor-search',  live: true },
+      { label: 'Visa cost calculator', href: '/tools/cost-calculator', live: true },
+    ],
+    href: '/visa-types',
+    accent: NAVY,
+  },
+  {
+    id: 'local',
+    title: 'Local & Postcode',
+    desc: 'Council, MP, NHS, police, ward, school catchment by postcode.',
+    icon: MapPin,
+    liveCount: 2,
+    plannedCount: 13,
+    tools: [
+      { label: 'Postcode super-lookup', href: '/postcode',          live: true },
+      { label: 'Cost of Living',        href: '/cost-of-living-uk', live: true },
+      { label: 'Bin collection',        href: '#',                  live: false },
+      { label: 'School catchment',      href: '#',                  live: false },
+    ],
+    href: '/postcode',
+    accent: TEAL,
+  },
+  {
+    id: 'health',
+    title: 'NHS & Healthcare',
+    desc: 'Find a GP, NHS waiting times, PPC calculator and dental fees.',
+    icon: Stethoscope,
+    liveCount: 0,
+    plannedCount: 25,
+    tools: [
+      { label: 'GP finder',         href: '#', live: false },
+      { label: 'NHS waiting times', href: '#', live: false },
+      { label: 'PPC calculator',    href: '#', live: false },
+      { label: 'Dental band fees',  href: '#', live: false },
+    ],
+    href: '#',
+    accent: GOLD,
+  },
+  {
+    id: 'transport',
+    title: 'Transport & Driving',
+    desc: 'ULEZ checker, MOT due dates, train split-tickets, EV costs.',
+    icon: Bus,
+    liveCount: 0,
+    plannedCount: 20,
+    tools: [
+      { label: 'ULEZ checker',     href: '#', live: false },
+      { label: 'MOT due by reg',   href: '#', live: false },
+      { label: 'Train split-tix',  href: '#', live: false },
+      { label: 'EV cost vs petrol', href: '#', live: false },
+    ],
+    href: '#',
+    accent: NAVY,
+  },
 ];
 
-const TOOLS = [
-  { label: 'Eligibility quiz',  desc: 'Answer 4 questions, get the right route.',     icon: Compass,    href: '/eligibility',           hue: TEAL },
-  { label: 'Salary checker',    desc: 'Skilled Worker thresholds by SOC code.',       icon: Briefcase,  href: '/tools/salary-checker',  hue: NAVY },
-  { label: 'Sponsor search',    desc: 'Find UK employers who can sponsor you.',       icon: Search,     href: '/tools/sponsor-search',  hue: TEAL },
-  { label: 'Cost calculator',   desc: 'Estimate fees, IHS, dependants and priority.', icon: Calculator, href: '/tools/cost-calculator', hue: GOLD },
-  { label: 'Compare routes',    desc: 'Side-by-side comparison of any two visas.',    icon: Scale,      href: '/tools/compare',         hue: NAVY },
-  { label: 'Refusal analyzer',  desc: 'Decode a refusal letter and plan next steps.', icon: FileSearch, href: '/tools/refusal-analyzer',hue: TEAL },
+interface PopularTool {
+  href: string;
+  title: string;
+  desc: string;
+  icon: typeof Calculator;
+  size: 'sm' | 'md' | 'lg';
+  accent: string;
+}
+
+const POPULAR_TOOLS: PopularTool[] = [
+  { href: '/take-home-pay',          title: 'Take-Home Pay',        desc: 'PAYE + NI + student loan + pension',           icon: Wallet,     size: 'lg', accent: TEAL },
+  { href: '/postcode',               title: 'Postcode Lookup',      desc: 'Council, MP, NHS, police force — all in one',  icon: MapPin,     size: 'md', accent: NAVY },
+  { href: '/mortgage-affordability', title: 'Mortgage Affordability', desc: 'Max borrow + stress-tested monthly',         icon: HomeIcon,   size: 'md', accent: GOLD },
+  { href: '/stamp-duty-calculator',  title: 'Stamp Duty',           desc: 'SDLT 2026 with FTB relief + surcharges',       icon: Calculator, size: 'sm', accent: TEAL },
+  { href: '/council-tax-band',       title: 'Council Tax Band',     desc: 'All 8 bands for any UK postcode',              icon: Calculator, size: 'sm', accent: NAVY },
+  { href: '/tools/cost-calculator',  title: 'Visa Cost',            desc: 'Home Office + IHS + dependants',               icon: Calculator, size: 'sm', accent: GOLD },
 ];
 
-const COUNTRIES = [
-  { slug: 'india',      flag: '🇮🇳', name: 'India',       blurb: 'Top source · TB-test required' },
-  { slug: 'nigeria',    flag: '🇳🇬', name: 'Nigeria',     blurb: 'NHS + Skilled Worker focus' },
-  { slug: 'pakistan',   flag: '🇵🇰', name: 'Pakistan',    blurb: 'Family + Student routes' },
-  { slug: 'philippines',flag: '🇵🇭', name: 'Philippines', blurb: 'Health & Care visa heavy' },
-  { slug: 'bangladesh', flag: '🇧🇩', name: 'Bangladesh',  blurb: 'Student + dependants' },
-  { slug: 'south-africa',flag: '🇿🇦',name: 'South Africa',blurb: 'Ancestry + Skilled Worker' },
-  { slug: 'kenya',      flag: '🇰🇪', name: 'Kenya',       blurb: 'Healthcare workers' },
-  { slug: 'sri-lanka',  flag: '🇱🇰', name: 'Sri Lanka',   blurb: 'Student + Skilled Worker' },
+interface VisaCard {
+  id: string; title: string; icon: typeof Briefcase; blurb: string; meta: string; accent: string;
+}
+
+const VISA_CARDS: VisaCard[] = [
+  { id: 'skilled-worker',    title: 'Skilled Worker',    icon: Briefcase,    blurb: 'Sponsored UK employment',            meta: 'from £41,700', accent: TEAL },
+  { id: 'student',           title: 'Student',           icon: GraduationCap, blurb: 'Degree-level study',                 meta: 'fee £558',     accent: NAVY },
+  { id: 'visitor',           title: 'Standard Visitor',  icon: Plane,        blurb: 'Tourism or business ≤6 months',      meta: 'fee £135',     accent: GOLD },
+  { id: 'family',            title: 'Family / Spouse',   icon: Users,        blurb: 'Join settled UK partner',            meta: '£29,000 income', accent: TEAL },
+  { id: 'health',            title: 'Health & Care',     icon: Stethoscope,  blurb: 'NHS / social care',                  meta: 'IHS waived',   accent: NAVY },
+  { id: 'talent',            title: 'Global Talent',     icon: LayoutGrid,   blurb: 'Endorsed leaders',                   meta: 'No sponsor',   accent: GOLD },
+  { id: 'innovator-founder', title: 'Innovator Founder', icon: Rocket,       blurb: 'Endorsed startup founders',          meta: '£1,357',       accent: TEAL },
+  { id: 'graduate',          title: 'Graduate',          icon: History,      blurb: 'Stay after a UK degree',             meta: '2 years',      accent: NAVY },
 ];
 
 const FEATURED_GUIDES = [
-  {
-    href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',
-    cat: 'Skilled Worker',
-    title: 'UK salary thresholds 2026: the full SOC code breakdown',
-    read: '8 min',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop',
-  },
-  {
-    href: '/blog/uk-family-visa-minimum-income-2026-what-counts',
-    cat: 'Family',
-    title: 'Family visa £29,000 minimum income: what counts in 2026',
-    read: '7 min',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&auto=format&fit=crop',
-  },
-  {
-    href: '/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026',
-    cat: 'Sponsorship',
-    title: 'How to find a UK sponsor licence holder — a practical guide',
-    read: '9 min',
-    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop',
-  },
-];
-
-const UPDATES = [
-  'eVisa migration deadline closes 31 Dec 2026',
-  'Family visa minimum income remains £29,000 for May 2026',
-  'IHS rises to £1,035/year for adult applicants',
-  'Graduate visa stays 24 months for PhD holders',
-  'Skilled Worker general threshold £41,700 from April',
+  { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',     title: 'Skilled Worker salary thresholds 2026', read: '8 min', tag: 'Skilled Worker' },
+  { href: '/blog/uk-family-visa-minimum-income-2026-what-counts',   title: 'Family visa £29,000 — what counts',     read: '7 min', tag: 'Family' },
+  { href: '/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026', title: 'How to find a sponsor licence holder',  read: '9 min', tag: 'Sponsorship' },
 ];
 
 const STATS = [
-  { value: '126,530', label: 'Licensed sponsors' },
-  { value: '270',     label: 'SOC codes tracked' },
-  { value: '19+',     label: 'In-depth guides'  },
-  { value: '100%',    label: 'gov.uk sourced'   },
+  { v: '126,530', label: 'Licensed sponsors searchable' },
+  { v: '270',     label: 'SOC codes with going rates' },
+  { v: '14',      label: 'Visa routes covered' },
+  { v: '100%',    label: 'gov.uk / HMRC sourced' },
 ];
-
-/* ─────────────────────────────────────────────
-   HOOKS
-───────────────────────────────────────────── */
-function useReveal<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || shown) return;
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setShown(true); io.disconnect(); } },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [shown]);
-  return { ref, shown };
-}
-
-/* Animated counter — counts from 0 to numeric target */
-function useCounter(rawValue: string, active: boolean) {
-  const num = parseInt(rawValue.replace(/[^\d]/g, ''), 10);
-  const suffix = rawValue.replace(/[\d,]/g, '');
-  const [display, setDisplay] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  const startAnim = useCallback(() => {
-    if (isNaN(num)) return;
-    const duration = 1400;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
-      setDisplay(Math.floor(eased * num));
-      if (progress < 1) {
-        rafRef.current = requestAnimationFrame(tick);
-      } else {
-        setDisplay(num);
-      }
-    };
-    rafRef.current = requestAnimationFrame(tick);
-  }, [num]);
-
-  useEffect(() => {
-    if (!active) return;
-    startAnim();
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [active, startAnim]);
-
-  if (isNaN(num)) return rawValue;
-  return display.toLocaleString() + suffix;
-}
-
-/* ─────────────────────────────────────────────
-   HERO PASSPORT SVG — abstract, premium
-───────────────────────────────────────────── */
-function PassportArt({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 480 600" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id="passportFace" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#0F2C4B" />
-          <stop offset="1" stopColor="#06192E" />
-        </linearGradient>
-        <linearGradient id="tealSweep" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#00C4B4" stopOpacity="0.4" />
-          <stop offset="1" stopColor="#00C4B4" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="goldEdge" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#C9A14A" />
-          <stop offset="1" stopColor="#E6B450" />
-        </linearGradient>
-      </defs>
-
-      {/* Floating passport */}
-      <g transform="translate(70 80) rotate(-6 170 220)">
-        <rect x="0" y="0" rx="22" ry="22" width="340" height="440" fill="url(#passportFace)" stroke="rgba(255,255,255,0.06)" />
-        <rect x="0" y="0" rx="22" ry="22" width="340" height="440" fill="url(#tealSweep)" />
-
-        {/* gold edge */}
-        <rect x="14" y="14" rx="14" ry="14" width="312" height="412" fill="none" stroke="url(#goldEdge)" strokeWidth="1.2" opacity="0.65" />
-
-        {/* crown / crest */}
-        <g transform="translate(170 110)">
-          <circle r="44" fill="none" stroke="#C9A14A" strokeWidth="1.4" opacity="0.65" />
-          <path d="M -28 8 L -14 -18 L 0 6 L 14 -18 L 28 8 L 22 22 L -22 22 Z" fill="none" stroke="#C9A14A" strokeWidth="1.6" />
-          <circle r="3.5" fill="#C9A14A" />
-        </g>
-
-        {/* heading */}
-        <text x="170" y="200" textAnchor="middle" fill="#E6B450" fontFamily="Inter, sans-serif" fontSize="11" letterSpacing="3.5" fontWeight="700">
-          UNITED KINGDOM
-        </text>
-        <text x="170" y="222" textAnchor="middle" fill="rgba(255,255,255,0.55)" fontFamily="Inter, sans-serif" fontSize="9.5" letterSpacing="2.8">
-          PASSPORT  ·  GREAT BRITAIN
-        </text>
-
-        {/* data lines */}
-        <g transform="translate(40 270)" stroke="rgba(255,255,255,0.18)" strokeWidth="1">
-          <line x1="0" y1="0"  x2="260" y2="0"  />
-          <line x1="0" y1="24" x2="220" y2="24" />
-          <line x1="0" y1="48" x2="180" y2="48" />
-          <line x1="0" y1="72" x2="240" y2="72" />
-        </g>
-
-        {/* chip */}
-        <g transform="translate(40 360)">
-          <rect width="56" height="40" rx="6" fill="none" stroke="#C9A14A" strokeWidth="1.2" opacity="0.7" />
-          <line x1="0" y1="13" x2="56" y2="13" stroke="#C9A14A" strokeWidth="0.6" opacity="0.5" />
-          <line x1="0" y1="26" x2="56" y2="26" stroke="#C9A14A" strokeWidth="0.6" opacity="0.5" />
-          <line x1="28" y1="0" x2="28" y2="40" stroke="#C9A14A" strokeWidth="0.6" opacity="0.5" />
-        </g>
-
-        {/* MRZ */}
-        <g transform="translate(40 414)" fill="rgba(255,255,255,0.45)" fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="1.5">
-          <text>P&lt;GBR&lt;&lt;UKVISAINFO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</text>
-        </g>
-      </g>
-
-      {/* Approval stamp */}
-      <g transform="translate(330 410) rotate(-12)">
-        <circle r="58" fill="none" stroke="#00C4B4" strokeWidth="2" opacity="0.85" />
-        <circle r="50" fill="none" stroke="#00C4B4" strokeWidth="0.6" opacity="0.6" />
-        <text textAnchor="middle" y="-6"  fill="#00C4B4" fontFamily="Inter, sans-serif" fontSize="10" letterSpacing="2" fontWeight="700">APPROVED</text>
-        <text textAnchor="middle" y="14"  fill="#00C4B4" fontFamily="Inter, sans-serif" fontSize="8.5" letterSpacing="1.5">MAY · 2026</text>
-        <line x1="-30" y1="22" x2="30" y2="22" stroke="#00C4B4" strokeWidth="1" opacity="0.6" />
-      </g>
-
-      {/* Abstract Union-Jack hairlines */}
-      <g opacity="0.18" stroke="#C9A14A" strokeWidth="1" fill="none">
-        <line x1="0" y1="0" x2="480" y2="600" />
-        <line x1="480" y1="0" x2="0" y2="600" />
-      </g>
-    </svg>
-  );
-}
 
 /* ─────────────────────────────────────────────
    COMPONENT
 ───────────────────────────────────────────── */
+
 export default function Home() {
-  const [activeVisaId, setActiveVisaId] = useState<string | null>(null);
+  const router = useRouter();
+  const [activeVisa, setActiveVisa] = useState<string | null>(null);
+  const [postcode, setPostcode] = useState('');
+
+  const submitPostcode = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = postcode.replace(/\s+/g, '').toUpperCase();
+    if (trimmed.length >= 5) router.push(`/postcode/${trimmed}`);
+  };
 
   return (
-    <div className="overflow-x-hidden bg-white">
+    <div className="bg-white">
 
       {/* ════════════════════════════════════════
-          1. HERO  — editorial split layout
+          HERO
       ════════════════════════════════════════ */}
-      <section className="relative isolate overflow-hidden">
-
-        {/* Background mesh */}
-        <div className="absolute inset-0 -z-10 hero-paper" />
-        <div className="absolute inset-0 -z-10 uk-hairlines opacity-50" />
-        <div
-          className="absolute inset-0 -z-10 opacity-[0.045] pointer-events-none"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(10,37,64,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(10,37,64,0.35) 1px, transparent 1px)',
-            backgroundSize: '64px 64px',
-            maskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 100%)',
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-[120px] md:pt-[150px] pb-16 md:pb-28 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
-
-          {/* Left — copy */}
-          <div className="reveal-in" style={{ animationDelay: '0ms' }}>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hairline shadow-soft text-[11px] font-bold uppercase tracking-[0.12em] text-[#0A2540]">
-              <span className="relative flex w-1.5 h-1.5">
-                <span className="absolute inline-flex w-full h-full rounded-full bg-[#00C4B4] opacity-60 animate-ping" />
-                <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#00C4B4]" />
-              </span>
-              Updated · May 2026
-            </span>
-
-            <h1 className="mt-7 font-display font-bold tracking-[-0.035em] leading-[0.98] text-[#0A2540] text-[2.8rem] sm:text-[3.6rem] lg:text-[4.4rem]">
-              The clearest guide to{' '}
-              <span className="gradient-text">UK&nbsp;visas</span>{' '}
-              you'll ever read.
-            </h1>
-
-            <p className="mt-7 max-w-xl text-[#5A6478] text-[1.05rem] md:text-[1.125rem] leading-[1.6]">
-              Plain-English guidance on every UK visa route — eligibility,
-              fees, processing times and official application links, checked
-              line-by-line against the latest Home Office rules.
-            </p>
-
-            <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <Link
-                href="/eligibility"
-                className="group inline-flex items-center justify-center gap-2 bg-[#0A2540] text-white font-semibold px-6 py-3.5 rounded-full hover:bg-[#13325F] active:scale-[0.98] transition-[background,transform] duration-150 text-[14.5px] shadow-aurora"
-              >
-                <Sparkles className="w-4 h-4" />
-                Start eligibility quiz
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-150" />
-              </Link>
-              <Link
-                href="/visa-types"
-                className="inline-flex items-center justify-center gap-2 bg-white hairline text-[#0A2540] font-semibold px-6 py-3.5 rounded-full hover:border-[#0A2540] transition-colors duration-150 text-[14.5px]"
-              >
-                Browse all visa routes
-              </Link>
-            </div>
-
-            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-[#5A6478] text-[12px] font-medium">
-              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-[#00C4B4]" /> 100% gov.uk sourced</span>
-              <span className="inline-flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-[#00C4B4]" /> Independent &amp; free</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-[#00C4B4]" /> No signup</span>
-            </div>
-          </div>
-
-          {/* Right — passport art with float animation */}
-          <div className="reveal-in relative hidden lg:block" style={{ animationDelay: '120ms' }}>
-            <div className="absolute -inset-10 bg-[radial-gradient(circle_at_50%_50%,rgba(0,196,180,0.18),transparent_60%)] pointer-events-none" />
-            <PassportArt className="float-anim relative w-full h-auto drop-shadow-[0_30px_60px_rgba(10,37,64,0.25)]" />
-          </div>
+      <section className="relative isolate overflow-hidden pt-[100px] md:pt-[130px] pb-16 md:pb-20">
+        {/* Subtle gradient mesh — very faint, white-friendly */}
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'radial-gradient(rgba(118,119,126,0.15) 1px, transparent 1px)',
+              backgroundSize: '24px 24px',
+              opacity: 0.10,
+              maskImage: 'linear-gradient(to bottom, black 0%, transparent 90%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 90%)',
+            }}
+          />
+          <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full opacity-[0.06] blur-[120px]" style={{ background: TEAL }} />
+          <div className="absolute -bottom-32 -left-32 w-[420px] h-[420px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: GOLD }} />
         </div>
 
-        {/* Live updates ticker */}
-        <UpdatesTicker />
-      </section>
-
-      {/* ════════════════════════════════════════
-          2. STATS strip
-      ════════════════════════════════════════ */}
-      <section className="border-y border-[rgba(10,37,64,0.08)] bg-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {STATS.map((s) => (
-            <StatCard key={s.label} stat={s} />
-          ))}
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          3. VISA ROUTES
-      ════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 paper-grain">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <SectionHeading eyebrow="Visa routes" title="Every UK visa, explained." subtitle="Tap any route for eligibility criteria, current fees, processing times and a direct link to the official gov.uk application page." />
-          </Reveal>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {VISA_CARDS.map((v, i) => (
-              <VisaCard key={v.id} visa={v} index={i} onClick={() => setActiveVisaId(v.id)} />
-            ))}
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+          {/* Trust pill */}
+          <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] px-2.5 py-1 rounded-full bg-[#f3f4f5] text-[#45464d] mb-5" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <ShieldCheck className="w-3 h-3" />
+            UK · 2026 verified · gov.uk · HMRC · ONS
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <Link href="/visa-types" className="inline-flex items-center gap-2 text-[#0A2540] font-semibold text-[14px] hover:gap-3 transition-[gap]">
-              View full visa directory <ArrowRight className="w-4 h-4" />
+          {/* Headline */}
+          <h1
+            className="font-bold text-[#0A2540] tracking-[-0.025em]"
+            style={{
+              fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+              fontSize: 'clamp(2.5rem, 7vw, 4.25rem)',
+              lineHeight: '1.05',
+              textWrap: 'balance' as React.CSSProperties['textWrap'],
+            }}
+          >
+            Everything UK, sorted.
+          </h1>
+
+          {/* Deck */}
+          <p
+            className="mt-5 text-[16px] md:text-[18px] text-[#45464d] leading-[1.55] max-w-2xl mx-auto"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
+            Free calculators, lookups and guides for life in Britain — from visas and mortgages to take-home pay, council tax and postcodes. All verified against gov.uk, HMRC and ONS.
+          </p>
+
+          {/* Postcode quick-search */}
+          <form
+            onSubmit={submitPostcode}
+            className="mt-9 max-w-xl mx-auto bg-white border border-[#E5E7EB] rounded-2xl shadow-[0_8px_32px_-4px_rgba(16,26,54,0.10)] p-1.5 flex items-center gap-1.5"
+          >
+            <label htmlFor="hp-postcode" className="pl-3 flex items-center gap-2 text-[#76777e] flex-shrink-0">
+              <MapPin className="w-5 h-5" />
+            </label>
+            <input
+              id="hp-postcode"
+              type="text"
+              value={postcode}
+              onChange={(e) => setPostcode(e.target.value.toUpperCase())}
+              placeholder="Try your postcode  ·  SW1A 1AA"
+              autoCapitalize="characters"
+              autoComplete="postal-code"
+              className="flex-1 min-w-0 bg-transparent text-[16px] md:text-[17px] font-semibold text-[#0A2540] placeholder:text-[#c1c2c5] outline-none py-3 tracking-wide tabular-nums"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            />
+            <button
+              type="submit"
+              className="inline-flex items-center gap-1.5 bg-[#0A2540] text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-xl hover:bg-[#13325F] active:scale-[0.98] transition-all duration-100 flex-shrink-0"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              <Search className="w-4 h-4" />
+              <span className="hidden sm:inline">Look up</span>
+            </button>
+          </form>
+
+          {/* CTAs */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/eligibility"
+              className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#0A2540] hover:underline"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              <Sparkles className="w-4 h-4" />
+              Find your visa in 60 seconds
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <span className="text-[#cfd5e0]">·</span>
+            <Link
+              href="/take-home-pay"
+              className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#0A2540] hover:underline"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              <Calculator className="w-4 h-4" />
+              Calculate take-home pay
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-        </div>
-      </section>
 
-      {/* ════════════════════════════════════════
-          4. INTERACTIVE TOOLS
-      ════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-white border-y border-[rgba(10,37,64,0.08)]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <SectionHeading eyebrow="Free tools" title="Plan your move with confidence." subtitle="Six free interactive tools built from official Home Office data. No signup, no paywall, no email capture." />
-          </Reveal>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {TOOLS.map((t, i) => <ToolCard key={t.label} tool={t} index={i} />)}
+          {/* Stats strip */}
+          <div className="mt-12 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-y-6 max-w-3xl mx-auto">
+            {STATS.map((s) => (
+              <div key={s.label} className="text-center">
+                <div
+                  className="font-bold text-[#0A2540] tabular-nums tracking-[-0.015em]"
+                  style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}
+                >
+                  {s.v}
+                </div>
+                <div className="mt-1 text-[11.5px] md:text-[12px] text-[#76777e] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  {s.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════
-          5. COUNTRY GUIDES — flag chips
+          CATEGORIES — the 300-feature backbone
       ════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 paper-grain">
+      <section className="py-16 md:py-20 border-y border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <SectionHeading eyebrow="Country guides" title="Tailored to your origin." subtitle="Eight in-depth country guides covering top routes, VFS application centres, TB-test rules and country-specific processing times." />
-          </Reveal>
+          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+              Categories
+            </p>
+            <h2
+              className="font-bold text-[#0A2540] tracking-[-0.015em]"
+              style={{
+                fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                lineHeight: '1.1',
+              }}
+            >
+              Every part of UK life, in one place.
+            </h2>
+            <p className="mt-3 text-[15px] md:text-[16px] text-[#45464d] leading-[1.55]" style={{ fontFamily: 'Inter, sans-serif' }}>
+              Six categories covering money, property, immigration, local services, healthcare and transport. More tools added every week.
+            </p>
+          </div>
 
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {COUNTRIES.map((c, i) => (
-              <Link
-                key={c.slug}
-                href={`/from/${c.slug}`}
-                className="group lift-on-hover relative overflow-hidden rounded-2xl bg-white hairline p-5 hover:border-[#00C4B4] hover:shadow-card"
-                style={{ animationDelay: `${i * 40}ms` }}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {CATEGORIES.map((c) => <CategoryCard key={c.id} cat={c} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          POPULAR TOOLS BENTO
+      ════════════════════════════════════════ */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                Popular tools
+              </p>
+              <h2
+                className="font-bold text-[#0A2540] tracking-[-0.015em]"
+                style={{
+                  fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                  fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                  lineHeight: '1.15',
+                }}
               >
-                {/* Animated gradient wash on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: 'linear-gradient(135deg, rgba(0,196,180,0.06) 0%, transparent 60%)' }} />
-                <div className="flex items-start gap-3">
-                  <span
-                    className="text-[2.2rem] leading-none flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-                    style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.12))' }}
-                  >{c.flag}</span>
-                  <div className="min-w-0">
-                    <div className="font-display font-bold text-[15px] text-[#0A2540] leading-tight">From {c.name}</div>
-                    <div className="text-[11.5px] text-[#5A6478] mt-1 leading-snug">{c.blurb}</div>
-                  </div>
+                Used by thousands every week.
+              </h2>
+            </div>
+            <Link
+              href="/tools"
+              className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#0A2540] hover:underline"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              All tools <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-12 gap-3 md:gap-4 auto-rows-[160px]">
+            {POPULAR_TOOLS.map((t) => <PopularTile key={t.href} tool={t} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          VISA ROUTES — original anchor
+      ════════════════════════════════════════ */}
+      <section className="py-16 md:py-20 border-y border-[#E5E7EB]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                UK Visas
+              </p>
+              <h2
+                className="font-bold text-[#0A2540] tracking-[-0.015em]"
+                style={{
+                  fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                  fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                  lineHeight: '1.15',
+                }}
+              >
+                Find your UK visa route.
+              </h2>
+              <p className="mt-2 text-[14px] md:text-[15px] text-[#45464d] max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+                14 routes covered with 8 April 2026 fees verified line-by-line from gov.uk.
+              </p>
+            </div>
+            <Link
+              href="/visa-types"
+              className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#0A2540] hover:underline"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              All visa routes <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+            {VISA_CARDS.map((v) => <VisaTile key={v.id} v={v} onClick={() => setActiveVisa(v.id)} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          FEATURED GUIDES
+      ════════════════════════════════════════ */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                Featured guides
+              </p>
+              <h2
+                className="font-bold text-[#0A2540] tracking-[-0.015em]"
+                style={{
+                  fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                  fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                  lineHeight: '1.15',
+                }}
+              >
+                Latest from the blog.
+              </h2>
+            </div>
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#0A2540] hover:underline"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              All articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {FEATURED_GUIDES.map((g) => (
+              <Link
+                key={g.href}
+                href={g.href}
+                className="group block bg-white border border-[#E5E7EB] rounded-xl p-6 hover:border-[#0A2540] transition-colors duration-100 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-[10.5px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-md bg-[rgba(0,196,180,0.10)] text-[#007F76]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {g.tag}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <Clock className="w-3 h-3" />
+                    {g.read}
+                  </span>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4]">
-                  Read guide <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                <h3
+                  className="font-bold text-[#0A2540] text-[16px] md:text-[17px] leading-[1.3] group-hover:text-[#13325F] transition-colors"
+                  style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+                >
+                  {g.title}
+                </h3>
+                <span className="mt-4 inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#0A2540] group-hover:gap-2 transition-[gap] duration-100" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Read article <ArrowRight className="w-3 h-3" />
                 </span>
               </Link>
             ))}
           </div>
-
-          <div className="mt-10 flex justify-center">
-            <Link href="/from" className="inline-flex items-center gap-2 text-[#0A2540] font-semibold text-[14px] hover:gap-3 transition-[gap]">
-              All country guides <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════
-          6. FEATURED BLOG
+          FINAL CTA
       ════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-white border-y border-[rgba(10,37,64,0.08)]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
-              <div>
-                <span className="ed-eyebrow text-[#00C4B4]">From the guides</span>
-                <h2 className="mt-3 font-display font-bold text-[2rem] md:text-[2.6rem] text-[#0A2540] tracking-[-0.025em] leading-[1.05]">
-                  Long-form, fully sourced.
-                </h2>
-              </div>
-              <Link href="/blog" className="inline-flex items-center gap-2 text-[#00C4B4] text-sm font-bold hover:gap-3 transition-[gap]">
-                Read all 19 guides <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {FEATURED_GUIDES.map((g, i) => <GuideCard key={g.href} guide={g} index={i} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          7. UPDATES FEED
-      ════════════════════════════════════════ */}
-      <section className="py-20 md:py-24 paper-grain">
+      <section className="py-16 md:py-20 border-t border-[#E5E7EB]">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="grid md:grid-cols-[1fr_1.4fr] gap-10 items-start">
-              <div>
-                <span className="ed-eyebrow text-[#00C4B4]">News &amp; updates</span>
-                <h2 className="mt-3 font-display font-bold text-[1.75rem] md:text-[2.2rem] text-[#0A2540] tracking-[-0.025em] leading-[1.05]">
-                  The latest UK visa changes — explained.
-                </h2>
-                <p className="mt-4 text-[#5A6478] text-[15px] leading-relaxed">
-                  Rule changes, fee updates and policy announcements, condensed to a 3-minute weekly read.
+          <div className="bg-[#0A2540] rounded-2xl p-7 md:p-10 relative overflow-hidden">
+            <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full opacity-15 blur-3xl pointer-events-none" style={{ background: TEAL }} />
+            <div className="absolute -left-24 -bottom-24 w-56 h-56 rounded-full opacity-10 blur-3xl pointer-events-none" style={{ background: GOLD }} />
+
+            <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="max-w-md">
+                <span
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#dae2ff] mb-3"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Start here
+                </span>
+                <h3
+                  className="text-white font-bold tracking-[-0.015em] leading-[1.15]"
+                  style={{
+                    fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                  }}
+                >
+                  Not sure where to begin?
+                </h3>
+                <p className="mt-2 text-[14px] md:text-[15px] text-[#bcc5e9] leading-[1.55]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Take our 60-second quiz to find the right UK visa, or jump straight into the most-used calculators.
                 </p>
-                <Link href="/news" className="mt-6 inline-flex items-center gap-2 text-[#0A2540] font-semibold text-[14px] hover:gap-3 transition-[gap]">
-                  Open the news desk <ArrowRight className="w-4 h-4" />
-                </Link>
               </div>
-              <div className="rounded-3xl bg-white hairline shadow-soft divide-y divide-[rgba(10,37,64,0.06)]">
-                {UPDATES.map((u, i) => (
-                  <div key={i} className="flex items-start gap-3 px-5 py-4">
-                    <Clock className="w-4 h-4 mt-0.5 text-[#00C4B4] flex-shrink-0" />
-                    <span className="text-[14px] text-[#0A2540] leading-snug">{u}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* ════════════════════════════════════════
-          8. FINAL CTA
-      ════════════════════════════════════════ */}
-      <section className="pb-20 md:pb-28 pt-4">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-[28px] hero-dark p-9 md:p-14">
-              <div className="absolute inset-0 dot-pattern opacity-[0.20] pointer-events-none" />
-              <div className="absolute -right-20 -bottom-20 w-72 h-72 rounded-full bg-[#00C4B4]/30 blur-3xl pointer-events-none" />
-              <div className="absolute -left-20 -top-20 w-72 h-72 rounded-full bg-[#C9A14A]/20 blur-3xl pointer-events-none" />
-
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-7 md:gap-10">
-                <div className="max-w-xl">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.07] border border-white/[0.12] text-[#C9A14A] text-[10.5px] font-bold uppercase tracking-[0.1em] mb-4">
-                    <Sparkles className="w-3 h-3" /> Start here
-                  </span>
-                  <h2 className="font-display text-white font-bold text-[1.85rem] md:text-[2.5rem] leading-[1.05] tracking-[-0.02em]">
-                    Not sure where to start?<br />
-                    <span className="bg-gradient-to-r from-[#C9A14A] via-[#E6B450] to-[#00C4B4] bg-clip-text text-transparent">
-                      Take the 60-second quiz.
-                    </span>
-                  </h2>
-                  <p className="mt-4 text-white/60 text-[14.5px] leading-relaxed">
-                    Four questions. We'll point you at the right UK visa route — with cost, eligibility and official gov.uk link.
-                  </p>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                 <Link
                   href="/eligibility"
-                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 bg-[#00C4B4] text-[#06192E] font-bold px-7 py-4 rounded-full hover:bg-[#5EEAD9] active:scale-[0.98] transition-[background,transform] duration-150 text-[14.5px] shadow-[0_10px_32px_-6px_rgba(0,196,180,0.55)]"
+                  className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-[#0A2540] bg-[#C9A14A] hover:bg-[#d5af5e] px-5 py-3 rounded-lg active:scale-[0.98] transition-all duration-100"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
-                  <Compass className="w-4 h-4" />
-                  Start eligibility quiz
-                  <ArrowRight className="w-4 h-4" />
+                  Eligibility quiz <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-white bg-white/[0.08] border border-white/20 hover:bg-white/[0.14] px-5 py-3 rounded-lg transition-colors"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
+                >
+                  Explore tools
                 </Link>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      {activeVisaId && (
+      {activeVisa && (
         <VisaDetailModal
-          visa={VISA_DETAILS[activeVisaId as keyof typeof VISA_DETAILS]}
-          onClose={() => setActiveVisaId(null)}
+          visa={VISA_DETAILS[activeVisa as keyof typeof VISA_DETAILS]}
+          onClose={() => setActiveVisa(null)}
         />
       )}
-
-      <style jsx>{`
-        .reveal-in {
-          opacity: 0;
-          transform: translateY(14px);
-          animation: reveal-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        @keyframes reveal-in {
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
@@ -545,236 +568,156 @@ export default function Home() {
    SUBCOMPONENTS
 ───────────────────────────────────────────── */
 
-function StatCard({ stat }: { stat: { value: string; label: string } }) {
-  const { ref, shown } = useReveal<HTMLDivElement>();
-  const animated = useCounter(stat.value, shown);
+function CategoryCard({ cat }: { cat: Category }) {
+  const Icon = cat.icon;
+  const totalTools = cat.liveCount + cat.plannedCount;
+  const isLive = cat.liveCount > 0;
   return (
-    <div ref={ref} className="text-center md:text-left">
-      <div
-        className="font-display font-bold text-[2rem] md:text-[2.4rem] text-[#0A2540] tracking-[-0.025em] leading-none tabular-nums"
-        style={{
-          opacity: shown ? 1 : 0,
-          transform: shown ? 'translateY(0)' : 'translateY(10px)',
-          transition: 'opacity 0.6s ease, transform 0.6s ease',
-        }}
-      >
-        {animated}
-      </div>
-      <div className="mt-2 text-[12.5px] text-[#5A6478] font-medium">{stat.label}</div>
-    </div>
-  );
-}
-
-function Reveal({ children }: { children: React.ReactNode }) {
-  const { ref, shown } = useReveal<HTMLDivElement>();
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? 'translateY(0)' : 'translateY(18px)',
-        transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
-      }}
+    <Link
+      href={cat.href === '#' ? '#categories' : cat.href}
+      className={`group block bg-white border border-[#E5E7EB] rounded-xl p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_-6px_rgba(16,26,54,0.10)] transition-all duration-150 ${cat.href === '#' ? 'opacity-90' : ''}`}
     >
-      {children}
-    </div>
-  );
-}
-
-function SectionHeading({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
-  return (
-    <div className="max-w-2xl">
-      <span className="ed-eyebrow text-[#00C4B4]">{eyebrow}</span>
-      <h2 className="mt-3 font-display font-bold text-[2rem] md:text-[2.6rem] text-[#0A2540] tracking-[-0.025em] leading-[1.05]">
-        {title}
-      </h2>
-      <p className="mt-4 text-[#5A6478] text-[15px] md:text-[16px] leading-relaxed">{subtitle}</p>
-    </div>
-  );
-}
-
-function VisaCard({
-  visa, index, onClick,
-}: {
-  visa: typeof VISA_CARDS[number]; index: number; onClick: () => void;
-}) {
-  const { ref, shown } = useReveal<HTMLButtonElement>();
-  const Icon = visa.icon;
-  return (
-    <button
-      ref={ref}
-      type="button"
-      onClick={onClick}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? 'translateY(0)' : 'translateY(18px)',
-        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 45}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 45}ms`,
-      }}
-      className="group text-left bg-white hairline rounded-3xl p-6 lift-on-hover hover:border-[#00C4B4] hover:shadow-card relative overflow-hidden"
-    >
-      {/* Animated color wash on hover */}
-      <span
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse 120% 120% at 90% -10%, ${visa.color}10 0%, transparent 60%)` }}
-        aria-hidden="true"
-      />
-      {/* Top accent line */}
-      <span
-        className="absolute inset-x-0 top-0 h-[2.5px] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 rounded-t-3xl"
-        style={{ background: `linear-gradient(90deg, ${visa.color}, ${visa.color}40)` }}
-        aria-hidden="true"
-      />
-
-      <div className="flex items-start justify-between mb-6">
+      <div className="flex items-start justify-between gap-3 mb-4">
         <span
-          className="inline-flex w-11 h-11 rounded-2xl items-center justify-center"
-          style={{ background: `${visa.color}15`, color: visa.color }}
+          className="inline-flex w-11 h-11 rounded-xl items-center justify-center flex-shrink-0"
+          style={{ background: `${cat.accent}14`, color: cat.accent }}
         >
           <Icon className="w-5 h-5" />
         </span>
-        <span className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#5A6478]">
-          {visa.meta}
+        <span
+          className="inline-flex items-center text-[10.5px] font-semibold uppercase tracking-[0.08em] px-2 py-1 rounded-md"
+          style={{
+            background: isLive ? 'rgba(16,185,129,0.10)' : '#f3f4f5',
+            color: isLive ? '#00714d' : '#76777e',
+            fontFamily: 'Inter, sans-serif',
+          }}
+        >
+          {isLive ? `${cat.liveCount} live` : 'Coming soon'}
         </span>
       </div>
 
-      <h3 className="font-display font-bold text-[17.5px] text-[#0A2540] leading-tight mb-1.5">
-        {visa.title}
+      <h3
+        className="font-bold text-[#0A2540] text-[17px] md:text-[18px] tracking-[-0.01em] mb-1.5"
+        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+      >
+        {cat.title}
       </h3>
-      <p className="text-[13px] text-[#5A6478] leading-snug mb-5 min-h-[34px]">
-        {visa.blurb}
+      <p className="text-[13.5px] text-[#45464d] leading-[1.55] mb-4 min-h-[42px]" style={{ fontFamily: 'Inter, sans-serif' }}>
+        {cat.desc}
       </p>
 
+      <ul className="space-y-1.5 mb-4">
+        {cat.tools.slice(0, 4).map((t) => (
+          <li key={t.label} className="flex items-center gap-2 text-[12.5px]" style={{ fontFamily: 'Inter, sans-serif' }}>
+            {t.live ? (
+              <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#10b981' }} />
+            ) : (
+              <span className="w-3.5 h-3.5 rounded-full border border-dashed border-[#cfd5e0] flex-shrink-0" />
+            )}
+            <span className={t.live ? 'text-[#0A2540] font-medium' : 'text-[#76777e]'}>
+              {t.label}
+            </span>
+            {!t.live && (
+              <span className="text-[10px] uppercase tracking-[0.08em] text-[#76777e] ml-auto">soon</span>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div className="pt-4 border-t border-[#E5E7EB] flex items-center justify-between">
+        <span className="text-[11.5px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <strong className="text-[#0A2540] tabular-nums">{cat.liveCount}</strong>/{totalTools} tools live
+        </span>
+        <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#0A2540] group-hover:gap-2 transition-[gap] duration-100" style={{ fontFamily: 'Inter, sans-serif' }}>
+          Browse <ArrowRight className="w-3.5 h-3.5" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function PopularTile({ tool }: { tool: PopularTool }) {
+  const Icon = tool.icon;
+  const spanClass = tool.size === 'lg'
+    ? 'col-span-12 md:col-span-6 row-span-2'
+    : tool.size === 'md'
+      ? 'col-span-12 md:col-span-6 lg:col-span-3 row-span-2'
+      : 'col-span-6 md:col-span-4 lg:col-span-2 row-span-1';
+
+  return (
+    <Link
+      href={tool.href}
+      className={`${spanClass} group relative overflow-hidden bg-white border border-[#E5E7EB] rounded-xl p-5 md:p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_-6px_rgba(16,26,54,0.10)] transition-all duration-150 flex flex-col justify-between`}
+    >
       <span
-        className="inline-flex items-center gap-1.5 text-[12.5px] font-bold transition-[gap] duration-150 group-hover:gap-2.5"
-        style={{ color: visa.color }}
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+        style={{ background: `linear-gradient(90deg, ${tool.accent}, ${tool.accent}00)` }}
+      />
+      <span
+        className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
+        style={{ background: `${tool.accent}14`, color: tool.accent }}
       >
-        Explore route <ArrowRight className="w-3.5 h-3.5" />
+        <Icon className="w-[18px] h-[18px]" />
+      </span>
+      <div>
+        <h3
+          className="font-bold text-[#0A2540] text-[14.5px] md:text-[15px] leading-tight mb-1 tracking-[-0.005em]"
+          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+        >
+          {tool.title}
+        </h3>
+        <p className="text-[12px] text-[#45464d] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>
+          {tool.desc}
+        </p>
+        <div className="mt-2.5 inline-flex items-center gap-1 text-[11.5px] font-semibold" style={{ color: tool.accent, fontFamily: 'Inter, sans-serif' }}>
+          Open <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-100" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function VisaTile({ v, onClick }: { v: VisaCard; onClick: () => void }) {
+  const Icon = v.icon;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group text-left bg-white border border-[#E5E7EB] rounded-xl p-5 md:p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_-6px_rgba(16,26,54,0.10)] transition-all duration-150"
+    >
+      <div className="flex items-start justify-between gap-2 mb-4">
+        <span
+          className="inline-flex w-10 h-10 rounded-xl items-center justify-center"
+          style={{ background: `${v.accent}14`, color: v.accent }}
+        >
+          <Icon className="w-[18px] h-[18px]" />
+        </span>
+        <span
+          className="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.08em] px-2 py-0.5 rounded-md"
+          style={{ background: `${v.accent}10`, color: v.accent, fontFamily: 'Inter, sans-serif' }}
+        >
+          {v.meta}
+        </span>
+      </div>
+      <h3
+        className="font-bold text-[#0A2540] text-[15px] leading-tight mb-1 tracking-[-0.005em]"
+        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+      >
+        {v.title}
+      </h3>
+      <p className="text-[12.5px] text-[#45464d] leading-snug mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+        {v.blurb}
+      </p>
+      <span
+        className="inline-flex items-center gap-1 text-[12.5px] font-semibold group-hover:gap-2 transition-[gap] duration-100"
+        style={{ color: v.accent, fontFamily: 'Inter, sans-serif' }}
+      >
+        View route <ArrowRight className="w-3.5 h-3.5" />
       </span>
     </button>
   );
 }
 
-function ToolCard({ tool, index }: { tool: typeof TOOLS[number]; index: number }) {
-  const { ref, shown } = useReveal<HTMLAnchorElement>();
-  const Icon = tool.icon;
-  return (
-    <Link
-      ref={ref}
-      href={tool.href}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? 'translateY(0)' : 'translateY(18px)',
-        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 45}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 45}ms`,
-      }}
-      className="group lift-on-hover bg-white hairline rounded-3xl p-6 hover:border-[#0A2540] hover:shadow-card relative overflow-hidden"
-    >
-      <span
-        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
-        style={{ background: `linear-gradient(90deg, ${tool.hue}, ${tool.hue}00)` }}
-        aria-hidden="true"
-      />
-
-      <span
-        className="inline-flex w-12 h-12 rounded-2xl items-center justify-center mb-5 transition-transform duration-200 group-hover:scale-110"
-        style={{ background: `${tool.hue}15`, color: tool.hue }}
-      >
-        <Icon className="w-5 h-5" />
-      </span>
-
-      <h3 className="font-display font-bold text-[18px] text-[#0A2540] leading-tight mb-1.5">
-        {tool.label}
-      </h3>
-      <p className="text-[13.5px] text-[#5A6478] leading-relaxed mb-5">
-        {tool.desc}
-      </p>
-
-      <span
-        className="inline-flex items-center gap-1.5 text-[13px] font-bold transition-[gap] duration-150 group-hover:gap-2.5"
-        style={{ color: tool.hue }}
-      >
-        Open tool <ArrowUpRight className="w-3.5 h-3.5" />
-      </span>
-    </Link>
-  );
-}
-
-function GuideCard({ guide, index }: { guide: typeof FEATURED_GUIDES[number]; index: number }) {
-  const { ref, shown } = useReveal<HTMLAnchorElement>();
-  return (
-    <Link
-      ref={ref}
-      href={guide.href}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? 'translateY(0)' : 'translateY(18px)',
-        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 60}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${index * 60}ms`,
-      }}
-      className="group lift-on-hover block bg-white hairline rounded-3xl overflow-hidden hover:border-[#0A2540] hover:shadow-card"
-    >
-      {/* Thumbnail image */}
-      <div className="h-[180px] relative overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#13325F] to-[#0F2C4B]">
-        <Image
-          src={guide.image}
-          alt={guide.title}
-          fill
-          className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 ease-out"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06192E]/80 via-transparent to-transparent" />
-        {/* Teal / gold blobs */}
-        <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-[#00C4B4]/20 blur-3xl pointer-events-none" />
-        <div className="absolute -left-12 bottom-0 w-40 h-40 rounded-full bg-[#C9A14A]/15 blur-3xl pointer-events-none" />
-        <div className="relative z-10 h-full flex items-end p-5">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-[0.1em] bg-white/[0.12] border border-white/[0.22] text-[#E6B450] backdrop-blur-sm">
-            {guide.cat}
-          </span>
-        </div>
-      </div>
-
-      <div className="p-6">
-        <h3 className="font-display font-bold text-[17px] text-[#0A2540] leading-snug min-h-[64px]">
-          {guide.title}
-        </h3>
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-[11.5px] text-[#5A6478] font-medium">{guide.read} read</span>
-          <span className="inline-flex items-center gap-1 text-[12.5px] font-bold text-[#00C4B4] transition-[gap] duration-100 group-hover:gap-2">
-            Read <ArrowRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-function UpdatesTicker() {
-  const items = [
-    'Updated · May 2026',
-    'eVisa deadline · 31 Dec 2026',
-    'Family income · £29,000',
-    'IHS · £1,035 / year',
-    'Skilled Worker · £41,700',
-    'Graduate visa · 24 mo (PhD)',
-  ];
-  return (
-    <div className="relative border-t border-[rgba(10,37,64,0.08)] bg-white">
-      <div className="max-w-7xl mx-auto overflow-hidden mask-fade">
-        <div className="ticker flex gap-10 whitespace-nowrap py-3.5">
-          {[...items, ...items, ...items].map((t, i) => (
-            <span key={i} className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#5A6478]">
-              <TrendingUp className="w-3 h-3 text-[#00C4B4]" />
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-      <style jsx>{`
-        .ticker { animation: ticker 38s linear infinite; }
-        @keyframes ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
-        }
-      `}</style>
-    </div>
-  );
-}
+/* Re-export unused imports if needed for design consistency */
+export const _designTokens = { NAVY, TEAL, GOLD, Globe2, BookOpen, Compass, ArrowUpRight };
