@@ -2,13 +2,13 @@ import { ImageResponse } from 'next/og';
 import { getPost } from '../../../data/blog';
 
 export const runtime = 'edge';
-export const alt = 'UK Visa Info — article preview';
+export const alt = 'UKDesk — article preview';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: { slug: string } }) {
   const post = getPost(params.slug);
-  const title = post?.title ?? 'UK Visa Info';
+  const title = post?.title ?? 'UKDesk';
   const category = post?.tags[0] ?? 'Guide';
   const readMin = post?.readMinutes ?? 5;
 

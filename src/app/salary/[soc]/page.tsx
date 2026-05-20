@@ -70,8 +70,8 @@ export default async function SalaryPage({ params }: RouteParams) {
     headline: `${occ.title} — UK Skilled Worker Salary Threshold 2026`,
     description: `SOC ${occ.code} occupation going rate and Skilled Worker visa thresholds for 2026.`,
     datePublished: '2026-04-01', dateModified: '2026-05-18',
-    author: { '@type': 'Organization', name: 'UK Visa Info' },
-    publisher: { '@type': 'Organization', name: 'UK Visa Info' },
+    author: { '@type': 'Organization', name: 'UKDesk' },
+    publisher: { '@type': 'Organization', name: 'UKDesk' },
     mainEntityOfPage: `https://ukvisainfo.co.uk/salary/${soc}`,
   };
 

@@ -59,12 +59,12 @@ export default async function CountryPage({ params }: RouteParams) {
     datePublished: '2026-04-01',
     dateModified: '2026-05-15',
     author: {
-      '@type': 'Organization', name: 'UK Visa Info',
+      '@type': 'Organization', name: 'UKDesk',
       url: 'https://ukvisainfo.co.uk',
       logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
     },
     publisher: {
-      '@type': 'Organization', name: 'UK Visa Info',
+      '@type': 'Organization', name: 'UKDesk',
       url: 'https://ukvisainfo.co.uk',
       logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
     },

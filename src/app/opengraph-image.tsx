@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'UK Visa Info — Plain-English Guide to Every UK Visa Route';
+export const alt = 'UKDesk — Free UK Calculators, Lookups & Guides';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -56,7 +56,7 @@ export default function OgImage() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ color: '#ffffff', fontSize: 22, fontWeight: 700, letterSpacing: '-0.3px', lineHeight: 1.2 }}>
-              UK Visa Info
+              UKDesk
             </span>
             <span style={{ color: '#00C4B4', fontSize: 13, fontWeight: 500, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
               ukvisainfo.co.uk
@@ -68,22 +68,22 @@ export default function OgImage() {
         <div style={{
           color: '#ffffff', fontSize: 58, fontWeight: 800,
           lineHeight: 1.1, letterSpacing: '-1.5px',
-          maxWidth: 800, marginBottom: 24,
+          maxWidth: 880, marginBottom: 24,
         }}>
-          Your Complete Guide to UK Visas
+          Every UK tool, calculator and guide.
         </div>
 
         {/* Sub-headline */}
         <div style={{
           color: 'rgba(255,255,255,0.75)', fontSize: 24,
-          fontWeight: 400, lineHeight: 1.4, maxWidth: 720, marginBottom: 40,
+          fontWeight: 400, lineHeight: 1.4, maxWidth: 760, marginBottom: 40,
         }}>
-          Eligibility checks, visa costs, document checklists &amp; official links — all free, plain English, updated 2026.
+          Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route — verified against gov.uk, HMRC and ONS.
         </div>
 
         {/* Trust badges */}
         <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-          {['✓ 100% gov.uk sourced', '✓ Updated May 2026', '✓ Independent & Free'].map((badge) => (
+          {['✓ gov.uk / HMRC verified', '✓ Updated 2026', '✓ Free · No signup'].map((badge) => (
             <div key={badge} style={{
               background: 'rgba(0,196,180,0.12)',
               border: '1px solid rgba(0,196,180,0.3)',

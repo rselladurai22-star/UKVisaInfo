@@ -119,7 +119,7 @@ function QACard({ item }: { item: typeof QA_DATA[0] }) {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#00C4B4] to-[#007F76] flex items-center justify-center flex-shrink-0">
                 <span className="text-white text-xs font-bold">UK</span>
               </div>
-              <span className="text-xs font-semibold text-[#00C4B4]">UK Visa Info</span>
+              <span className="text-xs font-semibold text-[#00C4B4]">UKDesk</span>
               <span className="text-xs text-[#5A6478] dark:text-white/40">· Verified Answer</span>
             </div>
             <p className="text-sm sm:text-base text-[#374151] dark:text-white/80 leading-relaxed">

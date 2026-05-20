@@ -3,12 +3,11 @@ import { ExternalLink, Mail, Sparkles } from 'lucide-react';
 import FooterNewsletter from './FooterNewsletter';
 
 const LOGO_ICON = (
-  <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-    <path d="M1 7L8 1.5L15 7" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="2.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="6" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="9.5" y="7" width="2" height="5.5" rx="0.5" fill="white"/>
-    <rect x="1" y="12.5" width="14" height="1.5" rx="0.5" fill="#C9A14A"/>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3"  y="3"  width="8" height="8" rx="2" fill="#00C4B4" />
+    <rect x="13" y="3"  width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
+    <rect x="3"  y="13" width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
+    <rect x="13" y="13" width="8" height="8" rx="2" fill="none" stroke="#C9A14A" strokeWidth="1.6" opacity="0.92" />
   </svg>
 );
 
@@ -79,13 +78,13 @@ export default function Footer() {
               <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#0A2540] to-[#06192E] ring-1 ring-[#00C4B4]/40 flex items-center justify-center shadow-[0_2px_8px_rgba(0,196,180,0.25)]">
                 {LOGO_ICON}
               </span>
-              <span className="font-display font-bold text-[15px] text-white">
-                UK Visa <span className="text-[#C9A14A]">Info</span>
+              <span className="font-display font-bold text-[16px] text-white tracking-[-0.02em]">
+                UK<span className="text-[#00C4B4]">Desk</span>
               </span>
             </Link>
             <p className="mt-5 text-sm text-white/40 leading-relaxed max-w-[280px]">
-              Independent, plainly-written UK immigration guidance. Always confirm critical
-              information against the official gov.uk source.
+              Free UK calculators, lookups and guides — verified against gov.uk, HMRC and ONS.
+              Independent editorial. No login, no email harvesting.
             </p>
             <a
               href="mailto:contact@ukvisainfo.co.uk"
@@ -168,7 +167,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[12px] text-white/25">
           <span>
-            © 2026 UK Visa Info — Independent editorial, not affiliated with gov.uk or the Home Office.
+            © 2026 UKDesk — Independent editorial, not affiliated with gov.uk, HMRC or the Home Office.
           </span>
           <span>Made in the UK</span>
         </div>

@@ -142,24 +142,26 @@ const SECTIONS: Section[] = [
   },
 ];
 
+/**
+ * UKDesk logo — app-launcher tile grid (2×2).
+ * Reads as: "this is a hub of tools", with one tile lit in teal as the accent.
+ * The mark sits on a navy chip; the wordmark "UKDesk" follows.
+ */
 const LOGO_SVG = (
-  <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-    {/* Teal orbit ring */}
-    <circle cx="18" cy="15" r="9" stroke="#00C4B4" strokeWidth="1.3" opacity="0.9"/>
-    {/* Crown silhouette */}
-    <path d="M10 15 L13.5 7.5 L18 11.5 L22.5 7.5 L26 15" stroke="#E6B450" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-    {/* Crown base */}
-    <rect x="9" y="15" width="18" height="2.5" rx="1.25" fill="#C9A14A" opacity="0.9"/>
-    {/* MRZ lines */}
-    <rect x="7" y="22" width="22" height="2.2" rx="1.1" fill="white" opacity="0.8"/>
-    <rect x="7" y="26" width="16" height="1.6" rx="0.8" fill="white" opacity="0.38"/>
-    {/* Gold accent bar */}
-    <rect x="4.5" y="31" width="27" height="2.5" rx="1.25" fill="#C9A14A" opacity="0.85"/>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    {/* top-left — filled teal (the lit tile) */}
+    <rect x="3"  y="3"  width="8" height="8" rx="2" fill="#00C4B4" />
+    {/* top-right — outlined */}
+    <rect x="13" y="3"  width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
+    {/* bottom-left — outlined */}
+    <rect x="3"  y="13" width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
+    {/* bottom-right — outlined gold accent */}
+    <rect x="13" y="13" width="8" height="8" rx="2" fill="none" stroke="#C9A14A" strokeWidth="1.6" opacity="0.92" />
   </svg>
 );
 
 const Brand = ({ onClick }: { onClick?: () => void }) => (
-  <Link href="/" aria-label="UK Visa Info — home" className="flex items-center gap-3 flex-shrink-0" onClick={onClick}>
+  <Link href="/" aria-label="UKDesk — home" className="flex items-center gap-2.5 flex-shrink-0" onClick={onClick}>
     <span
       className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
       style={{
@@ -168,9 +170,8 @@ const Brand = ({ onClick }: { onClick?: () => void }) => (
       }}>
       {LOGO_SVG}
     </span>
-    <span className="font-display font-bold tracking-[-0.02em] text-[#0A2540]" style={{ fontSize: '15.5px', letterSpacing: '-0.015em' }}>
-      UK Visa{' '}
-      <span style={{ color: '#00C4B4' }}>Info</span>
+    <span className="font-display font-bold tracking-[-0.02em] text-[#0A2540] leading-none" style={{ fontSize: '17px', letterSpacing: '-0.02em' }}>
+      UK<span style={{ color: '#00C4B4' }}>Desk</span>
     </span>
   </Link>
 );

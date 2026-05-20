@@ -52,8 +52,8 @@ export default async function VariantPage({ params }: RouteParams) {
     headline: `${visa.title} — ${v.label}`,
     description: v.headline,
     datePublished: '2026-04-08', dateModified: '2026-05-19',
-    author: { '@type': 'Organization', name: 'UK Visa Info' },
-    publisher: { '@type': 'Organization', name: 'UK Visa Info' },
+    author: { '@type': 'Organization', name: 'UKDesk' },
+    publisher: { '@type': 'Organization', name: 'UKDesk' },
     mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}/${variant}`,
   };
 

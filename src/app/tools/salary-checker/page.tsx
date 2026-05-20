@@ -35,7 +35,7 @@ const jsonLd = {
   operatingSystem: 'Web',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
   url: 'https://ukvisainfo.co.uk/tools/salary-checker',
-  publisher: { '@type': 'Organization', name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' },
+  publisher: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
 };
 
 const breadcrumb = {

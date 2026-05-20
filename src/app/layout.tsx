@@ -9,22 +9,22 @@ const SITE_URL = 'https://ukvisainfo.co.uk';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'UK Visa Info · Types, Eligibility, Costs & Official Links (2026)',
-    template: '%s · UK Visa Info',
+    default: 'UKDesk — UK Tools, Calculators & Guides for Money, Property, Visas',
+    template: '%s · UKDesk',
   },
   description:
-    'UK Visa Info — plain-English guide to every UK visa route for 2026. Skilled Worker, Student, Family, Visitor, Graduate, Global Talent and more. Free eligibility quiz, cost calculator and 100% gov.uk sourced.',
-  applicationName: 'UK Visa Info',
-  authors: [{ name: 'UK Visa Info', url: SITE_URL }],
-  creator: 'UK Visa Info',
-  publisher: 'UK Visa Info',
-  category: 'Immigration & Visas',
+    'UKDesk — free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
+  applicationName: 'UKDesk',
+  authors: [{ name: 'UKDesk', url: SITE_URL }],
+  creator: 'UKDesk',
+  publisher: 'UKDesk',
+  category: 'Reference & Utilities',
   keywords: [
-    'UK visa', 'UK visa 2026', 'Skilled Worker visa UK', 'Student visa UK',
-    'Family visa UK', 'Graduate visa UK', 'Global Talent visa', 'Health and Care Worker visa',
-    'UK visa cost calculator', 'UK visa requirements', 'UK visa application', 'IHS surcharge',
-    'eVisa UK', 'UK immigration', 'UK visa eligibility', 'UK visa guide', 'apply for UK visa',
-    'UK visa fees 2026', 'sponsor licence UK', 'ILR UK', 'settlement UK',
+    'UK take-home pay', 'UK mortgage calculator', 'UK stamp duty 2026', 'UK council tax band',
+    'UK postcode lookup', 'cost of living UK', 'UK salary calculator', 'PAYE calculator',
+    'UK visa 2026', 'Skilled Worker visa UK', 'Student visa UK', 'Family visa UK',
+    'UK utility tools', 'UK calculators', 'gov.uk verified', 'HMRC 2026/27',
+    'UK life admin', 'moving to UK', 'living in UK', 'British calculators',
   ],
   alternates: {
     canonical: '/',
@@ -34,23 +34,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_GB',
     url: SITE_URL,
-    siteName: 'UK Visa Info',
-    title: 'UK Visa Info — 2026 Guide to Every UK Visa Route',
+    siteName: 'UKDesk',
+    title: 'UKDesk — Every UK Tool, Calculator and Guide in One Place',
     description:
-      'Plain-English guidance on every UK visa route — eligibility, fees, processing times and official application links. Free tools: eligibility quiz, salary checker, cost calculator.',
+      'Free UK calculators and lookups: take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     images: [
       {
         url: `${SITE_URL}/og-default.png`,
         width: 1200, height: 630,
-        alt: 'UK Visa Info — 2026 Guide',
+        alt: 'UKDesk — UK tools & calculators',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ukvisainfo',
-    title: 'UK Visa Info — 2026 Guide to Every UK Visa Route',
-    description: 'Plain-English guide to every UK visa. Free eligibility quiz, cost calculator, salary checker — 100% gov.uk sourced.',
+    site: '@ukdesk',
+    title: 'UKDesk — Every UK Tool, Calculator and Guide',
+    description: 'Free UK calculators and lookups: pay, mortgage, SDLT, council tax, postcode, visas. 100% gov.uk sourced.',
     images: [`${SITE_URL}/og-default.png`],
   },
   robots: {
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#06192E',
+  themeColor: '#0A2540',
   width: 'device-width',
   initialScale: 1,
 };
@@ -88,21 +88,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const siteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'UK Visa Info',
+    name: 'UKDesk',
     alternateName: 'ukvisainfo.co.uk',
     url: SITE_URL,
-    description: 'Plain-English guide to every UK visa route — eligibility, fees, processing times and official links. Updated May 2026.',
+    description: 'Free UK calculators and lookups in one place — take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     inLanguage: 'en-GB',
     potentialAction: {
       '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/tools/sponsor-search?q={search_term_string}` },
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/tools?q={search_term_string}` },
       'query-input': 'required name=search_term_string',
     },
   };
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'UK Visa Info',
+    name: 'UKDesk',
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',

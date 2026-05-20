@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
-    authors: [{ name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' }],
+    authors: [{ name: 'UKDesk', url: 'https://ukvisainfo.co.uk' }],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -92,20 +92,20 @@ export default async function BlogPostPage({ params }: RouteParams) {
     image: `https://ukvisainfo.co.uk/blog/${slug}/opengraph-image`,
     author: {
       '@type': 'Organization',
-      name: 'UK Visa Info',
+      name: 'UKDesk',
       url: 'https://ukvisainfo.co.uk',
       logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
     },
     publisher: {
       '@type': 'Organization',
-      name: 'UK Visa Info',
+      name: 'UKDesk',
       url: 'https://ukvisainfo.co.uk',
       logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
     },
     mainEntityOfPage: `https://ukvisainfo.co.uk/blog/${slug}`,
     keywords: post.tags.join(', '),
     inLanguage: 'en-GB',
-    isPartOf: { '@type': 'Blog', name: 'UK Visa Info Guides', url: 'https://ukvisainfo.co.uk/blog' },
+    isPartOf: { '@type': 'Blog', name: 'UKDesk Guides', url: 'https://ukvisainfo.co.uk/blog' },
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -214,7 +214,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
             </span>
             <span className="hidden md:flex items-center gap-1.5 ml-auto">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" />
-              By <span className="text-white/65">UK Visa Info Editorial</span>
+              By <span className="text-white/65">UKDesk Editorial</span>
             </span>
           </div>
         </div>

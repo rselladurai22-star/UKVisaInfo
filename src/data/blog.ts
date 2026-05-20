@@ -144,7 +144,7 @@ If all three clear with a margin of at least £500, you're safe. Thin margins ar
 
 > [!QUOTE]
 > The salary stage is the single biggest cause of Skilled Worker refusals in 2026. Get this number right before you pay any application fee.
-> — UK Visa Info editorial team
+> — UKDesk editorial team
 
 Our [UK Skilled Worker visa guide](/visa/skilled-worker) covers the full application process, document list and fee breakdown.
 `.trim(),

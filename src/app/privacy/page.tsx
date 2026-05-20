@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — UK Visa Info',
+  title: 'Privacy Policy — UKDesk',
   description:
     'Privacy policy for ukvisainfo.co.uk. How we collect, use and protect your data, including cookies, analytics and advertising.',
   alternates: { canonical: '/privacy' },
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
 
       <section className="space-y-4 leading-relaxed">
         <p>
-          This Privacy Policy explains how <strong>UK Visa Info</strong>{' '}
+          This Privacy Policy explains how <strong>UKDesk</strong>{' '}
           (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), operator of{' '}
           <strong>ukvisainfo.co.uk</strong>, collects, uses and protects
           information about visitors to this website. We are committed to
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
           1. Who we are
         </h2>
         <p>
-          UK Visa Info is an independent information website providing
+          UKDesk is an independent information website providing
           guidance on UK immigration routes. We are not affiliated with the UK
           Home Office, gov.uk, or any official government body. We are not
           immigration solicitors and do not provide legal advice.

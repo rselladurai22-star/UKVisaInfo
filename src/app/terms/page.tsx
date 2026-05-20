@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use — UK Visa Info',
+  title: 'Terms of Use — UKDesk',
   description:
     'Terms of use for ukvisainfo.co.uk. Editorial disclaimer, no legal advice, accuracy and liability terms.',
   alternates: { canonical: '/terms' },
@@ -30,7 +30,7 @@ export default function TermsPage() {
           2. Nature of the website
         </h2>
         <p>
-          UK Visa Info is an independent editorial site providing general
+          UKDesk is an independent editorial site providing general
           information on UK immigration routes. We are not the UK Home Office
           and we are not affiliated with any government body.
         </p>
@@ -96,7 +96,7 @@ export default function TermsPage() {
           7. Limitation of liability
         </h2>
         <p>
-          To the maximum extent permitted by law, UK Visa Info accepts no
+          To the maximum extent permitted by law, UKDesk accepts no
           liability for any loss arising from reliance on information
           published on this site. Visa applications carry significant
           financial and personal consequences; never rely solely on a

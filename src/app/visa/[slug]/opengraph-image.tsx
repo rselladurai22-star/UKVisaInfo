@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { VISA_DETAILS } from '../../../data/visaDetails';
 
 export const runtime = 'edge';
-export const alt = 'UK Visa Info — visa route preview';
+export const alt = 'UKDesk — visa route preview';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

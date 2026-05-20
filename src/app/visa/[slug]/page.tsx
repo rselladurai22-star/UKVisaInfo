@@ -121,9 +121,9 @@ export default async function VisaPage({ params }: RouteParams) {
     description: v.summary,
     datePublished: '2026-04-08',
     dateModified: '2026-05-19',
-    author: { '@type': 'Organization', name: 'UK Visa Info', url: 'https://ukvisainfo.co.uk' },
+    author: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
     publisher: {
-      '@type': 'Organization', name: 'UK Visa Info',
+      '@type': 'Organization', name: 'UKDesk',
       logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
     },
     image: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`,

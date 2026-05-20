@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About — UK Visa Info',
+  title: 'About — UKDesk',
   description:
     'About ukvisainfo.co.uk: who we are, our editorial approach, and how we keep UK visa information accurate and up to date.',
   alternates: { canonical: '/about' },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-12 text-on-surface">
-      <h1 className="text-4xl font-bold text-primary mb-3">About UK Visa Info</h1>
+      <h1 className="text-4xl font-bold text-primary mb-3">About UKDesk</h1>
       <p className="text-lg text-on-surface-variant mb-10">
         Independent, plainly-written UK immigration guidance.
       </p>
@@ -22,7 +22,7 @@ export default function AboutPage() {
           What this site is
         </h2>
         <p>
-          UK Visa Info is an editorial site covering the UK visa system —
+          UKDesk is an editorial site covering the UK visa system —
           work routes, study, family, visit, and settlement. We translate
           dense official rules into plain English so applicants can
           understand what they need before they spend time and money on an
