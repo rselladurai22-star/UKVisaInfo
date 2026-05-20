@@ -25,3 +25,6 @@ Allow: /news/
 Allow: /blog/
 
 Sitemap: https://ukvisainfo.co.uk/sitemap.xml
+
+# IndexNow key verification
+# https://ukvisainfo.co.uk/f5a5e346b62e95505a77586057fc7ba0.txt
