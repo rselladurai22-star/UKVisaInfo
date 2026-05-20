@@ -28,20 +28,11 @@ type NavItem =
   | { kind: 'dropdown'; id: string; label: string };
 
 const NAV_ITEMS: NavItem[] = [
-  { kind: 'link',     id: 'eligibility', label: 'Eligibility',     href: '/eligibility',           icon: Sparkles,   primary: true },
-  { kind: 'dropdown', id: 'visas',       label: 'Visas' },
-  { kind: 'dropdown', id: 'settlement',  label: 'Settlement' },
-  { kind: 'dropdown', id: 'switch',      label: 'Switch Visa' },
-  { kind: 'link',     id: 'cost',        label: 'Cost Calculator', href: '/tools/cost-calculator', icon: Calculator, accent: true },
-  { kind: 'link',     id: 'postcode',    label: 'Postcode',        href: '/postcode',              icon: MapPin,     accent: true },
-  { kind: 'link',     id: 'takehome',    label: 'Take-Home Pay',   href: '/take-home-pay',         icon: Banknote,   accent: true },
-  { kind: 'link',     id: 'sdlt',        label: 'Stamp Duty',      href: '/stamp-duty-calculator', icon: Tag,        accent: true },
-  { kind: 'link',     id: 'mortgage',    label: 'Mortgage',        href: '/mortgage-affordability', icon: HomeIcon,  accent: true },
-  { kind: 'link',     id: 'counciltax',  label: 'Council Tax',     href: '/council-tax-band',      icon: Building2,  accent: true },
-  { kind: 'link',     id: 'costofliving', label: 'Cost of Living', href: '/cost-of-living-uk',     icon: ListChecks, accent: true },
-  { kind: 'dropdown', id: 'tools',       label: 'Tools' },
-  { kind: 'dropdown', id: 'guides',      label: 'Guides' },
-  { kind: 'link',     id: 'community',   label: 'Community',       href: '/community',             icon: Users },
+  { kind: 'dropdown', id: 'tools',    label: 'Tools' },
+  { kind: 'dropdown', id: 'visas',    label: 'Visas' },
+  { kind: 'link',     id: 'postcode', label: 'Postcode',  href: '/postcode', icon: MapPin },
+  { kind: 'dropdown', id: 'guides',   label: 'Guides' },
+  { kind: 'link',     id: 'about',    label: 'About',     href: '/about' },
 ];
 
 const SECTIONS: Section[] = [
@@ -98,20 +89,20 @@ const SECTIONS: Section[] = [
   {
     id: 'tools', label: 'Tools',
     columns: [
-      { heading: 'Calculators & Search', items: [
-        { href: '/tools/salary-checker',  label: 'Salary checker',   desc: 'SOC code threshold',      icon: Briefcase,  accent: '#00C4B4' },
-        { href: '/tools/sponsor-search',  label: 'Sponsor search',   desc: 'Find licensed employers', icon: Search,     accent: '#0A2540' },
-        { href: '/tools/cost-calculator', label: 'Cost calculator',  desc: 'Fees + IHS + dependants', icon: Calculator, accent: '#C9A14A' },
-        { href: '/tools/compare',         label: 'Visa comparison',  desc: 'Side-by-side analysis',   icon: Scale,      accent: '#00A89A' },
+      { heading: 'Money & Tax', items: [
+        { href: '/take-home-pay',         label: 'Take-home pay',     desc: 'PAYE + NI + student loan',   icon: Banknote,   accent: '#00C4B4' },
+        { href: '/stamp-duty-calculator', label: 'Stamp duty',        desc: 'SDLT 2026 with FTB relief',  icon: Tag,        accent: '#C9A14A' },
+        { href: '/council-tax-band',      label: 'Council tax band',  desc: 'All 8 bands by postcode',    icon: Building2,  accent: '#0A2540' },
+        { href: '/tools/salary-checker',  label: 'UK salary checker', desc: 'SOC code threshold check',   icon: TrendingUp, accent: '#00A89A' },
       ]},
-      { heading: 'Personal & Analysis', items: [
-        { href: '/tools/refusal-analyzer', label: 'Refusal analyzer',  desc: 'Decode your refusal letter', icon: FileSearch,  accent: '#00C4B4' },
-        { href: '/my-journey',             label: 'My visa journey',   desc: 'Save your plan locally',     icon: ListChecks,  accent: '#13325F' },
-        { href: '/eligibility',            label: 'Eligibility quiz',  desc: '60-second match',            icon: Compass,     accent: '#00C4B4' },
-        { href: '/salary',                 label: 'Salary by SOC',     desc: 'All 270 occupations',        icon: TrendingUp,  accent: '#C9A14A' },
+      { heading: 'Property, Local & Visa', items: [
+        { href: '/mortgage-affordability', label: 'Mortgage affordability', desc: 'Max borrow + stress test',  icon: HomeIcon,   accent: '#C9A14A' },
+        { href: '/postcode',               label: 'Postcode lookup',        desc: 'Council, MP, NHS, police',  icon: MapPin,     accent: '#0A2540' },
+        { href: '/cost-of-living-uk',      label: 'Cost of living',         desc: 'Compare any two UK cities', icon: ListChecks, accent: '#00C4B4' },
+        { href: '/tools/cost-calculator',  label: 'Visa cost calculator',   desc: 'Fees + IHS + dependants',   icon: Calculator, accent: '#13325F' },
       ]},
     ],
-    feature: { title: 'Free interactive tools', desc: 'Calculators and searches built from official gov.uk data. No login required.', href: '/tools', cta: 'Open tools hub' },
+    feature: { title: 'All free, all the time', desc: 'Verified against gov.uk, HMRC and ONS. No signup, no email harvesting, no ads in your face.', href: '/tools', cta: 'Open all tools' },
   },
   {
     id: 'explore', label: 'Explore',
