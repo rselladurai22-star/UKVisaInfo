@@ -250,7 +250,7 @@ export default function Home() {
   const [activeVisaId, setActiveVisaId] = useState<string | null>(null);
 
   return (
-    <div className="overflow-x-hidden bg-[#FAFAF7]">
+    <div className="overflow-x-hidden bg-white">
 
       {/* ════════════════════════════════════════
           1. HERO  — editorial split layout

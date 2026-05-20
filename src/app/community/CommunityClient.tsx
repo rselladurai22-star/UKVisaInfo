@@ -158,7 +158,7 @@ export default function CommunityClient() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAFAF7] dark:bg-[#06192E]">
+    <main className="min-h-screen bg-white dark:bg-[#06192E]">
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#06192E] via-[#0A2540] to-[#13325F] pt-[100px] md:pt-[120px] pb-14 md:pb-20 text-white">

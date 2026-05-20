@@ -127,13 +127,13 @@ html.dark body {
     linear-gradient(165deg, #06192E 0%, #0A2540 60%, #0F2C4B 100%);
 }
 
-/* Premium passport-paper hero — warm off-white with subtle teal mist */
+/* Clean white hero — subtle gradient mist on pure white */
 .hero-paper {
   background:
-    radial-gradient(ellipse at 15% 10%, rgba(0, 196, 180, 0.08) 0px, transparent 55%),
-    radial-gradient(ellipse at 88% 80%, rgba(10, 37, 64, 0.06) 0px, transparent 55%),
-    radial-gradient(ellipse at 50% 0%, rgba(201, 161, 74, 0.06) 0px, transparent 50%),
-    #FAFAF7;
+    radial-gradient(ellipse at 15% 10%, rgba(0, 196, 180, 0.05) 0px, transparent 55%),
+    radial-gradient(ellipse at 88% 80%, rgba(10, 37, 64, 0.04) 0px, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(201, 161, 74, 0.04) 0px, transparent 50%),
+    #ffffff;
 }
 
 /* Light tinted page-hero for directories / blog index */

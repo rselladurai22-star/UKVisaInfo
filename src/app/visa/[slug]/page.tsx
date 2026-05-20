@@ -284,7 +284,7 @@ export default async function VisaPage({ params }: RouteParams) {
       {/* ═══════════════════════════════════════════════════════════
           CONTENT
       ═══════════════════════════════════════════════════════════ */}
-      <div className="bg-[#FAFAF7]">
+      <div className="bg-white">
         <div className="max-w-[1280px] mx-auto px-5 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-12 gap-8 lg:gap-12">
 
