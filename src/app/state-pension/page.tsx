@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function StatePensionPage() {
   return (
     <CalcPageShell
+      url="/state-pension"
       eyebrow="State Pension · UK · DWP"
       title="What will your UK State Pension be?"
       deck="Type your National Insurance qualifying years and see your forecast weekly, monthly and annual pension, plus the cost of filling any gaps."

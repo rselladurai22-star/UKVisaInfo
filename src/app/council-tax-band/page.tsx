@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function CouncilTaxPage() {
   return (
     <CalcPageShell
+      url="/council-tax-band"
       eyebrow="Council Tax · UK 2026"
       title="Council Tax by band, for any UK postcode."
       deck="Enter your postcode to see the council, regional Band D average, and the calculated annual / monthly / weekly bill for every band."

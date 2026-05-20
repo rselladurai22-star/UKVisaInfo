@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function TaxCodePage() {
   return (
     <CalcPageShell
+      url="/tax-code"
       eyebrow="Tax code · UK · HMRC 2026/27"
       title="Decode your UK tax code."
       deck="Paste any tax code — 1257L, K475, BR, D0, NT, S1257L W1 — and we'll explain it in plain English, with your effective Personal Allowance."

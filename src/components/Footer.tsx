@@ -11,27 +11,43 @@ const LOGO_ICON = (
   </svg>
 );
 
+const CALCULATORS = [
+  { href: '/take-home-pay',          label: 'Take-Home Pay' },
+  { href: '/mortgage-affordability', label: 'Mortgage' },
+  { href: '/stamp-duty-calculator',  label: 'Stamp Duty' },
+  { href: '/council-tax-band',       label: 'Council Tax' },
+  { href: '/vat-calculator',         label: 'VAT Calculator' },
+  { href: '/cgt-calculator',         label: 'Capital Gains Tax' },
+  { href: '/pension-allowance',      label: 'Pension Allowance' },
+  { href: '/state-pension',          label: 'State Pension' },
+  { href: '/holiday-pay',            label: 'Holiday Pay' },
+  { href: '/salary-compare',         label: 'Salary Compare' },
+  { href: '/energy-bill',            label: 'Energy Bill' },
+  { href: '/ulez-check',             label: 'ULEZ / CAZ Check' },
+  { href: '/mot-check',              label: 'MOT & Tax Check' },
+];
+
 const RESOURCES = [
-  { href: '/visa-types', label: 'Visa Routes' },
-  { href: '/eligibility', label: 'Eligibility Quiz' },
-  { href: '/tools', label: 'Free Tools' },
-  { href: '/blog', label: 'Guides & Blog' },
-  { href: '/news', label: 'News & Updates' },
+  { href: '/visa-types',          label: 'Visa Routes' },
+  { href: '/eligibility',         label: 'Eligibility Quiz' },
+  { href: '/postcode',            label: 'Postcode Lookup' },
+  { href: '/blog',                label: 'Guides & Blog' },
+  { href: '/news',                label: 'News & Updates' },
 ];
 
 const EXPLORE = [
-  { href: '/settlement', label: 'Settlement Compare' },
-  { href: '/from', label: 'By Country' },
-  { href: '/uk-cities', label: 'UK City Guides' },
-  { href: '/salary', label: 'Salary by SOC Code' },
+  { href: '/settlement',          label: 'Settlement Compare' },
+  { href: '/from',                label: 'By Country' },
+  { href: '/uk-cities',           label: 'UK City Guides' },
+  { href: '/salary',              label: 'Salary by SOC Code' },
   { href: '/tools/refusal-analyzer', label: 'Refusal Analyzer' },
-  { href: '/my-journey', label: 'My Visa Journey' },
+  { href: '/my-journey',          label: 'My Visa Journey' },
 ];
 
 const LEGAL = [
-  { href: '/about', label: 'About' },
+  { href: '/about',   label: 'About' },
   { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/terms', label: 'Terms of Use' },
+  { href: '/terms',   label: 'Terms of Use' },
 ];
 
 export default function Footer() {
@@ -73,7 +89,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-white/[0.08]">
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-4">
+          <div className="col-span-2 md:col-span-3">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <span className="w-8 h-8 rounded-[10px] bg-gradient-to-br from-[#0A2540] to-[#06192E] ring-1 ring-[#00C4B4]/40 flex items-center justify-center shadow-[0_2px_8px_rgba(0,196,180,0.25)]">
                 {LOGO_ICON}
@@ -95,8 +111,24 @@ export default function Footer() {
             </a>
           </div>
 
+          {/* Calculators */}
+          <div className="col-span-1 md:col-span-3 md:col-start-4">
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
+              Calculators
+            </h4>
+            <ul className="space-y-3">
+              {CALCULATORS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-white/55 hover:text-white transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Resources */}
-          <div className="col-span-1 md:col-span-3 md:col-start-5">
+          <div className="col-span-1 md:col-span-2">
             <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
               Resources
             </h4>
@@ -123,7 +155,7 @@ export default function Footer() {
           </div>
 
           {/* Explore */}
-          <div className="col-span-1 md:col-span-3">
+          <div className="col-span-1 md:col-span-2">
             <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
               Explore
             </h4>
@@ -148,7 +180,7 @@ export default function Footer() {
           </div>
 
           {/* Legal */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-2 md:col-start-12">
             <h4 className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/30 mb-5">
               Legal
             </h4>

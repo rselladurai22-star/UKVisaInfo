@@ -1,36 +1,43 @@
 {
-  "name": "UK Visa Info",
-  "short_name": "UKVisaInfo",
-  "description": "Plain-English guide to every UK visa route — eligibility, fees, tools. 100% gov.uk sourced.",
+  "name": "UKDesk",
+  "short_name": "UKDesk",
+  "description": "Free UK calculators, lookups and guides — take-home pay, mortgage, stamp duty, postcode, every visa route. Verified against gov.uk, HMRC and ONS.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#06192E",
   "theme_color": "#0A2540",
   "lang": "en-GB",
-  "categories": ["education", "government", "lifestyle"],
+  "categories": ["finance", "education", "government", "lifestyle"],
   "icons": [
     { "src": "/icon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any maskable" }
   ],
   "shortcuts": [
     {
-      "name": "Eligibility Quiz",
-      "short_name": "Quiz",
-      "description": "Find the right UK visa for you in 60 seconds",
-      "url": "/eligibility",
+      "name": "Take-Home Pay",
+      "short_name": "Pay calc",
+      "description": "Calculate your UK take-home salary after tax and NI",
+      "url": "/take-home-pay",
       "icons": [{ "src": "/icon.svg", "sizes": "any" }]
     },
     {
-      "name": "Cost Calculator",
-      "short_name": "Calculator",
-      "description": "Estimate your total UK visa cost",
-      "url": "/tools/cost-calculator",
+      "name": "Postcode Lookup",
+      "short_name": "Postcode",
+      "description": "Find council, MP, NHS trust, ward and more for any UK postcode",
+      "url": "/postcode",
       "icons": [{ "src": "/icon.svg", "sizes": "any" }]
     },
     {
       "name": "Visa Routes",
       "short_name": "Visas",
-      "description": "Browse all UK visa routes",
+      "description": "Every UK visa route — Skilled Worker, Student, Family and more",
       "url": "/visa-types",
+      "icons": [{ "src": "/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Mortgage Calculator",
+      "short_name": "Mortgage",
+      "description": "How much can you borrow? UK mortgage affordability calculator",
+      "url": "/mortgage-affordability",
       "icons": [{ "src": "/icon.svg", "sizes": "any" }]
     }
   ]

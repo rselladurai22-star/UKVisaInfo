@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function SalaryComparePage() {
   return (
     <CalcPageShell
+      url="/salary-compare"
       eyebrow="Salary compare · UK 2026/27"
       title="What does that salary feel like in another UK city?"
       deck="Enter a gross salary and a city. We solve for the equivalent gross in any other UK city that keeps your disposable income (take-home minus city baseline costs) the same."

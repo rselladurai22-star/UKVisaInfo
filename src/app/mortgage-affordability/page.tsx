@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function MortgagePage() {
   return (
     <CalcPageShell
+      url="/mortgage-affordability"
       eyebrow="Mortgage · UK 2026"
       title="How much could you borrow?"
       deck="See your maximum mortgage, the property price it unlocks, monthly repayment, and how a +3% rate rise would change the picture."

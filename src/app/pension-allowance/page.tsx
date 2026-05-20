@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function PensionAllowancePage() {
   return (
     <CalcPageShell
+      url="/pension-allowance"
       eyebrow="Pension AA · UK 2026/27"
       title="How much can you contribute pre-tax?"
       deck="Work out your Annual Allowance — including taper for high earners and MPAA after flexible access — plus carry-forward from prior years."

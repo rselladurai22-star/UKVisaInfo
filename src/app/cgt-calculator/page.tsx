@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function CgtPage() {
   return (
     <CalcPageShell
+      url="/cgt-calculator"
       eyebrow="CGT · UK 2026/27"
       title="Capital Gains Tax — what you’ll actually pay."
       deck="Enter your taxable income and total gain. We apply the £3,000 Annual Exempt Amount and split the gain between 18% and 24% bands based on your unused basic-rate room."

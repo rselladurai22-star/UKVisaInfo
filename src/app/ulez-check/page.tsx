@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function UlezPage() {
   return (
     <CalcPageShell
+      url="/ulez-check"
       eyebrow="Clean Air Zones · UK · TfL / DEFRA"
       title="Is your vehicle ULEZ-compliant?"
       deck="Pick your fuel and year. We check compliance against London ULEZ, the seven English Clean Air Zones, and all four Scottish Low Emission Zones."

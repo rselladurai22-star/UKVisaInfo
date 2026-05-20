@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function VatPage() {
   return (
     <CalcPageShell
+      url="/vat-calculator"
       eyebrow="VAT · UK · HMRC rates"
       title="VAT calculator — add or remove."
       deck="Type any price. Get the net, VAT and gross instantly at 20% standard, 5% reduced or 0% zero rate."

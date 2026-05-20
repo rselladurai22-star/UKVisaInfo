@@ -14,16 +14,36 @@ interface Props {
   title: string;
   deck: string;
   verified?: string;
+  url?: string;
   related?: { href: string; title: string; desc: string }[];
   educational?: { title: string; body: string }[];
   children: React.ReactNode;
 }
 
 export default function CalcPageShell({
-  eyebrow, title, deck, verified = 'gov.uk / HMRC verified', related, educational, children,
+  eyebrow, title, deck, verified = 'gov.uk / HMRC verified', url, related, educational, children,
 }: Props) {
+  const jsonLd = url ? {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: title,
+    description: deck,
+    url: `https://ukvisainfo.co.uk${url}`,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web',
+    inLanguage: 'en-GB',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+    provider: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
+  } : null;
+
   return (
     <div className="bg-white min-h-screen relative">
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       {/* Subtle dot pattern over hero */}
       <div
         aria-hidden="true"

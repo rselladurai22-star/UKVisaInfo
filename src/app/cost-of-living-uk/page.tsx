@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function CostOfLivingPage() {
   return (
     <CalcPageShell
+      url="/cost-of-living-uk"
       eyebrow="Cost of Living · UK 2026"
       title="Compare any two UK cities, side by side."
       deck="See exactly how monthly rent, transport, groceries and utilities differ between UK cities — sourced from ONS, transport authorities and rental data."

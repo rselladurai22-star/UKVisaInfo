@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       'Free UK calculators and lookups: take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     images: [
       {
-        url: `${SITE_URL}/og-default.png`,
+        url: `${SITE_URL}/opengraph-image`,
         width: 1200, height: 630,
         alt: 'UKDesk — UK tools & calculators',
       },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     site: '@ukdesk',
     title: 'UKDesk — Every UK Tool, Calculator and Guide',
     description: 'Free UK calculators and lookups: pay, mortgage, SDLT, council tax, postcode, visas. 100% gov.uk sourced.',
-    images: [`${SITE_URL}/og-default.png`],
+    images: [`${SITE_URL}/opengraph-image`],
   },
   robots: {
     index: true,
@@ -69,11 +69,7 @@ export const metadata: Metadata = {
     google: 'pQMCtigbsU9Fme1xW_J9UqPEbmzm0O7ZX7vifV4kgjA',
   },
   icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
-    ],
-    apple: '/apple-touch-icon.png',
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
     shortcut: '/icon.svg',
   },
   manifest: '/manifest.json',

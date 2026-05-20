@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function StampDutyPage() {
   return (
     <CalcPageShell
+      url="/stamp-duty-calculator"
       eyebrow="Stamp Duty · England & NI 2026"
       title="What you'll actually pay in stamp duty."
       deck="Enter your property price and instantly see the SDLT bill — with first-time buyer relief, second-home surcharge and non-resident surcharge handled automatically."

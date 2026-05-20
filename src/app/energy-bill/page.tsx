@@ -3,7 +3,7 @@ import CalcPageShell from '../../components/calc-shell/CalcPageShell';
 import EnergyBillClient from './EnergyBillClient';
 
 export const metadata: Metadata = {
-  title: 'UK Energy Bill Calculator — Ofgem Price Cap Direct-Debit Rates',
+  title: 'UK Energy Bill Calculator 2026 — Ofgem Price Cap Rates (Apr–Jun)',
   description: 'Free UK energy bill estimator using the current Ofgem price cap. Enter your annual gas and electricity kWh to see annual, monthly and vs-typical bills.',
   alternates: { canonical: '/energy-bill' },
 };
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function EnergyBillPage() {
   return (
     <CalcPageShell
+      url="/energy-bill"
       eyebrow="Energy · UK · Ofgem cap"
       title="What will your energy bill be?"
       deck="Enter your annual electricity and gas kWh. We apply the current Ofgem price-cap unit rates and standing charges, and compare your bill to Ofgem's typical-use benchmark."

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function MotCheckPage() {
   return (
     <CalcPageShell
+      url="/mot-check"
       eyebrow="MOT & Tax · UK · DVSA / DVLA"
       title="Check MOT and tax for any UK vehicle."
       deck="Type a UK reg plate. We validate it, infer the registration era, and link you straight into the official gov.uk DVSA + DVLA checkers."

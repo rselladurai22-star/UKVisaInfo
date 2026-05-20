@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function HolidayPayPage() {
   return (
     <CalcPageShell
+      url="/holiday-pay"
       eyebrow="Holiday pay · UK · 2026"
       title="Your paid holiday entitlement."
       deck="Statutory 5.6 weeks for regular hours, 12.07% accrual for irregular-hours and part-year workers. Includes pay value if you enter your rate."
