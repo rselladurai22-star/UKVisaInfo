@@ -30,31 +30,13 @@ type NavItem =
 
 const NAV_ITEMS: NavItem[] = [
   { kind: 'dropdown', id: 'tools',    label: 'Tools' },
-  { kind: 'dropdown', id: 'visas',    label: 'Visas' },
-  { kind: 'link',     id: 'postcode', label: 'Postcode',  href: '/postcode', icon: MapPin },
+  { kind: 'link',     id: 'visas',    label: 'Visas',     href: '/visa-types', icon: Plane },
+  { kind: 'link',     id: 'postcode', label: 'Postcode',  href: '/postcode',   icon: MapPin },
   { kind: 'dropdown', id: 'guides',   label: 'Guides' },
   { kind: 'link',     id: 'about',    label: 'About',     href: '/about' },
 ];
 
 const SECTIONS: Section[] = [
-  {
-    id: 'visas', label: 'Visas',
-    columns: [
-      { heading: 'Work', items: [
-        { href: '/visa/skilled-worker',    label: 'Skilled Worker',    desc: 'Sponsored employment',  icon: Briefcase,   accent: '#00C4B4' },
-        { href: '/visa/health',            label: 'Health & Care',     desc: 'NHS and care roles',    icon: Stethoscope, accent: '#00A89A' },
-        { href: '/visa/talent',            label: 'Global Talent',     desc: 'Leaders & researchers', icon: LayoutGrid,  accent: '#C9A14A' },
-        { href: '/visa/innovator-founder', label: 'Innovator Founder', desc: 'Startup founders',      icon: Rocket,      accent: '#00C4B4' },
-      ]},
-      { heading: 'Study & Family', items: [
-        { href: '/visa/student',  label: 'Student',          desc: 'Degree-level study',   icon: GraduationCap, accent: '#0A2540' },
-        { href: '/visa/graduate', label: 'Graduate',         desc: '18 months post-study', icon: History,       accent: '#007F76' },
-        { href: '/visa/family',   label: 'Family / Spouse',  desc: 'Join settled partner', icon: Users,         accent: '#13325F' },
-        { href: '/visa/visitor',  label: 'Standard Visitor', desc: 'Up to 6 months',       icon: Plane,         accent: '#00C4B4' },
-      ]},
-    ],
-    feature: { title: 'All 10+ visa routes', desc: 'Full directory with fees, processing times and direct gov.uk links.', href: '/visa-types', cta: 'Visa directory' },
-  },
   {
     id: 'settlement', label: 'Settlement',
     columns: [

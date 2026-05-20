@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   /* ── Top-level pages ── */
   const top = [
     { p: '',                 prio: 1.0,  freq: 'weekly' },
-    { p: '/visa-types',      prio: 0.9,  freq: 'weekly' },
+    { p: '/visa-types',      prio: 0.95, freq: 'weekly' },
     { p: '/eligibility',     prio: 0.9,  freq: 'monthly' },
     { p: '/costs',           prio: 0.8,  freq: 'monthly' },
     { p: '/blog',            prio: 0.9,  freq: 'weekly' },
