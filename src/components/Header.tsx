@@ -9,6 +9,7 @@ import {
   FileText, Tag, Crown, ShieldCheck, Globe, Flag, RefreshCw, Home as HomeIcon,
   ChevronLeft, ArrowRight, Menu, X, BookOpen, MapPin, Building2, Newspaper,
   ListChecks, FileSearch, TrendingUp, ChevronDown, Banknote,
+  Percent, Calendar, Car, Zap,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -90,16 +91,20 @@ const SECTIONS: Section[] = [
     id: 'tools', label: 'Tools',
     columns: [
       { heading: 'Money & Tax', items: [
-        { href: '/take-home-pay',         label: 'Take-home pay',     desc: 'PAYE + NI + student loan',   icon: Banknote,   accent: '#00C4B4' },
-        { href: '/stamp-duty-calculator', label: 'Stamp duty',        desc: 'SDLT 2026 with FTB relief',  icon: Tag,        accent: '#C9A14A' },
-        { href: '/council-tax-band',      label: 'Council tax band',  desc: 'All 8 bands by postcode',    icon: Building2,  accent: '#0A2540' },
-        { href: '/tools/salary-checker',  label: 'UK salary checker', desc: 'SOC code threshold check',   icon: TrendingUp, accent: '#00A89A' },
+        { href: '/take-home-pay',     label: 'Take-home pay',      desc: 'PAYE + NI + student loan',     icon: Banknote,   accent: '#00C4B4' },
+        { href: '/tax-code',          label: 'Tax code decoder',   desc: '1257L · K475 · BR · D0',       icon: FileText,   accent: '#0A2540' },
+        { href: '/vat-calculator',    label: 'VAT calculator',     desc: 'Add or remove 20% / 5% / 0%',   icon: Percent,    accent: '#0EA5E9' },
+        { href: '/salary-compare',    label: 'Salary comparison',  desc: 'City ↔ city equivalent gross', icon: Scale,      accent: '#10B981' },
+        { href: '/cgt-calculator',    label: 'Capital Gains Tax',  desc: '£3,000 AEA · 18% / 24%',        icon: Calculator, accent: '#C9A14A' },
+        { href: '/holiday-pay',       label: 'Holiday pay',        desc: '5.6 weeks · 12.07% rule',       icon: Calendar,   accent: '#00A89A' },
       ]},
-      { heading: 'Property, Local & Visa', items: [
+      { heading: 'Property, Vehicle & Life', items: [
         { href: '/mortgage-affordability', label: 'Mortgage affordability', desc: 'Max borrow + stress test',  icon: HomeIcon,   accent: '#C9A14A' },
-        { href: '/postcode',               label: 'Postcode lookup',        desc: 'Council, MP, NHS, police',  icon: MapPin,     accent: '#0A2540' },
-        { href: '/cost-of-living-uk',      label: 'Cost of living',         desc: 'Compare any two UK cities', icon: ListChecks, accent: '#00C4B4' },
-        { href: '/tools/cost-calculator',  label: 'Visa cost calculator',   desc: 'Fees + IHS + dependants',   icon: Calculator, accent: '#13325F' },
+        { href: '/stamp-duty-calculator',  label: 'Stamp duty',             desc: 'SDLT 2026 + FTB relief',    icon: Tag,        accent: '#2563EB' },
+        { href: '/council-tax-band',       label: 'Council tax band',       desc: 'All 8 bands by postcode',   icon: Building2,  accent: '#0A2540' },
+        { href: '/postcode',               label: 'Postcode lookup',        desc: 'Council, MP, NHS, police',  icon: MapPin,     accent: '#7C3AED' },
+        { href: '/ulez-check',             label: 'ULEZ & CAZ checker',     desc: 'Is your car compliant?',    icon: Car,        accent: '#E11D48' },
+        { href: '/energy-bill',            label: 'Energy bill',            desc: 'Ofgem cap quarterly',       icon: Zap,        accent: '#F59E0B' },
       ]},
     ],
     feature: { title: 'All free, all the time', desc: 'Verified against gov.uk, HMRC and ONS. No signup, no email harvesting, no ads in your face.', href: '/tools', cta: 'Open all tools' },

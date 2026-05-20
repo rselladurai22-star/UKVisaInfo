@@ -24,6 +24,7 @@ import {
   ListChecks, Briefcase, GraduationCap,
   Search, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
   Activity, Newspaper, Sparkles, Command, CornerDownLeft,
+  Percent, FileText, Car, Zap, Scale,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -53,14 +54,18 @@ interface AppTile {
 }
 
 const APP_TILES: AppTile[] = [
-  { href: '/take-home-pay',          label: 'Take-home Pay',   hint: 'PAYE + NI + student loan',         icon: Wallet,     accent: TEAL,    live: true,  kbd: 'P' },
-  { href: '/mortgage-affordability', label: 'Mortgage',        hint: 'Max borrow + stress test',          icon: HomeIcon,   accent: GOLD,    live: true,  kbd: 'M' },
-  { href: '/stamp-duty-calculator',  label: 'Stamp Duty',      hint: 'SDLT 2026 · FTB relief',            icon: Calculator, accent: BLUE,    live: true,  kbd: 'S' },
-  { href: '/council-tax-band',       label: 'Council Tax',     hint: 'All 8 bands by postcode',           icon: Building2,  accent: NAVY,    live: true,  kbd: 'C' },
-  { href: '/postcode',               label: 'Postcode',        hint: 'Council, MP, NHS, police',          icon: MapPin,     accent: VIOLET,  live: true,  kbd: 'L' },
-  { href: '/cost-of-living-uk',      label: 'Cost of Living',  hint: 'Compare any two UK cities',         icon: ListChecks, accent: EMERALD, live: true,  kbd: 'O' },
-  { href: '/visa-types',             label: 'UK Visas',        hint: '14 routes, 2026 fees',              icon: Plane,      accent: ROSE,    live: true,  kbd: 'V' },
-  { href: '/tools/cost-calculator',  label: 'Visa Cost',       hint: 'Fees + IHS + dependants',           icon: Calculator, accent: AMBER,   live: true,  kbd: 'X' },
+  { href: '/take-home-pay',          label: 'Take-home Pay',   hint: 'PAYE + NI + student loan',        icon: Wallet,     accent: TEAL,    live: true, kbd: 'P' },
+  { href: '/mortgage-affordability', label: 'Mortgage',        hint: 'Max borrow + stress test',         icon: HomeIcon,   accent: GOLD,    live: true, kbd: 'M' },
+  { href: '/vat-calculator',         label: 'VAT calculator',  hint: 'Add or remove 20% / 5% / 0%',      icon: Percent,    accent: '#0EA5E9', live: true, kbd: 'A' },
+  { href: '/tax-code',               label: 'Tax code',        hint: 'Decode 1257L, K475, BR …',         icon: FileText,   accent: NAVY,    live: true, kbd: 'T' },
+  { href: '/postcode',               label: 'Postcode',        hint: 'Council, MP, NHS, police',         icon: MapPin,     accent: VIOLET,  live: true, kbd: 'L' },
+  { href: '/stamp-duty-calculator',  label: 'Stamp Duty',      hint: 'SDLT 2026 · FTB relief',           icon: Calculator, accent: BLUE,    live: true, kbd: 'S' },
+  { href: '/salary-compare',         label: 'Salary compare',  hint: 'City ↔ city equivalent gross',     icon: Scale,      accent: EMERALD, live: true, kbd: 'Q' },
+  { href: '/energy-bill',            label: 'Energy bill',     hint: 'Ofgem cap quarterly',              icon: Zap,        accent: AMBER,   live: true, kbd: 'E' },
+  { href: '/council-tax-band',       label: 'Council Tax',     hint: 'All 8 bands by postcode',          icon: Building2,  accent: NAVY,    live: true, kbd: 'C' },
+  { href: '/mot-check',              label: 'MOT & tax',       hint: 'Check any UK reg plate',           icon: Car,        accent: ROSE,    live: true, kbd: 'D' },
+  { href: '/ulez-check',             label: 'ULEZ / CAZ',      hint: 'Is your car compliant?',           icon: Car,        accent: '#7C3AED', live: true, kbd: 'U' },
+  { href: '/visa-types',             label: 'UK Visas',        hint: '14 routes, 2026 fees',             icon: Plane,      accent: '#F59E0B', live: true, kbd: 'V' },
 ];
 
 /* ─────────────────────────────────────────────
@@ -85,6 +90,16 @@ const COMMAND_INDEX: CommandItem[] = [
   { href: '/tools/cost-calculator',  title: 'Visa cost calculator',     hint: 'Fees + IHS + dependants',             group: 'Tools', keywords: ['visa', 'cost', 'fee', 'ihs'] },
   { href: '/tools/salary-checker',   title: 'SOC salary checker',       hint: '270 SOC codes · going rates',         group: 'Tools', keywords: ['soc', 'salary', 'sponsor'] },
   { href: '/tools/sponsor-search',   title: 'Sponsor licence search',   hint: '126,530 licensed UK sponsors',        group: 'Tools', keywords: ['sponsor', 'employer', 'licence'] },
+  { href: '/vat-calculator',         title: 'VAT calculator',           hint: 'Add or remove 20% / 5% / 0%',          group: 'Tools', keywords: ['vat', 'tax', '20%', 'reduce'] },
+  { href: '/tax-code',               title: 'Tax code decoder',         hint: '1257L · K475 · BR · D0 · NT',          group: 'Tools', keywords: ['tax code', 'paye', '1257l', 'k code', 'br', 'd0'] },
+  { href: '/holiday-pay',            title: 'Holiday pay calculator',   hint: 'Statutory 5.6 weeks · 12.07% rule',   group: 'Tools', keywords: ['holiday', 'leave', 'annual', 'entitlement'] },
+  { href: '/salary-compare',         title: 'Salary comparison',        hint: 'City ↔ city equivalent gross',         group: 'Tools', keywords: ['salary', 'compare', 'london', 'manchester', 'equivalent'] },
+  { href: '/cgt-calculator',         title: 'Capital Gains Tax',        hint: '£3,000 AEA · 18% / 24%',               group: 'Tools', keywords: ['cgt', 'capital gains', 'property', 'shares'] },
+  { href: '/pension-allowance',      title: 'Pension annual allowance', hint: 'Tapered + MPAA + carry-forward',       group: 'Tools', keywords: ['pension', 'allowance', 'tapered', 'mpaa'] },
+  { href: '/state-pension',          title: 'State Pension forecast',   hint: 'From your NI years',                    group: 'Tools', keywords: ['state pension', 'ni', 'retirement'] },
+  { href: '/ulez-check',             title: 'ULEZ & CAZ checker',       hint: 'London + 7 English + 4 Scottish zones',group: 'Tools', keywords: ['ulez', 'caz', 'clean air', 'emissions', 'tfl'] },
+  { href: '/mot-check',              title: 'MOT & tax check',          hint: 'Validate any UK reg plate',            group: 'Tools', keywords: ['mot', 'tax', 'dvla', 'dvsa', 'reg', 'plate'] },
+  { href: '/energy-bill',            title: 'Energy bill (Ofgem cap)',  hint: 'kWh × current cap rates',              group: 'Tools', keywords: ['energy', 'bill', 'gas', 'electricity', 'ofgem', 'cap'] },
   // Places
   { href: '/postcode',               title: 'Postcode super-lookup',    hint: 'Council, MP, NHS, police, ward',      group: 'Places', keywords: ['postcode', 'mp', 'council', 'nhs', 'police'] },
   // Visas
