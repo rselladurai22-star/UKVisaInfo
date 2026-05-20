@@ -25,6 +25,7 @@ import {
   Search, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
   Activity, Newspaper, Sparkles, Command, CornerDownLeft,
   Percent, FileText, Car, Zap, Scale,
+  Baby, HeartPulse, PiggyBank, Banknote, LandmarkIcon, Users, ReceiptText,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────
@@ -65,7 +66,16 @@ const APP_TILES: AppTile[] = [
   { href: '/council-tax-band',       label: 'Council Tax',     hint: 'All 8 bands by postcode',          icon: Building2,  accent: NAVY,    live: true, kbd: 'C' },
   { href: '/mot-check',              label: 'MOT & tax',       hint: 'Check any UK reg plate',           icon: Car,        accent: ROSE,    live: true, kbd: 'D' },
   { href: '/ulez-check',             label: 'ULEZ / CAZ',      hint: 'Is your car compliant?',           icon: Car,        accent: '#7C3AED', live: true, kbd: 'U' },
-  { href: '/visa-types',             label: 'UK Visas',        hint: '14 routes, 2026 fees',             icon: Plane,      accent: '#F59E0B', live: true, kbd: 'V' },
+  { href: '/visa-types',             label: 'UK Visas',        hint: '14 routes, 2026 fees',             icon: Plane,       accent: '#F59E0B', live: true, kbd: 'V' },
+  { href: '/national-insurance',     label: 'National Insurance', hint: 'Employee · employer · self-employed', icon: Users,    accent: TEAL,    live: true },
+  { href: '/inheritance-tax',        label: 'Inheritance Tax', hint: 'NRB £325k + RNRB £175k',          icon: LandmarkIcon, accent: GOLD,    live: true },
+  { href: '/dividend-tax',           label: 'Dividend Tax',    hint: '£500 allowance · 8.75–39.35%',     icon: PiggyBank,   accent: EMERALD, live: true },
+  { href: '/sole-trader-vs-limited', label: 'Sole vs Ltd',     hint: 'Which keeps more of your profit?', icon: Briefcase,   accent: BLUE,    live: true },
+  { href: '/student-loan-repayment', label: 'Student Loan',    hint: 'Plan 1/2/4/5 + Postgraduate',      icon: GraduationCap, accent: VIOLET, live: true },
+  { href: '/redundancy-pay',         label: 'Redundancy Pay',  hint: '£719 weekly cap · £30k tax-free',  icon: Banknote,    accent: ROSE,    live: true },
+  { href: '/maternity-pay',          label: 'Maternity Pay',   hint: 'SMP 39 weeks · SPP',                icon: Baby,        accent: '#EC4899', live: true },
+  { href: '/sick-pay',               label: 'Sick Pay (SSP)',  hint: '£118.75/wk · 28-week max',          icon: HeartPulse,  accent: '#0EA5E9', live: true },
+  { href: '/payslip-decoder',        label: 'Payslip Decoder', hint: 'Tax codes · NI letters · pensions', icon: ReceiptText, accent: AMBER,   live: true },
 ];
 
 /* ─────────────────────────────────────────────
@@ -100,6 +110,15 @@ const COMMAND_INDEX: CommandItem[] = [
   { href: '/ulez-check',             title: 'ULEZ & CAZ checker',       hint: 'London + 7 English + 4 Scottish zones',group: 'Tools', keywords: ['ulez', 'caz', 'clean air', 'emissions', 'tfl'] },
   { href: '/mot-check',              title: 'MOT & tax check',          hint: 'Validate any UK reg plate',            group: 'Tools', keywords: ['mot', 'tax', 'dvla', 'dvsa', 'reg', 'plate'] },
   { href: '/energy-bill',            title: 'Energy bill (Ofgem cap)',  hint: 'kWh × current cap rates',              group: 'Tools', keywords: ['energy', 'bill', 'gas', 'electricity', 'ofgem', 'cap'] },
+  { href: '/national-insurance',     title: 'National Insurance calculator', hint: 'Class 1 employee/employer · Class 4', group: 'Tools', keywords: ['ni', 'national insurance', 'class 1', 'class 4', 'self employed'] },
+  { href: '/inheritance-tax',        title: 'Inheritance Tax calculator',    hint: 'NRB £325k · RNRB £175k · 36% charity', group: 'Tools', keywords: ['iht', 'inheritance', 'estate', 'nil rate band', 'rnrb'] },
+  { href: '/dividend-tax',           title: 'Dividend Tax calculator',       hint: '£500 allowance · 8.75% / 33.75% / 39.35%', group: 'Tools', keywords: ['dividend', 'dividend tax', 'shareholder', 'limited company'] },
+  { href: '/sole-trader-vs-limited', title: 'Sole trader vs Limited company', hint: 'Full IT+NI vs CT+dividend comparison', group: 'Tools', keywords: ['sole trader', 'limited company', 'ltd', 'self employed', 'corporation tax'] },
+  { href: '/student-loan-repayment', title: 'Student Loan repayment',        hint: 'Plan 1/2/4/5 + Postgraduate projection', group: 'Tools', keywords: ['student loan', 'plan 2', 'plan 5', 'postgraduate', 'sl'] },
+  { href: '/redundancy-pay',         title: 'Redundancy Pay calculator',     hint: 'Statutory · £719 cap · £30k tax-free',   group: 'Tools', keywords: ['redundancy', 'statutory redundancy', 'redundancy pay', 'made redundant'] },
+  { href: '/maternity-pay',          title: 'Maternity Pay calculator',      hint: 'SMP 39 weeks · SPP · £187.18',            group: 'Tools', keywords: ['maternity', 'smp', 'maternity pay', 'paternity', 'spp'] },
+  { href: '/sick-pay',               title: 'Sick Pay (SSP) calculator',     hint: '£118.75/wk · 28-week max · waiting days', group: 'Tools', keywords: ['ssp', 'sick pay', 'statutory sick', 'sickness'] },
+  { href: '/payslip-decoder',        title: 'Payslip decoder',               hint: 'Tax codes · NI letters · deduction codes', group: 'Tools', keywords: ['payslip', 'tax code', 'ni category', 'p60', 'p45', 'deduction'] },
   // Places
   { href: '/postcode',               title: 'Postcode super-lookup',    hint: 'Council, MP, NHS, police, ward',      group: 'Places', keywords: ['postcode', 'mp', 'council', 'nhs', 'police'] },
   // Visas
