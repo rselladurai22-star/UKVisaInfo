@@ -3,16 +3,12 @@ import Script from 'next/script';
 /**
  * Google Analytics 4 loader.
  *
- * UKDesk Measurement ID is hardcoded as the default. An env var
- * (NEXT_PUBLIC_GA_ID) can override for staging / preview deploys.
- * Free, unlimited events. Pair with Vercel Analytics for a 2nd lens.
- *
- * Manage the property at analytics.google.com.
+ * Reads NEXT_PUBLIC_GA_ID from the environment (set in Vercel → project
+ * → Settings → Environment Variables). No-ops when unset. Free, unlimited
+ * events. Pair with Vercel Analytics for a 2nd lens on traffic.
  */
-const UKDESK_GA_ID = 'G-80TXNPVFCZ';
-
 export default function GoogleAnalytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID || UKDESK_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
   if (!gaId) return null;
 
   return (
