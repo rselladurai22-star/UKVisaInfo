@@ -62,6 +62,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/about',           prio: 0.4,  freq: 'yearly' },
     { p: '/privacy',         prio: 0.3,  freq: 'yearly' },
     { p: '/terms',           prio: 0.3,  freq: 'yearly' },
+    /* ── Tier-2 calculators ── */
+    { p: '/child-benefit-calculator',    prio: 0.90, freq: 'monthly' },
+    { p: '/marriage-allowance-calculator', prio: 0.90, freq: 'monthly' },
+    { p: '/company-car-tax',             prio: 0.90, freq: 'monthly' },
+    { p: '/ir35-calculator',             prio: 0.90, freq: 'monthly' },
+    { p: '/contractor-day-rate',         prio: 0.90, freq: 'monthly' },
+    { p: '/mileage-expense-calculator',  prio: 0.90, freq: 'monthly' },
+    { p: '/salary-sacrifice-calculator', prio: 0.90, freq: 'monthly' },
+    { p: '/self-assessment-calculator',  prio: 0.90, freq: 'monthly' },
+    { p: '/rental-income-tax',           prio: 0.90, freq: 'monthly' },
+    { p: '/rental-yield-calculator',     prio: 0.90, freq: 'monthly' },
+    { p: '/overpayment-mortgage',        prio: 0.90, freq: 'monthly' },
+    { p: '/property-cgt-calculator',     prio: 0.90, freq: 'monthly' },
+    { p: '/childcare-calculator',        prio: 0.90, freq: 'monthly' },
+    { p: '/isa-calculator',              prio: 0.90, freq: 'monthly' },
+    { p: '/ihs-calculator',              prio: 0.90, freq: 'monthly' },
+    { p: '/skilled-worker-points-check', prio: 0.90, freq: 'monthly' },
+    { p: '/notice-period-calculator',    prio: 0.90, freq: 'monthly' },
+    { p: '/minimum-wage-checker',        prio: 0.90, freq: 'monthly' },
+    { p: '/pension-drawdown-calculator', prio: 0.90, freq: 'monthly' },
+    { p: '/lifetime-isa-calculator',     prio: 0.90, freq: 'monthly' },
   ];
   for (const { p, prio, freq } of top) {
     urls.push({
