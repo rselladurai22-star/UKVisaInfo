@@ -26,114 +26,111 @@ export default function VariantPicker({ variants, visaId, accent = '#00C4B4' }: 
   const v = variants[activeIdx];
 
   return (
-    <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
-      <div className="mb-4">
-        <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] mb-1.5" style={{ color: accent }}>
-          Sub-routes
+    <section className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
+      style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
+      {/* Header */}
+      <div className="px-6 py-5 border-b border-[#F3F4F6]"
+        style={{ background: `${accent}08` }}>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="w-[3px] h-4 rounded-full" style={{ background: accent }} />
+          <div className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#6B7280]">Sub-routes</div>
         </div>
-        <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] tracking-[-0.015em] leading-tight">
+        <h2 className="font-bold text-[#0A2540] text-[20px] md:text-[22px] tracking-[-0.015em]"
+          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
           Which sub-route applies to you?
         </h2>
-        <p className="mt-2 text-[13.5px] text-[#52596e] leading-relaxed">
-          Switching between tabs reveals the fees, eligibility and gov.uk source for that specific variant.
+        <p className="mt-1 text-[14px] text-[#374151] leading-relaxed">
+          Select a route to see its specific fees and eligibility requirements.
         </p>
       </div>
 
       {/* Tab strip */}
-      <div className="flex flex-wrap gap-1.5 mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
+      <div className="px-5 pt-4 pb-1 flex flex-wrap gap-2 border-b border-[#F3F4F6]">
         {variants.map((vv, i) => {
           const isActive = i === activeIdx;
           return (
-            <button
-              key={vv.id}
-              type="button"
-              onClick={() => setActiveIdx(i)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors duration-100 ${
-                isActive
-                  ? 'text-white'
-                  : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0A2540]'
-              }`}
-              style={isActive ? { background: accent } : undefined}
-            >
+            <button key={vv.id} type="button" onClick={() => setActiveIdx(i)}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-100 mb-3"
+              style={isActive
+                ? { background: accent, color: '#fff', boxShadow: `0 4px 12px -4px ${accent}66` }
+                : { background: '#F3F4F6', color: '#374151' }}>
               {vv.label}
+              {typeof vv.feeAmount === 'number' && (
+                <span className={`text-[11px] ${isActive ? 'text-white/80' : 'text-[#6B7280]'}`}>
+                  £{vv.feeAmount.toLocaleString('en-GB')}
+                </span>
+              )}
             </button>
           );
         })}
       </div>
 
       {/* Active variant detail */}
-      <div className="grid grid-cols-12 gap-5">
-        <div className="col-span-12 md:col-span-7">
-          <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#9aa3b8]">
+      <div className="grid grid-cols-12 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#F3F4F6]">
+        {/* Left: eligibility highlights */}
+        <div className="col-span-12 md:col-span-7 p-6">
+          <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF] mb-1">
             {v.label}
           </div>
-          <div className="mt-1 font-display font-bold text-[18px] text-[#0A2540] leading-tight">
+          <div className="font-bold text-[17px] text-[#0A2540] leading-snug mb-1"
+            style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
             {v.headline}
           </div>
           {v.fee && (
-            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] text-[12.5px] font-semibold text-[#0A2540] tabular-nums">
+            <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-bold border"
+              style={{ background: `${accent}0c`, borderColor: `${accent}30`, color: '#0A2540' }}>
               {v.fee}
             </div>
           )}
 
-          <ul className="mt-5 space-y-2">
+          <ul className="space-y-3 mt-4">
             {v.eligibilityHighlights.map((line, i) => (
-              <li key={i} className="flex items-start gap-2.5 text-[14px] text-[#1a2240] leading-snug">
+              <li key={i} className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: accent }} />
-                <span>{line}</span>
+                <span className="text-[14.5px] text-[#111827] leading-snug">{line}</span>
               </li>
             ))}
           </ul>
 
           {v.notes && v.notes.length > 0 && (
-            <ul className="mt-4 space-y-1.5">
+            <ul className="mt-4 space-y-2 pl-6 border-l-2" style={{ borderColor: `${accent}40` }}>
               {v.notes.map((n, i) => (
-                <li key={i} className="flex items-start gap-2 text-[12.5px] text-[#7a8195] leading-snug">
-                  <span className="text-[#00C4B4]">•</span>
-                  <span>{n}</span>
-                </li>
+                <li key={i} className="text-[13px] text-[#374151] leading-snug">{n}</li>
               ))}
             </ul>
           )}
         </div>
 
-        {/* Meta panel */}
-        <div className="col-span-12 md:col-span-5">
-          <dl className="rounded-2xl bg-white border border-[rgba(14,20,36,0.06)] p-4 space-y-3 text-[13px]">
+        {/* Right: fee meta + actions */}
+        <div className="col-span-12 md:col-span-5 p-6">
+          <dl className="rounded-xl bg-[#F8FAFC] border border-[#E5E7EB] divide-y divide-[#F3F4F6] mb-4 overflow-hidden">
             {typeof v.feeAmount === 'number' && (
-              <Row label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />
+              <RowItem label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />
             )}
             {typeof v.ihsAdult === 'number' && (
-              <Row label="IHS (adult)" value={`£${v.ihsAdult.toLocaleString('en-GB')}/yr`} />
+              <RowItem label="IHS (adult/yr)" value={`£${v.ihsAdult.toLocaleString('en-GB')}`} />
             )}
-            {v.duration && <Row label="Duration" value={v.duration} />}
+            {v.duration && <RowItem label="Duration" value={v.duration} />}
             {typeof v.yearsToIlr === 'number' && (
-              <Row label="Time to ILR" value={`${v.yearsToIlr} year${v.yearsToIlr === 1 ? '' : 's'}`} />
+              <RowItem label="Time to ILR" value={`${v.yearsToIlr} year${v.yearsToIlr === 1 ? '' : 's'}`} />
             )}
             {typeof v.yearsToCitizenship === 'number' && (
-              <Row label="ILR → Citizenship" value={v.yearsToCitizenship === 0 ? 'Immediate' : `${v.yearsToCitizenship} year${v.yearsToCitizenship === 1 ? '' : 's'}`} />
+              <RowItem label="ILR → Citizenship" value={v.yearsToCitizenship === 0 ? 'Immediate' : `${v.yearsToCitizenship} yr${v.yearsToCitizenship === 1 ? '' : 's'}`} />
             )}
           </dl>
 
-          <div className="mt-3 space-y-2">
-            <Link
-              href={`/tools/cost-calculator?visa=${visaId}&variant=${v.id}`}
-              className="group flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-white font-bold text-[13px] shadow-[0_4px_14px_rgba(0, 196, 180,0.32)] active:scale-[0.98] transition-transform"
-              style={{ background: accent }}
-            >
-              <span className="flex items-center gap-2">
-                💰 Calculate your full cost
-              </span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-100" />
+          <div className="space-y-2">
+            <Link href={`/tools/cost-calculator?visa=${visaId}&variant=${v.id}`}
+              className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-white text-[13.5px] font-bold transition-all active:scale-[0.98]"
+              style={{ background: accent, boxShadow: `0 4px 14px -4px ${accent}66` }}>
+              <span>Calculate your full cost</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
-            <a
-              href={v.source}
-              target="_blank" rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-white border border-[rgba(14,20,36,0.1)] text-[12.5px] font-semibold text-[#52596e] hover:border-[#0A2540] hover:text-[#0A2540] transition-colors duration-100"
-            >
+            <a href={v.source} target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl bg-white border border-[#E5E7EB] text-[13px] font-semibold text-[#374151] hover:border-[#0A2540] hover:text-[#0A2540] transition-colors">
               <span className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
-                gov.uk source for this variant
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                gov.uk source for this route
               </span>
               <ExternalLink className="w-3 h-3" />
             </a>
@@ -144,15 +141,11 @@ export default function VariantPicker({ variants, visaId, accent = '#00C4B4' }: 
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function RowItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-start justify-between gap-3">
-      <dt className="text-[11.5px] uppercase tracking-[0.08em] text-[#9aa3b8] font-semibold flex-shrink-0">
-        {label}
-      </dt>
-      <dd className="text-[12.5px] font-semibold text-[#0A2540] text-right tabular-nums leading-tight">
-        {value}
-      </dd>
+    <div className="flex items-center justify-between gap-3 px-4 py-3">
+      <dt className="text-[12.5px] text-[#6B7280] font-medium">{label}</dt>
+      <dd className="text-[13px] font-bold text-[#0A2540] tabular-nums">{value}</dd>
     </div>
   );
 }
