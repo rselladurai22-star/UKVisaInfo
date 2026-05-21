@@ -253,49 +253,17 @@ export default function Header({ onApply }: { onApply: () => void }) {
 
           <Brand />
 
-          {/* ── Desktop nav — full OR contextual ── */}
+          {/* ── Desktop nav — full OR minimal on visa sub-site ── */}
           {isVisaPage(pathname) ? (
-            /* ── VISA CONTEXTUAL NAV ── */
-            <nav className="hidden lg:flex items-center gap-1 flex-1 ml-5" aria-label="Visa navigation">
-              <span
-                className="text-[10.5px] font-bold uppercase tracking-[0.14em] mr-2 flex-shrink-0"
-                style={{ color: '#9CA3AF', fontFamily: 'Inter,sans-serif' }}
-              >
-                Visas
-              </span>
-              {VISA_NAV.map((item) => {
-                const Icon = item.icon;
-                const isActive =
-                  item.href === '/visa-types'
-                    ? pathname === '/visa-types' || pathname.startsWith('/visa/')
-                    : pathname === item.href || pathname.startsWith(item.href + '/');
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="relative inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100 flex-shrink-0"
-                    style={{
-                      background: isActive ? 'rgba(0,196,180,0.10)' : 'transparent',
-                      color: isActive ? '#00C4B4' : '#374151',
-                    }}
-                    onMouseOver={(e) => { if (!isActive) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
-                    onMouseOut={(e)  => { if (!isActive) e.currentTarget.style.background = isActive ? 'rgba(0,196,180,0.10)' : 'transparent'; }}
-                  >
-                    <Icon className="w-3.5 h-3.5" style={{ color: isActive ? '#00C4B4' : '#5A6478' } as React.CSSProperties} />
-                    {item.label}
-                    {isActive && (
-                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00C4B4]" />
-                    )}
-                  </Link>
-                );
-              })}
+            /* On visa pages: header is logo-only. The visa hub owns all its own nav. */
+            <nav className="hidden lg:flex items-center flex-1 ml-5" aria-label="Visa page back link">
               <span className="flex-1" />
               <Link
                 href="/"
-                className="hidden xl:inline-flex items-center gap-1.5 h-9 px-3 text-[12.5px] font-medium rounded-lg transition-colors duration-100 flex-shrink-0"
+                className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-lg text-[13px] font-medium transition-all duration-100"
                 style={{ color: '#5A6478', fontFamily: 'Inter,sans-serif' }}
-                onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
-                onMouseOut={(e)  => { e.currentTarget.style.background = 'transparent'; }}
+                onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(10,37,64,0.05)'; e.currentTarget.style.color = '#0A2540'; }}
+                onMouseOut={(e)  => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#5A6478'; }}
               >
                 ← All tools
               </Link>

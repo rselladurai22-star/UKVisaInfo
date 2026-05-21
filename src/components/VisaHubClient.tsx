@@ -217,7 +217,7 @@ export default function VisaHubClient() {
           </div>
         </div>
 
-        {/* ── SECTION NAV (sticky) ── */}
+        {/* ── SECTION NAV — inside dark header ── */}
         <div className="border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-0 overflow-x-auto">
@@ -252,9 +252,33 @@ export default function VisaHubClient() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════
-          CONTENT AREA
-      ══════════════════════════════════════ */}
+      {/* ── STICKY SECTION NAV (white bar, persists on scroll) ── */}
+      <div className="sticky z-30 bg-white border-b border-[#E5E7EB]" style={{ top: '62px' }}
+        role="navigation" aria-label="Visa hub sections">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center overflow-x-auto gap-0 no-scrollbar">
+            {SECTIONS.map(s => {
+              const SIcon = s.icon;
+              const active = activeSection === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setActiveSection(s.id)}
+                  className="group flex-shrink-0 flex items-center gap-2 px-4 py-3.5 text-[13px] font-semibold relative transition-colors duration-100"
+                  style={{ color: active ? '#0A2540' : '#6B7280', borderBottom: active ? '2.5px solid #0A2540' : '2.5px solid transparent', marginBottom: '-1px' }}
+                  onMouseOver={e => { if (!active) (e.currentTarget as HTMLElement).style.color = '#374151'; }}
+                  onMouseOut={e => { if (!active) (e.currentTarget as HTMLElement).style.color = '#6B7280'; }}
+                >
+                  <span style={{ color: active ? '#00C4B4' : '#9CA3AF' }}>
+                    <SIcon className="w-3.5 h-3.5" />
+                  </span>
+                  <span>{s.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
 
         {/* ── SECTION: ROUTES ── */}
