@@ -32,6 +32,9 @@ interface VisaRoute {
 interface Country {
   flag: string; name: string; code: string;
   tbTest: boolean; visaRequired: boolean; vacCities: string;
+  processingWeeks: string;
+  popularRoutes: TabId[];
+  notes: string[];
 }
 
 /* ─── SECTION NAV ─── */
@@ -106,28 +109,28 @@ const ROUTES: VisaRoute[] = [
 ];
 
 const COUNTRIES: Country[] = [
-  { flag:'��🇳', name:'India',        code:'india',        tbTest:true,  visaRequired:true,  vacCities:'Delhi, Mumbai, Chennai, Kolkata, Hyderabad, Pune, Chandigarh' },
-  { flag:'🇳🇬', name:'Nigeria',      code:'nigeria',      tbTest:true,  visaRequired:true,  vacCities:'Lagos, Abuja' },
-  { flag:'🇵🇰', name:'Pakistan',     code:'pakistan',     tbTest:true,  visaRequired:true,  vacCities:'Islamabad, Karachi, Lahore' },
-  { flag:'🇵🇭', name:'Philippines',  code:'philippines',  tbTest:true,  visaRequired:true,  vacCities:'Manila, Cebu' },
-  { flag:'🇧🇩', name:'Bangladesh',   code:'bangladesh',   tbTest:true,  visaRequired:true,  vacCities:'Dhaka, Sylhet' },
-  { flag:'🇨🇳', name:'China',        code:'china',        tbTest:true,  visaRequired:true,  vacCities:'Beijing, Shanghai, Guangzhou, Chengdu' },
-  { flag:'🇰🇪', name:'Kenya',        code:'kenya',        tbTest:true,  visaRequired:true,  vacCities:'Nairobi' },
-  { flag:'🇬🇭', name:'Ghana',        code:'ghana',        tbTest:true,  visaRequired:true,  vacCities:'Accra' },
-  { flag:'🇱🇰', name:'Sri Lanka',    code:'sri-lanka',    tbTest:true,  visaRequired:true,  vacCities:'Colombo' },
-  { flag:'🇳🇵', name:'Nepal',        code:'nepal',        tbTest:true,  visaRequired:true,  vacCities:'Kathmandu' },
-  { flag:'🇿��', name:'Zimbabwe',     code:'zimbabwe',     tbTest:true,  visaRequired:true,  vacCities:'Harare' },
-  { flag:'🇹🇿', name:'Tanzania',     code:'tanzania',     tbTest:true,  visaRequired:true,  vacCities:'Dar es Salaam' },
-  { flag:'🇹🇷', name:'Turkey',       code:'turkey',       tbTest:true,  visaRequired:true,  vacCities:'Istanbul, Ankara' },
-  { flag:'🇪🇬', name:'Egypt',        code:'egypt',        tbTest:true,  visaRequired:true,  vacCities:'Cairo' },
-  { flag:'🇺🇸', name:'USA',          code:'usa',          tbTest:false, visaRequired:false, vacCities:'Online only (no biometrics for visitors)' },
-  { flag:'🇨🇦', name:'Canada',       code:'canada',       tbTest:false, visaRequired:false, vacCities:'Online only (visitors)' },
-  { flag:'🇦🇺', name:'Australia',    code:'australia',    tbTest:false, visaRequired:false, vacCities:'Online only (visitors)' },
-  { flag:'🇭🇰', name:'Hong Kong',    code:'hong-kong',    tbTest:false, visaRequired:false, vacCities:'Hong Kong' },
-  { flag:'🇿🇦', name:'South Africa', code:'south-africa', tbTest:false, visaRequired:false, vacCities:'Cape Town, Johannesburg' },
-  { flag:'🇧🇷', name:'Brazil',       code:'brazil',       tbTest:false, visaRequired:false, vacCities:'Online only (visitors)' },
-  { flag:'🇺🇦', name:'Ukraine',      code:'ukraine',      tbTest:false, visaRequired:false, vacCities:'Online' },
-  { flag:'🇯🇵', name:'Japan',        code:'japan',        tbTest:false, visaRequired:false, vacCities:'Tokyo, Osaka' },
+  { flag:'🇮🇳', name:'India',        code:'india',        tbTest:true,  visaRequired:true,  vacCities:'Delhi, Mumbai, Chennai, Kolkata, Hyderabad, Pune, Chandigarh',  processingWeeks:'3–8 wks',  popularRoutes:['work','study','family','settlement'] as TabId[], notes:['High-demand VAC — book appointment early','Skilled Worker is most common route','Students need CAS from sponsor institution'] },
+  { flag:'🇳🇬', name:'Nigeria',      code:'nigeria',      tbTest:true,  visaRequired:true,  vacCities:'Lagos, Abuja',                                                  processingWeeks:'4–10 wks', popularRoutes:['work','family','study'] as TabId[],               notes:['Additional financial documents often requested','TB test required for stays over 6 months','Priority service available for Work/Study'] },
+  { flag:'🇵🇰', name:'Pakistan',     code:'pakistan',     tbTest:true,  visaRequired:true,  vacCities:'Islamabad, Karachi, Lahore',                                    processingWeeks:'3–8 wks',  popularRoutes:['family','work','settlement'] as TabId[],           notes:['Family visa is the most common route','Sponsor must meet £29,000 income threshold','TB test at approved IOM clinic mandatory'] },
+  { flag:'🇵🇭', name:'Philippines',  code:'philippines',  tbTest:true,  visaRequired:true,  vacCities:'Manila, Cebu',                                                  processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Health & Care visa popular (IHS waived)','Skilled Worker requires licensed UK sponsor','TB test at approved IOM centre required'] },
+  { flag:'🇧🇩', name:'Bangladesh',   code:'bangladesh',   tbTest:true,  visaRequired:true,  vacCities:'Dhaka, Sylhet',                                                 processingWeeks:'4–8 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Family and Work routes most common','Biometric at TLScontact','TB test mandatory at Dhaka IOM clinic'] },
+  { flag:'🇨🇳', name:'China',        code:'china',        tbTest:true,  visaRequired:true,  vacCities:'Beijing, Shanghai, Guangzhou, Chengdu',                         processingWeeks:'3–6 wks',  popularRoutes:['study','work','visit'] as TabId[],                notes:['Student visa most common route','Multiple VAC locations in major cities','TB test at approved hospitals required'] },
+  { flag:'🇰🇪', name:'Kenya',        code:'kenya',        tbTest:true,  visaRequired:true,  vacCities:'Nairobi',                                                       processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Skilled Worker and Health & Care are common','TB test at Nairobi IOM clinic','Priority processing available'] },
+  { flag:'🇬🇭', name:'Ghana',        code:'ghana',        tbTest:true,  visaRequired:true,  vacCities:'Accra',                                                         processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Health sector workers often use Health & Care visa','TB test at approved Accra clinic','Sponsor letter required for all routes'] },
+  { flag:'🇱🇰', name:'Sri Lanka',    code:'sri-lanka',    tbTest:true,  visaRequired:true,  vacCities:'Colombo',                                                       processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Work and Family are most common routes','TB test at Colombo IOM clinic mandatory','Priority reduces processing to ~5 working days'] },
+  { flag:'🇳🇵', name:'Nepal',        code:'nepal',        tbTest:true,  visaRequired:true,  vacCities:'Kathmandu',                                                     processingWeeks:'3–8 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Skilled Worker and Student are popular','TB test at Kathmandu IOM clinic','Book VAC appointment early as slots fill fast'] },
+  { flag:'��🇼', name:'Zimbabwe',     code:'zimbabwe',     tbTest:true,  visaRequired:true,  vacCities:'Harare',                                                        processingWeeks:'3–6 wks',  popularRoutes:['work','family','special'] as TabId[],             notes:['UK Ancestry visa available with UK-born grandparent','Health & Care visa: IHS waived for qualifying workers','TB test at Harare approved clinic'] },
+  { flag:'🇹🇿', name:'Tanzania',     code:'tanzania',     tbTest:true,  visaRequired:true,  vacCities:'Dar es Salaam',                                                 processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Work and Family routes most common','TB test at Dar es Salaam IOM clinic required','Apply with sufficient lead time'] },
+  { flag:'🇹🇷', name:'Turkey',       code:'turkey',       tbTest:true,  visaRequired:true,  vacCities:'Istanbul, Ankara',                                              processingWeeks:'3–6 wks',  popularRoutes:['work','study','visit'] as TabId[],                notes:['Student visa popular for postgraduate study','Skilled Worker requires UKVI-licensed employer','TB test mandatory for stays over 6 months'] },
+  { flag:'🇪🇬', name:'Egypt',        code:'egypt',        tbTest:true,  visaRequired:true,  vacCities:'Cairo',                                                         processingWeeks:'3–6 wks',  popularRoutes:['work','family','study'] as TabId[],               notes:['Work and Family routes most common','TB test at Cairo IOM clinic','Applications via VFS Global'] },
+  { flag:'🇺🇸', name:'USA',          code:'usa',          tbTest:false, visaRequired:false, vacCities:'Online only (no biometrics for short visits)',                  processingWeeks:'3–4 wks',  popularRoutes:['work','study','visit','special'] as TabId[],      notes:['No visitor visa needed for stays up to 6 months','Youth Mobility Scheme available for 18-30 year olds','Work and Study applications fully online'] },
+  { flag:'🇨🇦', name:'Canada',       code:'canada',       tbTest:false, visaRequired:false, vacCities:'Online only (visitors)',                                        processingWeeks:'3–5 wks',  popularRoutes:['work','study','visit','special'] as TabId[],      notes:['Visa-free visiting up to 6 months','Youth Mobility Scheme available','All visa applications made online'] },
+  { flag:'🇦🇺', name:'Australia',    code:'australia',    tbTest:false, visaRequired:false, vacCities:'Online only (visitors)',                                        processingWeeks:'3–5 wks',  popularRoutes:['work','study','visit','special'] as TabId[],      notes:['Visa-free visiting up to 6 months','Youth Mobility Scheme (18-30) available','All applications made online'] },
+  { flag:'🇭🇰', name:'Hong Kong',    code:'hong-kong',    tbTest:false, visaRequired:false, vacCities:'Hong Kong',                                                     processingWeeks:'3–5 wks',  popularRoutes:['special','work','study','settlement'] as TabId[], notes:['BN(O) Visa available for BN(O) status holders','BN(O) pathway: ILR after 5 yrs, citizenship after 6+','No TB test or visitor visa required'] },
+  { flag:'🇿🇦', name:'South Africa', code:'south-africa', tbTest:false, visaRequired:false, vacCities:'Cape Town, Johannesburg',                                       processingWeeks:'3–5 wks',  popularRoutes:['work','family','special'] as TabId[],             notes:['UK Ancestry visa if you have UK-born grandparent','Skilled Worker is common route','Visa-free visits; no TB test required'] },
+  { flag:'��🇷', name:'Brazil',       code:'brazil',       tbTest:false, visaRequired:false, vacCities:'Online only (visitors)',                                        processingWeeks:'3–5 wks',  popularRoutes:['work','study','visit'] as TabId[],                notes:['Visa-free visiting up to 6 months','Work and Study applications fully online','No TB test required'] },
+  { flag:'🇺🇦', name:'Ukraine',      code:'ukraine',      tbTest:false, visaRequired:false, vacCities:'Online',                                                        processingWeeks:'1–3 wks',  popularRoutes:['special','work','family'] as TabId[],             notes:['Ukraine Schemes (Family & Homes for Ukraine) are free and fast-tracked','No TB test or visitor visa required','BRP collected in the UK after arrival'] },
+  { flag:'🇯🇵', name:'Japan',        code:'japan',        tbTest:false, visaRequired:false, vacCities:'Tokyo, Osaka',                                                  processingWeeks:'3–5 wks',  popularRoutes:['work','study','visit','special'] as TabId[],      notes:['Visa-free for visits up to 6 months','Youth Mobility Scheme available for 18-30 year olds','Work and Study applications online'] },
 ];
 
 function fmt(n: number) { return '£' + n.toLocaleString('en-GB'); }
@@ -217,39 +220,6 @@ export default function VisaHubClient() {
           </div>
         </div>
 
-        {/* ── SECTION NAV — inside dark header ── */}
-        <div className="border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-0 overflow-x-auto">
-              {SECTIONS.map(s => {
-                const SIcon = s.icon;
-                const active = activeSection === s.id;
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => setActiveSection(s.id)}
-                    className="group flex-shrink-0 flex items-center gap-2 px-4 py-3.5 text-[13px] font-semibold transition-all duration-100 relative"
-                    style={{
-                      color: active ? '#5EEAD9' : 'rgba(255,255,255,0.55)',
-                      background: 'transparent',
-                    }}
-                    onMouseOver={e => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.85)'; }}
-                    onMouseOut={e => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'; }}
-                  >
-                    <SIcon className="w-3.5 h-3.5" />
-                    <span>{s.label}</span>
-                    <span className="hidden sm:inline text-[10.5px] ml-1" style={{ color: active ? '#5EEAD9' : 'rgba(255,255,255,0.30)', fontWeight: 400 }}>
-                      {s.desc}
-                    </span>
-                    {active && (
-                      <span className="absolute bottom-0 inset-x-0 h-[2px] rounded-t-full bg-[#5EEAD9]" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ── STICKY SECTION NAV (white bar, persists on scroll) ── */}
@@ -284,10 +254,19 @@ export default function VisaHubClient() {
         {/* ── SECTION: ROUTES ── */}
         {activeSection === 'routes' && (
           <div>
-            {/* Visa type tabs */}
+            {/* Visa type switcher */}
             <div className="bg-white border border-[#E5E7EB] rounded-2xl mb-6 overflow-hidden">
-              <div className="px-4 pt-4 pb-0 border-b border-[#F3F4F6]">
-                <div className="flex items-center gap-1 overflow-x-auto pb-0">
+              {/* Switcher label row */}
+              <div className="px-5 pt-4 pb-0 flex items-center justify-between gap-3">
+                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Switch visa type</span>
+                <button onClick={() => setActiveSection('eligibility')}
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4] hover:underline">
+                  <Target className="w-3 h-3" /> Not sure? Take the quiz
+                </button>
+              </div>
+              {/* Type tabs */}
+              <div className="px-4 pt-2 pb-0 border-b border-[#F3F4F6]">
+                <div className="flex items-center gap-0 overflow-x-auto pb-0">
                   {TABS.map(t => {
                     const TIcon = t.icon;
                     const isActive = activeTab === t.id;
@@ -306,27 +285,25 @@ export default function VisaHubClient() {
                 </div>
               </div>
 
-              {/* Section subtitle */}
-              <div className="px-5 py-4 flex flex-wrap items-center justify-between gap-3"
+              {/* Active type subtitle */}
+              <div className="px-5 py-3.5 flex flex-wrap items-center justify-between gap-2"
                 style={{ background: `linear-gradient(90deg, ${activeTabMeta.accent}08 0%, transparent 50%)` }}>
                 <div className="flex items-center gap-2.5">
-                  <span className="inline-flex w-8 h-8 rounded-lg items-center justify-center flex-shrink-0"
+                  <span className="inline-flex w-7 h-7 rounded-lg items-center justify-center flex-shrink-0"
                     style={{ background: `${activeTabMeta.accent}18`, color: activeTabMeta.accent }}>
-                    {(() => { const TIcon = activeTabMeta.icon; return <TIcon className="w-4 h-4" />; })()}
+                    {(() => { const TIcon = activeTabMeta.icon; return <TIcon className="w-3.5 h-3.5" />; })()}
                   </span>
-                  <div>
-                    <span className="font-bold text-[#0A2540] text-[15px]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>
-                      {activeTabMeta.label} Visas
-                    </span>
-                    <span className="ml-2 text-[12.5px] text-[#9CA3AF]">{tabRoutes.length} route{tabRoutes.length !== 1 ? 's' : ''}</span>
-                  </div>
+                  <span className="font-bold text-[#0A2540] text-[14.5px]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>
+                    {activeTabMeta.label} Visas
+                  </span>
+                  <span className="text-[12px] text-[#9CA3AF]">— {tabRoutes.length} route{tabRoutes.length !== 1 ? 's' : ''}</span>
                 </div>
-                <button onClick={() => setActiveSection('eligibility')}
-                  className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold transition-colors"
+                <button onClick={() => setActiveSection('calculator')}
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold transition-colors"
                   style={{ color: activeTabMeta.accent }}
                   onMouseOver={e => (e.currentTarget as HTMLElement).style.textDecoration = 'underline'}
                   onMouseOut={e => (e.currentTarget as HTMLElement).style.textDecoration = 'none'}>
-                  Not sure which fits? <ArrowRight className="w-3.5 h-3.5" />
+                  <Calculator className="w-3 h-3" /> Calculate costs
                 </button>
               </div>
             </div>
@@ -742,48 +719,103 @@ export default function VisaHubClient() {
             {/* Selected country detail */}
             {selectedCountry ? (
               <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden">
+                {/* Header */}
                 <div className="px-6 py-5 border-b border-[#F3F4F6]"
                   style={{ background: 'linear-gradient(90deg, rgba(10,37,64,0.04) 0%, transparent 60%)' }}>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[2.5rem] leading-none">{selectedCountry.flag}</span>
-                    <div>
-                      <h3 className="font-bold text-[#0A2540] text-[20px]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{selectedCountry.name}</h3>
-                      <p className="text-[12.5px] text-[#6B7280]">Country-specific UK visa notes · gov.uk verified</p>
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[2.5rem] leading-none">{selectedCountry.flag}</span>
+                      <div>
+                        <h3 className="font-bold text-[#0A2540] text-[20px]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>
+                          Applying to the UK from {selectedCountry.name}
+                        </h3>
+                        <p className="text-[12.5px] text-[#6B7280]">gov.uk verified · typical processing {selectedCountry.processingWeeks}</p>
+                      </div>
                     </div>
+                    <Link href={`/from/${selectedCountry.code}`}
+                      className="inline-flex items-center gap-1.5 text-[13px] font-bold px-4 py-2 rounded-xl border border-[#0A2540] text-[#0A2540] hover:bg-[#0A2540] hover:text-white transition-all">
+                      Full {selectedCountry.name} guide <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
-                <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                {/* Key facts row */}
+                <div className="px-6 pt-5 pb-4 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#F3F4F6]">
                   <InfoPill
                     ok={!selectedCountry.visaRequired}
                     label={selectedCountry.visaRequired ? 'Visitor visa required' : 'Visa-free visiting'}
                     desc={selectedCountry.visaRequired
-                      ? 'Apply for Standard Visitor visa on gov.uk before travelling to the UK.'
+                      ? 'Apply for Standard Visitor visa on gov.uk before travelling.'
                       : 'No visa needed for short visits (up to 6 months).'}
                   />
                   <InfoPill
                     ok={!selectedCountry.tbTest}
                     label={selectedCountry.tbTest ? 'TB test required' : 'No TB test required'}
                     desc={selectedCountry.tbTest
-                      ? 'Book a UK-approved tuberculosis test at an approved clinic before applying.'
+                      ? 'Book UK-approved TB test at an approved IOM clinic before applying.'
                       : 'No tuberculosis test needed for your application.'}
                   />
                   <div className="rounded-xl p-4 border" style={{ background: '#F0F4FF', borderColor: '#BFDBFE' }}>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-1.5">
                       <MapPin className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
-                      <span className="text-[13px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>VAC locations</span>
+                      <span className="text-[13px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>VAC / Application centre</span>
                     </div>
                     <p className="text-[12.5px] text-[#374151] leading-relaxed font-medium">{selectedCountry.vacCities}</p>
-                    <Link href={`/from/${selectedCountry.code}`}
-                      className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#2563EB] hover:underline">
-                      Full {selectedCountry.name} guide <ArrowRight className="w-3 h-3" />
-                    </Link>
+                    <div className="mt-2 flex items-center gap-2">
+                      <Clock className="w-3.5 h-3.5 text-[#6B7280]" />
+                      <span className="text-[11.5px] text-[#6B7280]">Typical: {selectedCountry.processingWeeks}</span>
+                    </div>
                   </div>
+                </div>
+
+                {/* Popular visas from this country */}
+                <div className="px-6 pt-5 pb-4 border-b border-[#F3F4F6]">
+                  <h4 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF] mb-3">
+                    Popular visa types from {selectedCountry.name}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCountry.popularRoutes.map(tabId => {
+                      const tab = TABS.find(t => t.id === tabId);
+                      if (!tab) return null;
+                      const count = ROUTES.filter(r => r.tab === tabId).length;
+                      const TIcon = tab.icon;
+                      return (
+                        <button key={tabId}
+                          onClick={() => { setActiveSection('routes'); setActiveTab(tabId); }}
+                          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[13px] font-semibold transition-all duration-100 hover:shadow-sm"
+                          style={{ background: `${tab.accent}0c`, borderColor: `${tab.accent}30`, color: '#0A2540' }}
+                          onMouseOver={e => { (e.currentTarget as HTMLElement).style.borderColor = tab.accent; (e.currentTarget as HTMLElement).style.background = `${tab.accent}18`; }}
+                          onMouseOut={e => { (e.currentTarget as HTMLElement).style.borderColor = `${tab.accent}30`; (e.currentTarget as HTMLElement).style.background = `${tab.accent}0c`; }}>
+                          <span style={{ color: tab.accent }}><TIcon className="w-3.5 h-3.5" /></span>
+                          {tab.label}
+                          <span className="text-[11px] font-normal text-[#9CA3AF]">{count} routes</span>
+                          <ArrowRight className="w-3 h-3 text-[#9CA3AF]" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Country-specific notes */}
+                <div className="px-6 py-5">
+                  <h4 className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF] mb-3">
+                    Key notes for {selectedCountry.name} applicants
+                  </h4>
+                  <ul className="space-y-2">
+                    {selectedCountry.notes.map((note, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#10B981] flex-shrink-0 mt-0.5" />
+                        <span className="text-[13px] text-[#374151] leading-snug">{note}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ) : (
               <div className="bg-white border border-[#E5E7EB] rounded-2xl p-10 text-center">
                 <Globe className="w-10 h-10 mx-auto mb-3" style={{ color: '#CBD5E1' }} />
-                <p className="text-[14px] text-[#9CA3AF]">Select a country above to see TB test requirement, visa rules and VAC locations.</p>
+                <p className="text-[15px] font-semibold text-[#374151] mb-1">Select a country above</p>
+                <p className="text-[13px] text-[#9CA3AF]">See applicable visa types, TB test, VAC locations and country-specific tips.</p>
               </div>
             )}
 
