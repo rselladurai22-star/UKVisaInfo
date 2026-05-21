@@ -134,16 +134,38 @@ const SECTIONS: Section[] = [
  * Reads as: "this is a hub of tools", with one tile lit in teal as the accent.
  * The mark sits on a navy chip; the wordmark "UKDesk" follows.
  */
+/* ─────────────────────────────────────────────
+   CONTEXTUAL NAVIGATION — visa + guides sections
+───────────────────────────────────────────── */
+const VISA_NAV = [
+  { label: 'Visa Hub',    href: '/visa-types',            icon: Plane },
+  { label: 'Settlement',  href: '/settlement',            icon: ShieldCheck },
+  { label: 'Eligibility', href: '/eligibility',           icon: ListChecks },
+  { label: 'Calculator',  href: '/tools/cost-calculator', icon: Calculator },
+  { label: 'Countries',   href: '/from',                  icon: Globe },
+  { label: 'Sponsors',    href: '/sponsors',              icon: Building2 },
+];
+
+const VISA_ROOTS = ['/visa-types', '/visa/', '/settlement', '/eligibility', '/from', '/sponsors'];
+function isVisaPage(p: string) {
+  return VISA_ROOTS.some((r) => p === r || p.startsWith(r + '/') || p.startsWith(r + '?'));
+}
+
+/**
+ * UKDesk logo mark — 4-point compass star.
+ * North/South: teal  East/West: white  Center: gold
+ * Reads as: navigation, guidance, direction through UK life.
+ */
 const LOGO_SVG = (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    {/* top-left — filled teal (the lit tile) */}
-    <rect x="3"  y="3"  width="8" height="8" rx="2" fill="#00C4B4" />
-    {/* top-right — outlined */}
-    <rect x="13" y="3"  width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
-    {/* bottom-left — outlined */}
-    <rect x="3"  y="13" width="8" height="8" rx="2" fill="none" stroke="#ffffff" strokeWidth="1.6" opacity="0.92" />
-    {/* bottom-right — outlined gold accent */}
-    <rect x="13" y="13" width="8" height="8" rx="2" fill="none" stroke="#C9A14A" strokeWidth="1.6" opacity="0.92" />
+    {/* N/S points — teal */}
+    <path d="M12 3 L15.2 11 L12 9.4 L8.8 11 Z" fill="#00C4B4"/>
+    <path d="M12 21 L8.8 13 L12 14.6 L15.2 13 Z" fill="#00C4B4"/>
+    {/* E/W points — white */}
+    <path d="M21 12 L13 8.8 L14.6 12 L13 15.2 Z" fill="rgba(255,255,255,0.82)"/>
+    <path d="M3 12 L11 15.2 L9.4 12 L11 8.8 Z" fill="rgba(255,255,255,0.82)"/>
+    {/* Center jewel — gold */}
+    <circle cx="12" cy="12" r="2" fill="#C9A14A"/>
   </svg>
 );
 
@@ -231,90 +253,134 @@ export default function Header({ onApply }: { onApply: () => void }) {
 
           <Brand />
 
-          {/* ── Desktop nav ── */}
-          <nav className="hidden lg:flex items-center gap-1 flex-1 ml-4" aria-label="Main navigation">
-            {NAV_ITEMS.map((item) => {
-              /* ── DIRECT LINK ── */
-              if (item.kind === 'link') {
-                const Icon       = item.icon;
-                const isOnPage   = pathname.startsWith(item.href);
-                if (item.primary) {
-                  // Eligibility — solid teal pill (primary CTA)
+          {/* ── Desktop nav — full OR contextual ── */}
+          {isVisaPage(pathname) ? (
+            /* ── VISA CONTEXTUAL NAV ── */
+            <nav className="hidden lg:flex items-center gap-1 flex-1 ml-5" aria-label="Visa navigation">
+              <span
+                className="text-[10.5px] font-bold uppercase tracking-[0.14em] mr-2 flex-shrink-0"
+                style={{ color: '#9CA3AF', fontFamily: 'Inter,sans-serif' }}
+              >
+                Visas
+              </span>
+              {VISA_NAV.map((item) => {
+                const Icon = item.icon;
+                const isActive =
+                  item.href === '/visa-types'
+                    ? pathname === '/visa-types' || pathname.startsWith('/visa/')
+                    : pathname === item.href || pathname.startsWith(item.href + '/');
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="relative inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100 flex-shrink-0"
+                    style={{
+                      background: isActive ? 'rgba(0,196,180,0.10)' : 'transparent',
+                      color: isActive ? '#00C4B4' : '#374151',
+                    }}
+                    onMouseOver={(e) => { if (!isActive) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                    onMouseOut={(e)  => { if (!isActive) e.currentTarget.style.background = isActive ? 'rgba(0,196,180,0.10)' : 'transparent'; }}
+                  >
+                    <Icon className="w-3.5 h-3.5" style={{ color: isActive ? '#00C4B4' : '#5A6478' } as React.CSSProperties} />
+                    {item.label}
+                    {isActive && (
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00C4B4]" />
+                    )}
+                  </Link>
+                );
+              })}
+              <span className="flex-1" />
+              <Link
+                href="/"
+                className="hidden xl:inline-flex items-center gap-1.5 h-9 px-3 text-[12.5px] font-medium rounded-lg transition-colors duration-100 flex-shrink-0"
+                style={{ color: '#5A6478', fontFamily: 'Inter,sans-serif' }}
+                onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                onMouseOut={(e)  => { e.currentTarget.style.background = 'transparent'; }}
+              >
+                ← All tools
+              </Link>
+            </nav>
+          ) : (
+            /* ── FULL GLOBAL NAV ── */
+            <nav className="hidden lg:flex items-center gap-1 flex-1 ml-4" aria-label="Main navigation">
+              {NAV_ITEMS.map((item) => {
+                if (item.kind === 'link') {
+                  const Icon       = item.icon;
+                  const isOnPage   = pathname.startsWith(item.href);
+                  if (item.primary) {
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        onMouseEnter={() => setOpenId(null)}
+                        className="relative inline-flex items-center gap-1.5 h-9 px-3.5 rounded-lg text-[13px] font-semibold transition-all duration-100"
+                        style={{
+                          background: 'linear-gradient(135deg, #00C4B4 0%, #00A89A 100%)',
+                          color: '#fff',
+                          boxShadow: '0 2px 10px -2px rgba(0,196,180,0.45)',
+                        }}
+                      >
+                        {Icon && <Icon className="w-3.5 h-3.5" />}
+                        {item.label}
+                      </Link>
+                    );
+                  }
                   return (
                     <Link
                       key={item.id}
                       href={item.href}
                       onMouseEnter={() => setOpenId(null)}
-                      className="relative inline-flex items-center gap-1.5 h-9 px-3.5 rounded-lg text-[13px] font-semibold transition-all duration-100"
+                      className="relative inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100"
                       style={{
-                        background: 'linear-gradient(135deg, #00C4B4 0%, #00A89A 100%)',
-                        color: '#fff',
-                        boxShadow: '0 2px 10px -2px rgba(0,196,180,0.45)',
+                        background: isOnPage ? 'rgba(201,161,74,0.10)' : 'transparent',
+                        color: isOnPage ? '#C9A14A' : '#374151',
                       }}
+                      onMouseOver={(e) => { if (!isOnPage) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                      onMouseOut={(e)  => { if (!isOnPage) e.currentTarget.style.background = 'transparent'; }}
                     >
-                      {Icon && <Icon className="w-3.5 h-3.5" />}
+                      {Icon && <Icon className="w-3.5 h-3.5" style={{ color: isOnPage ? '#C9A14A' : '#5A6478' }} />}
                       {item.label}
+                      {isOnPage && (
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#C9A14A' }} />
+                      )}
                     </Link>
                   );
                 }
-                // Cost Calculator — accent link (icon + label)
+                const s = SECTIONS.find((x) => x.id === item.id);
+                if (!s) return null;
+                const isOpen   = openId === s.id;
+                const isActive = isPageInSection(s);
                 return (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    onMouseEnter={() => setOpenId(null)}
-                    className="relative inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100"
+                  <button
+                    key={s.id}
+                    type="button"
+                    onMouseEnter={() => open(s.id)}
+                    onFocus={() => open(s.id)}
+                    onClick={() => setOpenId(isOpen ? null : s.id)}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                    className="relative h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100 select-none outline-none inline-flex items-center gap-1"
                     style={{
-                      background: isOnPage ? 'rgba(201,161,74,0.10)' : 'transparent',
-                      color: isOnPage ? '#C9A14A' : '#374151',
+                      background: isOpen ? '#0A2540' : 'transparent',
+                      color: isOpen ? '#fff' : isActive ? '#00C4B4' : '#374151',
+                      fontWeight: isOpen ? 600 : 500,
                     }}
-                    onMouseOver={(e) => { if (!isOnPage) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
-                    onMouseOut={(e)  => { if (!isOnPage) e.currentTarget.style.background = 'transparent'; }}
+                    onMouseOver={(e) => { if (!isOpen) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
+                    onMouseOut={(e)  => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
                   >
-                    {Icon && <Icon className="w-3.5 h-3.5" style={{ color: isOnPage ? '#C9A14A' : '#5A6478' }} />}
-                    {item.label}
-                    {isOnPage && (
-                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#C9A14A' }} />
+                    {s.label}
+                    <ChevronDown
+                      className="w-3 h-3 transition-transform duration-150"
+                      style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.55 }}
+                    />
+                    {isActive && !isOpen && (
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#00C4B4' }} />
                     )}
-                  </Link>
+                  </button>
                 );
-              }
-
-              /* ── DROPDOWN ── */
-              const s = SECTIONS.find((x) => x.id === item.id);
-              if (!s) return null;
-              const isOpen   = openId === s.id;
-              const isActive = isPageInSection(s);
-              return (
-                <button
-                  key={s.id}
-                  type="button"
-                  onMouseEnter={() => open(s.id)}
-                  onFocus={() => open(s.id)}
-                  onClick={() => setOpenId(isOpen ? null : s.id)}
-                  aria-expanded={isOpen}
-                  aria-haspopup="true"
-                  className="relative h-9 px-3 rounded-lg text-[13.5px] font-medium transition-all duration-100 select-none outline-none inline-flex items-center gap-1"
-                  style={{
-                    background: isOpen ? '#0A2540' : 'transparent',
-                    color: isOpen ? '#fff' : isActive ? '#00C4B4' : '#374151',
-                    fontWeight: isOpen ? 600 : 500,
-                  }}
-                  onMouseOver={(e) => { if (!isOpen) e.currentTarget.style.background = 'rgba(10,37,64,0.04)'; }}
-                  onMouseOut={(e)  => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
-                >
-                  {s.label}
-                  <ChevronDown
-                    className="w-3 h-3 transition-transform duration-150"
-                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.55 }}
-                  />
-                  {isActive && !isOpen && (
-                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: '#00C4B4' }} />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
+              })}
+            </nav>
+          )}
 
           {/* ── Right actions ── */}
           <div className="flex items-center gap-2 ml-auto">
@@ -344,8 +410,8 @@ export default function Header({ onApply }: { onApply: () => void }) {
           </div>
         </div>
 
-        {/* ── MEGA PANEL ─────────────────────────────────────────────── */}
-        <div
+        {/* ── MEGA PANEL — only on full-nav pages ── */}
+        {!isVisaPage(pathname) && <div
           onMouseEnter={cancelClose}
           onMouseLeave={startClose}
           className="absolute left-0 right-0 top-full hidden lg:block pointer-events-none"
@@ -477,10 +543,11 @@ export default function Header({ onApply }: { onApply: () => void }) {
               </div>
             </div>
           )}
-        </div>
+        </div>}
       </header>
 
-      {/* Backdrop */}
+      {/* Backdrop — only when mega panel is visible */}
+      {!isVisaPage(pathname) && (
       <div
         className="fixed inset-0 z-40 hidden lg:block transition-opacity duration-150"
         style={{
@@ -492,6 +559,7 @@ export default function Header({ onApply }: { onApply: () => void }) {
         onClick={() => setOpenId(null)}
         aria-hidden="true"
       />
+      )}
 
       {/* Mobile overlay */}
       <div

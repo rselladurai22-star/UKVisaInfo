@@ -790,36 +790,58 @@ function FeaturedCard({ t }: { t: AppTile }) {
   return (
     <Link
       href={t.href}
-      className="group relative bg-white border border-[#E5E7EB] rounded-xl p-5 md:p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_12px_36px_-8px_rgba(16,26,54,0.15)] transition-all duration-150 flex flex-col gap-4 min-h-[180px]"
+      className="group relative bg-white border border-[#E5E7EB] rounded-2xl p-5 md:p-6 hover:-translate-y-1 transition-all duration-200 flex flex-col gap-4 min-h-[190px] overflow-hidden"
+      style={{
+        boxShadow: '0 1px 4px rgba(16,26,54,0.06)',
+      }}
+      onMouseOver={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 44px -8px rgba(16,26,54,0.18), 0 0 0 1.5px rgba(10,37,64,0.14)'; }}
+      onMouseOut={(e)  => { (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 4px rgba(16,26,54,0.06)'; }}
     >
-      <div className="flex items-start justify-between">
-        <span className="inline-flex w-12 h-12 rounded-xl items-center justify-center flex-shrink-0" style={{ background: `${t.accent}14`, color: t.accent }}>
+      {/* Subtle accent gradient wash */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none rounded-2xl"
+        style={{ background: `linear-gradient(145deg, ${t.accent}08 0%, transparent 60%)` }}
+      />
+      {/* Always-visible thin accent bar at top */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[3px] rounded-t-2xl"
+        style={{ background: `linear-gradient(90deg, ${t.accent} 0%, ${t.accent}60 100%)`, opacity: 0.55 }}
+      />
+      <div className="flex items-start justify-between relative z-10">
+        <span
+          className="inline-flex w-12 h-12 rounded-xl items-center justify-center flex-shrink-0"
+          style={{
+            background: `linear-gradient(135deg, ${t.accent}22 0%, ${t.accent}0e 100%)`,
+            color: t.accent,
+            boxShadow: `0 2px 8px ${t.accent}28`,
+          }}
+        >
           <Icon className="w-6 h-6" />
         </span>
         <span
-          className="inline-flex items-center gap-1 text-[10.5px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600"
-          style={{ fontFamily: 'Inter, sans-serif' }}
+          className="inline-flex items-center gap-1 text-[10.5px] font-bold px-2 py-0.5 rounded-full"
+          style={{ background: '#FFF7ED', color: '#C2780F', fontFamily: 'Inter, sans-serif' }}
         >
           <TrendingUp className="w-2.5 h-2.5" />
           Popular
         </span>
       </div>
-      <div>
+      <div className="relative z-10">
         <h3 className="font-bold text-[#0A2540] text-[16px] md:text-[17px] tracking-[-0.01em] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
           {t.label}
         </h3>
         <p className="mt-1 text-[13px] text-[#76777e] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
       </div>
-      <div className="mt-auto">
-        <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0A2540] group-hover:gap-2 transition-[gap] duration-100" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="mt-auto relative z-10 flex items-center justify-between">
+        <span
+          className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold group-hover:gap-2.5 transition-[gap] duration-150"
+          style={{ color: t.accent, fontFamily: 'Inter, sans-serif' }}
+        >
           Open tool <ArrowRight className="w-3.5 h-3.5" />
         </span>
       </div>
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-t-xl"
-        style={{ background: t.accent }}
-      />
     </Link>
   );
 }
@@ -829,14 +851,32 @@ function AppTileCard({ t, badge, compact }: { t: AppTile; badge?: { text: string
   return (
     <Link
       href={t.href}
-      className={`group relative bg-white border border-[#E5E7EB] rounded-xl hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_12px_36px_-8px_rgba(16,26,54,0.15)] transition-all duration-150 flex flex-col gap-2.5 ${
+      className={`group relative bg-white border border-[#EAECF0] rounded-xl transition-all duration-200 flex flex-col gap-2.5 ${
         compact ? 'p-3 md:p-4 min-h-[120px]' : 'p-4 md:p-5 min-h-[148px]'
       }`}
+      style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.05)' }}
+      onMouseOver={(e) => {
+        (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px -4px rgba(16,26,54,0.14), 0 0 0 1.5px rgba(10,37,64,0.12)';
+        (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+      }}
+      onMouseOut={(e) => {
+        (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.05)';
+        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+      }}
     >
+      {/* Thin left accent strip */}
+      <span
+        aria-hidden="true"
+        className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        style={{ background: t.accent }}
+      />
       <div className="flex items-center justify-between">
         <span
-          className={`inline-flex rounded-lg items-center justify-center ${compact ? 'w-9 h-9' : 'w-11 h-11 rounded-xl'}`}
-          style={{ background: `${t.accent}14`, color: t.accent }}
+          className={`inline-flex rounded-xl items-center justify-center ${compact ? 'w-9 h-9' : 'w-11 h-11'}`}
+          style={{
+            background: `linear-gradient(135deg, ${t.accent}1e 0%, ${t.accent}0a 100%)`,
+            color: t.accent,
+          }}
         >
           <Icon className={compact ? 'w-4 h-4' : 'w-5 h-5'} />
         </span>
@@ -860,11 +900,6 @@ function AppTileCard({ t, badge, compact }: { t: AppTile; badge?: { text: string
         </h3>
         <p className="mt-0.5 text-[11.5px] text-[#76777e] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
       </div>
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-t-xl"
-        style={{ background: t.accent }}
-      />
     </Link>
   );
 }
@@ -872,23 +907,35 @@ function AppTileCard({ t, badge, compact }: { t: AppTile; badge?: { text: string
 function SoonCard({ t }: { t: SoonTool }) {
   const Icon = t.icon;
   return (
-    <div className="bg-white border-2 border-dashed border-[#E5E7EB] rounded-xl p-4 opacity-60 flex flex-col gap-2.5 min-h-[120px]">
-      <div className="flex items-center justify-between">
-        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-[#f3f4f5]">
-          <Icon className="w-4 h-4 text-[#a5a6ad]" />
+    <div
+      className="relative bg-white border border-dashed border-[#D1D5DB] rounded-xl p-4 flex flex-col gap-2.5 min-h-[120px] overflow-hidden"
+      style={{ opacity: 0.72 }}
+    >
+      {/* Subtle patterned overlay */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none rounded-xl"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0)', backgroundSize: '10px 10px' }}
+      />
+      <div className="flex items-center justify-between relative z-10">
+        <span
+          className="inline-flex w-9 h-9 rounded-lg items-center justify-center"
+          style={{ background: '#F3F4F6', color: '#9CA3AF' }}
+        >
+          <Icon className="w-4 h-4" />
         </span>
         <span
-          className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full bg-[#f3f4f5] text-[#a5a6ad]"
-          style={{ fontFamily: 'Inter, sans-serif' }}
+          className="text-[9px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
+          style={{ background: '#F3F4F6', color: '#9CA3AF', fontFamily: 'Inter, sans-serif' }}
         >
-          Soon
+          Coming soon
         </span>
       </div>
-      <div>
-        <h3 className="font-semibold text-[13px] text-[#76777e] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+      <div className="relative z-10">
+        <h3 className="font-semibold text-[13px] text-[#6B7280] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
           {t.label}
         </h3>
-        <p className="mt-0.5 text-[11.5px] text-[#a5a6ad] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
+        <p className="mt-0.5 text-[11.5px] text-[#9CA3AF] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
       </div>
     </div>
   );
