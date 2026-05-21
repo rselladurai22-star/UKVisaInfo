@@ -294,29 +294,29 @@ export default async function VisaPage({ params }: RouteParams) {
               <Section eyebrow="Overview" title={`What is the ${v.title}?`} accent={accent}>
                 <div className="rounded-2xl bg-white border border-[#E5E7EB] p-7 md:p-9"
                   style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
-                  <p className="text-[#111827] text-[16px] md:text-[17.5px] leading-[1.75]"
+                  <p className="text-[#0F172A] text-[15.5px] md:text-[16.5px] font-normal leading-[1.82]"
                      style={{ fontFamily: 'Inter, sans-serif' }}>
                     {v.summary}
                   </p>
-                  <div className="mt-6 pt-5 border-t border-[#F3F4F6] flex flex-wrap gap-5">
+                  <div className="mt-6 pt-5 border-t border-[#F3F4F6] flex flex-wrap gap-6">
                     <div>
-                      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-1">Application fee</div>
-                      <div className="text-[17px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.fee}</div>
+                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Application fee</div>
+                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.fee}</div>
                     </div>
                     <div className="w-px bg-[#E5E7EB]" />
                     <div>
-                      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-1">IHS surcharge</div>
-                      <div className="text-[17px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.ihs}</div>
+                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">IHS surcharge</div>
+                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.ihs}</div>
                     </div>
                     <div className="w-px bg-[#E5E7EB]" />
                     <div>
-                      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-1">Decision (outside UK)</div>
-                      <div className="text-[17px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.processing.outside}</div>
+                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Decision (outside UK)</div>
+                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.processing.outside}</div>
                     </div>
                     <div className="w-px bg-[#E5E7EB]" />
                     <div>
-                      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-1">Visa duration</div>
-                      <div className="text-[17px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{shortDuration}</div>
+                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Visa duration</div>
+                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{shortDuration}</div>
                     </div>
                   </div>
                 </div>
@@ -333,8 +333,8 @@ export default async function VisaPage({ params }: RouteParams) {
               <Section eyebrow="Eligibility" title="Are you eligible?" accent={accent}>
                 <div className="mb-5 rounded-xl bg-amber-50 border border-amber-200 px-5 py-4 flex items-start gap-3">
                   <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-[14px] text-amber-900 leading-[1.6]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    You must meet <strong>every</strong> condition below. The Home Office refuses on the first missed requirement.
+                  <p className="text-[13.5px] font-normal text-amber-900 leading-[1.65]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    You must meet <strong className="font-bold">every</strong> condition below. The Home Office refuses on the first missed requirement.
                   </p>
                 </div>
                 <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
@@ -342,11 +342,11 @@ export default async function VisaPage({ params }: RouteParams) {
                   <ul className="divide-y divide-[#F3F4F6]">
                     {v.eligibility.map((item, i) => (
                       <li key={i} className="px-6 py-5 flex items-start gap-4">
-                        <span className="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[12px] font-bold text-white"
-                          style={{ background: accent }}>
+                        <span className="mt-0.5 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[12.5px] font-extrabold text-white"
+                          style={{ background: accent, fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                           {i + 1}
                         </span>
-                        <span className="text-[#111827] text-[15.5px] leading-[1.65] flex-1"
+                        <span className="text-[#0F172A] text-[15px] font-normal leading-[1.72] flex-1"
                               style={{ fontFamily: 'Inter, sans-serif' }}>
                           {item}
                         </span>
@@ -358,7 +358,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 03 COSTS */}
               <Section eyebrow="Costs" title="What it costs in 2026" accent={accent}>
-                <p className="text-[#374151] text-[15.5px] leading-[1.65] mb-6 max-w-2xl"
+                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
                    style={{ fontFamily: 'Inter, sans-serif' }}>
                   Two compulsory costs: the application fee and the Immigration Health Surcharge (IHS). Priority and dependants are added on top.
                 </p>
@@ -372,7 +372,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 04 DOCUMENTS */}
               <Section eyebrow="Documents" title="What you'll need to provide" accent={accent}>
-                <p className="text-[#374151] text-[15.5px] leading-[1.65] mb-6 max-w-2xl"
+                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
                    style={{ fontFamily: 'Inter, sans-serif' }}>
                   Group your evidence under these headings. Mis-categorised or missing documents are the second most common refusal reason.
                 </p>
@@ -385,15 +385,15 @@ export default async function VisaPage({ params }: RouteParams) {
                         style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.05)' }}>
                         <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[#F3F4F6]">
                           <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ background: `${group.tone}15`, color: group.tone }}>
-                            <Icon className="w-[18px] h-[18px]" strokeWidth={2.2} />
+                            style={{ background: `${group.tone}18`, color: group.tone }}>
+                            <Icon className="w-[18px] h-[18px]" strokeWidth={2} />
                           </span>
-                          <h3 className="font-bold text-[#0A2540] text-[15.5px] flex-1"
+                          <h3 className="font-extrabold text-[#0A2540] text-[14.5px] flex-1"
                             style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                             {group.label}
                           </h3>
-                          <span className="text-[11.5px] font-bold px-2 py-0.5 rounded-full text-white"
-                            style={{ background: group.tone }}>
+                          <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full text-white"
+                            style={{ background: group.tone, fontFamily: 'Inter, sans-serif' }}>
                             {group.items.length}
                           </span>
                         </div>
@@ -401,7 +401,7 @@ export default async function VisaPage({ params }: RouteParams) {
                           {group.items.map((doc, i) => (
                             <li key={i} className="flex items-start gap-3">
                               <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: group.tone }} />
-                              <span className="text-[#374151] text-[14px] leading-[1.55]"
+                              <span className="text-[#334155] text-[13.5px] font-normal leading-[1.58]"
                                     style={{ fontFamily: 'Inter, sans-serif' }}>
                                 {doc}
                               </span>
@@ -424,15 +424,15 @@ export default async function VisaPage({ params }: RouteParams) {
                     {v.steps.map((s, i) => (
                       <li key={i} className="relative pl-14 pb-9 last:pb-0">
                         <span aria-hidden
-                          className="absolute left-0 top-0 w-10 h-10 rounded-full text-white text-[13px] font-bold flex items-center justify-center"
+                          className="absolute left-0 top-0 w-10 h-10 rounded-full text-white text-[13px] font-extrabold flex items-center justify-center"
                           style={{ background: accent, boxShadow: `0 4px 14px -4px ${accent}80`, fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                           {i + 1}
                         </span>
-                        <h4 className="font-bold text-[#0A2540] text-[16px] leading-tight mb-2"
+                        <h4 className="font-extrabold text-[#0A2540] text-[15.5px] leading-tight mb-2"
                           style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                           {s.title}
                         </h4>
-                        <p className="text-[#374151] text-[14.5px] leading-[1.65]"
+                        <p className="text-[#475569] text-[14px] font-normal leading-[1.68]"
                            style={{ fontFamily: 'Inter, sans-serif' }}>
                           {s.desc}
                         </p>
@@ -454,9 +454,9 @@ export default async function VisaPage({ params }: RouteParams) {
                               style={{ background: 'rgba(201,161,74,0.12)', color: '#C9A14A' }}>
                           <AlertTriangle className="w-4 h-4" strokeWidth={2.2} />
                         </span>
-                        <p className="text-[#111827] text-[15px] leading-[1.65]"
+                        <p className="text-[#0F172A] text-[14.5px] font-normal leading-[1.68]"
                            style={{ fontFamily: 'Inter, sans-serif' }}>
-                          {note}
+                           {note}
                         </p>
                       </div>
                     ))}
@@ -521,11 +521,11 @@ export default async function VisaPage({ params }: RouteParams) {
                 {/* Quick facts card */}
                 <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
                   style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.07)' }}>
-                  <div className="px-5 py-3.5 border-b border-[#F3F4F6] flex items-center gap-2"
-                    style={{ background: `${accent}08` }}>
-                    <span className="w-2 h-2 rounded-full" style={{ background: accent }} />
-                    <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#374151]"
-                      style={{ fontFamily: 'Inter, sans-serif' }}>At a glance</span>
+                  <div className="px-5 py-3.5 border-b border-[#F3F4F6] flex items-center gap-2.5"
+                    style={{ background: `${accent}0c` }}>
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: accent }} />
+                    <span className="text-[10.5px] font-extrabold uppercase tracking-[0.16em]"
+                      style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>At a glance</span>
                   </div>
                   <dl className="divide-y divide-[#F9FAFB]">
                     <FactRow label="Application fee" value={v.fee} icon={Banknote} accent={accent} />
@@ -541,8 +541,8 @@ export default async function VisaPage({ params }: RouteParams) {
                   className="group flex items-center justify-between gap-3 rounded-2xl p-5 text-white transition-all active:scale-[0.99]"
                   style={{ background: `linear-gradient(135deg, ${accent} 0%, ${accent}cc 100%)`, boxShadow: `0 8px 30px -8px ${accent}66` }}>
                   <div>
-                    <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/80 mb-1">Official application</div>
-                    <div className="font-bold text-[18px] leading-tight text-white"
+                    <div className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/75 mb-1">Official application</div>
+                    <div className="font-extrabold text-[17px] leading-tight text-white"
                       style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
                       Apply on gov.uk
                     </div>
@@ -627,14 +627,14 @@ function Section({
     .replace('common-pitfalls', 'notes');
   return (
     <section id={sectionId} className="scroll-mt-28">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="w-[3px] h-4 rounded-full" style={{ background: accent }} />
-        <p className="text-[11.5px] font-bold uppercase tracking-[0.13em] text-[#6B7280]"
-           style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="flex items-center gap-2.5 mb-2.5">
+        <span className="w-[3px] h-[18px] rounded-full" style={{ background: accent }} />
+        <p className="text-[10.5px] font-extrabold uppercase tracking-[0.18em]"
+           style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>
           {eyebrow}
         </p>
       </div>
-      <h2 className="font-bold text-[#0A2540] tracking-[-0.018em] leading-[1.15] mb-6 text-[22px] md:text-[26px]"
+      <h2 className="font-extrabold text-[#0A2540] tracking-[-0.022em] leading-[1.12] mb-7 text-[23px] md:text-[28px]"
         style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
         {title}
       </h2>
@@ -653,24 +653,24 @@ function HeroStat({
     <div className={`rounded-2xl p-5 ${wide ? 'col-span-2' : ''}`}
       style={{
         background: 'rgba(255,255,255,0.10)',
-        border: '1px solid rgba(255,255,255,0.16)',
-        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        backdropFilter: 'blur(10px)',
       }}>
-      <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/75 mb-2.5"
+      <div className="flex items-center gap-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/70 mb-3"
            style={{ fontFamily: 'Inter, sans-serif' }}>
-        <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+        <Icon className="w-3 h-3" strokeWidth={2.5} />
         {label}
       </div>
-      <p className="font-bold tracking-[-0.015em] leading-[1.1] tabular-nums"
+      <p className="font-extrabold tracking-[-0.02em] leading-[1.05] tabular-nums"
         style={{
           fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-          fontSize: wide ? 'clamp(1.1rem, 2vw, 1.35rem)' : 'clamp(1.4rem, 2.8vw, 1.75rem)',
+          fontSize: wide ? 'clamp(1.15rem, 2vw, 1.4rem)' : 'clamp(1.5rem, 3vw, 1.85rem)',
           color: accent ?? '#fff',
         }}>
         {value}
       </p>
       {sub && (
-        <p className="mt-1.5 text-[12px] text-white/65 leading-[1.5]"
+        <p className="mt-2 text-[11.5px] text-white/60 leading-[1.45]"
            style={{ fontFamily: 'Inter, sans-serif' }}>
           {sub}
         </p>
@@ -688,13 +688,13 @@ function FactRow({
 }) {
   return (
     <div className="flex items-start justify-between gap-3 px-5 py-3.5">
-      <dt className="flex items-center gap-2 text-[13px] text-[#374151] font-medium flex-shrink-0"
+      <dt className="flex items-center gap-2 text-[12px] font-medium text-[#64748B] flex-shrink-0"
           style={{ fontFamily: 'Inter, sans-serif' }}>
         <span style={{ color: accent }}><Icon className="w-3.5 h-3.5" strokeWidth={2} /></span>
         {label}
       </dt>
-      <dd className="text-[13.5px] font-bold text-[#0A2540] text-right max-w-[200px] leading-snug"
-          style={{ fontFamily: 'Inter, sans-serif' }}>
+      <dd className="text-[13px] font-extrabold text-[#0A2540] text-right max-w-[200px] leading-snug"
+          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
         {value}
       </dd>
     </div>
@@ -709,20 +709,20 @@ function CostCard({ fee, ihs, accent, slug, headlineFee }: {
       style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.07)' }}>
       {/* Fee header — clean accent band */}
       <div className="px-7 py-6 border-b border-[#F3F4F6]"
-        style={{ background: `linear-gradient(90deg, ${accent}0c 0%, transparent 60%)` }}>
+        style={{ background: `linear-gradient(90deg, ${accent}0d 0%, transparent 60%)` }}>
         <div className="flex items-end justify-between gap-4 flex-wrap">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-1.5"
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
                style={{ fontFamily: 'Inter, sans-serif' }}>
               Application fee
             </p>
-            <p className="font-bold tabular-nums tracking-[-0.025em] leading-none text-[#0A2540]"
+            <p className="font-extrabold tabular-nums tracking-[-0.03em] leading-none text-[#0A2540]"
               style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(2.2rem, 5vw, 3rem)' }}>
               {headlineFee}
             </p>
-            <p className="mt-2 text-[13.5px] text-[#374151]" style={{ fontFamily: 'Inter, sans-serif' }}>{fee}</p>
+            <p className="mt-2 text-[13px] font-normal text-[#475569]" style={{ fontFamily: 'Inter, sans-serif' }}>{fee}</p>
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full border"
+          <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold px-3 py-1.5 rounded-full border"
             style={{ background: `${accent}0e`, borderColor: `${accent}30`, color: '#0A2540' }}>
             <ShieldCheck className="w-3.5 h-3.5" style={{ color: accent }} />
             gov.uk verified
@@ -732,18 +732,21 @@ function CostCard({ fee, ihs, accent, slug, headlineFee }: {
 
       <div className="p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-2">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Health Surcharge (IHS)
           </p>
-          <p className="text-[22px] font-bold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+          <p className="text-[24px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
             {ihs}
           </p>
-          <p className="mt-1.5 text-[13px] text-[#374151] leading-[1.6]">
+          <p className="mt-1.5 text-[13px] font-normal text-[#475569] leading-[1.65]"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Paid upfront for the full visa duration — funds NHS access.
           </p>
         </div>
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7280] mb-2">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
+             style={{ fontFamily: 'Inter, sans-serif' }}>
             Optional add-ons
           </p>
           <ul className="space-y-2.5">
@@ -753,8 +756,8 @@ function CostCard({ fee, ihs, accent, slug, headlineFee }: {
               ['Per dependant', '+full fee + IHS'],
             ].map(([label, val]) => (
               <li key={label} className="flex items-center justify-between gap-3">
-                <span className="text-[13.5px] text-[#374151]">{label}</span>
-                <span className="text-[13.5px] font-bold text-[#0A2540]">{val}</span>
+                <span className="text-[13px] font-normal text-[#475569]" style={{ fontFamily: 'Inter, sans-serif' }}>{label}</span>
+                <span className="text-[13px] font-extrabold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{val}</span>
               </li>
             ))}
           </ul>
