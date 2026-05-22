@@ -1,28 +1,38 @@
 'use client';
 /**
- * CalcFormPrimitives v3 — "Graphite & Flame" design system
- * Flat underline inputs · Dark stat cards · Violet toggles · Syne/Space Grotesk type
+ * CalcFormPrimitives v4 — "Quartz" design system
+ * Stripe/Linear-inspired · light fills · hairline borders · refined indigo accent
+ * Inter Tight (display) + Inter (body) · tabular numerics
  */
 
-/* ─── tokens ──────────────────────────────────────────────── */
-const T = {
-  ink:      '#0D1117',
-  mid:      '#6B7280',
-  faint:    '#9CA3AF',
-  border:   '#E2E6EB',
-  bg:       '#F8F9FB',
-  canvas:   '#FFFFFF',
-  accentV:  '#7C3AED',   // violet
-  accentA:  '#F59E0B',   // amber
-  positive: '#059669',
-  negative: '#DC2626',
-  dark:     '#111827',
+/* ─── tokens — match CalcPageShell Quartz ─────────────────── */
+const Q = {
+  bg:        '#FCFCFD',
+  bgAlt:     '#F7F8FA',
+  bgInput:   '#F7F8FA',
+  surface:   '#FFFFFF',
+  ink:       '#1A1F36',
+  ink2:      '#3C4257',
+  mid:       '#697386',
+  mid2:      '#8792A2',
+  faint:     '#A3ACB9',
+  border:    '#E3E8EE',
+  borderStr: '#CFD7DF',
+  accent:    '#635BFF',
+  accentDk:  '#5851DB',
+  accentSoft:'#EFEEFF',
+  positive:  '#08855D',
+  positiveSoft: '#E6F7EF',
+  warning:   '#BF6A02',
+  warningSoft: '#FCEDD3',
+  negative:  '#CD3D64',
+  negativeSoft: '#FDEEF0',
 };
-const SYNE  = '"Manrope", "DM Sans", sans-serif';
-const GRSK  = '"DM Sans", system-ui, sans-serif';
-const INTER = '"DM Sans", system-ui, sans-serif';
+const DISPLAY = '"Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
+const MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
 
-/* ─── formatters ─────────────────────────────────────────── */
+/* ─── formatters ──────────────────────────────────────────── */
 export function fmtGBP(n: number) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n);
 }
@@ -31,31 +41,30 @@ export function fmtGBP2(n: number) {
 }
 export function fmtPct(n: number, dp = 1) { return `${n.toFixed(dp)}%`; }
 
-/* ─── Field wrapper ──────────────────────────────────────── */
+/* ─── Field wrapper ───────────────────────────────────────── */
 export function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
   return (
     <label style={{ display: 'block' }}>
       <span style={{
         display: 'block',
-        fontFamily: GRSK,
-        fontSize: 9.5,
-        fontWeight: 700,
-        letterSpacing: '0.18em',
-        textTransform: 'uppercase' as const,
-        color: T.mid,
+        fontFamily: TEXT,
+        fontSize: 13,
+        fontWeight: 500,
+        color: Q.ink2,
+        letterSpacing: '-0.005em',
         marginBottom: 6,
       }}>
         {label}
       </span>
       {children}
       {hint && (
-        <span style={{ display: 'block', fontFamily: INTER, fontSize: 11, color: T.faint, marginTop: 4, lineHeight: 1.5 }}>{hint}</span>
+        <span style={{ display: 'block', fontFamily: TEXT, fontSize: 12, color: Q.mid2, marginTop: 5, lineHeight: 1.5 }}>{hint}</span>
       )}
     </label>
   );
 }
 
-/* ─── NumberField — flat underline style ─────────────────── */
+/* ─── NumberField — Stripe-style light fill with focus ring ─ */
 export function NumberField({
   label, value, onChange, prefix, suffix, step = 'any', hint,
 }: {
@@ -64,25 +73,43 @@ export function NumberField({
 }) {
   return (
     <Field label={label} hint={hint}>
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 6,
-        borderBottom: `2px solid ${T.border}`,
-        paddingBottom: 8,
-        transition: 'border-color 0.15s',
-      }}
-        onFocusCapture={(e) => ((e.currentTarget as HTMLElement).style.borderColor = T.accentV)}
-        onBlurCapture={(e) => ((e.currentTarget as HTMLElement).style.borderColor = T.border)}
+      <div
+        className="cfp-input"
+        style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          background: Q.bgInput,
+          border: `1px solid ${Q.border}`,
+          borderRadius: 8,
+          padding: '0 12px',
+          height: 40,
+          transition: 'box-shadow 0.12s ease, border-color 0.12s ease',
+        }}
+        onFocusCapture={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = Q.accent;
+          el.style.background = Q.surface;
+          el.style.boxShadow = `0 0 0 3px ${Q.accent}26`;
+        }}
+        onBlurCapture={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.borderColor = Q.border;
+          el.style.background = Q.bgInput;
+          el.style.boxShadow = 'none';
+        }}
       >
-        {prefix && <span style={{ fontFamily: GRSK, fontSize: 15, fontWeight: 600, color: T.mid }}>{prefix}</span>}
+        {prefix && <span style={{ fontFamily: TEXT, fontSize: 14, fontWeight: 500, color: Q.mid }}>{prefix}</span>}
         <input
           type="number" inputMode="decimal" step={step} value={value}
           onChange={(e) => onChange(e.target.value)}
           style={{
             flex: 1, minWidth: 0, background: 'transparent', border: 'none', outline: 'none',
-            fontFamily: GRSK, fontSize: 18, fontWeight: 700, color: T.ink, letterSpacing: '-0.02em',
+            fontFamily: TEXT, fontSize: 14.5, fontWeight: 500, color: Q.ink,
+            fontVariantNumeric: 'tabular-nums',
+            letterSpacing: '-0.005em',
+            height: '100%',
           }}
         />
-        {suffix && <span style={{ fontFamily: INTER, fontSize: 12, color: T.faint }}>{suffix}</span>}
+        {suffix && <span style={{ fontFamily: TEXT, fontSize: 13, color: Q.mid2 }}>{suffix}</span>}
       </div>
     </Field>
   );
@@ -97,30 +124,48 @@ export function SelectField<T extends string>({
 }) {
   return (
     <Field label={label} hint={hint}>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value as T)}
-        style={{
-          width: '100%',
-          background: 'transparent',
-          border: 'none',
-          borderBottom: `2px solid ${T.border}`,
-          paddingBottom: 8,
-          fontFamily: GRSK, fontSize: 16, fontWeight: 600, color: T.ink,
-          outline: 'none', cursor: 'pointer',
-          appearance: 'none' as const,
-          WebkitAppearance: 'none' as const,
-        }}
-        onFocus={(e) => (e.currentTarget.style.borderColor = T.accentV)}
-        onBlur={(e) => (e.currentTarget.style.borderColor = T.border)}
-      >
-        {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-      </select>
+      <div style={{ position: 'relative' }}>
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value as T)}
+          style={{
+            width: '100%',
+            background: Q.bgInput,
+            border: `1px solid ${Q.border}`,
+            borderRadius: 8,
+            padding: '0 36px 0 12px',
+            height: 40,
+            fontFamily: TEXT, fontSize: 14.5, fontWeight: 500, color: Q.ink,
+            letterSpacing: '-0.005em',
+            outline: 'none', cursor: 'pointer',
+            appearance: 'none' as const,
+            WebkitAppearance: 'none' as const,
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = Q.accent;
+            e.currentTarget.style.background = Q.surface;
+            e.currentTarget.style.boxShadow = `0 0 0 3px ${Q.accent}26`;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = Q.border;
+            e.currentTarget.style.background = Q.bgInput;
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+        </select>
+        <svg
+          width="10" height="6" viewBox="0 0 10 6" fill="none"
+          style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+        >
+          <path d="M1 1l4 4 4-4" stroke={Q.mid2} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
     </Field>
   );
 }
 
-/* ─── ToggleRow — solid violet/grey blocks ───────────────── */
+/* ─── ToggleRow — segmented control ──────────────────────── */
 export function ToggleRow<T extends string>({
   options, value, onChange,
 }: {
@@ -129,7 +174,13 @@ export function ToggleRow<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div style={{ display: 'inline-flex', gap: 4, background: T.bg, padding: 4, borderRadius: 6, border: `1px solid ${T.border}` }}>
+    <div style={{
+      display: 'inline-flex', gap: 2,
+      background: Q.bgInput,
+      padding: 3,
+      borderRadius: 8,
+      border: `1px solid ${Q.border}`,
+    }}>
       {options.map((o) => {
         const active = o.value === value;
         return (
@@ -137,12 +188,14 @@ export function ToggleRow<T extends string>({
             key={o.value} type="button" onClick={() => onChange(o.value)}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 5,
-              padding: '7px 14px',
-              fontFamily: GRSK, fontSize: 13, fontWeight: 600, letterSpacing: '-0.01em',
-              borderRadius: 4, border: 'none', cursor: 'pointer',
-              background: active ? T.accentV : 'transparent',
-              color: active ? '#fff' : T.mid,
-              transition: 'all 0.14s',
+              padding: '6px 12px',
+              fontFamily: TEXT, fontSize: 13, fontWeight: 500,
+              letterSpacing: '-0.005em',
+              borderRadius: 6, border: 'none', cursor: 'pointer',
+              background: active ? Q.surface : 'transparent',
+              color: active ? Q.ink : Q.mid,
+              boxShadow: active ? '0 1px 2px rgba(26,31,54,0.08), 0 0 0 1px rgba(26,31,54,0.04)' : 'none',
+              transition: 'all 0.12s ease',
             }}
           >
             {o.icon}{o.label}
@@ -159,19 +212,24 @@ export function ResultBox({
 }: {
   label: string; value: string; primary?: boolean; muted?: boolean; accent?: string; sub?: string;
 }) {
-  const clr = accent ?? (primary ? T.accentV : muted ? T.faint : T.ink);
+  const clr = accent ?? (primary ? Q.accent : muted ? Q.mid2 : Q.ink);
   return (
-    <div style={{
-      borderLeft: `4px solid ${primary ? T.accentV : muted ? T.border : T.accentA}`,
-      paddingLeft: 14, paddingTop: 2, paddingBottom: 2,
-    }}>
-      <div style={{ fontFamily: GRSK, fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' as const, color: T.mid, marginBottom: 3 }}>
+    <div style={{ paddingLeft: 0 }}>
+      <div style={{
+        fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+        letterSpacing: '0.04em', textTransform: 'uppercase' as const,
+        color: Q.mid2, marginBottom: 6,
+      }}>
         {label}
       </div>
-      <div style={{ fontFamily: SYNE, fontSize: 28, fontWeight: 800, color: clr, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+      <div style={{
+        fontFamily: DISPLAY, fontSize: 28, fontWeight: 700,
+        color: clr, letterSpacing: '-0.025em', lineHeight: 1.1,
+        fontVariantNumeric: 'tabular-nums',
+      }}>
         {value}
       </div>
-      {sub && <div style={{ fontFamily: INTER, fontSize: 11.5, color: T.faint, marginTop: 3, lineHeight: 1.5 }}>{sub}</div>}
+      {sub && <div style={{ fontFamily: TEXT, fontSize: 12.5, color: Q.mid, marginTop: 4, lineHeight: 1.5 }}>{sub}</div>}
     </div>
   );
 }
@@ -180,11 +238,8 @@ export function ResultBox({
 export function CalcCard({ children, wide }: { children: React.ReactNode; wide?: boolean }) {
   return (
     <div style={{
-      background: T.canvas,
-      border: `1px solid ${T.border}`,
-      borderRadius: 6,
-      padding: '22px 24px',
-      maxWidth: wide ? '100%' : 700,
+      background: 'transparent',
+      maxWidth: wide ? '100%' : '100%',
     }}>
       {children}
     </div>
@@ -192,21 +247,31 @@ export function CalcCard({ children, wide }: { children: React.ReactNode; wide?:
 }
 
 /* ─── Section ────────────────────────────────────────────── */
-export function Section({ title, eyebrow, children, accent = T.accentV, tone = 'default' }: {
+export function Section({ title, eyebrow, children, tone = 'default' }: {
   title: string; eyebrow?: string; children: React.ReactNode;
   accent?: string; tone?: 'default' | 'inputs' | 'results';
 }) {
-  const bg = tone === 'inputs' ? T.bg : tone === 'results' ? '#F4F3FF' : 'transparent';
-  const bdr = tone === 'default' ? 'none' : `1px solid ${T.border}`;
+  const bg     = tone === 'inputs' ? Q.bgAlt : tone === 'results' ? Q.accentSoft : 'transparent';
+  const border = tone === 'default' ? 'none' : `1px solid ${tone === 'results' ? '#DDD8FF' : Q.border}`;
+  const pad    = tone === 'default' ? 0 : 'clamp(18px,3vw,22px)';
   return (
-    <section style={{ background: bg, border: bdr, borderRadius: 6, padding: tone === 'default' ? 0 : '18px 20px 20px' }}>
-      <header style={{ marginBottom: 14, display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
+    <section style={{
+      background: bg, border, borderRadius: tone === 'default' ? 0 : 12, padding: pad,
+    }}>
+      <header style={{ marginBottom: 16 }}>
         {eyebrow && (
-          <span style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: accent }}>
+          <div style={{
+            fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+            letterSpacing: '0.06em', textTransform: 'uppercase' as const,
+            color: Q.mid2, marginBottom: 4,
+          }}>
             {eyebrow}
-          </span>
+          </div>
         )}
-        <h3 style={{ fontFamily: SYNE, fontSize: 14, fontWeight: 700, color: T.ink, letterSpacing: '-0.02em', margin: 0 }}>
+        <h3 style={{
+          fontFamily: DISPLAY, fontSize: 16, fontWeight: 600,
+          color: Q.ink, letterSpacing: '-0.015em', margin: 0, lineHeight: 1.3,
+        }}>
           {title}
         </h3>
       </header>
@@ -217,70 +282,122 @@ export function Section({ title, eyebrow, children, accent = T.accentV, tone = '
 
 /* ─── StatGrid ───────────────────────────────────────────── */
 export function StatGrid({ children, cols = 3 }: { children: React.ReactNode; cols?: 2 | 3 | 4 }) {
-  const c = cols === 2 ? 'repeat(2,1fr)' : cols === 4 ? 'repeat(auto-fill,minmax(160px,1fr))' : 'repeat(auto-fill,minmax(180px,1fr))';
-  return <div style={{ display: 'grid', gridTemplateColumns: c, gap: 10 }}>{children}</div>;
+  const c = cols === 2 ? 'repeat(auto-fill,minmax(200px,1fr))'
+          : cols === 4 ? 'repeat(auto-fill,minmax(160px,1fr))'
+          :              'repeat(auto-fill,minmax(180px,1fr))';
+  return <div style={{ display: 'grid', gridTemplateColumns: c, gap: 12 }}>{children}</div>;
 }
 
-/* ─── StatCard — dark cards with big amber numbers ───────── */
+/* ─── StatCard — light surface, tonal accents ────────────── */
 export function StatCard({ label, value, sub, tone = 'default', accent }: {
   label: string; value: string; sub?: string;
   tone?: 'default' | 'primary' | 'positive' | 'negative' | 'muted';
   accent?: string;
 }) {
-  const dark = tone === 'primary';
-  const bg   = tone === 'primary' ? T.dark : tone === 'positive' ? '#ECFDF5' : tone === 'negative' ? '#FEF2F2' : tone === 'muted' ? T.bg : T.canvas;
-  const txt  = tone === 'primary' ? '#FFFFFF' : tone === 'positive' ? '#064E3B' : tone === 'negative' ? '#7F1D1D' : T.ink;
-  const lbl  = tone === 'primary' ? 'rgba(255,255,255,0.5)' : T.mid;
-  const sub_ = tone === 'primary' ? 'rgba(255,255,255,0.4)' : T.faint;
-  const numClr = accent ?? (tone === 'primary' ? T.accentA : tone === 'positive' ? T.positive : tone === 'negative' ? T.negative : T.accentV);
+  const bg =
+    tone === 'primary'  ? Q.accentSoft :
+    tone === 'positive' ? Q.positiveSoft :
+    tone === 'negative' ? Q.negativeSoft :
+    tone === 'muted'    ? Q.bgAlt :
+                          Q.surface;
+  const border =
+    tone === 'primary'  ? '#DDD8FF' :
+    tone === 'positive' ? '#BFE3D3' :
+    tone === 'negative' ? '#F8C9D2' :
+                          Q.border;
+  const numClr = accent ?? (
+    tone === 'primary'  ? Q.accentDk :
+    tone === 'positive' ? Q.positive :
+    tone === 'negative' ? Q.negative :
+                          Q.ink
+  );
   return (
     <div style={{
       background: bg,
-      border: `1px solid ${dark ? 'rgba(255,255,255,0.06)' : T.border}`,
-      borderRadius: 6,
+      border: `1px solid ${border}`,
+      borderRadius: 10,
       padding: '14px 16px',
     }}>
-      <div style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' as const, color: lbl, marginBottom: 6 }}>
+      <div style={{
+        fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+        letterSpacing: '0.04em', textTransform: 'uppercase' as const,
+        color: Q.mid2, marginBottom: 6,
+      }}>
         {label}
       </div>
-      <div style={{ fontFamily: SYNE, fontSize: 22, fontWeight: 800, color: numClr, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+      <div style={{
+        fontFamily: DISPLAY, fontSize: 22, fontWeight: 700,
+        color: numClr, letterSpacing: '-0.025em', lineHeight: 1.15,
+        fontVariantNumeric: 'tabular-nums',
+      }}>
         {value}
       </div>
-      {sub && <div style={{ fontFamily: INTER, fontSize: 11, color: sub_, marginTop: 4, lineHeight: 1.45 }}>{sub}</div>}
+      {sub && <div style={{ fontFamily: TEXT, fontSize: 12, color: Q.mid, marginTop: 5, lineHeight: 1.5 }}>{sub}</div>}
     </div>
   );
 }
 
-/* ─── SummaryHero — large result banner ─────────────────── */
+/* ─── SummaryHero — refined indigo gradient banner ────────── */
 export function SummaryHero({ label, value, sub, tone = 'navy', badge }: {
   label: string; value: string; sub?: string;
   tone?: 'navy' | 'teal' | 'red'; badge?: string;
 }) {
-  const bg  = tone === 'navy' ? T.dark : tone === 'teal' ? '#065F46' : '#7F1D1D';
-  const num = tone === 'navy' ? T.accentA : tone === 'teal' ? '#6EE7B7' : '#FCA5A5';
+  const isNavy = tone === 'navy';
+  const bg =
+    isNavy ? 'linear-gradient(135deg, #1A1F36 0%, #2D2456 100%)' :
+    tone === 'teal' ? 'linear-gradient(135deg, #06593F 0%, #08855D 100%)' :
+                      'linear-gradient(135deg, #8B1538 0%, #CD3D64 100%)';
+  const numColor = isNavy ? '#FFFFFF' : '#FFFFFF';
+  const accentBar = isNavy ? Q.accent : tone === 'teal' ? '#34D399' : '#FCA5A5';
   return (
     <div style={{
-      background: bg, borderRadius: 8, padding: 'clamp(20px,4vw,28px)',
-      borderLeft: `4px solid ${num}`,
+      background: bg,
+      borderRadius: 14,
+      padding: 'clamp(22px,4vw,30px)',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' as const, marginBottom: 8 }}>
-        <span style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.5)' }}>
+      <div style={{
+        position: 'absolute', top: 0, left: 0, bottom: 0, width: 3,
+        background: accentBar,
+      }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' as const, marginBottom: 10 }}>
+        <span style={{
+          fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+          letterSpacing: '0.06em', textTransform: 'uppercase' as const,
+          color: 'rgba(255,255,255,0.7)',
+        }}>
           {label}
         </span>
         {badge && (
           <span style={{
-            fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase' as const, color: num,
-            background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: 3,
+            fontFamily: TEXT, fontSize: 10.5, fontWeight: 600,
+            letterSpacing: '0.04em', textTransform: 'uppercase' as const,
+            color: '#fff',
+            background: 'rgba(255,255,255,0.16)',
+            border: '1px solid rgba(255,255,255,0.18)',
+            padding: '2px 8px', borderRadius: 999,
           }}>
             {badge}
           </span>
         )}
       </div>
-      <div style={{ fontFamily: SYNE, fontSize: 'clamp(32px,6vw,48px)', fontWeight: 800, color: num, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+      <div style={{
+        fontFamily: DISPLAY, fontSize: 'clamp(32px,6vw,46px)',
+        fontWeight: 700, color: numColor,
+        letterSpacing: '-0.03em', lineHeight: 1.05,
+        fontVariantNumeric: 'tabular-nums',
+      }}>
         {value}
       </div>
-      {sub && <div style={{ fontFamily: INTER, fontSize: 13, color: 'rgba(255,255,255,0.55)', marginTop: 8, lineHeight: 1.55 }}>{sub}</div>}
+      {sub && (
+        <div style={{
+          fontFamily: TEXT, fontSize: 14, color: 'rgba(255,255,255,0.72)',
+          marginTop: 10, lineHeight: 1.6, maxWidth: 520,
+        }}>
+          {sub}
+        </div>
+      )}
     </div>
   );
 }
@@ -291,32 +408,35 @@ export function BreakdownTable({ rows, highlightLast }: {
   highlightLast?: boolean;
 }) {
   return (
-    <div style={{ border: `1px solid ${T.border}`, borderRadius: 6, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${Q.border}`, borderRadius: 10, overflow: 'hidden', background: Q.surface }}>
       {rows.map((r, i) => {
         const last = highlightLast && i === rows.length - 1;
         return (
           <div key={i} style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            padding: '10px 16px',
-            borderTop: i > 0 ? `1px solid ${T.border}` : 'none',
-            background: last ? T.dark : T.canvas,
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+            padding: '12px 16px',
+            borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
+            background: last ? Q.bgAlt : Q.surface,
           }}>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{
-                fontFamily: INTER, fontSize: 13,
-                fontWeight: r.bold || last ? 700 : 500,
-                color: last ? 'rgba(255,255,255,0.9)' : r.bold ? T.ink : T.mid,
+                fontFamily: TEXT, fontSize: 13.5,
+                fontWeight: r.bold || last ? 600 : 400,
+                color: r.bold || last ? Q.ink : Q.ink2,
+                letterSpacing: '-0.005em',
               }}>
                 {r.label}
               </div>
-              {r.sub && <div style={{ fontFamily: INTER, fontSize: 10.5, color: last ? 'rgba(255,255,255,0.4)' : T.faint, marginTop: 2 }}>{r.sub}</div>}
+              {r.sub && <div style={{ fontFamily: TEXT, fontSize: 11.5, color: Q.mid2, marginTop: 2, lineHeight: 1.45 }}>{r.sub}</div>}
             </div>
             <div style={{
-              fontFamily: GRSK,
+              fontFamily: TEXT,
               fontSize: 14,
-              fontWeight: r.bold || last ? 700 : 600,
-              color: last ? T.accentA : r.negative ? T.negative : r.positive ? T.positive : r.bold ? T.ink : T.mid,
-              letterSpacing: '-0.01em',
+              fontWeight: r.bold || last ? 600 : 500,
+              color: last ? Q.ink : r.negative ? Q.negative : r.positive ? Q.positive : Q.ink2,
+              letterSpacing: '-0.005em',
+              fontVariantNumeric: 'tabular-nums',
+              flexShrink: 0,
             }}>
               {r.value}
             </div>
@@ -327,32 +447,46 @@ export function BreakdownTable({ rows, highlightLast }: {
   );
 }
 
-/* ─── ScenarioTabs — solid block selector ───────────────── */
+/* ─── ScenarioTabs — card-style selector ────────────────── */
 export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   options: { value: T; label: string; sub?: string }[];
   value: T;
   onChange: (v: T) => void;
 }) {
-  const cols = options.length;
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols},1fr)`, gap: 6 }}>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: `repeat(auto-fit,minmax(140px,1fr))`,
+      gap: 8,
+    }}>
       {options.map((o) => {
         const active = o.value === value;
         return (
           <button
             key={o.value} type="button" onClick={() => onChange(o.value)}
             style={{
-              textAlign: 'left', padding: '12px 14px',
-              border: `2px solid ${active ? T.accentV : T.border}`,
-              borderRadius: 6, cursor: 'pointer',
-              background: active ? T.accentV : T.canvas,
-              color: active ? '#fff' : T.ink,
-              transition: 'all 0.15s',
+              textAlign: 'left',
+              padding: '12px 14px',
+              border: `1px solid ${active ? Q.accent : Q.border}`,
+              borderRadius: 10, cursor: 'pointer',
+              background: active ? Q.accentSoft : Q.surface,
+              boxShadow: active ? `0 0 0 3px ${Q.accent}1f` : 'none',
+              transition: 'all 0.12s ease',
             }}
           >
-            <div style={{ fontFamily: GRSK, fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em' }}>{o.label}</div>
+            <div style={{
+              fontFamily: DISPLAY, fontSize: 13.5, fontWeight: 600,
+              color: active ? Q.accentDk : Q.ink,
+              letterSpacing: '-0.01em',
+            }}>
+              {o.label}
+            </div>
             {o.sub && (
-              <div style={{ fontFamily: INTER, fontSize: 11, marginTop: 2, color: active ? 'rgba(255,255,255,0.6)' : T.faint }}>
+              <div style={{
+                fontFamily: TEXT, fontSize: 11.5, marginTop: 3,
+                color: active ? Q.accentDk : Q.mid,
+                lineHeight: 1.4,
+              }}>
                 {o.sub}
               </div>
             )}
@@ -363,22 +497,24 @@ export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   );
 }
 
-/* ─── Tip ────────────────────────────────────────────────── */
+/* ─── Tip — alert/callout ────────────────────────────────── */
 export function Tip({ children, tone = 'info' }: { children: React.ReactNode; tone?: 'info' | 'warn' | 'success' }) {
   const s = {
-    info:    { bg: '#EEF2FF', barClr: T.accentV, txt: '#3730A3', icon: 'ⓘ' },
-    warn:    { bg: '#FFFBEB', barClr: T.accentA, txt: '#92400E', icon: '⚠' },
-    success: { bg: '#ECFDF5', barClr: T.positive, txt: '#065F46', icon: '✓' },
+    info:    { bg: Q.accentSoft,    border: '#DDD8FF', barClr: Q.accent,   txt: Q.accentDk, icon: 'ⓘ' },
+    warn:    { bg: Q.warningSoft,   border: '#F5D88B', barClr: Q.warning,  txt: '#7E4A02',  icon: '⚠' },
+    success: { bg: Q.positiveSoft,  border: '#BFE3D3', barClr: Q.positive, txt: '#054A36',  icon: '✓' },
   }[tone];
   return (
     <div style={{
       display: 'flex', gap: 10, alignItems: 'flex-start',
-      background: s.bg, borderLeft: `3px solid ${s.barClr}`,
-      borderRadius: '0 4px 4px 0',
-      padding: '10px 14px',
-      fontFamily: INTER, fontSize: 12.5, color: s.txt, lineHeight: 1.55,
+      background: s.bg,
+      border: `1px solid ${s.border}`,
+      borderLeft: `3px solid ${s.barClr}`,
+      borderRadius: 8,
+      padding: '11px 14px',
+      fontFamily: TEXT, fontSize: 13, color: s.txt, lineHeight: 1.55,
     }}>
-      <span style={{ flexShrink: 0, fontWeight: 700, marginTop: 1 }}>{s.icon}</span>
+      <span style={{ flexShrink: 0, fontWeight: 600, marginTop: 1, color: s.barClr }}>{s.icon}</span>
       <div>{children}</div>
     </div>
   );
@@ -391,19 +527,25 @@ export function CheckboxField({ label, checked, onChange, hint }: {
   return (
     <label style={{
       display: 'flex', alignItems: 'flex-start', gap: 10,
-      border: `1px solid ${checked ? T.accentV : T.border}`,
-      borderRadius: 6, padding: '12px 14px', cursor: 'pointer',
-      background: checked ? '#EEF2FF' : T.canvas,
-      transition: 'all 0.15s',
+      border: `1px solid ${checked ? Q.accent : Q.border}`,
+      borderRadius: 10, padding: '12px 14px', cursor: 'pointer',
+      background: checked ? Q.accentSoft : Q.surface,
+      boxShadow: checked ? `0 0 0 3px ${Q.accent}1f` : 'none',
+      transition: 'all 0.12s ease',
     }}>
       <input
         type="checkbox" checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        style={{ marginTop: 2, accentColor: T.accentV, width: 15, height: 15, flexShrink: 0 }}
+        style={{ marginTop: 2, accentColor: Q.accent, width: 15, height: 15, flexShrink: 0 }}
       />
-      <span>
-        <span style={{ display: 'block', fontFamily: GRSK, fontSize: 13, fontWeight: 600, color: T.ink }}>{label}</span>
-        {hint && <span style={{ display: 'block', fontFamily: INTER, fontSize: 11, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{hint}</span>}
+      <span style={{ minWidth: 0 }}>
+        <span style={{
+          display: 'block', fontFamily: TEXT, fontSize: 13.5, fontWeight: 500,
+          color: Q.ink, letterSpacing: '-0.005em',
+        }}>
+          {label}
+        </span>
+        {hint && <span style={{ display: 'block', fontFamily: TEXT, fontSize: 12, color: Q.mid, marginTop: 3, lineHeight: 1.5 }}>{hint}</span>}
       </span>
     </label>
   );

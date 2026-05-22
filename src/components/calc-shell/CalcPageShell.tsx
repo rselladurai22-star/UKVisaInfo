@@ -1,57 +1,55 @@
 /**
- * CalcPageShell v3 — "Graphite & Flame" theme
- * Cool grey canvas · Dark obsidian sidebar · Syne display headings · Space Grotesk numbers
- * Zero resemblance to the previous Navy/Teal/Cream design.
+ * CalcPageShell v4 — "Quartz" design system
+ * Inspired by Stripe Dashboard / Linear / Vercel docs
+ * Light · refined neutrals · one disciplined indigo accent · hairline borders
  */
 import Link from 'next/link';
-import { ShieldCheck, ExternalLink, ArrowUpRight, CalendarDays, BarChart2, Zap } from 'lucide-react';
+import { ShieldCheck, ExternalLink, ArrowUpRight, CalendarDays, BarChart3, Sparkles, Layers } from 'lucide-react';
 
 export interface SidebarRate { label: string; value: string; sub?: string; accent?: string }
 export interface SidebarDate { date: string; desc: string; urgent?: boolean }
 export interface SidebarTip  { heading: string; body: string }
 export interface SidebarData {
-  keyRates?:  SidebarRate[];
-  dates?:     SidebarDate[];
-  tips?:      SidebarTip[];
-  govLink?:   string;
-  govLabel?:  string;
+  keyRates?: SidebarRate[]; dates?: SidebarDate[]; tips?: SidebarTip[];
+  govLink?: string; govLabel?: string;
 }
 
 interface Props {
-  eyebrow:     string;
-  title:       string;
-  deck:        string;
-  verified?:   string;
-  url?:        string;
-  sidebar?:    SidebarData;
-  related?:    { href: string; title: string; desc: string }[];
+  eyebrow: string; title: string; deck: string;
+  verified?: string; url?: string;
+  sidebar?: SidebarData;
+  related?: { href: string; title: string; desc: string }[];
   educational?: { title: string; body: string }[];
-  children:    React.ReactNode;
+  children: React.ReactNode;
 }
 
-/* ─── tokens ────────────────────────────────────── */
-const T = {
-  bg:         '#F0F2F5',   // cool grey canvas
-  canvas:     '#FFFFFF',   // card surfaces
-  ink:        '#0D1117',   // near-black text
-  mid:        '#6B7280',   // secondary text
-  border:     '#E2E6EB',   // card border
-  accentV:    '#7C3AED',   // electric violet — primary accent
-  accentA:    '#F59E0B',   // amber — highlights / numbers
-  sidebarBg:  '#0D1117',   // obsidian sidebar
-  sidebarEl:  '#161B22',   // elevated inside sidebar
-  sidebarBdr: 'rgba(255,255,255,0.06)',
-  positive:   '#059669',
-  negative:   '#DC2626',
+/* ─── design tokens — Stripe-inspired Quartz palette ────── */
+const Q = {
+  bg:        '#FCFCFD',
+  bgAlt:     '#F7F8FA',
+  surface:   '#FFFFFF',
+  ink:       '#1A1F36',
+  ink2:      '#3C4257',
+  mid:       '#697386',
+  mid2:      '#8792A2',
+  faint:     '#A3ACB9',
+  border:    '#E3E8EE',
+  borderStr: '#CFD7DF',
+  accent:    '#635BFF',
+  accentDk:  '#5851DB',
+  accentSoft:'#EFEEFF',
+  positive:  '#08855D',
+  positiveSoft: '#E6F7EF',
+  warning:   '#BF6A02',
+  warningSoft: '#FCEDD3',
+  negative:  '#CD3D64',
 };
 
-/* ─── font shortcuts ────────────────────────────── */
-const SYNE  = '"Manrope", "DM Sans", sans-serif';
-const GRSK  = '"DM Sans", system-ui, sans-serif';
-const INTER = '"DM Sans", system-ui, sans-serif';
+const DISPLAY = '"Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
 
 export default function CalcPageShell({
-  eyebrow, title, deck, verified = 'gov.uk / HMRC verified',
+  eyebrow, title, deck, verified = 'gov.uk verified',
   url, sidebar, related, educational, children,
 }: Props) {
   const jsonLd = url ? {
@@ -63,158 +61,179 @@ export default function CalcPageShell({
   } : null;
 
   return (
-    <div style={{ background: T.bg, minHeight: '100vh', fontFamily: INTER }}>
+    <div style={{
+      background: Q.bg,
+      minHeight: '100vh',
+      fontFamily: TEXT,
+      color: Q.ink,
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'grayscale',
+    }}>
       {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <div style={{ background: T.canvas, borderBottom: `1px solid ${T.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(88px,12vw,120px) clamp(16px,4vw,40px) 40px' }}>
-
-          {/* eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+      <header style={{
+        background: Q.surface,
+        borderBottom: `1px solid ${Q.border}`,
+      }}>
+        <div style={{
+          maxWidth: 1240,
+          margin: '0 auto',
+          padding: 'clamp(80px,11vw,108px) clamp(20px,4vw,40px) clamp(36px,6vw,56px)',
+        }}>
+          {/* eyebrow + breadcrumb-style label */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18, flexWrap: 'wrap' }}>
             <span style={{
-              display: 'inline-block',
-              background: T.accentV,
-              color: '#fff',
-              fontFamily: GRSK,
-              fontSize: 10,
-              fontWeight: 700,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              background: Q.accentSoft,
+              color: Q.accentDk,
+              fontFamily: TEXT,
+              fontSize: 12,
+              fontWeight: 600,
+              letterSpacing: '-0.01em',
               padding: '4px 10px',
-              borderRadius: 3,
+              borderRadius: 999,
+              border: `1px solid ${Q.accent}1f`,
             }}>
+              <Sparkles size={11} strokeWidth={2.5} />
               {eyebrow}
             </span>
           </div>
 
-          {/* title — Syne display, very tight */}
+          {/* title — Inter Tight, optically tuned */}
           <h1 style={{
-            fontFamily: SYNE,
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            fontWeight: 800,
-            color: T.ink,
-            letterSpacing: '-0.04em',
-            lineHeight: 1.0,
-            maxWidth: 820,
-            margin: '0 0 16px',
+            fontFamily: DISPLAY,
+            fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
+            fontWeight: 700,
+            color: Q.ink,
+            letterSpacing: '-0.025em',
+            lineHeight: 1.1,
+            maxWidth: 800,
+            margin: '0 0 18px',
           }}>
             {title}
           </h1>
 
-          {/* left-bar deck */}
+          {/* deck — generous line height, optimal measure */}
           <p style={{
-            fontFamily: INTER,
-            fontSize: 16,
-            color: T.mid,
+            fontFamily: TEXT,
+            fontSize: 'clamp(15px, 1.5vw, 17px)',
+            color: Q.mid,
             lineHeight: 1.65,
-            maxWidth: 680,
-            borderLeft: `3px solid ${T.accentV}`,
-            paddingLeft: 16,
-            margin: '0 0 20px',
+            maxWidth: 660,
+            margin: '0 0 24px',
+            fontWeight: 400,
           }}>
             {deck}
           </p>
 
-          {/* verified chip */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <ShieldCheck size={13} color={T.positive} />
-            <span style={{ fontFamily: GRSK, fontSize: 11, fontWeight: 600, color: T.positive, letterSpacing: '0.04em' }}>
-              {verified}
-            </span>
-            <span style={{ color: T.border, margin: '0 4px' }}>·</span>
-            <span style={{ fontFamily: GRSK, fontSize: 11, fontWeight: 600, color: T.mid }}>Free · No signup</span>
+          {/* trust signals row */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <Chip icon={<ShieldCheck size={12} strokeWidth={2.5} />} label={verified} tone="success" />
+            <Chip label="Free · No signup" tone="default" />
+            <Chip label="Updated 2025/26" tone="default" />
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* ── Body: 2-col ──────────────────────────────────── */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px clamp(16px,4vw,40px) 48px', display: 'flex', flexDirection: 'column', gap: 28 }}>
-        <div className="flex flex-col lg:flex-row gap-7 items-start">
+      {/* ── Body 2-column ────────────────────────────────── */}
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(28px,5vw,40px) clamp(20px,4vw,40px) 64px' }}>
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-          {/* ─ Main column ─ */}
+          {/* ── Main column ── */}
           <div style={{ flex: 1, minWidth: 0 }}>
-            {/* Calculator content */}
+            {/* Calculator surface */}
             <div style={{
-              background: T.canvas,
-              border: `1px solid ${T.border}`,
-              borderTop: `3px solid ${T.accentV}`,
-              borderRadius: '0 0 8px 8px',
+              background: Q.surface,
+              border: `1px solid ${Q.border}`,
+              borderRadius: 12,
+              boxShadow: `0 1px 2px rgba(26,31,54,0.04)`,
               overflow: 'hidden',
             }}>
-              <div style={{ padding: 'clamp(20px,4vw,32px)' }}>
+              <div style={{ padding: 'clamp(20px,3.5vw,32px)' }}>
                 {children}
               </div>
             </div>
 
-            {/* Educational accordion */}
+            {/* Educational — refined accordion */}
             {educational && educational.length > 0 && (
-              <div style={{ marginTop: 28 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-                  <div style={{ width: 3, height: 18, background: T.accentA, borderRadius: 2 }} />
-                  <h2 style={{ fontFamily: SYNE, fontSize: 14, fontWeight: 700, color: T.ink, letterSpacing: '-0.01em', margin: 0 }}>
-                    How it works &amp; HMRC rules
-                  </h2>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 8 }}>
+              <section style={{ marginTop: 36 }}>
+                <SectionLabel icon={<Layers size={14} strokeWidth={2.2} />} label="Reference" title="How it works" />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 8, marginTop: 16 }}>
                   {educational.map((e, i) => (
-                    <details key={i} style={{ background: T.canvas, border: `1px solid ${T.border}`, borderRadius: 6, overflow: 'hidden' }}>
+                    <details key={i} style={{
+                      background: Q.surface,
+                      border: `1px solid ${Q.border}`,
+                      borderRadius: 10,
+                      overflow: 'hidden',
+                      transition: 'border-color 0.15s ease',
+                    }}>
                       <summary style={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                        padding: '12px 16px', cursor: 'pointer', listStyle: 'none',
-                        fontFamily: GRSK, fontSize: 13, fontWeight: 600, color: T.ink,
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12,
+                        padding: '14px 16px',
+                        cursor: 'pointer',
+                        listStyle: 'none',
+                        fontFamily: DISPLAY,
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: Q.ink,
+                        letterSpacing: '-0.005em',
                       }}>
-                        {e.title}
-                        <span style={{ color: T.mid, fontSize: 16, lineHeight: 1, flexShrink: 0, marginLeft: 8 }}>+</span>
+                        <span>{e.title}</span>
+                        <span style={{
+                          color: Q.mid2,
+                          fontSize: 18,
+                          lineHeight: 1,
+                          fontWeight: 300,
+                          flexShrink: 0,
+                          width: 18, height: 18,
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        }}>+</span>
                       </summary>
                       <div style={{
-                        padding: '0 16px 14px', borderTop: `1px solid ${T.border}`,
-                        fontFamily: INTER, fontSize: 13, color: T.mid, lineHeight: 1.65,
+                        padding: '4px 16px 14px',
+                        fontFamily: TEXT,
+                        fontSize: 13.5,
+                        color: Q.mid,
+                        lineHeight: 1.65,
                       }}>
-                        <div style={{ paddingTop: 12 }}>{e.body}</div>
+                        {e.body}
                       </div>
                     </details>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
           </div>
 
-          {/* ─ Sidebar: Obsidian dark ─ */}
+          {/* ── Sidebar — light cards, hairline borders ── */}
           {sidebar && (
-            <aside className="w-full lg:w-[280px] xl:w-[308px] flex-shrink-0">
-              <div className="lg:sticky lg:top-[80px]" style={{ display: 'flex', flexDirection: 'column', gap: 3, background: T.sidebarBg, borderRadius: 8, overflow: 'hidden' }}>
+            <aside className="w-full lg:w-[280px] xl:w-[300px] flex-shrink-0">
+              <div className="lg:sticky lg:top-[80px]" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
 
-                {/* Key Rates */}
+                {/* Key rates */}
                 {sidebar.keyRates && sidebar.keyRates.length > 0 && (
-                  <div>
-                    <div style={{
-                      display: 'flex', alignItems: 'center', gap: 8,
-                      padding: '12px 16px 10px',
-                      borderBottom: `1px solid ${T.sidebarBdr}`,
-                    }}>
-                      <BarChart2 size={12} color={T.accentV} />
-                      <span style={{ fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.accentV }}>
-                        2025/26 Rates
-                      </span>
-                    </div>
+                  <SideCard icon={<BarChart3 size={13} strokeWidth={2.4} color={Q.accent} />} title="Key rates" sub="2025/26">
                     <div>
                       {sidebar.keyRates.map((r, i) => (
                         <div key={i} style={{
-                          display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8,
-                          padding: '9px 16px',
-                          borderBottom: `1px solid ${T.sidebarBdr}`,
+                          display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 10,
+                          padding: '10px 14px',
+                          borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
                         }}>
-                          <div>
-                            <div style={{ fontFamily: INTER, fontSize: 11.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>{r.label}</div>
-                            {r.sub && <div style={{ fontFamily: INTER, fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 1 }}>{r.sub}</div>}
+                          <div style={{ minWidth: 0 }}>
+                            <div style={{ fontFamily: TEXT, fontSize: 12.5, color: Q.ink2, lineHeight: 1.4, fontWeight: 500 }}>{r.label}</div>
+                            {r.sub && (
+                              <div style={{ fontFamily: TEXT, fontSize: 11, color: Q.mid2, marginTop: 2, lineHeight: 1.4 }}>{r.sub}</div>
+                            )}
                           </div>
                           <div style={{
-                            fontFamily: GRSK,
+                            fontFamily: DISPLAY,
                             fontSize: 14,
-                            fontWeight: 700,
-                            color: r.accent ?? T.accentA,
-                            letterSpacing: '-0.01em',
+                            fontWeight: 600,
+                            color: r.accent ?? Q.ink,
+                            letterSpacing: '-0.015em',
+                            fontVariantNumeric: 'tabular-nums',
                             flexShrink: 0,
                             textAlign: 'right',
                           }}>
@@ -223,137 +242,245 @@ export default function CalcPageShell({
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </SideCard>
                 )}
 
-                {/* Important Dates */}
+                {/* Dates */}
                 {sidebar.dates && sidebar.dates.length > 0 && (
-                  <div style={{ borderTop: `2px solid ${T.sidebarBdr}` }}>
-                    <div style={{
-                      display: 'flex', alignItems: 'center', gap: 8,
-                      padding: '12px 16px 10px',
-                      borderBottom: `1px solid ${T.sidebarBdr}`,
-                    }}>
-                      <CalendarDays size={12} color={T.accentA} />
-                      <span style={{ fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.accentA }}>
-                        Key Dates
-                      </span>
-                    </div>
-                    {sidebar.dates.map((d, i) => (
-                      <div key={i} style={{
-                        display: 'flex', gap: 10, alignItems: 'flex-start',
-                        padding: '9px 16px',
-                        borderBottom: `1px solid ${T.sidebarBdr}`,
-                      }}>
-                        <span style={{
-                          fontFamily: GRSK, fontSize: 9.5, fontWeight: 700,
-                          background: d.urgent ? T.negative : T.accentA,
-                          color: '#fff',
-                          padding: '2px 6px',
-                          borderRadius: 3,
-                          flexShrink: 0,
-                          marginTop: 2,
-                          letterSpacing: '0.02em',
+                  <SideCard icon={<CalendarDays size={13} strokeWidth={2.4} color={Q.warning} />} title="Key dates">
+                    <div>
+                      {sidebar.dates.map((d, i) => (
+                        <div key={i} style={{
+                          display: 'flex', gap: 10, alignItems: 'flex-start',
+                          padding: '10px 14px',
+                          borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
                         }}>
-                          {d.date}
-                        </span>
-                        <span style={{ fontFamily: INTER, fontSize: 11.5, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
-                          {d.desc}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                          <span style={{
+                            fontFamily: TEXT,
+                            fontSize: 10.5,
+                            fontWeight: 600,
+                            background: d.urgent ? '#FDEEF0' : Q.bgAlt,
+                            color: d.urgent ? Q.negative : Q.ink2,
+                            border: `1px solid ${d.urgent ? '#F8C9D2' : Q.border}`,
+                            padding: '2px 7px',
+                            borderRadius: 6,
+                            flexShrink: 0,
+                            marginTop: 1,
+                            letterSpacing: '-0.005em',
+                            whiteSpace: 'nowrap',
+                          }}>
+                            {d.date}
+                          </span>
+                          <span style={{ fontFamily: TEXT, fontSize: 12.5, color: Q.mid, lineHeight: 1.5 }}>
+                            {d.desc}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </SideCard>
                 )}
 
                 {/* Tips */}
                 {sidebar.tips && sidebar.tips.length > 0 && (
-                  <div style={{ borderTop: `2px solid ${T.sidebarBdr}` }}>
-                    <div style={{
-                      display: 'flex', alignItems: 'center', gap: 8,
-                      padding: '12px 16px 10px',
-                      borderBottom: `1px solid ${T.sidebarBdr}`,
-                    }}>
-                      <Zap size={12} color="#FCD34D" />
-                      <span style={{ fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#FCD34D' }}>
-                        Tips
-                      </span>
+                  <SideCard icon={<Sparkles size={13} strokeWidth={2.4} color={Q.accent} />} title="Pro tips">
+                    <div>
+                      {sidebar.tips.map((t, i) => (
+                        <div key={i} style={{
+                          padding: '10px 14px',
+                          borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
+                        }}>
+                          <div style={{ fontFamily: DISPLAY, fontSize: 12.5, fontWeight: 600, color: Q.ink, letterSpacing: '-0.005em', marginBottom: 3 }}>
+                            {t.heading}
+                          </div>
+                          <div style={{ fontFamily: TEXT, fontSize: 12, color: Q.mid, lineHeight: 1.55 }}>
+                            {t.body}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    {sidebar.tips.map((t, i) => (
-                      <div key={i} style={{
-                        padding: '10px 16px',
-                        borderBottom: `1px solid ${T.sidebarBdr}`,
-                      }}>
-                        <div style={{ fontFamily: GRSK, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.88)', marginBottom: 3, letterSpacing: '-0.01em' }}>
-                          {t.heading}
-                        </div>
-                        <div style={{ fontFamily: INTER, fontSize: 11, color: 'rgba(255,255,255,0.45)', lineHeight: 1.55 }}>
-                          {t.body}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  </SideCard>
                 )}
 
                 {/* Related */}
                 {related && related.length > 0 && (
-                  <div style={{ borderTop: `2px solid ${T.sidebarBdr}` }}>
-                    <div style={{
-                      padding: '12px 16px 10px',
-                      borderBottom: `1px solid ${T.sidebarBdr}`,
-                    }}>
-                      <span style={{ fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)' }}>
-                        Related Tools
-                      </span>
-                    </div>
-                    {related.map((r) => (
-                      <Link
-                        key={r.href}
-                        href={r.href}
-                        className="group"
-                        style={{ display: 'block', textDecoration: 'none' }}
-                      >
-                        <div style={{
-                          display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6,
-                          padding: '9px 16px',
-                          borderBottom: `1px solid ${T.sidebarBdr}`,
-                        }}
-                          className="hover:bg-[#161B22] transition-colors duration-100"
+                  <SideCard title="Related tools" subtle>
+                    <div>
+                      {related.map((r, i) => (
+                        <Link
+                          key={r.href}
+                          href={r.href}
+                          className="group block"
+                          style={{ textDecoration: 'none' }}
                         >
-                          <div>
-                            <div style={{ fontFamily: GRSK, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.8)', letterSpacing: '-0.01em' }}>{r.title}</div>
-                            <div style={{ fontFamily: INTER, fontSize: 10.5, color: 'rgba(255,255,255,0.35)', marginTop: 2, lineHeight: 1.45 }}>{r.desc}</div>
+                          <div
+                            className="hover:bg-[#F7F8FA] transition-colors duration-100"
+                            style={{
+                              display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8,
+                              padding: '10px 14px',
+                              borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
+                            }}>
+                            <div style={{ minWidth: 0 }}>
+                              <div style={{
+                                fontFamily: DISPLAY, fontSize: 13, fontWeight: 600, color: Q.ink, letterSpacing: '-0.005em',
+                              }}>
+                                {r.title}
+                              </div>
+                              <div style={{ fontFamily: TEXT, fontSize: 11.5, color: Q.mid, marginTop: 2, lineHeight: 1.45 }}>
+                                {r.desc}
+                              </div>
+                            </div>
+                            <ArrowUpRight size={13} strokeWidth={2.2} color={Q.mid2} className="flex-shrink-0 mt-1 group-hover:text-[#635BFF] transition-colors" />
                           </div>
-                          <ArrowUpRight size={12} color="rgba(255,255,255,0.3)" style={{ flexShrink: 0, marginTop: 2 }} />
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </SideCard>
                 )}
 
-                {/* Gov source + disclaimer */}
-                <div style={{ padding: '12px 16px 14px', borderTop: `2px solid ${T.sidebarBdr}` }}>
-                  {sidebar.govLink && (
-                    <a
-                      href={`https://${sidebar.govLink}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', marginBottom: 10 }}
-                    >
-                      <ExternalLink size={11} color={T.accentV} />
-                      <span style={{ fontFamily: GRSK, fontSize: 11, fontWeight: 600, color: T.accentV }}>
+                {/* Source */}
+                {sidebar.govLink && (
+                  <a
+                    href={`https://${sidebar.govLink}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+                      background: Q.surface,
+                      border: `1px solid ${Q.border}`,
+                      borderRadius: 10,
+                      padding: '12px 14px',
+                      textDecoration: 'none',
+                      transition: 'border-color 0.15s ease',
+                    }}
+                    className="hover:border-[#635BFF]"
+                  >
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontFamily: TEXT, fontSize: 10.5, fontWeight: 600, color: Q.mid2, letterSpacing: '0.04em', textTransform: 'uppercase' }}>Source</div>
+                      <div style={{ fontFamily: DISPLAY, fontSize: 13, fontWeight: 600, color: Q.ink, marginTop: 2 }}>
                         {sidebar.govLabel ?? sidebar.govLink}
-                      </span>
-                    </a>
-                  )}
-                  <p style={{ fontFamily: INTER, fontSize: 10, color: 'rgba(255,255,255,0.25)', lineHeight: 1.6, margin: 0 }}>
-                    Estimates only. Consult HMRC or a qualified accountant for personal advice.
-                  </p>
-                </div>
+                      </div>
+                    </div>
+                    <ExternalLink size={13} strokeWidth={2.2} color={Q.mid2} style={{ flexShrink: 0 }} />
+                  </a>
+                )}
+
+                {/* Disclaimer */}
+                <p style={{
+                  fontFamily: TEXT,
+                  fontSize: 11,
+                  color: Q.faint,
+                  lineHeight: 1.55,
+                  margin: '4px 4px 0',
+                }}>
+                  Estimates only. Consult HMRC or a qualified accountant for advice on your circumstances.
+                </p>
               </div>
             </aside>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ─── Sub-components ─────────────────────────────────────── */
+
+function Chip({ icon, label, tone = 'default' }: { icon?: React.ReactNode; label: string; tone?: 'default' | 'success' }) {
+  const styles = tone === 'success'
+    ? { bg: Q.positiveSoft, color: Q.positive, border: '#BFE3D3' }
+    : { bg: Q.bgAlt, color: Q.ink2, border: Q.border };
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 5,
+      fontFamily: TEXT,
+      fontSize: 12,
+      fontWeight: 500,
+      color: styles.color,
+      background: styles.bg,
+      border: `1px solid ${styles.border}`,
+      padding: '4px 9px',
+      borderRadius: 999,
+      letterSpacing: '-0.005em',
+    }}>
+      {icon}
+      {label}
+    </span>
+  );
+}
+
+function SectionLabel({ icon, label, title }: { icon?: React.ReactNode; label: string; title: string }) {
+  return (
+    <div>
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        fontFamily: TEXT,
+        fontSize: 11,
+        fontWeight: 600,
+        color: Q.mid2,
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
+        marginBottom: 6,
+      }}>
+        {icon}
+        {label}
+      </div>
+      <h2 style={{
+        fontFamily: DISPLAY,
+        fontSize: 22,
+        fontWeight: 700,
+        color: Q.ink,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.2,
+        margin: 0,
+      }}>
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+function SideCard({ icon, title, sub, subtle, children }: {
+  icon?: React.ReactNode; title: string; sub?: string; subtle?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div style={{
+      background: Q.surface,
+      border: `1px solid ${Q.border}`,
+      borderRadius: 12,
+      overflow: 'hidden',
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+        padding: '11px 14px',
+        background: subtle ? Q.bgAlt : Q.surface,
+        borderBottom: `1px solid ${Q.border}`,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+          {icon}
+          <span style={{
+            fontFamily: DISPLAY,
+            fontSize: 13,
+            fontWeight: 600,
+            color: Q.ink,
+            letterSpacing: '-0.01em',
+          }}>
+            {title}
+          </span>
+        </div>
+        {sub && (
+          <span style={{
+            fontFamily: TEXT,
+            fontSize: 10.5,
+            fontWeight: 500,
+            color: Q.mid2,
+            letterSpacing: '0.02em',
+          }}>
+            {sub}
+          </span>
+        )}
+      </div>
+      {children}
     </div>
   );
 }
