@@ -1,17 +1,17 @@
 'use client';
 
 /**
- * UKDesk homepage — redesigned as a smart tool directory + command bar.
+ * UKDesk homepage — premium magazine-style directory.
  *
- * Sections:
- *  1. HERO          — search bar, status chip
- *  2. STICKY NAV    — category filter pills + live stats
- *  3. DIRECTORY     — filtered tool grid with Featured / Trending / New sub-sections
- *  4. COMING SOON   — 16 tier-3 previews + planned count
- *  5. UK PULSE      — live national stats strip
- *  6. INTENT ROWS   — quick-path journeys
- *  7. GUIDES        — featured articles
- *  8. FOOTER CTA    — trust + links
+ * Layout (each section visually distinct):
+ *  1. EDITORIAL HERO  — bright white, oversized typography, command search
+ *  2. PULSE MARQUEE   — slim dark band with live UK stats
+ *  3. PATH GRID       — 4 large intent cards on cream
+ *  4. BENTO DIRECTORY — featured (large) + regular (small) tiles, category-coded
+ *  5. CATEGORY ATLAS  — 8 category mega-tiles with counts
+ *  6. JOURNAL         — featured guides as magazine cards
+ *  7. COMING SOON     — dotted background, ghost tiles
+ *  8. FOOTER CTA      — bold solid block
  */
 
 import { useState, useMemo, useEffect, useRef } from 'react';
@@ -19,15 +19,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   Search, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
-  Activity, Newspaper, Sparkles, Command, CornerDownLeft,
-  Wallet, HomeIcon, MapPin, Plane, Briefcase, GraduationCap,
-  Star, Clock, Users, Car, PiggyBank,
+  Sparkles, Command, CornerDownLeft, Star, Clock,
+  HomeIcon, MapPin, Briefcase, GraduationCap, BookOpen,
+  ChevronRight, Zap, ShieldCheck,
 } from 'lucide-react';
 import {
-  APP_TILES, CATEGORIES, SOON_SHOWCASE, SOON_TOOLS, PLANNED_TOOLS,
+  APP_TILES, CATEGORIES, SOON_SHOWCASE,
   FEATURED_TILES, TRENDING_TILES, NEW_TILES,
   TOTAL_SOON_COUNT, LIVE_COUNT,
-  type AppTile, type SoonTool, type CategoryId,
+  type CategoryId,
 } from '../data/tools';
 
 /* ─────────────────────────────────────────────
@@ -35,9 +35,11 @@ import {
 ───────────────────────────────────────────── */
 const NAVY = '#0A2540';
 const TEAL = '#00C4B4';
+const GOLD = '#C9A14A';
+const INK  = '#0F172A';
 
 /* ─────────────────────────────────────────────
-   COMMAND-BAR search index
+   COMMAND INDEX (search)
 ───────────────────────────────────────────── */
 interface CommandItem {
   href: string; title: string; hint: string;
@@ -59,57 +61,57 @@ const COMMAND_INDEX: CommandItem[] = [
   { href: '/salary-compare',         title: 'Salary comparison',               hint: 'City ↔ city equivalent gross',                      group: 'Tools', keywords: ['salary','compare','london','manchester','equivalent'] },
   { href: '/cgt-calculator',         title: 'Capital Gains Tax',               hint: '£3,000 AEA · 18% / 24%',                            group: 'Tools', keywords: ['cgt','capital gains','property','shares'] },
   { href: '/pension-allowance',      title: 'Pension annual allowance',        hint: 'Tapered + MPAA + carry-forward',                    group: 'Tools', keywords: ['pension','allowance','tapered','mpaa'] },
-  { href: '/state-pension',          title: 'State Pension forecast',          hint: 'From your NI years',                                 group: 'Tools', keywords: ['state pension','ni','retirement'] },
+  { href: '/state-pension',          title: 'State Pension forecast',          hint: 'From your NI years',                                group: 'Tools', keywords: ['state pension','ni','retirement'] },
   { href: '/ulez-check',             title: 'ULEZ & CAZ checker',              hint: 'London + 7 English + 4 Scottish zones',             group: 'Tools', keywords: ['ulez','caz','clean air','emissions','tfl'] },
   { href: '/mot-check',              title: 'MOT & tax check',                 hint: 'Validate any UK reg plate',                         group: 'Tools', keywords: ['mot','tax','dvla','dvsa','reg','plate'] },
   { href: '/energy-bill',            title: 'Energy bill (Ofgem cap)',         hint: 'kWh × current cap rates',                           group: 'Tools', keywords: ['energy','bill','gas','electricity','ofgem','cap'] },
   { href: '/national-insurance',     title: 'National Insurance calculator',   hint: 'Class 1 employee/employer · Class 4',               group: 'Tools', keywords: ['ni','national insurance','class 1','class 4','self employed'] },
-  { href: '/inheritance-tax',        title: 'Inheritance Tax calculator',      hint: 'NRB £325k · RNRB £175k · 36% charity',             group: 'Tools', keywords: ['iht','inheritance','estate','nil rate band','rnrb'] },
-  { href: '/dividend-tax',           title: 'Dividend Tax calculator',         hint: '£500 allowance · 8.75% / 33.75% / 39.35%',         group: 'Tools', keywords: ['dividend','dividend tax','shareholder','limited company'] },
-  { href: '/sole-trader-vs-limited', title: 'Sole trader vs Limited company',  hint: 'Full IT+NI vs CT+dividend comparison',              group: 'Tools', keywords: ['sole trader','limited company','ltd','self employed','corporation tax'] },
+  { href: '/inheritance-tax',        title: 'Inheritance Tax calculator',      hint: 'NRB £325k · RNRB £175k · 36% charity',              group: 'Tools', keywords: ['iht','inheritance','estate','nil rate band','rnrb'] },
+  { href: '/dividend-tax',           title: 'Dividend Tax calculator',         hint: '£500 allowance · 8.75% / 33.75% / 39.35%',          group: 'Tools', keywords: ['dividend','dividend tax','shareholder','limited company'] },
+  { href: '/sole-trader-vs-limited', title: 'Sole trader vs Limited',          hint: 'Full IT+NI vs CT+dividend comparison',              group: 'Tools', keywords: ['sole trader','limited company','ltd','self employed'] },
   { href: '/student-loan-repayment', title: 'Student Loan repayment',          hint: 'Plan 1/2/4/5 + Postgraduate projection',            group: 'Tools', keywords: ['student loan','plan 2','plan 5','postgraduate','sl'] },
-  { href: '/redundancy-pay',         title: 'Redundancy Pay calculator',       hint: 'Statutory · £719 cap · £30k tax-free',              group: 'Tools', keywords: ['redundancy','statutory redundancy','redundancy pay','made redundant'] },
+  { href: '/redundancy-pay',         title: 'Redundancy Pay calculator',       hint: 'Statutory · £719 cap · £30k tax-free',              group: 'Tools', keywords: ['redundancy','statutory','redundancy pay'] },
   { href: '/maternity-pay',          title: 'Maternity Pay calculator',        hint: 'SMP 39 weeks · SPP · £187.18',                      group: 'Tools', keywords: ['maternity','smp','maternity pay','paternity','spp'] },
-  { href: '/sick-pay',               title: 'Sick Pay (SSP) calculator',       hint: '£118.75/wk · 28-week max · waiting days',          group: 'Tools', keywords: ['ssp','sick pay','statutory sick','sickness'] },
-  { href: '/payslip-decoder',        title: 'Payslip decoder',                 hint: 'Tax codes · NI letters · deduction codes',          group: 'Tools', keywords: ['payslip','tax code','ni category','p60','p45','deduction'] },
-  { href: '/child-benefit-calculator',      title: 'Child Benefit calculator',        hint: '£25.60/wk eldest · HICBC £60k–£80k taper',       group: 'Tools', keywords: ['child benefit','hicbc','children','benefit'] },
-  { href: '/marriage-allowance-calculator', title: 'Marriage Allowance',              hint: '£1,260 PA transfer · up to £252 saving',          group: 'Tools', keywords: ['marriage allowance','spouse','civil partner','personal allowance'] },
-  { href: '/company-car-tax',               title: 'Company Car Tax (BiK)',           hint: 'List price × CO₂% · EV 3% · Class 1A',            group: 'Tools', keywords: ['company car','bik','benefit in kind','co2','fleet'] },
-  { href: '/ir35-calculator',               title: 'IR35 calculator',                 hint: 'Inside vs outside take-home comparison',           group: 'Tools', keywords: ['ir35','inside','outside','contractor','psc'] },
-  { href: '/contractor-day-rate',           title: 'Contractor day rate',             hint: 'Day rate → Ltd take-home + PAYE equivalent',      group: 'Tools', keywords: ['day rate','contractor','limited company','daily rate'] },
-  { href: '/mileage-expense-calculator',    title: 'Mileage expense calculator',      hint: 'AMAP 45p/25p car · 24p motorcycle · 20p bike',    group: 'Tools', keywords: ['mileage','amap','business miles','fuel','reimbursement'] },
-  { href: '/salary-sacrifice-calculator',   title: 'Salary sacrifice calculator',     hint: 'IT + employee NI + employer NI saving',            group: 'Tools', keywords: ['salary sacrifice','pension','employer ni','net pay'] },
-  { href: '/self-assessment-calculator',    title: 'Self Assessment calculator',      hint: 'Multi-income · Class 4 NI · POAC estimate',        group: 'Tools', keywords: ['self assessment','sa','tax return','self employed','hmrc'] },
-  { href: '/rental-income-tax',             title: 'Rental income tax',               hint: 'Section 24 · 20% mortgage interest credit',        group: 'Tools', keywords: ['rental','landlord','section 24','buy to let','property income'] },
-  { href: '/rental-yield-calculator',       title: 'Rental yield calculator',         hint: 'Gross/net yield · BTL ICR 125%/145%',              group: 'Tools', keywords: ['rental yield','gross yield','net yield','btl','buy to let'] },
-  { href: '/overpayment-mortgage',          title: 'Mortgage overpayment',            hint: 'Interest saved · months off mortgage term',        group: 'Tools', keywords: ['mortgage overpayment','overpay','interest saved','early repayment'] },
-  { href: '/property-cgt-calculator',       title: 'Property CGT calculator',         hint: 'PPR relief · 18%/24% from Oct 2024 · AEA',         group: 'Tools', keywords: ['property cgt','capital gains','ppr','main residence','residential'] },
-  { href: '/childcare-calculator',          title: 'Childcare cost calculator',       hint: '15/30 free hours · TFC £500/qtr · UC 85%',         group: 'Tools', keywords: ['childcare','free hours','tax-free childcare','tfc','universal credit'] },
-  { href: '/isa-calculator',                title: 'ISA & LISA growth calculator',    hint: '£20k ISA · LISA 25% bonus · projection',           group: 'Tools', keywords: ['isa','lisa','lifetime isa','stocks and shares','savings'] },
-  { href: '/ihs-calculator',                title: 'IHS surcharge calculator',        hint: '£1,035/yr standard · £776/yr student',             group: 'Tools', keywords: ['ihs','immigration health surcharge','nhs surcharge','visa health'] },
-  { href: '/skilled-worker-points-check',   title: 'Skilled Worker points checker',   hint: '70-point check · shortage occupation',              group: 'Tools', keywords: ['skilled worker','points','sponsorship','shortage','new entrant'] },
-  { href: '/notice-period-calculator',      title: 'Notice period calculator',        hint: 'Statutory 1wk/yr max 12 · PILON taxable',          group: 'Tools', keywords: ['notice period','pilon','gardening leave','resignation','redundancy'] },
-  { href: '/minimum-wage-checker',          title: 'Minimum wage checker',            hint: 'NLW £12.21 (21+) · Apr 2025 rates',                group: 'Tools', keywords: ['minimum wage','nlw','nmw','living wage','hourly rate'] },
-  { href: '/pension-drawdown-calculator',   title: 'Pension drawdown calculator',     hint: 'PCLS 25% · year-by-year income projection',        group: 'Tools', keywords: ['pension drawdown','pcls','lump sum','retirement income','sipp'] },
-  { href: '/lifetime-isa-calculator',       title: 'Lifetime ISA calculator',         hint: '25% bonus · first home ≤£450k · retirement',      group: 'Tools', keywords: ['lifetime isa','lisa','first home','bonus','help to buy'] },
-  { href: '/postcode',                title: 'Postcode super-lookup',    hint: 'Council, MP, NHS, police, ward',           group: 'Places', keywords: ['postcode','mp','council','nhs','police'] },
-  { href: '/visa/skilled-worker',     title: 'Skilled Worker visa',      hint: '£41,700 · employer sponsored',              group: 'Visas',  keywords: ['skilled','worker','job','employment'] },
-  { href: '/visa/student',            title: 'Student visa',             hint: '£558 · degree-level study',                 group: 'Visas',  keywords: ['student','study','university'] },
-  { href: '/visa/family',             title: 'Family visa',              hint: '£29,000 income · spouse',                   group: 'Visas',  keywords: ['family','spouse','partner','marriage'] },
-  { href: '/visa/visitor',            title: 'Standard Visitor',         hint: '£135 · tourism / business',                 group: 'Visas',  keywords: ['visitor','tourist','business'] },
-  { href: '/visa/graduate',           title: 'Graduate visa',            hint: '2 years post-study',                        group: 'Visas',  keywords: ['graduate','post study'] },
-  { href: '/visa/global-talent',      title: 'Global Talent',            hint: 'No sponsor · endorsed',                     group: 'Visas',  keywords: ['talent','endorsement'] },
-  { href: '/visa/health-and-care',    title: 'Health & Care Worker',     hint: 'NHS / care · IHS waived',                   group: 'Visas',  keywords: ['nhs','care','health'] },
-  { href: '/settlement',              title: 'ILR · settlement',         hint: '£3,226 · indefinite leave',                 group: 'Visas',  keywords: ['ilr','settlement','indefinite'] },
-  { href: '/eligibility',             title: 'Eligibility quiz',         hint: 'Find your route in 60s',                    group: 'Visas',  keywords: ['quiz','eligibility','match'] },
-  { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',     title: 'Skilled Worker thresholds 2026', hint: 'Full SOC table',        group: 'Guides', keywords: ['salary','threshold'] },
-  { href: '/blog/uk-family-visa-minimum-income-2026-what-counts',   title: 'Family visa £29,000 income',     hint: 'What counts',           group: 'Guides', keywords: ['family','29000','income'] },
-  { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate',      title: 'eVisa migration guide',          hint: 'Beat the deadline',     group: 'Guides', keywords: ['evisa','brp'] },
+  { href: '/sick-pay',               title: 'Sick Pay (SSP) calculator',       hint: '£118.75/wk · 28-week max · waiting days',           group: 'Tools', keywords: ['ssp','sick pay','statutory sick','sickness'] },
+  { href: '/payslip-decoder',        title: 'Payslip decoder',                 hint: 'Tax codes · NI letters · deduction codes',          group: 'Tools', keywords: ['payslip','tax code','ni category','p60','p45'] },
+  { href: '/child-benefit-calculator',      title: 'Child Benefit calculator',  hint: '£25.60/wk eldest · HICBC £60k–£80k taper',          group: 'Tools', keywords: ['child benefit','hicbc','children','benefit'] },
+  { href: '/marriage-allowance-calculator', title: 'Marriage Allowance',       hint: '£1,260 PA transfer · up to £252 saving',            group: 'Tools', keywords: ['marriage allowance','spouse','civil partner'] },
+  { href: '/company-car-tax',               title: 'Company Car Tax (BiK)',    hint: 'List price × CO₂% · EV 3% · Class 1A',              group: 'Tools', keywords: ['company car','bik','benefit in kind','co2'] },
+  { href: '/ir35-calculator',               title: 'IR35 calculator',          hint: 'Inside vs outside take-home comparison',            group: 'Tools', keywords: ['ir35','inside','outside','contractor','psc'] },
+  { href: '/contractor-day-rate',           title: 'Contractor day rate',      hint: 'Day rate → Ltd take-home + PAYE equivalent',        group: 'Tools', keywords: ['day rate','contractor','limited company','daily rate'] },
+  { href: '/mileage-expense-calculator',    title: 'Mileage expense',          hint: 'AMAP 45p/25p car · 24p motorcycle · 20p bike',      group: 'Tools', keywords: ['mileage','amap','business miles','fuel'] },
+  { href: '/salary-sacrifice-calculator',   title: 'Salary sacrifice',         hint: 'IT + employee NI + employer NI saving',             group: 'Tools', keywords: ['salary sacrifice','pension','employer ni'] },
+  { href: '/self-assessment-calculator',    title: 'Self Assessment',          hint: 'Multi-income · Class 4 NI · POAC estimate',         group: 'Tools', keywords: ['self assessment','sa','tax return','hmrc'] },
+  { href: '/rental-income-tax',             title: 'Rental income tax',        hint: 'Section 24 · 20% mortgage interest credit',         group: 'Tools', keywords: ['rental','landlord','section 24','buy to let'] },
+  { href: '/rental-yield-calculator',       title: 'Rental yield',             hint: 'Gross/net yield · BTL ICR 125%/145%',               group: 'Tools', keywords: ['rental yield','gross yield','btl','buy to let'] },
+  { href: '/overpayment-mortgage',          title: 'Mortgage overpayment',     hint: 'Interest saved · months off mortgage term',         group: 'Tools', keywords: ['mortgage overpayment','overpay','early repayment'] },
+  { href: '/property-cgt-calculator',       title: 'Property CGT',             hint: 'PPR relief · 18%/24% from Oct 2024 · AEA',          group: 'Tools', keywords: ['property cgt','capital gains','ppr','main residence'] },
+  { href: '/childcare-calculator',          title: 'Childcare cost',           hint: '15/30 free hours · TFC £500/qtr · UC 85%',          group: 'Tools', keywords: ['childcare','free hours','tax-free childcare','tfc'] },
+  { href: '/isa-calculator',                title: 'ISA & LISA growth',        hint: '£20k ISA · LISA 25% bonus · projection',            group: 'Tools', keywords: ['isa','lisa','lifetime isa','savings'] },
+  { href: '/ihs-calculator',                title: 'IHS surcharge',            hint: '£1,035/yr standard · £776/yr student',              group: 'Tools', keywords: ['ihs','immigration health surcharge','nhs surcharge'] },
+  { href: '/skilled-worker-points-check',   title: 'Skilled Worker points',    hint: '70-point check · shortage occupation',              group: 'Tools', keywords: ['skilled worker','points','sponsorship','shortage'] },
+  { href: '/notice-period-calculator',      title: 'Notice period',            hint: 'Statutory 1wk/yr max 12 · PILON taxable',           group: 'Tools', keywords: ['notice period','pilon','gardening leave'] },
+  { href: '/minimum-wage-checker',          title: 'Minimum wage checker',     hint: 'NLW £12.21 (21+) · Apr 2025 rates',                 group: 'Tools', keywords: ['minimum wage','nlw','nmw','living wage'] },
+  { href: '/pension-drawdown-calculator',   title: 'Pension drawdown',         hint: 'PCLS 25% · year-by-year income projection',         group: 'Tools', keywords: ['pension drawdown','pcls','lump sum','sipp'] },
+  { href: '/lifetime-isa-calculator',       title: 'Lifetime ISA',             hint: '25% bonus · first home ≤£450k · retirement',        group: 'Tools', keywords: ['lifetime isa','lisa','first home','bonus'] },
+  { href: '/postcode',                title: 'Postcode super-lookup', hint: 'Council, MP, NHS, police, ward',  group: 'Places', keywords: ['postcode','mp','council','nhs','police'] },
+  { href: '/visa-types',              title: 'Browse all UK visas',   hint: '35+ routes with full guides',     group: 'Visas',  keywords: ['visa','routes','browse'] },
+  { href: '/visa-switching',          title: 'UK visa switching',     hint: 'In-country switch guide',         group: 'Visas',  keywords: ['switch','switching','inside uk','3c leave'] },
+  { href: '/visa/skilled-worker',     title: 'Skilled Worker visa',   hint: '£41,700 · employer sponsored',    group: 'Visas',  keywords: ['skilled','worker','job','employment'] },
+  { href: '/visa/student',            title: 'Student visa',          hint: '£558 · degree-level study',       group: 'Visas',  keywords: ['student','study','university'] },
+  { href: '/visa/family',             title: 'Family visa',           hint: '£29,000 income · spouse',         group: 'Visas',  keywords: ['family','spouse','partner','marriage'] },
+  { href: '/visa/visitor',            title: 'Standard Visitor',      hint: '£135 · tourism / business',       group: 'Visas',  keywords: ['visitor','tourist','business'] },
+  { href: '/visa/graduate',           title: 'Graduate visa',         hint: '2 years post-study',              group: 'Visas',  keywords: ['graduate','post study'] },
+  { href: '/visa/global-talent',      title: 'Global Talent',         hint: 'No sponsor · endorsed',           group: 'Visas',  keywords: ['talent','endorsement'] },
+  { href: '/visa/health-and-care',    title: 'Health & Care Worker',  hint: 'NHS / care · IHS waived',         group: 'Visas',  keywords: ['nhs','care','health'] },
+  { href: '/settlement',              title: 'ILR · settlement',      hint: '£3,226 · indefinite leave',       group: 'Visas',  keywords: ['ilr','settlement','indefinite'] },
+  { href: '/eligibility',             title: 'Eligibility quiz',      hint: 'Find your route in 60s',          group: 'Visas',  keywords: ['quiz','eligibility','match'] },
+  { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',     title: 'Skilled Worker thresholds 2026', hint: 'Full SOC table',    group: 'Guides', keywords: ['salary','threshold'] },
+  { href: '/blog/uk-family-visa-minimum-income-2026-what-counts',   title: 'Family visa £29,000 income',     hint: 'What counts',       group: 'Guides', keywords: ['family','29000','income'] },
+  { href: '/blog/uk-evisa-final-deadline-2026-how-to-migrate',      title: 'eVisa migration guide',          hint: 'Beat the deadline', group: 'Guides', keywords: ['evisa','brp'] },
 ];
 
-/* ─────────────────────────────────────────────
-   UK PULSE
-───────────────────────────────────────────── */
+/* PULSE */
 interface PulseRow { label: string; value: string; delta?: string; trend?: 'up' | 'down' | 'flat'; source: string; }
 const PULSE: PulseRow[] = [
   { label: 'Bank rate',          value: '4.25%',  delta: '−25 bp',  trend: 'down', source: 'BoE' },
@@ -117,23 +119,22 @@ const PULSE: PulseRow[] = [
   { label: 'Avg weekly wage',    value: '£697',   delta: '+4.1%',   trend: 'up',   source: 'ONS' },
   { label: '£ / €',              value: '1.18',   delta: '+0.4%',   trend: 'up',   source: 'BoE' },
   { label: '£ / $',              value: '1.27',   delta: '−0.2%',   trend: 'down', source: 'BoE' },
-  { label: 'Skilled Worker min', value: '£41.7k', delta: '8 Apr 26',               source: 'gov.uk' },
+  { label: 'Skilled Worker min', value: '£41.7k', delta: 'Apr 26',                source: 'gov.uk' },
 ];
 
-/* ─────────────────────────────────────────────
-   INTENT ROWS
-───────────────────────────────────────────── */
+/* INTENTS */
 interface Intent {
-  id: string; title: string; desc: string;
+  id: string; title: string; desc: string; eyebrow: string;
   icon: typeof Briefcase;
   steps: { href: string; label: string }[];
-  accent: string;
+  accent: string; bg: string;
 }
 const INTENTS: Intent[] = [
   {
-    id: 'work', title: 'I want to work in the UK',
-    desc: 'Find a sponsor, check the salary threshold, see your take-home.',
-    icon: Briefcase, accent: TEAL,
+    id: 'work', eyebrow: 'Career path',
+    title: 'Work in the UK',
+    desc: 'Find a sponsor, check the salary threshold and project your take-home.',
+    icon: Briefcase, accent: '#00C4B4', bg: '#ECFEFE',
     steps: [
       { href: '/visa/skilled-worker',  label: 'Skilled Worker visa' },
       { href: '/tools/sponsor-search', label: 'Find a UK sponsor' },
@@ -142,9 +143,10 @@ const INTENTS: Intent[] = [
     ],
   },
   {
-    id: 'live', title: 'I want to buy or rent a UK home',
+    id: 'live', eyebrow: 'Property',
+    title: 'Buy or rent a UK home',
     desc: 'See what you can borrow, the SDLT bill and the council tax band.',
-    icon: HomeIcon, accent: '#C9A14A',
+    icon: HomeIcon, accent: '#C9A14A', bg: '#FEF8EC',
     steps: [
       { href: '/mortgage-affordability', label: 'Mortgage affordability' },
       { href: '/stamp-duty-calculator',  label: 'Stamp Duty' },
@@ -153,9 +155,10 @@ const INTENTS: Intent[] = [
     ],
   },
   {
-    id: 'local', title: 'I just moved — what is around me?',
+    id: 'local', eyebrow: 'Local lookup',
+    title: 'I just moved — what is around me?',
     desc: 'One postcode tells you the council, MP, NHS region, police force and more.',
-    icon: MapPin, accent: '#7C3AED',
+    icon: MapPin, accent: '#7C3AED', bg: '#F3EEFE',
     steps: [
       { href: '/postcode',          label: 'Postcode super-lookup' },
       { href: '/council-tax-band',  label: 'Council Tax for the area' },
@@ -163,9 +166,10 @@ const INTENTS: Intent[] = [
     ],
   },
   {
-    id: 'study', title: 'I want to study or stay after a degree',
+    id: 'study', eyebrow: 'Study & stay',
+    title: 'Study or stay after a degree',
     desc: 'Student route, Graduate route, and pathways toward settlement.',
-    icon: GraduationCap, accent: '#2563EB',
+    icon: GraduationCap, accent: '#2563EB', bg: '#EEF4FE',
     steps: [
       { href: '/visa/student',  label: 'Student visa' },
       { href: '/visa/graduate', label: 'Graduate route' },
@@ -176,24 +180,23 @@ const INTENTS: Intent[] = [
 ];
 
 const FEATURED_GUIDES = [
-  { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',       title: 'Skilled Worker salary thresholds 2026', read: '8 min', tag: 'Visas',  accent: '#E11D48' },
-  { href: '/blog/uk-family-visa-minimum-income-2026-what-counts',     title: 'Family visa £29,000 — what counts',     read: '7 min', tag: 'Visas',  accent: '#E11D48' },
-  { href: '/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026', title: 'How to find a sponsor licence holder',   read: '9 min', tag: 'Money',  accent: TEAL },
+  { href: '/blog/uk-skilled-worker-visa-salary-threshold-2026',       title: 'Skilled Worker salary thresholds 2026',  excerpt: 'New SOC-level rates, going-rate floors, and how the £41,700 baseline is calculated.', read: '8 min', tag: 'Visas',  accent: '#E11D48' },
+  { href: '/blog/uk-family-visa-minimum-income-2026-what-counts',     title: 'Family visa £29,000 — what counts',      excerpt: 'Which income sources count toward the new £29k threshold, plus the savings shortfall route.', read: '7 min', tag: 'Visas',  accent: '#E11D48' },
+  { href: '/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026', title: 'How to find a sponsor licence holder',   excerpt: 'Filter 126,530 sponsors by city and sector, plus what to ask before applying for a CoS.', read: '9 min', tag: 'Career', accent: TEAL },
 ];
 
-/* ─────────────────────────────────────────────
+/* ═════════════════════════════════════════════
    COMPONENT
-───────────────────────────────────────────── */
+═════════════════════════════════════════════ */
 export default function Home() {
   const router = useRouter();
-  const [query, setQuery]               = useState('');
-  const [active, setActive]             = useState(0);
-  const [focused, setFocused]           = useState(false);
+  const [query, setQuery]     = useState('');
+  const [active, setActive]   = useState(0);
+  const [focused, setFocused] = useState(false);
   const [activeCategory, setActiveCategory] = useState<CategoryId | 'all'>('all');
   const inputRef = useRef<HTMLInputElement>(null);
   const dirRef   = useRef<HTMLDivElement>(null);
 
-  /* ⌘K shortcut */
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -204,7 +207,6 @@ export default function Home() {
     return () => window.removeEventListener('keydown', fn);
   }, []);
 
-  /* Search filter */
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
@@ -230,23 +232,13 @@ export default function Home() {
     if (e.key === 'Escape')    { inputRef.current?.blur(); }
   };
 
-  /* Filtered tiles */
   const filteredTiles = useMemo(
-    () => activeCategory === 'all'
-      ? APP_TILES
-      : APP_TILES.filter((t) => t.category === activeCategory),
+    () => activeCategory === 'all' ? APP_TILES : APP_TILES.filter((t) => t.category === activeCategory),
     [activeCategory],
   );
 
-  /* Category tile counts */
   const catCounts = useMemo(() =>
     Object.fromEntries(CATEGORIES.map((c) => [c.id, APP_TILES.filter((t) => t.category === c.id).length])),
-    [],
-  );
-
-  /* Category soon counts */
-  const catSoonCounts = useMemo(() =>
-    Object.fromEntries(CATEGORIES.map((c) => [c.id, SOON_TOOLS.filter((t) => t.category === c.id).length])),
     [],
   );
 
@@ -255,511 +247,471 @@ export default function Home() {
     dirRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const activeCat = CATEGORIES.find((c) => c.id === activeCategory);
-
   return (
-    <div className="bg-white">
+    <div style={{ fontFamily: 'Inter, sans-serif', color: INK, background: '#FFFFFF' }}>
 
-      {/* ════════════════════════════════════════
-          HERO — command bar
-      ════════════════════════════════════════ */}
-      <section className="relative pt-[100px] md:pt-[120px] pb-10 md:pb-12">
-        {/* grid backdrop */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[420px] pointer-events-none -z-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, rgba(10,37,64,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,37,64,0.05) 1px, transparent 1px)',
-            backgroundSize: '56px 56px',
-            maskImage: 'linear-gradient(to bottom, black 0%, transparent 80%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 80%)',
-          }}
-        />
+      {/* ═══════════════════════════════════
+          1. EDITORIAL HERO (bright white)
+      ═══════════════════════════════════ */}
+      <section className="relative pt-[110px] md:pt-[130px] pb-12 md:pb-20 overflow-hidden bg-white">
+        {/* subtle dot grid backdrop */}
+        <div aria-hidden className="absolute inset-0 opacity-[0.35] pointer-events-none"
+             style={{
+               backgroundImage: 'radial-gradient(circle, #CBD5E1 1px, transparent 1px)',
+               backgroundSize: '28px 28px',
+               maskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
+               WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
+             }} />
 
-        <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
-          {/* Status pill */}
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <span
-              className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full bg-[#f3f4f5] text-[#45464d]"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              <span className="relative flex items-center justify-center w-1.5 h-1.5">
-                <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-60" />
-                <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              </span>
-              live &middot; {LIVE_COUNT} tools &middot; {TOTAL_SOON_COUNT}+ coming soon &middot; 8 categories
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10 text-center">
+
+          {/* badge */}
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-6 border"
+                style={{ background: '#F0FDFA', borderColor: '#99F6E4' }}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10B981' }} />
+            <span className="text-[11px] font-extrabold tracking-[0.16em] uppercase" style={{ color: '#047857', fontFamily: 'Inter, sans-serif' }}>
+              {LIVE_COUNT} apps live · {TOTAL_SOON_COUNT}+ launching soon
             </span>
-          </div>
+          </span>
 
-          <h1
-            className="text-center font-bold text-[#0A2540] tracking-[-0.025em]"
-            style={{
-              fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-              fontSize: 'clamp(1.85rem, 4.5vw, 3rem)',
-              lineHeight: '1.1',
-              textWrap: 'balance' as React.CSSProperties['textWrap'],
-            }}
-          >
-            What do you need to figure out today?
+          {/* mega headline */}
+          <h1 className="font-extrabold tracking-[-0.04em] leading-[0.95] mx-auto"
+              style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                       color: NAVY,
+                       fontSize: 'clamp(2.6rem, 6.2vw, 5.25rem)',
+                       maxWidth: '17ch' }}>
+            One toolkit for{' '}
+            <span className="relative whitespace-nowrap">
+              UK life
+              <span aria-hidden className="absolute left-0 right-0 -bottom-1.5 h-[8px] rounded-full"
+                    style={{ background: 'linear-gradient(90deg, #00C4B4 0%, #C9A14A 100%)', opacity: 0.85 }} />
+            </span>
           </h1>
 
-          <div className="relative mt-8 max-w-2xl mx-auto">
-            <div
-              className={`flex items-center gap-3 bg-white border rounded-2xl pl-5 pr-2 py-2 shadow-[0_8px_32px_-4px_rgba(16,26,54,0.10)] transition-all duration-150 ${
-                focused ? 'border-[#0A2540] shadow-[0_12px_36px_-4px_rgba(16,26,54,0.18)]' : 'border-[#E5E7EB]'
-              }`}
-            >
-              <Search className="w-5 h-5 text-[#76777e] flex-shrink-0" />
+          {/* subhead */}
+          <p className="mx-auto mt-7 text-[16px] md:text-[19px] leading-[1.65] font-normal"
+             style={{ color: '#475569', maxWidth: '640px' }}>
+            Visas, take-home pay, mortgages, postcodes, ULEZ, ILR.
+            Every essential UK calculator and information lookup in one
+            beautifully simple place — verified against gov.uk.
+          </p>
+
+          {/* SEARCH */}
+          <div className="relative mt-10 max-w-[680px] mx-auto">
+            <div className="relative flex items-center rounded-2xl border-2 transition-all"
+                 style={{ background: '#FFFFFF',
+                          borderColor: focused ? TEAL : '#E2E8F0',
+                          boxShadow: focused
+                            ? '0 0 0 6px rgba(0,196,180,0.12), 0 14px 40px -10px rgba(10,37,64,0.22)'
+                            : '0 4px 18px -4px rgba(10,37,64,0.08)' }}>
+              <Search className="w-5 h-5 ml-5 flex-shrink-0" style={{ color: focused ? TEAL : '#94A3B8' }} />
               <input
                 ref={inputRef}
-                type="text"
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setActive(0); }}
                 onFocus={() => setFocused(true)}
-                onBlur={() => setTimeout(() => setFocused(false), 150)}
+                onBlur={() => setTimeout(() => setFocused(false), 160)}
                 onKeyDown={onKey}
-                placeholder="Search tools, visas, guides — or paste a postcode"
-                className="flex-1 min-w-0 bg-transparent text-[15px] md:text-[16px] text-[#0A2540] placeholder:text-[#a5a6ad] outline-none py-2.5"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-                autoCapitalize="off" autoComplete="off" spellCheck={false}
+                placeholder="Search a tool, postcode, or visa…"
+                className="flex-1 px-4 py-4 md:py-[18px] bg-transparent outline-none text-[15.5px] md:text-[16px] font-medium placeholder:font-normal"
+                style={{ color: NAVY }}
               />
-              <kbd
-                className="hidden md:inline-flex items-center gap-1 text-[11px] font-semibold text-[#76777e] bg-[#f3f4f5] border border-[#E5E7EB] rounded-md px-1.5 py-1 flex-shrink-0"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-              >
+              <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 mr-3 rounded-md text-[11px] font-bold border"
+                    style={{ background: '#F8FAFC', borderColor: '#E2E8F0', color: '#64748B' }}>
                 <Command className="w-3 h-3" /> K
-              </kbd>
+              </span>
             </div>
 
-            {/* Results popover */}
-            {focused && results.length > 0 && (
-              <div
-                className="absolute left-0 right-0 top-full mt-2 bg-white border border-[#E5E7EB] rounded-xl shadow-[0_24px_48px_-8px_rgba(16,26,54,0.20)] overflow-hidden z-30"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-              >
-                <ul>
-                  {results.map((r, i) => (
-                    <li key={r.href}>
-                      <Link
-                        href={r.href}
-                        className={`flex items-center justify-between gap-3 px-4 py-2.5 text-[13.5px] ${i === active ? 'bg-[#f6f7f8]' : 'hover:bg-[#f6f7f8]'}`}
-                        onMouseEnter={() => setActive(i)}
-                      >
-                        <div className="min-w-0 flex-1">
-                          <div className="font-semibold text-[#0A2540] truncate">{r.title}</div>
-                          <div className="text-[12px] text-[#76777e] truncate">{r.hint}</div>
-                        </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-[10.5px] font-semibold uppercase tracking-[0.08em] text-[#76777e]">{r.group}</span>
-                          <CornerDownLeft className="w-3.5 h-3.5 text-[#76777e]" />
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <div className="px-4 py-2 text-[11px] text-[#76777e] bg-[#fafbfc] border-t border-[#E5E7EB] flex items-center justify-between">
-                  <span>&uarr;&darr; navigate &middot; &#9166; open &middot; esc close</span>
-                  <span className="tabular-nums">{results.length} result{results.length === 1 ? '' : 's'}</span>
-                </div>
-              </div>
-            )}
-
-            {/* Suggestion chips */}
-            {!query && (
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-[12.5px]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                <span className="text-[#76777e]">Try:</span>
-                {['take-home pay', 'mortgage', 'SW1A 1AA', 'skilled worker', 'sdlt'].map((s) => (
-                  <button
-                    key={s} type="button"
-                    onClick={() => { setQuery(s); setActive(0); inputRef.current?.focus(); }}
-                    className="px-2.5 py-1 rounded-full bg-[#f3f4f5] hover:bg-[#e7e9ec] text-[#0A2540] font-medium transition-colors"
-                  >
-                    {s}
-                  </button>
+            {/* dropdown */}
+            {focused && query && results.length > 0 && (
+              <div className="absolute left-0 right-0 mt-2 rounded-2xl bg-white border border-[#E2E8F0] overflow-hidden z-30 text-left"
+                   style={{ boxShadow: '0 24px 60px -12px rgba(10,37,64,0.22)' }}>
+                {results.map((r, i) => (
+                  <Link key={r.href} href={r.href} onMouseEnter={() => setActive(i)}
+                        className="flex items-center justify-between gap-3 px-5 py-3.5 transition-colors"
+                        style={{ background: i === active ? '#F0FDFA' : 'transparent' }}>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[13.5px] font-extrabold truncate" style={{ color: NAVY }}>{r.title}</div>
+                      <div className="text-[12px] font-normal truncate" style={{ color: '#64748B' }}>{r.hint}</div>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-[0.14em] px-2 py-1 rounded-md"
+                          style={{ background: '#0A2540', color: '#5EEAD4' }}>
+                      {r.group}
+                    </span>
+                    <CornerDownLeft className="w-3.5 h-3.5 text-[#94A3B8]" />
+                  </Link>
                 ))}
               </div>
             )}
+
+            {/* quick chips */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
+              <span className="text-[11.5px] font-extrabold uppercase tracking-[0.14em]" style={{ color: '#94A3B8' }}>Try:</span>
+              {['Take-home pay', 'SDLT', 'Skilled Worker', 'Postcode', 'ULEZ'].map(q => (
+                <button key={q} onClick={() => { setQuery(q); inputRef.current?.focus(); }}
+                        className="px-3 py-1.5 rounded-full text-[12.5px] font-semibold border transition-all hover:border-[#0A2540] hover:text-[#0A2540]"
+                        style={{ background: '#FFFFFF', borderColor: '#E2E8F0', color: '#475569' }}>
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* trust strip */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[12px] font-semibold" style={{ color: '#64748B' }}>
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" style={{ color: '#10B981' }} /> Verified against gov.uk</span>
+            <span className="inline-flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" style={{ color: GOLD }} /> No account needed</span>
+            <span className="inline-flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" style={{ color: TEAL }} /> Free forever</span>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          STICKY CATEGORY FILTER + STATS
-      ════════════════════════════════════════ */}
-      <div className="sticky top-[68px] z-20 bg-white/95 backdrop-blur-sm border-b border-[#E5E7EB]">
-        {/* Stats bar */}
-        <div className="border-b border-[#E5E7EB] bg-[#fafbfc] hidden md:block">
-          <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-2">
-            <div className="flex items-center gap-5 overflow-x-auto">
-              {[
-                { num: LIVE_COUNT,            label: 'live tools' },
-                { num: TOTAL_SOON_COUNT,       label: 'in development' },
-                { num: CATEGORIES.length,      label: 'categories' },
-                { num: '100%',                 label: 'free · no signup' },
-              ].map((s, i) => (
-                <div key={i} className="flex items-center gap-1.5 flex-shrink-0">
-                  {i > 0 && <span className="w-px h-3 bg-[#E5E7EB] mr-3" />}
-                  <span className="text-[12.5px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{s.num}</span>
-                  <span className="text-[12px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>{s.label}</span>
-                </div>
-              ))}
-            </div>
+      {/* ═══════════════════════════════════
+          2. PULSE MARQUEE (dark thin band)
+      ═══════════════════════════════════ */}
+      <section className="border-y" style={{ background: NAVY, borderColor: '#0F2D4D' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-3.5 flex items-center gap-6 overflow-x-auto">
+          <span className="flex-shrink-0 inline-flex items-center gap-2 text-[10.5px] font-extrabold uppercase tracking-[0.18em]"
+                style={{ color: '#5EEAD4' }}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: TEAL }} /> UK pulse
+          </span>
+          <div className="flex items-center gap-7 md:gap-10 flex-shrink-0">
+            {PULSE.map((p) => (
+              <div key={p.label} className="flex items-baseline gap-2.5 flex-shrink-0">
+                <span className="text-[11px] font-medium" style={{ color: 'rgba(255,255,255,0.55)' }}>{p.label}</span>
+                <span className="text-[14px] font-extrabold tabular-nums" style={{ color: '#FFFFFF', fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{p.value}</span>
+                {p.delta && (
+                  <span className="inline-flex items-center gap-0.5 text-[10.5px] font-bold"
+                        style={{ color: p.trend === 'up' ? '#34D399' : p.trend === 'down' ? '#FCA5A5' : '#CBD5E1' }}>
+                    {p.trend === 'up' && <TrendingUp className="w-2.5 h-2.5" />}
+                    {p.trend === 'down' && <TrendingDown className="w-2.5 h-2.5" />}
+                    {p.delta}
+                  </span>
+                )}
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Category pills */}
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-1 py-2.5 overflow-x-auto">
-            <button
-              onClick={() => selectCategory('all')}
-              className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors duration-100 ${
-                activeCategory === 'all' ? 'bg-[#0A2540] text-white' : 'text-[#45464d] hover:bg-[#f3f4f5]'
-              }`}
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              All
-              <span className={`text-[11px] font-normal ${activeCategory === 'all' ? 'opacity-60' : 'text-[#a5a6ad]'}`}>{LIVE_COUNT}</span>
-            </button>
-            {CATEGORIES.map((cat) => {
-              const CatIcon = cat.icon;
-              const count = catCounts[cat.id] ?? 0;
-              const isActive = activeCategory === cat.id;
+      {/* ═══════════════════════════════════
+          3. PATH GRID (cream, 4 large intent cards)
+      ═══════════════════════════════════ */}
+      <section className="py-16 md:py-24" style={{ background: '#FAFBFC' }}>
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <SectionHeader
+            eyebrow="Choose your path"
+            title="What brings you here?"
+            sub="Pick the journey that matches you. We'll line up the calculators, guides and lookups you'll need." />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mt-12">
+            {INTENTS.map((it) => {
+              const Icon = it.icon;
               return (
-                <button
-                  key={cat.id}
-                  onClick={() => selectCategory(cat.id)}
-                  className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors duration-100 ${
-                    isActive ? 'bg-[#0A2540] text-white' : 'text-[#45464d] hover:bg-[#f3f4f5]'
-                  }`}
-                  style={{ fontFamily: 'Inter, sans-serif' }}
-                >
-                  <CatIcon className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">{cat.label}</span>
-                  <span className="sm:hidden">{cat.label.split(' ')[0]}</span>
-                  <span className={`text-[11px] font-normal ${isActive ? 'opacity-60' : 'text-[#a5a6ad]'}`}>{count}</span>
-                </button>
+                <div key={it.id}
+                     className="group relative rounded-3xl border bg-white overflow-hidden transition-all hover:-translate-y-1"
+                     style={{ borderColor: '#E5E7EB', boxShadow: '0 2px 20px -6px rgba(10,37,64,0.08)' }}>
+                  {/* accent bar */}
+                  <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: it.accent }} />
+                  {/* tinted backdrop */}
+                  <div aria-hidden className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-50 pointer-events-none"
+                       style={{ background: it.bg, transform: 'translate(30%,-30%)' }} />
+
+                  <div className="relative p-7 md:p-8">
+                    <div className="flex items-start justify-between gap-4 mb-5">
+                      <span className="inline-flex w-12 h-12 rounded-2xl items-center justify-center"
+                            style={{ background: it.bg, color: it.accent }}>
+                        <Icon className="w-5 h-5" />
+                      </span>
+                      <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full"
+                            style={{ background: it.bg, color: it.accent }}>
+                        {it.eyebrow}
+                      </span>
+                    </div>
+
+                    <h3 className="text-[22px] md:text-[24px] font-extrabold tracking-[-0.02em] leading-[1.15] mb-2.5"
+                        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: NAVY }}>
+                      {it.title}
+                    </h3>
+                    <p className="text-[14px] font-normal leading-[1.65] mb-5" style={{ color: '#475569' }}>
+                      {it.desc}
+                    </p>
+
+                    <ul className="space-y-1.5">
+                      {it.steps.map(s => (
+                        <li key={s.href}>
+                          <Link href={s.href}
+                                className="group/step flex items-center justify-between gap-3 py-2.5 px-3 -mx-3 rounded-lg transition-colors hover:bg-[#F8FAFC]">
+                            <span className="text-[13.5px] font-bold" style={{ color: NAVY, fontFamily: 'Inter, sans-serif' }}>
+                              {s.label}
+                            </span>
+                            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/step:translate-x-0.5 group-hover/step:-translate-y-0.5"
+                                          style={{ color: it.accent }} />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ════════════════════════════════════════
-          TOOL DIRECTORY
-      ════════════════════════════════════════ */}
-      <section ref={dirRef} className="py-10 md:py-14">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      {/* ═══════════════════════════════════
+          4. BENTO DIRECTORY (white)
+      ═══════════════════════════════════ */}
+      <section ref={dirRef} className="py-16 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <SectionHeader
+            eyebrow="The directory"
+            title="Every calculator, every lookup"
+            sub={`${LIVE_COUNT} live tools, organised by what you're trying to do.`} />
 
+          {/* Filter chips */}
+          <div className="mt-10 flex flex-wrap gap-2">
+            <FilterChip active={activeCategory === 'all'} onClick={() => selectCategory('all')}
+                        label="All" count={APP_TILES.length} color={NAVY} />
+            {CATEGORIES.map((c) => (
+              <FilterChip key={c.id}
+                          active={activeCategory === c.id}
+                          onClick={() => selectCategory(c.id)}
+                          label={c.label}
+                          count={catCounts[c.id] ?? 0}
+                          color={c.color} />
+            ))}
+          </div>
+
+          {/* When showing all → bento layout */}
           {activeCategory === 'all' ? (
-            <div className="space-y-12">
-
-              {/* FEATURED */}
-              <div>
-                <SectionHeader icon={Star} label="Featured" accent={TEAL} />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {FEATURED_TILES.map((t) => <FeaturedCard key={t.href} t={t} />)}
-                </div>
-              </div>
-
-              {/* TRENDING */}
-              <div>
-                <SectionHeader icon={TrendingUp} label="Trending Now" accent="#F59E0B" />
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                  {TRENDING_TILES.map((t) => (
-                    <AppTileCard key={t.href} t={t} badge={{ text: 'Trending', color: '#F59E0B' }} />
-                  ))}
-                </div>
-              </div>
-
-              {/* RECENTLY ADDED */}
-              <div>
-                <SectionHeader icon={Sparkles} label="Recently Added" accent={TEAL} />
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                  {NEW_TILES.map((t) => (
-                    <AppTileCard key={t.href} t={t} badge={{ text: 'New', color: TEAL }} />
-                  ))}
-                </div>
-              </div>
-
-              {/* BROWSE ALL — grouped by category */}
-              <div>
-                <SectionHeader icon={Wallet} label={`All ${LIVE_COUNT} Tools`} />
-                <div className="space-y-8">
-                  {CATEGORIES.map((cat) => {
-                    const tiles = APP_TILES.filter((t) => t.category === cat.id);
-                    if (!tiles.length) return null;
-                    const CatIcon = cat.icon;
-                    return (
-                      <div key={cat.id}>
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-2">
-                            <span className="inline-flex w-6 h-6 rounded-md items-center justify-center" style={{ background: `${cat.color}18`, color: cat.color }}>
-                              <CatIcon className="w-3.5 h-3.5" />
-                            </span>
-                            <span className="text-[12.5px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{cat.label}</span>
-                            <span className="text-[11px] text-[#a5a6ad]" style={{ fontFamily: 'Inter, sans-serif' }}>{tiles.length} tools</span>
-                          </div>
-                          <button
-                            onClick={() => selectCategory(cat.id)}
-                            className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#0A2540] hover:underline"
-                            style={{ fontFamily: 'Inter, sans-serif' }}
-                          >
-                            View category <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
-                          {tiles.map((t) => <AppTileCard key={t.href} t={t} compact />)}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* ── CATEGORY FILTERED VIEW ── */
-            <div>
-              {/* Category header */}
-              {activeCat && (
-                <div className="flex items-start gap-4 mb-8 pb-6 border-b border-[#E5E7EB]">
-                  <span
-                    className="inline-flex w-14 h-14 rounded-2xl items-center justify-center flex-shrink-0"
-                    style={{ background: `${activeCat.color}14`, color: activeCat.color }}
-                  >
-                    <activeCat.icon className="w-7 h-7" />
-                  </span>
-                  <div>
-                    <h2
-                      className="font-bold text-[#0A2540] tracking-[-0.01em]"
-                      style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.4rem, 3vw, 1.875rem)' }}
-                    >
-                      {activeCat.label}
-                    </h2>
-                    <p className="mt-1 text-[14px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                      {activeCat.description} &middot; <strong>{filteredTiles.length}</strong> live tools
-                      {catSoonCounts[activeCategory] ? ` · ${catSoonCounts[activeCategory]} coming soon` : ''}
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {/* Tools grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-10">
-                {filteredTiles.map((t) => (
-                  <AppTileCard
-                    key={t.href} t={t}
-                    badge={t.status === 'new' ? { text: 'New', color: TEAL } : undefined}
-                  />
+            <>
+              {/* FEATURED — large bento */}
+              <SubHeader text="Featured tools" iconColor={GOLD} icon={Star} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+                {FEATURED_TILES.slice(0, 3).map((t) => (
+                  <FeatureTile key={t.href} tile={t} />
                 ))}
               </div>
 
-              {/* Category coming-soon preview */}
-              {catSoonCounts[activeCategory] > 0 && (
-                <div>
-                  <SectionHeader icon={Clock} label={`Coming Soon in ${activeCat?.label}`} accent="#a5a6ad" />
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {SOON_TOOLS.filter((t) => t.category === activeCategory).slice(0, 8).map((t) => (
-                      <SoonCard key={t.label} t={t} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Back to all */}
-              <div className="mt-8 pt-6 border-t border-[#E5E7EB]">
-                <button
-                  onClick={() => selectCategory('all')}
-                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#76777e] hover:text-[#0A2540] transition-colors"
-                  style={{ fontFamily: 'Inter, sans-serif' }}
-                >
-                  &larr; View all {LIVE_COUNT} tools
-                </button>
+              {/* TRENDING + NEW combined as smaller cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                <TileColumn title="Trending now" icon={TrendingUp} iconColor="#E11D48" tiles={TRENDING_TILES.slice(0, 5)} />
+                <TileColumn title="Recently added" icon={Sparkles}  iconColor={TEAL}    tiles={NEW_TILES.slice(0, 5)} />
               </div>
+
+              {/* BROWSE ALL — grouped by category */}
+              <SubHeader text="Browse by category" iconColor={NAVY} icon={BookOpen} />
+              <div className="space-y-10">
+                {CATEGORIES.map((cat) => {
+                  const tiles = APP_TILES.filter((t) => t.category === cat.id);
+                  if (!tiles.length) return null;
+                  return (
+                    <CategorySection key={cat.id} category={cat} tiles={tiles} />
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            // When filtered to a single category
+            <div className="mt-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {filteredTiles.map((t) => <SmallTile key={t.href} tile={t} />)}
+              </div>
+              <button onClick={() => selectCategory('all')}
+                      className="mt-8 inline-flex items-center gap-2 text-[13px] font-bold hover:gap-3 transition-all"
+                      style={{ color: TEAL }}>
+                <ArrowRight className="w-3.5 h-3.5 rotate-180" /> Back to all categories
+              </button>
             </div>
           )}
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          COMING SOON — full showcase
-      ════════════════════════════════════════ */}
-      <section className="py-14 md:py-20 border-t border-[#E5E7EB] bg-[#fafbfc]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      {/* ═══════════════════════════════════
+          5. CATEGORY ATLAS (navy band)
+      ═══════════════════════════════════ */}
+      <section className="py-16 md:py-24 relative overflow-hidden"
+               style={{ background: 'linear-gradient(135deg, #06192E 0%, #0A2540 60%, #0D3060 100%)' }}>
+        <div aria-hidden className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-15 blur-3xl"
+             style={{ background: 'radial-gradient(circle, #00C4B4 0%, transparent 60%)' }} />
+        <div aria-hidden className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full opacity-10 blur-3xl"
+             style={{ background: 'radial-gradient(circle, #C9A14A 0%, transparent 60%)' }} />
 
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10">
+          <SectionHeader
+            eyebrow="Category atlas"
+            title="Jump straight in"
+            sub="Eight pillars of UK life — pick a category to see every tool inside."
+            dark />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-12">
+            {CATEGORIES.map((c) => {
+              const Icon = c.icon;
+              const count = catCounts[c.id] ?? 0;
+              return (
+                <button key={c.id} onClick={() => selectCategory(c.id)}
+                        className="group text-left p-5 rounded-2xl border transition-all hover:-translate-y-0.5"
+                        style={{ background: 'rgba(255,255,255,0.04)',
+                                 borderColor: 'rgba(255,255,255,0.10)',
+                                 boxShadow: '0 1px 0 0 rgba(255,255,255,0.04) inset' }}>
+                  <span className="inline-flex w-11 h-11 rounded-xl items-center justify-center mb-4"
+                        style={{ background: `${c.color}22`, color: c.color }}>
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <div className="text-[15px] font-extrabold text-white leading-tight mb-1"
+                       style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                    {c.label}
+                  </div>
+                  <div className="text-[12px] font-normal mb-3" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                    {c.description}
+                  </div>
+                  <div className="flex items-center justify-between pt-3 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                    <span className="text-[11px] font-extrabold uppercase tracking-[0.14em]" style={{ color: c.color }}>
+                      {count} tools
+                    </span>
+                    <ChevronRight className="w-3.5 h-3.5 text-white/40 group-hover:text-white/80 group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════
+          6. JOURNAL (cream, magazine style)
+      ═══════════════════════════════════ */}
+      <section className="py-16 md:py-24" style={{ background: '#FAFBFC' }}>
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#a5a6ad] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-                <Clock className="inline w-3 h-3 mr-1 -mt-0.5" />
-                What&rsquo;s coming next
-              </p>
-              <h2
-                className="font-bold text-[#0A2540] tracking-[-0.015em]"
-                style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.4rem, 3vw, 1.875rem)', lineHeight: '1.15' }}
-              >
-                {TOTAL_SOON_COUNT}+ tools in development.
-              </h2>
-              <p className="mt-2 text-[14px] text-[#76777e] max-w-xl" style={{ fontFamily: 'Inter, sans-serif' }}>
-                New calculators ship every week. The 16 below launch next &mdash; {PLANNED_TOOLS.length} more are planned across all categories.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-[13px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-              <span className="w-2 h-2 rounded-full bg-amber-400" />
-              {SOON_TOOLS.length} launching next
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
-            {SOON_SHOWCASE.map((t) => <SoonCard key={t.label} t={t} />)}
-          </div>
-
-          <div className="text-center py-6 border-2 border-dashed border-[#E5E7EB] rounded-xl">
-            <p className="text-[13px] text-[#a5a6ad]" style={{ fontFamily: 'Inter, sans-serif' }}>
-              <span className="font-semibold text-[#76777e]">+{PLANNED_TOOLS.length} more</span> planned across all categories
-              &nbsp;&middot;&nbsp; Benefits, property, energy, retirement, family, international &amp; more
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          UK PULSE
-      ════════════════════════════════════════ */}
-      <section className="py-12 md:py-16 border-t border-[#E5E7EB]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-5">
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#76777e]"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              <Activity className="inline w-3 h-3 mr-1 -mt-0.5" />
-              UK Pulse
-            </p>
-            <span className="text-[11px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>20 May &middot; refreshed daily</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-            {PULSE.map((p) => (
-              <PulseCard key={p.label} p={p} />
-            ))}
-          </div>
-          <p className="mt-4 text-[11px] text-[#a5a6ad]" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Sources: Bank of England, ONS, gov.uk.
-          </p>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          INTENT ROWS
-      ════════════════════════════════════════ */}
-      <section className="py-14 md:py-20 border-y border-[#E5E7EB] bg-[#fafbfc]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="mb-8 md:mb-10">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>Quick paths</p>
-            <h2
-              className="font-bold text-[#0A2540] tracking-[-0.015em]"
-              style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2rem)', lineHeight: '1.15' }}
-            >
-              Or pick what brought you here.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            {INTENTS.map((intent) => <IntentCard key={intent.id} intent={intent} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          FEATURED GUIDES
-      ════════════════════════════════════════ */}
-      <section className="py-14 md:py-20">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-                <Newspaper className="inline w-3 h-3 mr-1 -mt-0.5" />
-                From the desk
-              </p>
-              <h2
-                className="font-bold text-[#0A2540] tracking-[-0.015em]"
-                style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2rem)', lineHeight: '1.15' }}
-              >
-                Recent guides worth reading.
+              <span className="text-[11px] font-extrabold uppercase tracking-[0.18em]" style={{ color: GOLD }}>The journal</span>
+              <h2 className="text-[32px] md:text-[42px] font-extrabold tracking-[-0.03em] leading-[1.06] mt-2"
+                  style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: NAVY }}>
+                Latest guides
               </h2>
             </div>
-            <Link href="/blog" className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#0A2540] hover:underline" style={{ fontFamily: 'Inter, sans-serif' }}>
-              All articles <ArrowRight className="w-4 h-4" />
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-[13px] font-bold hover:gap-2.5 transition-all" style={{ color: NAVY }}>
+              All articles <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {FEATURED_GUIDES.map((g) => (
-              <Link
-                key={g.href} href={g.href}
-                className="group block bg-white border border-[#E5E7EB] rounded-xl p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_12px_36px_-8px_rgba(16,26,54,0.15)] transition-all duration-150"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-[10.5px] font-semibold uppercase tracking-[0.1em] px-2 py-0.5 rounded-md" style={{ background: `${g.accent}14`, color: g.accent, fontFamily: 'Inter, sans-serif' }}>
+              <Link key={g.href} href={g.href}
+                    className="group block rounded-3xl bg-white border overflow-hidden transition-all hover:-translate-y-1"
+                    style={{ borderColor: '#E5E7EB', boxShadow: '0 2px 14px -4px rgba(10,37,64,0.06)' }}>
+                {/* visual header band */}
+                <div className="h-28 relative overflow-hidden"
+                     style={{ background: `linear-gradient(135deg, ${g.accent}18 0%, ${g.accent}08 100%)` }}>
+                  <div aria-hidden className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-2xl opacity-50"
+                       style={{ background: g.accent }} />
+                  <span className="absolute top-4 left-5 text-[10px] font-extrabold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full"
+                        style={{ background: 'white', color: g.accent, boxShadow: '0 1px 4px rgba(10,37,64,0.06)' }}>
                     {g.tag}
                   </span>
-                  <span className="text-[11px] text-[#76777e]" style={{ fontFamily: 'Inter, sans-serif' }}>{g.read}</span>
                 </div>
-                <h3 className="font-bold text-[#0A2540] text-[16px] md:text-[17px] leading-[1.3] tracking-[-0.005em]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-                  {g.title}
-                </h3>
-                <span className="mt-4 inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#0A2540] group-hover:gap-2 transition-[gap] duration-100" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  Read article <ArrowRight className="w-3 h-3" />
-                </span>
+                <div className="p-6">
+                  <h3 className="text-[17px] font-extrabold tracking-[-0.015em] leading-[1.25] mb-2.5"
+                      style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: NAVY }}>
+                    {g.title}
+                  </h3>
+                  <p className="text-[13.5px] font-normal leading-[1.62] mb-4" style={{ color: '#475569' }}>
+                    {g.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-[#F3F4F6]">
+                    <span className="inline-flex items-center gap-1.5 text-[11.5px] font-bold" style={{ color: '#64748B' }}>
+                      <Clock className="w-3 h-3" /> {g.read} read
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[12px] font-extrabold transition-all group-hover:gap-2" style={{ color: g.accent }}>
+                      Read <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          FOOTER CTA
-      ════════════════════════════════════════ */}
-      <section className="py-14 md:py-16 bg-[#0A2540] text-white relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.10] pointer-events-none"
-          style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)',
-            backgroundSize: '56px 56px',
-          }}
-        />
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-            <div className="md:col-span-2">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#5EEAD9] mb-3" style={{ fontFamily: 'Inter, sans-serif' }}>
-                <Sparkles className="inline w-3 h-3 mr-1 -mt-0.5" />
-                Built differently
-              </p>
-              <h2
-                className="font-bold tracking-[-0.015em] leading-[1.15]"
-                style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}
-              >
-                Every figure on UKDesk is verified line-by-line against the official source.
+      {/* ═══════════════════════════════════
+          7. COMING SOON (dotted ghost tiles)
+      ═══════════════════════════════════ */}
+      <section className="py-16 md:py-20 relative bg-white">
+        <div aria-hidden className="absolute inset-0 opacity-[0.4] pointer-events-none"
+             style={{
+               backgroundImage: 'radial-gradient(circle, #E2E8F0 1px, transparent 1px)',
+               backgroundSize: '22px 22px',
+             }} />
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+            <div>
+              <span className="text-[11px] font-extrabold uppercase tracking-[0.18em]" style={{ color: '#94A3B8' }}>Roadmap</span>
+              <h2 className="text-[28px] md:text-[36px] font-extrabold tracking-[-0.025em] leading-[1.1] mt-2"
+                  style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: NAVY }}>
+                {TOTAL_SOON_COUNT}+ more tools landing soon
               </h2>
-              <p className="mt-4 text-[14.5px] md:text-[15px] text-[#bcc5e9] leading-[1.6] max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Tax bands from HMRC. Visa fees from gov.uk. Postcode data from postcodes.io and the UK Parliament Members API.
-                Council Tax ratios from the statutory instrument. Mortgage stress test from FCA MCOB. No paid placements, no email harvesting, no signup wall.
-              </p>
             </div>
-            <div className="flex flex-col gap-2 md:items-end">
-              <Link
-                href="/tools"
-                className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-[#0A2540] bg-[#5EEAD9] hover:bg-[#7BEFE0] px-5 py-3 rounded-lg active:scale-[0.98] transition-all duration-100"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-              >
-                Open all tools <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-white bg-white/[0.08] border border-white/20 hover:bg-white/[0.14] px-5 py-3 rounded-lg transition-colors"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-              >
-                How we source data
-              </Link>
-            </div>
+            <span className="text-[12px] font-semibold" style={{ color: '#64748B' }}>
+              Building in public · ship every fortnight
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {SOON_SHOWCASE.slice(0, 12).map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div key={i} className="p-4 rounded-2xl border bg-white/80 backdrop-blur-sm"
+                     style={{ borderColor: '#E5E7EB', borderStyle: 'dashed' }}>
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center"
+                          style={{ background: `${s.accent}14`, color: s.accent }}>
+                      <Icon className="w-4 h-4" />
+                    </span>
+                    <span className="text-[9.5px] font-extrabold uppercase tracking-[0.14em] px-2 py-0.5 rounded-full"
+                          style={{ background: '#FEF3C7', color: '#92400E' }}>
+                      Soon
+                    </span>
+                  </div>
+                  <div className="text-[13.5px] font-extrabold leading-tight mb-1" style={{ color: NAVY, fontFamily: 'Inter, sans-serif' }}>
+                    {s.label}
+                  </div>
+                  <div className="text-[11.5px] font-normal leading-snug" style={{ color: '#64748B' }}>
+                    {s.hint}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════
+          8. FOOTER CTA (solid teal-navy)
+      ═══════════════════════════════════ */}
+      <section className="relative overflow-hidden" style={{ background: NAVY }}>
+        <div aria-hidden className="absolute inset-0 opacity-30"
+             style={{ background: 'radial-gradient(ellipse 60% 60% at 30% 50%, rgba(0,196,180,0.3), transparent), radial-gradient(ellipse 50% 50% at 80% 80%, rgba(201,161,74,0.2), transparent)' }} />
+        <div className="relative max-w-[1100px] mx-auto px-5 md:px-10 py-16 md:py-24 text-center">
+          <h2 className="text-[34px] md:text-[52px] font-extrabold tracking-[-0.035em] leading-[1.04] text-white max-w-3xl mx-auto"
+              style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+            Built for everyone living, working or moving to the UK.
+          </h2>
+          <p className="mt-6 text-[15.5px] md:text-[17px] font-normal leading-[1.65] mx-auto" style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px' }}>
+            No accounts. No paywalls. No tracking. Just calculators that work and information that&apos;s correct.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/visa-types"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-extrabold transition-transform hover:-translate-y-0.5"
+                  style={{ background: TEAL, color: NAVY, boxShadow: '0 12px 30px -8px rgba(0,196,180,0.55)' }}>
+              Explore visa routes <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/tools"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-extrabold border-2 transition-colors hover:bg-white/5"
+                  style={{ borderColor: 'rgba(255,255,255,0.25)', color: 'white' }}>
+              Browse the toolkit
+            </Link>
           </div>
         </div>
       </section>
@@ -767,78 +719,91 @@ export default function Home() {
   );
 }
 
-/* ─────────────────────────────────────────────
+/* ═════════════════════════════════════════════
    SUB-COMPONENTS
-───────────────────────────────────────────── */
+═════════════════════════════════════════════ */
 
-function SectionHeader({ icon: Icon, label, accent }: { icon: typeof Star; label: string; accent?: string }) {
+function SectionHeader({
+  eyebrow, title, sub, dark = false,
+}: { eyebrow: string; title: string; sub: string; dark?: boolean }) {
   return (
-    <div className="flex items-center gap-2 mb-4">
-      <Icon className="w-3.5 h-3.5" style={{ color: accent ?? '#76777e' }} />
-      <h2
-        className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#76777e]"
-        style={{ fontFamily: 'Inter, sans-serif', color: accent ? undefined : '#76777e' }}
-      >
-        {label}
+    <div className="max-w-2xl">
+      <span className="text-[11px] font-extrabold uppercase tracking-[0.18em]"
+            style={{ color: dark ? '#5EEAD4' : TEAL }}>
+        {eyebrow}
+      </span>
+      <h2 className="text-[32px] md:text-[42px] font-extrabold tracking-[-0.03em] leading-[1.06] mt-2"
+          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
+                   color: dark ? '#FFFFFF' : NAVY }}>
+        {title}
       </h2>
+      <p className="mt-4 text-[15.5px] font-normal leading-[1.6]"
+         style={{ color: dark ? 'rgba(255,255,255,0.7)' : '#64748B' }}>
+        {sub}
+      </p>
     </div>
   );
 }
 
-function FeaturedCard({ t }: { t: AppTile }) {
-  const Icon = t.icon;
+function SubHeader({ text, icon: Icon, iconColor }: { text: string; icon: typeof Star; iconColor: string }) {
   return (
-    <Link
-      href={t.href}
-      className="group relative bg-white border border-[#E5E7EB] rounded-2xl p-5 md:p-6 hover:-translate-y-1 transition-all duration-200 flex flex-col gap-4 min-h-[190px] overflow-hidden"
-      style={{
-        boxShadow: '0 1px 4px rgba(16,26,54,0.06)',
-      }}
-      onMouseOver={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 44px -8px rgba(16,26,54,0.18), 0 0 0 1.5px rgba(10,37,64,0.14)'; }}
-      onMouseOut={(e)  => { (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 4px rgba(16,26,54,0.06)'; }}
-    >
-      {/* Subtle accent gradient wash */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none rounded-2xl"
-        style={{ background: `linear-gradient(145deg, ${t.accent}08 0%, transparent 60%)` }}
-      />
-      {/* Always-visible thin accent bar at top */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[3px] rounded-t-2xl"
-        style={{ background: `linear-gradient(90deg, ${t.accent} 0%, ${t.accent}60 100%)`, opacity: 0.55 }}
-      />
-      <div className="flex items-start justify-between relative z-10">
-        <span
-          className="inline-flex w-12 h-12 rounded-xl items-center justify-center flex-shrink-0"
-          style={{
-            background: `linear-gradient(135deg, ${t.accent}22 0%, ${t.accent}0e 100%)`,
-            color: t.accent,
-            boxShadow: `0 2px 8px ${t.accent}28`,
-          }}
-        >
-          <Icon className="w-6 h-6" />
-        </span>
-        <span
-          className="inline-flex items-center gap-1 text-[10.5px] font-bold px-2 py-0.5 rounded-full"
-          style={{ background: '#FFF7ED', color: '#C2780F', fontFamily: 'Inter, sans-serif' }}
-        >
-          <TrendingUp className="w-2.5 h-2.5" />
-          Popular
-        </span>
-      </div>
-      <div className="relative z-10">
-        <h3 className="font-bold text-[#0A2540] text-[16px] md:text-[17px] tracking-[-0.01em] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-          {t.label}
-        </h3>
-        <p className="mt-1 text-[13px] text-[#76777e] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
-      </div>
-      <div className="mt-auto relative z-10 flex items-center justify-between">
-        <span
-          className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold group-hover:gap-2.5 transition-[gap] duration-150"
-          style={{ color: t.accent, fontFamily: 'Inter, sans-serif' }}
-        >
+    <div className="flex items-center gap-2.5 mt-12 mb-5">
+      <span className="inline-flex w-7 h-7 rounded-lg items-center justify-center"
+            style={{ background: `${iconColor}15`, color: iconColor }}>
+        <Icon className="w-3.5 h-3.5" />
+      </span>
+      <h3 className="text-[14px] font-extrabold uppercase tracking-[0.14em]" style={{ color: NAVY }}>
+        {text}
+      </h3>
+      <span className="flex-1 h-px" style={{ background: '#E5E7EB' }} />
+    </div>
+  );
+}
+
+function FilterChip({
+  active, onClick, label, count, color,
+}: { active: boolean; onClick: () => void; label: string; count: number; color: string }) {
+  return (
+    <button onClick={onClick}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-bold border-2 transition-all"
+            style={active
+              ? { background: color, borderColor: color, color: '#FFFFFF' }
+              : { background: '#FFFFFF', borderColor: '#E2E8F0', color: '#475569' }}>
+      {label}
+      <span className="text-[11px] tabular-nums font-extrabold opacity-70">{count}</span>
+    </button>
+  );
+}
+
+function FeatureTile({ tile }: { tile: typeof APP_TILES[number] }) {
+  const Icon = tile.icon;
+  return (
+    <Link href={tile.href}
+          className="group relative block rounded-3xl border bg-white overflow-hidden transition-all hover:-translate-y-1"
+          style={{ borderColor: '#E5E7EB', boxShadow: '0 2px 20px -6px rgba(10,37,64,0.08)' }}>
+      <div className="absolute top-0 left-0 right-0 h-1" style={{ background: tile.accent }} />
+      <div aria-hidden className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-15 blur-3xl pointer-events-none"
+           style={{ background: tile.accent }} />
+      <div className="relative p-6">
+        <div className="flex items-start justify-between mb-5">
+          <span className="inline-flex w-12 h-12 rounded-2xl items-center justify-center"
+                style={{ background: `${tile.accent}18`, color: tile.accent }}>
+            <Icon className="w-5 h-5" />
+          </span>
+          <span className="text-[9.5px] font-extrabold uppercase tracking-[0.18em] px-2 py-1 rounded-full"
+                style={{ background: '#FEF3C7', color: '#92400E' }}>
+            ★ Featured
+          </span>
+        </div>
+        <h4 className="text-[17px] font-extrabold tracking-[-0.015em] leading-tight mb-1.5"
+            style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: NAVY }}>
+          {tile.label}
+        </h4>
+        <p className="text-[13px] font-normal leading-[1.55] mb-4" style={{ color: '#64748B' }}>
+          {tile.hint}
+        </p>
+        <span className="inline-flex items-center gap-1 text-[12.5px] font-extrabold group-hover:gap-2 transition-all"
+              style={{ color: tile.accent }}>
           Open tool <ArrowRight className="w-3.5 h-3.5" />
         </span>
       </div>
@@ -846,143 +811,79 @@ function FeaturedCard({ t }: { t: AppTile }) {
   );
 }
 
-function AppTileCard({ t, badge, compact }: { t: AppTile; badge?: { text: string; color: string }; compact?: boolean }) {
-  const Icon = t.icon;
+function TileColumn({
+  title, icon: Icon, iconColor, tiles,
+}: { title: string; icon: typeof Star; iconColor: string; tiles: typeof APP_TILES }) {
   return (
-    <Link
-      href={t.href}
-      className={`group relative bg-white border border-[#EAECF0] rounded-xl transition-all duration-200 flex flex-col gap-2.5 ${
-        compact ? 'p-3 md:p-4 min-h-[120px]' : 'p-4 md:p-5 min-h-[148px]'
-      }`}
-      style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.05)' }}
-      onMouseOver={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px -4px rgba(16,26,54,0.14), 0 0 0 1.5px rgba(10,37,64,0.12)';
-        (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-      }}
-      onMouseOut={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.05)';
-        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-      }}
-    >
-      {/* Thin left accent strip */}
-      <span
-        aria-hidden="true"
-        className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        style={{ background: t.accent }}
-      />
-      <div className="flex items-center justify-between">
-        <span
-          className={`inline-flex rounded-xl items-center justify-center ${compact ? 'w-9 h-9' : 'w-11 h-11'}`}
-          style={{
-            background: `linear-gradient(135deg, ${t.accent}1e 0%, ${t.accent}0a 100%)`,
-            color: t.accent,
-          }}
-        >
-          <Icon className={compact ? 'w-4 h-4' : 'w-5 h-5'} />
+    <div>
+      <div className="flex items-center gap-2.5 mb-4">
+        <span className="inline-flex w-7 h-7 rounded-lg items-center justify-center"
+              style={{ background: `${iconColor}15`, color: iconColor }}>
+          <Icon className="w-3.5 h-3.5" />
         </span>
-        {badge && (
-          <span
-            className="text-[9.5px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full"
-            style={{ background: `${badge.color}14`, color: badge.color, fontFamily: 'Inter, sans-serif' }}
-          >
-            {badge.text}
-          </span>
-        )}
-        {!badge && t.kbd && (
-          <kbd className="hidden md:inline-flex items-center text-[10px] font-semibold text-[#76777e] bg-[#f6f7f8] border border-[#E5E7EB] rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity" style={{ fontFamily: 'Inter, sans-serif' }}>
-            {t.kbd}
-          </kbd>
-        )}
+        <h3 className="text-[14px] font-extrabold uppercase tracking-[0.14em]" style={{ color: NAVY }}>{title}</h3>
       </div>
-      <div>
-        <h3 className={`font-bold text-[#0A2540] tracking-[-0.005em] leading-tight ${compact ? 'text-[13px] md:text-[13.5px]' : 'text-[14.5px] md:text-[15px]'}`} style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-          {t.label}
-        </h3>
-        <p className="mt-0.5 text-[11.5px] text-[#76777e] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
+      <div className="space-y-2">
+        {tiles.map((t) => <SmallTile key={t.href} tile={t} />)}
       </div>
+    </div>
+  );
+}
+
+function SmallTile({ tile }: { tile: typeof APP_TILES[number] }) {
+  const Icon = tile.icon;
+  return (
+    <Link href={tile.href}
+          className="group flex items-center gap-3.5 p-3.5 rounded-xl bg-white border transition-all hover:border-[#0A2540] hover:shadow-[0_4px_14px_-4px_rgba(10,37,64,0.10)]"
+          style={{ borderColor: '#E5E7EB' }}>
+      <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center flex-shrink-0"
+            style={{ background: `${tile.accent}14`, color: tile.accent }}>
+        <Icon className="w-4 h-4" />
+      </span>
+      <div className="flex-1 min-w-0">
+        <div className="text-[13.5px] font-extrabold leading-tight" style={{ color: NAVY, fontFamily: 'Inter, sans-serif' }}>
+          {tile.label}
+        </div>
+        <div className="text-[11.5px] font-normal leading-snug truncate mt-0.5" style={{ color: '#64748B' }}>
+          {tile.hint}
+        </div>
+      </div>
+      {tile.status === 'new' && (
+        <span className="text-[9px] font-extrabold uppercase tracking-[0.14em] px-1.5 py-0.5 rounded"
+              style={{ background: '#ECFEFE', color: '#0F766E' }}>New</span>
+      )}
+      <ArrowUpRight className="w-3.5 h-3.5 flex-shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ color: '#94A3B8' }} />
     </Link>
   );
 }
 
-function SoonCard({ t }: { t: SoonTool }) {
-  const Icon = t.icon;
+function CategorySection({
+  category, tiles,
+}: { category: typeof CATEGORIES[number]; tiles: typeof APP_TILES }) {
+  const Icon = category.icon;
   return (
-    <div
-      className="relative bg-white border border-dashed border-[#D1D5DB] rounded-xl p-4 flex flex-col gap-2.5 min-h-[120px] overflow-hidden"
-      style={{ opacity: 0.72 }}
-    >
-      {/* Subtle patterned overlay */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none rounded-xl"
-        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0)', backgroundSize: '10px 10px' }}
-      />
-      <div className="flex items-center justify-between relative z-10">
-        <span
-          className="inline-flex w-9 h-9 rounded-lg items-center justify-center"
-          style={{ background: '#F3F4F6', color: '#9CA3AF' }}
-        >
-          <Icon className="w-4 h-4" />
-        </span>
-        <span
-          className="text-[9px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
-          style={{ background: '#F3F4F6', color: '#9CA3AF', fontFamily: 'Inter, sans-serif' }}
-        >
-          Coming soon
-        </span>
-      </div>
-      <div className="relative z-10">
-        <h3 className="font-semibold text-[13px] text-[#6B7280] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-          {t.label}
-        </h3>
-        <p className="mt-0.5 text-[11.5px] text-[#9CA3AF] leading-snug" style={{ fontFamily: 'Inter, sans-serif' }}>{t.hint}</p>
-      </div>
-    </div>
-  );
-}
-
-function PulseCard({ p }: { p: PulseRow }) {
-  const TrendIcon = p.trend === 'up' ? TrendingUp : p.trend === 'down' ? TrendingDown : null;
-  const trendColor = p.trend === 'up' ? '#10B981' : p.trend === 'down' ? '#E11D48' : '#76777e';
-  return (
-    <div className="bg-white border border-[#E5E7EB] rounded-xl px-4 py-3 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.04)]">
-      <div className="text-[11px] text-[#a5a6ad] uppercase tracking-[0.06em] mb-1" style={{ fontFamily: 'Inter, sans-serif' }}>{p.source} · {p.label}</div>
-      <div className="font-bold text-[#0A2540] text-[18px] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{p.value}</div>
-      {p.delta && (
-        <div className="inline-flex items-center gap-0.5 text-[10.5px] font-semibold tabular-nums mt-0.5" style={{ color: trendColor, fontFamily: 'Inter, sans-serif' }}>
-          {TrendIcon && <TrendIcon className="w-2.5 h-2.5" />}
-          {p.delta}
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex w-9 h-9 rounded-xl items-center justify-center"
+                style={{ background: `${category.color}15`, color: category.color }}>
+            <Icon className="w-4 h-4" />
+          </span>
+          <div>
+            <div className="text-[15px] font-extrabold leading-tight"
+                 style={{ color: NAVY, fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+              {category.label}
+            </div>
+            <div className="text-[12px] font-normal" style={{ color: '#64748B' }}>{category.description}</div>
+          </div>
         </div>
-      )}
-    </div>
-  );
-}
-
-function IntentCard({ intent }: { intent: Intent }) {
-  const Icon = intent.icon;
-  return (
-    <div className="group bg-white border border-[#E5E7EB] rounded-xl p-6 md:p-7 hover:border-[#0A2540] transition-colors duration-150 shadow-[0_4px_24px_-6px_rgba(16,26,54,0.05)]">
-      <div className="flex items-start gap-4">
-        <span className="inline-flex w-12 h-12 rounded-xl items-center justify-center flex-shrink-0" style={{ background: `${intent.accent}14`, color: intent.accent }}>
-          <Icon className="w-5 h-5" />
+        <span className="text-[11px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full"
+              style={{ background: `${category.color}12`, color: category.color }}>
+          {tiles.length} tools
         </span>
-        <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-[#0A2540] text-[16.5px] md:text-[17.5px] tracking-[-0.005em] leading-tight" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-            {intent.title}
-          </h3>
-          <p className="mt-1.5 text-[13.5px] text-[#45464d] leading-[1.55]" style={{ fontFamily: 'Inter, sans-serif' }}>{intent.desc}</p>
-        </div>
       </div>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {intent.steps.map((s) => (
-          <Link
-            key={s.href} href={s.href}
-            className="inline-flex items-center gap-1 text-[12.5px] font-semibold px-2.5 py-1.5 rounded-lg bg-[#f3f4f5] hover:bg-[#0A2540] hover:text-white text-[#0A2540] transition-colors duration-100"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            {s.label} <ArrowRight className="w-3 h-3" />
-          </Link>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        {tiles.map((t) => <SmallTile key={t.href} tile={t} />)}
       </div>
     </div>
   );
