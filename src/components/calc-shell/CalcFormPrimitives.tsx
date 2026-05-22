@@ -1,67 +1,126 @@
 'use client';
-/* Shared form primitives for calculator client components. */
+/**
+ * CalcFormPrimitives v3 — "Graphite & Flame" design system
+ * Flat underline inputs · Dark stat cards · Violet toggles · Syne/Space Grotesk type
+ */
 
+/* ─── tokens ──────────────────────────────────────────────── */
+const T = {
+  ink:      '#0D1117',
+  mid:      '#6B7280',
+  faint:    '#9CA3AF',
+  border:   '#E2E6EB',
+  bg:       '#F8F9FB',
+  canvas:   '#FFFFFF',
+  accentV:  '#7C3AED',   // violet
+  accentA:  '#F59E0B',   // amber
+  positive: '#059669',
+  negative: '#DC2626',
+  dark:     '#111827',
+};
+const SYNE  = '"Syne", "Space Grotesk", sans-serif';
+const GRSK  = '"Space Grotesk", "Inter", sans-serif';
+const INTER = '"Inter", system-ui, sans-serif';
+
+/* ─── formatters ─────────────────────────────────────────── */
+export function fmtGBP(n: number) {
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n);
+}
+export function fmtGBP2(n: number) {
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+}
+export function fmtPct(n: number, dp = 1) { return `${n.toFixed(dp)}%`; }
+
+/* ─── Field wrapper ──────────────────────────────────────── */
 export function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
   return (
-    <label className="block">
-      <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#76777e]">{label}</span>
-      <div className="mt-2">{children}</div>
-      {hint && <span className="block mt-1 text-[11.5px] text-[#76777e]">{hint}</span>}
+    <label style={{ display: 'block' }}>
+      <span style={{
+        display: 'block',
+        fontFamily: GRSK,
+        fontSize: 9.5,
+        fontWeight: 700,
+        letterSpacing: '0.18em',
+        textTransform: 'uppercase' as const,
+        color: T.mid,
+        marginBottom: 6,
+      }}>
+        {label}
+      </span>
+      {children}
+      {hint && (
+        <span style={{ display: 'block', fontFamily: INTER, fontSize: 11, color: T.faint, marginTop: 4, lineHeight: 1.5 }}>{hint}</span>
+      )}
     </label>
   );
 }
 
+/* ─── NumberField — flat underline style ─────────────────── */
 export function NumberField({
   label, value, onChange, prefix, suffix, step = 'any', hint,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  prefix?: string;
-  suffix?: string;
-  step?: string;
-  hint?: string;
+  label: string; value: string; onChange: (v: string) => void;
+  prefix?: string; suffix?: string; step?: string; hint?: string;
 }) {
   return (
     <Field label={label} hint={hint}>
-      <div className="flex items-center gap-2 border border-[#E5E7EB] rounded-xl bg-white px-3 py-2.5 focus-within:border-[#0A2540]">
-        {prefix && <span className="text-[#76777e] text-[15px] font-semibold">{prefix}</span>}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 6,
+        borderBottom: `2px solid ${T.border}`,
+        paddingBottom: 8,
+        transition: 'border-color 0.15s',
+      }}
+        onFocusCapture={(e) => ((e.currentTarget as HTMLElement).style.borderColor = T.accentV)}
+        onBlurCapture={(e) => ((e.currentTarget as HTMLElement).style.borderColor = T.border)}
+      >
+        {prefix && <span style={{ fontFamily: GRSK, fontSize: 15, fontWeight: 600, color: T.mid }}>{prefix}</span>}
         <input
           type="number" inputMode="decimal" step={step} value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="flex-1 min-w-0 bg-transparent text-[16px] font-bold text-[#0A2540] tabular-nums outline-none"
-          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}
+          style={{
+            flex: 1, minWidth: 0, background: 'transparent', border: 'none', outline: 'none',
+            fontFamily: GRSK, fontSize: 18, fontWeight: 700, color: T.ink, letterSpacing: '-0.02em',
+          }}
         />
-        {suffix && <span className="text-[#76777e] text-[13px]">{suffix}</span>}
+        {suffix && <span style={{ fontFamily: INTER, fontSize: 12, color: T.faint }}>{suffix}</span>}
       </div>
     </Field>
   );
 }
 
+/* ─── SelectField ────────────────────────────────────────── */
 export function SelectField<T extends string>({
   label, value, onChange, options, hint,
 }: {
-  label: string;
-  value: T;
-  onChange: (v: T) => void;
-  options: { value: T; label: string }[];
-  hint?: string;
+  label: string; value: T; onChange: (v: T) => void;
+  options: { value: T; label: string }[]; hint?: string;
 }) {
   return (
     <Field label={label} hint={hint}>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as T)}
-        className="w-full border border-[#E5E7EB] rounded-xl px-4 py-3 text-[14.5px] font-semibold text-[#0A2540] bg-white outline-none focus:border-[#0A2540]"
+        style={{
+          width: '100%',
+          background: 'transparent',
+          border: 'none',
+          borderBottom: `2px solid ${T.border}`,
+          paddingBottom: 8,
+          fontFamily: GRSK, fontSize: 16, fontWeight: 600, color: T.ink,
+          outline: 'none', cursor: 'pointer',
+          appearance: 'none' as const,
+          WebkitAppearance: 'none' as const,
+        }}
+        onFocus={(e) => (e.currentTarget.style.borderColor = T.accentV)}
+        onBlur={(e) => (e.currentTarget.style.borderColor = T.border)}
       >
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
-        ))}
+        {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </Field>
   );
 }
 
+/* ─── ToggleRow — solid violet/grey blocks ───────────────── */
 export function ToggleRow<T extends string>({
   options, value, onChange,
 }: {
@@ -70,101 +129,84 @@ export function ToggleRow<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="inline-flex p-1 bg-[#f3f4f5] rounded-lg">
-      {options.map((o) => (
-        <button
-          key={o.value}
-          type="button"
-          onClick={() => onChange(o.value)}
-          className={`inline-flex items-center gap-1.5 px-4 py-2 text-[13.5px] font-semibold rounded-md transition-colors ${value === o.value ? 'bg-white text-[#0A2540] shadow-sm' : 'text-[#76777e] hover:text-[#0A2540]'}`}
-        >
-          {o.icon}
-          {o.label}
-        </button>
-      ))}
+    <div style={{ display: 'inline-flex', gap: 4, background: T.bg, padding: 4, borderRadius: 6, border: `1px solid ${T.border}` }}>
+      {options.map((o) => {
+        const active = o.value === value;
+        return (
+          <button
+            key={o.value} type="button" onClick={() => onChange(o.value)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 5,
+              padding: '7px 14px',
+              fontFamily: GRSK, fontSize: 13, fontWeight: 600, letterSpacing: '-0.01em',
+              borderRadius: 4, border: 'none', cursor: 'pointer',
+              background: active ? T.accentV : 'transparent',
+              color: active ? '#fff' : T.mid,
+              transition: 'all 0.14s',
+            }}
+          >
+            {o.icon}{o.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
 
+/* ─── ResultBox ──────────────────────────────────────────── */
 export function ResultBox({
   label, value, primary, muted, accent, sub,
 }: {
-  label: string;
-  value: string;
-  primary?: boolean;
-  muted?: boolean;
-  accent?: string;
-  sub?: string;
+  label: string; value: string; primary?: boolean; muted?: boolean; accent?: string; sub?: string;
 }) {
+  const clr = accent ?? (primary ? T.accentV : muted ? T.faint : T.ink);
   return (
-    <div
-      className="rounded-xl p-4 border"
-      style={{
-        background: primary ? '#0A2540' : muted ? '#f6f7f8' : '#ffffff',
-        borderColor: primary ? '#0A2540' : '#E5E7EB',
-        color: primary ? '#ffffff' : '#0A2540',
-      }}
-    >
-      <div className="text-[10.5px] font-semibold uppercase tracking-[0.08em]"
-        style={{ color: primary ? 'rgba(255,255,255,0.6)' : accent ?? '#76777e' }}>
+    <div style={{
+      borderLeft: `4px solid ${primary ? T.accentV : muted ? T.border : T.accentA}`,
+      paddingLeft: 14, paddingTop: 2, paddingBottom: 2,
+    }}>
+      <div style={{ fontFamily: GRSK, fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' as const, color: T.mid, marginBottom: 3 }}>
         {label}
       </div>
-      <div className="mt-1 font-bold tabular-nums text-[18px] md:text-[22px] tracking-[-0.01em]"
-        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+      <div style={{ fontFamily: SYNE, fontSize: 28, fontWeight: 800, color: clr, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
         {value}
       </div>
-      {sub && (
-        <div className="mt-1 text-[11.5px]"
-          style={{ color: primary ? 'rgba(255,255,255,0.55)' : '#76777e' }}>
-          {sub}
-        </div>
-      )}
+      {sub && <div style={{ fontFamily: INTER, fontSize: 11.5, color: T.faint, marginTop: 3, lineHeight: 1.5 }}>{sub}</div>}
     </div>
   );
 }
 
-export const fmtGBP = (n: number) =>
-  new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n);
-
-export const fmtGBP2 = (n: number) =>
-  new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
-
-export const fmtPct = (n: number) => `${(n * 100).toFixed(1)}%`;
-
+/* ─── CalcCard ───────────────────────────────────────────── */
 export function CalcCard({ children, wide }: { children: React.ReactNode; wide?: boolean }) {
   return (
-    <div
-      className={`${wide ? 'max-w-5xl' : 'max-w-4xl'} mx-auto bg-white border border-[#E5E7EB] rounded-2xl p-6 md:p-8 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.06)]`}
-      style={{ fontFamily: 'Inter, sans-serif' }}
-    >
+    <div style={{
+      background: T.canvas,
+      border: `1px solid ${T.border}`,
+      borderRadius: 6,
+      padding: '22px 24px',
+      maxWidth: wide ? '100%' : 700,
+    }}>
       {children}
     </div>
   );
 }
 
-/* ─────────────── Advanced primitives ─────────────── */
-
-export function Section({ title, eyebrow, children, accent = '#00C4B4', tone = 'default' }: {
-  title: string;
-  eyebrow?: string;
-  children: React.ReactNode;
-  accent?: string;
-  tone?: 'default' | 'inputs' | 'results';
+/* ─── Section ────────────────────────────────────────────── */
+export function Section({ title, eyebrow, children, accent = T.accentV, tone = 'default' }: {
+  title: string; eyebrow?: string; children: React.ReactNode;
+  accent?: string; tone?: 'default' | 'inputs' | 'results';
 }) {
-  const bg = tone === 'inputs' ? '#FAFBFC' : tone === 'results' ? '#F4F9F8' : 'transparent';
-  const border = tone === 'inputs' ? '#EEF0F2' : tone === 'results' ? '#D7EBE7' : 'transparent';
+  const bg = tone === 'inputs' ? T.bg : tone === 'results' ? '#F4F3FF' : 'transparent';
+  const bdr = tone === 'default' ? 'none' : `1px solid ${T.border}`;
   return (
-    <section
-      className="rounded-xl"
-      style={{ background: bg, border: tone === 'default' ? 'none' : `1px solid ${border}`, padding: tone === 'default' ? 0 : '20px 20px 22px' }}
-    >
-      <header className="mb-3 flex items-baseline gap-2 flex-wrap">
+    <section style={{ background: bg, border: bdr, borderRadius: 6, padding: tone === 'default' ? 0 : '18px 20px 20px' }}>
+      <header style={{ marginBottom: 14, display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' as const }}>
         {eyebrow && (
-          <span className="text-[10.5px] font-extrabold uppercase tracking-[0.18em]" style={{ color: accent }}>
+          <span style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: accent }}>
             {eyebrow}
           </span>
         )}
-        <h3 className="text-[15.5px] font-bold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', letterSpacing: '-0.01em' }}>
+        <h3 style={{ fontFamily: SYNE, fontSize: 14, fontWeight: 700, color: T.ink, letterSpacing: '-0.02em', margin: 0 }}>
           {title}
         </h3>
       </header>
@@ -173,84 +215,109 @@ export function Section({ title, eyebrow, children, accent = '#00C4B4', tone = '
   );
 }
 
+/* ─── StatGrid ───────────────────────────────────────────── */
 export function StatGrid({ children, cols = 3 }: { children: React.ReactNode; cols?: 2 | 3 | 4 }) {
-  const c = cols === 2 ? 'sm:grid-cols-2' : cols === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-2 lg:grid-cols-3';
-  return <div className={`grid grid-cols-1 ${c} gap-3`}>{children}</div>;
+  const c = cols === 2 ? 'repeat(2,1fr)' : cols === 4 ? 'repeat(auto-fill,minmax(160px,1fr))' : 'repeat(auto-fill,minmax(180px,1fr))';
+  return <div style={{ display: 'grid', gridTemplateColumns: c, gap: 10 }}>{children}</div>;
 }
 
+/* ─── StatCard — dark cards with big amber numbers ───────── */
 export function StatCard({ label, value, sub, tone = 'default', accent }: {
-  label: string;
-  value: string;
-  sub?: string;
+  label: string; value: string; sub?: string;
   tone?: 'default' | 'primary' | 'positive' | 'negative' | 'muted';
   accent?: string;
 }) {
-  const styles = {
-    default:  { bg: '#FFFFFF', border: '#E5E7EB', text: '#0A2540', labelClr: '#76777e', subClr: '#76777e' },
-    primary:  { bg: '#0A2540', border: '#0A2540', text: '#FFFFFF', labelClr: 'rgba(255,255,255,0.6)', subClr: 'rgba(255,255,255,0.55)' },
-    positive: { bg: '#ECFDF5', border: '#A7F3D0', text: '#064E3B', labelClr: '#047857', subClr: '#047857' },
-    negative: { bg: '#FEF2F2', border: '#FECACA', text: '#7F1D1D', labelClr: '#B91C1C', subClr: '#B91C1C' },
-    muted:    { bg: '#F6F7F8', border: '#E5E7EB', text: '#0A2540', labelClr: '#76777e', subClr: '#76777e' },
-  }[tone];
+  const dark = tone === 'primary';
+  const bg   = tone === 'primary' ? T.dark : tone === 'positive' ? '#ECFDF5' : tone === 'negative' ? '#FEF2F2' : tone === 'muted' ? T.bg : T.canvas;
+  const txt  = tone === 'primary' ? '#FFFFFF' : tone === 'positive' ? '#064E3B' : tone === 'negative' ? '#7F1D1D' : T.ink;
+  const lbl  = tone === 'primary' ? 'rgba(255,255,255,0.5)' : T.mid;
+  const sub_ = tone === 'primary' ? 'rgba(255,255,255,0.4)' : T.faint;
+  const numClr = accent ?? (tone === 'primary' ? T.accentA : tone === 'positive' ? T.positive : tone === 'negative' ? T.negative : T.accentV);
   return (
-    <div className="rounded-xl p-4 border" style={{ background: styles.bg, borderColor: styles.border }}>
-      <div className="text-[10.5px] font-extrabold uppercase tracking-[0.14em]" style={{ color: accent ?? styles.labelClr }}>
+    <div style={{
+      background: bg,
+      border: `1px solid ${dark ? 'rgba(255,255,255,0.06)' : T.border}`,
+      borderRadius: 6,
+      padding: '14px 16px',
+    }}>
+      <div style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' as const, color: lbl, marginBottom: 6 }}>
         {label}
       </div>
-      <div className="mt-1.5 font-extrabold tabular-nums text-[20px] md:text-[24px] tracking-[-0.02em]"
-        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', color: styles.text }}>
+      <div style={{ fontFamily: SYNE, fontSize: 22, fontWeight: 800, color: numClr, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
         {value}
       </div>
-      {sub && <div className="mt-1 text-[11.5px] leading-[1.45]" style={{ color: styles.subClr }}>{sub}</div>}
+      {sub && <div style={{ fontFamily: INTER, fontSize: 11, color: sub_, marginTop: 4, lineHeight: 1.45 }}>{sub}</div>}
     </div>
   );
 }
 
-export function Tip({ children, tone = 'info' }: { children: React.ReactNode; tone?: 'info' | 'warn' | 'success' }) {
-  const styles = {
-    info:    { bg: '#EFF6FF', border: '#BFDBFE', text: '#1E3A8A', icon: 'ⓘ' },
-    warn:    { bg: '#FFFBEB', border: '#FDE68A', text: '#78350F', icon: '⚠' },
-    success: { bg: '#ECFDF5', border: '#A7F3D0', text: '#064E3B', icon: '✓' },
-  }[tone];
+/* ─── SummaryHero — large result banner ─────────────────── */
+export function SummaryHero({ label, value, sub, tone = 'navy', badge }: {
+  label: string; value: string; sub?: string;
+  tone?: 'navy' | 'teal' | 'red'; badge?: string;
+}) {
+  const bg  = tone === 'navy' ? T.dark : tone === 'teal' ? '#065F46' : '#7F1D1D';
+  const num = tone === 'navy' ? T.accentA : tone === 'teal' ? '#6EE7B7' : '#FCA5A5';
   return (
-    <div className="rounded-lg px-3.5 py-2.5 border text-[12.5px] leading-[1.55] flex gap-2.5"
-      style={{ background: styles.bg, borderColor: styles.border, color: styles.text }}>
-      <span aria-hidden className="font-bold mt-[1px]">{styles.icon}</span>
-      <div>{children}</div>
+    <div style={{
+      background: bg, borderRadius: 8, padding: 'clamp(20px,4vw,28px)',
+      borderLeft: `4px solid ${num}`,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' as const, marginBottom: 8 }}>
+        <span style={{ fontFamily: GRSK, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.5)' }}>
+          {label}
+        </span>
+        {badge && (
+          <span style={{
+            fontFamily: GRSK, fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
+            textTransform: 'uppercase' as const, color: num,
+            background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: 3,
+          }}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <div style={{ fontFamily: SYNE, fontSize: 'clamp(32px,6vw,48px)', fontWeight: 800, color: num, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+        {value}
+      </div>
+      {sub && <div style={{ fontFamily: INTER, fontSize: 13, color: 'rgba(255,255,255,0.55)', marginTop: 8, lineHeight: 1.55 }}>{sub}</div>}
     </div>
   );
 }
 
+/* ─── BreakdownTable ─────────────────────────────────────── */
 export function BreakdownTable({ rows, highlightLast }: {
   rows: { label: string; value: string; sub?: string; bold?: boolean; negative?: boolean; positive?: boolean }[];
   highlightLast?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-[#E5E7EB] overflow-hidden">
+    <div style={{ border: `1px solid ${T.border}`, borderRadius: 6, overflow: 'hidden' }}>
       {rows.map((r, i) => {
-        const isLast = i === rows.length - 1;
-        const hi = highlightLast && isLast;
+        const last = highlightLast && i === rows.length - 1;
         return (
-          <div key={i}
-            className={`flex items-center justify-between px-4 py-2.5 ${i > 0 ? 'border-t border-[#EEF0F2]' : ''}`}
-            style={{ background: hi ? '#0A2540' : '#FFFFFF', color: hi ? '#FFFFFF' : '#0A2540' }}>
+          <div key={i} style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '10px 16px',
+            borderTop: i > 0 ? `1px solid ${T.border}` : 'none',
+            background: last ? T.dark : T.canvas,
+          }}>
             <div>
-              <div className={`text-[13px] ${r.bold || hi ? 'font-bold' : 'font-medium'}`}
-                style={{ color: hi ? '#FFFFFF' : (r.bold ? '#0A2540' : '#45464d') }}>
+              <div style={{
+                fontFamily: INTER, fontSize: 13,
+                fontWeight: r.bold || last ? 700 : 500,
+                color: last ? 'rgba(255,255,255,0.9)' : r.bold ? T.ink : T.mid,
+              }}>
                 {r.label}
               </div>
-              {r.sub && (
-                <div className="text-[11px] mt-0.5" style={{ color: hi ? 'rgba(255,255,255,0.6)' : '#76777e' }}>{r.sub}</div>
-              )}
+              {r.sub && <div style={{ fontFamily: INTER, fontSize: 10.5, color: last ? 'rgba(255,255,255,0.4)' : T.faint, marginTop: 2 }}>{r.sub}</div>}
             </div>
-            <div className={`tabular-nums text-[14px] ${r.bold || hi ? 'font-extrabold' : 'font-semibold'}`}
-              style={{
-                color: hi ? '#00C4B4' :
-                  r.negative ? '#B91C1C' :
-                  r.positive ? '#047857' :
-                  (r.bold ? '#0A2540' : '#45464d'),
-                fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-              }}>
+            <div style={{
+              fontFamily: GRSK,
+              fontSize: 14,
+              fontWeight: r.bold || last ? 700 : 600,
+              color: last ? T.accentA : r.negative ? T.negative : r.positive ? T.positive : r.bold ? T.ink : T.mid,
+              letterSpacing: '-0.01em',
+            }}>
               {r.value}
             </div>
           </div>
@@ -260,30 +327,34 @@ export function BreakdownTable({ rows, highlightLast }: {
   );
 }
 
+/* ─── ScenarioTabs — solid block selector ───────────────── */
 export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   options: { value: T; label: string; sub?: string }[];
   value: T;
   onChange: (v: T) => void;
 }) {
+  const cols = options.length;
   return (
-    <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols},1fr)`, gap: 6 }}>
       {options.map((o) => {
         const active = o.value === value;
         return (
           <button
-            key={o.value}
-            type="button"
-            onClick={() => onChange(o.value)}
-            className="text-left rounded-xl border-2 px-3.5 py-2.5 transition-colors"
+            key={o.value} type="button" onClick={() => onChange(o.value)}
             style={{
-              borderColor: active ? '#0A2540' : '#E5E7EB',
-              background: active ? '#0A2540' : '#FFFFFF',
-              color: active ? '#FFFFFF' : '#0A2540',
+              textAlign: 'left', padding: '12px 14px',
+              border: `2px solid ${active ? T.accentV : T.border}`,
+              borderRadius: 6, cursor: 'pointer',
+              background: active ? T.accentV : T.canvas,
+              color: active ? '#fff' : T.ink,
+              transition: 'all 0.15s',
             }}
           >
-            <div className="text-[13.5px] font-bold" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{o.label}</div>
+            <div style={{ fontFamily: GRSK, fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em' }}>{o.label}</div>
             {o.sub && (
-              <div className="text-[11px] mt-0.5" style={{ color: active ? 'rgba(255,255,255,0.6)' : '#76777e' }}>{o.sub}</div>
+              <div style={{ fontFamily: INTER, fontSize: 11, marginTop: 2, color: active ? 'rgba(255,255,255,0.6)' : T.faint }}>
+                {o.sub}
+              </div>
             )}
           </button>
         );
@@ -292,49 +363,47 @@ export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   );
 }
 
-export function SummaryHero({ label, value, sub, tone = 'navy', badge }: {
-  label: string;
-  value: string;
-  sub?: string;
-  tone?: 'navy' | 'teal' | 'red';
-  badge?: string;
-}) {
-  const bg = tone === 'navy' ? '#0A2540' : tone === 'teal' ? '#0F766E' : '#7F1D1D';
+/* ─── Tip ────────────────────────────────────────────────── */
+export function Tip({ children, tone = 'info' }: { children: React.ReactNode; tone?: 'info' | 'warn' | 'success' }) {
+  const s = {
+    info:    { bg: '#EEF2FF', barClr: T.accentV, txt: '#3730A3', icon: 'ⓘ' },
+    warn:    { bg: '#FFFBEB', barClr: T.accentA, txt: '#92400E', icon: '⚠' },
+    success: { bg: '#ECFDF5', barClr: T.positive, txt: '#065F46', icon: '✓' },
+  }[tone];
   return (
-    <div className="rounded-2xl p-5 md:p-6" style={{ background: bg, color: '#FFFFFF' }}>
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[10.5px] font-extrabold uppercase tracking-[0.18em]" style={{ color: '#00C4B4' }}>{label}</span>
-        {badge && (
-          <span className="text-[10px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.12)', color: '#FFFFFF' }}>{badge}</span>
-        )}
-      </div>
-      <div className="mt-2 font-extrabold tabular-nums text-[34px] md:text-[42px] tracking-[-0.035em]"
-        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-        {value}
-      </div>
-      {sub && <div className="mt-1.5 text-[13px] leading-[1.55]" style={{ color: 'rgba(255,255,255,0.7)' }}>{sub}</div>}
+    <div style={{
+      display: 'flex', gap: 10, alignItems: 'flex-start',
+      background: s.bg, borderLeft: `3px solid ${s.barClr}`,
+      borderRadius: '0 4px 4px 0',
+      padding: '10px 14px',
+      fontFamily: INTER, fontSize: 12.5, color: s.txt, lineHeight: 1.55,
+    }}>
+      <span style={{ flexShrink: 0, fontWeight: 700, marginTop: 1 }}>{s.icon}</span>
+      <div>{children}</div>
     </div>
   );
 }
 
+/* ─── CheckboxField ──────────────────────────────────────── */
 export function CheckboxField({ label, checked, onChange, hint }: {
-  label: string;
-  checked: boolean;
-  onChange: (v: boolean) => void;
-  hint?: string;
+  label: string; checked: boolean; onChange: (v: boolean) => void; hint?: string;
 }) {
   return (
-    <label className="flex items-start gap-3 rounded-xl border border-[#E5E7EB] bg-white px-3.5 py-3 cursor-pointer hover:border-[#0A2540]">
+    <label style={{
+      display: 'flex', alignItems: 'flex-start', gap: 10,
+      border: `1px solid ${checked ? T.accentV : T.border}`,
+      borderRadius: 6, padding: '12px 14px', cursor: 'pointer',
+      background: checked ? '#EEF2FF' : T.canvas,
+      transition: 'all 0.15s',
+    }}>
       <input
-        type="checkbox"
-        checked={checked}
+        type="checkbox" checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 h-4 w-4 accent-[#0A2540]"
+        style={{ marginTop: 2, accentColor: T.accentV, width: 15, height: 15, flexShrink: 0 }}
       />
       <span>
-        <span className="block text-[13.5px] font-semibold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{label}</span>
-        {hint && <span className="block text-[11.5px] text-[#76777e] mt-0.5 leading-[1.45]">{hint}</span>}
+        <span style={{ display: 'block', fontFamily: GRSK, fontSize: 13, fontWeight: 600, color: T.ink }}>{label}</span>
+        {hint && <span style={{ display: 'block', fontFamily: INTER, fontSize: 11, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{hint}</span>}
       </span>
     </label>
   );
