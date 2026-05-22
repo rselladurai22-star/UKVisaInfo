@@ -13,6 +13,7 @@ import VisaFaq from '../../../components/visa/VisaFaq';
 import VisaStickyBar from '../../../components/visa/VisaStickyBar';
 import SettlementCostStack from '../../../components/visa/SettlementCostStack';
 import VariantPicker from '../../../components/visa/VariantPicker';
+import ApplicationGuide from '../../../components/visa/ApplicationGuide';
 import RelatedBlogToVisa from '../../../components/RelatedBlogToVisa';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import { SETTLEMENT_BREAKDOWNS } from '../../../data/settlementFees';
@@ -414,32 +415,24 @@ export default async function VisaPage({ params }: RouteParams) {
                 </div>
               </Section>
 
-              {/* 05 PROCESS */}
-              <Section eyebrow="How to apply" title="Step-by-step guide" accent={accent}>
-                <div className="rounded-2xl bg-white border border-[#E5E7EB] p-7 md:p-9"
-                  style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
-                  <ol className="relative space-y-0">
-                    <span aria-hidden className="absolute left-[19px] top-8 bottom-8 w-[2px]"
-                          style={{ background: `linear-gradient(180deg, ${accent}66, #E5E7EB)` }} />
-                    {v.steps.map((s, i) => (
-                      <li key={i} className="relative pl-14 pb-9 last:pb-0">
-                        <span aria-hidden
-                          className="absolute left-0 top-0 w-10 h-10 rounded-full text-white text-[13px] font-extrabold flex items-center justify-center"
-                          style={{ background: accent, boxShadow: `0 4px 14px -4px ${accent}80`, fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-                          {i + 1}
-                        </span>
-                        <h4 className="font-extrabold text-[#0A2540] text-[15.5px] leading-tight mb-2"
-                          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-                          {s.title}
-                        </h4>
-                        <p className="text-[#475569] text-[14px] font-normal leading-[1.68]"
-                           style={{ fontFamily: 'Inter, sans-serif' }}>
-                          {s.desc}
-                        </p>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+              {/* 05 PROCESS — gov.uk-style differentiated guide */}
+              <Section eyebrow="How to apply" title="Step-by-step application guide" accent={accent}>
+                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
+                   style={{ fontFamily: 'Inter, sans-serif' }}>
+                  Choose your path below. The process is different if you&apos;re applying from outside the UK
+                  (entry clearance) versus switching from another visa inside the UK.
+                </p>
+                <ApplicationGuide
+                  slug={slug}
+                  title={v.title}
+                  category={v.category}
+                  fee={v.fee}
+                  ihs={v.ihs}
+                  applyUrl={v.applyUrl}
+                  processing={v.processing}
+                  steps={v.steps}
+                  accent={accent}
+                />
               </Section>
 
               {/* 06 NOTES */}
