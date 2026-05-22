@@ -14,7 +14,7 @@ export default function MaternityPage() {
     <CalcPageShell
       url="/maternity-pay"
       eyebrow={`Statutory Maternity & Paternity · ${RATES_TAX_YEAR} rates`}
-      title="What you\u2019ll be paid on parental leave."
+      title="What you’ll be paid on parental leave."
       deck="Average weekly earnings in, full SMP or SPP breakdown out — the 6-week 90% phase, the 33-week statutory phase and the unpaid tail, all in one shot."
       verified="gov.uk/maternity-pay-leave/pay · gov.uk/paternity-pay-leave"
       related={[

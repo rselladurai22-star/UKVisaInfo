@@ -13,7 +13,7 @@ export default function SoleVsLtdPage() {
     <CalcPageShell
       url="/sole-trader-vs-limited"
       eyebrow="Business structure · UK · 2026/27"
-      title="Sole trader or limited company \u2014 which keeps more?"
+      title="Sole trader or limited company — which keeps more?"
       deck="Enter your annual profit, choose how much salary a director would draw, and see the all-in tax bill on both sides — including Corporation Tax marginal relief and dividend tax."
       verified="gov.uk/corporation-tax-rates · gov.uk/income-tax-rates"
       related={[

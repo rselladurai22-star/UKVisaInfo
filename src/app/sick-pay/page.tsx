@@ -14,7 +14,7 @@ export default function SspPage() {
     <CalcPageShell
       url="/sick-pay"
       eyebrow={`Statutory Sick Pay · ${RATES_TAX_YEAR}`}
-      title="What you get when you\u2019re off sick."
+      title="What you get when you’re off sick."
       deck={`£${SSP_WEEKLY}/week, paid by your employer from the 4th qualifying day, for up to ${MAX_WEEKS} weeks. Enter your earnings and how long you\'ve been off to see the total.`}
       verified="gov.uk/statutory-sick-pay"
       related={[

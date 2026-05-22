@@ -14,7 +14,7 @@ export default function RedundancyPage() {
     <CalcPageShell
       url="/redundancy-pay"
       eyebrow={`Statutory Redundancy · Cap £${WEEKLY_CAP}/week from ${WEEKLY_CAP_FROM}`}
-      title="What you\u2019re owed if you\u2019re made redundant."
+      title="What you’re owed if you’re made redundant."
       deck="The statutory formula in plain English: age band × years of service × capped weekly pay. See your entitlement broken down year-by-year."
       verified="gov.uk/calculate-your-redundancy-pay"
       related={[
