@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const top = [
     { p: '',                 prio: 1.0,  freq: 'weekly' },
     { p: '/visa-types',      prio: 0.95, freq: 'weekly' },
+    { p: '/visa-switching',  prio: 0.95, freq: 'monthly' },
     { p: '/eligibility',     prio: 0.9,  freq: 'monthly' },
     { p: '/costs',           prio: 0.8,  freq: 'monthly' },
     { p: '/blog',            prio: 0.9,  freq: 'weekly' },
@@ -56,6 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/tools/compare',            prio: 0.8,  freq: 'monthly' },
     { p: '/tools/refusal-analyzer',   prio: 0.85, freq: 'monthly' },
     { p: '/my-journey',      prio: 0.6,  freq: 'monthly' },
+    { p: '/community',       prio: 0.7,  freq: 'weekly' },
     { p: '/from',            prio: 0.85, freq: 'monthly' },
     { p: '/uk-cities',       prio: 0.8,  freq: 'monthly' },
     { p: '/salary',          prio: 0.85, freq: 'monthly' },
