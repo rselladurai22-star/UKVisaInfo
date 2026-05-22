@@ -258,11 +258,11 @@ export default function VisaHubClient() {
             <div className="bg-white border border-[#E5E7EB] rounded-2xl mb-6 overflow-hidden">
               {/* Switcher label row */}
               <div className="px-5 pt-4 pb-0 flex items-center justify-between gap-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Switch visa type</span>
-                <button onClick={() => setActiveSection('eligibility')}
+                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Browse by category</span>
+                <Link href="/visa-switching"
                   className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#00C4B4] hover:underline">
-                  <Target className="w-3 h-3" /> Not sure? Take the quiz
-                </button>
+                  <ChevronRight className="w-3 h-3" /> Already in UK? Switching guide
+                </Link>
               </div>
               {/* Type tabs */}
               <div className="px-4 pt-2 pb-0 border-b border-[#F3F4F6]">
