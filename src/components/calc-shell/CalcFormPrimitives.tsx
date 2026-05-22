@@ -18,9 +18,9 @@ const T = {
   negative: '#DC2626',
   dark:     '#111827',
 };
-const SYNE  = '"Syne", "Space Grotesk", sans-serif';
-const GRSK  = '"Space Grotesk", "Inter", sans-serif';
-const INTER = '"Inter", system-ui, sans-serif';
+const SYNE  = '"Manrope", "DM Sans", sans-serif';
+const GRSK  = '"DM Sans", system-ui, sans-serif';
+const INTER = '"DM Sans", system-ui, sans-serif';
 
 /* ─── formatters ─────────────────────────────────────────── */
 export function fmtGBP(n: number) {
