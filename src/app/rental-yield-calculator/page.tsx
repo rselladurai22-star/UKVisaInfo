@@ -14,8 +14,30 @@ export default function RentalYieldPage() {
       url="/rental-yield-calculator"
       eyebrow="Rental Yield · UK · 2025/26"
       title="Will that buy-to-let actually stack up?"
-      deck="Gross yield ignores costs. Net yield ignores the mortgage stress test. Enter price, rent, costs and your BTL mortgage — and see whether the lender&rsquo;s ICR check passes before you commit."
+      deck="Gross yield ignores costs. Net yield ignores the mortgage stress test. Enter price, rent, costs and your BTL mortgage — and see whether the lender's ICR check passes before you commit."
       verified="gov.uk/guidance/income-tax-when-you-rent-out-a-property"
+      sidebar={{
+        keyRates: [
+          { label: 'ICR basic-rate taxpayer', value: '125%', sub: 'Rent must cover 125% of stressed interest', accent: '#0F766E' },
+          { label: 'ICR higher-rate taxpayer', value: '145%', sub: 'Rent must cover 145% of stressed interest', accent: '#B45309' },
+          { label: 'Stress test rate (typical)', value: 'Pay rate +2%', sub: 'Minimum 5.5% — whichever is higher' },
+          { label: 'SDLT surcharge (BTL)', value: '+5%', sub: 'On top of standard SDLT (2025)' },
+          { label: 'SDLT threshold', value: '£125,000', sub: 'Nil rate band — standard' },
+          { label: 'Typical gross yield target', value: '5–7%', sub: 'UK average ~4.9% (2024)' },
+        ],
+        dates: [
+          { date: '6 Apr 2025', desc: 'FHL abolished — holiday lets lose favourable treatment', urgent: false },
+          { date: '14 days', desc: 'SDLT payment window after completion', urgent: false },
+          { date: '31 Jan', desc: 'SA rental income return deadline', urgent: true },
+        ],
+        tips: [
+          { heading: 'Net yield is what matters', body: 'Gross yield looks attractive but ignores agent fees (8–12%), insurance, maintenance reserve (1% of value p.a.), and void periods. Always model net yield.' },
+          { heading: 'ICR check before you offer', body: 'If the rent does not cover 125% (or 145%) of stressed interest payments, a BTL lender will not offer a mortgage — regardless of your income or deposit.' },
+          { heading: 'Budget for 2–4 weeks void', body: 'Even good tenants have gaps. Model 3.8%–7.7% of annual rent as void allowance to get a realistic net yield figure.' },
+        ],
+        govLink: 'gov.uk/guidance/income-tax-when-you-rent-out-a-property',
+        govLabel: 'gov.uk — Rental income tax',
+      }}
       related={[
         { href: '/rental-income-tax', title: 'Rental income tax', desc: 'Section 24 detailed tax on your rental profit.' },
         { href: '/property-cgt-calculator', title: 'Property CGT', desc: 'Tax when you sell.' },

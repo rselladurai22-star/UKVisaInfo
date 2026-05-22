@@ -13,9 +13,32 @@ export default function MileagePage() {
     <CalcPageShell
       url="/mileage-expense-calculator"
       eyebrow="AMAP Mileage · UK · 2025/26 HMRC rates"
-      title="Are you getting the full 45p per mile you&rsquo;re entitled to?"
-      deck="HMRC&rsquo;s Approved Mileage Allowance Payments cover fuel, wear & tear, insurance and depreciation — at 45p per mile for the first 10,000 and 25p after. If your employer pays less, you can claim the difference."
+      title="Are you getting the full 45p per mile you're entitled to?"
+      deck="HMRC's Approved Mileage Allowance Payments cover fuel, wear & tear, insurance and depreciation — at 45p per mile for the first 10,000 and 25p after. If your employer pays less, you can claim the difference."
       verified="gov.uk/expenses-and-benefits-business-travel-mileage"
+      sidebar={{
+        keyRates: [
+          { label: 'Car / van (first 10,000 mi)', value: '45p/mi', accent: '#0F766E' },
+          { label: 'Car / van (above 10,000 mi)', value: '25p/mi' },
+          { label: 'Motorcycle', value: '24p/mi' },
+          { label: 'Bicycle', value: '20p/mi' },
+          { label: 'Passenger supplement', value: '5p/mi', sub: 'Per passenger carried on business' },
+          { label: 'EV advisory rate', value: '9p/mi', sub: 'Company-owned EV (electricity only)' },
+          { label: 'Max MAR relief rate', value: '40% / 45%', sub: 'At your marginal IT rate' },
+        ],
+        dates: [
+          { date: '5 Oct', desc: 'Register for SA if claiming >£2,500 mileage shortfall', urgent: false },
+          { date: '31 Jan', desc: 'Claim mileage via SA if not reimbursed by employer', urgent: true },
+          { date: 'P87', desc: 'Small claims (<£2,500) can use P87 form instead of SA', urgent: false },
+        ],
+        tips: [
+          { heading: 'Keep a mileage log', body: 'HMRC requires a contemporaneous record: date, purpose, origin, destination, miles. A GPS app (e.g. TripLog, MileIQ) is ideal evidence.' },
+          { heading: 'Employer can pay tax-free up to AMAP', body: 'Employers can pay up to the AMAP rate tax-free. Any excess is taxable — report it on your P11D and SA.' },
+          { heading: 'EV owners still claim AMAP', body: 'If you own an EV privately and use it for work, you claim at 45p/mi (first 10k) — not the 9p AER, which only applies to company-owned vehicles.' },
+        ],
+        govLink: 'gov.uk/expenses-and-benefits-business-travel-mileage',
+        govLabel: 'gov.uk — Mileage allowances',
+      }}
       related={[
         { href: '/self-assessment-calculator', title: 'Self Assessment estimator', desc: 'Claim mileage shortfalls through your SA return.' },
         { href: '/company-car-tax', title: 'Company car tax', desc: 'Compare owning your car vs a company car.' },

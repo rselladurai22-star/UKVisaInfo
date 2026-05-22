@@ -16,8 +16,29 @@ export default function MarriageAllowancePage() {
       title="Is the £252 Marriage Allowance worth claiming?"
       deck="If one of you earns below £12,570 and the other pays basic-rate tax, you can transfer £1,260 of Personal Allowance — and backdate up to four years for a one-off windfall."
       verified="gov.uk/marriage-allowance"
+      sidebar={{
+        keyRates: [
+          { label: 'Annual saving', value: '£252', sub: '£1,260 × 20% basic rate', accent: '#0F766E' },
+          { label: 'Maximum transfer', value: '£1,260', sub: '10% of Personal Allowance £12,570' },
+          { label: 'Lower earner income cap', value: '£12,570', sub: 'Must earn below Personal Allowance' },
+          { label: 'Higher earner must pay', value: 'Basic rate only', sub: 'Income between £12,571–£50,270' },
+          { label: 'Max backdate saving', value: '£1,260', sub: '5 years × £252 (incl. current year)' },
+        ],
+        dates: [
+          { date: '31 Jan', desc: 'Self Assessment deadline if claiming backdate via SA', urgent: true },
+          { date: '5 Apr', desc: 'Apply before tax year-end to include that year', urgent: false },
+          { date: '4 yrs', desc: 'Maximum backdate period from current tax year', urgent: false },
+        ],
+        tips: [
+          { heading: 'Apply online in minutes', body: 'Apply at gov.uk/marriage-allowance — takes around 10 minutes. HMRC adjusts the higher earner\'s tax code automatically.' },
+          { heading: 'Can be cancelled anytime', body: 'Cancel in the new tax year if the lower earner\'s income rises. The current year allocation stays until year-end.' },
+          { heading: 'Civil partnerships qualify', body: 'The Marriage Allowance applies equally to married couples and those in civil partnerships — the rules are identical.' },
+        ],
+        govLink: 'gov.uk/marriage-allowance',
+        govLabel: 'gov.uk — Marriage Allowance',
+      }}
       related={[
-        { href: '/take-home-pay', title: 'Take-home pay', desc: 'See both partners&rsquo; full net salaries.' },
+        { href: '/take-home-pay', title: 'Take-home pay', desc: 'See both partners\' full net salaries.' },
         { href: '/self-assessment-calculator', title: 'Self Assessment estimator', desc: 'Check how backdated claims affect your SA bill.' },
         { href: '/salary-sacrifice-calculator', title: 'Salary sacrifice', desc: 'Reducing income below £12,570 to qualify.' },
       ]}

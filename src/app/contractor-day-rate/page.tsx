@@ -16,9 +16,33 @@ export default function ContractorDayRatePage() {
       title="What permanent salary is your day rate really worth?"
       deck="Contractors bear costs that employers cover for permanent staff: holiday, sick pay, pension, employer NI, professional fees. Strip those out and see what your day rate actually equates to."
       verified="gov.uk/income-tax-rates"
+      sidebar={{
+        keyRates: [
+          { label: 'Corporation Tax', value: '25%', sub: 'Profits > £250k (marginal relief below)' },
+          { label: 'Corp Tax (small profits)', value: '19%', sub: 'Profits ≤ £50,000' },
+          { label: 'Dividend allowance', value: '£500', sub: '2025/26' },
+          { label: 'Dividend tax (basic)', value: '8.75%', sub: 'After allowance' },
+          { label: 'Dividend tax (higher)', value: '33.75%', sub: 'After allowance' },
+          { label: 'Employer NI', value: '15%', sub: 'On salary above £5,000' },
+          { label: 'Optimum director salary', value: '£12,570', sub: 'Full PA use, no ee NI if sole emp.' },
+        ],
+        dates: [
+          { date: '5 Apr', desc: 'Ltd company year-end (if using fiscal year)', urgent: false },
+          { date: '9 months', desc: 'Accounts filing deadline after year-end', urgent: false },
+          { date: '9 months +1', desc: 'Corporation Tax payment deadline', urgent: true },
+          { date: '6 Apr', desc: 'New IR35 off-payroll rules apply to new engagements', urgent: false },
+        ],
+        tips: [
+          { heading: 'Budget for void periods', body: 'Most contractors realistically bill 200–230 days per year after holidays, bank holidays, admin, and gap periods between contracts.' },
+          { heading: 'Business costs reduce CT', body: 'Accountancy, PI insurance, software, and professional memberships are allowable limited company expenses — reducing the Corp Tax base.' },
+          { heading: 'IR35 risk first', body: 'Check IR35 status before calculating Ltd route savings. If inside IR35 the Ltd company offers little advantage over umbrella/PAYE.' },
+        ],
+        govLink: 'gov.uk/working-through-limited-company',
+        govLabel: 'gov.uk — Working via Ltd co.',
+      }}
       related={[
         { href: '/ir35-calculator', title: 'IR35 calculator', desc: 'How much does an inside IR35 determination actually cost you?' },
-        { href: '/sole-trader-vs-limited', title: 'Sole trader vs Ltd', desc: 'Compare extraction routes for your annual profit.' },
+        { href: '/self-assessment-calculator', title: 'Self Assessment', desc: 'Dividend income goes on your SA return.' },
         { href: '/dividend-tax', title: 'Dividend tax', desc: 'Understand the dividend rates used in the Ltd calculation.' },
       ]}
       educational={[
