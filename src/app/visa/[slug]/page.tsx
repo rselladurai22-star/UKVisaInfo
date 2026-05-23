@@ -13,9 +13,8 @@ import { VISA_FAQS } from '../../../data/visaFaqs';
 import VisaTabNav from '../../../components/visa/VisaTabNav';
 import VisaFaq from '../../../components/visa/VisaFaq';
 import VisaStickyBar from '../../../components/visa/VisaStickyBar';
-import VariantPicker from '../../../components/visa/VariantPicker';
 import StickyMobileCta from '../../../components/StickyMobileCta';
-import { getVariants } from '../../../data/visaVariants';
+import { getVariants, type VisaVariant } from '../../../data/visaVariants';
 
 /* ════════════════════════════════════════════════
    QUARTZ — terminal-grade design tokens
@@ -180,28 +179,22 @@ export default async function VisaPage({ params }: RouteParams) {
   const insideWeeks = weeks(v.processing.inside);
   const eligCount = v.eligibility.length;
   const docCount = v.documents.length;
-  const stepCount = v.steps.length;
 
-  // Comparison vs UK route average (normalize so smaller = better for cost/speed/criteria)
-  const radarData = [
-    { axis: 'Cost',    val: Math.min(100, 100 - Math.round((fee / Math.max(1, bench.feeAvg)) * 50)), unit: `£${fee.toLocaleString()}`, hint: `avg £${bench.feeAvg.toLocaleString()}` },
-    { axis: 'Speed',   val: Math.min(100, 100 - Math.round((decisionWeeks / Math.max(1, bench.weekAvg)) * 50)), unit: `${decisionWeeks}w`, hint: `avg ${bench.weekAvg}w` },
-    { axis: 'Simpler', val: Math.min(100, 100 - Math.round((eligCount / Math.max(1, bench.eligAvg)) * 50)), unit: `${eligCount} rules`, hint: `avg ${bench.eligAvg}` },
-    { axis: 'Family',  val: /spouse|partner|dependant|child/i.test(v.eligibility.concat(v.documents).join(' ')) ? 90 : 30, unit: '—', hint: 'dependants' },
-    { axis: 'IHS',     val: Math.min(100, 100 - Math.round((ihsPerYear / Math.max(1, bench.ihsAvg)) * 50)), unit: `£${ihsPerYear}`, hint: `avg £${bench.ihsAvg}` },
-  ];
+  // 3yr and 5yr cost options
+  const ihsTotal3 = ihsPerYear * Math.min(3, yrs);
+  const totalMin3 = fee + ihsTotal3;
+  const ihsTotal5 = ihsPerYear * Math.min(5, yrs);
+  const totalMin5 = fee + ihsTotal5;
 
   // Complexity heat (0-5) per row
   const complexityScore = Math.min(5, Math.ceil(eligCount / 1.4));
 
   const tabs = [
     { id: 'overview',    label: 'Overview' },
-    ...(variants.length ? [{ id: 'variants', label: 'Sub-routes' }] : []),
+    ...(variants.length ? [{ id: 'routes', label: 'Sub-routes' }] : []),
     { id: 'eligibility', label: 'Eligibility' },
     { id: 'costs',       label: 'Costs' },
     { id: 'documents',   label: 'Documents' },
-    { id: 'timeline',    label: 'Timeline' },
-    { id: 'compare',     label: 'Compare' },
     ...(faqs.length ? [{ id: 'faq', label: 'FAQ' }] : []),
   ];
 
@@ -364,13 +357,13 @@ export default async function VisaPage({ params }: RouteParams) {
                       }}>
                   <Calculator size={13} strokeWidth={2} /> Cost calculator
                 </Link>
-                <a href="#timeline"
+                <a href="#costs"
                    style={{
                      display: 'inline-flex', alignItems: 'center', gap: 6,
                      color: C.mid, fontSize: 13, fontWeight: 500,
                      padding: '10px 4px', textDecoration: 'none',
                    }}>
-                  View timeline <ChevronRight size={13} />
+                  See cost breakdown <ChevronRight size={13} />
                 </a>
               </div>
             </div>
@@ -434,54 +427,45 @@ export default async function VisaPage({ params }: RouteParams) {
 
             <main style={{ flex: 1, minWidth: 0, maxWidth: 880 }} className="space-y-14">
 
-              {/* 01 OVERVIEW — matrix of facts + complexity sparkbar */}
+              {/* 01 OVERVIEW — fact matrix + processing times */}
               <Section id="overview" num="01" title="At a glance"
-                       meta={`${stepCount} steps · ${docCount} documents · ${eligCount} eligibility rules`}>
+                       meta={`${docCount} documents · ${eligCount} eligibility rules`}>
                 <FactMatrix v={v} fee={fee} ihsPerYear={ihsPerYear} totalMin={totalMin}
-                            yrs={yrs} decisionWeeks={decisionWeeks} insideWeeks={insideWeeks}
-                            complexity={complexityScore} />
+                            yrs={yrs} complexity={complexityScore} />
+                <ProcessingTimes outside={v.processing.outside} inside={v.processing.inside}
+                                 outsideWeeks={decisionWeeks} insideWeeks={insideWeeks} />
               </Section>
 
               {variants.length > 0 && (
-                <section id="variants" className="scroll-mt-32">
-                  <VariantPicker variants={variants} visaId={slug} />
-                </section>
+                <Section id="routes" num="02" title="Sub-routes"
+                         meta={`${variants.length} routes · choose the one that fits you`}>
+                  <SubRoutesGuide variants={variants} visaId={slug} />
+                </Section>
               )}
 
-              {/* 02 ELIGIBILITY — classified matrix grid */}
-              <Section id="eligibility" num="02" title="Eligibility matrix"
+              {/* 03 ELIGIBILITY — classified matrix grid */}
+              <Section id="eligibility" num={variants.length ? '03' : '02'} title="Eligibility matrix"
                        meta={`${eligCount} rules · all required unless marked conditional`}>
                 <EligibilityMatrix items={v.eligibility} />
               </Section>
 
-              {/* 03 COSTS — Marimekko-style stacked composition */}
-              <Section id="costs" num="03" title="Cost flow"
-                       meta="Required vs optional · per-line allocation">
+              {/* 04 COSTS — 3yr + 5yr side-by-side */}
+              <Section id="costs" num={variants.length ? '04' : '03'} title="Cost breakdown"
+                       meta="Required vs optional · 3-year and 5-year options">
                 <CostFlow fee={fee} ihsTotal={ihsTotal} ihsPerYear={ihsPerYear} years={yrs}
-                          totalMin={totalMin} slug={slug} />
+                          totalMin={totalMin} totalMin3={totalMin3} totalMin5={totalMin5}
+                          ihsTotal3={ihsTotal3} ihsTotal5={ihsTotal5} slug={slug} />
               </Section>
 
-              {/* 04 DOCUMENTS — checklist with completion rings */}
-              <Section id="documents" num="04" title="Document register"
+              {/* 05 DOCUMENTS — checklist with completion rings */}
+              <Section id="documents" num={variants.length ? '05' : '04'} title="Document register"
                        meta={`${docCount} items · 4 categories · evidence to submit`}>
                 <DocumentRegister groups={docGroups} total={docCount} />
               </Section>
 
-              {/* 05 TIMELINE — Gantt-style horizontal */}
-              <Section id="timeline" num="05" title="Application timeline"
-                       meta={`${stepCount} phases · ~${decisionWeeks} weeks to decision`}>
-                <GanttTimeline steps={v.steps} weeks={decisionWeeks} />
-              </Section>
-
-              {/* 06 COMPARE — radar */}
-              <Section id="compare" num="06" title="Route benchmark"
-                       meta="vs UK route average — higher = better">
-                <RadarCompare data={radarData} title={v.title} />
-              </Section>
-
-              {/* 07 FAQ */}
+              {/* 06 FAQ */}
               {faqs.length > 0 && (
-                <Section id="faq" num="07" title="FAQ"
+                <Section id="faq" num={variants.length ? '06' : '05'} title="FAQ"
                          meta={`${faqs.length} answered questions`}>
                   <VisaFaq faqs={faqs} />
                 </Section>
@@ -704,8 +688,8 @@ function Section({
 
 /* ─── At-a-glance matrix ─── */
 function FactMatrix({
-  v, fee, ihsPerYear, totalMin, yrs, decisionWeeks, insideWeeks, complexity,
-}: { v: VisaDetail; fee: number; ihsPerYear: number; totalMin: number; yrs: number; decisionWeeks: number; insideWeeks: number; complexity: number }) {
+  v, fee, ihsPerYear, totalMin, yrs, complexity,
+}: { v: VisaDetail; fee: number; ihsPerYear: number; totalMin: number; yrs: number; complexity: number }) {
   const hasFamily = /spouse|partner|dependant|child/i.test(v.eligibility.concat(v.documents).join(' '));
   const hasSponsor = /sponsor|cas|cos|licensed/i.test(v.eligibility.join(' '));
   const hasSwitch = !!v.processing.inside && !/^n\/a/i.test(v.processing.inside);
@@ -714,8 +698,6 @@ function FactMatrix({
     { k: 'Initial leave',  v: `${yrs} years`, sub: v.duration.split(/[;·]/)[0] },
     { k: 'Total upfront',  v: `£${totalMin.toLocaleString()}`, sub: `fee + ${yrs}y IHS` },
     { k: 'IHS / yr',       v: `£${ihsPerYear.toLocaleString()}`, sub: 'paid upfront for full duration' },
-    { k: 'Decision (outside)', v: `${decisionWeeks}w`, sub: 'standard service', bar: Math.min(100, (decisionWeeks/12)*100) },
-    { k: 'Decision (inside)',  v: `${insideWeeks}w`, sub: 'switch / extend' },
     { k: 'Sponsor needed', v: hasSponsor ? 'Yes' : 'No', pill: hasSponsor ? 'critical' : 'no', pillTone: hasSponsor ? C.warn : C.ok },
     { k: 'Dependants',     v: hasFamily ? 'Allowed' : 'Limited', pill: hasFamily ? 'family' : 'solo', pillTone: hasFamily ? C.ok : C.warn },
     { k: 'Switch in-UK',   v: hasSwitch ? 'Permitted' : 'Not available', pillTone: hasSwitch ? C.ok : C.mid },
@@ -835,10 +817,14 @@ function EligibilityMatrix({ items }: { items: string[] }) {
   );
 }
 
-/* ─── Marimekko-style cost flow ─── */
+/* ─── Marimekko-style cost flow with 3yr / 5yr options ─── */
 function CostFlow({
-  fee, ihsTotal, ihsPerYear, years, totalMin, slug,
-}: { fee: number; ihsTotal: number; ihsPerYear: number; years: number; totalMin: number; slug: string }) {
+  fee, ihsTotal, ihsPerYear, years, totalMin,
+  totalMin3, totalMin5, ihsTotal3, ihsTotal5, slug,
+}: {
+  fee: number; ihsTotal: number; ihsPerYear: number; years: number; totalMin: number;
+  totalMin3: number; totalMin5: number; ihsTotal3: number; ihsTotal5: number; slug: string;
+}) {
   const rows = [
     { label: 'Application fee', val: fee,      tone: C.accent,  req: true,  to: 'Home Office', sub: 'One-off' },
     { label: 'IHS surcharge',   val: ihsTotal, tone: C.accent2, req: true,  to: 'NHS Insurance', sub: `£${ihsPerYear}/yr × ${years}` },
@@ -848,98 +834,130 @@ function CostFlow({
   ];
   const max = Math.max(...rows.map((r) => r.val));
   return (
-    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, background: C.bg, padding: 18 }}>
-      {/* Top: total with stacked total bar */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: '1fr auto', gap: 16,
-        alignItems: 'center', marginBottom: 18,
-        paddingBottom: 14, borderBottom: `1px solid ${C.hair}`,
-      }}>
-        <div>
-          <div style={{ fontSize: 10, fontWeight: 700, color: C.mid2,
-                        letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-            Required for {years}y leave
-          </div>
-          <div style={{ fontSize: 24, fontWeight: 600, color: C.ink,
-                        letterSpacing: '-0.025em', fontVariantNumeric: 'tabular-nums', marginTop: 2 }}>
-            £{totalMin.toLocaleString()}
-          </div>
-          <div style={{ display: 'flex', height: 8, borderRadius: 999, overflow: 'hidden', background: C.bg3, marginTop: 8 }}>
-            <div style={{ width: `${(fee / totalMin) * 100}%`, background: C.accent }} />
-            <div style={{ width: `${(ihsTotal / totalMin) * 100}%`, background: C.accent2 }} />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: C.mid, marginTop: 4,
-                        fontVariantNumeric: 'tabular-nums' }}>
-            <span>Fee {Math.round((fee/totalMin)*100)}%</span>
-            <span>IHS {Math.round((ihsTotal/totalMin)*100)}%</span>
-          </div>
-        </div>
-        <Link href={`/tools/cost-calculator?visa=${slug}`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 5,
-                       fontSize: 12, fontWeight: 500, color: C.accentDk,
-                       border: `1px solid ${C.border}`, padding: '7px 11px',
-                       borderRadius: 6, textDecoration: 'none', background: C.bg }}>
-          <Calculator size={11} strokeWidth={2.2} /> Full calc
-        </Link>
-      </div>
+    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, background: C.bg, overflow: 'hidden' }}>
 
-      {/* Per-row flow bars */}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {rows.map((r, i) => (
-          <div key={i} style={{
-            display: 'grid', gridTemplateColumns: '170px 1fr 100px',
-            gap: 14, alignItems: 'center', padding: '10px 0',
-            borderTop: i > 0 ? `1px dashed ${C.hair}` : 'none',
+      {/* ── Duration options: 3yr vs 5yr ── */}
+      <div style={{
+        display: 'grid', gridTemplateColumns: '1fr 1fr',
+        borderBottom: `1px solid ${C.border}`,
+      }}>
+        {[
+          { label: '3-Year leave', total: totalMin3, ihs: ihsTotal3, yrs: 3 },
+          { label: '5-Year leave', total: totalMin5, ihs: ihsTotal5, yrs: 5 },
+        ].map((opt, idx) => (
+          <div key={idx} style={{
+            padding: '18px 20px',
+            borderLeft: idx > 0 ? `1px solid ${C.border}` : 'none',
+            background: idx === (years >= 5 ? 1 : 0) ? C.accentSoft : C.bg2,
+            position: 'relative',
           }}>
-            <div style={{ minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{
-                  width: 3, height: 14, borderRadius: 2,
-                  background: r.tone, opacity: r.req ? 1 : 0.55,
-                }} />
-                <span style={{ fontSize: 12.5, fontWeight: 500, color: C.ink, letterSpacing: '-0.005em' }}>
-                  {r.label}
-                </span>
-              </div>
-              <div style={{ fontSize: 10, color: C.mid, marginTop: 2, paddingLeft: 11 }}>
-                {r.sub} → {r.to}
-              </div>
+            {idx === (years >= 5 ? 1 : 0) && (
+              <span style={{
+                position: 'absolute', top: 10, right: 12,
+                fontSize: 9, fontWeight: 700, color: C.accentDk,
+                background: C.bg, border: `1px solid ${C.accent}44`,
+                padding: '2px 7px', borderRadius: 999, letterSpacing: '0.1em',
+              }}>DEFAULT</span>
+            )}
+            <div style={{ fontSize: 10, fontWeight: 700, color: C.mid2,
+                          letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              {opt.label}
             </div>
-            <div style={{ position: 'relative', height: 18 }}>
-              <div style={{ position: 'absolute', top: 6, left: 0, right: 0, height: 6,
-                            background: C.bg3, borderRadius: 999, overflow: 'hidden' }}>
-                <div style={{
-                  width: `${(r.val / max) * 100}%`, height: '100%',
-                  background: r.tone, opacity: r.req ? 1 : 0.6,
-                  borderTopRightRadius: 999, borderBottomRightRadius: 999,
-                }} />
-              </div>
-              {!r.req && (
-                <span style={{
-                  position: 'absolute', top: -2, left: `${(r.val / max) * 100 + 1}%`,
-                  fontSize: 9, fontWeight: 700, color: r.tone,
-                  letterSpacing: '0.06em',
-                }}>OPT</span>
-              )}
+            <div style={{ fontSize: 26, fontWeight: 600, color: C.ink,
+                          letterSpacing: '-0.025em', fontVariantNumeric: 'tabular-nums', marginTop: 4, lineHeight: 1 }}>
+              £{opt.total.toLocaleString()}
+            </div>
+            <div style={{ display: 'flex', height: 5, borderRadius: 999, overflow: 'hidden', background: C.bg3, marginTop: 10 }}>
+              <div style={{ width: `${(fee / opt.total) * 100}%`, background: C.accent }} />
+              <div style={{ width: `${(opt.ihs / opt.total) * 100}%`, background: C.accent2 }} />
             </div>
             <div style={{
-              textAlign: 'right', fontSize: 13, fontWeight: 600, color: C.ink,
-              fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em',
+              display: 'flex', justifyContent: 'space-between', gap: 8,
+              fontSize: 10, color: C.mid, marginTop: 5, fontVariantNumeric: 'tabular-nums',
             }}>
-              {r.req ? '' : '+'}£{r.val.toLocaleString()}
+              <span>Fee £{fee.toLocaleString()}</span>
+              <span>IHS £{opt.ihs.toLocaleString()} ({opt.yrs}y)</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Legend */}
-      <div style={{ marginTop: 14, paddingTop: 12, borderTop: `1px solid ${C.hair}`,
-                    display: 'flex', flexWrap: 'wrap', gap: 14, fontSize: 10.5, color: C.mid }}>
-        <Swatch tone={C.accent} label="Application fee" />
-        <Swatch tone={C.accent2} label="NHS surcharge" />
-        <Swatch tone={C.warn} label="Optional speed" />
-        <Swatch tone={C.pink} label="Premium service" />
-        <Swatch tone={C.mid} label="Per extra person" />
+      {/* ── Per-row breakdown ── */}
+      <div style={{ padding: 18 }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          marginBottom: 14,
+        }}>
+          <div style={{
+            fontSize: 10, fontWeight: 700, color: C.mid2,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+          }}>Line-by-line allocation</div>
+          <Link href={`/tools/cost-calculator?visa=${slug}`}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5,
+                         fontSize: 12, fontWeight: 500, color: C.accentDk,
+                         border: `1px solid ${C.border}`, padding: '6px 11px',
+                         borderRadius: 6, textDecoration: 'none', background: C.bg }}>
+            <Calculator size={11} strokeWidth={2.2} /> Full calc
+          </Link>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {rows.map((r, i) => (
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: '170px 1fr 100px',
+              gap: 14, alignItems: 'center', padding: '10px 0',
+              borderTop: i > 0 ? `1px dashed ${C.hair}` : 'none',
+            }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{
+                    width: 3, height: 14, borderRadius: 2,
+                    background: r.tone, opacity: r.req ? 1 : 0.55,
+                  }} />
+                  <span style={{ fontSize: 12.5, fontWeight: 500, color: C.ink, letterSpacing: '-0.005em' }}>
+                    {r.label}
+                  </span>
+                </div>
+                <div style={{ fontSize: 10, color: C.mid, marginTop: 2, paddingLeft: 11 }}>
+                  {r.sub} → {r.to}
+                </div>
+              </div>
+              <div style={{ position: 'relative', height: 18 }}>
+                <div style={{ position: 'absolute', top: 6, left: 0, right: 0, height: 6,
+                              background: C.bg3, borderRadius: 999, overflow: 'hidden' }}>
+                  <div style={{
+                    width: `${(r.val / max) * 100}%`, height: '100%',
+                    background: r.tone, opacity: r.req ? 1 : 0.6,
+                    borderTopRightRadius: 999, borderBottomRightRadius: 999,
+                  }} />
+                </div>
+                {!r.req && (
+                  <span style={{
+                    position: 'absolute', top: -2, left: `${(r.val / max) * 100 + 1}%`,
+                    fontSize: 9, fontWeight: 700, color: r.tone,
+                    letterSpacing: '0.06em',
+                  }}>OPT</span>
+                )}
+              </div>
+              <div style={{
+                textAlign: 'right', fontSize: 13, fontWeight: 600, color: C.ink,
+                fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em',
+              }}>
+                {r.req ? '' : '+'}£{r.val.toLocaleString()}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Legend */}
+        <div style={{ marginTop: 14, paddingTop: 12, borderTop: `1px solid ${C.hair}`,
+                      display: 'flex', flexWrap: 'wrap', gap: 14, fontSize: 10.5, color: C.mid }}>
+          <Swatch tone={C.accent} label="Application fee" />
+          <Swatch tone={C.accent2} label="NHS surcharge" />
+          <Swatch tone={C.warn} label="Optional speed" />
+          <Swatch tone={C.pink} label="Premium service" />
+          <Swatch tone={C.mid} label="Per extra person" />
+        </div>
       </div>
     </div>
   );
@@ -1061,187 +1079,246 @@ function RingProgress({ total, groups }: { total: number; groups: { tone: string
   );
 }
 
-/* ─── Gantt-style timeline ─── */
-function GanttTimeline({ steps, weeks: totalW }: { steps: { title: string; desc: string }[]; weeks: number }) {
-  // distribute step duration across weeks
-  const perStep = Math.max(1, Math.round(totalW / steps.length));
-  const bars = steps.map((s, i) => {
-    const start = i * perStep;
-    const end = Math.min(totalW, (i + 1) * perStep);
-    return { ...s, start, end, week: start };
-  });
-  const colors = [C.accent, C.accent2, C.teal, C.warn, C.pink, C.accent, C.ok];
-
+/* ─── Processing Times — inside vs outside UK ─── */
+function ProcessingTimes({
+  outside, inside: insideStr, outsideWeeks, insideWeeks,
+}: { outside: string; inside: string; outsideWeeks: number; insideWeeks: number }) {
+  const hasInside = !!insideStr && !/^n\/a/i.test(insideStr);
+  const maxW = Math.max(outsideWeeks, insideWeeks, 1);
   return (
-    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, background: C.bg, padding: 18 }}>
-      {/* week ruler */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: `170px repeat(${totalW}, 1fr)`,
-        gap: 0, marginBottom: 8,
-      }}>
+    <div style={{
+      marginTop: 12,
+      display: 'grid', gridTemplateColumns: hasInside ? '1fr 1fr' : '1fr',
+      gap: 1, background: C.border, border: `1px solid ${C.border}`,
+      borderRadius: 10, overflow: 'hidden',
+    }}>
+      {/* Outside UK / Fresh application */}
+      <div style={{ background: C.bg, padding: '16px 18px' }}>
         <div style={{
-          fontSize: 10, fontWeight: 700, color: C.mid2,
-          letterSpacing: '0.1em', textTransform: 'uppercase',
-        }}>Phase</div>
-        {Array.from({ length: totalW }).map((_, i) => (
-          <div key={i} style={{
-            fontFamily: 'JetBrains Mono, ui-monospace, monospace',
-            fontSize: 9.5, color: C.faint, textAlign: 'center',
-            borderLeft: `1px dashed ${C.hair}`,
-            paddingBottom: 4,
-          }}>W{i + 1}</div>
-        ))}
-      </div>
-      {/* rows */}
-      {bars.map((b, i) => (
-        <div key={i} style={{
-          display: 'grid', gridTemplateColumns: `170px repeat(${totalW}, 1fr)`,
-          gap: 0, alignItems: 'center', position: 'relative',
-          borderTop: `1px solid ${C.hair}`, padding: '8px 0',
+          display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10,
         }}>
-          <div style={{ paddingRight: 12, minWidth: 0 }}>
-            <div style={{
-              fontSize: 9.5, fontWeight: 700, color: colors[i % colors.length],
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-            }}>PHASE {String(i+1).padStart(2,'0')}</div>
-            <div style={{
-              fontSize: 12.5, fontWeight: 500, color: C.ink, marginTop: 1,
-              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-            }}>{shortLabel(b.title, 28)}</div>
-          </div>
-          {/* bar overlay */}
-          <div style={{
-            gridColumn: `${b.start + 2} / ${b.end + 2}`,
-            height: 22, background: `${colors[i % colors.length]}1A`,
-            border: `1px solid ${colors[i % colors.length]}66`,
-            borderRadius: 5, position: 'relative',
-            display: 'flex', alignItems: 'center', paddingLeft: 8,
+          <span style={{
+            width: 28, height: 28, borderRadius: 7, background: C.accentSoft,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <span style={{
-              fontSize: 10, fontWeight: 600, color: colors[i % colors.length],
-              letterSpacing: '-0.005em',
-            }}>
-              {b.end - b.start}w
-            </span>
+            <Plane size={13} strokeWidth={2} color={C.accentDk} />
+          </span>
+          <div>
+            <div style={{
+              fontSize: 10, fontWeight: 700, color: C.accentDk,
+              letterSpacing: '0.1em', textTransform: 'uppercase', lineHeight: 1,
+            }}>From outside UK</div>
+            <div style={{ fontSize: 10, color: C.mid, marginTop: 1 }}>Fresh application</div>
           </div>
         </div>
-      ))}
-      {/* milestone marker — final decision */}
-      <div style={{
-        marginTop: 12, paddingTop: 10, borderTop: `1px solid ${C.hair}`,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        fontSize: 11, color: C.mid,
-      }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 8, height: 8, borderRadius: 999, background: C.ok }} />
-          <span style={{ fontWeight: 600, color: C.ink2 }}>Decision by week {totalW}</span>
-        </span>
-        <span style={{ fontVariantNumeric: 'tabular-nums' }}>
-          {steps.length} phases · {totalW} weeks total
-        </span>
+        <div style={{
+          fontSize: 28, fontWeight: 600, color: C.ink,
+          letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums', lineHeight: 1,
+        }}>{outsideWeeks}<span style={{ fontSize: 14, fontWeight: 500, color: C.mid, marginLeft: 4 }}>weeks</span></div>
+        <div style={{ fontSize: 11.5, color: C.mid, marginTop: 4 }}>{outside}</div>
+        <div style={{ marginTop: 10, height: 4, background: C.bg3, borderRadius: 999, overflow: 'hidden' }}>
+          <div style={{ width: `${(outsideWeeks / maxW) * 100}%`, height: '100%', background: C.accent }} />
+        </div>
       </div>
+
+      {/* Inside UK / Switching / Extension */}
+      {hasInside && (
+        <div style={{ background: C.bg, padding: '16px 18px' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10,
+          }}>
+            <span style={{
+              width: 28, height: 28, borderRadius: 7, background: C.okSoft,
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Globe2 size={13} strokeWidth={2} color={C.ok} />
+            </span>
+            <div>
+              <div style={{
+                fontSize: 10, fontWeight: 700, color: C.ok,
+                letterSpacing: '0.1em', textTransform: 'uppercase', lineHeight: 1,
+              }}>Inside UK switch</div>
+              <div style={{ fontSize: 10, color: C.mid, marginTop: 1 }}>Extend / switch route</div>
+            </div>
+          </div>
+          <div style={{
+            fontSize: 28, fontWeight: 600, color: C.ink,
+            letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums', lineHeight: 1,
+          }}>{insideWeeks}<span style={{ fontSize: 14, fontWeight: 500, color: C.mid, marginLeft: 4 }}>weeks</span></div>
+          <div style={{ fontSize: 11.5, color: C.mid, marginTop: 4 }}>{insideStr}</div>
+          <div style={{ marginTop: 10, height: 4, background: C.bg3, borderRadius: 999, overflow: 'hidden' }}>
+            <div style={{ width: `${(insideWeeks / maxW) * 100}%`, height: '100%', background: C.ok }} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-/* ─── Radar comparison ─── */
-function RadarCompare({ data, title }: { data: { axis: string; val: number; unit: string; hint: string }[]; title: string }) {
-  const W = 360, H = 280, cx = W / 2, cy = H / 2 + 6, R = 100;
-  const N = data.length;
-  const angleOf = (i: number) => -Math.PI / 2 + (i / N) * Math.PI * 2;
-  const point = (i: number, ratio: number) => {
-    const a = angleOf(i);
-    return [cx + Math.cos(a) * R * ratio, cy + Math.sin(a) * R * ratio] as const;
-  };
-  const polyAvg = data.map((_, i) => point(i, 0.5)).map(([x, y]) => `${x},${y}`).join(' ');
-  const polyThis = data.map((d, i) => point(i, d.val / 100)).map(([x, y]) => `${x},${y}`).join(' ');
+/* ─── Sub-Routes Guide — premium card grid per variant ─── */
 
+function SubRoutesGuide({ variants, visaId }: { variants: VisaVariant[]; visaId: string }) {
+  const tones = [C.accent, C.ok, C.teal, C.warn, C.pink];
   return (
-    <div style={{
-      border: `1px solid ${C.border}`, borderRadius: 10, background: C.bg,
-      padding: 18,
-      display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 24,
-      alignItems: 'center',
-    }} className="visa-radar">
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} aria-label="Radar comparison">
-        {/* grid rings */}
-        {[0.25, 0.5, 0.75, 1].map((r, i) => (
-          <polygon key={i}
-                   points={data.map((_, j) => {
-                     const [x, y] = point(j, r);
-                     return `${x},${y}`;
-                   }).join(' ')}
-                   fill="none" stroke={C.hair} strokeWidth="1" />
-        ))}
-        {/* axes */}
-        {data.map((d, i) => {
-          const [x, y] = point(i, 1);
-          return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke={C.border} strokeWidth="1" />;
-        })}
-        {/* benchmark polygon (50%) */}
-        <polygon points={polyAvg} fill={`${C.mid}1A`} stroke={C.mid2} strokeWidth="1" strokeDasharray="3 3" />
-        {/* this route polygon */}
-        <polygon points={polyThis} fill={`${C.accent}24`} stroke={C.accent} strokeWidth="1.8" />
-        {/* points */}
-        {data.map((d, i) => {
-          const [x, y] = point(i, d.val / 100);
-          return <circle key={i} cx={x} cy={y} r="3" fill={C.accent} stroke={C.bg} strokeWidth="1.5" />;
-        })}
-        {/* axis labels */}
-        {data.map((d, i) => {
-          const [x, y] = point(i, 1.18);
-          return (
-            <text key={i} x={x} y={y} textAnchor="middle" dominantBaseline="middle"
-                  fontSize="10" fontWeight="700" fill={C.ink2}
-                  style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              {d.axis}
-            </text>
-          );
-        })}
-      </svg>
-      {/* table */}
-      <div style={{ minWidth: 0 }}>
-        <div style={{
-          fontSize: 10, fontWeight: 700, color: C.mid2,
-          letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8,
-        }}>{title} vs UK avg</div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {data.map((d, i) => (
-            <div key={i} style={{
-              display: 'grid', gridTemplateColumns: '70px 1fr 60px',
-              gap: 10, alignItems: 'center', padding: '7px 0',
-              borderTop: i > 0 ? `1px solid ${C.hair}` : 'none',
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {variants.map((vr, i) => {
+        const tone = tones[i % tones.length];
+        return (
+          <div key={vr.id} style={{
+            border: `1px solid ${C.border}`,
+            borderRadius: 10, background: C.bg, overflow: 'hidden',
+          }}>
+            {/* Card header */}
+            <div style={{
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
+              gap: 16, padding: '14px 18px',
+              background: C.bg2, borderBottom: `1px solid ${C.border}`,
             }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: C.ink2, letterSpacing: '0.04em' }}>
-                {d.axis}
-              </span>
-              <div style={{ height: 4, background: C.bg3, borderRadius: 999, overflow: 'hidden', position: 'relative' }}>
-                <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '50%',
-                              borderRight: `1px dashed ${C.mid2}` }} />
-                <div style={{ width: `${d.val}%`, height: '100%', background: C.accent }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+                <span style={{
+                  width: 34, height: 34, borderRadius: 8, flexShrink: 0,
+                  background: `${tone}14`, color: tone,
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 12, fontWeight: 700,
+                  fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+                }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{
+                    fontSize: 15, fontWeight: 600, color: C.ink,
+                    letterSpacing: '-0.015em', lineHeight: 1.2,
+                  }}>{vr.label}</div>
+                  <div style={{
+                    fontSize: 11.5, color: C.mid, marginTop: 2,
+                  }}>{vr.headline}</div>
+                </div>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: 11.5, fontWeight: 600, color: C.ink, fontVariantNumeric: 'tabular-nums' }}>
-                  {d.unit}
-                </div>
-                <div style={{ fontSize: 9.5, color: C.faint, fontVariantNumeric: 'tabular-nums' }}>
-                  {d.hint}
-                </div>
+              <div style={{ display: 'flex', gap: 6, flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                {vr.fee && (
+                  <span style={{
+                    fontSize: 10, fontWeight: 700, color: tone,
+                    background: `${tone}10`, border: `1px solid ${tone}33`,
+                    padding: '3px 8px', borderRadius: 5, letterSpacing: '0.04em',
+                    whiteSpace: 'nowrap',
+                  }}>{vr.fee.split('/')[0].trim()}</span>
+                )}
+                {vr.duration && (
+                  <span style={{
+                    fontSize: 10, fontWeight: 600, color: C.mid2,
+                    background: C.bg3, border: `1px solid ${C.border}`,
+                    padding: '3px 8px', borderRadius: 5,
+                    whiteSpace: 'nowrap',
+                  }}>{vr.duration}</span>
+                )}
               </div>
             </div>
-          ))}
-        </div>
-        <div style={{
-          marginTop: 10, paddingTop: 8, borderTop: `1px dashed ${C.hair}`,
-          display: 'flex', gap: 14, fontSize: 10, color: C.mid,
-        }}>
-          <Swatch tone={C.accent} label="This route" />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <span style={{ width: 8, height: 2, background: C.mid2, borderTop: `1px dashed ${C.mid2}` }} />
-            UK average
-          </span>
-        </div>
-      </div>
+
+            {/* Eligibility highlights */}
+            <div style={{ padding: '12px 18px' }}>
+              <div style={{
+                fontSize: 10, fontWeight: 700, color: C.mid2,
+                letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8,
+              }}>Who qualifies</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {vr.eligibilityHighlights.map((h, j) => (
+                  <div key={j} style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 10,
+                    fontSize: 12.5, lineHeight: 1.5, color: C.ink2,
+                  }}>
+                    <span style={{
+                      marginTop: 4, width: 6, height: 6, borderRadius: 999,
+                      background: tone, flexShrink: 0,
+                    }} />
+                    {h}
+                  </div>
+                ))}
+              </div>
+
+              {/* Costs + path to ILR */}
+              {(vr.feeAmount || vr.yearsToIlr) && (
+                <div style={{
+                  marginTop: 12, display: 'flex', gap: 1,
+                  background: C.border, borderRadius: 7, overflow: 'hidden',
+                }}>
+                  {vr.feeAmount && (
+                    <div style={{ flex: 1, background: C.bg, padding: '10px 12px' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: C.mid2,
+                                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>Fee</div>
+                      <div style={{ fontSize: 16, fontWeight: 600, color: C.ink,
+                                    fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
+                        £{vr.feeAmount.toLocaleString()}
+                      </div>
+                    </div>
+                  )}
+                  {vr.ihsAdult && (
+                    <div style={{ flex: 1, background: C.bg, padding: '10px 12px' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: C.mid2,
+                                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>IHS/yr</div>
+                      <div style={{ fontSize: 16, fontWeight: 600, color: C.ink,
+                                    fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
+                        £{vr.ihsAdult.toLocaleString()}
+                      </div>
+                    </div>
+                  )}
+                  {vr.yearsToIlr && (
+                    <div style={{ flex: 1, background: C.bg, padding: '10px 12px' }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: C.mid2,
+                                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 2 }}>Path to ILR</div>
+                      <div style={{ fontSize: 16, fontWeight: 600, color: C.ink,
+                                    fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
+                        {vr.yearsToIlr}y
+                        {vr.yearsToCitizenship !== undefined && vr.yearsToCitizenship > 0 && (
+                          <span style={{ fontSize: 10.5, color: C.mid, marginLeft: 4 }}>
+                            +{vr.yearsToCitizenship}y citizenship
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Notes */}
+              {vr.notes && vr.notes.length > 0 && (
+                <div style={{
+                  marginTop: 10, padding: '10px 12px',
+                  background: C.warnSoft, border: `1px solid #F5D88B`,
+                  borderRadius: 7,
+                }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: C.warn,
+                                letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 5 }}>Notes</div>
+                  {vr.notes.map((n, j) => (
+                    <div key={j} style={{ fontSize: 12, color: C.ink2, lineHeight: 1.5, marginTop: j > 0 ? 4 : 0 }}>
+                      {n}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Link to variant page */}
+              <div style={{ marginTop: 12, display: 'flex', gap: 8, alignItems: 'center' }}>
+                <Link href={`/visa/${visaId}/${vr.id}`}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 6,
+                        fontSize: 12, fontWeight: 500, color: tone,
+                        border: `1px solid ${tone}44`, padding: '7px 12px',
+                        borderRadius: 6, textDecoration: 'none', background: `${tone}08`,
+                      }}>
+                  Full guide for {vr.label} <ChevronRight size={11} strokeWidth={2.2} />
+                </Link>
+                <a href={vr.source} target="_blank" rel="noopener noreferrer"
+                   style={{
+                     display: 'inline-flex', alignItems: 'center', gap: 5,
+                     fontSize: 11, color: C.mid, textDecoration: 'none',
+                   }}>
+                  <ExternalLink size={10} strokeWidth={2} /> gov.uk
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
