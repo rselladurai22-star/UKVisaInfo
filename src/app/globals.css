@@ -1,86 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
+  /* ════════════════════════════════════════════
+     FONT STACK — Editorial Premium
+     Display: Fraunces (variable serif, optical sizing)
+     Body: Inter (16/17px, very readable)
+     Mono: JetBrains Mono
+  ════════════════════════════════════════════ */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-headline: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-serif: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-headline: "Fraunces", "Times New Roman", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Success / verified-state — Refined Emerald per design system */
-  --color-success: #10b981;
-  --color-success-soft: rgba(16, 185, 129, 0.10);
-  --color-success-strong: #006c49;
-
   /* ════════════════════════════════════════════
-     BRAND PALETTE — May 2026 redesign
-     Deep navy + teal + refined gold + warm gray
+     EDITORIAL PREMIUM PALETTE — May 2026
+     Cream paper + ink black + deep emerald + warm gold
   ════════════════════════════════════════════ */
 
-  /* Primary — deep navy */
-  --color-primary: #0A2540;
-  --color-primary-container: #13325F;
-  --color-primary-soft: #EEF2F8;
-  --color-primary-ink: #061730;
+  /* Primary — Ink black (headings, primary UI) */
+  --color-primary: #0B0F19;
+  --color-primary-container: #1F2937;
+  --color-primary-soft: #F1F2F4;
+  --color-primary-ink: #000000;
 
-  /* Secondary — teal accent */
-  --color-secondary: #00C4B4;
-  --color-secondary-soft: #E6FAF7;
-  --color-secondary-strong: #007F76;
+  /* Secondary — Deep editorial emerald */
+  --color-secondary: #047857;
+  --color-secondary-soft: #ECFDF5;
+  --color-secondary-strong: #064E3B;
 
-  /* Accent — refined warm gold */
-  --color-accent: #C9A14A;
-  --color-accent-soft: #FAF3E2;
+  /* Accent — Warm editorial gold */
+  --color-accent: #B8860B;
+  --color-accent-soft: #FBF6E7;
 
-  /* Surfaces — pure white background with neutral grey scale for elevation */
-  --color-surface: #ffffff;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f8f9fa;
-  --color-surface-container: #f3f4f5;
-  --color-surface-container-high: #ebecee;
-  --color-surface-container-highest: #e0e2e5;
+  /* Success — Refined emerald (semantic) */
+  --color-success: #047857;
+  --color-success-soft: #ECFDF5;
+  --color-success-strong: #064E3B;
+
+  /* Surfaces — Cream paper + pure white card stack */
+  --color-surface: #FAFAF7;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F6F5F0;
+  --color-surface-container: #F1EFE8;
+  --color-surface-container-high: #EBE9E0;
+  --color-surface-container-highest: #E2DFD3;
 
   /* Text */
-  --color-on-surface: #0A2540;
-  --color-on-surface-variant: #5A6478;
+  --color-on-surface: #0B0F19;
+  --color-on-surface-variant: #475569;
 
-  /* Borders */
-  --color-outline: #C7CCD6;
-  --color-outline-variant: #E0E4EC;
+  /* Borders — warm hairline */
+  --color-outline: #D8D5CA;
+  --color-outline-variant: #ECEAE0;
 
-  /* Consistent card border — used everywhere */
-  --color-border: rgba(10, 37, 64, 0.08);
-  --color-border-strong: rgba(10, 37, 64, 0.14);
+  /* Consistent card border */
+  --color-border: rgba(11, 15, 25, 0.08);
+  --color-border-strong: rgba(11, 15, 25, 0.14);
 }
 
 /* ════════════════════════════════════════════
    DARK MODE — opt-in via .dark on <html>
 ════════════════════════════════════════════ */
 html.dark {
-  --color-primary: #E6F2FF;
-  --color-primary-container: #14365C;
-  --color-primary-soft: #14365C;
+  --color-primary: #FAFAF7;
+  --color-primary-container: #1F2937;
+  --color-primary-soft: #1F2937;
   --color-primary-ink: #FFFFFF;
 
-  --color-secondary: #2DD4C2;
-  --color-secondary-soft: rgba(0, 196, 180, 0.12);
-  --color-secondary-strong: #5EEAD9;
+  --color-secondary: #34D399;
+  --color-secondary-soft: rgba(4, 120, 87, 0.16);
+  --color-secondary-strong: #6EE7B7;
 
-  --color-accent: #E6B450;
-  --color-accent-soft: rgba(201, 161, 74, 0.10);
+  --color-accent: #E4B53B;
+  --color-accent-soft: rgba(184, 134, 11, 0.14);
 
-  --color-surface: #06192E;
-  --color-surface-container-lowest: #0A2540;
-  --color-surface-container-low: #0F2C4B;
-  --color-surface-container: #133456;
-  --color-surface-container-high: #173D63;
-  --color-surface-container-highest: #1C4670;
+  --color-surface: #0A0E16;
+  --color-surface-container-lowest: #0F141E;
+  --color-surface-container-low: #141A26;
+  --color-surface-container: #1A2030;
+  --color-surface-container-high: #20283A;
+  --color-surface-container-highest: #283146;
 
-  --color-on-surface: #F1F4FA;
+  --color-on-surface: #F5F4EE;
   --color-on-surface-variant: #A3AFC5;
 
-  --color-outline: #2A4368;
-  --color-outline-variant: #1B324F;
+  --color-outline: #2A3447;
+  --color-outline-variant: #1B2233;
 
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-strong: rgba(255, 255, 255, 0.14);
@@ -89,8 +96,8 @@ html.dark {
 }
 
 html.dark body {
-  background: #06192E;
-  color: #F1F4FA;
+  background: #0A0E16;
+  color: #F5F4EE;
 }
 
 @layer base {
@@ -99,8 +106,13 @@ html.dark body {
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    @apply bg-white text-on-surface antialiased;
+    background: #FAFAF7;
+    color: #0B0F19;
+    font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv02", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   @media (pointer: coarse) {
     button, a { min-height: 44px; }
@@ -112,151 +124,330 @@ html.dark body {
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.025em;
+    font-optical-sizing: auto;
+    letter-spacing: -0.022em;
+    color: #0B0F19;
   }
 }
 
-/* ────── Hero backgrounds ────── */
+/* ════════════════════════════════════════════
+   SERIF DISPLAY — Editorial Premium typography
+════════════════════════════════════════════ */
 
-/* Dark navy hero — premium calm, teal/gold mesh */
-.hero-dark {
-  background:
-    radial-gradient(ellipse at 15% 25%, rgba(0, 196, 180, 0.22) 0px, transparent 55%),
-    radial-gradient(ellipse at 85% 70%, rgba(19, 50, 95, 0.55) 0px, transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(201, 161, 74, 0.14) 0px, transparent 50%),
-    linear-gradient(165deg, #06192E 0%, #0A2540 60%, #0F2C4B 100%);
+.font-serif    { font-family: var(--font-serif); }
+.font-display  { font-family: var(--font-display); }
+.font-headline { font-family: var(--font-headline); }
+.font-sans     { font-family: var(--font-sans); }
+.font-mono     { font-family: var(--font-mono); }
+
+/* Premium display headline — Fraunces variable with optical sizing */
+.serif-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  line-height: 0.98;
+  color: #0B0F19;
+  text-wrap: balance;
 }
 
-/* Clean white hero — subtle gradient mist on pure white */
+/* Larger editorial headline */
+.serif-mega {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  color: #0B0F19;
+  text-wrap: balance;
+}
+
+/* Body deck below headline */
+.serif-deck {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #475569;
+  text-wrap: pretty;
+  letter-spacing: -0.005em;
+}
+
+/* Section eyebrow — small-caps category */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #047857;
+}
+
+.eyebrow-muted {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94908A;
+}
+
+/* Italic editorial pullquote */
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #0B0F19;
+}
+
+/* Long-form prose — 17/1.75 Inter */
+.prose-content {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #1F2937;
+  letter-spacing: -0.003em;
+}
+@media (min-width: 768px) {
+  .prose-content { font-size: 18px; }
+}
+.prose-content p  { margin-bottom: 1.3em; }
+.prose-content h2 { margin-top: 2.4em; margin-bottom: 0.5em; }
+.prose-content h3 { margin-top: 1.8em; margin-bottom: 0.4em; }
+
+/* ════════════════════════════════════════════
+   BACKGROUNDS — Editorial paper feel
+════════════════════════════════════════════ */
+
+/* Default page surface — warm cream paper */
+.bg-paper {
+  background: #FAFAF7;
+}
+
+/* Slightly cooler cream for alternating bands */
+.bg-paper-warm {
+  background: #F6F5F0;
+}
+
+/* Pure white cards */
+.bg-paper-pure {
+  background: #FFFFFF;
+}
+
+/* Ink — primary dark sections */
+.bg-ink {
+  background: #0B0F19;
+  color: #FAFAF7;
+}
+
+.bg-ink-soft {
+  background: #1F2937;
+  color: #FAFAF7;
+}
+
+/* Subtle hero paper — preserves backward compat */
 .hero-paper {
   background:
-    radial-gradient(ellipse at 15% 10%, rgba(0, 196, 180, 0.05) 0px, transparent 55%),
-    radial-gradient(ellipse at 88% 80%, rgba(10, 37, 64, 0.04) 0px, transparent 55%),
-    radial-gradient(ellipse at 50% 0%, rgba(201, 161, 74, 0.04) 0px, transparent 50%),
-    #ffffff;
+    radial-gradient(ellipse at 12% 8%, rgba(4, 120, 87, 0.04) 0px, transparent 55%),
+    radial-gradient(ellipse at 88% 80%, rgba(184, 134, 11, 0.05) 0px, transparent 55%),
+    #FAFAF7;
 }
 
-/* Light tinted page-hero for directories / blog index */
+/* Dark hero — preserves backward compat */
+.hero-dark {
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(4, 120, 87, 0.18) 0px, transparent 55%),
+    radial-gradient(ellipse at 85% 70%, rgba(184, 134, 11, 0.10) 0px, transparent 60%),
+    linear-gradient(165deg, #0B0F19 0%, #111827 60%, #0B0F19 100%);
+}
+
+/* Light tinted hero — preserves backward compat */
 .hero-light {
   background:
-    radial-gradient(ellipse at 10% 0%, rgba(0, 196, 180, 0.05) 0px, transparent 50%),
-    radial-gradient(ellipse at 90% 100%, rgba(27, 44, 91, 0.06) 0px, transparent 50%),
-    #f3f5fb;
+    radial-gradient(ellipse at 10% 0%, rgba(4, 120, 87, 0.05) 0px, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(184, 134, 11, 0.05) 0px, transparent 50%),
+    #FAFAF7;
 }
 
-/* Old mesh-bg kept for backward compat */
+/* Backward-compat mesh classes */
 .mesh-bg {
   background:
-    radial-gradient(at 12% 18%, rgba(0, 196, 180, 0.18) 0px, transparent 50%),
-    radial-gradient(at 88% 22%, rgba(27, 44, 91, 0.22) 0px, transparent 50%),
-    radial-gradient(at 50% 90%, rgba(201, 161, 74, 0.14) 0px, transparent 50%),
-    linear-gradient(180deg, #0A2540 0%, #0E2B49 100%);
+    radial-gradient(at 12% 18%, rgba(4, 120, 87, 0.16) 0px, transparent 50%),
+    radial-gradient(at 88% 22%, rgba(184, 134, 11, 0.14) 0px, transparent 50%),
+    linear-gradient(180deg, #0B0F19 0%, #111827 100%);
 }
 
 .mesh-bg-light {
   background:
-    radial-gradient(at 8% 8%, rgba(0, 196, 180, 0.05) 0px, transparent 45%),
-    radial-gradient(at 92% 12%, rgba(27, 44, 91, 0.06) 0px, transparent 45%),
-    #f3f5fb;
+    radial-gradient(at 8% 8%, rgba(4, 120, 87, 0.05) 0px, transparent 45%),
+    radial-gradient(at 92% 12%, rgba(184, 134, 11, 0.05) 0px, transparent 45%),
+    #F6F5F0;
 }
 
-/* ────── Glass surface ────── */
+/* ════════════════════════════════════════════
+   GLASS / NAV
+════════════════════════════════════════════ */
 
-/* Nav glass — always slightly visible */
 .glass {
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(250, 250, 247, 0.88);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* ────── Cards & shadows ────── */
+/* ════════════════════════════════════════════
+   CARDS & SHADOWS — subtle, premium
+════════════════════════════════════════════ */
 
 .shadow-soft {
   box-shadow:
-    0 0 0 1px rgba(14, 20, 36, 0.05),
-    0 1px 2px rgba(14, 20, 36, 0.04),
-    0 4px 16px -4px rgba(14, 20, 36, 0.07);
+    0 0 0 1px rgba(11, 15, 25, 0.05),
+    0 1px 2px rgba(11, 15, 25, 0.03),
+    0 4px 14px -4px rgba(11, 15, 25, 0.06);
 }
 
 .shadow-card {
   box-shadow:
-    0 0 0 1px rgba(14, 20, 36, 0.06),
-    0 2px 4px rgba(14, 20, 36, 0.04),
-    0 12px 32px -8px rgba(14, 20, 36, 0.12);
+    0 0 0 1px rgba(11, 15, 25, 0.06),
+    0 2px 4px rgba(11, 15, 25, 0.03),
+    0 10px 28px -8px rgba(11, 15, 25, 0.10);
 }
 
 .shadow-card-hover {
   box-shadow:
-    0 0 0 1px rgba(14, 20, 36, 0.08),
-    0 4px 8px rgba(14, 20, 36, 0.06),
-    0 20px 48px -12px rgba(14, 20, 36, 0.18);
+    0 0 0 1px rgba(11, 15, 25, 0.10),
+    0 4px 8px rgba(11, 15, 25, 0.05),
+    0 18px 44px -10px rgba(11, 15, 25, 0.16);
 }
 
 .shadow-glow {
   box-shadow:
-    0 0 0 1px rgba(0, 196, 180, 0.22),
-    0 8px 32px -8px rgba(0, 196, 180, 0.32);
+    0 0 0 1px rgba(4, 120, 87, 0.22),
+    0 8px 28px -8px rgba(4, 120, 87, 0.30);
 }
 
-/* Premium aurora shadow for hero CTAs */
 .shadow-aurora {
   box-shadow:
-    0 0 0 1px rgba(10, 37, 64, 0.6),
-    0 12px 40px -10px rgba(0, 196, 180, 0.45),
-    0 6px 20px -8px rgba(10, 37, 64, 0.35);
+    0 0 0 1px rgba(11, 15, 25, 0.6),
+    0 12px 38px -10px rgba(4, 120, 87, 0.40),
+    0 6px 18px -8px rgba(11, 15, 25, 0.30);
 }
 
-/* ────── Premium new-design utilities ────── */
-
-/* Abstract Union-Jack hairlines for hero decoration */
-.uk-hairlines {
-  background-image:
-    linear-gradient(115deg, transparent 48.5%, rgba(0, 196, 180, 0.10) 49%, rgba(0, 196, 180, 0.10) 51%, transparent 51.5%),
-    linear-gradient(65deg, transparent 48.5%, rgba(201, 161, 74, 0.10) 49%, rgba(201, 161, 74, 0.10) 51%, transparent 51.5%),
-    linear-gradient(0deg, transparent 49%, rgba(10, 37, 64, 0.06) 49.5%, rgba(10, 37, 64, 0.06) 50.5%, transparent 51%),
-    linear-gradient(90deg, transparent 49%, rgba(10, 37, 64, 0.06) 49.5%, rgba(10, 37, 64, 0.06) 50.5%, transparent 51%);
-}
-
-/* Soft warm-paper grain */
-.paper-grain {
-  background-image:
-    radial-gradient(rgba(10, 37, 64, 0.025) 1px, transparent 1px);
-  background-size: 3px 3px;
-}
-
-/* Crisp hairline border for premium cards */
+/* Editorial hairline border */
 .hairline {
-  border: 1px solid rgba(10, 37, 64, 0.09);
+  border: 1px solid rgba(11, 15, 25, 0.09);
 }
-html.dark .hairline {
-  border-color: rgba(255, 255, 255, 0.08);
+html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
+
+.hairline-warm {
+  border: 1px solid rgba(184, 134, 11, 0.20);
 }
 
-/* Soft teal underline keyword highlight */
-.kw-teal {
-  background-image: linear-gradient(transparent 62%, rgba(0, 196, 180, 0.22) 62%, rgba(0, 196, 180, 0.22) 92%, transparent 92%);
+/* Editorial hairline divider rule */
+.ed-rule {
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(11, 15, 25, 0.16) 0%,
+    rgba(11, 15, 25, 0.06) 50%,
+    rgba(11, 15, 25, 0.00) 100%
+  );
+}
+
+.ed-rule-center {
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(11, 15, 25, 0.16) 50%,
+    transparent 100%
+  );
+}
+
+/* ════════════════════════════════════════════
+   TEXT TREATMENTS — keyword highlights
+════════════════════════════════════════════ */
+
+/* Soft emerald underline (replaces kw-teal) */
+.kw-emerald {
+  background-image: linear-gradient(transparent 62%, rgba(4, 120, 87, 0.22) 62%, rgba(4, 120, 87, 0.22) 92%, transparent 92%);
   padding: 0 2px;
 }
 
-/* Card lift effect */
-.lift-on-hover {
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 200ms;
-}
-.lift-on-hover:hover {
-  transform: translateY(-2px);
+.kw-gold {
+  background-image: linear-gradient(transparent 62%, rgba(184, 134, 11, 0.28) 62%, rgba(184, 134, 11, 0.28) 92%, transparent 92%);
+  padding: 0 2px;
 }
 
-/* ────── Dot pattern (footer, CTA bands) ────── */
+/* Backward-compat — kw-teal now uses emerald token */
+.kw-teal {
+  background-image: linear-gradient(transparent 62%, rgba(4, 120, 87, 0.22) 62%, rgba(4, 120, 87, 0.22) 92%, transparent 92%);
+  padding: 0 2px;
+}
+
+/* Italic serif inline accent — "for UK life" style */
+.serif-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: #047857;
+  letter-spacing: -0.015em;
+}
+
+/* Money / numeric — tabular nums */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum", "ss01";
+}
+
+.ed-money {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum", "ss01";
+}
+
+/* ════════════════════════════════════════════
+   PATTERNS — paper grain, dots, hairlines
+════════════════════════════════════════════ */
+
+.paper-grain {
+  background-image:
+    radial-gradient(rgba(11, 15, 25, 0.022) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
 .dot-pattern {
-  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* ────── Gradient animated text — calm teal→gold sweep ────── */
+.dot-pattern-dark {
+  background-image: radial-gradient(rgba(11, 15, 25, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.uk-hairlines {
+  background-image:
+    linear-gradient(115deg, transparent 48.5%, rgba(4, 120, 87, 0.08) 49%, rgba(4, 120, 87, 0.08) 51%, transparent 51.5%),
+    linear-gradient(65deg, transparent 48.5%, rgba(184, 134, 11, 0.08) 49%, rgba(184, 134, 11, 0.08) 51%, transparent 51.5%),
+    linear-gradient(0deg, transparent 49%, rgba(11, 15, 25, 0.05) 49.5%, rgba(11, 15, 25, 0.05) 50.5%, transparent 51%),
+    linear-gradient(90deg, transparent 49%, rgba(11, 15, 25, 0.05) 49.5%, rgba(11, 15, 25, 0.05) 50.5%, transparent 51%);
+}
+
+/* ════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════ */
+
+.lift-on-hover {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 200ms;
+}
+.lift-on-hover:hover {
+  transform: translateY(-3px);
+}
+
+/* Gradient sweep — kept for backward compat, repainted emerald→gold */
 .gradient-text {
-  background: linear-gradient(90deg, #00C4B4 0%, #C9A14A 50%, #00C4B4 100%);
+  background: linear-gradient(90deg, #047857 0%, #B8860B 50%, #047857 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -269,34 +460,13 @@ html.dark .hairline {
   100% { background-position: 200% center; }
 }
 
-/* ────── Horizontal scroll fade mask ────── */
+/* Horizontal scroll fade mask */
 .mask-fade {
   -webkit-mask-image: linear-gradient(to right, transparent 0, black 3%, black 97%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, black 3%, black 97%, transparent 100%);
 }
 
-/* ────── Prose / blog article reading ────── */
-.prose-content {
-  font-size: 17px;
-  line-height: 1.75;
-  color: var(--color-on-surface);
-}
-@media (min-width: 768px) {
-  .prose-content {
-    font-size: 18px;
-  }
-}
-.prose-content p { margin-bottom: 1.25em; }
-.prose-content h2 { margin-top: 2.5em; margin-bottom: 0.6em; }
-.prose-content h3 { margin-top: 2em; margin-bottom: 0.5em; }
-
-/* ────── Focus ring alternative ────── */
-.ring-soft:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 196, 180, 0.25);
-}
-
-/* ────── Reduced motion ────── */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .gradient-text { animation: none; }
   * {
@@ -306,27 +476,25 @@ html.dark .hairline {
   }
 }
 
-/* ─── Float animation for hero illustrations ─── */
+/* Float */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-14px); }
+  50%      { transform: translateY(-14px); }
 }
-.float-anim {
-  animation: float 6s ease-in-out infinite;
-}
+.float-anim { animation: float 6s ease-in-out infinite; }
 
-/* ─── Shimmer sweep (skeleton / highlight) ─── */
+/* Shimmer */
 @keyframes shimmer-x {
   0%   { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
 .shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
   background-size: 200% auto;
   animation: shimmer-x 2.5s linear infinite;
 }
 
-/* ─── Subtle pulse ring for live indicators ─── */
+/* Pulse ring */
 @keyframes ping-slow {
   0%   { transform: scale(1);   opacity: 0.55; }
   80%  { transform: scale(2.2); opacity: 0; }
@@ -334,37 +502,41 @@ html.dark .hairline {
 }
 .ping-slow { animation: ping-slow 2.4s ease-out infinite; }
 
-/* ─── Counter number reveal ─── */
+/* Counter reveal */
 @keyframes count-up {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.count-up { animation: count-up 0.55s cubic-bezier(0.22,1,0.36,1) forwards; }
+.count-up { animation: count-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-/* ─── Fade-slide stagger helper ─── */
+/* Fade up stagger */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.fade-up { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
-/* ─── Rotate slow (stamp) ─── */
+/* Slow rotate (stamp) */
 @keyframes rotate-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 .rotate-slow { animation: rotate-slow 24s linear infinite; }
 
+/* Soft focus ring */
+.ring-soft:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.25);
+}
+
 /* ════════════════════════════════════════════════════════
-   EDITORIAL TYPE SYSTEM (used by /visa/[slug] redesign)
+   EDITORIAL TYPE SYSTEM — used by /visa/[slug] redesign
 ══════════════════════════════════════════════════════════ */
 
-.font-editorial { font-family: var(--font-editorial); font-feature-settings: "ss01", "ss02"; }
-.font-mono      { font-family: var(--font-mono); }
+.font-editorial { font-family: var(--font-display); font-feature-settings: "ss01", "ss02"; }
 
-/* Editorial display headline — Fraunces variable serif with optical sizing */
 .ed-headline {
-  font-family: var(--font-editorial);
+  font-family: var(--font-display);
   font-optical-sizing: auto;
   font-variation-settings: "opsz" 144, "SOFT" 50;
   letter-spacing: -0.025em;
@@ -372,7 +544,6 @@ html.dark .hairline {
   line-height: 0.98;
 }
 
-/* Sub-headline / deck */
 .ed-deck {
   font-family: var(--font-sans);
   font-weight: 400;
@@ -381,7 +552,6 @@ html.dark .hairline {
   text-wrap: pretty;
 }
 
-/* Section eyebrow — small-caps category label */
 .ed-eyebrow {
   font-family: var(--font-sans);
   font-weight: 700;
@@ -390,39 +560,30 @@ html.dark .hairline {
   text-transform: uppercase;
 }
 
-/* Long-form body text — 18px / 1.7 / Inter */
 .ed-prose {
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.75;
-  color: #1a2240;
+  color: #1F2937;
   letter-spacing: -0.005em;
 }
 @media (min-width: 768px) {
   .ed-prose { font-size: 18px; }
 }
 
-/* Money / numeric — tabular nums for clean alignment */
-.ed-money {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum", "ss01";
-}
-
-/* Pull-quote treatment */
 .ed-pullquote {
-  font-family: var(--font-editorial);
+  font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.45;
-  color: #0A2540;
+  color: #0B0F19;
   letter-spacing: -0.01em;
 }
 @media (min-width: 768px) {
   .ed-pullquote { font-size: 1.5rem; }
 }
 
-/* Big number for statistical display */
 .ed-bignumber {
   font-family: var(--font-display);
   font-weight: 700;
@@ -431,23 +592,13 @@ html.dark .hairline {
   font-variant-numeric: tabular-nums;
 }
 
-/* Hairline rule — used between sections */
-.ed-rule {
-  height: 1px;
-  background: linear-gradient(to right,
-    rgba(14,20,36,0.18) 0%,
-    rgba(14,20,36,0.06) 50%,
-    rgba(14,20,36,0.0) 100%
-  );
-}
-
-/* Print stylesheet — strip dark gradients + sticky elements for clean ink */
+/* Print stylesheet */
 @media print {
-  nav, header[class*="fixed"], aside.lg\\:sticky, .sticky,
+  nav, header[class*="fixed"], aside.lg\:sticky, .sticky,
   [class*="StickyMobileCta"], [class*="VisaStickyBar"] {
     display: none !important;
   }
-  .ed-headline, .ed-deck, .ed-prose { color: #000 !important; }
+  .ed-headline, .ed-deck, .ed-prose, .serif-display, .serif-mega { color: #000 !important; }
   body { background: #fff !important; }
   [class*="bg-gradient-to"] { background: #fff !important; color: #000 !important; }
 }
