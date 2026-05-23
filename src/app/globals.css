@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* ════════════════════════════════════════════
-     FONT STACK — Editorial Premium
-     Display: Fraunces (variable serif, optical sizing)
-     Body: Inter (16/17px, very readable)
-     Mono: JetBrains Mono
-  ════════════════════════════════════════════ */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Fraunces", "Times New Roman", Georgia, serif;
-  --font-serif: "Fraunces", "Times New Roman", Georgia, serif;
-  --font-headline: "Fraunces", "Times New Roman", Georgia, serif;
+  /* Single-font system: Inter only — thin, bright, professional, no stylish display face */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-headline: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ════════════════════════════════════════════

@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
-  ArrowLeft, ExternalLink, CheckCircle2, Clock, Banknote, ShieldCheck,
-  Calendar, ArrowRight, MessageCircle, Star, Calculator,
-  Wallet, Stethoscope, Building2, IdCard, AlertTriangle, Sparkles,
+  ArrowLeft, ExternalLink, Calculator, ChevronRight,
 } from 'lucide-react';
 import { VISA_DETAILS } from '../../../data/visaDetails';
 import { VISA_FAQS } from '../../../data/visaFaqs';
@@ -19,25 +17,30 @@ import StickyMobileCta from '../../../components/StickyMobileCta';
 import { SETTLEMENT_BREAKDOWNS } from '../../../data/settlementFees';
 import { getVariants } from '../../../data/visaVariants';
 
-/* ────────────────────────────────────────────────────────────
-   Editorial Premium tokens — cream paper, ink, emerald, gold
-─────────────────────────────────────────────────────────────── */
-const INK     = '#1A1F36';
-const CREAM   = '#FCFCFD';
-const PAPER   = '#FFFFFF';
-const EMERALD = '#635BFF';
-const GOLD    = '#5851DB';
-const SLATE   = '#3C4257';
-const MUTED   = '#697386';
-const HAIR    = '#E3E8EE';
+/* ─── Quartz tokens — light, professional, single Inter font ──── */
+const INK    = '#1A1F36';
+const INK2   = '#3C4257';
+const MID    = '#697386';
+const MID2   = '#8792A2';
+const FAINT  = '#A3ACB9';
+const BG     = '#FFFFFF';
+const BG2    = '#F7F8FA';
+const BORDER = '#E3E8EE';
+const ACCENT = '#635BFF';
+const ACCENT_SOFT = '#EFEEFF';
+const ACCENT_DK = '#5851DB';
+const POSITIVE = '#08855D';
+const POSITIVE_SOFT = '#E6F7EF';
+const WARN_SOFT = '#FCEDD3';
+const WARN_INK  = '#7E4A02';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
 const CATEGORY_LABEL: Record<string, string> = {
-  Work:   'Work route',
-  Study:  'Study route',
-  Family: 'Family route',
-  Visit:  'Visit route',
+  Work:   'Work',
+  Study:  'Study',
+  Family: 'Family',
+  Visit:  'Visit',
 };
 
 export function generateStaticParams() {
@@ -63,30 +66,26 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       authors: ['https://ukvisainfo.co.uk'],
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title, description,
-      images: [ogImageUrl],
-    },
+    twitter: { card: 'summary_large_image', title, description, images: [ogImageUrl] },
   };
 }
 
 function categoriseDocuments(docs: string[]) {
-  const buckets: { id: string; label: string; icon: typeof IdCard; items: string[] }[] = [
-    { id: 'identity', label: 'Identity',                  icon: IdCard,      items: [] },
-    { id: 'finance',  label: 'Finance',                   icon: Wallet,      items: [] },
-    { id: 'sponsor',  label: 'Sponsor / Course',          icon: Building2,   items: [] },
-    { id: 'health',   label: 'Health & qualifications',   icon: Stethoscope, items: [] },
+  const buckets: { id: string; label: string; items: string[] }[] = [
+    { id: 'identity', label: 'Identity',          items: [] },
+    { id: 'finance',  label: 'Finance',           items: [] },
+    { id: 'sponsor',  label: 'Sponsor / Course',  items: [] },
+    { id: 'health',   label: 'Health & skills',   items: [] },
   ];
   for (const d of docs) {
     const low = d.toLowerCase();
-    if (/passport|biometric|brp|evisa|share code|nationality|certificate of birth|birth certificate|adoption|marriage|civil partnership|grandparent/i.test(low))
+    if (/passport|biometric|brp|evisa|share code|nationality|birth|adoption|marriage|civil partnership|grandparent/i.test(low))
       buckets[0].items.push(d);
     else if (/bank|payslip|p60|tax|hmrc|salary|maintenance|funds|savings|sa302|finance/i.test(low))
       buckets[1].items.push(d);
-    else if (/cas|cos|sponsor|certificate of sponsorship|certificate of acceptance|employer|letter|offer|course|institution|reference number|endorsement/i.test(low))
+    else if (/cas|cos|sponsor|certificate of acceptance|employer|letter|offer|course|institution|reference number|endorsement/i.test(low))
       buckets[2].items.push(d);
-    else if (/tb test|tuberculosis|english|ielts|selt|atas|life in the uk|qualification|degree|gmc|nmc|hcpc|criminal record|dbs|police|registration|cv/i.test(low))
+    else if (/tb|tuberculosis|english|ielts|selt|atas|life in the uk|qualification|degree|gmc|nmc|hcpc|criminal|dbs|police|registration|cv|phd/i.test(low))
       buckets[3].items.push(d);
     else
       buckets[2].items.push(d);
@@ -118,56 +117,47 @@ export default async function VisaPage({ params }: RouteParams) {
     ...(faqs.length ? [{ id: 'faq', label: 'FAQ' }] : []),
   ];
 
+  /* ─── JSON-LD ─── */
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: v.title,
-    description: v.summary,
-    datePublished: '2026-04-08',
-    dateModified: '2026-05-19',
+    headline: v.title, description: v.summary,
+    datePublished: '2026-04-08', dateModified: '2026-05-19',
     author: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
-    publisher: {
-      '@type': 'Organization', name: 'UKDesk',
-      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
-    },
+    publisher: { '@type': 'Organization', name: 'UKDesk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' } },
     image: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`,
     mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}`,
     inLanguage: 'en-GB',
   };
   const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',        item: 'https://ukvisainfo.co.uk' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ukvisainfo.co.uk' },
       { '@type': 'ListItem', position: 2, name: 'Visa Routes', item: 'https://ukvisainfo.co.uk/visa-types' },
-      { '@type': 'ListItem', position: 3, name: v.title,       item: `https://ukvisainfo.co.uk/visa/${slug}` },
+      { '@type': 'ListItem', position: 3, name: v.title, item: `https://ukvisainfo.co.uk/visa/${slug}` },
     ],
   };
   const howToJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
+    '@context': 'https://schema.org', '@type': 'HowTo',
     name: `How to Apply for a ${v.title}`,
     description: `Step-by-step guide to applying for the ${v.title}. Fee: ${v.fee}. Processing: ${v.processing.outside}.`,
     totalTime: `P${parseInt(v.processing.outside) || 3}W`,
     estimatedCost: { '@type': 'MonetaryAmount', currency: 'GBP', value: (v.fee.match(/[\d,]+/) ?? ['0'])[0].replace(',', '') },
-    step: [
-      { '@type': 'HowToStep', position: 1, name: 'Check eligibility', text: `Confirm you meet the eligibility criteria for the ${v.title}.`, url: `https://ukvisainfo.co.uk/visa/${slug}#eligibility` },
-      { '@type': 'HowToStep', position: 2, name: 'Gather documents',  text: 'Collect all required supporting documents before applying.', url: `https://ukvisainfo.co.uk/visa/${slug}#documents` },
-      { '@type': 'HowToStep', position: 3, name: 'Pay the fee',       text: `Pay the application fee (${v.fee}) and IHS surcharge (${v.ihs}).`, url: `https://ukvisainfo.co.uk/visa/${slug}#costs` },
-      { '@type': 'HowToStep', position: 4, name: 'Submit online application', text: 'Complete and submit your application on gov.uk.', url: v.applyUrl },
-      { '@type': 'HowToStep', position: 5, name: 'Attend biometrics appointment', text: 'Book and attend a biometrics appointment at a UKVCAS centre.' },
-      { '@type': 'HowToStep', position: 6, name: 'Await decision', text: `Receive your decision. Standard processing: ${v.processing.outside} (outside UK).` },
-    ],
+    step: v.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.desc })),
   };
   const faqJsonLd = faqs.length ? {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question', name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
-    })),
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
   } : null;
 
+  /* ────────────────────────────────────────────────────────── */
   return (
-    <>
+    <div style={{
+      background: BG, color: INK,
+      fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+      WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale',
+    }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
@@ -177,276 +167,214 @@ export default async function VisaPage({ params }: RouteParams) {
 
       <VisaStickyBar title={v.title} fee={v.fee} applyUrl={v.applyUrl} slug={slug} />
 
-      {/* ═══════════════════════════════════════════════════════════
-          HERO — cream, editorial, large serif title
-      ═══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-[84px] md:pt-[96px] pb-10 md:pb-12" style={{ background: PAPER, borderBottom: `1px solid ${HAIR}` }}>
-        {/* Subtle background paint */}
-        <div className="relative max-w-[1200px] mx-auto px-5 md:px-8">
+      {/* ═════════ HERO — compressed, one-glance ═════════ */}
+      <header style={{ borderBottom: `1px solid ${BORDER}`, background: BG }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(76px,9vw,92px) clamp(20px,3vw,32px) 24px' }}>
           {/* Breadcrumb */}
-          <div className="pt-2 pb-7">
-            <Link
-              href="/visa-types"
-              className="inline-flex items-center gap-1.5 text-[13px] font-medium transition-colors"
-              style={{ color: SLATE }}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              All visa routes
-            </Link>
-          </div>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: MID, marginBottom: 18 }}>
+            <Link href="/visa-types" style={{ color: MID, textDecoration: 'none' }}>UK Visas</Link>
+            <ChevronRight size={11} strokeWidth={2} color={FAINT} />
+            <Link href="/visa-types" style={{ color: MID, textDecoration: 'none' }}>{categoryLabel}</Link>
+            <ChevronRight size={11} strokeWidth={2} color={FAINT} />
+            <span style={{ color: INK2, fontWeight: 500 }}>{v.title}</span>
+          </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <div className="lg:col-span-7">
-              {/* Pill row */}
-              <div className="flex flex-wrap items-center gap-2 mb-7">
-                <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full"
-                      style={{
-                        background: 'rgba(99,91,255,0.08)',
-                        color: EMERALD,
-                        border: '1px solid rgba(99,91,255,0.18)',
-                        letterSpacing: '0.18em',
-                      }}>
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: EMERALD }} />
-                  {categoryLabel}
+          {/* Title + Tagline + Actions — all on one tight block */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(0, 1fr) auto',
+            gap: 24,
+            alignItems: 'flex-end',
+            marginBottom: 22,
+          }} className="visa-hero-row">
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
+                <span style={{
+                  fontSize: 11, fontWeight: 600, letterSpacing: '0.04em',
+                  textTransform: 'uppercase', color: ACCENT_DK,
+                  background: ACCENT_SOFT, border: `1px solid ${ACCENT}26`,
+                  padding: '3px 8px', borderRadius: 4,
+                }}>
+                  {categoryLabel} route
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full"
-                      style={{
-                        background: PAPER,
-                        color: INK,
-                        border: `1px solid ${HAIR}`,
-                        letterSpacing: '0.18em',
-                      }}>
-                  <CheckCircle2 className="w-3 h-3" style={{ color: EMERALD }} strokeWidth={2.5} />
+                <span style={{
+                  fontSize: 11, fontWeight: 500, color: POSITIVE,
+                  background: POSITIVE_SOFT, border: `1px solid #BFE3D3`,
+                  padding: '3px 8px', borderRadius: 4,
+                }}>
                   Verified · {v.updated}
                 </span>
-                <a
-                  href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full transition-colors"
-                  style={{
-                    background: PAPER,
-                    color: SLATE,
-                    border: `1px solid ${HAIR}`,
-                    letterSpacing: '0.18em',
-                  }}
-                >
-                  <ShieldCheck className="w-3 h-3" />
-                  gov.uk source
-                </a>
               </div>
-
-              {/* Title — Fraunces serif */}
               <h1 style={{
-                fontFamily: '"Inter Tight", Inter, sans-serif',
+                fontSize: 'clamp(26px, 3.6vw, 38px)',
                 fontWeight: 600,
-                fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
-                lineHeight: 0.98,
+                lineHeight: 1.1,
                 letterSpacing: '-0.025em',
                 color: INK,
-                textWrap: 'balance' as React.CSSProperties['textWrap'],
+                margin: '0 0 10px',
+                maxWidth: 720,
               }}>
                 {v.title}
               </h1>
-
-              <p className="mt-6 max-w-2xl text-[15px] md:text-[16px] leading-[1.65]"
-                 style={{ color: SLATE }}>
+              <p style={{
+                fontSize: 15, lineHeight: 1.55, color: MID,
+                margin: 0, maxWidth: 620, fontWeight: 400,
+              }}>
                 {v.tagline}
               </p>
-
-              {/* CTAs */}
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href={v.applyUrl}
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[14px] font-semibold px-7 py-3.5 rounded-xl active:scale-[0.98] transition-all"
-                  style={{
-                    background: INK,
-                    color: CREAM,
-                    boxShadow: '0 1px 2px rgba(26,31,54,0.06), 0 0 0 1px rgba(26,31,54,0.04)',
-                  }}
-                >
-                  Apply on gov.uk
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-                <Link
-                  href={`/tools/cost-calculator?visa=${slug}`}
-                  className="inline-flex items-center gap-2 text-[14px] font-semibold px-7 py-3.5 rounded-xl transition-colors"
-                  style={{
-                    background: PAPER,
-                    color: INK,
-                    border: `1px solid ${HAIR}`,
-                  }}
-                >
-                  <Calculator className="w-4 h-4" />
-                  Calculate full cost
-                </Link>
-              </div>
             </div>
-
-            {/* Stat grid — paper white cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-3 md:gap-4">
-              <HeroStat label="Fee from" value={headlineFee} icon={Banknote} highlight />
-              <HeroStat label="Decision" value={v.processing.outside} icon={Clock} />
-              <HeroStat label="IHS / yr" value={v.ihs} icon={Stethoscope} />
-              <HeroStat label="Duration" value={shortDuration} icon={Calendar} />
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0 }} className="visa-hero-cta">
+              <a
+                href={v.applyUrl}
+                target="_blank" rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  background: ACCENT, color: '#fff',
+                  fontSize: 13, fontWeight: 500,
+                  padding: '8px 14px', borderRadius: 6,
+                  textDecoration: 'none',
+                  boxShadow: '0 1px 2px rgba(26,31,54,0.08)',
+                }}
+              >
+                Apply on gov.uk <ExternalLink size={12} strokeWidth={2.2} />
+              </a>
+              <Link
+                href={`/tools/cost-calculator?visa=${slug}`}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  background: BG, color: INK,
+                  border: `1px solid ${BORDER}`,
+                  fontSize: 13, fontWeight: 500,
+                  padding: '8px 14px', borderRadius: 6,
+                  textDecoration: 'none',
+                }}
+              >
+                <Calculator size={12} strokeWidth={2.2} /> Estimate cost
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Section anchor nav */}
+          {/* INLINE METRIC STRIP — no cards, just hairline-separated cells */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            border: `1px solid ${BORDER}`,
+            borderRadius: 8,
+            background: BG2,
+            overflow: 'hidden',
+          }}>
+            <Metric label="Application fee" value={headlineFee} sub={v.fee.split('·')[0].trim().replace(headlineFee, '').trim() || 'from'} />
+            <Metric label="IHS / year" value={v.ihs.split('/')[0].trim()} sub="adult rate" border />
+            <Metric label="Decision (outside)" value={v.processing.outside} sub={`Inside UK: ${v.processing.inside}`} border />
+            <Metric label="Duration" value={shortDuration} sub="initial leave" border />
+          </div>
+        </div>
+      </header>
+
+      {/* Sticky tab nav */}
       <VisaTabNav tabs={tabs} />
 
-      {/* ═══════════════════════════════════════════════════════════
-          CONTENT
-      ═══════════════════════════════════════════════════════════ */}
-      <div style={{ background: '#F7F8FA' }}>
-        <div className="max-w-[1200px] mx-auto px-5 md:px-8 py-10 md:py-14">
-          <div className="grid grid-cols-12 gap-8 lg:gap-14">
+      {/* ═════════ BODY — 2-col with sticky TOC ═════════ */}
+      <div style={{ background: BG }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(24px,4vw,40px) clamp(20px,3vw,32px) 64px' }}>
+          <div className="flex flex-col lg:flex-row gap-10">
 
-            <main className="col-span-12 lg:col-span-8 space-y-16 md:space-y-20">
+            <main style={{ flex: 1, minWidth: 0, maxWidth: 760 }} className="space-y-12">
 
-              {/* 01 OVERVIEW */}
-              <Section eyebrow="01 — Overview" title={`What is the ${v.title}?`}>
-                <div className="rounded-xl p-7 md:p-9"
-                  style={{
-                    background: PAPER,
-                    border: `1px solid ${HAIR}`,
-                    
-                  }}>
-                  <p className="text-[14.5px] md:text-[15.5px] leading-[1.7]" style={{ color: INK }}>
-                    {v.summary}
-                  </p>
-                  <div className="mt-7 pt-6 grid grid-cols-2 md:grid-cols-4 gap-6"
-                       style={{ borderTop: `1px solid ${HAIR}` }}>
-                    <Inline label="Application fee" value={v.fee} />
-                    <Inline label="IHS surcharge" value={v.ihs} />
-                    <Inline label="Decision (outside)" value={v.processing.outside} />
-                    <Inline label="Duration" value={shortDuration} />
-                  </div>
-                </div>
+              {/* 01 OVERVIEW — facts, not paragraphs */}
+              <Section id="overview" num="01" title="Overview">
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: INK2, margin: '0 0 16px', maxWidth: 640 }}>
+                  {v.summary}
+                </p>
+                <DL items={[
+                  ['Route type', categoryLabel],
+                  ['Sponsor required', /sponsor|cas|cos|certificate/i.test(v.eligibility.join(' ')) ? 'Yes' : 'No'],
+                  ['Family allowed', /spouse|partner|dependant|child/i.test(v.eligibility.concat(v.documents).join(' ')) ? 'Yes — dependants permitted' : 'Check route rules'],
+                  ['Switch in-UK', v.processing.inside && !/^n\/a/i.test(v.processing.inside) ? `Allowed · ${v.processing.inside}` : 'Not available'],
+                  ['Updated', v.updated],
+                ]} />
               </Section>
 
-              {/* SUB-ROUTE PICKER */}
               {variants.length > 0 && (
                 <section id="variants" className="scroll-mt-32">
                   <VariantPicker variants={variants} visaId={slug} />
                 </section>
               )}
 
-              {/* 02 ELIGIBILITY */}
-              <Section eyebrow="02 — Eligibility" title="Are you eligible?">
-                <div className="mb-5 rounded-xl px-5 py-4 flex items-start gap-3"
-                     style={{ background: '#FBF6E7', border: '1px solid rgba(88,81,219,0.30)' }}>
-                  <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
-                  <p className="text-[13.5px] leading-[1.65]" style={{ color: '#5C4A12' }}>
-                    You must meet <strong style={{ fontWeight: 700 }}>every</strong> condition below.
-                    The Home Office refuses on the first missed requirement.
-                  </p>
-                </div>
-                <div className="rounded-xl overflow-hidden"
-                  style={{
-                    background: PAPER,
-                    border: `1px solid ${HAIR}`,
-                    
-                  }}>
-                  <ul>
-                    {v.eligibility.map((item, i) => (
-                      <li key={i} className="px-7 py-5 flex items-start gap-5"
-                          style={{ borderBottom: i < v.eligibility.length - 1 ? `1px solid ${HAIR}` : 'none' }}>
-                        <span aria-hidden
-                              className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-[12px] tabular-nums"
-                              style={{
-                                background: INK,
-                                color: CREAM,
-                                fontFamily: '"Inter Tight", Inter, sans-serif',
-                                fontWeight: 700,
-                              }}>
-                          {i + 1}
-                        </span>
-                        <span className="text-[14px] leading-[1.65] flex-1" style={{ color: INK }}>
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+              {/* 02 ELIGIBILITY — numbered table */}
+              <Section id="eligibility" num="02" title="Eligibility requirements"
+                       note="You must meet every condition. Home Office refuses on the first miss.">
+                <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden', background: BG }}>
+                  {v.eligibility.map((item, i) => (
+                    <div key={i} style={{
+                      display: 'grid', gridTemplateColumns: '36px 1fr',
+                      borderTop: i > 0 ? `1px solid ${BORDER}` : 'none',
+                    }}>
+                      <div style={{
+                        background: BG2, borderRight: `1px solid ${BORDER}`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 12, fontWeight: 500, color: MID,
+                        fontVariantNumeric: 'tabular-nums',
+                      }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <div style={{ padding: '11px 14px', fontSize: 14, lineHeight: 1.55, color: INK2 }}>
+                        {item}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </Section>
 
               {/* 03 COSTS */}
-              <Section eyebrow="03 — Costs" title="What it costs in 2026">
-                <p className="text-[14px] leading-[1.65] mb-6 max-w-2xl" style={{ color: SLATE }}>
-                  Two compulsory costs: the application fee and the Immigration Health Surcharge (IHS).
-                  Priority and dependants are added on top.
-                </p>
-
+              <Section id="costs" num="03" title="Costs in 2026">
                 {SETTLEMENT_BREAKDOWNS[slug] ? (
                   <SettlementCostStack breakdown={SETTLEMENT_BREAKDOWNS[slug]} calculatorVisaParam={slug} />
                 ) : (
-                  <CostCard fee={v.fee} ihs={v.ihs} slug={slug} headlineFee={headlineFee} />
+                  <CostTable fee={v.fee} ihs={v.ihs} slug={slug} headlineFee={headlineFee} />
                 )}
               </Section>
 
-              {/* 04 DOCUMENTS */}
-              <Section eyebrow="04 — Documents" title="What you'll need to provide">
-                <p className="text-[14px] leading-[1.65] mb-7 max-w-2xl" style={{ color: SLATE }}>
-                  Group your evidence under these headings. Mis-categorised or missing documents
-                  are the second most common refusal reason.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {docGroups.map((group) => {
-                    const Icon = group.icon;
-                    return (
-                      <div key={group.id}
-                        className="rounded-xl p-6"
-                        style={{
-                          background: PAPER,
-                          border: `1px solid ${HAIR}`,
-                          boxShadow: '0 2px 14px -8px rgba(26,31,54,0.08)',
-                        }}>
-                        <div className="flex items-center gap-3 mb-5 pb-5"
-                             style={{ borderBottom: `1px solid ${HAIR}` }}>
-                          <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ background: 'rgba(99,91,255,0.08)', color: EMERALD }}>
-                            <Icon className="w-[18px] h-[18px]" strokeWidth={2} />
-                          </span>
-                          <h3 className="flex-1"
-                              style={{
-                                fontFamily: '"Inter Tight", Inter, sans-serif',
-                                fontWeight: 600,
-                                fontSize: 18,
-                                letterSpacing: '-0.02em',
-                                color: INK,
-                                lineHeight: 1.15,
-                              }}>
-                            {group.label}
-                          </h3>
-                          <span className="text-[11px] font-mono tabular-nums" style={{ color: MUTED }}>
-                            {group.items.length}
-                          </span>
-                        </div>
-                        <ul className="space-y-3">
-                          {group.items.map((doc, i) => (
-                            <li key={i} className="flex items-start gap-3">
-                              <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: EMERALD }} />
-                              <span className="text-[14px] leading-[1.6]" style={{ color: INK }}>
-                                {doc}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+              {/* 04 DOCUMENTS — grouped 2-col bullets */}
+              <Section id="documents" num="04" title="Required documents">
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                  gap: 1, background: BORDER,
+                  border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden',
+                }}>
+                  {docGroups.map((g) => (
+                    <div key={g.id} style={{ background: BG, padding: '14px 16px' }}>
+                      <div style={{
+                        fontSize: 11, fontWeight: 600, color: MID2,
+                        letterSpacing: '0.04em', textTransform: 'uppercase',
+                        marginBottom: 10,
+                      }}>
+                        {g.label}
                       </div>
-                    );
-                  })}
+                      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                        {g.items.map((d, i) => (
+                          <li key={i} style={{
+                            fontSize: 13.5, lineHeight: 1.5, color: INK2,
+                            padding: '6px 0',
+                            borderTop: i > 0 ? `1px dashed ${BORDER}` : 'none',
+                            display: 'flex', gap: 8, alignItems: 'flex-start',
+                          }}>
+                            <span style={{
+                              width: 4, height: 4, borderRadius: 999,
+                              background: ACCENT, marginTop: 8, flexShrink: 0,
+                            }} />
+                            <span>{d}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </Section>
 
-              {/* 05 PROCESS */}
-              <Section eyebrow="05 — How to apply" title="Step-by-step application guide">
-                <p className="text-[14px] leading-[1.65] mb-7 max-w-2xl" style={{ color: SLATE }}>
-                  Choose your path below. The process is different if you&apos;re applying from outside the UK
-                  (entry clearance) versus switching from another visa inside the UK.
-                </p>
+              {/* 05 PROCESS — application guide stays */}
+              <Section id="process" num="05" title="How to apply">
                 <ApplicationGuide
                   slug={slug}
                   title={v.title}
@@ -456,212 +384,98 @@ export default async function VisaPage({ params }: RouteParams) {
                   applyUrl={v.applyUrl}
                   processing={v.processing}
                   steps={v.steps}
+                  accent={ACCENT}
                 />
               </Section>
 
-              {/* 06 NOTES */}
+              {/* 06 KEY NOTES */}
               {v.notes && v.notes.length > 0 && (
-                <Section eyebrow="06 — Common pitfalls" title="Things that catch people out">
-                  <div className="space-y-3">
-                    {v.notes.map((note, i) => (
-                      <div key={i}
-                        className="rounded-lg p-5 md:p-6 flex items-start gap-4"
-                        style={{
-                          background: '#FBF6E7',
-                          border: '1px solid rgba(88,81,219,0.30)',
-                        }}>
-                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ background: 'rgba(88,81,219,0.15)', color: GOLD }}>
-                          <AlertTriangle className="w-4 h-4" strokeWidth={2.2} />
-                        </span>
-                        <p className="text-[14.5px] leading-[1.7] flex-1" style={{ color: '#3F2E0A' }}>
-                          {note}
-                        </p>
-                      </div>
+                <Section id="notes" num="06" title="Key notes">
+                  <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                    {v.notes.map((n, i) => (
+                      <li key={i} style={{
+                        display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 10,
+                        padding: '10px 0',
+                        borderTop: i > 0 ? `1px solid ${BORDER}` : 'none',
+                        fontSize: 13.5, lineHeight: 1.6, color: INK2,
+                      }}>
+                        <span style={{
+                          marginTop: 6, width: 5, height: 5, borderRadius: 999,
+                          background: ACCENT_DK,
+                        }} />
+                        <span>{n}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </Section>
               )}
 
               {/* 07 FAQ */}
               {faqs.length > 0 && (
-                <Section eyebrow="07 — FAQ" title="Common questions">
-                  <div className="rounded-xl p-6 md:p-8"
-                    style={{
-                      background: PAPER,
-                      border: `1px solid ${HAIR}`,
-                      
-                    }}>
-                    <VisaFaq faqs={faqs} />
-                  </div>
+                <Section id="faq" num={String((v.notes?.length ? 7 : 6)).padStart(2, '0')} title="Frequently asked questions">
+                  <VisaFaq faqs={faqs} />
                 </Section>
               )}
-
-              {/* FINAL CTA BANNER */}
-              <div className="relative overflow-hidden rounded-xl p-8 md:p-12"
-                   style={{ background: INK, color: CREAM }}>
-                <div aria-hidden className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full pointer-events-none"
-                     style={{ background: 'rgba(99,91,255,0.28)', filter: 'blur(80px)' }} />
-                <div aria-hidden className="absolute -bottom-32 -left-32 w-[380px] h-[380px] rounded-full pointer-events-none"
-                     style={{ background: 'rgba(88,81,219,0.18)', filter: 'blur(80px)' }} />
-                <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-7">
-                  <div className="max-w-md">
-                    <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-4 inline-flex items-center gap-1.5"
-                       style={{ color: '#FDE68A' }}>
-                      <Sparkles className="w-3 h-3" />
-                      Ready to apply
-                    </p>
-                    <h3 className="mb-3"
-                        style={{
-                          fontFamily: '"Inter Tight", Inter, sans-serif',
-                          fontWeight: 600,
-                          fontSize: 'clamp(1.35rem, 3vw, 1.75rem)',
-                          letterSpacing: '-0.028em',
-                          lineHeight: 1.05,
-                          color: CREAM,
-                        }}>
-                      Apply for the <span style={{ fontStyle: 'italic', color: '#A7F3D0' }}>{v.title}</span> on gov.uk
-                    </h3>
-                    <p className="text-[15px] leading-[1.65]" style={{ color: 'rgba(250,250,247,0.65)' }}>
-                      Free, official, no agents required. Bookmark the URL — it&#39;s the only place to legally apply.
-                    </p>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                    <a href={v.applyUrl} target="_blank" rel="noopener noreferrer"
-                       className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold px-6 py-3.5 rounded-xl active:scale-[0.98] transition-all"
-                       style={{ background: CREAM, color: INK }}>
-                      Apply on gov.uk <ExternalLink className="w-4 h-4" />
-                    </a>
-                    <Link href="/eligibility"
-                       className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold px-6 py-3.5 rounded-xl transition-colors"
-                       style={{ background: 'rgba(250,250,247,0.06)', color: CREAM, border: '1px solid rgba(250,250,247,0.16)' }}>
-                      Eligibility quiz
-                    </Link>
-                  </div>
-                </div>
-              </div>
 
               <RelatedBlogToVisa visaSlug={slug} />
             </main>
 
-            {/* ═══════════════════════════════════════════════════════
-                SIDEBAR
-            ═══════════════════════════════════════════════════════ */}
-            <aside className="col-span-12 lg:col-span-4">
-              <div className="lg:sticky lg:top-[140px] space-y-4">
+            {/* ─── Sticky TOC sidebar (desktop) ─── */}
+            <aside className="hidden lg:block" style={{ width: 220, flexShrink: 0 }}>
+              <div className="sticky" style={{ top: 96 }}>
+                <div style={{
+                  fontSize: 11, fontWeight: 600, color: MID2,
+                  letterSpacing: '0.06em', textTransform: 'uppercase',
+                  marginBottom: 10, paddingLeft: 12,
+                }}>
+                  On this page
+                </div>
+                <nav style={{ display: 'flex', flexDirection: 'column' }}>
+                  {tabs.map((t) => (
+                    <a
+                      key={t.id} href={`#${t.id}`}
+                      style={{
+                        fontSize: 13, color: MID, textDecoration: 'none',
+                        padding: '7px 12px', borderLeft: `1px solid ${BORDER}`,
+                        transition: 'color 0.12s',
+                      }}
+                      className="hover:text-[#1A1F36] hover:border-l-[#635BFF]"
+                    >
+                      {t.label}
+                    </a>
+                  ))}
+                </nav>
 
-                {/* Quick facts card */}
-                <div className="rounded-xl overflow-hidden"
-                  style={{
-                    background: PAPER,
-                    border: `1px solid ${HAIR}`,
-                    
+                {/* Quick fact card */}
+                <div style={{
+                  marginTop: 24, padding: '12px 14px',
+                  background: BG2, border: `1px solid ${BORDER}`, borderRadius: 8,
+                }}>
+                  <div style={{
+                    fontSize: 11, fontWeight: 600, color: MID2,
+                    letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: 8,
                   }}>
-                  <div className="px-6 py-4 flex items-center gap-2.5"
-                       style={{ background: 'rgba(99,91,255,0.05)', borderBottom: `1px solid ${HAIR}` }}>
-                    <span className="w-2 h-2 rounded-full" style={{ background: EMERALD }} />
-                    <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]"
-                          style={{ color: GOLD }}>
-                      At a glance
-                    </span>
+                    Total minimum cost
                   </div>
-                  <dl>
-                    <FactRow label="Application fee" value={v.fee} icon={Banknote} />
-                    <FactRow label="Health surcharge (IHS)" value={v.ihs} icon={ShieldCheck} />
-                    <FactRow label="Decision (outside UK)" value={v.processing.outside} icon={Clock} />
-                    <FactRow label="Decision (inside UK)" value={v.processing.inside} icon={Clock} />
-                    <FactRow label="Duration" value={v.duration} icon={Calendar} last />
-                  </dl>
-                </div>
-
-                {/* Apply CTA */}
-                <a href={v.applyUrl} target="_blank" rel="noopener noreferrer"
-                   className="group flex items-center justify-between gap-3 rounded-xl p-5 transition-all active:scale-[0.99]"
-                   style={{
-                     background: INK,
-                     color: CREAM,
-                     boxShadow: '0 10px 30px -12px rgba(26,31,54,0.40)',
-                   }}>
-                  <div>
-                    <div className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-1.5"
-                         style={{ color: 'rgba(250,250,247,0.65)' }}>
-                      Official application
-                    </div>
-                    <div style={{
-                      fontFamily: '"Inter Tight", Inter, sans-serif',
-                      fontWeight: 600,
-                      fontSize: 18,
-                      letterSpacing: '-0.018em',
-                      color: CREAM,
-                      lineHeight: 1.15,
-                    }}>
-                      Apply on gov.uk
-                    </div>
+                  <div style={{
+                    fontSize: 22, fontWeight: 600, color: INK,
+                    letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums',
+                  }}>
+                    {headlineFee}
                   </div>
-                  <ExternalLink className="w-5 h-5 transition-transform group-hover:translate-x-0.5"
-                                style={{ color: '#A7F3D0' }} />
-                </a>
-
-                {/* Solicitor */}
-                <div className="rounded-xl p-5"
-                     style={{
-                       background: PAPER,
-                       border: `1px solid ${HAIR}`,
-                       boxShadow: '0 2px 14px -8px rgba(26,31,54,0.06)',
-                     }}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: 'rgba(99,91,255,0.10)', color: EMERALD }}>
-                      <MessageCircle className="w-4 h-4" strokeWidth={2.2} />
-                    </span>
-                    <div>
-                      <div style={{
-                        fontFamily: '"Inter Tight", Inter, sans-serif',
-                        fontWeight: 600,
-                        fontSize: 15,
-                        letterSpacing: '-0.015em',
-                        color: INK,
-                        lineHeight: 1.15,
-                      }}>
-                        Talk to a solicitor
-                      </div>
-                      <div className="text-[12px] mt-0.5" style={{ color: MUTED }}>
-                        Free 15-min consultation
-                      </div>
-                    </div>
+                  <div style={{ fontSize: 11.5, color: MID, marginTop: 4, lineHeight: 1.5 }}>
+                    + IHS {v.ihs} × duration
                   </div>
-                  <p className="text-[13px] leading-[1.6] mb-4" style={{ color: SLATE }}>
-                    Get an OISC-regulated immigration solicitor to review your case before you apply.
-                  </p>
-                  <Link href="/eligibility"
-                        className="block text-center text-[13.5px] font-semibold py-2.5 rounded-xl transition-colors"
-                        style={{ background: INK, color: CREAM }}>
-                    Get matched →
+                  <Link
+                    href={`/tools/cost-calculator?visa=${slug}`}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      marginTop: 12, fontSize: 12, fontWeight: 500, color: ACCENT,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Full cost calculator <ChevronRight size={12} />
                   </Link>
-                  <div className="mt-3 flex items-center justify-center gap-1 text-[11.5px]" style={{ color: MUTED }}>
-                    {[1,2,3,4,5].map((i) => <Star key={i} className="w-3 h-3" fill={GOLD} style={{ color: GOLD }} />)}
-                    <span className="ml-1.5">2,400+ applicants helped</span>
-                  </div>
-                </div>
-
-                {/* Source note */}
-                <div className="rounded-lg p-4"
-                     style={{ background: 'rgba(99,91,255,0.05)', border: '1px solid rgba(99,91,255,0.18)' }}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <ShieldCheck className="w-3.5 h-3.5" style={{ color: EMERALD }} />
-                    <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]" style={{ color: EMERALD }}>
-                      gov.uk verified
-                    </span>
-                  </div>
-                  <p className="text-[12.5px] leading-[1.6]" style={{ color: '#064E3B' }}>
-                    All fees verified against gov.uk effective <strong style={{ fontWeight: 700 }}>8 April 2026</strong>.
-                  </p>
-                  <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
-                     target="_blank" rel="noopener noreferrer"
-                     className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold transition-colors"
-                     style={{ color: EMERALD }}>
-                    View source <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </div>
             </aside>
@@ -669,234 +483,144 @@ export default async function VisaPage({ params }: RouteParams) {
         </div>
       </div>
 
-      <StickyMobileCta
-        context={`${v.category} · Apply`}
-        label="Apply on gov.uk"
-        href={v.applyUrl}
-        external
-        accent={EMERALD}
-      />
-    </>
+      <StickyMobileCta href={v.applyUrl} label="Apply on gov.uk" />
+    </div>
   );
 }
 
-/* ─────────────────────────────────────────────
-   SUBCOMPONENTS
-───────────────────────────────────────────── */
+/* ─── Helpers ─── */
 
 function Section({
-  eyebrow, title, children,
-}: {
-  eyebrow: string; title: string; children: React.ReactNode;
-}) {
-  const sectionId = eyebrow.toLowerCase().split('—')[1]?.trim()
-    .replace(/\s+/g, '-')
-    .replace('how-to-apply', 'process')
-    .replace('common-pitfalls', 'notes')
-    ?? eyebrow.toLowerCase().replace(/\s+/g, '-');
+  id, num, title, note, children,
+}: { id: string; num: string; title: string; note?: string; children: React.ReactNode }) {
   return (
-    <section id={sectionId} className="scroll-mt-32">
-      <p className="eyebrow mb-4" style={{ color: GOLD }}>{eyebrow}</p>
-      <h2 className="mb-7"
-          style={{
-            fontFamily: '"Inter Tight", Inter, sans-serif',
-            fontWeight: 600,
-            fontSize: 'clamp(1.35rem, 3.2vw, 1.875rem)',
-            letterSpacing: '-0.028em',
-            lineHeight: 1.05,
-            color: INK,
-            textWrap: 'balance' as React.CSSProperties['textWrap'],
-          }}>
-        {title}
-      </h2>
+    <section id={id} className="scroll-mt-32">
+      <div style={{
+        display: 'flex', alignItems: 'baseline', gap: 10,
+        paddingBottom: 8, marginBottom: 14,
+        borderBottom: `1px solid ${BORDER}`,
+      }}>
+        <span style={{
+          fontSize: 11, fontWeight: 600, color: MID2,
+          letterSpacing: '0.06em', fontVariantNumeric: 'tabular-nums',
+        }}>
+          {num}
+        </span>
+        <h2 style={{
+          fontSize: 18, fontWeight: 600, color: INK,
+          letterSpacing: '-0.015em', margin: 0,
+        }}>
+          {title}
+        </h2>
+      </div>
+      {note && (
+        <div style={{
+          background: WARN_SOFT, border: '1px solid #F5D88B',
+          color: WARN_INK, fontSize: 12.5, lineHeight: 1.5,
+          padding: '8px 12px', borderRadius: 6, marginBottom: 14,
+        }}>
+          {note}
+        </div>
+      )}
       {children}
     </section>
   );
 }
 
-function HeroStat({
-  label, value, highlight, icon: Icon,
-}: {
-  label: string; value: string; highlight?: boolean;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>;
-}) {
+function Metric({ label, value, sub, border }: { label: string; value: string; sub?: string; border?: boolean }) {
   return (
-    <div className="rounded-lg p-5"
-         style={{
-           background: highlight ? INK : PAPER,
-           color: highlight ? CREAM : INK,
-           border: `1px solid ${highlight ? 'rgba(250,250,247,0.10)' : HAIR}`,
-           boxShadow: highlight
-             ? '0 8px 26px -10px rgba(26,31,54,0.30)'
-             : '0 2px 12px -6px rgba(26,31,54,0.08)',
-         }}>
-      <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] mb-3"
-           style={{ color: highlight ? 'rgba(250,250,247,0.65)' : MUTED }}>
-        <Icon className="w-3 h-3" strokeWidth={2.5} />
+    <div style={{
+      padding: '12px 16px',
+      borderLeft: border ? `1px solid ${BORDER}` : 'none',
+      background: BG2,
+    }}>
+      <div style={{
+        fontSize: 10.5, fontWeight: 600, color: MID2,
+        letterSpacing: '0.04em', textTransform: 'uppercase',
+        marginBottom: 4,
+      }}>
         {label}
       </div>
-      <p className="tabular-nums leading-[1.05]"
-         style={{
-           fontFamily: '"Inter Tight", Inter, sans-serif',
-           fontWeight: 700,
-           fontSize: 'clamp(1.2rem, 2.4vw, 1.5rem)',
-           letterSpacing: '-0.03em',
-           color: highlight ? CREAM : INK,
-         }}>
+      <div style={{
+        fontSize: 17, fontWeight: 600, color: INK,
+        letterSpacing: '-0.015em', lineHeight: 1.2,
+        fontVariantNumeric: 'tabular-nums',
+      }}>
         {value}
-      </p>
+      </div>
+      {sub && (
+        <div style={{ fontSize: 11.5, color: MID, marginTop: 3, lineHeight: 1.4 }}>{sub}</div>
+      )}
     </div>
   );
 }
 
-function FactRow({
-  label, value, icon: Icon, last,
-}: {
-  label: string; value: string; last?: boolean;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>;
-}) {
+function DL({ items }: { items: [string, string][] }) {
   return (
-    <div className="flex items-start justify-between gap-3 px-6 py-4"
-         style={{ borderBottom: last ? 'none' : `1px solid ${HAIR}` }}>
-      <dt className="flex items-center gap-2 text-[12.5px] font-medium flex-shrink-0"
-          style={{ color: SLATE }}>
-        <Icon className="w-3.5 h-3.5" strokeWidth={2} style={{ color: EMERALD }} />
-        {label}
-      </dt>
-      <dd className="text-right max-w-[200px] leading-snug tabular-nums"
-          style={{
-            fontFamily: '"Inter Tight", Inter, sans-serif',
-            fontWeight: 600,
-            fontSize: 13.5,
-            letterSpacing: '-0.012em',
-            color: INK,
+    <dl style={{
+      margin: 0, border: `1px solid ${BORDER}`, borderRadius: 8,
+      background: BG, overflow: 'hidden',
+    }}>
+      {items.map(([k, val], i) => (
+        <div key={i} style={{
+          display: 'grid', gridTemplateColumns: '160px 1fr',
+          borderTop: i > 0 ? `1px solid ${BORDER}` : 'none',
+          fontSize: 13.5,
+        }}>
+          <dt style={{
+            background: BG2, padding: '10px 14px',
+            color: MID, fontWeight: 500,
+            borderRight: `1px solid ${BORDER}`,
           }}>
-        {value}
-      </dd>
-    </div>
+            {k}
+          </dt>
+          <dd style={{ padding: '10px 14px', color: INK2, margin: 0, lineHeight: 1.55 }}>
+            {val}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
-function Inline({ label, value }: { label: string; value: string }) {
+function CostTable({ fee, ihs, slug, headlineFee }: { fee: string; ihs: string; slug: string; headlineFee: string }) {
+  const rows: [string, string, string?][] = [
+    ['Application fee',  headlineFee, fee],
+    ['Health surcharge', ihs,         'Paid upfront for full duration'],
+    ['Priority service', '+£500',     'Optional · 5-day decision'],
+    ['Super-priority',   '+£1,000',   'Optional · next working day'],
+    ['Per dependant',    '+ full fee + IHS', 'Spouse and each child'],
+  ];
   return (
-    <div>
-      <div className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1.5" style={{ color: MUTED }}>
-        {label}
-      </div>
-      <div className="tabular-nums leading-[1.1]"
-           style={{
-             fontFamily: '"Inter Tight", Inter, sans-serif',
-             fontWeight: 700,
-             fontSize: 19,
-             letterSpacing: '-0.022em',
-             color: INK,
-           }}>
-        {value}
-      </div>
-    </div>
-  );
-}
-
-function CostCard({ fee, ihs, slug, headlineFee }: {
-  fee: string; ihs: string; slug: string; headlineFee: string;
-}) {
-  return (
-    <div className="rounded-xl overflow-hidden"
-         style={{
-           background: PAPER,
-           border: `1px solid ${HAIR}`,
-           
-         }}>
-      {/* Fee header */}
-      <div className="px-8 py-7" style={{ borderBottom: `1px solid ${HAIR}` }}>
-        <div className="flex items-end justify-between gap-4 flex-wrap">
-          <div>
-            <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
-              Application fee
-            </p>
-            <p className="tabular-nums leading-none"
-               style={{
-                 fontFamily: '"Inter Tight", Inter, sans-serif',
-                 fontWeight: 700,
-                 fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
-                 letterSpacing: '-0.028em',
-                 color: INK,
-               }}>
-              {headlineFee}
-            </p>
-            <p className="mt-3 text-[14px]" style={{ color: SLATE }}>{fee}</p>
+    <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden', background: BG }}>
+      {rows.map(([k, val, sub], i) => (
+        <div key={i} style={{
+          display: 'grid', gridTemplateColumns: '1fr auto',
+          gap: 12, padding: '11px 16px',
+          borderTop: i > 0 ? `1px solid ${BORDER}` : 'none',
+          background: i === 0 ? BG2 : BG,
+          alignItems: 'baseline',
+        }}>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontSize: 13.5, fontWeight: 500, color: INK, letterSpacing: '-0.005em' }}>{k}</div>
+            {sub && <div style={{ fontSize: 11.5, color: MID, marginTop: 2 }}>{sub}</div>}
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-full"
-                style={{
-                  background: 'rgba(99,91,255,0.08)',
-                  border: '1px solid rgba(99,91,255,0.22)',
-                  color: EMERALD,
-                }}>
-            <ShieldCheck className="w-3.5 h-3.5" />
-            gov.uk verified
-          </span>
+          <div style={{
+            fontSize: 14, fontWeight: 600, color: i === 0 ? ACCENT_DK : INK,
+            fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em',
+          }}>
+            {val}
+          </div>
         </div>
-      </div>
-
-      <div className="px-8 py-7 grid grid-cols-1 sm:grid-cols-2 gap-7">
-        <div>
-          <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: MUTED }}>
-            Health Surcharge (IHS)
-          </p>
-          <p className="tabular-nums"
-             style={{
-               fontFamily: '"Inter Tight", Inter, sans-serif',
-               fontWeight: 700,
-               fontSize: 28,
-               letterSpacing: '-0.028em',
-               color: INK,
-               lineHeight: 1,
-             }}>
-            {ihs}
-          </p>
-          <p className="mt-2 text-[13.5px] leading-[1.6]" style={{ color: SLATE }}>
-            Paid upfront for the full visa duration — funds NHS access.
-          </p>
-        </div>
-        <div>
-          <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: MUTED }}>
-            Optional add-ons
-          </p>
-          <ul className="space-y-3">
-            {[
-              ['Priority service', '+£500'],
-              ['Super-priority',   '+£1,000'],
-              ['Per dependant',    '+full fee + IHS'],
-            ].map(([label, val]) => (
-              <li key={label} className="flex items-center justify-between gap-3 pb-2"
-                  style={{ borderBottom: `1px solid ${HAIR}` }}>
-                <span className="text-[13.5px]" style={{ color: SLATE }}>{label}</span>
-                <span className="text-[13.5px] tabular-nums"
-                      style={{
-                        fontFamily: '"Inter Tight", Inter, sans-serif',
-                        fontWeight: 600,
-                        letterSpacing: '-0.012em',
-                        color: INK,
-                      }}>
-                  {val}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="px-8 py-5" style={{ background: CREAM, borderTop: `1px solid ${HAIR}` }}>
+      ))}
+      <div style={{ background: BG2, borderTop: `1px solid ${BORDER}`, padding: '10px 16px' }}>
         <Link href={`/tools/cost-calculator?visa=${slug}`}
-              className="inline-flex items-center gap-2 text-[13.5px] font-semibold px-5 py-3 rounded-xl transition-all active:scale-[0.98]"
               style={{
-                background: INK,
-                color: CREAM,
-                boxShadow: '0 1px 2px rgba(26,31,54,0.06)',
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontSize: 12.5, fontWeight: 500, color: ACCENT,
+                textDecoration: 'none',
               }}>
-          <Calculator className="w-4 h-4" />
-          Calculate your total cost
-          <ArrowRight className="w-3.5 h-3.5" />
+          <Calculator size={12} strokeWidth={2.2} /> Calculate your full cost
         </Link>
       </div>
     </div>
