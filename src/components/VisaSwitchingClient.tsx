@@ -36,26 +36,12 @@ export default function VisaSwitchingClient() {
   const from = useMemo(() => FROM_VISAS.find(v => v.id === fromId) ?? FROM_VISAS[0], [fromId]);
 
   return (
-    <div className="min-h-screen" style={{ background: '#FCFCFD', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div className="min-h-screen" style={{ background: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* HERO — Editorial Premium cream */}
-      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-14 md:pb-20"
-               style={{ background: '#FCFCFD' }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none"
-             style={{
-               background:
-                 'radial-gradient(ellipse at 12% 8%, rgba(99,91,255,0.06) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 88% 80%, rgba(88,81,219,0.05) 0px, transparent 55%)',
-             }} />
-        <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
-             style={{
-               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
-               backgroundSize: '32px 32px',
-               maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-               WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-             }} />
-
-        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10">
+      <section className="relative overflow-hidden pt-[84px] md:pt-[96px] pb-10 md:pb-12"
+               style={{ background: '#FFFFFF' }}>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-8">
           <div className="flex items-center gap-2 mb-6">
             <Link href="/visa-types"
                   className="inline-flex items-center gap-1 text-[13px] font-medium transition-colors"
@@ -85,7 +71,7 @@ export default function VisaSwitchingClient() {
           }}>
             Visa <span style={{ fontStyle: 'italic', color: '#635BFF' }}>switching</span> guide
           </h1>
-          <p className="mt-6 text-[17px] md:text-[19px] leading-[1.6] max-w-2xl"
+          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.65] max-w-2xl"
              style={{ color: '#475569' }}>
             Switch from one UK visa to another without leaving the country.
             Choose your current visa below to see which routes you can move to —
@@ -95,12 +81,12 @@ export default function VisaSwitchingClient() {
       </section>
 
       {/* MAIN */}
-      <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-12 md:py-16 grid grid-cols-12 gap-8 lg:gap-12">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8 py-8 md:py-12 grid grid-cols-12 gap-8 lg:gap-12">
 
         {/* LEFT: From selector + key facts */}
         <aside className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-[100px] space-y-4">
-            <div className="rounded-2xl bg-white border border-[#E5E7EB] p-6"
+            <div className="rounded-lg bg-white border border-[#E5E7EB] p-6"
                  style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
               <div className="flex items-center gap-2 mb-2.5">
                 <span className="w-[3px] h-[14px] rounded-full bg-[#635BFF]" />
@@ -163,7 +149,7 @@ export default function VisaSwitchingClient() {
             </div>
 
             <Link href="/tools/cost-calculator"
-                  className="flex items-center justify-between gap-3 rounded-2xl p-5 text-white"
+                  className="flex items-center justify-between gap-3 rounded-lg p-5 text-white"
                   style={{ background: 'linear-gradient(135deg, #635BFF, #064E3B)', boxShadow: '0 8px 30px -8px rgba(99,91,255,0.5)' }}>
               <div>
                 <div className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/85 mb-1">In-UK fees usually higher</div>
@@ -210,7 +196,7 @@ export default function VisaSwitchingClient() {
                 const diff  = DIFFICULTY_STYLE[s.difficulty];
                 return (
                   <Link key={s.toSlug + s.toTitle} href={`/visa/${s.toSlug}`}
-                        className="group block rounded-2xl bg-white border border-[#E5E7EB] p-5 hover:border-[#1A1F36] transition-all"
+                        className="group block rounded-lg bg-white border border-[#E5E7EB] p-5 hover:border-[#1A1F36] transition-all"
                         style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.05)' }}>
                     <div className="flex items-start gap-3 mb-3">
                       <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -251,7 +237,7 @@ export default function VisaSwitchingClient() {
               })}
             </div>
           ) : (
-            <div className="rounded-2xl bg-white border border-amber-200 p-7"
+            <div className="rounded-lg bg-white border border-amber-200 p-7"
                  style={{ boxShadow: '0 2px 12px rgba(245,158,11,0.08)' }}>
               <div className="flex items-start gap-4">
                 <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -276,7 +262,7 @@ export default function VisaSwitchingClient() {
 
           {/* Cannot switch into */}
           {from.cannotSwitchInto && from.cannotSwitchInto.length > 0 && (
-            <div className="rounded-2xl bg-white border border-[#FECACA] p-6"
+            <div className="rounded-lg bg-white border border-[#FECACA] p-6"
                  style={{ boxShadow: '0 2px 12px rgba(225,29,72,0.06)' }}>
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-7 h-7 rounded-lg flex items-center justify-center"
@@ -301,7 +287,7 @@ export default function VisaSwitchingClient() {
           )}
 
           {/* Generic step-by-step */}
-          <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden mt-2"
+          <div className="rounded-lg bg-white border border-[#E5E7EB] overflow-hidden mt-2"
                style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
             <div className="px-6 py-4 border-b border-[#F3F4F6] flex items-center gap-3"
                  style={{ background: 'rgba(99,91,255,0.06)' }}>

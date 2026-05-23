@@ -99,7 +99,7 @@ export default function ApplicationGuide({
       <div
         role="tablist"
         aria-label="Application path"
-        className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7 p-2 rounded-2xl"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7 p-2 rounded-lg"
         style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 12px -6px rgba(26,31,54,0.08)' }}
       >
         <PathTab
@@ -121,12 +121,12 @@ export default function ApplicationGuide({
       </div>
 
       {/* ─── CONTEXT STRIP ─── */}
-      <div className="rounded-2xl p-7 mb-6"
+      <div className="rounded-lg p-7 mb-6"
            style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
         <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
           {path === 'outside' ? 'New application · From your home country' : 'In-country switch · No travel needed'}
         </p>
-        <p className="text-[15px] leading-[1.7] max-w-3xl" style={{ color: INK }}>
+        <p className="text-[14px] leading-[1.65] max-w-3xl" style={{ color: INK }}>
           {path === 'outside' ? (
             <>This guide is for people applying to the UK from <strong style={{ fontWeight: 700 }}>outside</strong> the UK
             (entry clearance). You will book a biometrics appointment at a UK Visa Application Centre in your country
@@ -149,7 +149,7 @@ export default function ApplicationGuide({
 
       {/* ─── NATIONALITY FILTER (outside UK only) ─── */}
       {path === 'outside' && (
-        <div className="rounded-2xl p-7 mb-6"
+        <div className="rounded-lg p-7 mb-6"
              style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
           <div className="flex items-start justify-between gap-4 flex-wrap mb-5">
             <div>
@@ -250,7 +250,7 @@ export default function ApplicationGuide({
 
       {/* ─── SWITCHING-FROM HINT (inside UK only) ─── */}
       {path === 'inside' && SWITCHING_FROM_BY_CATEGORY[category]?.length ? (
-        <div className="rounded-2xl p-7 mb-6"
+        <div className="rounded-lg p-7 mb-6"
              style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
           <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-4" style={{ color: GOLD }}>
             Can switch from
@@ -267,7 +267,7 @@ export default function ApplicationGuide({
       ) : null}
 
       {/* ─── STEP-BY-STEP GUIDE ─── */}
-      <div className="rounded-2xl overflow-hidden"
+      <div className="rounded-lg overflow-hidden"
            style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
         <div className="px-7 py-5 flex items-center gap-3"
              style={{ background: 'rgba(99,91,255,0.04)', borderBottom: `1px solid ${HAIR}` }}>
@@ -336,7 +336,7 @@ export default function ApplicationGuide({
              style={{
                background: INK,
                color: CREAM,
-               boxShadow: '0 6px 18px -6px rgba(26,31,54,0.30)',
+               boxShadow: '0 1px 2px rgba(26,31,54,0.06)',
              }}
              onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}
              onMouseLeave={(e) => { e.currentTarget.style.background = INK; }}>

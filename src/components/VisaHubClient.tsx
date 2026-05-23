@@ -164,26 +164,12 @@ export default function VisaHubClient() {
   }, [calcVisaId, calcDependants, calcYears, calcPriority, calcSuperPriority]);
 
   return (
-    <div className="min-h-screen" style={{ background: '#FCFCFD', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div className="min-h-screen" style={{ background: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* ══════════════════════════════════════
           PAGE HEADER — Editorial Premium hero
       ══════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-12 md:pb-16" style={{ background: '#FCFCFD' }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none"
-             style={{
-               background:
-                 'radial-gradient(ellipse at 12% 8%, rgba(99,91,255,0.06) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 88% 80%, rgba(88,81,219,0.05) 0px, transparent 55%)',
-             }} />
-        <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
-             style={{
-               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
-               backgroundSize: '32px 32px',
-               maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-               WebkitBackdropFilter: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-             }} />
-
+      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-12 md:pb-16" style={{ background: '#FFFFFF' }}>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="pb-7">
@@ -287,7 +273,7 @@ export default function VisaHubClient() {
         {activeSection === 'routes' && (
           <div>
             {/* Visa type switcher */}
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl mb-6 overflow-hidden">
+            <div className="bg-white border border-[#E5E7EB] rounded-lg mb-6 overflow-hidden">
               {/* Switcher label row */}
               <div className="px-5 pt-4 pb-0 flex items-center justify-between gap-3">
                 <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Browse by category</span>
@@ -366,7 +352,7 @@ export default function VisaHubClient() {
         {/* ── SECTION: ELIGIBILITY ── */}
         {activeSection === 'eligibility' && (
           <div className="max-w-4xl">
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden mb-6">
+            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden mb-6">
               <div className="px-6 py-5 border-b border-[#F3F4F6]"
                 style={{ background: 'linear-gradient(90deg, rgba(0,196,180,0.07) 0%, transparent 60%)' }}>
                 <div className="flex items-center gap-3">
@@ -448,7 +434,7 @@ export default function VisaHubClient() {
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
               {/* Inputs panel */}
-              <div className="lg:col-span-3 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden">
+              <div className="lg:col-span-3 bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 <div className="px-6 py-4 border-b border-[#F3F4F6]"
                   style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.07) 0%, transparent 60%)' }}>
                   <div className="flex items-center gap-2.5">
@@ -540,7 +526,7 @@ export default function VisaHubClient() {
               </div>
 
               {/* Results panel */}
-              <div className="lg:col-span-2 rounded-2xl overflow-hidden flex flex-col"
+              <div className="lg:col-span-2 rounded-lg overflow-hidden flex flex-col"
                 style={{ background: '#1A1F36' }}>
                 <div className="px-6 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
                   <span className="text-[11.5px] font-bold uppercase tracking-[0.1em]" style={{ color: '#A7F3D0' }}>
@@ -618,7 +604,7 @@ export default function VisaHubClient() {
             </div>
 
             {/* Pathway timeline */}
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden mb-6">
+            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden mb-6">
               <div className="px-5 py-4 border-b border-[#F3F4F6]"
                 style={{ background: 'linear-gradient(90deg, rgba(16,185,129,0.06) 0%, transparent 50%)' }}>
                 <h3 className="font-bold text-[#1A1F36] text-[15px] flex items-center gap-2" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
@@ -750,7 +736,7 @@ export default function VisaHubClient() {
 
             {/* Selected country detail */}
             {selectedCountry ? (
-              <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden">
+              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Header */}
                 <div className="px-6 py-5 border-b border-[#F3F4F6]"
                   style={{ background: 'linear-gradient(90deg, rgba(26,31,54,0.04) 0%, transparent 60%)' }}>
@@ -787,7 +773,7 @@ export default function VisaHubClient() {
                       ? 'Book UK-approved TB test at an approved IOM clinic before applying.'
                       : 'No tuberculosis test needed for your application.'}
                   />
-                  <div className="rounded-xl p-4 border" style={{ background: '#FCFCFD', borderColor: 'rgba(26,31,54,0.08)' }}>
+                  <div className="rounded-xl p-4 border" style={{ background: '#FFFFFF', borderColor: 'rgba(26,31,54,0.08)' }}>
                     <div className="flex items-center gap-2 mb-1.5">
                       <MapPin className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
                       <span className="text-[13px] font-bold text-[#1A1F36]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>VAC / Application centre</span>
@@ -844,7 +830,7 @@ export default function VisaHubClient() {
                 </div>
               </div>
             ) : (
-              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-10 text-center">
+              <div className="bg-white border border-[#E5E7EB] rounded-lg p-10 text-center">
                 <Globe className="w-10 h-10 mx-auto mb-3" style={{ color: '#D8D5CA' }} />
                 <p className="text-[15px] font-semibold text-[#374151] mb-1">Select a country above</p>
                 <p className="text-[13px] text-[#9CA3AF]">See applicable visa types, TB test, VAC locations and country-specific tips.</p>

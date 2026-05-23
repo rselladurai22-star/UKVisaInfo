@@ -180,23 +180,9 @@ export default async function VisaPage({ params }: RouteParams) {
       {/* ═══════════════════════════════════════════════════════════
           HERO — cream, editorial, large serif title
       ═══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-14 md:pb-20" style={{ background: CREAM }}>
+      <section className="relative overflow-hidden pt-[84px] md:pt-[96px] pb-10 md:pb-12" style={{ background: PAPER, borderBottom: `1px solid ${HAIR}` }}>
         {/* Subtle background paint */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none"
-             style={{
-               background:
-                 'radial-gradient(ellipse at 10% 10%, rgba(99,91,255,0.05) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 90% 75%, rgba(88,81,219,0.05) 0px, transparent 55%)',
-             }} />
-        <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
-             style={{
-               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
-               backgroundSize: '32px 32px',
-               maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-               WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
-             }} />
-
-        <div className="relative max-w-7xl mx-auto px-5 md:px-10">
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-8">
           {/* Breadcrumb */}
           <div className="pt-2 pb-7">
             <Link
@@ -262,7 +248,7 @@ export default async function VisaPage({ params }: RouteParams) {
                 {v.title}
               </h1>
 
-              <p className="mt-6 max-w-2xl text-[17px] md:text-[19px] leading-[1.6]"
+              <p className="mt-6 max-w-2xl text-[15px] md:text-[16px] leading-[1.65]"
                  style={{ color: SLATE }}>
                 {v.tagline}
               </p>
@@ -276,7 +262,7 @@ export default async function VisaPage({ params }: RouteParams) {
                   style={{
                     background: INK,
                     color: CREAM,
-                    boxShadow: '0 6px 22px -6px rgba(26,31,54,0.30)',
+                    boxShadow: '0 1px 2px rgba(26,31,54,0.06), 0 0 0 1px rgba(26,31,54,0.04)',
                   }}
                 >
                   Apply on gov.uk
@@ -314,21 +300,21 @@ export default async function VisaPage({ params }: RouteParams) {
       {/* ═══════════════════════════════════════════════════════════
           CONTENT
       ═══════════════════════════════════════════════════════════ */}
-      <div style={{ background: CREAM }}>
-        <div className="max-w-7xl mx-auto px-5 md:px-10 py-16 md:py-20">
+      <div style={{ background: '#F7F8FA' }}>
+        <div className="max-w-[1200px] mx-auto px-5 md:px-8 py-10 md:py-14">
           <div className="grid grid-cols-12 gap-8 lg:gap-14">
 
             <main className="col-span-12 lg:col-span-8 space-y-16 md:space-y-20">
 
               {/* 01 OVERVIEW */}
               <Section eyebrow="01 — Overview" title={`What is the ${v.title}?`}>
-                <div className="rounded-3xl p-7 md:p-9"
+                <div className="rounded-xl p-7 md:p-9"
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
+                    
                   }}>
-                  <p className="text-[16px] md:text-[17px] leading-[1.75]" style={{ color: INK }}>
+                  <p className="text-[14.5px] md:text-[15.5px] leading-[1.7]" style={{ color: INK }}>
                     {v.summary}
                   </p>
                   <div className="mt-7 pt-6 grid grid-cols-2 md:grid-cols-4 gap-6"
@@ -358,18 +344,18 @@ export default async function VisaPage({ params }: RouteParams) {
                     The Home Office refuses on the first missed requirement.
                   </p>
                 </div>
-                <div className="rounded-3xl overflow-hidden"
+                <div className="rounded-xl overflow-hidden"
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
+                    
                   }}>
                   <ul>
                     {v.eligibility.map((item, i) => (
                       <li key={i} className="px-7 py-5 flex items-start gap-5"
                           style={{ borderBottom: i < v.eligibility.length - 1 ? `1px solid ${HAIR}` : 'none' }}>
                         <span aria-hidden
-                              className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-[14px] tabular-nums"
+                              className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-[12px] tabular-nums"
                               style={{
                                 background: INK,
                                 color: CREAM,
@@ -378,7 +364,7 @@ export default async function VisaPage({ params }: RouteParams) {
                               }}>
                           {i + 1}
                         </span>
-                        <span className="text-[15px] leading-[1.7] flex-1" style={{ color: INK }}>
+                        <span className="text-[14px] leading-[1.65] flex-1" style={{ color: INK }}>
                           {item}
                         </span>
                       </li>
@@ -389,7 +375,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 03 COSTS */}
               <Section eyebrow="03 — Costs" title="What it costs in 2026">
-                <p className="text-[15px] leading-[1.7] mb-6 max-w-2xl" style={{ color: SLATE }}>
+                <p className="text-[14px] leading-[1.65] mb-6 max-w-2xl" style={{ color: SLATE }}>
                   Two compulsory costs: the application fee and the Immigration Health Surcharge (IHS).
                   Priority and dependants are added on top.
                 </p>
@@ -403,7 +389,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 04 DOCUMENTS */}
               <Section eyebrow="04 — Documents" title="What you'll need to provide">
-                <p className="text-[15px] leading-[1.7] mb-7 max-w-2xl" style={{ color: SLATE }}>
+                <p className="text-[14px] leading-[1.65] mb-7 max-w-2xl" style={{ color: SLATE }}>
                   Group your evidence under these headings. Mis-categorised or missing documents
                   are the second most common refusal reason.
                 </p>
@@ -412,7 +398,7 @@ export default async function VisaPage({ params }: RouteParams) {
                     const Icon = group.icon;
                     return (
                       <div key={group.id}
-                        className="rounded-3xl p-6"
+                        className="rounded-xl p-6"
                         style={{
                           background: PAPER,
                           border: `1px solid ${HAIR}`,
@@ -457,7 +443,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 05 PROCESS */}
               <Section eyebrow="05 — How to apply" title="Step-by-step application guide">
-                <p className="text-[15px] leading-[1.7] mb-7 max-w-2xl" style={{ color: SLATE }}>
+                <p className="text-[14px] leading-[1.65] mb-7 max-w-2xl" style={{ color: SLATE }}>
                   Choose your path below. The process is different if you&apos;re applying from outside the UK
                   (entry clearance) versus switching from another visa inside the UK.
                 </p>
@@ -479,7 +465,7 @@ export default async function VisaPage({ params }: RouteParams) {
                   <div className="space-y-3">
                     {v.notes.map((note, i) => (
                       <div key={i}
-                        className="rounded-2xl p-5 md:p-6 flex items-start gap-4"
+                        className="rounded-lg p-5 md:p-6 flex items-start gap-4"
                         style={{
                           background: '#FBF6E7',
                           border: '1px solid rgba(88,81,219,0.30)',
@@ -500,11 +486,11 @@ export default async function VisaPage({ params }: RouteParams) {
               {/* 07 FAQ */}
               {faqs.length > 0 && (
                 <Section eyebrow="07 — FAQ" title="Common questions">
-                  <div className="rounded-3xl p-6 md:p-8"
+                  <div className="rounded-xl p-6 md:p-8"
                     style={{
                       background: PAPER,
                       border: `1px solid ${HAIR}`,
-                      boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
+                      
                     }}>
                     <VisaFaq faqs={faqs} />
                   </div>
@@ -512,15 +498,12 @@ export default async function VisaPage({ params }: RouteParams) {
               )}
 
               {/* FINAL CTA BANNER */}
-              <div className="relative overflow-hidden rounded-3xl p-8 md:p-12"
+              <div className="relative overflow-hidden rounded-xl p-8 md:p-12"
                    style={{ background: INK, color: CREAM }}>
                 <div aria-hidden className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full pointer-events-none"
                      style={{ background: 'rgba(99,91,255,0.28)', filter: 'blur(80px)' }} />
                 <div aria-hidden className="absolute -bottom-32 -left-32 w-[380px] h-[380px] rounded-full pointer-events-none"
                      style={{ background: 'rgba(88,81,219,0.18)', filter: 'blur(80px)' }} />
-                <div aria-hidden className="absolute inset-0 opacity-[0.08] pointer-events-none"
-                     style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
-
                 <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-7">
                   <div className="max-w-md">
                     <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-4 inline-flex items-center gap-1.5"
@@ -568,11 +551,11 @@ export default async function VisaPage({ params }: RouteParams) {
               <div className="lg:sticky lg:top-[140px] space-y-4">
 
                 {/* Quick facts card */}
-                <div className="rounded-3xl overflow-hidden"
+                <div className="rounded-xl overflow-hidden"
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
+                    
                   }}>
                   <div className="px-6 py-4 flex items-center gap-2.5"
                        style={{ background: 'rgba(99,91,255,0.05)', borderBottom: `1px solid ${HAIR}` }}>
@@ -593,7 +576,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
                 {/* Apply CTA */}
                 <a href={v.applyUrl} target="_blank" rel="noopener noreferrer"
-                   className="group flex items-center justify-between gap-3 rounded-3xl p-5 transition-all active:scale-[0.99]"
+                   className="group flex items-center justify-between gap-3 rounded-xl p-5 transition-all active:scale-[0.99]"
                    style={{
                      background: INK,
                      color: CREAM,
@@ -620,7 +603,7 @@ export default async function VisaPage({ params }: RouteParams) {
                 </a>
 
                 {/* Solicitor */}
-                <div className="rounded-3xl p-5"
+                <div className="rounded-xl p-5"
                      style={{
                        background: PAPER,
                        border: `1px solid ${HAIR}`,
@@ -662,7 +645,7 @@ export default async function VisaPage({ params }: RouteParams) {
                 </div>
 
                 {/* Source note */}
-                <div className="rounded-2xl p-4"
+                <div className="rounded-lg p-4"
                      style={{ background: 'rgba(99,91,255,0.05)', border: '1px solid rgba(99,91,255,0.18)' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: EMERALD }} />
@@ -738,7 +721,7 @@ function HeroStat({
   icon: React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>;
 }) {
   return (
-    <div className="rounded-2xl p-5"
+    <div className="rounded-lg p-5"
          style={{
            background: highlight ? INK : PAPER,
            color: highlight ? CREAM : INK,
@@ -818,11 +801,11 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
   fee: string; ihs: string; slug: string; headlineFee: string;
 }) {
   return (
-    <div className="rounded-3xl overflow-hidden"
+    <div className="rounded-xl overflow-hidden"
          style={{
            background: PAPER,
            border: `1px solid ${HAIR}`,
-           boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
+           
          }}>
       {/* Fee header */}
       <div className="px-8 py-7" style={{ borderBottom: `1px solid ${HAIR}` }}>
@@ -909,7 +892,7 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
               style={{
                 background: INK,
                 color: CREAM,
-                boxShadow: '0 6px 18px -6px rgba(26,31,54,0.30)',
+                boxShadow: '0 1px 2px rgba(26,31,54,0.06)',
               }}>
           <Calculator className="w-4 h-4" />
           Calculate your total cost

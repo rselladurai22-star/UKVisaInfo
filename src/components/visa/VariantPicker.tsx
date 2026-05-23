@@ -34,7 +34,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
 
   return (
     <section
-      className="rounded-3xl overflow-hidden"
+      className="rounded-xl overflow-hidden"
       style={{
         background: PAPER,
         border: `1px solid ${HAIR}`,
@@ -128,7 +128,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
 
         {/* Right: fee meta + actions */}
         <div className="col-span-12 md:col-span-5 p-7">
-          <dl className="rounded-2xl overflow-hidden mb-4"
+          <dl className="rounded-lg overflow-hidden mb-4"
               style={{ background: '#FCFCFD', border: `1px solid ${HAIR}` }}>
             {typeof v.feeAmount === 'number' && (
               <RowItem label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />

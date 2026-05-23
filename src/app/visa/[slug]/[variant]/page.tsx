@@ -134,13 +134,13 @@ export default async function VariantPage({ params }: RouteParams) {
       </header>
 
       <div style={{ background: CREAM }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-14">
           <div className="grid grid-cols-12 gap-8 lg:gap-12">
 
             <main className="col-span-12 lg:col-span-8 space-y-6">
 
               {/* 01 Eligibility */}
-              <section className="rounded-3xl p-7 md:p-8"
+              <section className="rounded-xl p-7 md:p-8"
                        style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                 <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                   01 — Eligibility
@@ -170,7 +170,7 @@ export default async function VariantPage({ params }: RouteParams) {
 
               {/* 02 Notes */}
               {v.notes && v.notes.length > 0 && (
-                <section className="rounded-3xl p-7 md:p-8"
+                <section className="rounded-xl p-7 md:p-8"
                          style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                   <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                     02 — Watch out for
@@ -199,7 +199,7 @@ export default async function VariantPage({ params }: RouteParams) {
 
               {/* 03 Other variants */}
               {otherVariants.length > 0 && (
-                <section className="rounded-3xl p-7 md:p-8"
+                <section className="rounded-xl p-7 md:p-8"
                          style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                   <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                     03 — Other sub-routes
@@ -245,7 +245,7 @@ export default async function VariantPage({ params }: RouteParams) {
               )}
 
               {/* Apply CTA — ink */}
-              <div className="relative rounded-3xl overflow-hidden p-8 md:p-10"
+              <div className="relative rounded-xl overflow-hidden p-8 md:p-10"
                    style={{ background: INK, color: CREAM }}>
                 <div aria-hidden className="absolute inset-0 opacity-[0.10] pointer-events-none"
                      style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)', backgroundSize: '20px 20px' }} />
@@ -282,7 +282,7 @@ export default async function VariantPage({ params }: RouteParams) {
               <div className="lg:sticky lg:top-[140px] space-y-4">
 
                 {/* Cost preview */}
-                <div className="rounded-3xl p-5"
+                <div className="rounded-xl p-5"
                      style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 14px -8px rgba(26,31,54,0.08)' }}>
                   <div className="flex items-center gap-2.5 mb-4">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -319,7 +319,7 @@ export default async function VariantPage({ params }: RouteParams) {
                 <SidebarAffiliate tags={[visa.category, visa.title]} />
 
                 <a href={v.source} target="_blank" rel="noopener noreferrer"
-                   className="block rounded-2xl p-4 transition-colors"
+                   className="block rounded-lg p-4 transition-colors"
                    style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2 flex items-center gap-1.5"
                        style={{ color: EMERALD }}>
@@ -355,7 +355,7 @@ function Pill({
   label: string; value: string;
 }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-2xl px-4 py-2.5"
+    <div className="flex items-center gap-2.5 rounded-lg px-4 py-2.5"
          style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
       <Icon className="w-4 h-4 flex-shrink-0" style={{ color: EMERALD }} />
       <div className="min-w-0">

@@ -28,7 +28,7 @@ export default function SettlementCostStack({
 
   return (
     <div
-      className="my-8 rounded-3xl p-7 md:p-8"
+      className="my-8 rounded-xl p-7 md:p-8"
       style={{
         background: PAPER,
         border: `1px solid ${HAIR}`,
@@ -98,7 +98,7 @@ export default function SettlementCostStack({
 
       {/* Total bar */}
       <div
-        className="rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        className="rounded-lg p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         style={{ background: INK, color: CREAM }}>
         <div>
           <p className="text-[10.5px] font-bold uppercase tracking-[0.18em]" style={{ color: '#FDE68A' }}>
