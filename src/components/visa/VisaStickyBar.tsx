@@ -1,24 +1,31 @@
 'use client';
 
+/**
+ * VisaStickyBar — slides down from below the main nav after scroll.
+ * Editorial Premium: cream surface, Fraunces title, emerald accent dot,
+ * ink-on-cream apply button.
+ */
+
 import { useEffect, useState } from 'react';
 import { ExternalLink, Calculator } from 'lucide-react';
 import Link from 'next/link';
+
+const INK     = '#0B0F19';
+const CREAM   = '#FAFAF7';
+const EMERALD = '#047857';
+const SLATE   = '#475569';
+const MUTED   = '#94908A';
 
 interface Props {
   title: string;
   fee: string;
   applyUrl: string;
-  accent: string;
+  accent?: string;
   slug: string;
 }
 
-/**
- * Slides down from below the main nav once the user scrolls past the
- * hero. Gives one-tap access to "Apply on gov.uk" + the cost calculator
- * deep-link, without re-introducing the busy floating-CTA pattern.
- * Pure CSS reveal via translateY + opacity.
- */
 export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Props) {
+  const dot = accent ?? EMERALD;
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -28,7 +35,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
       pending = true;
       requestAnimationFrame(() => {
         pending = false;
-        setShown(window.scrollY > 380);
+        setShown(window.scrollY > 420);
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -39,35 +46,49 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
   return (
     <div
       aria-hidden={!shown}
-      className={`
-        fixed left-0 right-0 z-30
-        top-[60px] md:top-[64px]
-        transition-[transform,opacity] duration-200 ease-out
-        ${shown ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}
-      `}
+      className="fixed left-0 right-0 z-30 top-[68px] md:top-[72px] transition-[transform,opacity] duration-200 ease-out"
+      style={{
+        transform: shown ? 'translateY(0)' : 'translateY(-100%)',
+        opacity: shown ? 1 : 0,
+        pointerEvents: shown ? 'auto' : 'none',
+      }}
     >
       <div
-        className="bg-white/95 backdrop-blur border-b border-[rgba(14,20,36,0.06)]"
-        style={{ boxShadow: '0 1px 8px rgba(10, 37, 64,0.04)' }}
+        style={{
+          background: 'rgba(250,250,247,0.94)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          borderBottom: '1px solid rgba(11,15,25,0.08)',
+          boxShadow: '0 1px 14px -6px rgba(11,15,25,0.10)',
+        }}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-[52px] flex items-center gap-3">
-          <span
-            aria-hidden="true"
-            className="w-2 h-2 rounded-full flex-shrink-0"
-            style={{ background: accent }}
-          />
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 h-[56px] flex items-center gap-3">
+          <span aria-hidden className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: dot }} />
           <div className="flex-1 min-w-0">
-            <div className="font-display font-bold text-[13.5px] text-[#0A2540] tracking-tight leading-none truncate">
+            <div
+              className="leading-none truncate"
+              style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 600,
+                fontSize: 15,
+                letterSpacing: '-0.018em',
+                color: INK,
+              }}
+            >
               {title}
             </div>
-            <div className="mt-1 text-[11px] text-[#52596e] tabular-nums truncate hidden sm:block">
+            <div className="mt-1 text-[11.5px] tabular-nums truncate hidden sm:block"
+                 style={{ color: MUTED, fontFamily: 'Inter, sans-serif' }}>
               From {extractFirstFee(fee)}
             </div>
           </div>
 
           <Link
             href={`/tools/cost-calculator?visa=${slug}`}
-            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#52596e] hover:text-[#0A2540] transition-colors duration-75 px-3 py-1.5 rounded-lg hover:bg-[#f3f5fb]"
+            className="hidden md:inline-flex items-center gap-1.5 text-[12.5px] font-semibold px-3 py-1.5 rounded-lg transition-colors duration-75"
+            style={{ color: SLATE }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.background = 'rgba(11,15,25,0.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = SLATE; e.currentTarget.style.background = 'transparent'; }}
           >
             <Calculator className="w-3.5 h-3.5" />
             Calculate cost
@@ -76,8 +97,14 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
           <a
             href={applyUrl}
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white font-bold text-[12.5px] px-4 py-2 rounded-full active:scale-[0.98] transition-transform duration-100"
-            style={{ background: accent, boxShadow: `0 4px 14px ${accent}40` }}
+            className="inline-flex items-center gap-1.5 font-semibold text-[12.5px] px-4 py-2 rounded-lg active:scale-[0.98] transition-all duration-100"
+            style={{
+              background: INK,
+              color: CREAM,
+              boxShadow: '0 2px 12px -2px rgba(11,15,25,0.30)',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = INK; }}
           >
             Apply on gov.uk
             <ExternalLink className="w-3.5 h-3.5" />

@@ -24,7 +24,7 @@ interface Props {
  * (where a real CTA already exists).
  */
 export default function StickyMobileCta({
-  label, href, external, context, accent = '#00C4B4',
+  label, href, external, context, accent = '#047857',
 }: Props) {
   const [show, setShow] = useState(false);
 

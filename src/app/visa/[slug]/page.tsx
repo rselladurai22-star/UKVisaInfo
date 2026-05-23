@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {
   ArrowLeft, ExternalLink, CheckCircle2, Clock, Banknote, ShieldCheck,
   Calendar, ArrowRight, MessageCircle, Star, Calculator,
-  Wallet, Stethoscope, Building2, Globe, IdCard, AlertTriangle, Sparkles,
+  Wallet, Stethoscope, Building2, IdCard, AlertTriangle, Sparkles,
 } from 'lucide-react';
 import { VISA_DETAILS } from '../../../data/visaDetails';
 import { VISA_FAQS } from '../../../data/visaFaqs';
@@ -20,21 +20,24 @@ import { SETTLEMENT_BREAKDOWNS } from '../../../data/settlementFees';
 import { getVariants } from '../../../data/visaVariants';
 
 /* ────────────────────────────────────────────────────────────
-   Brand palette references (no off-brand greys here)
-   navy   #0A2540   navy-2 #13325F   navy-deep #06192E
-   teal   #00C4B4   teal-dark #00A89A
-   gold   #C9A14A
-   ink    text on white = navy
-   muted  = slate-ish #5A6478
+   Editorial Premium tokens — cream paper, ink, emerald, gold
 ─────────────────────────────────────────────────────────────── */
+const INK     = '#0B0F19';
+const CREAM   = '#FAFAF7';
+const PAPER   = '#FFFFFF';
+const EMERALD = '#047857';
+const GOLD    = '#B8860B';
+const SLATE   = '#475569';
+const MUTED   = '#94908A';
+const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
-const CATEGORY_META: Record<string, { accent: string; bgTint: string; label: string }> = {
-  Work:   { accent: '#00C4B4', bgTint: 'rgba(0,196,180,0.08)',  label: 'Work route' },
-  Study:  { accent: '#C9A14A', bgTint: 'rgba(201,161,74,0.10)', label: 'Study route' },
-  Family: { accent: '#13325F', bgTint: 'rgba(19,50,95,0.08)',   label: 'Family route' },
-  Visit:  { accent: '#0A2540', bgTint: 'rgba(10,37,64,0.06)',   label: 'Visit route' },
+const CATEGORY_LABEL: Record<string, string> = {
+  Work:   'Work route',
+  Study:  'Study route',
+  Family: 'Family route',
+  Visit:  'Visit route',
 };
 
 export function generateStaticParams() {
@@ -69,11 +72,11 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
 }
 
 function categoriseDocuments(docs: string[]) {
-  const buckets: { id: string; label: string; icon: typeof IdCard; tone: string; items: string[] }[] = [
-    { id: 'identity', label: 'Identity',            icon: IdCard,      tone: '#0A2540', items: [] },
-    { id: 'finance',  label: 'Finance',             icon: Wallet,      tone: '#C9A14A', items: [] },
-    { id: 'sponsor',  label: 'Sponsor / Course',    icon: Building2,   tone: '#00C4B4', items: [] },
-    { id: 'health',   label: 'Health & qualifications', icon: Stethoscope, tone: '#13325F', items: [] },
+  const buckets: { id: string; label: string; icon: typeof IdCard; items: string[] }[] = [
+    { id: 'identity', label: 'Identity',                  icon: IdCard,      items: [] },
+    { id: 'finance',  label: 'Finance',                   icon: Wallet,      items: [] },
+    { id: 'sponsor',  label: 'Sponsor / Course',          icon: Building2,   items: [] },
+    { id: 'health',   label: 'Health & qualifications',   icon: Stethoscope, items: [] },
   ];
   for (const d of docs) {
     const low = d.toLowerCase();
@@ -97,8 +100,7 @@ export default async function VisaPage({ params }: RouteParams) {
   if (!v) notFound();
 
   const faqs = VISA_FAQS[slug] ?? [];
-  const meta = CATEGORY_META[v.category] ?? CATEGORY_META.Work;
-  const accent = meta.accent;
+  const categoryLabel = CATEGORY_LABEL[v.category] ?? 'UK visa';
   const variants = getVariants(slug);
   const docGroups = categoriseDocuments(v.documents);
 
@@ -173,32 +175,34 @@ export default async function VisaPage({ params }: RouteParams) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
 
-      <VisaStickyBar title={v.title} fee={v.fee} applyUrl={v.applyUrl} accent={accent} slug={slug} />
+      <VisaStickyBar title={v.title} fee={v.fee} applyUrl={v.applyUrl} slug={slug} />
 
       {/* ═══════════════════════════════════════════════════════════
-          HERO — deep navy, editorial, large display title with
-          ambient gradient + passport-style edge motif on the right
+          HERO — cream, editorial, large serif title
       ═══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#06192E] text-white pt-[88px] md:pt-[104px] pb-16 md:pb-24">
-        {/* Aurora */}
-        <div aria-hidden className="absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full opacity-[0.22] blur-3xl"
-             style={{ background: `radial-gradient(circle at center, ${accent} 0%, transparent 60%)` }} />
-        <div aria-hidden className="absolute -bottom-40 -right-32 w-[640px] h-[640px] rounded-full opacity-[0.16] blur-3xl"
-             style={{ background: 'radial-gradient(circle at center, #C9A14A 0%, transparent 60%)' }} />
-        {/* UK hairlines */}
-        <div aria-hidden className="absolute inset-0 opacity-[0.05]"
+      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-14 md:pb-20" style={{ background: CREAM }}>
+        {/* Subtle background paint */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none"
              style={{
-               backgroundImage:
-                 'linear-gradient(45deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%),' +
-                 'linear-gradient(-45deg, transparent 49.5%, #fff 49.5%, #fff 50.5%, transparent 50.5%)',
-               backgroundSize: '120px 120px',
+               background:
+                 'radial-gradient(ellipse at 10% 10%, rgba(4,120,87,0.05) 0px, transparent 55%),' +
+                 'radial-gradient(ellipse at 90% 75%, rgba(184,134,11,0.05) 0px, transparent 55%)',
+             }} />
+        <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
+             style={{
+               backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.10) 1px, transparent 1px)',
+               backgroundSize: '32px 32px',
+               maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
+               WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
              }} />
 
-        <div className="relative max-w-[1280px] mx-auto px-5 md:px-10">
-          <div className="pt-4 pb-6">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10">
+          {/* Breadcrumb */}
+          <div className="pt-2 pb-7">
             <Link
               href="/visa-types"
-              className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-[13px] font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 text-[13px] font-medium transition-colors"
+              style={{ color: SLATE }}
             >
               <ArrowLeft className="w-4 h-4" />
               All visa routes
@@ -208,52 +212,71 @@ export default async function VisaPage({ params }: RouteParams) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <div className="lg:col-span-7">
               {/* Pill row */}
-              <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span
-                  className="inline-flex items-center gap-1.5 text-[11.5px] font-bold uppercase tracking-[0.10em] px-3.5 py-1.5 rounded-full"
-                  style={{ background: `${accent}22`, color: accent, border: `1px solid ${accent}44` }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />
-                  {meta.label}
+              <div className="flex flex-wrap items-center gap-2 mb-7">
+                <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full"
+                      style={{
+                        background: 'rgba(4,120,87,0.08)',
+                        color: EMERALD,
+                        border: '1px solid rgba(4,120,87,0.18)',
+                        letterSpacing: '0.18em',
+                      }}>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: EMERALD }} />
+                  {categoryLabel}
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold px-3.5 py-1.5 rounded-full bg-white/[0.12] text-white border border-white/[0.18]">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" strokeWidth={2.5} />
+                <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full"
+                      style={{
+                        background: PAPER,
+                        color: INK,
+                        border: `1px solid ${HAIR}`,
+                        letterSpacing: '0.18em',
+                      }}>
+                  <CheckCircle2 className="w-3 h-3" style={{ color: EMERALD }} strokeWidth={2.5} />
                   Verified · {v.updated}
                 </span>
                 <a
                   href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold px-3.5 py-1.5 rounded-full bg-white/[0.07] text-white/90 hover:text-white hover:bg-white/[0.14] border border-white/[0.15] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full transition-colors"
+                  style={{
+                    background: PAPER,
+                    color: SLATE,
+                    border: `1px solid ${HAIR}`,
+                    letterSpacing: '0.18em',
+                  }}
                 >
                   <ShieldCheck className="w-3 h-3" />
                   gov.uk source
                 </a>
               </div>
 
-              <h1
-                className="font-bold text-white tracking-[-0.025em] leading-[1.06]"
-                style={{
-                  fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-                  fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
-                }}
-              >
+              {/* Title — Fraunces serif */}
+              <h1 style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 600,
+                fontSize: 'clamp(2.2rem, 5.5vw, 4.2rem)',
+                lineHeight: 0.98,
+                letterSpacing: '-0.035em',
+                color: INK,
+                textWrap: 'balance' as React.CSSProperties['textWrap'],
+              }}>
                 {v.title}
               </h1>
 
-              <p className="mt-5 text-white/90 text-[16px] md:text-[18px] leading-[1.65] max-w-2xl"
-                 style={{ fontFamily: 'Inter, sans-serif' }}>
+              <p className="mt-6 max-w-2xl text-[17px] md:text-[19px] leading-[1.6]"
+                 style={{ color: SLATE }}>
                 {v.tagline}
               </p>
 
               {/* CTAs */}
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-9 flex flex-wrap gap-3">
                 <a
                   href={v.applyUrl}
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#06192E] text-[14.5px] font-bold px-7 py-3.5 rounded-xl active:scale-[0.98] transition-all"
+                  className="inline-flex items-center gap-2 text-[14px] font-semibold px-7 py-3.5 rounded-xl active:scale-[0.98] transition-all"
                   style={{
-                    background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
-                    boxShadow: `0 10px 30px -8px ${accent}80, inset 0 1px 0 rgba(255,255,255,0.4)`,
+                    background: INK,
+                    color: CREAM,
+                    boxShadow: '0 6px 22px -6px rgba(11,15,25,0.30)',
                   }}
                 >
                   Apply on gov.uk
@@ -261,7 +284,12 @@ export default async function VisaPage({ params }: RouteParams) {
                 </a>
                 <Link
                   href={`/tools/cost-calculator?visa=${slug}`}
-                  className="inline-flex items-center gap-2 bg-white/[0.10] text-white text-[14.5px] font-semibold px-7 py-3.5 rounded-xl border border-white/[0.18] hover:bg-white/[0.18] transition-colors"
+                  className="inline-flex items-center gap-2 text-[14px] font-semibold px-7 py-3.5 rounded-xl transition-colors"
+                  style={{
+                    background: PAPER,
+                    color: INK,
+                    border: `1px solid ${HAIR}`,
+                  }}
                 >
                   <Calculator className="w-4 h-4" />
                   Calculate full cost
@@ -269,86 +297,88 @@ export default async function VisaPage({ params }: RouteParams) {
               </div>
             </div>
 
-            {/* Stat trio — clearly readable cards */}
+            {/* Stat grid — paper white cards */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-3 md:gap-4">
-              <HeroStat label="Fee from" value={headlineFee} accent={accent} icon={Banknote} />
+              <HeroStat label="Fee from" value={headlineFee} icon={Banknote} highlight />
               <HeroStat label="Decision" value={v.processing.outside} icon={Clock} />
-              <HeroStat label="Visa duration" value={shortDuration} sub={v.duration !== shortDuration ? v.duration : undefined} wide icon={Calendar} />
+              <HeroStat label="IHS / yr" value={v.ihs} icon={Stethoscope} />
+              <HeroStat label="Duration" value={shortDuration} icon={Calendar} />
             </div>
           </div>
         </div>
       </section>
 
       {/* Section anchor nav */}
-      <VisaTabNav tabs={tabs} accent={accent} />
+      <VisaTabNav tabs={tabs} />
 
       {/* ═══════════════════════════════════════════════════════════
           CONTENT
       ═══════════════════════════════════════════════════════════ */}
-      <div className="bg-[#F8FAFC]">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-10 py-14 md:py-18">
+      <div style={{ background: CREAM }}>
+        <div className="max-w-7xl mx-auto px-5 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-12 gap-8 lg:gap-14">
 
-            <main className="col-span-12 lg:col-span-8 space-y-14 md:space-y-20">
+            <main className="col-span-12 lg:col-span-8 space-y-16 md:space-y-20">
 
               {/* 01 OVERVIEW */}
-              <Section eyebrow="Overview" title={`What is the ${v.title}?`} accent={accent}>
-                <div className="rounded-2xl bg-white border border-[#E5E7EB] p-7 md:p-9"
-                  style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
-                  <p className="text-[#0F172A] text-[15.5px] md:text-[16.5px] font-normal leading-[1.82]"
-                     style={{ fontFamily: 'Inter, sans-serif' }}>
+              <Section eyebrow="01 — Overview" title={`What is the ${v.title}?`}>
+                <div className="rounded-3xl p-7 md:p-9"
+                  style={{
+                    background: PAPER,
+                    border: `1px solid ${HAIR}`,
+                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                  }}>
+                  <p className="text-[16px] md:text-[17px] leading-[1.75]" style={{ color: INK }}>
                     {v.summary}
                   </p>
-                  <div className="mt-6 pt-5 border-t border-[#F3F4F6] flex flex-wrap gap-6">
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Application fee</div>
-                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.fee}</div>
-                    </div>
-                    <div className="w-px bg-[#E5E7EB]" />
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">IHS surcharge</div>
-                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.ihs}</div>
-                    </div>
-                    <div className="w-px bg-[#E5E7EB]" />
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Decision (outside UK)</div>
-                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{v.processing.outside}</div>
-                    </div>
-                    <div className="w-px bg-[#E5E7EB]" />
-                    <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-1.5">Visa duration</div>
-                      <div className="text-[21px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans",Inter,sans-serif' }}>{shortDuration}</div>
-                    </div>
+                  <div className="mt-7 pt-6 grid grid-cols-2 md:grid-cols-4 gap-6"
+                       style={{ borderTop: `1px solid ${HAIR}` }}>
+                    <Inline label="Application fee" value={v.fee} />
+                    <Inline label="IHS surcharge" value={v.ihs} />
+                    <Inline label="Decision (outside)" value={v.processing.outside} />
+                    <Inline label="Duration" value={shortDuration} />
                   </div>
                 </div>
               </Section>
 
               {/* SUB-ROUTE PICKER */}
               {variants.length > 0 && (
-                <section id="variants" className="scroll-mt-28">
-                  <VariantPicker variants={variants} visaId={slug} accent={accent} />
+                <section id="variants" className="scroll-mt-32">
+                  <VariantPicker variants={variants} visaId={slug} />
                 </section>
               )}
 
               {/* 02 ELIGIBILITY */}
-              <Section eyebrow="Eligibility" title="Are you eligible?" accent={accent}>
-                <div className="mb-5 rounded-xl bg-amber-50 border border-amber-200 px-5 py-4 flex items-start gap-3">
-                  <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-[13.5px] font-normal text-amber-900 leading-[1.65]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    You must meet <strong className="font-bold">every</strong> condition below. The Home Office refuses on the first missed requirement.
+              <Section eyebrow="02 — Eligibility" title="Are you eligible?">
+                <div className="mb-5 rounded-xl px-5 py-4 flex items-start gap-3"
+                     style={{ background: '#FBF6E7', border: '1px solid rgba(184,134,11,0.30)' }}>
+                  <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
+                  <p className="text-[13.5px] leading-[1.65]" style={{ color: '#5C4A12' }}>
+                    You must meet <strong style={{ fontWeight: 700 }}>every</strong> condition below.
+                    The Home Office refuses on the first missed requirement.
                   </p>
                 </div>
-                <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
-                  style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
-                  <ul className="divide-y divide-[#F3F4F6]">
+                <div className="rounded-3xl overflow-hidden"
+                  style={{
+                    background: PAPER,
+                    border: `1px solid ${HAIR}`,
+                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                  }}>
+                  <ul>
                     {v.eligibility.map((item, i) => (
-                      <li key={i} className="px-6 py-5 flex items-start gap-4">
-                        <span className="mt-0.5 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[12.5px] font-extrabold text-white"
-                          style={{ background: accent, fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                      <li key={i} className="px-7 py-5 flex items-start gap-5"
+                          style={{ borderBottom: i < v.eligibility.length - 1 ? `1px solid ${HAIR}` : 'none' }}>
+                        <span aria-hidden
+                              className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-[14px] tabular-nums"
+                              style={{
+                                background: INK,
+                                color: CREAM,
+                                fontFamily: 'Fraunces, serif',
+                                fontWeight: 700,
+                              }}>
                           {i + 1}
                         </span>
-                        <span className="text-[#0F172A] text-[15px] font-normal leading-[1.72] flex-1"
-                              style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <span className="text-[15px] leading-[1.7] flex-1" style={{ color: INK }}>
                           {item}
                         </span>
                       </li>
@@ -358,52 +388,62 @@ export default async function VisaPage({ params }: RouteParams) {
               </Section>
 
               {/* 03 COSTS */}
-              <Section eyebrow="Costs" title="What it costs in 2026" accent={accent}>
-                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
-                   style={{ fontFamily: 'Inter, sans-serif' }}>
-                  Two compulsory costs: the application fee and the Immigration Health Surcharge (IHS). Priority and dependants are added on top.
+              <Section eyebrow="03 — Costs" title="What it costs in 2026">
+                <p className="text-[15px] leading-[1.7] mb-6 max-w-2xl" style={{ color: SLATE }}>
+                  Two compulsory costs: the application fee and the Immigration Health Surcharge (IHS).
+                  Priority and dependants are added on top.
                 </p>
 
                 {SETTLEMENT_BREAKDOWNS[slug] ? (
                   <SettlementCostStack breakdown={SETTLEMENT_BREAKDOWNS[slug]} calculatorVisaParam={slug} />
                 ) : (
-                  <CostCard fee={v.fee} ihs={v.ihs} accent={accent} slug={slug} headlineFee={headlineFee} />
+                  <CostCard fee={v.fee} ihs={v.ihs} slug={slug} headlineFee={headlineFee} />
                 )}
               </Section>
 
               {/* 04 DOCUMENTS */}
-              <Section eyebrow="Documents" title="What you'll need to provide" accent={accent}>
-                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
-                   style={{ fontFamily: 'Inter, sans-serif' }}>
-                  Group your evidence under these headings. Mis-categorised or missing documents are the second most common refusal reason.
+              <Section eyebrow="04 — Documents" title="What you'll need to provide">
+                <p className="text-[15px] leading-[1.7] mb-7 max-w-2xl" style={{ color: SLATE }}>
+                  Group your evidence under these headings. Mis-categorised or missing documents
+                  are the second most common refusal reason.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {docGroups.map((group) => {
                     const Icon = group.icon;
                     return (
                       <div key={group.id}
-                        className="rounded-2xl bg-white border border-[#E5E7EB] p-6"
-                        style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.05)' }}>
-                        <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[#F3F4F6]">
-                          <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ background: `${group.tone}18`, color: group.tone }}>
+                        className="rounded-3xl p-6"
+                        style={{
+                          background: PAPER,
+                          border: `1px solid ${HAIR}`,
+                          boxShadow: '0 2px 14px -8px rgba(11,15,25,0.08)',
+                        }}>
+                        <div className="flex items-center gap-3 mb-5 pb-5"
+                             style={{ borderBottom: `1px solid ${HAIR}` }}>
+                          <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{ background: 'rgba(4,120,87,0.08)', color: EMERALD }}>
                             <Icon className="w-[18px] h-[18px]" strokeWidth={2} />
                           </span>
-                          <h3 className="font-extrabold text-[#0A2540] text-[14.5px] flex-1"
-                            style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                          <h3 className="flex-1"
+                              style={{
+                                fontFamily: 'Fraunces, serif',
+                                fontWeight: 600,
+                                fontSize: 18,
+                                letterSpacing: '-0.02em',
+                                color: INK,
+                                lineHeight: 1.15,
+                              }}>
                             {group.label}
                           </h3>
-                          <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full text-white"
-                            style={{ background: group.tone, fontFamily: 'Inter, sans-serif' }}>
+                          <span className="text-[11px] font-mono tabular-nums" style={{ color: MUTED }}>
                             {group.items.length}
                           </span>
                         </div>
                         <ul className="space-y-3">
                           {group.items.map((doc, i) => (
                             <li key={i} className="flex items-start gap-3">
-                              <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: group.tone }} />
-                              <span className="text-[#334155] text-[13.5px] font-normal leading-[1.58]"
-                                    style={{ fontFamily: 'Inter, sans-serif' }}>
+                              <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: EMERALD }} />
+                              <span className="text-[14px] leading-[1.6]" style={{ color: INK }}>
                                 {doc}
                               </span>
                             </li>
@@ -415,10 +455,9 @@ export default async function VisaPage({ params }: RouteParams) {
                 </div>
               </Section>
 
-              {/* 05 PROCESS — gov.uk-style differentiated guide */}
-              <Section eyebrow="How to apply" title="Step-by-step application guide" accent={accent}>
-                <p className="text-[#475569] text-[14.5px] font-normal leading-[1.72] mb-6 max-w-2xl"
-                   style={{ fontFamily: 'Inter, sans-serif' }}>
+              {/* 05 PROCESS */}
+              <Section eyebrow="05 — How to apply" title="Step-by-step application guide">
+                <p className="text-[15px] leading-[1.7] mb-7 max-w-2xl" style={{ color: SLATE }}>
                   Choose your path below. The process is different if you&apos;re applying from outside the UK
                   (entry clearance) versus switching from another visa inside the UK.
                 </p>
@@ -431,25 +470,26 @@ export default async function VisaPage({ params }: RouteParams) {
                   applyUrl={v.applyUrl}
                   processing={v.processing}
                   steps={v.steps}
-                  accent={accent}
                 />
               </Section>
 
               {/* 06 NOTES */}
               {v.notes && v.notes.length > 0 && (
-                <Section eyebrow="Common pitfalls" title="Things that catch people out" accent={accent}>
+                <Section eyebrow="06 — Common pitfalls" title="Things that catch people out">
                   <div className="space-y-3">
                     {v.notes.map((note, i) => (
                       <div key={i}
-                        className="rounded-2xl bg-white border border-amber-200 p-5 md:p-6 flex items-start gap-4"
-                        style={{ boxShadow: '0 2px 8px rgba(201,161,74,0.08)' }}>
+                        className="rounded-2xl p-5 md:p-6 flex items-start gap-4"
+                        style={{
+                          background: '#FBF6E7',
+                          border: '1px solid rgba(184,134,11,0.30)',
+                        }}>
                         <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ background: 'rgba(201,161,74,0.12)', color: '#C9A14A' }}>
+                              style={{ background: 'rgba(184,134,11,0.15)', color: GOLD }}>
                           <AlertTriangle className="w-4 h-4" strokeWidth={2.2} />
                         </span>
-                        <p className="text-[#0F172A] text-[14.5px] font-normal leading-[1.68]"
-                           style={{ fontFamily: 'Inter, sans-serif' }}>
-                           {note}
+                        <p className="text-[14.5px] leading-[1.7] flex-1" style={{ color: '#3F2E0A' }}>
+                          {note}
                         </p>
                       </div>
                     ))}
@@ -459,43 +499,59 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* 07 FAQ */}
               {faqs.length > 0 && (
-                <Section eyebrow="FAQ" title="Common questions" accent={accent}>
-                  <div className="rounded-2xl bg-white border border-[#E5E7EB] p-6 md:p-8"
-                    style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
+                <Section eyebrow="07 — FAQ" title="Common questions">
+                  <div className="rounded-3xl p-6 md:p-8"
+                    style={{
+                      background: PAPER,
+                      border: `1px solid ${HAIR}`,
+                      boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                    }}>
                     <VisaFaq faqs={faqs} />
                   </div>
                 </Section>
               )}
 
               {/* FINAL CTA BANNER */}
-              <div className="relative overflow-hidden rounded-3xl p-8 md:p-12 text-white"
-                   style={{ background: 'linear-gradient(135deg, #06192E 0%, #0A2540 55%, #13325F 100%)' }}>
-                <div aria-hidden className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full opacity-25 blur-3xl"
-                     style={{ background: `radial-gradient(circle at center, ${accent} 0%, transparent 60%)` }} />
+              <div className="relative overflow-hidden rounded-3xl p-8 md:p-12"
+                   style={{ background: INK, color: CREAM }}>
+                <div aria-hidden className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full pointer-events-none"
+                     style={{ background: 'rgba(4,120,87,0.28)', filter: 'blur(80px)' }} />
+                <div aria-hidden className="absolute -bottom-32 -left-32 w-[380px] h-[380px] rounded-full pointer-events-none"
+                     style={{ background: 'rgba(184,134,11,0.18)', filter: 'blur(80px)' }} />
+                <div aria-hidden className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                     style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
+
                 <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-7">
                   <div className="max-w-md">
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] mb-3"
-                      style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-4 inline-flex items-center gap-1.5"
+                       style={{ color: '#FDE68A' }}>
                       <Sparkles className="w-3 h-3" />
                       Ready to apply
-                    </span>
-                    <h3 className="text-white text-[22px] md:text-[28px] font-bold tracking-[-0.02em] leading-[1.2] mb-3"
-                      style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-                      Apply for the {v.title} on gov.uk
+                    </p>
+                    <h3 className="mb-3"
+                        style={{
+                          fontFamily: 'Fraunces, serif',
+                          fontWeight: 600,
+                          fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                          letterSpacing: '-0.028em',
+                          lineHeight: 1.05,
+                          color: CREAM,
+                        }}>
+                      Apply for the <span style={{ fontStyle: 'italic', color: '#A7F3D0' }}>{v.title}</span> on gov.uk
                     </h3>
-                    <p className="text-white/80 text-[15px] leading-[1.65]"
-                       style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-[15px] leading-[1.65]" style={{ color: 'rgba(250,250,247,0.65)' }}>
                       Free, official, no agents required. Bookmark the URL — it&#39;s the only place to legally apply.
                     </p>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                     <a href={v.applyUrl} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 text-[#06192E] text-[14.5px] font-bold px-6 py-3.5 rounded-xl active:scale-[0.98] transition-all"
-                      style={{ background: `linear-gradient(135deg, ${accent}, ${accent}cc)`, boxShadow: `0 10px 30px -8px ${accent}90` }}>
+                       className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold px-6 py-3.5 rounded-xl active:scale-[0.98] transition-all"
+                       style={{ background: CREAM, color: INK }}>
                       Apply on gov.uk <ExternalLink className="w-4 h-4" />
                     </a>
                     <Link href="/eligibility"
-                      className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 text-[14.5px] font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-colors">
+                       className="inline-flex items-center justify-center gap-2 text-[14px] font-semibold px-6 py-3.5 rounded-xl transition-colors"
+                       style={{ background: 'rgba(250,250,247,0.06)', color: CREAM, border: '1px solid rgba(250,250,247,0.16)' }}>
                       Eligibility quiz
                     </Link>
                   </div>
@@ -509,82 +565,118 @@ export default async function VisaPage({ params }: RouteParams) {
                 SIDEBAR
             ═══════════════════════════════════════════════════════ */}
             <aside className="col-span-12 lg:col-span-4">
-              <div className="lg:sticky lg:top-[100px] space-y-4">
+              <div className="lg:sticky lg:top-[140px] space-y-4">
 
                 {/* Quick facts card */}
-                <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
-                  style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.07)' }}>
-                  <div className="px-5 py-3.5 border-b border-[#F3F4F6] flex items-center gap-2.5"
-                    style={{ background: `${accent}0c` }}>
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: accent }} />
-                    <span className="text-[10.5px] font-extrabold uppercase tracking-[0.16em]"
-                      style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>At a glance</span>
+                <div className="rounded-3xl overflow-hidden"
+                  style={{
+                    background: PAPER,
+                    border: `1px solid ${HAIR}`,
+                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                  }}>
+                  <div className="px-6 py-4 flex items-center gap-2.5"
+                       style={{ background: 'rgba(4,120,87,0.05)', borderBottom: `1px solid ${HAIR}` }}>
+                    <span className="w-2 h-2 rounded-full" style={{ background: EMERALD }} />
+                    <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]"
+                          style={{ color: GOLD }}>
+                      At a glance
+                    </span>
                   </div>
-                  <dl className="divide-y divide-[#F9FAFB]">
-                    <FactRow label="Application fee" value={v.fee} icon={Banknote} accent={accent} />
-                    <FactRow label="Health surcharge (IHS)" value={v.ihs} icon={ShieldCheck} accent={accent} />
-                    <FactRow label="Decision (outside UK)" value={v.processing.outside} icon={Clock} accent={accent} />
-                    <FactRow label="Decision (inside UK)" value={v.processing.inside} icon={Clock} accent={accent} />
-                    <FactRow label="Duration" value={v.duration} icon={Calendar} accent={accent} />
+                  <dl>
+                    <FactRow label="Application fee" value={v.fee} icon={Banknote} />
+                    <FactRow label="Health surcharge (IHS)" value={v.ihs} icon={ShieldCheck} />
+                    <FactRow label="Decision (outside UK)" value={v.processing.outside} icon={Clock} />
+                    <FactRow label="Decision (inside UK)" value={v.processing.inside} icon={Clock} />
+                    <FactRow label="Duration" value={v.duration} icon={Calendar} last />
                   </dl>
                 </div>
 
                 {/* Apply CTA */}
                 <a href={v.applyUrl} target="_blank" rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-3 rounded-2xl p-5 text-white transition-all active:scale-[0.99]"
-                  style={{ background: `linear-gradient(135deg, ${accent} 0%, ${accent}cc 100%)`, boxShadow: `0 8px 30px -8px ${accent}66` }}>
+                   className="group flex items-center justify-between gap-3 rounded-3xl p-5 transition-all active:scale-[0.99]"
+                   style={{
+                     background: INK,
+                     color: CREAM,
+                     boxShadow: '0 10px 30px -12px rgba(11,15,25,0.40)',
+                   }}>
                   <div>
-                    <div className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/75 mb-1">Official application</div>
-                    <div className="font-extrabold text-[17px] leading-tight text-white"
-                      style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                    <div className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-1.5"
+                         style={{ color: 'rgba(250,250,247,0.65)' }}>
+                      Official application
+                    </div>
+                    <div style={{
+                      fontFamily: 'Fraunces, serif',
+                      fontWeight: 600,
+                      fontSize: 18,
+                      letterSpacing: '-0.018em',
+                      color: CREAM,
+                      lineHeight: 1.15,
+                    }}>
                       Apply on gov.uk
                     </div>
                   </div>
-                  <ExternalLink className="w-5 h-5 text-white/90 group-hover:translate-x-0.5 transition-transform" />
+                  <ExternalLink className="w-5 h-5 transition-transform group-hover:translate-x-0.5"
+                                style={{ color: '#A7F3D0' }} />
                 </a>
 
                 {/* Solicitor */}
-                <div className="rounded-2xl bg-white border border-[#E5E7EB] p-5"
-                  style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.05)' }}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: 'rgba(0,196,180,0.12)', color: '#00A89A' }}>
+                <div className="rounded-3xl p-5"
+                     style={{
+                       background: PAPER,
+                       border: `1px solid ${HAIR}`,
+                       boxShadow: '0 2px 14px -8px rgba(11,15,25,0.06)',
+                     }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                          style={{ background: 'rgba(4,120,87,0.10)', color: EMERALD }}>
                       <MessageCircle className="w-4 h-4" strokeWidth={2.2} />
                     </span>
                     <div>
-                      <div className="font-bold text-[14px] text-[#0A2540] leading-tight"
-                           style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+                      <div style={{
+                        fontFamily: 'Fraunces, serif',
+                        fontWeight: 600,
+                        fontSize: 15,
+                        letterSpacing: '-0.015em',
+                        color: INK,
+                        lineHeight: 1.15,
+                      }}>
                         Talk to a solicitor
                       </div>
-                      <div className="text-[12px] text-[#6B7280] mt-0.5">Free 15-min consultation</div>
+                      <div className="text-[12px] mt-0.5" style={{ color: MUTED }}>
+                        Free 15-min consultation
+                      </div>
                     </div>
                   </div>
-                  <p className="text-[13px] text-[#374151] leading-[1.6] mb-4">
+                  <p className="text-[13px] leading-[1.6] mb-4" style={{ color: SLATE }}>
                     Get an OISC-regulated immigration solicitor to review your case before you apply.
                   </p>
                   <Link href="/eligibility"
-                    className="block text-center text-white text-[13.5px] font-bold py-2.5 rounded-xl"
-                    style={{ background: 'linear-gradient(135deg, #0A2540, #13325F)' }}>
+                        className="block text-center text-[13.5px] font-semibold py-2.5 rounded-xl transition-colors"
+                        style={{ background: INK, color: CREAM }}>
                     Get matched →
                   </Link>
-                  <div className="mt-3 flex items-center justify-center gap-1 text-[11.5px] text-[#6B7280]">
-                    {[1,2,3,4,5].map((i) => <Star key={i} className="w-3 h-3 fill-[#C9A14A] text-[#C9A14A]" />)}
+                  <div className="mt-3 flex items-center justify-center gap-1 text-[11.5px]" style={{ color: MUTED }}>
+                    {[1,2,3,4,5].map((i) => <Star key={i} className="w-3 h-3" fill={GOLD} style={{ color: GOLD }} />)}
                     <span className="ml-1.5">2,400+ applicants helped</span>
                   </div>
                 </div>
 
                 {/* Source note */}
-                <div className="rounded-xl bg-[#F0F9FF] border border-[#BAE6FD] p-4">
+                <div className="rounded-2xl p-4"
+                     style={{ background: 'rgba(4,120,87,0.05)', border: '1px solid rgba(4,120,87,0.18)' }}>
                   <div className="flex items-center gap-2 mb-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#0284C7]" />
-                    <span className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#0369A1]">gov.uk verified</span>
+                    <ShieldCheck className="w-3.5 h-3.5" style={{ color: EMERALD }} />
+                    <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]" style={{ color: EMERALD }}>
+                      gov.uk verified
+                    </span>
                   </div>
-                  <p className="text-[12.5px] text-[#0C4A6E] leading-[1.6]">
-                    All fees verified against gov.uk effective <strong>8 April 2026</strong>.
+                  <p className="text-[12.5px] leading-[1.6]" style={{ color: '#064E3B' }}>
+                    All fees verified against gov.uk effective <strong style={{ fontWeight: 700 }}>8 April 2026</strong>.
                   </p>
                   <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
-                    target="_blank" rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-1 text-[12px] font-bold text-[#0284C7] hover:underline">
+                     target="_blank" rel="noopener noreferrer"
+                     className="mt-2 inline-flex items-center gap-1 text-[12px] font-semibold transition-colors"
+                     style={{ color: EMERALD }}>
                     View source <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
@@ -599,7 +691,7 @@ export default async function VisaPage({ params }: RouteParams) {
         label="Apply on gov.uk"
         href={v.applyUrl}
         external
-        accent={accent}
+        accent={EMERALD}
       />
     </>
   );
@@ -610,25 +702,28 @@ export default async function VisaPage({ params }: RouteParams) {
 ───────────────────────────────────────────── */
 
 function Section({
-  eyebrow, title, children, accent,
+  eyebrow, title, children,
 }: {
-  eyebrow: string; title: string; children: React.ReactNode; accent: string;
+  eyebrow: string; title: string; children: React.ReactNode;
 }) {
-  const sectionId = eyebrow.toLowerCase()
+  const sectionId = eyebrow.toLowerCase().split('—')[1]?.trim()
     .replace(/\s+/g, '-')
     .replace('how-to-apply', 'process')
-    .replace('common-pitfalls', 'notes');
+    .replace('common-pitfalls', 'notes')
+    ?? eyebrow.toLowerCase().replace(/\s+/g, '-');
   return (
-    <section id={sectionId} className="scroll-mt-28">
-      <div className="flex items-center gap-2.5 mb-2.5">
-        <span className="w-[3px] h-[18px] rounded-full" style={{ background: accent }} />
-        <p className="text-[10.5px] font-extrabold uppercase tracking-[0.18em]"
-           style={{ color: accent, fontFamily: 'Inter, sans-serif' }}>
-          {eyebrow}
-        </p>
-      </div>
-      <h2 className="font-extrabold text-[#0A2540] tracking-[-0.022em] leading-[1.12] mb-7 text-[23px] md:text-[28px]"
-        style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+    <section id={sectionId} className="scroll-mt-32">
+      <p className="eyebrow mb-4" style={{ color: GOLD }}>{eyebrow}</p>
+      <h2 className="mb-7"
+          style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 600,
+            fontSize: 'clamp(1.7rem, 3.4vw, 2.4rem)',
+            letterSpacing: '-0.028em',
+            lineHeight: 1.05,
+            color: INK,
+            textWrap: 'balance' as React.CSSProperties['textWrap'],
+          }}>
         {title}
       </h2>
       {children}
@@ -637,130 +732,185 @@ function Section({
 }
 
 function HeroStat({
-  label, value, sub, wide, accent, icon: Icon,
+  label, value, highlight, icon: Icon,
 }: {
-  label: string; value: string; sub?: string; wide?: boolean; accent?: string;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  label: string; value: string; highlight?: boolean;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>;
 }) {
   return (
-    <div className={`rounded-2xl p-5 ${wide ? 'col-span-2' : ''}`}
-      style={{
-        background: 'rgba(255,255,255,0.10)',
-        border: '1px solid rgba(255,255,255,0.18)',
-        backdropFilter: 'blur(10px)',
-      }}>
-      <div className="flex items-center gap-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/70 mb-3"
-           style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="rounded-2xl p-5"
+         style={{
+           background: highlight ? INK : PAPER,
+           color: highlight ? CREAM : INK,
+           border: `1px solid ${highlight ? 'rgba(250,250,247,0.10)' : HAIR}`,
+           boxShadow: highlight
+             ? '0 8px 26px -10px rgba(11,15,25,0.30)'
+             : '0 2px 12px -6px rgba(11,15,25,0.08)',
+         }}>
+      <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] mb-3"
+           style={{ color: highlight ? 'rgba(250,250,247,0.65)' : MUTED }}>
         <Icon className="w-3 h-3" strokeWidth={2.5} />
         {label}
       </div>
-      <p className="font-extrabold tracking-[-0.02em] leading-[1.05] tabular-nums"
-        style={{
-          fontFamily: '"Plus Jakarta Sans", Inter, sans-serif',
-          fontSize: wide ? 'clamp(1.15rem, 2vw, 1.4rem)' : 'clamp(1.5rem, 3vw, 1.85rem)',
-          color: accent ?? '#fff',
-        }}>
+      <p className="tabular-nums leading-[1.05]"
+         style={{
+           fontFamily: 'Fraunces, serif',
+           fontWeight: 700,
+           fontSize: 'clamp(1.4rem, 2.6vw, 1.8rem)',
+           letterSpacing: '-0.03em',
+           color: highlight ? CREAM : INK,
+         }}>
         {value}
       </p>
-      {sub && (
-        <p className="mt-2 text-[11.5px] text-white/60 leading-[1.45]"
-           style={{ fontFamily: 'Inter, sans-serif' }}>
-          {sub}
-        </p>
-      )}
     </div>
   );
 }
 
 function FactRow({
-  label, value, icon: Icon, accent,
+  label, value, icon: Icon, last,
 }: {
-  label: string; value: string;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  accent: string;
+  label: string; value: string; last?: boolean;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number; style?: React.CSSProperties }>;
 }) {
   return (
-    <div className="flex items-start justify-between gap-3 px-5 py-3.5">
-      <dt className="flex items-center gap-2 text-[12px] font-medium text-[#64748B] flex-shrink-0"
-          style={{ fontFamily: 'Inter, sans-serif' }}>
-        <span style={{ color: accent }}><Icon className="w-3.5 h-3.5" strokeWidth={2} /></span>
+    <div className="flex items-start justify-between gap-3 px-6 py-4"
+         style={{ borderBottom: last ? 'none' : `1px solid ${HAIR}` }}>
+      <dt className="flex items-center gap-2 text-[12.5px] font-medium flex-shrink-0"
+          style={{ color: SLATE }}>
+        <Icon className="w-3.5 h-3.5" strokeWidth={2} style={{ color: EMERALD }} />
         {label}
       </dt>
-      <dd className="text-[13px] font-extrabold text-[#0A2540] text-right max-w-[200px] leading-snug"
-          style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+      <dd className="text-right max-w-[200px] leading-snug tabular-nums"
+          style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 600,
+            fontSize: 13.5,
+            letterSpacing: '-0.012em',
+            color: INK,
+          }}>
         {value}
       </dd>
     </div>
   );
 }
 
-function CostCard({ fee, ihs, accent, slug, headlineFee }: {
-  fee: string; ihs: string; accent: string; slug: string; headlineFee: string;
+function Inline({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1.5" style={{ color: MUTED }}>
+        {label}
+      </div>
+      <div className="tabular-nums leading-[1.1]"
+           style={{
+             fontFamily: 'Fraunces, serif',
+             fontWeight: 700,
+             fontSize: 19,
+             letterSpacing: '-0.022em',
+             color: INK,
+           }}>
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function CostCard({ fee, ihs, slug, headlineFee }: {
+  fee: string; ihs: string; slug: string; headlineFee: string;
 }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden"
-      style={{ boxShadow: '0 2px 12px rgba(10,37,64,0.07)' }}>
-      {/* Fee header — clean accent band */}
-      <div className="px-7 py-6 border-b border-[#F3F4F6]"
-        style={{ background: `linear-gradient(90deg, ${accent}0d 0%, transparent 60%)` }}>
+    <div className="rounded-3xl overflow-hidden"
+         style={{
+           background: PAPER,
+           border: `1px solid ${HAIR}`,
+           boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+         }}>
+      {/* Fee header */}
+      <div className="px-8 py-7" style={{ borderBottom: `1px solid ${HAIR}` }}>
         <div className="flex items-end justify-between gap-4 flex-wrap">
           <div>
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
-               style={{ fontFamily: 'Inter, sans-serif' }}>
+            <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
               Application fee
             </p>
-            <p className="font-extrabold tabular-nums tracking-[-0.03em] leading-none text-[#0A2540]"
-              style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif', fontSize: 'clamp(2.2rem, 5vw, 3rem)' }}>
+            <p className="tabular-nums leading-none"
+               style={{
+                 fontFamily: 'Fraunces, serif',
+                 fontWeight: 700,
+                 fontSize: 'clamp(2.4rem, 5.5vw, 3.6rem)',
+                 letterSpacing: '-0.04em',
+                 color: INK,
+               }}>
               {headlineFee}
             </p>
-            <p className="mt-2 text-[13px] font-normal text-[#475569]" style={{ fontFamily: 'Inter, sans-serif' }}>{fee}</p>
+            <p className="mt-3 text-[14px]" style={{ color: SLATE }}>{fee}</p>
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold px-3 py-1.5 rounded-full border"
-            style={{ background: `${accent}0e`, borderColor: `${accent}30`, color: '#0A2540' }}>
-            <ShieldCheck className="w-3.5 h-3.5" style={{ color: accent }} />
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-full"
+                style={{
+                  background: 'rgba(4,120,87,0.08)',
+                  border: '1px solid rgba(4,120,87,0.22)',
+                  color: EMERALD,
+                }}>
+            <ShieldCheck className="w-3.5 h-3.5" />
             gov.uk verified
           </span>
         </div>
       </div>
 
-      <div className="p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="px-8 py-7 grid grid-cols-1 sm:grid-cols-2 gap-7">
         <div>
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
-             style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: MUTED }}>
             Health Surcharge (IHS)
           </p>
-          <p className="text-[24px] font-extrabold text-[#0A2540] tabular-nums" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
+          <p className="tabular-nums"
+             style={{
+               fontFamily: 'Fraunces, serif',
+               fontWeight: 700,
+               fontSize: 28,
+               letterSpacing: '-0.028em',
+               color: INK,
+               lineHeight: 1,
+             }}>
             {ihs}
           </p>
-          <p className="mt-1.5 text-[13px] font-normal text-[#475569] leading-[1.65]"
-             style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="mt-2 text-[13.5px] leading-[1.6]" style={{ color: SLATE }}>
             Paid upfront for the full visa duration — funds NHS access.
           </p>
         </div>
         <div>
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#9CA3AF] mb-2"
-             style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: MUTED }}>
             Optional add-ons
           </p>
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {[
               ['Priority service', '+£500'],
-              ['Super-priority', '+£1,000'],
-              ['Per dependant', '+full fee + IHS'],
+              ['Super-priority',   '+£1,000'],
+              ['Per dependant',    '+full fee + IHS'],
             ].map(([label, val]) => (
-              <li key={label} className="flex items-center justify-between gap-3">
-                <span className="text-[13px] font-normal text-[#475569]" style={{ fontFamily: 'Inter, sans-serif' }}>{label}</span>
-                <span className="text-[13px] font-extrabold text-[#0A2540]" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>{val}</span>
+              <li key={label} className="flex items-center justify-between gap-3 pb-2"
+                  style={{ borderBottom: `1px solid ${HAIR}` }}>
+                <span className="text-[13.5px]" style={{ color: SLATE }}>{label}</span>
+                <span className="text-[13.5px] tabular-nums"
+                      style={{
+                        fontFamily: 'Fraunces, serif',
+                        fontWeight: 600,
+                        letterSpacing: '-0.012em',
+                        color: INK,
+                      }}>
+                  {val}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div className="px-7 py-4 border-t border-[#F3F4F6] bg-[#FAFAFA]">
+      <div className="px-8 py-5" style={{ background: CREAM, borderTop: `1px solid ${HAIR}` }}>
         <Link href={`/tools/cost-calculator?visa=${slug}`}
-          className="inline-flex items-center gap-2 text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl transition-all active:scale-[0.98]"
-          style={{ background: `linear-gradient(135deg, ${accent}, ${accent}cc)`, boxShadow: `0 4px 14px -4px ${accent}66` }}>
+              className="inline-flex items-center gap-2 text-[13.5px] font-semibold px-5 py-3 rounded-xl transition-all active:scale-[0.98]"
+              style={{
+                background: INK,
+                color: CREAM,
+                boxShadow: '0 6px 18px -6px rgba(11,15,25,0.30)',
+              }}>
           <Calculator className="w-4 h-4" />
           Calculate your total cost
           <ArrowRight className="w-3.5 h-3.5" />

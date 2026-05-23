@@ -1,10 +1,21 @@
 'use client';
 
+/**
+ * VisaTabNav — sticky section anchor nav (Editorial Premium)
+ * Cream surface, hairline rule, ink labels, emerald active state.
+ */
+
 import { useEffect, useState } from 'react';
 
 export interface Tab { id: string; label: string }
 
-export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: string }) {
+const INK     = '#0B0F19';
+const CREAM   = '#FAFAF7';
+const EMERALD = '#047857';
+const SLATE   = '#475569';
+
+export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent?: string }) {
+  const activeColor = accent ?? EMERALD;
   const [activeId, setActiveId] = useState<string>(tabs[0]?.id ?? '');
 
   useEffect(() => {
@@ -23,9 +34,8 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: stri
           setActiveId(top);
         }
       },
-      { rootMargin: '-120px 0px -65% 0px', threshold: [0, 1] }
+      { rootMargin: '-140px 0px -65% 0px', threshold: [0, 1] }
     );
-
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, [tabs]);
@@ -34,7 +44,7 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: stri
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 120;
+      const y = el.getBoundingClientRect().top + window.scrollY - 130;
       window.scrollTo({ top: y, behavior: 'smooth' });
       history.replaceState(null, '', `#${id}`);
     }
@@ -43,9 +53,15 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: stri
   return (
     <nav
       aria-label="Section navigation"
-      className="sticky top-[60px] md:top-[64px] z-30 bg-white/92 backdrop-blur border-b border-[rgba(14,20,36,0.07)]"
+      className="sticky top-[68px] md:top-[72px] z-30"
+      style={{
+        background: 'rgba(250,250,247,0.92)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid rgba(11,15,25,0.08)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 overflow-x-auto">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 overflow-x-auto">
         <ul className="flex items-center gap-0 min-w-max">
           {tabs.map((t) => {
             const isActive = t.id === activeId;
@@ -55,17 +71,25 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent: stri
                   href={`#${t.id}`}
                   onClick={(e) => onClick(e, t.id)}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`relative inline-flex items-center h-12 px-3.5 text-[13px] font-semibold transition-colors duration-75 ${
-                    isActive ? 'text-[#0A2540]' : 'text-[#7a8195] hover:text-[#0A2540]'
-                  }`}
+                  className="relative inline-flex items-center h-12 px-4 transition-colors duration-100"
+                  style={{
+                    color: isActive ? INK : SLATE,
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: 13,
+                    fontWeight: isActive ? 600 : 500,
+                    letterSpacing: '-0.005em',
+                  }}
+                  onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = INK; }}
+                  onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = SLATE; }}
                 >
                   {t.label}
                   <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-1.5 -bottom-px h-[2px] rounded-full origin-left transition-transform duration-200 ${
-                      isActive ? 'scale-x-100' : 'scale-x-0'
-                    }`}
-                    style={{ background: accent }}
+                    aria-hidden
+                    className="absolute inset-x-2 -bottom-px h-[2px] rounded-full origin-left transition-transform duration-200"
+                    style={{
+                      background: activeColor,
+                      transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                    }}
                   />
                 </a>
               </li>
