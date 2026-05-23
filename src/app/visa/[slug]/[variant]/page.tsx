@@ -10,14 +10,14 @@ import { VISA_VARIANTS, getVariants } from '../../../../data/visaVariants';
 import SidebarAffiliate from '../../../../components/blog/SidebarAffiliate';
 import StickyMobileCta from '../../../../components/StickyMobileCta';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
-const HAIR    = 'rgba(11,15,25,0.08)';
+const EMERALD = '#635BFF';
+const GOLD    = '#5851DB';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
+const HAIR    = '#E3E8EE';
 
 interface RouteParams { params: Promise<{ slug: string; variant: string }> }
 
@@ -71,12 +71,12 @@ export default async function VariantPage({ params }: RouteParams) {
         <div aria-hidden className="absolute inset-0 pointer-events-none"
              style={{
                background:
-                 'radial-gradient(ellipse at 12% 8%, rgba(4,120,87,0.06) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 88% 80%, rgba(184,134,11,0.05) 0px, transparent 55%)',
+                 'radial-gradient(ellipse at 12% 8%, rgba(99,91,255,0.06) 0px, transparent 55%),' +
+                 'radial-gradient(ellipse at 88% 80%, rgba(88,81,219,0.05) 0px, transparent 55%)',
              }} />
         <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
              style={{
-               backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.10) 1px, transparent 1px)',
+               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
                backgroundSize: '32px 32px',
                maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
                WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
@@ -91,9 +91,9 @@ export default async function VariantPage({ params }: RouteParams) {
 
           <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[10.5px] font-bold uppercase mb-5"
                 style={{
-                  background: 'rgba(4,120,87,0.08)',
+                  background: 'rgba(99,91,255,0.08)',
                   color: EMERALD,
-                  border: '1px solid rgba(4,120,87,0.18)',
+                  border: '1px solid rgba(99,91,255,0.18)',
                   letterSpacing: '0.18em',
                 }}>
             <span className="w-1.5 h-1.5 rounded-full mr-2" style={{ background: EMERALD }} />
@@ -101,11 +101,11 @@ export default async function VariantPage({ params }: RouteParams) {
           </span>
 
           <h1 style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
             fontSize: 'clamp(2rem, 5vw, 3.4rem)',
             lineHeight: 0.98,
-            letterSpacing: '-0.035em',
+            letterSpacing: '-0.025em',
             color: INK,
             textWrap: 'balance' as React.CSSProperties['textWrap'],
           }}>
@@ -141,12 +141,12 @@ export default async function VariantPage({ params }: RouteParams) {
 
               {/* 01 Eligibility */}
               <section className="rounded-3xl p-7 md:p-8"
-                       style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+                       style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                 <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                   01 — Eligibility
                 </p>
                 <h2 style={{
-                  fontFamily: 'Fraunces, serif',
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
                   fontWeight: 600,
                   fontSize: 'clamp(1.5rem, 3vw, 2rem)',
                   letterSpacing: '-0.025em',
@@ -171,12 +171,12 @@ export default async function VariantPage({ params }: RouteParams) {
               {/* 02 Notes */}
               {v.notes && v.notes.length > 0 && (
                 <section className="rounded-3xl p-7 md:p-8"
-                         style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+                         style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                   <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                     02 — Watch out for
                   </p>
                   <h2 style={{
-                    fontFamily: 'Fraunces, serif',
+                    fontFamily: '"Inter Tight", Inter, sans-serif',
                     fontWeight: 600,
                     fontSize: 24,
                     letterSpacing: '-0.022em',
@@ -188,7 +188,7 @@ export default async function VariantPage({ params }: RouteParams) {
                   <ul className="space-y-3">
                     {v.notes.map((note, i) => (
                       <li key={i} className="flex gap-3 items-start p-4 rounded-xl"
-                          style={{ background: '#FBF6E7', border: '1px solid rgba(184,134,11,0.30)' }}>
+                          style={{ background: '#FBF6E7', border: '1px solid rgba(88,81,219,0.30)' }}>
                         <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
                         <span className="text-[14px] leading-[1.65]" style={{ color: '#3F2E0A' }}>{note}</span>
                       </li>
@@ -200,12 +200,12 @@ export default async function VariantPage({ params }: RouteParams) {
               {/* 03 Other variants */}
               {otherVariants.length > 0 && (
                 <section className="rounded-3xl p-7 md:p-8"
-                         style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+                         style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
                   <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
                     03 — Other sub-routes
                   </p>
                   <h2 style={{
-                    fontFamily: 'Fraunces, serif',
+                    fontFamily: '"Inter Tight", Inter, sans-serif',
                     fontWeight: 600,
                     fontSize: 24,
                     letterSpacing: '-0.022em',
@@ -226,7 +226,7 @@ export default async function VariantPage({ params }: RouteParams) {
                             </div>
                             <div className="leading-tight mt-1 truncate"
                                  style={{
-                                   fontFamily: 'Fraunces, serif',
+                                   fontFamily: '"Inter Tight", Inter, sans-serif',
                                    fontWeight: 600,
                                    fontSize: 15,
                                    letterSpacing: '-0.015em',
@@ -250,13 +250,13 @@ export default async function VariantPage({ params }: RouteParams) {
                 <div aria-hidden className="absolute inset-0 opacity-[0.10] pointer-events-none"
                      style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)', backgroundSize: '20px 20px' }} />
                 <div aria-hidden className="absolute -right-20 -bottom-20 w-60 h-60 rounded-full pointer-events-none"
-                     style={{ background: 'rgba(4,120,87,0.28)', filter: 'blur(60px)' }} />
+                     style={{ background: 'rgba(99,91,255,0.28)', filter: 'blur(60px)' }} />
 
                 <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="max-w-md">
                     <h3 className="leading-tight"
                         style={{
-                          fontFamily: 'Fraunces, serif',
+                          fontFamily: '"Inter Tight", Inter, sans-serif',
                           fontWeight: 600,
                           fontSize: 'clamp(1.4rem, 2.6vw, 1.85rem)',
                           letterSpacing: '-0.028em',
@@ -283,15 +283,15 @@ export default async function VariantPage({ params }: RouteParams) {
 
                 {/* Cost preview */}
                 <div className="rounded-3xl p-5"
-                     style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 14px -8px rgba(11,15,25,0.08)' }}>
+                     style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 14px -8px rgba(26,31,54,0.08)' }}>
                   <div className="flex items-center gap-2.5 mb-4">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: 'rgba(4,120,87,0.10)', color: EMERALD }}>
+                          style={{ background: 'rgba(99,91,255,0.10)', color: EMERALD }}>
                       <Calculator className="w-4 h-4" />
                     </span>
                     <div>
                       <div style={{
-                        fontFamily: 'Fraunces, serif',
+                        fontFamily: '"Inter Tight", Inter, sans-serif',
                         fontWeight: 600,
                         fontSize: 15,
                         letterSpacing: '-0.015em',
@@ -364,7 +364,7 @@ function Pill({
         </div>
         <div className="leading-none truncate max-w-[180px] tabular-nums"
              style={{
-               fontFamily: 'Fraunces, serif',
+               fontFamily: '"Inter Tight", Inter, sans-serif',
                fontWeight: 600,
                fontSize: 14,
                letterSpacing: '-0.015em',

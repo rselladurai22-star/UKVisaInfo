@@ -48,10 +48,10 @@ const SECTIONS: { id: SectionId; label: string; icon: React.ComponentType<{ clas
 
 /* ─── VISA TABS ─── */
 const TABS: { id: TabId; label: string; icon: React.ComponentType<{ className?: string }>; accent: string }[] = [
-  { id: 'work',        label: 'Work',        icon: Briefcase,     accent: '#047857' },
+  { id: 'work',        label: 'Work',        icon: Briefcase,     accent: '#635BFF' },
   { id: 'study',       label: 'Study',       icon: GraduationCap, accent: '#1E3A8A' },
   { id: 'family',      label: 'Family',      icon: Heart,         accent: '#E11D48' },
-  { id: 'visit',       label: 'Visit',       icon: Plane,         accent: '#B8860B' },
+  { id: 'visit',       label: 'Visit',       icon: Plane,         accent: '#5851DB' },
   { id: 'settlement',  label: 'Settlement',  icon: ShieldCheck,   accent: '#10B981' },
   { id: 'citizenship', label: 'Citizenship', icon: Crown,         accent: '#7C3AED' },
   { id: 'special',     label: 'Special',     icon: Star,          accent: '#F59E0B' },
@@ -60,7 +60,7 @@ const TABS: { id: TabId; label: string; icon: React.ComponentType<{ className?: 
 /* ─── VISA ROUTES DATA ─── */
 const ROUTES: VisaRoute[] = [
   /* WORK */
-  { id:'skilled-worker',   title:'Skilled Worker',             blurb:'Employer-sponsored at any eligible SOC occupation. Most common route to ILR.',          fee:'from £610',              baseFee:610,   ihsPerYear:1035, duration:'3–5 yr',    toILR:'5 years',                      accent:'#047857', icon:Briefcase,    tab:'work',        badge:'Most popular', href:'/visa/skilled-worker'    },
+  { id:'skilled-worker',   title:'Skilled Worker',             blurb:'Employer-sponsored at any eligible SOC occupation. Most common route to ILR.',          fee:'from £610',              baseFee:610,   ihsPerYear:1035, duration:'3–5 yr',    toILR:'5 years',                      accent:'#635BFF', icon:Briefcase,    tab:'work',        badge:'Most popular', href:'/visa/skilled-worker'    },
   { id:'health-care',      title:'Health & Care Worker',       blurb:'NHS and eligible social care roles. IHS fully waived for all applicants.',               fee:'from £247',              baseFee:247,   ihsPerYear:0,    duration:'3 yr',      toILR:'5 years',                      accent:'#10B981', icon:Building2,    tab:'work',        badge:'IHS waived',  href:'/visa/health-and-care'   },
   { id:'global-talent',    title:'Global Talent',              blurb:'Endorsed leaders in digital tech, arts, science or academia. No sponsor needed.',        fee:'£167 + endorsement',     baseFee:167,   ihsPerYear:1035, duration:'Flexible',  toILR:'3–5 years',                    accent:'#7C3AED', icon:Star,         tab:'work',        href:'/visa/global-talent'     },
   { id:'innovator-founder',title:'Innovator Founder',          blurb:'Endorsed founders with innovative, viable and scalable business plan.',                  fee:'£1,357',                 baseFee:1357,  ihsPerYear:1035, duration:'3 yr',      toILR:'3 years',                      accent:'#F59E0B', icon:Zap,          tab:'work',        href:'/visa/innovator-founder' },
@@ -81,9 +81,9 @@ const ROUTES: VisaRoute[] = [
   { id:'fiancee',          title:'Fiancé(e)',                  blurb:'Marry or register civil partnership within 6 months, then switch to Spouse visa.',       fee:'£1,846',                 baseFee:1846,  ihsPerYear:0,    duration:'6 months',  toILR:'5 yr (after switch)',           accent:'#F43F5E', icon:Heart,        tab:'family',      href:'/visa/family'            },
   { id:'child-dep',        title:'Child Joining Parents',      blurb:'Children under 18 joining both parents or a lone parent who are settled.',               fee:'£1,846',                 baseFee:1846,  ihsPerYear:1035, duration:'2.5 yr',    toILR:'5 years',                      accent:'#FB923C', icon:Baby,         tab:'family',      href:'/visa/family'            },
   { id:'parent-brit',      title:'Parent of British Child',    blurb:'Parent of a British or settled child under 18, with sole responsibility.',               fee:'£1,846',                 baseFee:1846,  ihsPerYear:1035, duration:'2.5 yr',    toILR:'5 years',                      accent:'#FBBF24', icon:Users,        tab:'family',      href:'/visa/family'            },
-  { id:'adult-dep',        title:'Adult Dependent Relative',   blurb:'Elderly or incapacitated relatives needing personal care from a settled person.',        fee:'£3,250',                 baseFee:3250,  ihsPerYear:1035, duration:'2.5 yr',    toILR:'5 years',                      accent:'#B8860B', icon:Users,        tab:'family',      href:'/visa/family'            },
+  { id:'adult-dep',        title:'Adult Dependent Relative',   blurb:'Elderly or incapacitated relatives needing personal care from a settled person.',        fee:'£3,250',                 baseFee:3250,  ihsPerYear:1035, duration:'2.5 yr',    toILR:'5 years',                      accent:'#5851DB', icon:Users,        tab:'family',      href:'/visa/family'            },
   /* VISIT */
-  { id:'visitor-std',      title:'Standard Visitor',           blurb:'Tourism, family visit, medical treatment or business meetings. Up to 6 months.',         fee:'from £115 (6m) to £963 (10yr)',baseFee:115,ihsPerYear:0, duration:'6m – 10yr', toILR:null,                           accent:'#B8860B', icon:Plane,        tab:'visit',       badge:'Popular',     href:'/visa/visitor'           },
+  { id:'visitor-std',      title:'Standard Visitor',           blurb:'Tourism, family visit, medical treatment or business meetings. Up to 6 months.',         fee:'from £115 (6m) to £963 (10yr)',baseFee:115,ihsPerYear:0, duration:'6m – 10yr', toILR:null,                           accent:'#5851DB', icon:Plane,        tab:'visit',       badge:'Popular',     href:'/visa/visitor'           },
   { id:'marriage-visitor', title:'Marriage Visitor',           blurb:'Visit to marry or register a civil partnership. Cannot switch in-UK.',                   fee:'£115',                   baseFee:115,   ihsPerYear:0,    duration:'6 months',  toILR:null,                           accent:'#F97316', icon:Heart,        tab:'visit',       href:'/visa/visitor'           },
   { id:'ppe-visitor',      title:'Permitted Paid Engagement',  blurb:'Up to 1 month for specific paid work (academic, creative, sport).',                      fee:'£115',                   baseFee:115,   ihsPerYear:0,    duration:'1 month',   toILR:null,                           accent:'#EAB308', icon:Briefcase,    tab:'visit',       href:'/visa/visitor'           },
   { id:'transit',          title:'Direct Airside Transit',     blurb:'Pass through a UK airport without going through UK border control.',                     fee:'£64',                    baseFee:64,    ihsPerYear:0,    duration:'Transit',   toILR:null,                           accent:'#475569', icon:Plane,        tab:'visit',       href:'/visa/visitor'           },
@@ -164,21 +164,21 @@ export default function VisaHubClient() {
   }, [calcVisaId, calcDependants, calcYears, calcPriority, calcSuperPriority]);
 
   return (
-    <div className="min-h-screen" style={{ background: '#FAFAF7', fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen" style={{ background: '#FCFCFD', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* ══════════════════════════════════════
           PAGE HEADER — Editorial Premium hero
       ══════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-12 md:pb-16" style={{ background: '#FAFAF7' }}>
+      <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-12 md:pb-16" style={{ background: '#FCFCFD' }}>
         <div aria-hidden className="absolute inset-0 pointer-events-none"
              style={{
                background:
-                 'radial-gradient(ellipse at 12% 8%, rgba(4,120,87,0.06) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 88% 80%, rgba(184,134,11,0.05) 0px, transparent 55%)',
+                 'radial-gradient(ellipse at 12% 8%, rgba(99,91,255,0.06) 0px, transparent 55%),' +
+                 'radial-gradient(ellipse at 88% 80%, rgba(88,81,219,0.05) 0px, transparent 55%)',
              }} />
         <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
              style={{
-               backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.10) 1px, transparent 1px)',
+               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
                backgroundSize: '32px 32px',
                maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
                WebkitBackdropFilter: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
@@ -194,7 +194,7 @@ export default function VisaHubClient() {
                 UKDesk
               </Link>
               <ChevronRight className="w-3 h-3" style={{ color: '#94908A' }} />
-              <span style={{ color: '#047857', fontWeight: 600 }}>UK Visa Hub</span>
+              <span style={{ color: '#635BFF', fontWeight: 600 }}>UK Visa Hub</span>
             </div>
           </div>
 
@@ -202,22 +202,22 @@ export default function VisaHubClient() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
-                   style={{ background: 'rgba(4,120,87,0.08)', border: '1px solid rgba(4,120,87,0.18)' }}>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#047857' }} />
-                <span className="text-[10.5px] font-bold uppercase" style={{ color: '#047857', letterSpacing: '0.18em' }}>
+                   style={{ background: 'rgba(99,91,255,0.08)', border: '1px solid rgba(99,91,255,0.18)' }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#635BFF' }} />
+                <span className="text-[10.5px] font-bold uppercase" style={{ color: '#635BFF', letterSpacing: '0.18em' }}>
                   gov.uk verified · 2026
                 </span>
               </div>
               <h1 style={{
-                fontFamily: 'Fraunces, serif',
+                fontFamily: '"Inter Tight", Inter, sans-serif',
                 fontWeight: 600,
-                fontSize: 'clamp(2.2rem, 5.4vw, 4rem)',
+                fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
                 lineHeight: 0.98,
-                letterSpacing: '-0.035em',
-                color: '#0B0F19',
+                letterSpacing: '-0.025em',
+                color: '#1A1F36',
                 textWrap: 'balance' as React.CSSProperties['textWrap'],
               }}>
-                UK Visa <span style={{ fontStyle: 'italic', color: '#047857' }}>hub.</span>
+                UK Visa <span style={{ fontStyle: 'italic', color: '#635BFF' }}>hub.</span>
               </h1>
               <p className="mt-5 text-[16px] md:text-[18px] leading-[1.6]" style={{ color: '#475569' }}>
                 35+ visa routes · advanced cost calculator · settlement pathway · country guidance.
@@ -233,10 +233,10 @@ export default function VisaHubClient() {
                 { n: '£0',   l: 'To use' },
               ].map(s => (
                 <div key={s.l} className="px-5 py-3 rounded-xl text-center"
-                     style={{ background: '#FFFFFF', border: '1px solid rgba(11,15,25,0.08)', minWidth: 88 }}>
+                     style={{ background: '#FFFFFF', border: '1px solid rgba(26,31,54,0.08)', minWidth: 88 }}>
                   <div className="tabular-nums"
-                       style={{ fontFamily: 'Fraunces, serif', fontWeight: 700,
-                                fontSize: 22, letterSpacing: '-0.03em', color: '#0B0F19', lineHeight: 1 }}>
+                       style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontWeight: 700,
+                                fontSize: 22, letterSpacing: '-0.03em', color: '#1A1F36', lineHeight: 1 }}>
                     {s.n}
                   </div>
                   <div className="text-[11px] mt-1.5 font-medium" style={{ color: '#94908A' }}>{s.l}</div>
@@ -254,7 +254,7 @@ export default function VisaHubClient() {
              background: 'rgba(250,250,247,0.92)',
              backdropFilter: 'blur(20px) saturate(180%)',
              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-             borderBottom: '1px solid rgba(11,15,25,0.08)',
+             borderBottom: '1px solid rgba(26,31,54,0.08)',
            }}
            role="navigation" aria-label="Visa hub sections">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -267,11 +267,11 @@ export default function VisaHubClient() {
                   key={s.id}
                   onClick={() => setActiveSection(s.id)}
                   className="group flex-shrink-0 flex items-center gap-2 px-4 py-3.5 text-[13px] font-semibold relative transition-colors duration-100"
-                  style={{ color: active ? '#0B0F19' : '#475569', borderBottom: active ? '2.5px solid #0B0F19' : '2.5px solid transparent', marginBottom: '-1px' }}
-                  onMouseOver={e => { if (!active) (e.currentTarget as HTMLElement).style.color = '#0B0F19'; }}
+                  style={{ color: active ? '#1A1F36' : '#475569', borderBottom: active ? '2.5px solid #1A1F36' : '2.5px solid transparent', marginBottom: '-1px' }}
+                  onMouseOver={e => { if (!active) (e.currentTarget as HTMLElement).style.color = '#1A1F36'; }}
                   onMouseOut={e => { if (!active) (e.currentTarget as HTMLElement).style.color = '#475569'; }}
                 >
-                  <span style={{ color: active ? '#047857' : '#94908A' }}>
+                  <span style={{ color: active ? '#635BFF' : '#94908A' }}>
                     <SIcon className="w-3.5 h-3.5" />
                   </span>
                   <span>{s.label}</span>
@@ -292,7 +292,7 @@ export default function VisaHubClient() {
               <div className="px-5 pt-4 pb-0 flex items-center justify-between gap-3">
                 <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Browse by category</span>
                 <Link href="/visa-switching"
-                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#047857] hover:underline">
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#635BFF] hover:underline">
                   <ChevronRight className="w-3 h-3" /> Already in UK? Switching guide
                 </Link>
               </div>
@@ -325,7 +325,7 @@ export default function VisaHubClient() {
                     style={{ background: `${activeTabMeta.accent}18`, color: activeTabMeta.accent }}>
                     {(() => { const TIcon = activeTabMeta.icon; return <TIcon className="w-3.5 h-3.5" />; })()}
                   </span>
-                  <span className="font-bold text-[#0B0F19] text-[14.5px]" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <span className="font-bold text-[#1A1F36] text-[14.5px]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                     {activeTabMeta.label} Visas
                   </span>
                   <span className="text-[12px] text-[#9CA3AF]">— {tabRoutes.length} route{tabRoutes.length !== 1 ? 's' : ''}</span>
@@ -352,8 +352,8 @@ export default function VisaHubClient() {
                 const count = ROUTES.filter(r => r.tab === t.id).length;
                 return (
                   <button key={t.id} onClick={() => setActiveTab(t.id)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold border border-[#E5E7EB] bg-white hover:border-[#0B0F19] transition-colors"
-                    style={{ color: '#0B0F19' }}>
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold border border-[#E5E7EB] bg-white hover:border-[#1A1F36] transition-colors"
+                    style={{ color: '#1A1F36' }}>
                     <span style={{ color: t.accent }}>{(() => { const AccentIcon = t.icon; return <AccentIcon className="w-3 h-3" />; })()}</span>
                     {t.label} <span className="text-[#9CA3AF] font-normal">{count}</span>
                   </button>
@@ -371,11 +371,11 @@ export default function VisaHubClient() {
                 style={{ background: 'linear-gradient(90deg, rgba(0,196,180,0.07) 0%, transparent 60%)' }}>
                 <div className="flex items-center gap-3">
                   <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center flex-shrink-0"
-                    style={{ background: '#04785714', color: '#047857' }}>
+                    style={{ background: '#635BFF14', color: '#635BFF' }}>
                     <Target className="w-5 h-5" />
                   </span>
                   <div>
-                    <h2 className="font-bold text-[#0B0F19] text-[18px]" style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h2 className="font-bold text-[#1A1F36] text-[18px]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                       Find your visa route
                     </h2>
                     <p className="text-[13px] text-[#76777e]">Answer a few questions — get matched in 60 seconds</p>
@@ -388,7 +388,7 @@ export default function VisaHubClient() {
                 </p>
                 <Link href="/eligibility"
                   className="inline-flex items-center gap-2 text-[14.5px] font-bold px-7 py-3.5 rounded-xl text-white transition-all duration-150"
-                  style={{ background: 'linear-gradient(135deg, #047857 0%, #064E3B 100%)', boxShadow: '0 4px 16px -2px rgba(0,196,180,0.40)' }}>
+                  style={{ background: 'linear-gradient(135deg, #635BFF 0%, #064E3B 100%)', boxShadow: '0 4px 16px -2px rgba(0,196,180,0.40)' }}>
                   <Sparkles className="w-4 h-4" />
                   Start the eligibility quiz
                   <ArrowRight className="w-4 h-4" />
@@ -398,15 +398,15 @@ export default function VisaHubClient() {
 
             {/* Quick guide by goal */}
             <div className="mb-2">
-              <h3 className="font-bold text-[#0B0F19] text-[16px] mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h3 className="font-bold text-[#1A1F36] text-[16px] mb-4" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 Or — pick your goal:
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { icon: Briefcase, accent: '#047857', title: 'I have a UK job offer', desc: 'Skilled Worker, Health & Care, Sportsperson or International Agreement', tab: 'work' as TabId },
+                  { icon: Briefcase, accent: '#635BFF', title: 'I have a UK job offer', desc: 'Skilled Worker, Health & Care, Sportsperson or International Agreement', tab: 'work' as TabId },
                   { icon: GraduationCap, accent: '#1E3A8A', title: 'I want to study in the UK', desc: 'Student Visa (degree+), Child Student, Short-term Study or Graduate visa after', tab: 'study' as TabId },
                   { icon: Heart, accent: '#E11D48', title: 'I want to join family', desc: 'Spouse/Partner, Fiancé, Child joining parents, Parent of British child', tab: 'family' as TabId },
-                  { icon: Plane, accent: '#B8860B', title: 'I just want to visit', desc: 'Standard Visitor up to 6 months. 10-year multi-entry available.', tab: 'visit' as TabId },
+                  { icon: Plane, accent: '#5851DB', title: 'I just want to visit', desc: 'Standard Visitor up to 6 months. 10-year multi-entry available.', tab: 'visit' as TabId },
                   { icon: ShieldCheck, accent: '#10B981', title: 'I want to settle permanently', desc: 'ILR after 5 years (most routes) or 10-year long residence route', tab: 'settlement' as TabId },
                   { icon: Crown, accent: '#7C3AED', title: 'I want British citizenship', desc: 'Naturalisation (ILR + 12m), Registration for children, BN(O) pathway', tab: 'citizenship' as TabId },
                   { icon: Star, accent: '#F59E0B', title: 'I have a UK grandparent / young / exceptional', desc: 'UK Ancestry, Youth Mobility, High Potential Individual, BN(O)', tab: 'special' as TabId },
@@ -415,7 +415,7 @@ export default function VisaHubClient() {
                   return (
                     <button key={item.tab}
                       onClick={() => { setActiveSection('routes'); setActiveTab(item.tab); }}
-                      className="group flex items-start gap-4 p-4 bg-white border border-[#E5E7EB] rounded-xl text-left hover:border-[#0B0F19] transition-all duration-100"
+                      className="group flex items-start gap-4 p-4 bg-white border border-[#E5E7EB] rounded-xl text-left hover:border-[#1A1F36] transition-all duration-100"
                       style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.04)' }}
                       onMouseOver={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px -4px rgba(16,26,54,0.12)'}
                       onMouseOut={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.04)'}>
@@ -424,7 +424,7 @@ export default function VisaHubClient() {
                         <IIcon className="w-5 h-5" />
                       </span>
                       <div className="flex-1 min-w-0">
-                        <div className="font-bold text-[14.5px] text-[#0B0F19] leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>{item.title}</div>
+                        <div className="font-bold text-[14.5px] text-[#1A1F36] leading-tight" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{item.title}</div>
                         <p className="mt-1 text-[12.5px] text-[#6B7280] leading-snug">{item.desc}</p>
                       </div>
                       <ArrowRight className="w-4 h-4 flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: item.accent }} />
@@ -440,7 +440,7 @@ export default function VisaHubClient() {
         {activeSection === 'calculator' && (
           <div>
             <div className="mb-6">
-              <h2 className="font-bold text-[#0B0F19] text-[22px] tracking-[-0.015em]" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="font-bold text-[#1A1F36] text-[22px] tracking-[-0.015em]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 Advanced cost calculator
               </h2>
               <p className="mt-1 text-[14px] text-[#6B7280]">Home Office fees + Immigration Health Surcharge + priority services · gov.uk 2026 rates</p>
@@ -452,8 +452,8 @@ export default function VisaHubClient() {
                 <div className="px-6 py-4 border-b border-[#F3F4F6]"
                   style={{ background: 'linear-gradient(90deg, rgba(201,161,74,0.07) 0%, transparent 60%)' }}>
                   <div className="flex items-center gap-2.5">
-                    <Calculator className="w-5 h-5" style={{ color: '#B8860B' }} />
-                    <span className="font-bold text-[#0B0F19] text-[15px]" style={{ fontFamily: 'Fraunces, serif' }}>Configure your application</span>
+                    <Calculator className="w-5 h-5" style={{ color: '#5851DB' }} />
+                    <span className="font-bold text-[#1A1F36] text-[15px]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>Configure your application</span>
                   </div>
                 </div>
                 <div className="px-6 py-6 space-y-7">
@@ -462,10 +462,10 @@ export default function VisaHubClient() {
                     <label className="block text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#6B7280] mb-2.5">Visa route</label>
                     <div className="relative">
                       <select value={calcVisaId} onChange={e => setCalcVisaId(e.target.value)}
-                        className="w-full appearance-none bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[14px] font-semibold text-[#0B0F19] outline-none pr-10 transition-colors"
+                        className="w-full appearance-none bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[14px] font-semibold text-[#1A1F36] outline-none pr-10 transition-colors"
                         style={{ fontFamily: 'Inter,sans-serif' }}
-                        onFocus={e => (e.target as HTMLElement).style.borderColor = '#0B0F19'}
-                        onBlur={e => (e.target as HTMLElement).style.borderColor = 'rgba(11,15,25,0.08)'}>
+                        onFocus={e => (e.target as HTMLElement).style.borderColor = '#1A1F36'}
+                        onBlur={e => (e.target as HTMLElement).style.borderColor = 'rgba(26,31,54,0.08)'}>
                         {TABS.map(tab => (
                           <optgroup key={tab.id} label={`── ${tab.label.toUpperCase()} ──`}>
                             {ROUTES.filter(r => r.tab === tab.id).map(r => (
@@ -486,10 +486,10 @@ export default function VisaHubClient() {
                         <button key={y} onClick={() => setCalcYears(y)}
                           className="px-5 py-2.5 rounded-xl text-[13.5px] font-semibold border transition-all duration-100"
                           style={{
-                            background: calcYears === y ? '#0B0F19' : '#fff',
-                            color: calcYears === y ? '#fff' : '#0B0F19',
-                            borderColor: calcYears === y ? '#0B0F19' : 'rgba(11,15,25,0.08)',
-                            boxShadow: calcYears === y ? '0 2px 8px rgba(11,15,25,0.20)' : 'none',
+                            background: calcYears === y ? '#1A1F36' : '#fff',
+                            color: calcYears === y ? '#fff' : '#1A1F36',
+                            borderColor: calcYears === y ? '#1A1F36' : 'rgba(26,31,54,0.08)',
+                            boxShadow: calcYears === y ? '0 2px 8px rgba(26,31,54,0.20)' : 'none',
                           }}>
                           {y} yr
                         </button>
@@ -502,13 +502,13 @@ export default function VisaHubClient() {
                     <label className="block text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#6B7280] mb-2.5">Dependants</label>
                     <div className="flex items-center gap-3">
                       <button onClick={() => setCalcDependants(d => Math.max(0, d - 1))}
-                        className="w-10 h-10 rounded-xl border border-[#E5E7EB] flex items-center justify-center text-[#0B0F19] hover:bg-[#F3F4F6] transition-colors">
+                        className="w-10 h-10 rounded-xl border border-[#E5E7EB] flex items-center justify-center text-[#1A1F36] hover:bg-[#F3F4F6] transition-colors">
                         <Minus className="w-3.5 h-3.5" />
                       </button>
-                      <span className="w-10 text-center font-bold text-[20px] text-[#0B0F19] tabular-nums"
-                        style={{ fontFamily: 'Fraunces, serif' }}>{calcDependants}</span>
+                      <span className="w-10 text-center font-bold text-[20px] text-[#1A1F36] tabular-nums"
+                        style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{calcDependants}</span>
                       <button onClick={() => setCalcDependants(d => Math.min(6, d + 1))}
-                        className="w-10 h-10 rounded-xl border border-[#E5E7EB] flex items-center justify-center text-[#0B0F19] hover:bg-[#F3F4F6] transition-colors">
+                        className="w-10 h-10 rounded-xl border border-[#E5E7EB] flex items-center justify-center text-[#1A1F36] hover:bg-[#F3F4F6] transition-colors">
                         <Plus className="w-3.5 h-3.5" />
                       </button>
                       <span className="text-[13px] text-[#9CA3AF]">
@@ -527,9 +527,9 @@ export default function VisaHubClient() {
                       ].map(opt => (
                         <label key={opt.id} className="flex items-center gap-3 cursor-pointer group p-3 rounded-xl border border-[#F3F4F6] hover:border-[#E5E7EB] transition-colors">
                           <input type="checkbox" checked={opt.state} onChange={e => opt.set(e.target.checked)}
-                            className="w-4 h-4 rounded" style={{ accentColor: '#0B0F19' }} />
+                            className="w-4 h-4 rounded" style={{ accentColor: '#1A1F36' }} />
                           <div>
-                            <span className="text-[13.5px] font-semibold text-[#0B0F19]">{opt.label}</span>
+                            <span className="text-[13.5px] font-semibold text-[#1A1F36]">{opt.label}</span>
                             <span className="ml-2 text-[12px] text-[#9CA3AF]">{opt.note}</span>
                           </div>
                         </label>
@@ -541,7 +541,7 @@ export default function VisaHubClient() {
 
               {/* Results panel */}
               <div className="lg:col-span-2 rounded-2xl overflow-hidden flex flex-col"
-                style={{ background: '#0B0F19' }}>
+                style={{ background: '#1A1F36' }}>
                 <div className="px-6 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
                   <span className="text-[11.5px] font-bold uppercase tracking-[0.1em]" style={{ color: '#A7F3D0' }}>
                     Cost breakdown
@@ -566,7 +566,7 @@ export default function VisaHubClient() {
                       <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
                         <div className="text-[12.5px] mb-1" style={{ color: 'rgba(255,255,255,0.45)' }}>Estimated total</div>
                         <div className="font-bold tabular-nums text-white tracking-[-0.025em]"
-                          style={{ fontFamily: 'Fraunces, serif', fontSize: 'clamp(2rem,5vw,2.75rem)' }}>
+                          style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(1.5rem, 3.8vw, 2.25rem)' }}>
                           {fmt(calcResult.total)}
                         </div>
                         <p className="text-[11.5px] mt-2 leading-snug" style={{ color: 'rgba(255,255,255,0.40)' }}>
@@ -574,7 +574,7 @@ export default function VisaHubClient() {
                         </p>
                         <Link href="/tools/cost-calculator"
                           className="mt-5 inline-flex w-full items-center justify-center gap-2 text-[13.5px] font-bold px-4 py-2.5 rounded-xl transition-colors"
-                          style={{ background: '#A7F3D0', color: '#0B0F19' }}>
+                          style={{ background: '#A7F3D0', color: '#1A1F36' }}>
                           Full cost calculator <ArrowUpRight className="w-4 h-4" />
                         </Link>
                       </div>
@@ -593,7 +593,7 @@ export default function VisaHubClient() {
               {[
                 { icon: CheckCircle2, text: 'All fees gov.uk verified', color: '#10B981' },
                 { icon: FileText, text: 'IHS rates: £1,035/yr standard · £776/yr students', color: '#1E3A8A' },
-                { icon: Clock, text: 'Rates correct as of April 2026', color: '#B8860B' },
+                { icon: Clock, text: 'Rates correct as of April 2026', color: '#5851DB' },
               ].map(item => {
                 const IIcon = item.icon;
                 return (
@@ -611,7 +611,7 @@ export default function VisaHubClient() {
         {activeSection === 'settlement' && (
           <div>
             <div className="mb-6">
-              <h2 className="font-bold text-[#0B0F19] text-[22px] tracking-[-0.015em]" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="font-bold text-[#1A1F36] text-[22px] tracking-[-0.015em]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 Settlement & Citizenship pathways
               </h2>
               <p className="mt-1 text-[14px] text-[#6B7280]">All routes to ILR, naturalisation and British passport</p>
@@ -621,7 +621,7 @@ export default function VisaHubClient() {
             <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden mb-6">
               <div className="px-5 py-4 border-b border-[#F3F4F6]"
                 style={{ background: 'linear-gradient(90deg, rgba(16,185,129,0.06) 0%, transparent 50%)' }}>
-                <h3 className="font-bold text-[#0B0F19] text-[15px] flex items-center gap-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h3 className="font-bold text-[#1A1F36] text-[15px] flex items-center gap-2" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                   <ShieldCheck className="w-4.5 h-4.5 text-[#10B981]" />
                   Standard pathway: Visa → ILR → British Citizenship
                 </h3>
@@ -629,11 +629,11 @@ export default function VisaHubClient() {
               <div className="p-5 overflow-x-auto">
                 <div className="flex items-stretch gap-0 min-w-[600px]">
                   {[
-                    { step: '1', title: 'Entry Visa',        desc: 'Skilled Worker, Family, Student, BN(O) or other qualifying route',       accent: '#047857', icon: Plane,      dur: 'Day 1' },
+                    { step: '1', title: 'Entry Visa',        desc: 'Skilled Worker, Family, Student, BN(O) or other qualifying route',       accent: '#635BFF', icon: Plane,      dur: 'Day 1' },
                     { step: '2', title: '5 Years (most)',    desc: 'Continuous lawful residence. Salary must stay above threshold.',           accent: '#1E3A8A', icon: Clock,      dur: '~5 yr' },
                     { step: '3', title: 'Apply for ILR',     desc: 'Indefinite Leave to Remain. Permanent right to live and work in the UK.', accent: '#10B981', icon: ShieldCheck,dur: '£2,885' },
                     { step: '4', title: '12 Months with ILR',desc: 'Continue UK residence. Life in the UK test + English language required.',  accent: '#7C3AED', icon: Star,       dur: '12 m' },
-                    { step: '5', title: 'British Citizenship',desc: 'Naturalisation or registration. Then apply for British passport.',        accent: '#B8860B', icon: Crown,      dur: '£1,500' },
+                    { step: '5', title: 'British Citizenship',desc: 'Naturalisation or registration. Then apply for British passport.',        accent: '#5851DB', icon: Crown,      dur: '£1,500' },
                   ].map((s, i) => (
                     <div key={s.step} className="flex items-stretch flex-1 min-w-0">
                       <div className="flex-1 rounded-xl border border-[#E5E7EB] p-4 flex flex-col gap-2.5 relative overflow-hidden"
@@ -645,7 +645,7 @@ export default function VisaHubClient() {
                         </span>
                         <div>
                           <div className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF] mb-0.5">Step {s.step}</div>
-                          <div className="font-bold text-[13.5px] text-[#0B0F19] leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>{s.title}</div>
+                          <div className="font-bold text-[13.5px] text-[#1A1F36] leading-snug" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{s.title}</div>
                           <p className="mt-1 text-[11.5px] text-[#6B7280] leading-snug">{s.desc}</p>
                         </div>
                         <div className="mt-auto inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-bold self-start"
@@ -664,7 +664,7 @@ export default function VisaHubClient() {
 
             {/* Settlement routes cards */}
             <div className="mb-6">
-              <h3 className="font-bold text-[#0B0F19] text-[15.5px] mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h3 className="font-bold text-[#1A1F36] text-[15.5px] mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 ILR routes (Settlement)
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -674,7 +674,7 @@ export default function VisaHubClient() {
 
             {/* Citizenship routes */}
             <div className="mb-6">
-              <h3 className="font-bold text-[#0B0F19] text-[15.5px] mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h3 className="font-bold text-[#1A1F36] text-[15.5px] mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 Citizenship & British passport
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -685,26 +685,26 @@ export default function VisaHubClient() {
             {/* CTA row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
               <Link href="/settlement"
-                className="flex items-center justify-between gap-3 p-5 bg-white border border-[#E5E7EB] rounded-xl hover:border-[#0B0F19] transition-all group"
+                className="flex items-center justify-between gap-3 p-5 bg-white border border-[#E5E7EB] rounded-xl hover:border-[#1A1F36] transition-all group"
                 style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.04)' }}
                 onMouseOver={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px -4px rgba(16,26,54,0.12)'}
                 onMouseOut={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.04)'}>
                 <div>
-                  <div className="font-bold text-[14.5px] text-[#0B0F19]" style={{ fontFamily: 'Fraunces, serif' }}>Settlement comparison guide</div>
+                  <div className="font-bold text-[14.5px] text-[#1A1F36]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>Settlement comparison guide</div>
                   <div className="text-[12.5px] text-[#6B7280] mt-0.5">Side-by-side fees, time-to-ILR and English requirements</div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#0B0F19] transition-colors flex-shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#1A1F36] transition-colors flex-shrink-0" />
               </Link>
               <button onClick={() => setActiveSection('calculator')}
-                className="flex items-center justify-between gap-3 p-5 bg-white border border-[#E5E7EB] rounded-xl hover:border-[#0B0F19] transition-all group text-left"
+                className="flex items-center justify-between gap-3 p-5 bg-white border border-[#E5E7EB] rounded-xl hover:border-[#1A1F36] transition-all group text-left"
                 style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.04)' }}
                 onMouseOver={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px -4px rgba(16,26,54,0.12)'}
                 onMouseOut={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.04)'}>
                 <div>
-                  <div className="font-bold text-[14.5px] text-[#0B0F19]" style={{ fontFamily: 'Fraunces, serif' }}>Calculate ILR fees</div>
+                  <div className="font-bold text-[14.5px] text-[#1A1F36]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>Calculate ILR fees</div>
                   <div className="text-[12.5px] text-[#6B7280] mt-0.5">£2,885 ILR + £1,500 citizenship + biometric fees</div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#0B0F19] transition-colors flex-shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#1A1F36] transition-colors flex-shrink-0" />
               </button>
             </div>
           </div>
@@ -714,7 +714,7 @@ export default function VisaHubClient() {
         {activeSection === 'countries' && (
           <div>
             <div className="mb-6">
-              <h2 className="font-bold text-[#0B0F19] text-[22px] tracking-[-0.015em]" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="font-bold text-[#1A1F36] text-[22px] tracking-[-0.015em]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 Applying from your country
               </h2>
               <p className="mt-1 text-[14px] text-[#6B7280]">TB test requirement · VAC locations · visa requirement · country-specific notes</p>
@@ -729,14 +729,14 @@ export default function VisaHubClient() {
                     onClick={() => setSelectedCountry(isSelected ? null : c)}
                     className="flex flex-col items-center gap-1.5 p-3 rounded-xl border text-center transition-all duration-100"
                     style={{
-                      background: isSelected ? '#0B0F19' : '#fff',
-                      borderColor: isSelected ? '#0B0F19' : 'rgba(11,15,25,0.08)',
-                      boxShadow: isSelected ? '0 4px 12px rgba(11,15,25,0.20)' : 'none',
+                      background: isSelected ? '#1A1F36' : '#fff',
+                      borderColor: isSelected ? '#1A1F36' : 'rgba(26,31,54,0.08)',
+                      boxShadow: isSelected ? '0 4px 12px rgba(26,31,54,0.20)' : 'none',
                     }}
-                    onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLElement).style.borderColor = '#0B0F19'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(11,15,25,0.08)'; } }}
-                    onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(11,15,25,0.08)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; } }}>
+                    onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLElement).style.borderColor = '#1A1F36'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(26,31,54,0.08)'; } }}
+                    onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(26,31,54,0.08)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; } }}>
                     <span className="text-[24px] leading-none">{c.flag}</span>
-                    <span className="text-[12px] font-semibold leading-tight" style={{ color: isSelected ? '#fff' : '#0B0F19' }}>{c.name}</span>
+                    <span className="text-[12px] font-semibold leading-tight" style={{ color: isSelected ? '#fff' : '#1A1F36' }}>{c.name}</span>
                     {c.tbTest && !isSelected && (
                       <span className="text-[9.5px] px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-600 font-semibold">TB req</span>
                     )}
@@ -753,19 +753,19 @@ export default function VisaHubClient() {
               <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden">
                 {/* Header */}
                 <div className="px-6 py-5 border-b border-[#F3F4F6]"
-                  style={{ background: 'linear-gradient(90deg, rgba(11,15,25,0.04) 0%, transparent 60%)' }}>
+                  style={{ background: 'linear-gradient(90deg, rgba(26,31,54,0.04) 0%, transparent 60%)' }}>
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <span className="text-[2.5rem] leading-none">{selectedCountry.flag}</span>
                       <div>
-                        <h3 className="font-bold text-[#0B0F19] text-[20px]" style={{ fontFamily: 'Fraunces, serif' }}>
+                        <h3 className="font-bold text-[#1A1F36] text-[20px]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                           Applying to the UK from {selectedCountry.name}
                         </h3>
                         <p className="text-[12.5px] text-[#6B7280]">gov.uk verified · typical processing {selectedCountry.processingWeeks}</p>
                       </div>
                     </div>
                     <Link href={`/from/${selectedCountry.code}`}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-bold px-4 py-2 rounded-xl border border-[#0B0F19] text-[#0B0F19] hover:bg-[#0B0F19] hover:text-white transition-all">
+                      className="inline-flex items-center gap-1.5 text-[13px] font-bold px-4 py-2 rounded-xl border border-[#1A1F36] text-[#1A1F36] hover:bg-[#1A1F36] hover:text-white transition-all">
                       Full {selectedCountry.name} guide <ArrowUpRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -787,10 +787,10 @@ export default function VisaHubClient() {
                       ? 'Book UK-approved TB test at an approved IOM clinic before applying.'
                       : 'No tuberculosis test needed for your application.'}
                   />
-                  <div className="rounded-xl p-4 border" style={{ background: '#FAFAF7', borderColor: 'rgba(11,15,25,0.08)' }}>
+                  <div className="rounded-xl p-4 border" style={{ background: '#FCFCFD', borderColor: 'rgba(26,31,54,0.08)' }}>
                     <div className="flex items-center gap-2 mb-1.5">
                       <MapPin className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
-                      <span className="text-[13px] font-bold text-[#0B0F19]" style={{ fontFamily: 'Fraunces, serif' }}>VAC / Application centre</span>
+                      <span className="text-[13px] font-bold text-[#1A1F36]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>VAC / Application centre</span>
                     </div>
                     <p className="text-[12.5px] text-[#374151] leading-relaxed font-medium">{selectedCountry.vacCities}</p>
                     <div className="mt-2 flex items-center gap-2">
@@ -815,7 +815,7 @@ export default function VisaHubClient() {
                         <button key={tabId}
                           onClick={() => { setActiveSection('routes'); setActiveTab(tabId); }}
                           className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[13px] font-semibold transition-all duration-100 hover:shadow-sm"
-                          style={{ background: `${tab.accent}0c`, borderColor: `${tab.accent}30`, color: '#0B0F19' }}
+                          style={{ background: `${tab.accent}0c`, borderColor: `${tab.accent}30`, color: '#1A1F36' }}
                           onMouseOver={e => { (e.currentTarget as HTMLElement).style.borderColor = tab.accent; (e.currentTarget as HTMLElement).style.background = `${tab.accent}18`; }}
                           onMouseOut={e => { (e.currentTarget as HTMLElement).style.borderColor = `${tab.accent}30`; (e.currentTarget as HTMLElement).style.background = `${tab.accent}0c`; }}>
                           <span style={{ color: tab.accent }}><TIcon className="w-3.5 h-3.5" /></span>
@@ -853,7 +853,7 @@ export default function VisaHubClient() {
 
             <div className="mt-4 text-center">
               <Link href="/from"
-                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#0B0F19] hover:underline">
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#1A1F36] hover:underline">
                 View all 22 country guides <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -869,22 +869,22 @@ export default function VisaHubClient() {
             <p className="text-[13px] font-semibold text-[#374151]">Related visa tools:</p>
             <div className="flex flex-wrap gap-2">
               {[
-                { href: '/eligibility',               label: 'Eligibility quiz',       accent: '#047857' },
-                { href: '/tools/cost-calculator',     label: 'Cost calculator',        accent: '#B8860B' },
+                { href: '/eligibility',               label: 'Eligibility quiz',       accent: '#635BFF' },
+                { href: '/tools/cost-calculator',     label: 'Cost calculator',        accent: '#5851DB' },
                 { href: '/tools/salary-checker',      label: 'SOC salary check',       accent: '#1E3A8A' },
-                { href: '/tools/sponsor-search',      label: 'Sponsor search',         accent: '#0B0F19' },
+                { href: '/tools/sponsor-search',      label: 'Sponsor search',         accent: '#1A1F36' },
                 { href: '/ihs-calculator',            label: 'IHS calculator',         accent: '#E11D48' },
                 { href: '/settlement',                label: 'Settlement guide',       accent: '#10B981' },
               ].map(t => (
                 <Link key={t.href} href={t.href}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FAFAF7] border border-[#E5E7EB] hover:border-[#0B0F19] text-[12.5px] font-semibold text-[#374151] transition-colors">
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FCFCFD] border border-[#E5E7EB] hover:border-[#1A1F36] text-[12.5px] font-semibold text-[#374151] transition-colors">
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: t.accent }} />
                   {t.label}
                 </Link>
               ))}
             </div>
             <Link href="/"
-              className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#6B7280] hover:text-[#0B0F19] transition-colors">
+              className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#6B7280] hover:text-[#1A1F36] transition-colors">
               ← Back to all tools
             </Link>
           </div>
@@ -908,7 +908,7 @@ function VisaCard({ r }: { r: VisaRoute }) {
     <Link href={r.href}
       className="group relative bg-white border border-[#E5E7EB] rounded-xl p-5 flex flex-col gap-3 transition-all duration-150"
       style={{ boxShadow: '0 1px 3px rgba(16,26,54,0.04)' }}
-      onMouseOver={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 32px -6px rgba(16,26,54,0.16), 0 0 0 1.5px rgba(11,15,25,0.12)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+      onMouseOver={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 32px -6px rgba(16,26,54,0.16), 0 0 0 1.5px rgba(26,31,54,0.12)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
       onMouseOut={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(16,26,54,0.04)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
       <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] rounded-t-xl"
         style={{ background: `linear-gradient(90deg, ${r.accent} 0%, ${r.accent}60 100%)`, opacity: 0.6 }} />
@@ -925,15 +925,15 @@ function VisaCard({ r }: { r: VisaRoute }) {
         )}
       </div>
       <div className="flex-1">
-        <h3 className="font-bold text-[#0B0F19] text-[14.5px] tracking-[-0.005em] leading-snug"
-          style={{ fontFamily: 'Fraunces, serif' }}>{r.title}</h3>
+        <h3 className="font-bold text-[#1A1F36] text-[14.5px] tracking-[-0.005em] leading-snug"
+          style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{r.title}</h3>
         <p className="mt-1.5 text-[12px] text-[#6B7280] leading-[1.5]">{r.blurb}</p>
       </div>
       <div className="flex items-center justify-between gap-2 pt-2.5 border-t border-[#F3F4F6]">
         <div>
           <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9CA3AF] mb-0.5">Fee</div>
-          <div className="font-bold text-[12.5px] text-[#0B0F19] tabular-nums"
-            style={{ fontFamily: 'Fraunces, serif' }}>{r.fee}</div>
+          <div className="font-bold text-[12.5px] text-[#1A1F36] tabular-nums"
+            style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{r.fee}</div>
         </div>
         <div className="text-right">
           <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9CA3AF] mb-0.5">To ILR</div>
@@ -956,7 +956,7 @@ function CostRow({ label, value, note }: { label: string; value: string; note?: 
         {note && <div className="text-[10.5px] text-[#A7F3D0] mt-0.5">{note}</div>}
       </div>
       <span className="font-bold text-[14px] text-white tabular-nums flex-shrink-0"
-        style={{ fontFamily: 'Fraunces, serif' }}>{value}</span>
+        style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{value}</span>
     </div>
   );
 }
@@ -964,15 +964,15 @@ function CostRow({ label, value, note }: { label: string; value: string; note?: 
 function InfoPill({ ok, label, desc }: { ok: boolean; label: string; desc: string }) {
   return (
     <div className="rounded-xl p-4 border" style={{
-      background: ok ? 'rgba(4,120,87,0.08)' : '#FBF6E7',
-      borderColor: ok ? 'rgba(4,120,87,0.30)' : 'rgba(184,134,11,0.30)',
+      background: ok ? 'rgba(99,91,255,0.08)' : '#FBF6E7',
+      borderColor: ok ? 'rgba(99,91,255,0.30)' : 'rgba(88,81,219,0.30)',
     }}>
       <div className="flex items-center gap-2 mb-1.5">
         {ok
-          ? <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: '#047857' }} />
-          : <XCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#B8860B' }} />
+          ? <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: '#635BFF' }} />
+          : <XCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#5851DB' }} />
         }
-        <span className="text-[13px] font-bold text-[#0B0F19]" style={{ fontFamily: 'Fraunces, serif' }}>{label}</span>
+        <span className="text-[13px] font-bold text-[#1A1F36]" style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>{label}</span>
       </div>
       <p className="text-[12px] text-[#374151] leading-snug pl-6">{desc}</p>
     </div>

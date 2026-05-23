@@ -16,14 +16,14 @@ import {
 } from 'lucide-react';
 import { NATIONALITIES } from '../../data/visaNationalities';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
-const HAIR    = 'rgba(11,15,25,0.08)';
+const EMERALD = '#635BFF';
+const GOLD    = '#5851DB';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
+const HAIR    = '#E3E8EE';
 
 interface Step { title: string; desc: string }
 
@@ -100,7 +100,7 @@ export default function ApplicationGuide({
         role="tablist"
         aria-label="Application path"
         className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7 p-2 rounded-2xl"
-        style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 12px -6px rgba(11,15,25,0.08)' }}
+        style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 12px -6px rgba(26,31,54,0.08)' }}
       >
         <PathTab
           active={path === 'outside'}
@@ -122,7 +122,7 @@ export default function ApplicationGuide({
 
       {/* ─── CONTEXT STRIP ─── */}
       <div className="rounded-2xl p-7 mb-6"
-           style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+           style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
         <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-3" style={{ color: GOLD }}>
           {path === 'outside' ? 'New application · From your home country' : 'In-country switch · No travel needed'}
         </p>
@@ -150,14 +150,14 @@ export default function ApplicationGuide({
       {/* ─── NATIONALITY FILTER (outside UK only) ─── */}
       {path === 'outside' && (
         <div className="rounded-2xl p-7 mb-6"
-             style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+             style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
           <div className="flex items-start justify-between gap-4 flex-wrap mb-5">
             <div>
               <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: GOLD }}>
                 Applying from
               </p>
               <h3 style={{
-                fontFamily: 'Fraunces, serif',
+                fontFamily: '"Inter Tight", Inter, sans-serif',
                 fontWeight: 600,
                 fontSize: 22,
                 letterSpacing: '-0.022em',
@@ -186,17 +186,17 @@ export default function ApplicationGuide({
               {natOpen && (
                 <ul role="listbox"
                     className="absolute right-0 mt-2 w-72 max-h-80 overflow-y-auto rounded-xl z-20"
-                    style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 16px 40px -12px rgba(11,15,25,0.22)' }}>
+                    style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 16px 40px -12px rgba(26,31,54,0.22)' }}>
                   {NATIONALITIES.map((n) => (
                     <li key={n.code}>
                       <button
                         onClick={() => { setNatCode(n.code); setNatOpen(false); }}
                         className="w-full text-left flex items-center gap-3 px-4 py-2.5 text-[13.5px] font-medium transition-colors"
                         style={{
-                          background: n.code === natCode ? 'rgba(4,120,87,0.06)' : 'transparent',
+                          background: n.code === natCode ? 'rgba(99,91,255,0.06)' : 'transparent',
                           color: n.code === natCode ? EMERALD : INK,
                         }}
-                        onMouseEnter={(e) => { if (n.code !== natCode) e.currentTarget.style.background = 'rgba(11,15,25,0.04)'; }}
+                        onMouseEnter={(e) => { if (n.code !== natCode) e.currentTarget.style.background = 'rgba(26,31,54,0.04)'; }}
                         onMouseLeave={(e) => { if (n.code !== natCode) e.currentTarget.style.background = 'transparent'; }}
                       >
                         <span className="text-[16px]">{n.flag}</span>
@@ -238,7 +238,7 @@ export default function ApplicationGuide({
 
           {nat.note && (
             <div className="mt-5 flex items-start gap-3 rounded-xl p-4"
-                 style={{ background: 'rgba(4,120,87,0.05)', border: '1px solid rgba(4,120,87,0.18)' }}>
+                 style={{ background: 'rgba(99,91,255,0.05)', border: '1px solid rgba(99,91,255,0.18)' }}>
               <Info className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: EMERALD }} />
               <p className="text-[13.5px] leading-[1.65]" style={{ color: INK }}>
                 <strong style={{ fontWeight: 700 }}>Note for {nat.name}:</strong> {nat.note}
@@ -251,14 +251,14 @@ export default function ApplicationGuide({
       {/* ─── SWITCHING-FROM HINT (inside UK only) ─── */}
       {path === 'inside' && SWITCHING_FROM_BY_CATEGORY[category]?.length ? (
         <div className="rounded-2xl p-7 mb-6"
-             style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+             style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
           <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-4" style={{ color: GOLD }}>
             Can switch from
           </p>
           <div className="flex flex-wrap gap-2">
             {SWITCHING_FROM_BY_CATEGORY[category].map((s) => (
               <span key={s} className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[12.5px] font-semibold"
-                    style={{ background: 'rgba(11,15,25,0.05)', color: INK, border: `1px solid ${HAIR}` }}>
+                    style={{ background: 'rgba(26,31,54,0.05)', color: INK, border: `1px solid ${HAIR}` }}>
                 {s}
               </span>
             ))}
@@ -268,9 +268,9 @@ export default function ApplicationGuide({
 
       {/* ─── STEP-BY-STEP GUIDE ─── */}
       <div className="rounded-2xl overflow-hidden"
-           style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>
+           style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)' }}>
         <div className="px-7 py-5 flex items-center gap-3"
-             style={{ background: 'rgba(4,120,87,0.04)', borderBottom: `1px solid ${HAIR}` }}>
+             style={{ background: 'rgba(99,91,255,0.04)', borderBottom: `1px solid ${HAIR}` }}>
           <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ background: INK, color: CREAM }}>
             {path === 'outside' ? <Globe className="w-[18px] h-[18px]" /> : <Building2 className="w-[18px] h-[18px]" />}
@@ -281,7 +281,7 @@ export default function ApplicationGuide({
             </p>
             <h3 className="leading-tight"
                 style={{
-                  fontFamily: 'Fraunces, serif',
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
                   fontWeight: 600,
                   fontSize: 18,
                   letterSpacing: '-0.02em',
@@ -303,14 +303,14 @@ export default function ApplicationGuide({
                     style={{
                       background: INK,
                       color: CREAM,
-                      fontFamily: 'Fraunces, serif',
+                      fontFamily: '"Inter Tight", Inter, sans-serif',
                       fontWeight: 700,
                     }}>
                 {i + 1}
               </span>
               <div className="flex-1 min-w-0">
                 <h4 style={{
-                  fontFamily: 'Fraunces, serif',
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
                   fontWeight: 600,
                   fontSize: 18,
                   letterSpacing: '-0.018em',
@@ -336,7 +336,7 @@ export default function ApplicationGuide({
              style={{
                background: INK,
                color: CREAM,
-               boxShadow: '0 6px 18px -6px rgba(11,15,25,0.30)',
+               boxShadow: '0 6px 18px -6px rgba(26,31,54,0.30)',
              }}
              onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}
              onMouseLeave={(e) => { e.currentTarget.style.background = INK; }}>
@@ -380,12 +380,12 @@ function PathTab({
         opacity: disabled ? 0.4 : 1,
         cursor: disabled ? 'not-allowed' : 'pointer',
       }}
-      onMouseEnter={(e) => { if (!active && !disabled) e.currentTarget.style.background = 'rgba(11,15,25,0.04)'; }}
+      onMouseEnter={(e) => { if (!active && !disabled) e.currentTarget.style.background = 'rgba(26,31,54,0.04)'; }}
       onMouseLeave={(e) => { if (!active && !disabled) e.currentTarget.style.background = 'transparent'; }}
     >
       <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{
-              background: active ? 'rgba(250,250,247,0.10)' : 'rgba(4,120,87,0.10)',
+              background: active ? 'rgba(250,250,247,0.10)' : 'rgba(99,91,255,0.10)',
               color: active ? CREAM : EMERALD,
             }}>
         <Icon className="w-[18px] h-[18px]" />
@@ -393,7 +393,7 @@ function PathTab({
       <div className="flex-1 min-w-0">
         <div className="leading-tight mb-1"
              style={{
-               fontFamily: 'Fraunces, serif',
+               fontFamily: '"Inter Tight", Inter, sans-serif',
                fontWeight: 600,
                fontSize: 16,
                letterSpacing: '-0.018em',
@@ -426,7 +426,7 @@ function Fact({
       </div>
       <div className="leading-tight tabular-nums"
            style={{
-             fontFamily: 'Fraunces, serif',
+             fontFamily: '"Inter Tight", Inter, sans-serif',
              fontWeight: 600,
              fontSize: 16,
              letterSpacing: '-0.015em',
@@ -457,7 +457,7 @@ function NatRow({
           </div>
           <div className="leading-tight"
                style={{
-                 fontFamily: 'Fraunces, serif',
+                 fontFamily: '"Inter Tight", Inter, sans-serif',
                  fontWeight: 600,
                  fontSize: 15,
                  letterSpacing: '-0.015em',

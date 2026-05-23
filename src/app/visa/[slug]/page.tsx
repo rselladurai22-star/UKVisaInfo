@@ -22,14 +22,14 @@ import { getVariants } from '../../../data/visaVariants';
 /* ────────────────────────────────────────────────────────────
    Editorial Premium tokens — cream paper, ink, emerald, gold
 ─────────────────────────────────────────────────────────────── */
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
-const HAIR    = 'rgba(11,15,25,0.08)';
+const EMERALD = '#635BFF';
+const GOLD    = '#5851DB';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
+const HAIR    = '#E3E8EE';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
@@ -185,12 +185,12 @@ export default async function VisaPage({ params }: RouteParams) {
         <div aria-hidden className="absolute inset-0 pointer-events-none"
              style={{
                background:
-                 'radial-gradient(ellipse at 10% 10%, rgba(4,120,87,0.05) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 90% 75%, rgba(184,134,11,0.05) 0px, transparent 55%)',
+                 'radial-gradient(ellipse at 10% 10%, rgba(99,91,255,0.05) 0px, transparent 55%),' +
+                 'radial-gradient(ellipse at 90% 75%, rgba(88,81,219,0.05) 0px, transparent 55%)',
              }} />
         <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
              style={{
-               backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.10) 1px, transparent 1px)',
+               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
                backgroundSize: '32px 32px',
                maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
                WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
@@ -215,9 +215,9 @@ export default async function VisaPage({ params }: RouteParams) {
               <div className="flex flex-wrap items-center gap-2 mb-7">
                 <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3 py-1.5 rounded-full"
                       style={{
-                        background: 'rgba(4,120,87,0.08)',
+                        background: 'rgba(99,91,255,0.08)',
                         color: EMERALD,
-                        border: '1px solid rgba(4,120,87,0.18)',
+                        border: '1px solid rgba(99,91,255,0.18)',
                         letterSpacing: '0.18em',
                       }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: EMERALD }} />
@@ -251,11 +251,11 @@ export default async function VisaPage({ params }: RouteParams) {
 
               {/* Title — Fraunces serif */}
               <h1 style={{
-                fontFamily: 'Fraunces, serif',
+                fontFamily: '"Inter Tight", Inter, sans-serif',
                 fontWeight: 600,
-                fontSize: 'clamp(2.2rem, 5.5vw, 4.2rem)',
+                fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
                 lineHeight: 0.98,
-                letterSpacing: '-0.035em',
+                letterSpacing: '-0.025em',
                 color: INK,
                 textWrap: 'balance' as React.CSSProperties['textWrap'],
               }}>
@@ -276,7 +276,7 @@ export default async function VisaPage({ params }: RouteParams) {
                   style={{
                     background: INK,
                     color: CREAM,
-                    boxShadow: '0 6px 22px -6px rgba(11,15,25,0.30)',
+                    boxShadow: '0 6px 22px -6px rgba(26,31,54,0.30)',
                   }}
                 >
                   Apply on gov.uk
@@ -326,7 +326,7 @@ export default async function VisaPage({ params }: RouteParams) {
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
                   }}>
                   <p className="text-[16px] md:text-[17px] leading-[1.75]" style={{ color: INK }}>
                     {v.summary}
@@ -351,7 +351,7 @@ export default async function VisaPage({ params }: RouteParams) {
               {/* 02 ELIGIBILITY */}
               <Section eyebrow="02 — Eligibility" title="Are you eligible?">
                 <div className="mb-5 rounded-xl px-5 py-4 flex items-start gap-3"
-                     style={{ background: '#FBF6E7', border: '1px solid rgba(184,134,11,0.30)' }}>
+                     style={{ background: '#FBF6E7', border: '1px solid rgba(88,81,219,0.30)' }}>
                   <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
                   <p className="text-[13.5px] leading-[1.65]" style={{ color: '#5C4A12' }}>
                     You must meet <strong style={{ fontWeight: 700 }}>every</strong> condition below.
@@ -362,7 +362,7 @@ export default async function VisaPage({ params }: RouteParams) {
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
                   }}>
                   <ul>
                     {v.eligibility.map((item, i) => (
@@ -373,7 +373,7 @@ export default async function VisaPage({ params }: RouteParams) {
                               style={{
                                 background: INK,
                                 color: CREAM,
-                                fontFamily: 'Fraunces, serif',
+                                fontFamily: '"Inter Tight", Inter, sans-serif',
                                 fontWeight: 700,
                               }}>
                           {i + 1}
@@ -416,17 +416,17 @@ export default async function VisaPage({ params }: RouteParams) {
                         style={{
                           background: PAPER,
                           border: `1px solid ${HAIR}`,
-                          boxShadow: '0 2px 14px -8px rgba(11,15,25,0.08)',
+                          boxShadow: '0 2px 14px -8px rgba(26,31,54,0.08)',
                         }}>
                         <div className="flex items-center gap-3 mb-5 pb-5"
                              style={{ borderBottom: `1px solid ${HAIR}` }}>
                           <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ background: 'rgba(4,120,87,0.08)', color: EMERALD }}>
+                            style={{ background: 'rgba(99,91,255,0.08)', color: EMERALD }}>
                             <Icon className="w-[18px] h-[18px]" strokeWidth={2} />
                           </span>
                           <h3 className="flex-1"
                               style={{
-                                fontFamily: 'Fraunces, serif',
+                                fontFamily: '"Inter Tight", Inter, sans-serif',
                                 fontWeight: 600,
                                 fontSize: 18,
                                 letterSpacing: '-0.02em',
@@ -482,10 +482,10 @@ export default async function VisaPage({ params }: RouteParams) {
                         className="rounded-2xl p-5 md:p-6 flex items-start gap-4"
                         style={{
                           background: '#FBF6E7',
-                          border: '1px solid rgba(184,134,11,0.30)',
+                          border: '1px solid rgba(88,81,219,0.30)',
                         }}>
                         <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ background: 'rgba(184,134,11,0.15)', color: GOLD }}>
+                              style={{ background: 'rgba(88,81,219,0.15)', color: GOLD }}>
                           <AlertTriangle className="w-4 h-4" strokeWidth={2.2} />
                         </span>
                         <p className="text-[14.5px] leading-[1.7] flex-1" style={{ color: '#3F2E0A' }}>
@@ -504,7 +504,7 @@ export default async function VisaPage({ params }: RouteParams) {
                     style={{
                       background: PAPER,
                       border: `1px solid ${HAIR}`,
-                      boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                      boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
                     }}>
                     <VisaFaq faqs={faqs} />
                   </div>
@@ -515,9 +515,9 @@ export default async function VisaPage({ params }: RouteParams) {
               <div className="relative overflow-hidden rounded-3xl p-8 md:p-12"
                    style={{ background: INK, color: CREAM }}>
                 <div aria-hidden className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full pointer-events-none"
-                     style={{ background: 'rgba(4,120,87,0.28)', filter: 'blur(80px)' }} />
+                     style={{ background: 'rgba(99,91,255,0.28)', filter: 'blur(80px)' }} />
                 <div aria-hidden className="absolute -bottom-32 -left-32 w-[380px] h-[380px] rounded-full pointer-events-none"
-                     style={{ background: 'rgba(184,134,11,0.18)', filter: 'blur(80px)' }} />
+                     style={{ background: 'rgba(88,81,219,0.18)', filter: 'blur(80px)' }} />
                 <div aria-hidden className="absolute inset-0 opacity-[0.08] pointer-events-none"
                      style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.6) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
 
@@ -530,9 +530,9 @@ export default async function VisaPage({ params }: RouteParams) {
                     </p>
                     <h3 className="mb-3"
                         style={{
-                          fontFamily: 'Fraunces, serif',
+                          fontFamily: '"Inter Tight", Inter, sans-serif',
                           fontWeight: 600,
-                          fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                          fontSize: 'clamp(1.35rem, 3vw, 1.75rem)',
                           letterSpacing: '-0.028em',
                           lineHeight: 1.05,
                           color: CREAM,
@@ -572,10 +572,10 @@ export default async function VisaPage({ params }: RouteParams) {
                   style={{
                     background: PAPER,
                     border: `1px solid ${HAIR}`,
-                    boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+                    boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
                   }}>
                   <div className="px-6 py-4 flex items-center gap-2.5"
-                       style={{ background: 'rgba(4,120,87,0.05)', borderBottom: `1px solid ${HAIR}` }}>
+                       style={{ background: 'rgba(99,91,255,0.05)', borderBottom: `1px solid ${HAIR}` }}>
                     <span className="w-2 h-2 rounded-full" style={{ background: EMERALD }} />
                     <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]"
                           style={{ color: GOLD }}>
@@ -597,7 +597,7 @@ export default async function VisaPage({ params }: RouteParams) {
                    style={{
                      background: INK,
                      color: CREAM,
-                     boxShadow: '0 10px 30px -12px rgba(11,15,25,0.40)',
+                     boxShadow: '0 10px 30px -12px rgba(26,31,54,0.40)',
                    }}>
                   <div>
                     <div className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-1.5"
@@ -605,7 +605,7 @@ export default async function VisaPage({ params }: RouteParams) {
                       Official application
                     </div>
                     <div style={{
-                      fontFamily: 'Fraunces, serif',
+                      fontFamily: '"Inter Tight", Inter, sans-serif',
                       fontWeight: 600,
                       fontSize: 18,
                       letterSpacing: '-0.018em',
@@ -624,16 +624,16 @@ export default async function VisaPage({ params }: RouteParams) {
                      style={{
                        background: PAPER,
                        border: `1px solid ${HAIR}`,
-                       boxShadow: '0 2px 14px -8px rgba(11,15,25,0.06)',
+                       boxShadow: '0 2px 14px -8px rgba(26,31,54,0.06)',
                      }}>
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: 'rgba(4,120,87,0.10)', color: EMERALD }}>
+                          style={{ background: 'rgba(99,91,255,0.10)', color: EMERALD }}>
                       <MessageCircle className="w-4 h-4" strokeWidth={2.2} />
                     </span>
                     <div>
                       <div style={{
-                        fontFamily: 'Fraunces, serif',
+                        fontFamily: '"Inter Tight", Inter, sans-serif',
                         fontWeight: 600,
                         fontSize: 15,
                         letterSpacing: '-0.015em',
@@ -663,7 +663,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
                 {/* Source note */}
                 <div className="rounded-2xl p-4"
-                     style={{ background: 'rgba(4,120,87,0.05)', border: '1px solid rgba(4,120,87,0.18)' }}>
+                     style={{ background: 'rgba(99,91,255,0.05)', border: '1px solid rgba(99,91,255,0.18)' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <ShieldCheck className="w-3.5 h-3.5" style={{ color: EMERALD }} />
                     <span className="text-[10.5px] font-bold uppercase tracking-[0.18em]" style={{ color: EMERALD }}>
@@ -716,9 +716,9 @@ function Section({
       <p className="eyebrow mb-4" style={{ color: GOLD }}>{eyebrow}</p>
       <h2 className="mb-7"
           style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
-            fontSize: 'clamp(1.7rem, 3.4vw, 2.4rem)',
+            fontSize: 'clamp(1.35rem, 3.2vw, 1.875rem)',
             letterSpacing: '-0.028em',
             lineHeight: 1.05,
             color: INK,
@@ -744,8 +744,8 @@ function HeroStat({
            color: highlight ? CREAM : INK,
            border: `1px solid ${highlight ? 'rgba(250,250,247,0.10)' : HAIR}`,
            boxShadow: highlight
-             ? '0 8px 26px -10px rgba(11,15,25,0.30)'
-             : '0 2px 12px -6px rgba(11,15,25,0.08)',
+             ? '0 8px 26px -10px rgba(26,31,54,0.30)'
+             : '0 2px 12px -6px rgba(26,31,54,0.08)',
          }}>
       <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] mb-3"
            style={{ color: highlight ? 'rgba(250,250,247,0.65)' : MUTED }}>
@@ -754,9 +754,9 @@ function HeroStat({
       </div>
       <p className="tabular-nums leading-[1.05]"
          style={{
-           fontFamily: 'Fraunces, serif',
+           fontFamily: '"Inter Tight", Inter, sans-serif',
            fontWeight: 700,
-           fontSize: 'clamp(1.4rem, 2.6vw, 1.8rem)',
+           fontSize: 'clamp(1.2rem, 2.4vw, 1.5rem)',
            letterSpacing: '-0.03em',
            color: highlight ? CREAM : INK,
          }}>
@@ -782,7 +782,7 @@ function FactRow({
       </dt>
       <dd className="text-right max-w-[200px] leading-snug tabular-nums"
           style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
             fontSize: 13.5,
             letterSpacing: '-0.012em',
@@ -802,7 +802,7 @@ function Inline({ label, value }: { label: string; value: string }) {
       </div>
       <div className="tabular-nums leading-[1.1]"
            style={{
-             fontFamily: 'Fraunces, serif',
+             fontFamily: '"Inter Tight", Inter, sans-serif',
              fontWeight: 700,
              fontSize: 19,
              letterSpacing: '-0.022em',
@@ -822,7 +822,7 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
          style={{
            background: PAPER,
            border: `1px solid ${HAIR}`,
-           boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)',
+           boxShadow: '0 2px 16px -8px rgba(26,31,54,0.08)',
          }}>
       {/* Fee header */}
       <div className="px-8 py-7" style={{ borderBottom: `1px solid ${HAIR}` }}>
@@ -833,10 +833,10 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
             </p>
             <p className="tabular-nums leading-none"
                style={{
-                 fontFamily: 'Fraunces, serif',
+                 fontFamily: '"Inter Tight", Inter, sans-serif',
                  fontWeight: 700,
-                 fontSize: 'clamp(2.4rem, 5.5vw, 3.6rem)',
-                 letterSpacing: '-0.04em',
+                 fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
+                 letterSpacing: '-0.028em',
                  color: INK,
                }}>
               {headlineFee}
@@ -845,8 +845,8 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
           </div>
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-full"
                 style={{
-                  background: 'rgba(4,120,87,0.08)',
-                  border: '1px solid rgba(4,120,87,0.22)',
+                  background: 'rgba(99,91,255,0.08)',
+                  border: '1px solid rgba(99,91,255,0.22)',
                   color: EMERALD,
                 }}>
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -862,7 +862,7 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
           </p>
           <p className="tabular-nums"
              style={{
-               fontFamily: 'Fraunces, serif',
+               fontFamily: '"Inter Tight", Inter, sans-serif',
                fontWeight: 700,
                fontSize: 28,
                letterSpacing: '-0.028em',
@@ -890,7 +890,7 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
                 <span className="text-[13.5px]" style={{ color: SLATE }}>{label}</span>
                 <span className="text-[13.5px] tabular-nums"
                       style={{
-                        fontFamily: 'Fraunces, serif',
+                        fontFamily: '"Inter Tight", Inter, sans-serif',
                         fontWeight: 600,
                         letterSpacing: '-0.012em',
                         color: INK,
@@ -909,7 +909,7 @@ function CostCard({ fee, ihs, slug, headlineFee }: {
               style={{
                 background: INK,
                 color: CREAM,
-                boxShadow: '0 6px 18px -6px rgba(11,15,25,0.30)',
+                boxShadow: '0 6px 18px -6px rgba(26,31,54,0.30)',
               }}>
           <Calculator className="w-4 h-4" />
           Calculate your total cost

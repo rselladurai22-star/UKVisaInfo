@@ -7,14 +7,14 @@ import Link from 'next/link';
 import { Calculator, ShieldCheck, ExternalLink, ArrowRight, AlertCircle } from 'lucide-react';
 import type { RouteBreakdown } from '../../data/settlementFees';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
-const HAIR    = 'rgba(11,15,25,0.08)';
+const EMERALD = '#635BFF';
+const GOLD    = '#5851DB';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
+const HAIR    = '#E3E8EE';
 
 const POUND = (n: number) => '£' + n.toLocaleString('en-GB');
 
@@ -32,7 +32,7 @@ export default function SettlementCostStack({
       style={{
         background: PAPER,
         border: `1px solid ${HAIR}`,
-        boxShadow: '0 2px 16px -8px rgba(11,15,25,0.10)',
+        boxShadow: '0 2px 16px -8px rgba(26,31,54,0.10)',
       }}>
       <div className="flex items-start justify-between gap-3 mb-6 pb-5" style={{ borderBottom: `1px solid ${HAIR}` }}>
         <div>
@@ -43,7 +43,7 @@ export default function SettlementCostStack({
           </p>
           <h3
             style={{
-              fontFamily: 'Fraunces, serif',
+              fontFamily: '"Inter Tight", Inter, sans-serif',
               fontWeight: 600,
               fontSize: 22,
               letterSpacing: '-0.022em',
@@ -54,7 +54,7 @@ export default function SettlementCostStack({
           </h3>
         </div>
         <div className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full flex-shrink-0"
-             style={{ background: 'rgba(4,120,87,0.10)', border: '1px solid rgba(4,120,87,0.22)', color: EMERALD }}>
+             style={{ background: 'rgba(99,91,255,0.10)', border: '1px solid rgba(99,91,255,0.22)', color: EMERALD }}>
           <ShieldCheck className="w-3 h-3" />
           gov.uk verified
         </div>
@@ -70,7 +70,7 @@ export default function SettlementCostStack({
                 {line.label}
               </span>
               <div className="col-span-9 sm:col-span-5 relative h-7 rounded-lg overflow-hidden"
-                   style={{ background: 'rgba(11,15,25,0.04)' }}>
+                   style={{ background: 'rgba(26,31,54,0.04)' }}>
                 <div
                   className="absolute inset-y-0 left-0 rounded-lg transition-[width] duration-500 ease-out"
                   style={{
@@ -82,7 +82,7 @@ export default function SettlementCostStack({
               <span className="col-span-3 sm:col-span-2 text-right text-[14px] tabular-nums"
                     style={{
                       color: INK,
-                      fontFamily: 'Fraunces, serif',
+                      fontFamily: '"Inter Tight", Inter, sans-serif',
                       fontWeight: 600,
                       letterSpacing: '-0.012em',
                     }}>
@@ -106,10 +106,10 @@ export default function SettlementCostStack({
           </p>
           <div className="mt-1.5 tabular-nums"
                style={{
-                 fontFamily: 'Fraunces, serif',
+                 fontFamily: '"Inter Tight", Inter, sans-serif',
                  fontWeight: 700,
                  fontSize: 'clamp(2rem, 4vw, 2.5rem)',
-                 letterSpacing: '-0.035em',
+                 letterSpacing: '-0.025em',
                  lineHeight: 1,
                  color: CREAM,
                }}>
@@ -131,7 +131,7 @@ export default function SettlementCostStack({
       {/* Note */}
       {breakdown.note && (
         <div className="mt-5 flex items-start gap-2.5 p-4 rounded-xl"
-             style={{ background: '#FBF6E7', border: '1px solid rgba(184,134,11,0.25)' }}>
+             style={{ background: '#FBF6E7', border: '1px solid rgba(88,81,219,0.25)' }}>
           <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
           <p className="text-[13px] leading-[1.6]" style={{ color: '#5C4A12' }}>{breakdown.note}</p>
         </div>

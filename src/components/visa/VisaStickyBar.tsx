@@ -10,11 +10,11 @@ import { useEffect, useState } from 'react';
 import { ExternalLink, Calculator } from 'lucide-react';
 import Link from 'next/link';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
+const EMERALD = '#635BFF';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
 
 interface Props {
   title: string;
@@ -58,8 +58,8 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
           background: 'rgba(250,250,247,0.94)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderBottom: '1px solid rgba(11,15,25,0.08)',
-          boxShadow: '0 1px 14px -6px rgba(11,15,25,0.10)',
+          borderBottom: '1px solid rgba(26,31,54,0.08)',
+          boxShadow: '0 1px 14px -6px rgba(26,31,54,0.10)',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 h-[56px] flex items-center gap-3">
@@ -68,7 +68,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
             <div
               className="leading-none truncate"
               style={{
-                fontFamily: 'Fraunces, serif',
+                fontFamily: '"Inter Tight", Inter, sans-serif',
                 fontWeight: 600,
                 fontSize: 15,
                 letterSpacing: '-0.018em',
@@ -78,7 +78,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
               {title}
             </div>
             <div className="mt-1 text-[11.5px] tabular-nums truncate hidden sm:block"
-                 style={{ color: MUTED, fontFamily: 'Inter, sans-serif' }}>
+                 style={{ color: MUTED, fontFamily: 'Inter, system-ui, sans-serif' }}>
               From {extractFirstFee(fee)}
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
             href={`/tools/cost-calculator?visa=${slug}`}
             className="hidden md:inline-flex items-center gap-1.5 text-[12.5px] font-semibold px-3 py-1.5 rounded-lg transition-colors duration-75"
             style={{ color: SLATE }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.background = 'rgba(11,15,25,0.05)'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.background = 'rgba(26,31,54,0.05)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = SLATE; e.currentTarget.style.background = 'transparent'; }}
           >
             <Calculator className="w-3.5 h-3.5" />
@@ -101,7 +101,7 @@ export default function VisaStickyBar({ title, fee, applyUrl, accent, slug }: Pr
             style={{
               background: INK,
               color: CREAM,
-              boxShadow: '0 2px 12px -2px rgba(11,15,25,0.30)',
+              boxShadow: '0 2px 12px -2px rgba(26,31,54,0.30)',
             }}
             onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = INK; }}

@@ -12,13 +12,13 @@ import {
 } from 'lucide-react';
 import type { VisaVariant } from '../../data/visaVariants';
 
-const INK     = '#0B0F19';
+const INK     = '#1A1F36';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
-const HAIR    = 'rgba(11,15,25,0.08)';
+const EMERALD = '#635BFF';
+const GOLD    = '#5851DB';
+const SLATE   = '#3C4257';
+const MUTED   = '#697386';
+const HAIR    = '#E3E8EE';
 
 interface Props {
   variants: VisaVariant[];
@@ -38,15 +38,15 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
       style={{
         background: PAPER,
         border: `1px solid ${HAIR}`,
-        boxShadow: '0 2px 16px -8px rgba(11,15,25,0.10)',
+        boxShadow: '0 2px 16px -8px rgba(26,31,54,0.10)',
       }}>
       {/* Header */}
-      <div className="px-7 py-6" style={{ background: 'rgba(4,120,87,0.04)', borderBottom: `1px solid ${HAIR}` }}>
+      <div className="px-7 py-6" style={{ background: 'rgba(99,91,255,0.04)', borderBottom: `1px solid ${HAIR}` }}>
         <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: GOLD }}>
           Sub-routes
         </p>
         <h2 style={{
-          fontFamily: 'Fraunces, serif',
+          fontFamily: '"Inter Tight", Inter, sans-serif',
           fontWeight: 600,
           fontSize: 24,
           letterSpacing: '-0.025em',
@@ -69,8 +69,8 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
               key={vv.id} type="button" onClick={() => setActiveIdx(i)}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-100 mb-3"
               style={isActive
-                ? { background: INK, color: '#FAFAF7', boxShadow: '0 4px 14px -4px rgba(11,15,25,0.30)' }
-                : { background: 'rgba(11,15,25,0.05)', color: INK }}>
+                ? { background: INK, color: '#FCFCFD', boxShadow: '0 4px 14px -4px rgba(26,31,54,0.30)' }
+                : { background: 'rgba(26,31,54,0.05)', color: INK }}>
               {vv.label}
               {typeof vv.feeAmount === 'number' && (
                 <span className="text-[11px] tabular-nums"
@@ -91,7 +91,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
             {v.label}
           </p>
           <h3 style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
             fontSize: 19,
             letterSpacing: '-0.018em',
@@ -103,7 +103,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
           </h3>
           {v.fee && (
             <div className="mt-2 mb-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12.5px] font-semibold"
-                 style={{ background: 'rgba(4,120,87,0.08)', color: EMERALD, border: '1px solid rgba(4,120,87,0.18)' }}>
+                 style={{ background: 'rgba(99,91,255,0.08)', color: EMERALD, border: '1px solid rgba(99,91,255,0.18)' }}>
               {v.fee}
             </div>
           )}
@@ -118,7 +118,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
           </ul>
 
           {v.notes && v.notes.length > 0 && (
-            <ul className="mt-5 space-y-2 pl-5" style={{ borderLeft: '2px solid rgba(184,134,11,0.35)' }}>
+            <ul className="mt-5 space-y-2 pl-5" style={{ borderLeft: '2px solid rgba(88,81,219,0.35)' }}>
               {v.notes.map((n, i) => (
                 <li key={i} className="text-[13px] leading-[1.6]" style={{ color: SLATE }}>{n}</li>
               ))}
@@ -129,7 +129,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
         {/* Right: fee meta + actions */}
         <div className="col-span-12 md:col-span-5 p-7">
           <dl className="rounded-2xl overflow-hidden mb-4"
-              style={{ background: '#FAFAF7', border: `1px solid ${HAIR}` }}>
+              style={{ background: '#FCFCFD', border: `1px solid ${HAIR}` }}>
             {typeof v.feeAmount === 'number' && (
               <RowItem label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />
             )}
@@ -150,8 +150,8 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
                   className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[13.5px] font-semibold transition-all active:scale-[0.98]"
                   style={{
                     background: INK,
-                    color: '#FAFAF7',
-                    boxShadow: '0 4px 16px -4px rgba(11,15,25,0.30)',
+                    color: '#FCFCFD',
+                    boxShadow: '0 4px 16px -4px rgba(26,31,54,0.30)',
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = INK; }}>
@@ -179,13 +179,13 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
 function RowItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-3 px-4 py-3" style={{ borderBottom: `1px solid ${HAIR}` }}>
-      <dt className="text-[12.5px] font-medium" style={{ color: MUTED, fontFamily: 'Inter, sans-serif' }}>
+      <dt className="text-[12.5px] font-medium" style={{ color: MUTED, fontFamily: 'Inter, system-ui, sans-serif' }}>
         {label}
       </dt>
       <dd className="text-[13.5px] tabular-nums"
           style={{
             color: INK,
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
             letterSpacing: '-0.012em',
           }}>

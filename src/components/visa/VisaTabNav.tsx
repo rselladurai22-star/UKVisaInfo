@@ -9,10 +9,10 @@ import { useEffect, useState } from 'react';
 
 export interface Tab { id: string; label: string }
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const SLATE   = '#475569';
+const INK     = '#1A1F36';
+const CREAM   = '#FCFCFD';
+const EMERALD = '#635BFF';
+const SLATE   = '#3C4257';
 
 export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent?: string }) {
   const activeColor = accent ?? EMERALD;
@@ -58,7 +58,7 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent?: str
         background: 'rgba(250,250,247,0.92)',
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        borderBottom: '1px solid rgba(11,15,25,0.08)',
+        borderBottom: '1px solid rgba(26,31,54,0.08)',
       }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 overflow-x-auto">
@@ -74,7 +74,7 @@ export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent?: str
                   className="relative inline-flex items-center h-12 px-4 transition-colors duration-100"
                   style={{
                     color: isActive ? INK : SLATE,
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     fontSize: 13,
                     fontWeight: isActive ? 600 : 500,
                     letterSpacing: '-0.005em',

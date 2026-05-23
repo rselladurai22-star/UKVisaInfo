@@ -10,10 +10,10 @@ import {
 import { FROM_VISAS } from '../data/visaSwitching';
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Work: '#047857',
+  Work: '#635BFF',
   Study: '#1E3A8A',
   Family: '#9F1239',
-  Settlement: '#047857',
+  Settlement: '#635BFF',
 };
 
 const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -24,8 +24,8 @@ const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>
 };
 
 const DIFFICULTY_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  Common:      { bg: '#04785715', color: '#047857', label: 'Common switch' },
-  Conditional: { bg: 'rgba(184,134,11,0.12)', color: '#5C4A12', label: 'Conditional' },
+  Common:      { bg: '#635BFF15', color: '#635BFF', label: 'Common switch' },
+  Conditional: { bg: 'rgba(88,81,219,0.12)', color: '#5C4A12', label: 'Conditional' },
   Rare:        { bg: 'rgba(159,18,57,0.10)', color: '#9F1239', label: 'Rare / unusual' },
 };
 
@@ -36,20 +36,20 @@ export default function VisaSwitchingClient() {
   const from = useMemo(() => FROM_VISAS.find(v => v.id === fromId) ?? FROM_VISAS[0], [fromId]);
 
   return (
-    <div className="min-h-screen" style={{ background: '#FAFAF7', fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen" style={{ background: '#FCFCFD', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* HERO — Editorial Premium cream */}
       <section className="relative overflow-hidden pt-[100px] md:pt-[120px] pb-14 md:pb-20"
-               style={{ background: '#FAFAF7' }}>
+               style={{ background: '#FCFCFD' }}>
         <div aria-hidden className="absolute inset-0 pointer-events-none"
              style={{
                background:
-                 'radial-gradient(ellipse at 12% 8%, rgba(4,120,87,0.06) 0px, transparent 55%),' +
-                 'radial-gradient(ellipse at 88% 80%, rgba(184,134,11,0.05) 0px, transparent 55%)',
+                 'radial-gradient(ellipse at 12% 8%, rgba(99,91,255,0.06) 0px, transparent 55%),' +
+                 'radial-gradient(ellipse at 88% 80%, rgba(88,81,219,0.05) 0px, transparent 55%)',
              }} />
         <div aria-hidden className="absolute inset-0 opacity-[0.22] pointer-events-none"
              style={{
-               backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.10) 1px, transparent 1px)',
+               backgroundImage: 'radial-gradient(circle, rgba(26,31,54,0.10) 1px, transparent 1px)',
                backgroundSize: '32px 32px',
                maskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
                WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 35%, black, transparent)',
@@ -66,24 +66,24 @@ export default function VisaSwitchingClient() {
 
           <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3.5 py-1.5 rounded-full mb-6"
                 style={{
-                  background: 'rgba(4,120,87,0.08)',
-                  color: '#047857',
-                  border: '1px solid rgba(4,120,87,0.18)',
+                  background: 'rgba(99,91,255,0.08)',
+                  color: '#635BFF',
+                  border: '1px solid rgba(99,91,255,0.18)',
                   letterSpacing: '0.18em',
                 }}>
             <Building2 className="w-3 h-3" /> Already in the UK
           </span>
 
           <h1 style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: '"Inter Tight", Inter, sans-serif',
             fontWeight: 600,
-            fontSize: 'clamp(2.2rem, 5.4vw, 4rem)',
+            fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
             lineHeight: 0.98,
-            letterSpacing: '-0.035em',
-            color: '#0B0F19',
+            letterSpacing: '-0.025em',
+            color: '#1A1F36',
             textWrap: 'balance' as React.CSSProperties['textWrap'],
           }}>
-            Visa <span style={{ fontStyle: 'italic', color: '#047857' }}>switching</span> guide
+            Visa <span style={{ fontStyle: 'italic', color: '#635BFF' }}>switching</span> guide
           </h1>
           <p className="mt-6 text-[17px] md:text-[19px] leading-[1.6] max-w-2xl"
              style={{ color: '#475569' }}>
@@ -101,31 +101,31 @@ export default function VisaSwitchingClient() {
         <aside className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-[100px] space-y-4">
             <div className="rounded-2xl bg-white border border-[#E5E7EB] p-6"
-                 style={{ boxShadow: '0 2px 12px rgba(11,15,25,0.06)' }}>
+                 style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
               <div className="flex items-center gap-2 mb-2.5">
-                <span className="w-[3px] h-[14px] rounded-full bg-[#047857]" />
+                <span className="w-[3px] h-[14px] rounded-full bg-[#635BFF]" />
                 <span className="text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#064E3B]"
-                      style={{ fontFamily: 'Inter, sans-serif' }}>
+                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                   Step 1 · Your current visa
                 </span>
               </div>
-              <h3 className="text-[17px] font-extrabold text-[#0B0F19] mb-1"
-                  style={{ fontFamily: 'Fraunces, serif' }}>
+              <h3 className="text-[17px] font-extrabold text-[#1A1F36] mb-1"
+                  style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                 I am currently on…
               </h3>
               <p className="text-[13px] font-normal text-[#64748B] mb-4 leading-[1.55]"
-                 style={{ fontFamily: 'Inter, sans-serif' }}>
+                 style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                 Choose the UK visa you currently hold. We&apos;ll show what you can switch into.
               </p>
 
               {/* Dropdown */}
               <div className="relative">
                 <button onClick={() => setOpen(o => !o)}
-                        className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl bg-[#FAFAF7] border-2 border-[#E2E8F0] hover:border-[#94A3B8] transition-colors text-left"
+                        className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl bg-[#FCFCFD] border-2 border-[#E2E8F0] hover:border-[#94A3B8] transition-colors text-left"
                         aria-haspopup="listbox" aria-expanded={open}>
                   <div>
-                    <div className="text-[14px] font-extrabold text-[#0B0F19]"
-                         style={{ fontFamily: 'Fraunces, serif' }}>
+                    <div className="text-[14px] font-extrabold text-[#1A1F36]"
+                         style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                       {from.label}
                     </div>
                     <div className="text-[11.5px] font-normal text-[#64748B] mt-0.5">{from.blurb}</div>
@@ -135,15 +135,15 @@ export default function VisaSwitchingClient() {
                 {open && (
                   <ul role="listbox"
                       className="absolute left-0 right-0 mt-2 max-h-96 overflow-y-auto rounded-xl bg-white border border-[#E5E7EB] z-20"
-                      style={{ boxShadow: '0 12px 32px -8px rgba(11,15,25,0.18)' }}>
+                      style={{ boxShadow: '0 12px 32px -8px rgba(26,31,54,0.18)' }}>
                     {FROM_VISAS.map(v => (
                       <li key={v.id}>
                         <button onClick={() => { setFromId(v.id); setOpen(false); }}
                                 className={`w-full text-left px-4 py-3 ${
-                                  v.id === fromId ? 'bg-[#F1F5F9]' : 'hover:bg-[#FAFAF7]'
+                                  v.id === fromId ? 'bg-[#F1F5F9]' : 'hover:bg-[#FCFCFD]'
                                 }`}>
-                          <div className="text-[14px] font-bold text-[#0B0F19]"
-                               style={{ fontFamily: 'Inter, sans-serif' }}>
+                          <div className="text-[14px] font-bold text-[#1A1F36]"
+                               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                             {v.label}
                           </div>
                           <div className="text-[12px] font-normal text-[#64748B] mt-0.5">{v.blurb}</div>
@@ -164,11 +164,11 @@ export default function VisaSwitchingClient() {
 
             <Link href="/tools/cost-calculator"
                   className="flex items-center justify-between gap-3 rounded-2xl p-5 text-white"
-                  style={{ background: 'linear-gradient(135deg, #047857, #064E3B)', boxShadow: '0 8px 30px -8px rgba(4,120,87,0.5)' }}>
+                  style={{ background: 'linear-gradient(135deg, #635BFF, #064E3B)', boxShadow: '0 8px 30px -8px rgba(99,91,255,0.5)' }}>
               <div>
                 <div className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/85 mb-1">In-UK fees usually higher</div>
                 <div className="text-[16px] font-extrabold leading-tight"
-                     style={{ fontFamily: 'Fraunces, serif' }}>
+                     style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                   Calculate switching cost
                 </div>
               </div>
@@ -183,18 +183,18 @@ export default function VisaSwitchingClient() {
           {/* Step 2 header */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="w-[3px] h-[18px] rounded-full bg-[#047857]" />
+              <span className="w-[3px] h-[18px] rounded-full bg-[#635BFF]" />
               <span className="text-[10.5px] font-extrabold uppercase tracking-[0.18em] text-[#064E3B]"
-                    style={{ fontFamily: 'Inter, sans-serif' }}>
+                    style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                 Step 2 · Where you can switch to
               </span>
             </div>
-            <h2 className="text-[23px] md:text-[28px] font-extrabold text-[#0B0F19] tracking-[-0.022em] leading-[1.12]"
-                style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-[23px] md:text-[28px] font-extrabold text-[#1A1F36] tracking-[-0.022em] leading-[1.12]"
+                style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
               From <span style={{ color: '#064E3B' }}>{from.label}</span>{' → '}
             </h2>
             <p className="mt-3 text-[14.5px] font-normal text-[#475569] leading-[1.72] max-w-2xl"
-               style={{ fontFamily: 'Inter, sans-serif' }}>
+               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
               {from.switches.length > 0
                 ? `Available switches from a ${from.label}. Common routes are routine; conditional routes have extra requirements you must meet.`
                 : `The ${from.label} is a short-stay route. You generally cannot switch into a long-term UK visa from inside the UK — you must leave and apply for entry clearance.`}
@@ -205,13 +205,13 @@ export default function VisaSwitchingClient() {
           {from.switches.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {from.switches.map((s) => {
-                const color = CATEGORY_COLORS[s.category] ?? '#0B0F19';
+                const color = CATEGORY_COLORS[s.category] ?? '#1A1F36';
                 const Icon = CATEGORY_ICONS[s.category] ?? Briefcase;
                 const diff  = DIFFICULTY_STYLE[s.difficulty];
                 return (
                   <Link key={s.toSlug + s.toTitle} href={`/visa/${s.toSlug}`}
-                        className="group block rounded-2xl bg-white border border-[#E5E7EB] p-5 hover:border-[#0B0F19] transition-all"
-                        style={{ boxShadow: '0 2px 12px rgba(11,15,25,0.05)' }}>
+                        className="group block rounded-2xl bg-white border border-[#E5E7EB] p-5 hover:border-[#1A1F36] transition-all"
+                        style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.05)' }}>
                     <div className="flex items-start gap-3 mb-3">
                       <span className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
                             style={{ background: `${color}15`, color }}>
@@ -219,29 +219,29 @@ export default function VisaSwitchingClient() {
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="text-[10.5px] font-extrabold uppercase tracking-[0.14em] mb-1"
-                             style={{ color, fontFamily: 'Inter, sans-serif' }}>
+                             style={{ color, fontFamily: 'Inter, system-ui, sans-serif' }}>
                           {s.category} route
                         </div>
-                        <h3 className="text-[15.5px] font-extrabold text-[#0B0F19] leading-tight"
-                            style={{ fontFamily: 'Fraunces, serif' }}>
+                        <h3 className="text-[15.5px] font-extrabold text-[#1A1F36] leading-tight"
+                            style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                           {s.toTitle}
                         </h3>
                       </div>
                     </div>
                     <p className="text-[13.5px] font-normal text-[#334155] leading-[1.65] mb-4"
-                       style={{ fontFamily: 'Inter, sans-serif' }}>
+                       style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                       {s.note}
                     </p>
                     <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#F3F4F6]">
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full"
-                            style={{ background: diff.bg, color: diff.color, fontFamily: 'Inter, sans-serif' }}>
+                            style={{ background: diff.bg, color: diff.color, fontFamily: 'Inter, system-ui, sans-serif' }}>
                         {s.difficulty === 'Common' ? <CheckCircle2 className="w-3 h-3" />
                           : s.difficulty === 'Conditional' ? <AlertTriangle className="w-3 h-3" />
                           : <Info className="w-3 h-3" />}
                         {diff.label}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-[13px] font-bold text-[#0B0F19] group-hover:gap-2 transition-all"
-                            style={{ fontFamily: 'Inter, sans-serif' }}>
+                      <span className="inline-flex items-center gap-1 text-[13px] font-bold text-[#1A1F36] group-hover:gap-2 transition-all"
+                            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                         See full guide
                         <ArrowRight className="w-3.5 h-3.5" />
                       </span>
@@ -259,12 +259,12 @@ export default function VisaSwitchingClient() {
                   <AlertTriangle className="w-5 h-5" />
                 </span>
                 <div className="flex-1">
-                  <h3 className="text-[16px] font-extrabold text-[#0B0F19] mb-2"
-                      style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-[16px] font-extrabold text-[#1A1F36] mb-2"
+                      style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                     No in-country switches available
                   </h3>
                   <p className="text-[14px] font-normal text-[#334155] leading-[1.7]"
-                     style={{ fontFamily: 'Inter, sans-serif' }}>
+                     style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                     From a <strong className="font-bold">{from.label}</strong>, you cannot switch into a long-term
                     UK visa while inside the UK. You must leave the UK and apply for entry clearance from your home
                     country (or the country in which you normally live).
@@ -283,15 +283,15 @@ export default function VisaSwitchingClient() {
                       style={{ background: '#FEE2E2', color: '#B91C1C' }}>
                   <XCircle className="w-4 h-4" />
                 </span>
-                <h3 className="text-[14.5px] font-extrabold text-[#0B0F19]"
-                    style={{ fontFamily: 'Fraunces, serif' }}>
+                <h3 className="text-[14.5px] font-extrabold text-[#1A1F36]"
+                    style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                   Cannot switch from {from.label} into
                 </h3>
               </div>
               <ul className="space-y-2">
                 {from.cannotSwitchInto.map((r, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-[13.5px] font-normal text-[#334155] leading-[1.6]"
-                      style={{ fontFamily: 'Inter, sans-serif' }}>
+                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                     <XCircle className="w-3.5 h-3.5 flex-shrink-0 mt-1 text-[#DC2626]" />
                     {r}
                   </li>
@@ -302,20 +302,20 @@ export default function VisaSwitchingClient() {
 
           {/* Generic step-by-step */}
           <div className="rounded-2xl bg-white border border-[#E5E7EB] overflow-hidden mt-2"
-               style={{ boxShadow: '0 2px 12px rgba(11,15,25,0.06)' }}>
+               style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
             <div className="px-6 py-4 border-b border-[#F3F4F6] flex items-center gap-3"
-                 style={{ background: 'rgba(4,120,87,0.06)' }}>
+                 style={{ background: 'rgba(99,91,255,0.06)' }}>
               <span className="w-9 h-9 rounded-xl flex items-center justify-center text-white"
-                    style={{ background: '#047857' }}>
+                    style={{ background: '#635BFF' }}>
                 <Building2 className="w-4 h-4" />
               </span>
               <div>
                 <div className="text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#064E3B]"
-                     style={{ fontFamily: 'Inter, sans-serif' }}>
+                     style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                   Step 3 · How an in-UK switch works
                 </div>
-                <h3 className="text-[16px] font-extrabold text-[#0B0F19] leading-tight"
-                    style={{ fontFamily: 'Fraunces, serif' }}>
+                <h3 className="text-[16px] font-extrabold text-[#1A1F36] leading-tight"
+                    style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                   General switching process
                 </h3>
               </div>
@@ -325,16 +325,16 @@ export default function VisaSwitchingClient() {
                 <li key={i} className="px-6 py-5 md:px-8 md:py-6 flex gap-5">
                   <span aria-hidden
                         className="flex-shrink-0 w-10 h-10 rounded-full text-white text-[14px] font-extrabold flex items-center justify-center"
-                        style={{ background: '#047857', boxShadow: '0 4px 14px -4px rgba(4,120,87,0.6)', fontFamily: 'Fraunces, serif' }}>
+                        style={{ background: '#635BFF', boxShadow: '0 4px 14px -4px rgba(99,91,255,0.6)', fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                     {i + 1}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-[15.5px] md:text-[16.5px] font-extrabold text-[#0B0F19] leading-tight mb-1.5"
-                        style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h4 className="text-[15.5px] md:text-[16.5px] font-extrabold text-[#1A1F36] leading-tight mb-1.5"
+                        style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
                       {s.title}
                     </h4>
                     <p className="text-[14px] font-normal text-[#334155] leading-[1.75] max-w-3xl"
-                       style={{ fontFamily: 'Inter, sans-serif' }}>
+                       style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                       {s.desc}
                     </p>
                   </div>
@@ -343,7 +343,7 @@ export default function VisaSwitchingClient() {
             </ol>
             <div className="px-6 py-4 md:px-8 border-t border-[#F3F4F6] bg-[#FAFBFC] flex flex-wrap gap-3">
               <a href="https://www.gov.uk/check-uk-visa" target="_blank" rel="noopener noreferrer"
-                 className="inline-flex items-center gap-2 text-[13px] font-bold text-[#0B0F19] hover:underline">
+                 className="inline-flex items-center gap-2 text-[13px] font-bold text-[#1A1F36] hover:underline">
                 gov.uk: Check if you can switch <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -379,16 +379,16 @@ function KeyFact({
   return (
     <div className="flex items-start gap-3">
       <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(4,120,87,0.12)', color: '#064E3B' }}>
+            style={{ background: 'rgba(99,91,255,0.12)', color: '#064E3B' }}>
         <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
       </span>
       <div className="flex-1 min-w-0">
         <div className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-[#9CA3AF]"
-             style={{ fontFamily: 'Inter, sans-serif' }}>
+             style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
           {label}
         </div>
-        <div className="text-[13px] font-bold text-[#0B0F19] leading-snug mt-0.5"
-             style={{ fontFamily: 'Inter, sans-serif' }}>
+        <div className="text-[13px] font-bold text-[#1A1F36] leading-snug mt-0.5"
+             style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
           {value}
         </div>
       </div>
