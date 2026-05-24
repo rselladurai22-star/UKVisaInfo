@@ -19,10 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
   const { country } = await params;
   const c = getCountry(country);
-  if (!c) return { title: 'Country guide not found' };
+  if (!c) return { title: 'Country guide not found', robots: { index: false, follow: true } };
   const title = `UK Visa for ${c.demonym} Citizens — 2026 Complete Guide`;
   const description = `Apply for a UK visa from ${c.name}. Visa routes, fees, document checklist, TB test requirements, biometrics and processing times — updated for 2026. 100% gov.uk sourced.`;
   const ogImageUrl = `https://ukvisainfo.co.uk/og-default.png`;
+  // Stub country pages don't carry enough unique editorial value to index.
+  // They remain crawlable for users but are excluded from search results.
+  const isStub = c.status !== 'full';
   return {
     title, description,
     alternates: { canonical: `/from/${country}` },
@@ -40,6 +43,9 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       title, description,
       images: [ogImageUrl],
     },
+    robots: isStub
+      ? { index: false, follow: true, googleBot: { index: false, follow: true } }
+      : { index: true, follow: true },
   };
 }
 

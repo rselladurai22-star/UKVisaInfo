@@ -19,13 +19,18 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
   const { city } = await params;
   const c = getCity(city);
-  if (!c) return { title: 'City guide not found' };
+  if (!c) return { title: 'City guide not found', robots: { index: false, follow: true } };
   const title = `Living in ${c.name} on a UK Visa — Cost, Jobs & Sponsors 2026`;
   const description = `Move to ${c.name}: monthly cost of living, top hiring sectors, popular neighbourhoods for newcomers, NHS access and sponsor activity.`;
+  // Stubs are short data-card pages — keep them browsable but out of search.
+  const isStub = c.status === 'stub';
   return {
     title, description,
     alternates: { canonical: `/uk-cities/${city}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/uk-cities/${city}`, type: 'article' },
+    robots: isStub
+      ? { index: false, follow: true, googleBot: { index: false, follow: true } }
+      : { index: true, follow: true },
   };
 }
 

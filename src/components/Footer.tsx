@@ -45,9 +45,12 @@ const EXPLORE = [
 ];
 
 const LEGAL = [
-  { href: '/about',   label: 'About' },
-  { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/terms',   label: 'Terms of Use' },
+  { href: '/about',             label: 'About & editor' },
+  { href: '/editorial-policy',  label: 'Editorial policy' },
+  { href: '/sources',           label: 'Sources cited' },
+  { href: '/privacy',           label: 'Privacy Policy' },
+  { href: '/terms',             label: 'Terms of Use' },
+  { href: '/terms#disclaimer',  label: 'Legal disclaimer' },
 ];
 
 function FooterLogo() {

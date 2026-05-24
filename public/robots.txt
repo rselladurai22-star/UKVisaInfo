@@ -5,6 +5,12 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 
+# Note: /postcode/<postcode>, /salary/<soc>, /sponsors/city/<city> and
+# /sponsors/sector/<sector> are templated data-display pages. They are
+# left crawlable so Google can SEE the in-page `noindex` robots meta —
+# blocking them here would hide the noindex and risk indexing without
+# our consent. The pages themselves return <meta name="robots" content="noindex">.
+
 # Block bad bots
 User-agent: AhrefsBot
 Crawl-delay: 30

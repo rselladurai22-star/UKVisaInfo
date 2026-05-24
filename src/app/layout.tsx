@@ -4,6 +4,7 @@ import './globals.css';
 import AppShell from '../components/AppShell';
 import AdSenseScript from '../components/AdSenseScript';
 import GoogleAnalytics from '../components/GoogleAnalytics';
+import { PRIMARY_EDITOR, primaryEditorSchema } from '../data/editorialTeam';
 
 const SITE_URL = 'https://ukvisainfo.co.uk';
 
@@ -16,8 +17,11 @@ export const metadata: Metadata = {
   description:
     'UKDesk — free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
   applicationName: 'UKDesk',
-  authors: [{ name: 'UKDesk', url: SITE_URL }],
-  creator: 'UKDesk',
+  authors: [
+    { name: PRIMARY_EDITOR.name, url: `${SITE_URL}${PRIMARY_EDITOR.profileUrl}` },
+    { name: 'UKDesk', url: SITE_URL },
+  ],
+  creator: PRIMARY_EDITOR.name,
   publisher: 'UKDesk',
   category: 'Reference & Utilities',
   keywords: [
@@ -96,10 +100,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       'query-input': 'required name=search_term_string',
     },
   };
+  const editorJsonLd = primaryEditorSchema(SITE_URL);
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${SITE_URL}#org`,
     name: 'UKDesk',
+    legalName: 'UKDesk',
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
@@ -109,11 +116,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     sameAs: [
       'https://www.reddit.com/r/ukvisa',
     ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'customer support',
-      availableLanguage: 'English',
-    },
+    email: 'contact@ukvisainfo.co.uk',
+    founder: editorJsonLd,
+    employee: [editorJsonLd],
+    publishingPrinciples: `${SITE_URL}/editorial-policy`,
+    knowsAbout: PRIMARY_EDITOR.expertise,
+    areaServed: 'GB',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'editorial',
+        email: 'contact@ukvisainfo.co.uk',
+        availableLanguage: 'English',
+        areaServed: 'GB',
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'privacy',
+        email: 'privacy@ukvisainfo.co.uk',
+        availableLanguage: 'English',
+        areaServed: 'GB',
+      },
+    ],
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -135,6 +159,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', ...editorJsonLd }) }}
         />
         <script
           type="application/ld+json"

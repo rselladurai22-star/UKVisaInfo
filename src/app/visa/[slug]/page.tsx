@@ -15,6 +15,11 @@ import VisaFaq from '../../../components/visa/VisaFaq';
 import VisaStickyBar from '../../../components/visa/VisaStickyBar';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import { getVariants, type VisaVariant } from '../../../data/visaVariants';
+import VisaPageV2 from '../../../components/visa/v2/VisaPageV2';
+import { VISA_FEES, hasV2Layout } from '../../../data/visaFees';
+import EditorByline from '../../../components/EditorByline';
+import LegalDisclaimer from '../../../components/LegalDisclaimer';
+import { primaryEditorSchema } from '../../../data/editorialTeam';
 
 /* ════════════════════════════════════════════════
    QUARTZ — terminal-grade design tokens
@@ -164,6 +169,55 @@ export default async function VisaPage({ params }: RouteParams) {
 
   const faqs = VISA_FAQS[slug] ?? [];
   const variants = getVariants(slug);
+
+  // V2 cheat-sheet layout (rolling out per-visa). Currently: skilled-worker only.
+  if (hasV2Layout(slug)) {
+    const f = VISA_FEES[slug];
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org', '@type': 'Article',
+          headline: v.title, description: v.summary,
+          datePublished: '2026-04-08', dateModified: '2026-05-19',
+          author: primaryEditorSchema('https://ukvisainfo.co.uk'),
+          publisher: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk', logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' } },
+          image: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`,
+          mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}`,
+          inLanguage: 'en-GB',
+        }) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home',        item: 'https://ukvisainfo.co.uk' },
+            { '@type': 'ListItem', position: 2, name: 'Visa Routes', item: 'https://ukvisainfo.co.uk/visa-types' },
+            { '@type': 'ListItem', position: 3, name: v.title,       item: `https://ukvisainfo.co.uk/visa/${slug}` },
+          ],
+        }) }} />
+        {faqs.length > 0 && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org', '@type': 'FAQPage',
+            mainEntity: faqs.map((q) => ({ '@type': 'Question', name: q.question, acceptedAnswer: { '@type': 'Answer', text: q.answer } })),
+          }) }} />
+        )}
+        <VisaPageV2
+          slug={slug}
+          visa={v}
+          variants={variants}
+          faqs={faqs}
+          defaultYears={f.defaultYears}
+          baseFeeOutside3y={f.baseFee.out3yr}
+          baseFeeOutside5y={f.baseFee.out5yr}
+          baseFeeInside3y={f.baseFee.in3yr}
+          baseFeeInside5y={f.baseFee.in5yr}
+          ihsAdult={f.ihsAdult}
+          ihsChild={f.ihsChild}
+          allowDependants={f.allowsDependants}
+        />
+      </>
+    );
+  }
+
+  const categoryLabel = CATEGORY_LABEL[v.category] ?? 'UK visa';
   const docGroups = categoriseDocuments(v.documents);
   const CatIcon = CATEGORY_ICON[v.category] ?? Globe2;
   const bench = buildBenchmarks();
@@ -201,10 +255,16 @@ export default async function VisaPage({ params }: RouteParams) {
   /* JSON-LD */
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: v.title, description: v.summary,
-    datePublished: '2026-04-08', dateModified: '2026-05-19',
-    author:    { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
-    publisher: { '@type': 'Organization', name: 'UKDesk', logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' } },
+    headline: v.title,
+    description: v.summary,
+    datePublished: '2026-04-08',
+    dateModified: '2026-05-19',
+    author: primaryEditorSchema('https://ukvisainfo.co.uk'),
+    publisher: {
+      '@type': 'Organization', name: 'UKDesk',
+      url: 'https://ukvisainfo.co.uk',
+      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
+    },
     image: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`,
     mainEntityOfPage: `https://ukvisainfo.co.uk/visa/${slug}`, inLanguage: 'en-GB',
   };
@@ -415,6 +475,17 @@ export default async function VisaPage({ params }: RouteParams) {
         </div>
       </header>
 
+      {/* Byline + YMYL disclaimer */}
+      <div style={{ background: C.bg2 }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto',
+                      padding: 'clamp(12px,2vw,16px) clamp(20px,3vw,32px) clamp(4px,1vw,8px)',
+                      display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <EditorByline verified={v.updated} />
+          <LegalDisclaimer variant="inline" />
+        </div>
+      </div>
+
+      {/* Section anchor nav */}
       <VisaTabNav tabs={tabs} />
 
       {/* ════════════════════════════════════════════

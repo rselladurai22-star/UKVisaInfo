@@ -26,8 +26,8 @@ export default function TermsPage() {
           site.
         </p>
 
-        <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          2. Nature of the website
+        <h2 id="disclaimer" className="text-2xl font-bold text-primary mt-8 mb-3 scroll-mt-32">
+          2. Nature of the website — full editorial disclaimer
         </h2>
         <p>
           UKDesk is an independent editorial site providing general
@@ -82,7 +82,7 @@ export default function TermsPage() {
           policies of external sites.
         </p>
 
-        <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
+        <h2 id="advertising" className="text-2xl font-bold text-primary mt-8 mb-3 scroll-mt-32">
           6. Advertising and affiliate disclosure
         </h2>
         <p>

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const display = formatPostcode(postcode);
   const data = await lookupPostcode(postcode);
   if (!data) {
-    return { title: `Postcode ${display} not found`, robots: { index: false } };
+    return { title: `Postcode ${display} not found`, robots: { index: false, follow: true } };
   }
   const title = `${display} — ${data.council} · ${data.constituency} · UK Postcode Lookup`;
   const description = `${display} is in ${data.council} (${data.country}). Constituency: ${data.constituency}${data.mp ? `, MP ${data.mp}` : ''}. NHS area: ${data.nhsRegion}. Police: ${data.policeForce}.`;
@@ -23,6 +23,14 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title, description,
     alternates: { canonical: `/postcode/${normalisePostcode(postcode)}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/postcode/${normalisePostcode(postcode)}`, type: 'article' },
+    // Per-postcode results are user-driven lookup output, not editorial content.
+    // We keep them browsable (e.g. for sharing a specific lookup) but hide them
+    // from Google so they cannot dilute the site's quality signal — only the
+    // /postcode landing page is indexed.
+    robots: {
+      index: false, follow: true,
+      googleBot: { index: false, follow: true },
+    },
   };
 }
 

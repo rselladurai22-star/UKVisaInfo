@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title, description,
     alternates: { canonical: `/sponsors/city/${city}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/sponsors/city/${city}`, type: 'article' },
+    // City-filtered sponsor listing — data display, not editorial. Hidden
+    // from search; the /sponsors landing remains indexed.
+    robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
   };
 }
 

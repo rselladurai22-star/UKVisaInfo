@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const { soc } = await params;
   const code = parseSocSlug(soc);
   const occ = code ? SOC_OCCUPATIONS.find((o) => o.code === code) : null;
-  if (!occ) return { title: 'Occupation not found' };
+  if (!occ) return { title: 'Occupation not found', robots: { index: false, follow: true } };
 
   const title = `${occ.title} — UK Skilled Worker Salary 2026 (SOC ${occ.code})`;
   const description =
@@ -34,6 +34,15 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title, description,
     alternates: { canonical: `/salary/${soc}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/salary/${soc}`, type: 'article' },
+    // 271 SOC-code pages share an identical template with data swaps.
+    // We keep them browsable (referenced from the salary checker tool) but
+    // exclude them from search until each is rewritten with route-specific
+    // editorial. The top-level /salary-compare and /tools/salary-checker
+    // pages remain indexed and carry the editorial value.
+    robots: {
+      index: false, follow: true,
+      googleBot: { index: false, follow: true },
+    },
   };
 }
 
