@@ -147,7 +147,8 @@ export const APP_TILES: AppTile[] = [
   { href: '/ir35-calculator',              label: 'IR35 Calculator',      hint: 'Inside vs outside — take-home diff',    icon: Shield,       accent: VIOLET, category: 'business',   status: 'new',  live: true },
   { href: '/contractor-day-rate',          label: 'Contractor Day Rate',  hint: 'Day rate → Ltd vs PAYE comparison',     icon: Briefcase,    accent: BLUE,   category: 'business',   status: 'new',  live: true },
 
-  // ── IMMIGRATION (4 live) ────────────────────────────────────────
+  // ── IMMIGRATION (5 live) ────────────────────────────────────────
+  { href: '/tools/cost-calculator',        label: 'Visa Cost Calculator', hint: 'Fees + IHS + dependants · 8 currencies', icon: Calculator,   accent: VIOLET, category: 'immigration', status: 'new', live: true, featured: true },
   { href: '/ihs-calculator',               label: 'IHS Surcharge',        hint: '£1,035/yr · students £776/yr',          icon: HeartPulse,   accent: SKY,    category: 'immigration', status: 'new', live: true },
   { href: '/skilled-worker-points-check',  label: 'Skilled Worker Points',hint: '70-point check · shortage/new entrant', icon: GraduationCap,accent: GOLD,   category: 'immigration', status: 'new', live: true },
   { href: '/postcode',                     label: 'Postcode Lookup',      hint: 'Council, MP, NHS, police, ward',        icon: MapPin,       accent: VIOLET, category: 'immigration', status: 'live', live: true, kbd: 'L' },
