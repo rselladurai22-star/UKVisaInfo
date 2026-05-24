@@ -9,6 +9,7 @@
  * for SEO. The dynamic numerics + apply URL update from the URL params.
  */
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft, ExternalLink, ShieldCheck, Sparkles, AlertTriangle,
@@ -176,15 +177,20 @@ export default function VisaPageV2({
         </div>
       </div>
 
-      {/* ═══ SCENARIO BAR (sticky, frosted) ═════════════ */}
-      <ScenarioBar
-        variants={variants}
-        allowDependants={allowDependants}
-        hasInside={hasInside}
-        hasOutside={hasOutside}
-        defaultVariant={defaultVariant}
-        defaultFrom={defaultFrom}
-      />
+      {/* ═══ SCENARIO BAR (sticky, frosted) ═════════════
+          Wrapped in Suspense because the client island reads search
+          params via useSearchParams, which would otherwise opt the
+          whole page out of static prerendering. */}
+      <Suspense fallback={<div style={{ height: 56 }} aria-hidden />}>
+        <ScenarioBar
+          variants={variants}
+          allowDependants={allowDependants}
+          hasInside={hasInside}
+          hasOutside={hasOutside}
+          defaultVariant={defaultVariant}
+          defaultFrom={defaultFrom}
+        />
+      </Suspense>
 
       {/* ═══ CONTENT ════════════════════════════════════ */}
       <div style={{ background: CREAM }}>
@@ -193,7 +199,9 @@ export default function VisaPageV2({
           {/* SUB-ROUTE SPOTLIGHT */}
           {variants.length > 1 && (
             <SectionShell eyebrow={`${pad(sec.next())} — Sub-route`} title="Your chosen route">
-              <VariantSpotlight variants={variants} defaultVariant={defaultVariant} />
+              <Suspense fallback={null}>
+                <VariantSpotlight variants={variants} defaultVariant={defaultVariant} />
+              </Suspense>
             </SectionShell>
           )}
 
@@ -220,19 +228,21 @@ export default function VisaPageV2({
             eyebrow={`${pad(sec.next())} — Cost for your scenario`}
             title="What it will cost"
             sub="Live total — changes when you switch family or sub-route in the bar above.">
-            <CostPanel
-              slug={slug}
-              variants={variants}
-              defaultYears={defaultYears}
-              defaultVariant={defaultVariant}
-              allowDependants={allowDependants}
-              baseFeeOutside3y={baseFeeOutside3y}
-              baseFeeOutside5y={baseFeeOutside5y}
-              baseFeeInside3y={baseFeeInside3y}
-              baseFeeInside5y={baseFeeInside5y}
-              ihsAdult={ihsAdult}
-              ihsChild={ihsChild}
-            />
+            <Suspense fallback={<div style={{ minHeight: 200 }} aria-hidden />}>
+              <CostPanel
+                slug={slug}
+                variants={variants}
+                defaultYears={defaultYears}
+                defaultVariant={defaultVariant}
+                allowDependants={allowDependants}
+                baseFeeOutside3y={baseFeeOutside3y}
+                baseFeeOutside5y={baseFeeOutside5y}
+                baseFeeInside3y={baseFeeInside3y}
+                baseFeeInside5y={baseFeeInside5y}
+                ihsAdult={ihsAdult}
+                ihsChild={ihsChild}
+              />
+            </Suspense>
           </SectionShell>
 
           {/* PROCESSING */}
@@ -240,7 +250,9 @@ export default function VisaPageV2({
             eyebrow={`${pad(sec.next())} — Processing time`}
             title="When will you hear back?"
             sub="Three speed tiers from the Home Office.">
-            <ProcessingCard processing={visa.processing} defaultVariant={defaultVariant} />
+            <Suspense fallback={null}>
+              <ProcessingCard processing={visa.processing} defaultVariant={defaultVariant} />
+            </Suspense>
           </SectionShell>
 
           {/* DOCUMENTS */}
@@ -266,7 +278,9 @@ export default function VisaPageV2({
             eyebrow={`${pad(sec.next())} — Apply`}
             title="Direct to the form"
             sub="We deep-link to the first page of the actual gov.uk application — no agents, no middlemen.">
-            <ApplyCta slug={slug} visaTitle={visa.title} fallbackUrl={visa.applyUrl} defaultVariant={defaultVariant} />
+            <Suspense fallback={null}>
+              <ApplyCta slug={slug} visaTitle={visa.title} fallbackUrl={visa.applyUrl} defaultVariant={defaultVariant} />
+            </Suspense>
           </SectionShell>
 
           {/* SWITCH PATHS */}
