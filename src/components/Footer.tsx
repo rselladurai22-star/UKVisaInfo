@@ -46,9 +46,11 @@ const EXPLORE = [
 
 const LEGAL = [
   { href: '/about',             label: 'About & editor' },
+  { href: '/contact',           label: 'Contact us' },
   { href: '/editorial-policy',  label: 'Editorial policy' },
   { href: '/sources',           label: 'Sources cited' },
   { href: '/privacy',           label: 'Privacy Policy' },
+  { href: '/privacy#adsense',   label: 'Advertising disclosure' },
   { href: '/terms',             label: 'Terms of Use' },
   { href: '/terms#disclaimer',  label: 'Legal disclaimer' },
 ];

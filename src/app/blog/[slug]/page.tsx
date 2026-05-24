@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, ArrowRight } from 'lucide-react';
 import { BLOG_POSTS, getPost } from '../../../data/blog';
+import { primaryEditorSchema, PRIMARY_EDITOR } from '../../../data/editorialTeam';
+import EditorByline from '../../../components/EditorByline';
 import AffiliateCallouts from '../../../components/AffiliateCallouts';
 import RelatedPosts from '../../../components/RelatedPosts';
 import ReadingProgress from '../../../components/blog/ReadingProgress';
@@ -45,7 +47,10 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
-    authors: [{ name: 'UKDesk', url: 'https://ukvisainfo.co.uk' }],
+    authors: [
+      { name: 'R. Selladurai', url: 'https://ukvisainfo.co.uk/about#r-selladurai' },
+      { name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
+    ],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -53,7 +58,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: ['https://ukvisainfo.co.uk'],
+      authors: ['https://ukvisainfo.co.uk/about#r-selladurai'],
       tags: post.tags,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
     },
@@ -90,12 +95,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
     datePublished: post.date,
     dateModified: post.updated,
     image: `https://ukvisainfo.co.uk/blog/${slug}/opengraph-image`,
-    author: {
-      '@type': 'Organization',
-      name: 'UKDesk',
-      url: 'https://ukvisainfo.co.uk',
-      logo: { '@type': 'ImageObject', url: 'https://ukvisainfo.co.uk/icon.svg' },
-    },
+    author: primaryEditorSchema('https://ukvisainfo.co.uk'),
     publisher: {
       '@type': 'Organization',
       name: 'UKDesk',
@@ -214,11 +214,22 @@ export default async function BlogPostPage({ params }: RouteParams) {
             </span>
             <span className="hidden md:flex items-center gap-1.5 ml-auto">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" />
-              By <span className="text-white/65">UKDesk Editorial</span>
+              By <Link href={PRIMARY_EDITOR.profileUrl} className="text-white/85 hover:underline underline-offset-2">{PRIMARY_EDITOR.name}</Link>
             </span>
           </div>
         </div>
       </header>
+
+      {/* Named-editor byline immediately below the dark hero — the
+          first signal a reader sees inside the article body. */}
+      <div className="bg-white border-b border-[rgba(14,20,36,0.06)]">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 pt-6 pb-4">
+          <EditorByline
+            verified={new Date(post.updated).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
+            prefix="Written & verified by"
+          />
+        </div>
+      </div>
 
       {/* ═══════════════════════
           3-COLUMN ARTICLE LAYOUT

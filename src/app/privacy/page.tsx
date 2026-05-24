@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <div className="max-w-3xl mx-auto px-6 py-12 text-on-surface">
       <h1 className="text-4xl font-bold text-primary mb-2">Privacy Policy</h1>
       <p className="text-sm text-on-surface-variant mb-10">
-        Last updated: 29 April 2026
+        Last updated: 24 May 2026 (added Google AdSense personalised-advertising disclosure)
       </p>
 
       <section className="space-y-4 leading-relaxed">
@@ -113,8 +113,80 @@ export default function PrivacyPage() {
           banner.
         </p>
 
+        <h2 id="adsense" className="text-2xl font-bold text-primary mt-8 mb-3 scroll-mt-32">
+          6. Google AdSense &amp; personalised advertising
+        </h2>
+        <p>
+          UKDesk displays advertisements served by{' '}
+          <strong>Google AdSense</strong> (publisher ID{' '}
+          <code className="text-sm bg-gray-100 px-1.5 py-0.5 rounded">ca-pub-9854912596289421</code>).
+          As an approved Google publisher, we&apos;re required to disclose how
+          AdSense uses cookies and how you can control them.
+        </p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>
+            <strong>Third-party cookies.</strong> Google and its advertising
+            partners use cookies and similar technologies to show personalised
+            and non-personalised ads to you on this site and across the
+            internet.
+          </li>
+          <li>
+            <strong>Personalised ads.</strong> Personalised advertising is
+            shown <em>only</em> with your explicit consent. Until you opt in
+            via the cookie banner, ads are non-personalised (contextual to the
+            page content, not based on your profile).
+          </li>
+          <li>
+            <strong>The consent banner.</strong> We use{' '}
+            <a className="text-secondary underline"
+               href="https://support.google.com/fundingchoices/"
+               target="_blank" rel="noopener noreferrer">
+              Google Funding Choices
+            </a>{' '}
+            (a Google-certified Consent Management Platform) to record your
+            choice. The banner gives you three options: consent to personalised
+            ads, decline (non-personalised ads only), or read more first.
+          </li>
+          <li>
+            <strong>Withdrawing consent.</strong> Clear cookies for this domain
+            in your browser to reset the banner and choose again. You can also
+            opt out of personalised advertising across the web at{' '}
+            <a className="text-secondary underline"
+               href="https://www.google.com/settings/ads"
+               target="_blank" rel="noopener noreferrer">
+              Google Ads Settings
+            </a>{' '}
+            or at{' '}
+            <a className="text-secondary underline"
+               href="https://www.youronlinechoices.eu"
+               target="_blank" rel="noopener noreferrer">
+              youronlinechoices.eu
+            </a>.
+          </li>
+          <li>
+            <strong>How Google uses data.</strong> Google&apos;s use of cookies
+            and the categories of data processed are documented in the{' '}
+            <a className="text-secondary underline"
+               href="https://policies.google.com/technologies/ads"
+               target="_blank" rel="noopener noreferrer">
+              Google advertising technologies policy
+            </a>. We do not have access to or control over Google&apos;s
+            advertising cookies beyond the consent signal collected by the
+            banner.
+          </li>
+        </ul>
+        <p>
+          We do <strong>not</strong> sell personal data, we do not run
+          retargeting based on form input, and we do not allow advertisers to
+          pay for editorial placement. See the{' '}
+          <a className="text-secondary underline" href="/editorial-policy">
+            editorial policy
+          </a>{' '}
+          for our independence commitments.
+        </p>
+
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          6. Third-party services
+          7. Other third-party services
         </h2>
         <p>
           We share limited usage data with the following processors:
@@ -139,7 +211,7 @@ export default function PrivacyPage() {
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          7. Your rights
+          8. Your rights
         </h2>
         <p>Under UK GDPR you have the right to:</p>
         <ul className="list-disc pl-6 space-y-2">
@@ -166,7 +238,7 @@ export default function PrivacyPage() {
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          8. Children
+          9. Children
         </h2>
         <p>
           This site is not directed at children under 13. We do not knowingly
@@ -174,7 +246,7 @@ export default function PrivacyPage() {
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          9. Changes to this policy
+          10. Changes to this policy
         </h2>
         <p>
           We may update this Privacy Policy from time to time. The &quot;Last
@@ -183,7 +255,7 @@ export default function PrivacyPage() {
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
-          10. Contact
+          11. Contact
         </h2>
         <p>
           Questions about this Privacy Policy can be sent to{' '}
