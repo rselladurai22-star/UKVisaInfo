@@ -122,11 +122,24 @@ const FX: Record<Currency, { rate: number; symbol: string; flag: string }> = {
   CAD: { rate: 1.73, symbol: 'C$', flag: '🇨🇦' },
 };
 
+/* ── Quartz tokens (shared with visa pages) ── */
+const C = {
+  ink:'#0A0F1F', ink2:'#1A1F36', ink3:'#3C4257',
+  mid:'#697386', mid2:'#8792A2', faint:'#A3ACB9',
+  bg:'#FFFFFF', bg2:'#FAFBFC', bg3:'#F4F6F8',
+  border:'#E3E8EE', hair:'#EDF0F4',
+  accent:'#635BFF', accentDk:'#4F47CC', accentSoft:'#EFEEFF',
+  ok:'#08855D', okSoft:'#E6F7EF',
+  warn:'#BF6A02', warnSoft:'#FCEDD3',
+  teal:'#0B7285', tealSoft:'#E0F2F4',
+  gold:'#8B6914',
+};
+
 const CATEGORIES = [
-  { id: 'work',       label: 'Work',       icon: Briefcase,     color: '#00C4B4' },
-  { id: 'study',      label: 'Study',      icon: GraduationCap, color: '#0A2540' },
-  { id: 'family',     label: 'Family',     icon: Heart,         color: '#C9A14A' },
-  { id: 'settlement', label: 'Settlement', icon: Home,          color: '#007F76' },
+  { id: 'work',       label: 'Work',       icon: Briefcase,     color: C.accent },
+  { id: 'study',      label: 'Study',      icon: GraduationCap, color: C.teal },
+  { id: 'family',     label: 'Family',     icon: Heart,         color: '#CD3D64' },
+  { id: 'settlement', label: 'Settlement', icon: Home,          color: C.ok },
 ] as const;
 
 /* ─────────────────────────────── CALCULATOR ──────────────────────────────── */
@@ -177,36 +190,35 @@ export default function CostCalculatorAdvanced() {
   const visasInCategory = VISAS.filter((v) => v.category === category);
 
   return (
-    <div className="bg-[#F8F9FC] min-h-screen">
+    <div style={{ background: C.bg2, minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, sans-serif', WebkitFontSmoothing: 'antialiased' }}>
 
       {/* ── Hero ── */}
-      <section className="pt-[88px] md:pt-[104px] pb-10 bg-white"
-               style={{ borderBottom: '1px solid rgba(10,37,64,0.07)' }}>
+      <section style={{ paddingTop: 'clamp(80px,10vw,104px)', paddingBottom: 32, background: C.bg, borderBottom: `1px solid ${C.border}` }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                 style={{ background: 'rgba(0,196,180,0.10)' }}>
-              <Calculator className="w-4 h-4" style={{ color: '#00C4B4' }} />
+                 style={{ background: C.accentSoft }}>
+              <Calculator className="w-4 h-4" style={{ color: C.accentDk }} />
             </div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: '#5A6478' }}>
+            <span className="text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: C.mid2 }}>
               Tool — Visa Cost Calculator
             </span>
           </div>
-          <h1 className="font-display text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-[#0A2540] tracking-tight leading-tight">
+          <h1 style={{ fontSize: 'clamp(28px,3.8vw,44px)', fontWeight: 600, color: C.ink, letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 12 }}>
             UK Visa Cost Calculator
           </h1>
-          <p className="mt-3 max-w-2xl text-[#5A6478] text-base md:text-[17px] leading-relaxed">
+          <p style={{ maxWidth: 560, color: C.mid, fontSize: 15, lineHeight: 1.65, marginBottom: 16 }}>
             Add up Home Office fees, Immigration Health Surcharge, dependants, and priority services —
             then convert to your local currency.
           </p>
-          <div className="mt-4 flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             {[
               { icon: ShieldCheck, label: 'Official gov.uk fees' },
               { icon: RefreshCw,   label: 'Updated Apr 2026' },
               { icon: Globe,       label: '8 currencies supported' },
             ].map(({ icon: I, label }) => (
-              <div key={label} className="flex items-center gap-1.5 text-[12.5px] font-medium" style={{ color: '#5A6478' }}>
-                <I className="w-3.5 h-3.5" style={{ color: '#00C4B4' }} />
+              <div key={label} className="flex items-center gap-1.5 text-[12.5px] font-medium" style={{ color: C.mid }}>
+                <I className="w-3.5 h-3.5" style={{ color: C.accent }} />
                 {label}
               </div>
             ))}
@@ -215,7 +227,7 @@ export default function CostCalculatorAdvanced() {
       </section>
 
       {/* ── Main layout ── */}
-      <section className="py-8 md:py-12">
+      <section style={{ padding: 'clamp(24px,4vw,48px) 0' }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-6 items-start">
 
@@ -235,9 +247,9 @@ export default function CostCalculatorAdvanced() {
                         onClick={() => setCategory(cat.id)}
                         className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-semibold whitespace-nowrap transition-all flex-shrink-0"
                         style={{
-                          background: isActive ? cat.color : 'rgba(10,37,64,0.04)',
-                          color: isActive ? '#fff' : '#374151',
-                          boxShadow: isActive ? `0 2px 8px ${cat.color}30` : 'none',
+                          background: isActive ? cat.color : C.bg3,
+                          color: isActive ? '#fff' : C.ink3,
+                          border: `1px solid ${isActive ? cat.color : C.border}`,
                         }}
                       >
                         <Icon className="w-3.5 h-3.5" />
@@ -267,11 +279,11 @@ export default function CostCalculatorAdvanced() {
                         }}
                       >
                         <div className="text-[13.5px] font-bold leading-tight"
-                             style={{ color: isSelected ? '#fff' : '#0A2540' }}>
+                             style={{ color: isSelected ? '#fff' : C.ink }}>
                           {v.label}
                         </div>
                         <div className="mt-1 text-[11.5px]"
-                             style={{ color: isSelected ? 'rgba(255,255,255,0.55)' : '#9CA3AF' }}>
+                             style={{ color: isSelected ? 'rgba(255,255,255,0.5)' : C.mid2 }}>
                           from £{v.baseFee.out3yr.toLocaleString()}
                         </div>
                         {isSelected && (
@@ -288,7 +300,7 @@ export default function CostCalculatorAdvanced() {
                 {/* If selected visa is in a different category, show it */}
                 {!visasInCategory.some((v) => v.id === visaId) && (
                   <div className="mt-3 flex items-start gap-2 px-3 py-2.5 rounded-xl text-[12px]"
-                       style={{ background: 'rgba(0,196,180,0.07)', color: '#007F76' }}>
+                       style={{ background: C.okSoft, color: C.ok }}>
                     <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                     <span><strong>{visa.label}</strong> is selected (from another category)</span>
                   </div>
@@ -319,10 +331,10 @@ export default function CostCalculatorAdvanced() {
                           }}
                         >
                           <div className="flex items-center gap-2 mb-2">
-                            <Icon className="w-4 h-4" style={{ color: isActive ? '#00C4B4' : '#9CA3AF' }} />
+                            <Icon className="w-4 h-4" style={{ color: isActive ? C.accent : C.mid2 }} />
                             <span className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0"
-                                  style={{ borderColor: isActive ? '#00C4B4' : '#D1D5DB' }}>
-                              {isActive && <span className="w-2 h-2 rounded-full" style={{ background: '#00C4B4' }} />}
+                                  style={{ borderColor: isActive ? C.accent : C.border }}>
+                              {isActive && <span className="w-2 h-2 rounded-full" style={{ background: C.accent }} />}
                             </span>
                           </div>
                           <div className="text-[13.5px] font-bold" style={{ color: isActive ? '#0A2540' : '#374151' }}>
@@ -353,7 +365,7 @@ export default function CostCalculatorAdvanced() {
                       onChange={(e) => setYears(parseFloat(e.target.value))}
                       className="w-full h-2 appearance-none rounded-full cursor-pointer outline-none"
                       style={{
-                        background: `linear-gradient(to right, #00C4B4 0%, #00C4B4 ${((years - 0.5) / 9.5) * 100}%, #E5E7EB ${((years - 0.5) / 9.5) * 100}%, #E5E7EB 100%)`,
+                        background: `linear-gradient(to right, ${C.accent} 0%, ${C.accent} ${((years - 0.5) / 9.5) * 100}%, ${C.border} ${((years - 0.5) / 9.5) * 100}%, ${C.border} 100%)`,
                       }}
                     />
                     <div className="flex justify-between mt-2">
@@ -398,7 +410,7 @@ export default function CostCalculatorAdvanced() {
               ) : (
                 <StepCard step={3} title="Who's applying" desc="Dependants">
                   <div className="flex items-center gap-3 px-4 py-4 rounded-xl"
-                       style={{ background: 'rgba(10,37,64,0.03)', border: '1px solid rgba(10,37,64,0.07)' }}>
+                       style={{ background: C.bg2, border: `1px solid ${C.border}` }}>
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center"
                          style={{ background: '#F3F4F6' }}>
                       <Users className="w-5 h-5" style={{ color: '#9CA3AF' }} />
@@ -458,10 +470,10 @@ export default function CostCalculatorAdvanced() {
                       >
                         <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
                              style={{
-                               background: isActive ? 'rgba(0,196,180,0.15)' : 'rgba(10,37,64,0.06)',
+                               background: isActive ? C.accentSoft : C.bg3,
                              }}>
                           <Icon className="w-4 h-4"
-                                style={{ color: isActive ? '#00C4B4' : '#5A6478' }} />
+                                style={{ color: isActive ? C.accent : C.mid }} />
                         </div>
                         <div className="text-[13px] font-bold leading-tight"
                              style={{ color: isActive ? '#fff' : '#0A2540' }}>
@@ -531,7 +543,7 @@ export default function CostCalculatorAdvanced() {
                        style={{ color: '#C9A14A' }}>
                     Total estimated cost
                   </div>
-                  <div className="font-display text-[3rem] md:text-[3.5rem] font-bold tabular-nums leading-none text-white">
+                  <div style={{ fontSize: 'clamp(44px,5.5vw,56px)', fontWeight: 600, fontVariantNumeric: 'tabular-nums', lineHeight: 1, color: '#fff', letterSpacing: '-0.03em' }}>
                     {convert(result.total)}
                   </div>
                   {currency !== 'GBP' && (
@@ -624,8 +636,8 @@ export default function CostCalculatorAdvanced() {
 
               {/* Currency card */}
               <div className="mt-4 rounded-2xl p-4 flex gap-3"
-                   style={{ background: 'rgba(201,161,74,0.07)', border: '1px solid rgba(201,161,74,0.22)' }}>
-                <Globe className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#C9A14A' }} />
+                   style={{ background: C.bg2, border: `1px solid ${C.border}`, borderRadius: 12 }}>
+                <Globe className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
                 <div>
                   <p className="text-[12.5px] font-semibold" style={{ color: '#0A2540' }}>
                     Sending money to the UK?
@@ -647,7 +659,7 @@ export default function CostCalculatorAdvanced() {
                 <Link
                   href="/blog/uk-skilled-worker-visa-salary-threshold-2026"
                   className="flex items-center justify-center gap-1.5 py-3 rounded-xl text-[12.5px] font-semibold text-white transition-all"
-                  style={{ background: '#0A2540', boxShadow: '0 2px 8px rgba(10,37,64,0.18)' }}
+                  style={{ background: C.ink, boxShadow: '0 2px 8px rgba(10,15,31,0.14)' }}
                 >
                   Full cost guide <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -669,9 +681,9 @@ export default function CostCalculatorAdvanced() {
       </section>
 
       {/* Info section */}
-      <section className="py-12 md:py-16 bg-white" style={{ borderTop: '1px solid rgba(10,37,64,0.06)' }}>
+      <section style={{ padding: 'clamp(40px,5vw,64px) 0', background: C.bg, borderTop: `1px solid ${C.border}` }}>
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
-          <h2 className="font-display text-xl md:text-2xl font-bold text-[#0A2540] mb-6">
+          <h2 style={{ fontSize: 22, fontWeight: 600, color: C.ink, letterSpacing: '-0.02em', marginBottom: 24 }}>
             What these costs include
           </h2>
           <div className="grid sm:grid-cols-3 gap-4">
@@ -692,18 +704,18 @@ export default function CostCalculatorAdvanced() {
                 desc: 'Available for most routes. Priority (5 working days) or Super Priority (next working day).',
               },
             ].map(({ icon: Icon, color, title, desc }) => (
-              <div key={title} className="p-5 rounded-2xl" style={{ background: '#F8F9FC', border: '1px solid rgba(10,37,64,0.07)' }}>
+              <div key={title} className="p-5 rounded-2xl" style={{ background: C.bg2, border: `1px solid ${C.border}` }}>
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
                      style={{ background: `${color}12` }}>
-                  <Icon className="w-4.5 h-4.5" style={{ color }} />
+                  <Icon className="w-4.5 h-4.5" style={{ color: color }} />
                 </div>
-                <h3 className="text-[13.5px] font-bold mb-2" style={{ color: '#0A2540' }}>{title}</h3>
-                <p className="text-[12.5px] leading-relaxed" style={{ color: '#5A6478' }}>{desc}</p>
+                <h3 className="text-[13.5px] font-bold mb-2" style={{ color: C.ink }}>{title}</h3>
+                <p className="text-[12.5px] leading-relaxed" style={{ color: C.mid }}>{desc}</p>
               </div>
             ))}
           </div>
-          <div className="mt-6 px-4 py-4 rounded-xl text-[12.5px] leading-relaxed" style={{ background: '#F8F9FC', color: '#5A6478', border: '1px solid rgba(10,37,64,0.07)' }}>
-            <strong className="font-semibold" style={{ color: '#0A2540' }}>Not included in this estimate: </strong>
+          <div className="mt-6 px-4 py-4 rounded-xl text-[12.5px] leading-relaxed" style={{ background: C.bg2, color: C.mid, border: `1px solid ${C.border}`, borderRadius: 8 }}>
+            <strong className="font-semibold" style={{ color: C.ink }}>Not included in this estimate: </strong>
             biometrics (£0–£150), translations, English language test, TB test, ATAS clearance, criminal record certificates,
             travel costs. Sponsor fees (CoS, Skills Charge) are paid by your employer.
           </div>
@@ -714,15 +726,15 @@ export default function CostCalculatorAdvanced() {
         input[type='range']::-webkit-slider-thumb {
           -webkit-appearance: none; appearance: none;
           width: 20px; height: 20px; border-radius: 50%;
-          background: #0A2540; cursor: pointer;
+          background: #0A0F1F; cursor: pointer;
           border: 3px solid #fff;
-          box-shadow: 0 2px 8px rgba(10,37,64,0.25);
+          box-shadow: 0 2px 6px rgba(10,15,31,0.2);
         }
         input[type='range']::-moz-range-thumb {
           width: 20px; height: 20px; border-radius: 50%;
-          background: #0A2540; cursor: pointer;
+          background: #0A0F1F; cursor: pointer;
           border: 3px solid #fff;
-          box-shadow: 0 2px 8px rgba(10,37,64,0.25);
+          box-shadow: 0 2px 6px rgba(10,15,31,0.2);
         }
       `}</style>
     </div>
@@ -738,17 +750,17 @@ function StepCard({
 }) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden"
-         style={{ border: '1px solid rgba(10,37,64,0.08)', boxShadow: '0 2px 12px rgba(10,37,64,0.06)' }}>
+         style={{ border: `1px solid ${C.border}`, boxShadow: '0 1px 4px rgba(10,15,31,0.04)' }}>
       {/* Step header */}
       <div className="flex items-center gap-3 px-5 py-4"
-           style={{ borderBottom: '1px solid rgba(10,37,64,0.06)', background: 'rgba(10,37,64,0.015)' }}>
+           style={{ borderBottom: `1px solid ${C.border}`, background: C.bg2 }}>
         <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
              style={{ background: '#0A2540' }}>
           <span className="text-[11px] font-bold text-white tabular-nums">{String(step).padStart(2, '0')}</span>
         </div>
         <div>
-          <div className="text-[14px] font-bold" style={{ color: '#0A2540' }}>{title}</div>
-          <div className="text-[11.5px]" style={{ color: '#9CA3AF' }}>{desc}</div>
+          <div className="text-[14px] font-bold" style={{ color: C.ink }}>{title}</div>
+          <div className="text-[11.5px]" style={{ color: C.mid }}>{desc}</div>
         </div>
       </div>
       {/* Step body */}
@@ -770,14 +782,14 @@ function PersonCounter({
   const canInc = value < max;
   return (
     <div className="flex flex-col items-center gap-3 p-4 rounded-xl text-center"
-         style={{ background: 'rgba(10,37,64,0.03)', border: '1px solid rgba(10,37,64,0.07)' }}>
+         style={{ background: C.bg2, border: `1px solid ${C.border}` }}>
       <div className="w-10 h-10 rounded-xl flex items-center justify-center"
            style={{ background: `${accent}12` }}>
         <Icon className="w-5 h-5" style={{ color: accent }} />
       </div>
       <div>
-        <div className="text-[12.5px] font-semibold" style={{ color: '#0A2540' }}>{label}</div>
-        <div className="text-[11px]" style={{ color: '#9CA3AF' }}>{sublabel}</div>
+        <div className="text-[12.5px] font-semibold" style={{ color: C.ink }}>{label}</div>
+        <div className="text-[11px]" style={{ color: C.mid2 }}>{sublabel}</div>
       </div>
       {/* Counter */}
       <div className="flex items-center gap-3">
@@ -834,8 +846,8 @@ function ResultRow({
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-2.5 min-w-0">
         <span className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{ background: 'rgba(201,161,74,0.12)' }}>
-          <Icon className="w-3.5 h-3.5" style={{ color: '#C9A14A' }} />
+              style={{ background: 'rgba(255,255,255,0.08)' }}>
+          <Icon className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
         </span>
         <div className="min-w-0">
           <div className="text-[13px] font-medium" style={{ color: 'rgba(255,255,255,0.80)' }}>{label}</div>
