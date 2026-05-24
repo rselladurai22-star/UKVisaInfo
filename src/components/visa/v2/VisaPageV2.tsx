@@ -17,6 +17,7 @@ import {
 import type { VisaDetail } from '../../../data/visaDetails';
 import type { VisaVariant } from '../../../data/visaVariants';
 import { getRefusalsFor } from '../../../data/visaRefusals';
+import { getCommentaryFor } from '../../../data/visaCommentary';
 import { FROM_VISAS } from '../../../data/visaSwitching';
 import VisaStickyBar from '../VisaStickyBar';
 import VisaFaq from '../VisaFaq';
@@ -32,6 +33,7 @@ import ApplyCta from './ApplyCta';
 import EligibilityCard from './EligibilityCard';
 import DocumentsCard from './DocumentsCard';
 import RefusalsCard from './RefusalsCard';
+import EditorCommentary from './EditorCommentary';
 
 const INK     = '#0B0F19';
 const CREAM   = '#FAFAF7';
@@ -74,6 +76,7 @@ export default function VisaPageV2({
   ihsAdult, ihsChild, allowDependants,
 }: Props) {
   const refusals = getRefusalsFor(slug);
+  const commentary = getCommentaryFor(slug);
   const switchOptions = FROM_VISAS.find((f) => f.id === slug);
   const categoryLabel = CATEGORY_LABEL[visa.category] ?? 'UK visa';
 
@@ -86,6 +89,12 @@ export default function VisaPageV2({
   const yearsBadge  = variants[0]?.yearsToIlr
     ? `${variants[0].yearsToIlr} yrs to ILR`
     : visa.duration.split(/[;,·]/)[0].trim();
+
+  // Auto-numbered section counter — sections are conditional, so we
+  // assign IDs in the order they actually render. `pad` zero-pads.
+  let _n = 0;
+  const sec = { next: () => ++_n };
+  const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
   return (
     <>
@@ -183,14 +192,24 @@ export default function VisaPageV2({
 
           {/* SUB-ROUTE SPOTLIGHT */}
           {variants.length > 1 && (
-            <SectionShell eyebrow="01 — Sub-route" title="Your chosen route">
+            <SectionShell eyebrow={`${pad(sec.next())} — Sub-route`} title="Your chosen route">
               <VariantSpotlight variants={variants} defaultVariant={defaultVariant} />
+            </SectionShell>
+          )}
+
+          {/* EDITOR'S COMMENTARY — original analysis (key E-E-A-T signal) */}
+          {commentary && (
+            <SectionShell
+              eyebrow={`${pad(sec.next())} — Editor’s analysis`}
+              title="The honest read on this route"
+              sub="Original commentary from R. Selladurai — not paraphrased from gov.uk.">
+              <EditorCommentary commentary={commentary} />
             </SectionShell>
           )}
 
           {/* ELIGIBILITY */}
           <SectionShell
-            eyebrow={`${variants.length > 1 ? '02' : '01'} — Eligibility`}
+            eyebrow={`${pad(sec.next())} — Eligibility`}
             title="Are you eligible?"
             sub="Every line below must be true on the day you apply.">
             <EligibilityCard items={visa.eligibility} />
@@ -198,7 +217,7 @@ export default function VisaPageV2({
 
           {/* COST */}
           <SectionShell
-            eyebrow={`${variants.length > 1 ? '03' : '02'} — Cost for your scenario`}
+            eyebrow={`${pad(sec.next())} — Cost for your scenario`}
             title="What it will cost"
             sub="Live total — changes when you switch family or sub-route in the bar above.">
             <CostPanel
@@ -218,7 +237,7 @@ export default function VisaPageV2({
 
           {/* PROCESSING */}
           <SectionShell
-            eyebrow={`${variants.length > 1 ? '04' : '03'} — Processing time`}
+            eyebrow={`${pad(sec.next())} — Processing time`}
             title="When will you hear back?"
             sub="Three speed tiers from the Home Office.">
             <ProcessingCard processing={visa.processing} defaultVariant={defaultVariant} />
@@ -226,7 +245,7 @@ export default function VisaPageV2({
 
           {/* DOCUMENTS */}
           <SectionShell
-            eyebrow={`${variants.length > 1 ? '05' : '04'} — Documents`}
+            eyebrow={`${pad(sec.next())} — Documents`}
             title="What you will upload"
             sub="Tick each item as you collect it — your progress is saved in this view.">
             <DocumentsCard documents={visa.documents} />
@@ -235,7 +254,7 @@ export default function VisaPageV2({
           {/* REFUSALS */}
           {refusals.length > 0 && (
             <SectionShell
-              eyebrow={`${variants.length > 1 ? '06' : '05'} — Why people get refused`}
+              eyebrow={`${pad(sec.next())} — Why people get refused`}
               title="Top 5 refusal reasons"
               sub="Tap a row to see the cause + how to avoid it. Sources cite the gov.uk rule.">
               <RefusalsCard reasons={refusals} />
@@ -244,7 +263,7 @@ export default function VisaPageV2({
 
           {/* APPLY */}
           <SectionShell
-            eyebrow={`${variants.length > 1 ? '07' : '06'} — Apply`}
+            eyebrow={`${pad(sec.next())} — Apply`}
             title="Direct to the form"
             sub="We deep-link to the first page of the actual gov.uk application — no agents, no middlemen.">
             <ApplyCta slug={slug} visaTitle={visa.title} fallbackUrl={visa.applyUrl} defaultVariant={defaultVariant} />
@@ -253,7 +272,7 @@ export default function VisaPageV2({
           {/* SWITCH PATHS */}
           {switchOptions && switchOptions.switches.length > 0 && (
             <SectionShell
-              eyebrow={`${variants.length > 1 ? '08' : '07'} — After this visa`}
+              eyebrow={`${pad(sec.next())} — After this visa`}
               title="Where you can go next"
               sub="Common routes you can switch to from this visa.">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -289,7 +308,7 @@ export default function VisaPageV2({
           {/* PITFALLS */}
           {visa.notes && visa.notes.length > 0 && (
             <SectionShell
-              eyebrow={`${variants.length > 1 ? '09' : '08'} — Pitfalls`}
+              eyebrow={`${pad(sec.next())} — Pitfalls`}
               title="Things that catch people out">
               <div className="space-y-2.5">
                 {visa.notes.map((note, i) => (
@@ -311,7 +330,7 @@ export default function VisaPageV2({
           {/* FAQ */}
           {faqs.length > 0 && (
             <SectionShell
-              eyebrow="10 — FAQ"
+              eyebrow={`${pad(sec.next())} — FAQ`}
               title="Common questions">
               <div className="rounded-3xl p-5 md:p-7"
                    style={{ background: PAPER, border: `1px solid ${HAIR}`, boxShadow: '0 2px 16px -8px rgba(11,15,25,0.08)' }}>

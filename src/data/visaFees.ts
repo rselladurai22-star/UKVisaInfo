@@ -39,9 +39,24 @@ export const VISA_FEES: Record<string, VisaFee> = {
   'long-residence':    { baseFee: { out3yr: 3226, in3yr: 3226 },                            ihsAdult: 0,    ihsChild: 0,                       superPriorityFee: 1000, allowsDependants: false, defaultYears: 1 },
 };
 
-/** Slugs that should use the V2 (cheat-sheet) layout. */
+/** Slugs that should use the V2 (cheat-sheet) layout.
+ *  Full rollout — all 14 visa routes use the scenario-driven layout.
+ *  Removing a slug here falls back to the legacy template. */
 const V2_SLUGS = new Set<string>([
   'skilled-worker',
+  'student',
+  'visitor',
+  'family',
+  'health',
+  'talent',
+  'graduate',
+  'innovator-founder',
+  'ilr',
+  'citizenship',
+  'euss',
+  'bno',
+  'long-residence',
+  'ancestry',
 ]);
 
 export function hasV2Layout(slug: string): boolean {
