@@ -16,6 +16,11 @@ export default function MortgagePage() {
       title="How much could you borrow?"
       deck="See your maximum mortgage, the property price it unlocks, monthly repayment, and how a +3% rate rise would change the picture."
       verified="FCA stress-test rules"
+      methodology={{
+        summary: "Maximum borrowing uses the standard UK lender model: gross income × multiple (4.5× default, single or joint), minus existing monthly outgoings × 60. Affordability is then stress-tested at +3% above the product rate, per the FCA Mortgage Market Review framework. Loan-to-Value limits cap final lending against deposit size.",
+        govUrl: "https://www.fca.org.uk/firms/mortgages-home-finance/responsible-lending",
+        govLabel: "FCA · Mortgage Market Review",
+      }}
       related={[
         { href: '/stamp-duty-calculator', title: 'Stamp Duty calculator', desc: 'SDLT on your purchase — FTB relief & surcharges included.' },
         { href: '/take-home-pay',         title: 'Take-home pay',         desc: 'See your real net income before applying.' },

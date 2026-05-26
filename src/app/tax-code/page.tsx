@@ -16,6 +16,11 @@ export default function TaxCodePage() {
       title="Decode your UK tax code."
       deck="Paste any tax code — 1257L, K475, BR, D0, NT, S1257L W1 — and we'll explain it in plain English, with your effective Personal Allowance."
       verified="HMRC tax-code guidance"
+      methodology={{
+        summary: "We decode the structure HMRC publishes in its tax-code guidance (PAYE40000 employer manual): numeric part × 10 + 9 gives the tax-free Personal Allowance for the year; suffix letters (L, M, N, T, BR, D0, D1, NT, 0T, K) carry rate or allowance modifiers; S and C prefixes flag Scottish or Welsh rates; W1/M1/X mark non-cumulative emergency operation. All explanations track HMRC's current 2026/27 rate cards.",
+        govUrl: "https://www.gov.uk/tax-codes",
+        govLabel: "gov.uk · Tax codes",
+      }}
       related={[
         { href: '/take-home-pay',       title: 'Take-home pay',     desc: 'See net pay after PAYE, NI, student loan, pension.' },
         { href: '/vat-calculator',      title: 'VAT calculator',    desc: 'Add or remove 20%, 5%, 0% VAT.' },

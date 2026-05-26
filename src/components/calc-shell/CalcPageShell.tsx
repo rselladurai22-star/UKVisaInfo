@@ -184,12 +184,19 @@ export default function CalcPageShell({
               </div>
             </div>
 
-            {/* Methodology — "How we calculate this" with gov.uk source */}
-            {methodology && (
+            {/* Methodology — "How we calculate this" with gov.uk source.
+                Falls back to a generic block linking /sources + /editorial-policy
+                so every calc page carries the EEAT signal even before a
+                bespoke methodology is authored. */}
+            {methodology ? (
               <Methodology
                 summary={methodology.summary}
                 govUrl={methodology.govUrl}
                 govLabel={methodology.govLabel}
+              />
+            ) : (
+              <Methodology
+                summary="This calculator uses current UK government rules, HMRC rates and ONS data. Figures are verified against the primary sources we list site-wide; the editorial policy explains how we keep them current."
               />
             )}
 

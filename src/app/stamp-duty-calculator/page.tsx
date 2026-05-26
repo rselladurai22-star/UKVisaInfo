@@ -16,6 +16,11 @@ export default function StampDutyPage() {
       title="What you'll actually pay in stamp duty."
       deck="Enter your property price and instantly see the SDLT bill — with first-time buyer relief, second-home surcharge and non-resident surcharge handled automatically."
       verified="gov.uk verified"
+      methodology={{
+        summary: "We apply HMRC's SDLT band rates for England and Northern Ireland (effective April 2025): 0% up to £125,000, 2% to £250,000, 5% to £925,000, 10% to £1.5m and 12% above. First-time buyer relief, the 3% additional-property surcharge and the 2% non-UK resident surcharge are added on top of standard bands.",
+        govUrl: "https://www.gov.uk/stamp-duty-land-tax",
+        govLabel: "gov.uk · Stamp Duty Land Tax",
+      }}
       related={[
         { href: '/mortgage-affordability', title: 'Mortgage affordability', desc: 'See how much you can borrow + monthly repayment.' },
         { href: '/take-home-pay',          title: 'Take-home pay',          desc: 'Net salary after tax, NI, student loan, pension.' },

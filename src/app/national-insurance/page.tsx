@@ -16,6 +16,11 @@ export default function NiPage() {
       title="Every flavour of National Insurance, calculated."
       deck="Employee Class 1, employer Class 1 (15% from April 2025), and self-employed Class 4 (6% / 2%) — pick a side and see the NI bill, by band, with the right category letter applied."
       verified="gov.uk/national-insurance-rates-letters"
+      methodology={{
+        summary: "Class 1 employee NI: 8% between the £12,570 Primary Threshold and £50,270 Upper Earnings Limit, 2% above. Class 1 employer NI: 15% above the £5,000 Secondary Threshold (April 2025 rate, Autumn Budget 2024). Class 4 self-employed NI: 6% between £12,570 and £50,270, 2% above (Spring Budget 2024 cut from 8%). Class 2 abolished from 6 April 2024.",
+        govUrl: "https://www.gov.uk/national-insurance-rates-letters",
+        govLabel: "gov.uk · NI rates and letters",
+      }}
       related={[
         { href: '/take-home-pay', title: 'Take-home pay', desc: 'Full PAYE picture — tax, NI, student loan, pension.' },
         { href: '/dividend-tax',  title: 'Dividend tax', desc: 'Why dividends beat extra salary on NI.' },

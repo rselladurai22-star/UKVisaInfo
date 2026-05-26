@@ -19,8 +19,9 @@ import { BookOpen, ExternalLink } from 'lucide-react';
 interface Props {
   /** Plain-English description of the calculation method. */
   summary: string;
-  /** Canonical gov.uk URL the rules are taken from. */
-  govUrl: string;
+  /** Canonical gov.uk URL the rules are taken from. Optional for generic
+   *  fallback blocks; bespoke pages should always set this. */
+  govUrl?: string;
   /** Display label for the gov.uk link. Defaults to the URL. */
   govLabel?: string;
 }
@@ -101,24 +102,28 @@ export default function Methodology({ summary, govUrl, govLabel }: Props) {
             fontSize: 12,
           }}
         >
-          <a
-            href={govUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 5,
-              color: Q.accentDk,
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            {govLabel ?? govUrl.replace(/^https?:\/\//, '')}
-            <ExternalLink size={11} strokeWidth={2.4} />
-          </a>
+          {govUrl && (
+            <>
+              <a
+                href={govUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  color: Q.accentDk,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                }}
+              >
+                {govLabel ?? govUrl.replace(/^https?:\/\//, '')}
+                <ExternalLink size={11} strokeWidth={2.4} />
+              </a>
 
-          <span style={{ color: Q.mid2 }}>·</span>
+              <span style={{ color: Q.mid2 }}>·</span>
+            </>
+          )}
 
           <Link
             href="/sources"

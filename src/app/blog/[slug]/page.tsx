@@ -87,6 +87,21 @@ export default async function BlogPostPage({ params }: RouteParams) {
   );
   const isFresh = updatedDays <= 30;
 
+  // Plain-text projection of the markdown body for Article schema.
+  // Strips MD syntax → counts words → trims first 5000 chars for articleBody.
+  const plainBody = post.body
+    .replace(/```[\s\S]*?```/g, ' ')            // code blocks
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')      // images
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')    // links → text
+    .replace(/>\s*\[!\w+\][^\n]*/g, ' ')        // callout markers
+    .replace(/^#{1,6}\s+/gm, '')                // heading hashes
+    .replace(/[*_`~|]+/g, ' ')                  // emphasis + table pipes
+    .replace(/<[^>]+>/g, ' ')                   // raw html
+    .replace(/\s+/g, ' ')
+    .trim();
+  const wordCount = plainBody.split(/\s+/).filter(Boolean).length;
+  const articleBody = plainBody.slice(0, 5000);
+
   const blogJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -106,6 +121,10 @@ export default async function BlogPostPage({ params }: RouteParams) {
     keywords: post.tags.join(', '),
     inLanguage: 'en-GB',
     isPartOf: { '@type': 'Blog', name: 'UKDesk Guides', url: 'https://ukvisainfo.co.uk/blog' },
+    wordCount,
+    articleBody,
+    articleSection: post.tags[0] ?? 'Guide',
+    timeRequired: `PT${post.readMinutes}M`,
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',

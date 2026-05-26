@@ -16,6 +16,11 @@ export default function SelfAssessmentPage() {
       title="What will your Self Assessment bill actually be?"
       deck="Pull together all income sources — employment, self-employment, rental, dividends, savings — add Class 4 NI and Payments on Account, and you have a complete picture of your January bill before HMRC sends a notice."
       verified="gov.uk/self-assessment-tax-returns"
+      methodology={{
+        summary: "We aggregate all reportable income sources (employment, self-employment, rental, dividends, savings) against 2025/26 HMRC bands: Personal Allowance £12,570 with taper above £100,000; basic 20% to £50,270; higher 40% to £125,140; additional 45% above. Class 4 NI applies at 6% / 2% on self-employed profits. Payments on Account follow the standard 50% × 2 rule when last year's SA bill exceeded £1,000 and less than 80% was collected at source.",
+        govUrl: "https://www.gov.uk/self-assessment-tax-returns",
+        govLabel: "gov.uk · Self Assessment",
+      }}
       sidebar={{
         keyRates: [
           { label: 'Personal Allowance', value: '£12,570', sub: 'Tapers at £100k income' },
