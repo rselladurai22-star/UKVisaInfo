@@ -38,7 +38,7 @@ export default function ChildBenefitClient() {
   return (
     <CalcCard wide>
       <SummaryHero
-        label="Your result · 2025/26"
+        label="Your result · 2024/25 rates"
         value={headlineValue}
         sub={claim
           ? `${parseInt(children) || 0} child${(parseInt(children) || 0) === 1 ? '' : 'ren'} · £${r.weeklyBenefit.toFixed(2)}/week gross entitlement`

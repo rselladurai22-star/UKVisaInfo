@@ -27,7 +27,7 @@ export default function MarriageAllowanceClient() {
           ? `£${ANNUAL_SAVING} this year + £${r.backdateSaving} from ${r.yearsBackdated.length} backdated year${r.yearsBackdated.length === 1 ? '' : 's'}.`
           : r.ineligibleReason ?? ''}
         tone={r.eligible ? 'teal' : 'red'}
-        badge="2025/26"
+        badge="2026/27"
       />
 
       <div className="mt-6 grid lg:grid-cols-2 gap-5">
@@ -86,7 +86,7 @@ export default function MarriageAllowanceClient() {
                 highlightLast
                 rows={[
                   ...r.yearsBackdated.map((y) => ({ label: `Tax year ${y.year}`, value: `+${fmtGBP(y.saving)}`, positive: true })),
-                  { label: '2025/26 current year', value: `+${fmtGBP(r.annualSaving)}`, positive: true },
+                  { label: '2026/27 current year', value: `+${fmtGBP(r.annualSaving)}`, positive: true },
                   { label: 'Total claim', value: fmtGBP(r.totalSaving), bold: true },
                 ]}
               />
