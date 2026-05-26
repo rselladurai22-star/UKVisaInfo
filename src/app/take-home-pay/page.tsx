@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Calculator, ArrowRight, ShieldCheck } from 'lucide-react';
 import TakeHomeCalculator from '../../components/take-home/TakeHomeCalculator';
+import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
   title: 'UK Take-Home Pay Calculator 2026/27 — PAYE, NI, Student Loan, Pension',
@@ -68,6 +69,11 @@ export default function TakeHomePayPage() {
             HMRC-verified · Free · No signup
           </div>
         </header>
+
+        {/* ── BYLINE ── */}
+        <div className="max-w-3xl mx-auto mb-6">
+          <EditorByline verified="May 2026" />
+        </div>
 
         {/* ── CALCULATOR ── */}
         <TakeHomeCalculator initialSalary={50000} />

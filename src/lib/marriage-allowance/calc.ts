@@ -3,22 +3,25 @@
  *
  * Source: gov.uk/marriage-allowance
  *
- * 2025/26:
+ * 2026/27:
  * - Transfer amount:  £1,260 of Personal Allowance (10% of £12,570, rounded)
  * - Annual saving:    £1,260 × 20% = £252
  * - Backdating:       up to 4 prior tax years (all must qualify)
+ *
+ * Constants imported from ../constants/tax-2026-27.
  */
 
-export const TRANSFER_AMOUNT = 1260;
-export const BASIC_RATE      = 0.20;
-export const ANNUAL_SAVING   = TRANSFER_AMOUNT * BASIC_RATE;  // £252
+import {
+  PERSONAL_ALLOWANCE,
+  RUK_BASIC_TOP,
+  MA_TRANSFER_AMOUNT,
+  MA_ANNUAL_SAVING,
+  MA_BACKDATE_YEARS,
+} from '../constants/tax-2026-27';
 
-export const BACKDATE_YEARS = [
-  { year: '2021/22', saving: 252 },
-  { year: '2022/23', saving: 252 },
-  { year: '2023/24', saving: 252 },
-  { year: '2024/25', saving: 252 },
-] as const;
+export const TRANSFER_AMOUNT = MA_TRANSFER_AMOUNT;
+export const ANNUAL_SAVING   = MA_ANNUAL_SAVING;
+export const BACKDATE_YEARS  = MA_BACKDATE_YEARS;
 
 export interface CalcInput {
   lowerEarnerIncome: number;
@@ -35,8 +38,8 @@ export interface CalcResult {
   yearsBackdated: readonly { year: string; saving: number }[];
 }
 
-const PA        = 12570;
-const BASIC_TOP = 50270;
+const PA        = PERSONAL_ALLOWANCE;
+const BASIC_TOP = RUK_BASIC_TOP;
 
 export function calculateMarriageAllowance(input: CalcInput): CalcResult {
   const lower  = Math.max(0, input.lowerEarnerIncome);

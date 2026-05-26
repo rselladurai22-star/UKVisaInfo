@@ -11,8 +11,12 @@ import StickyMobileCta from '../../../../components/StickyMobileCta';
 
 interface RouteParams { params: Promise<{ sector: string }> }
 
+// ISR — noindexed filtered listings, rendered on-demand and cached.
+export const dynamicParams = true;
+export const revalidate = 86400;
+
 export function generateStaticParams() {
-  return SPONSOR_SECTORS.map((s) => ({ sector: slugify(s) }));
+  return [];
 }
 
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {

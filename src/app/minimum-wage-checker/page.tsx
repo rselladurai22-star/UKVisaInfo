@@ -18,7 +18,7 @@ export default function MinimumWagePage() {
       verified="gov.uk/national-minimum-wage-rates"
       related={[
         { href: '/take-home-pay', title: 'Take-home pay', desc: 'See net pay at minimum wage levels.' },
-        { href: '/notice-period-calculator', title: 'Notice period', desc: 'Notice pay cannot breach minimum wage either.' },
+        { href: '/holiday-pay', title: 'Holiday pay', desc: 'Holiday pay must also meet NMW for hours worked.' },
         { href: '/redundancy-pay', title: 'Redundancy pay', desc: 'Statutory redundancy uses a week\'s pay capped at £719.' },
       ]}
       educational={[

@@ -5,6 +5,9 @@
  */
 import Link from 'next/link';
 import { ShieldCheck, ExternalLink, ArrowUpRight, CalendarDays, BarChart3, Sparkles, Layers } from 'lucide-react';
+import FaqJsonLd, { type FaqItem } from './FaqJsonLd';
+import EditorByline from '../EditorByline';
+import Methodology from './Methodology';
 
 export interface SidebarRate { label: string; value: string; sub?: string; accent?: string }
 export interface SidebarDate { date: string; desc: string; urgent?: boolean }
@@ -14,14 +17,30 @@ export interface SidebarData {
   govLink?: string; govLabel?: string;
 }
 
+export interface MethodologyData {
+  summary: string;
+  govUrl: string;
+  govLabel?: string;
+}
+
 interface Props {
   eyebrow: string; title: string; deck: string;
   verified?: string; url?: string;
   sidebar?: SidebarData;
   related?: { href: string; title: string; desc: string }[];
   educational?: { title: string; body: string }[];
+  /** FAQ entries — emits FAQPage JSON-LD for rich-result eligibility. */
+  faqs?: FaqItem[];
+  /** Last-verified date for EditorByline (e.g. "May 2026"). Defaults to current month. */
+  editorVerified?: string;
+  /** Hide the auto-rendered byline (rare — only for non-YMYL pages). */
+  hideByline?: boolean;
+  /** Methodology block — "How we calculate this" with gov.uk source link. */
+  methodology?: MethodologyData;
   children: React.ReactNode;
 }
+
+const DEFAULT_VERIFIED = 'May 2026';
 
 /* ─── design tokens — Stripe-inspired Quartz palette ────── */
 const Q = {
@@ -50,7 +69,9 @@ const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
 
 export default function CalcPageShell({
   eyebrow, title, deck, verified = 'gov.uk verified',
-  url, sidebar, related, educational, children,
+  url, sidebar, related, educational, faqs,
+  editorVerified = DEFAULT_VERIFIED, hideByline = false, methodology,
+  children,
 }: Props) {
   const jsonLd = url ? {
     '@context': 'https://schema.org', '@type': 'WebApplication',
@@ -70,6 +91,7 @@ export default function CalcPageShell({
       MozOsxFontSmoothing: 'grayscale',
     }}>
       {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
+      {faqs && faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <header style={{
@@ -142,6 +164,13 @@ export default function CalcPageShell({
 
           {/* ── Main column ── */}
           <div style={{ flex: 1, minWidth: 0 }}>
+            {/* Author byline — E-E-A-T signal above every YMYL calc */}
+            {!hideByline && (
+              <div style={{ marginBottom: 16 }}>
+                <EditorByline verified={editorVerified} />
+              </div>
+            )}
+
             {/* Calculator surface */}
             <div style={{
               background: Q.surface,
@@ -154,6 +183,15 @@ export default function CalcPageShell({
                 {children}
               </div>
             </div>
+
+            {/* Methodology — "How we calculate this" with gov.uk source */}
+            {methodology && (
+              <Methodology
+                summary={methodology.summary}
+                govUrl={methodology.govUrl}
+                govLabel={methodology.govLabel}
+              />
+            )}
 
             {/* Educational — refined accordion */}
             {educational && educational.length > 0 && (

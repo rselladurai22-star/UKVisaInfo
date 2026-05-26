@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { NEWS_ITEMS, getNewsItem } from '../../../data/news';
 import EmailCapture from '../../../components/EmailCapture';
+import EditorByline from '../../../components/EditorByline';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
@@ -66,6 +67,9 @@ export default async function NewsItemPage({ params }: RouteParams) {
 
       <div className="bg-white">
         <article className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-14">
+          <div className="mb-8">
+            <EditorByline verified={n.date} />
+          </div>
           <div className="prose-content">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}

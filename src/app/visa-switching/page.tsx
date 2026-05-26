@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import VisaSwitchingClient from '../../components/VisaSwitchingClient';
+import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
   title: 'UK Visa Switching Guide 2026 — Switch Inside UK Without Leaving',
@@ -15,5 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <VisaSwitchingClient />;
+  return (
+    <>
+      <VisaSwitchingClient />
+      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 py-10">
+        <EditorByline verified="May 2026" prefix="Edited & verified by" />
+      </div>
+    </>
+  );
 }

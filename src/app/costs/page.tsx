@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CostCalculator from '../../components/CostCalculator';
+import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
   title: 'UK Visa Cost Calculator 2026 — Fees, IHS & Total',
@@ -15,5 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CostCalculator />;
+  return (
+    <>
+      <CostCalculator />
+      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 py-10">
+        <EditorByline verified="May 2026" prefix="Edited & verified by" />
+      </div>
+    </>
+  );
 }

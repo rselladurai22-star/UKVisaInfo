@@ -15,8 +15,12 @@ function uniqueCities() {
   return Array.from(new Set(SPONSORS.map((s) => s.city).filter(Boolean)));
 }
 
+// ISR — noindexed filtered listings, rendered on-demand and cached.
+export const dynamicParams = true;
+export const revalidate = 86400;
+
 export function generateStaticParams() {
-  return uniqueCities().map((c) => ({ city: slugify(c) }));
+  return [];
 }
 
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {

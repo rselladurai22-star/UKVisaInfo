@@ -119,9 +119,7 @@ export const APP_TILES: AppTile[] = [
   { href: '/sick-pay',                     label: 'Sick Pay (SSP)',       hint: '£118.75/wk · 28-week max',              icon: HeartPulse,   accent: SKY,    category: 'employment', status: 'live', live: true },
   { href: '/student-loan-repayment',       label: 'Student Loan',         hint: 'Plan 1/2/4/5 + Postgraduate',           icon: GraduationCap,accent: VIOLET, category: 'employment', status: 'live', live: true },
   { href: '/payslip-decoder',              label: 'Payslip Decoder',      hint: 'Tax codes · NI letters · pensions',     icon: ReceiptText,  accent: AMBER,  category: 'employment', status: 'live', live: true },
-  { href: '/notice-period-calculator',     label: 'Notice Period',        hint: 'Statutory 1wk/yr · PILON taxable',      icon: Clock,        accent: ROSE,   category: 'employment', status: 'new',  live: true },
   { href: '/minimum-wage-checker',         label: 'Minimum Wage',         hint: 'NLW £12.21 · Apr 2025 rates',           icon: Scale,        accent: EMERALD,category: 'employment', status: 'new',  live: true },
-  { href: '/mileage-expense-calculator',   label: 'Mileage Expenses',     hint: 'AMAP 45p/25p car · 24p motorcycle',     icon: MapPin,       accent: EMERALD,category: 'employment', status: 'new',  live: true },
   { href: '/salary-sacrifice-calculator',  label: 'Salary Sacrifice',     hint: 'IT + NI saving vs relief at source',    icon: PiggyBank,    accent: TEAL,   category: 'employment', status: 'new',  live: true },
 
   // ── PROPERTY & MORTGAGE (9 live) ───────────────────────────────

@@ -1,10 +1,8 @@
 /**
  * UK take-home pay calculator — tax year 2026/27.
  *
- * All thresholds and rates verified against HMRC published guidance.
- * Income Tax rates: gov.uk/income-tax-rates
- * NI rates:          gov.uk/national-insurance-rates-letters
- * Student loans:     gov.uk/repaying-your-student-loan/what-you-pay
+ * Thresholds and rates imported from src/lib/constants/tax-2026-27.ts
+ * (single source of truth — updated annually in April).
  *
  * Note: Personal allowance tapers £1 for every £2 over £100k, fully
  * withdrawn by £125,140 — creating the "60% effective tax" trap.
@@ -12,7 +10,19 @@
  * input flag).
  */
 
-export type StudentLoanPlan = 'none' | 'plan1' | 'plan2' | 'plan4' | 'plan5' | 'postgrad';
+import {
+  PERSONAL_ALLOWANCE, PA_TAPER_START, PA_TAPER_END,
+  RUK_BASIC_TOP, RUK_HIGHER_TOP,
+  RUK_BASIC_RATE, RUK_HIGHER_RATE, RUK_ADDITIONAL_RATE,
+  SCO_STARTER_TOP, SCO_BASIC_TOP, SCO_INTERMEDIATE_TOP, SCO_HIGHER_TOP, SCO_ADVANCED_TOP,
+  SCO_STARTER_RATE, SCO_BASIC_RATE, SCO_INTERMEDIATE_RATE,
+  SCO_HIGHER_RATE, SCO_ADVANCED_RATE, SCO_TOP_RATE,
+  NI_PRIMARY_THRESHOLD, NI_UPPER_EARNINGS_LIMIT, NI_MAIN_RATE, NI_ADDITIONAL_RATE,
+  STUDENT_LOAN_PLANS,
+  type StudentLoanPlan,
+} from '../constants/tax-2026-27';
+
+export type { StudentLoanPlan };
 
 export interface CalcInput {
   /** Gross annual salary, GBP */
@@ -59,44 +69,8 @@ export interface CalcResult {
   effectiveRate: number;
 }
 
-const PERSONAL_ALLOWANCE = 12570;
-const PA_TAPER_START = 100000;
-const PA_TAPER_END = 125140;
-
-/* ── Income tax bands (rest of UK) ────────────────────────────── */
-const RUK_BASIC_TOP = 50270;
-const RUK_HIGHER_TOP = 125140;
-const RUK_BASIC_RATE = 0.20;
-const RUK_HIGHER_RATE = 0.40;
-const RUK_ADDITIONAL_RATE = 0.45;
-
-/* ── Income tax bands (Scotland) ─────────────────────────────── */
-const SCO_STARTER_TOP = 14876;       // 19%
-const SCO_BASIC_TOP = 26561;         // 20%
-const SCO_INTERMEDIATE_TOP = 43662;  // 21%
-const SCO_HIGHER_TOP = 75000;        // 42%
-const SCO_ADVANCED_TOP = 125140;     // 45%
-const SCO_STARTER_RATE = 0.19;
-const SCO_BASIC_RATE = 0.20;
-const SCO_INTERMEDIATE_RATE = 0.21;
-const SCO_HIGHER_RATE = 0.42;
-const SCO_ADVANCED_RATE = 0.45;
-const SCO_TOP_RATE = 0.48;
-
-/* ── NI Class 1 (employee) ───────────────────────────────────── */
-const NI_PRIMARY_THRESHOLD = 12570;  // aligned with PA from Apr 2024
-const NI_UPPER_EARNINGS_LIMIT = 50270;
-const NI_MAIN_RATE = 0.08;           // 8% from Apr 2024
-const NI_ADDITIONAL_RATE = 0.02;     // 2% above UEL
-
-/* ── Student loan thresholds 2026/27 ─────────────────────────── */
-const SL_PLANS: Record<Exclude<StudentLoanPlan, 'none'>, { threshold: number; rate: number; label: string }> = {
-  plan1:    { threshold: 26065, rate: 0.09, label: 'Plan 1' },
-  plan2:    { threshold: 28470, rate: 0.09, label: 'Plan 2' },
-  plan4:    { threshold: 32745, rate: 0.09, label: 'Plan 4 (Scotland)' },
-  plan5:    { threshold: 25000, rate: 0.09, label: 'Plan 5' },
-  postgrad: { threshold: 21000, rate: 0.06, label: 'Postgraduate' },
-};
+/* All constants imported from ../constants/tax-2026-27 — single source of truth. */
+const SL_PLANS = STUDENT_LOAN_PLANS;
 
 /** Personal allowance after high-income taper. */
 function personalAllowance(taxablePay: number): number {

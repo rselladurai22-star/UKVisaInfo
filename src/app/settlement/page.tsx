@@ -8,6 +8,7 @@ import {
 import { VISA_DETAILS } from '../../data/visaDetails';
 import { SETTLEMENT_BREAKDOWNS } from '../../data/settlementFees';
 import StickyMobileCta from '../../components/StickyMobileCta';
+import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
   title: 'UK Settlement 2026 — ILR, Citizenship, EUSS, BNO, Long Residence, Ancestry',
@@ -150,6 +151,9 @@ export default function SettlementHub() {
 
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 md:py-16 space-y-10">
+
+          {/* Byline */}
+          <EditorByline verified="May 2026" />
 
           {/* Comparison table */}
           <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] shadow-[0_2px_12px_rgba(10, 37, 64,0.04)] overflow-hidden">

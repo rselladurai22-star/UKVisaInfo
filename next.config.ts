@@ -8,7 +8,18 @@ const config: NextConfig = {
     ],
   },
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/notice-period-calculator',
+        destination: '/redundancy-pay#notice-period',
+        permanent: true,
+      },
+      {
+        source: '/mileage-expense-calculator',
+        destination: '/self-assessment-calculator#mileage',
+        permanent: true,
+      },
+    ];
   },
 };
 

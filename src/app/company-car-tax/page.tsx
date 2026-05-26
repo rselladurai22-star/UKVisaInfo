@@ -40,7 +40,7 @@ export default function CompanyCarPage() {
       }}
       related={[
         { href: '/take-home-pay', title: 'Take-home pay', desc: 'See how the BiK adds to your tax code.' },
-        { href: '/mileage-expense-calculator', title: 'Mileage expenses', desc: 'Private car vs company car cost comparison.' },
+        { href: '/self-assessment-calculator', title: 'Mileage on Self Assessment', desc: 'AMAP rates for business mileage in a private car.' },
         { href: '/salary-sacrifice-calculator', title: 'Salary sacrifice', desc: 'Electric car via salary sacrifice beats this.' },
       ]}
       educational={[

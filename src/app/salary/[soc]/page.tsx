@@ -13,8 +13,14 @@ import StickyMobileCta from '../../../components/StickyMobileCta';
 
 interface RouteParams { params: Promise<{ soc: string }> }
 
+// ISR — 271 SOC routes are noindexed and only reached from /tools/salary-checker.
+// Rendering all of them at build exhausts the Node heap, so we render on-demand
+// and cache for 24h. SEO is unaffected (these pages carry robots:noindex).
+export const dynamicParams = true;
+export const revalidate = 86400;
+
 export function generateStaticParams() {
-  return SOC_OCCUPATIONS.map((o) => ({ soc: socSlug(o.code, o.title) }));
+  return [];
 }
 
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
