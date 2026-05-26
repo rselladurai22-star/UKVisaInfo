@@ -7,11 +7,11 @@ import { primaryEditorSchema } from '../../data/editorialTeam';
 
 export const metadata: Metadata = {
   title: 'UK Stamp Duty Calculator 2026 — SDLT, LBTT, LTT',
-  description: 'Live UK stamp duty calculator — SDLT, LBTT, LTT across every buyer scenario. First-time buyer relief, 3% additional surcharge, 2% non-resident surcharge, 36-month refund eligibility. Verified May 2026.',
+  description: 'Live UK stamp duty calculator with price-sensitivity chart and scenario comparison. SDLT, LBTT, LTT across every buyer scenario. Verified May 2026.',
   alternates: { canonical: '/stamp-duty-calculator' },
   openGraph: {
     title: 'UK Stamp Duty Calculator 2026',
-    description: 'Live SDLT, LBTT and LTT across every buyer scenario.',
+    description: 'Live SDLT, LBTT and LTT across every buyer scenario with price-curve visualisation.',
     url: 'https://ukvisainfo.co.uk/stamp-duty-calculator',
     type: 'article',
   },
@@ -25,11 +25,8 @@ const T = {
   faint:   '#A1A1AA',
   paper:   '#FFFFFF',
   surface: '#FAFAFA',
-  page:    '#F4F4F5',
   hair:    '#E4E4E7',
-  divide:  '#F4F4F5',
   brand:   '#047857',
-  brandT:  '#ECFDF5',
 };
 
 const FAQS = [
@@ -71,10 +68,9 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <FaqJsonLd faqs={FAQS} />
 
-      {/* ──── Hero — minimal, calculator-introducing ──── */}
-      <section style={{ paddingTop: 'clamp(96px, 12vh, 128px)', paddingBottom: 32 }}>
+      {/* ──── Hero (light) ──── */}
+      <section style={{ paddingTop: 'clamp(96px, 12vh, 128px)', paddingBottom: 16 }}>
         <div style={wrap}>
-          {/* Breadcrumb + meta */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: T.muted, marginBottom: 24 }}>
             <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
             <span style={{ color: T.faint }}>/</span>
@@ -87,7 +83,6 @@ export default function Page() {
             </span>
           </div>
 
-          {/* Title block */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32, alignItems: 'end' }} className="lg:grid-cols-[1fr_auto]">
             <div>
               <h1 style={{
@@ -103,7 +98,7 @@ export default function Page() {
                 fontSize: 17, lineHeight: 1.5, color: T.body,
                 margin: '20px 0 0', maxWidth: '52ch',
               }}>
-                Live SDLT, LBTT and LTT across every UK buyer scenario. Verified against HMRC, Revenue Scotland and the Welsh Revenue Authority.
+                Live SDLT, LBTT and LTT across every UK buyer scenario with price-sensitivity visualisation. Verified against HMRC, Revenue Scotland and the Welsh Revenue Authority.
               </p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 13, color: T.muted }}>
@@ -113,15 +108,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ──── Calculator — the product ──── */}
-      <section style={{ paddingBottom: 64 }}>
-        <div style={wrap}>
-          <SdltClient initialPrice={350000} />
-        </div>
-      </section>
+      {/* SdltClient renders its own sections: calc, dark insights, country, refund, quick-ref */}
+      <SdltClient initialPrice={350000} />
 
-      {/* ──── FAQ — compact details list ──── */}
-      <section style={{ paddingTop: 32, paddingBottom: 64, borderTop: `1px solid ${T.hair}`, background: T.paper }}>
+      {/* ──── FAQ ──── */}
+      <section style={{ paddingTop: 64, paddingBottom: 64, borderTop: `1px solid ${T.hair}`, background: T.paper }}>
         <div style={wrap}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32 }} className="lg:grid-cols-[280px_1fr]">
             <div>
@@ -133,7 +124,7 @@ export default function Page() {
                 letterSpacing: '-0.02em', color: T.black,
                 margin: '8px 0 0', maxWidth: '20ch',
               }}>
-                Common questions about stamp duty
+                Common questions
               </h2>
             </div>
             <div>
@@ -148,7 +139,7 @@ export default function Page() {
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
                   }}>
                     {f.q}
-                    <span style={{ color: T.faint, fontSize: 18, lineHeight: 1, transition: 'transform 0.15s' }}>+</span>
+                    <span style={{ color: T.faint, fontSize: 18, lineHeight: 1 }}>+</span>
                   </summary>
                   <p style={{ fontSize: 14.5, lineHeight: 1.65, color: T.body, margin: '10px 0 0', maxWidth: '60ch' }}>
                     {f.a}
@@ -160,11 +151,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ──── Footer strip — sources + related ──── */}
+      {/* ──── Footer strip ──── */}
       <section style={{ paddingTop: 40, paddingBottom: 80, background: T.surface, borderTop: `1px solid ${T.hair}` }}>
         <div style={wrap}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 40 }} className="lg:grid-cols-[1fr_1fr]">
-            {/* Sources */}
             <div>
               <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 14 }}>
                 Sources
@@ -196,7 +186,6 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Related */}
             <div>
               <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 14 }}>
                 Related calculators
