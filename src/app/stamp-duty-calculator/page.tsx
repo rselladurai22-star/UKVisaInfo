@@ -133,12 +133,12 @@ export default function Page() {
       `}</style>
 
       {/* ═══════════════════════════════════════════
-          HERO — ultra premium with floating cards
+          HERO — compact premium with floating cards
       ═══════════════════════════════════════════ */}
       <section style={{
         position: 'relative', overflow: 'hidden',
-        paddingTop: 'clamp(96px, 12vh, 140px)',
-        paddingBottom: 'clamp(48px, 7vh, 96px)',
+        paddingTop: 'clamp(80px, 9vh, 104px)',
+        paddingBottom: 'clamp(24px, 4vh, 40px)',
       }}>
         {/* Animated gradient orbs */}
         <div aria-hidden style={{
@@ -166,12 +166,12 @@ export default function Page() {
         }} />
 
         <div style={{ ...wrap, position: 'relative' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 64, alignItems: 'center' }} className="lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32, alignItems: 'center' }} className="lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-12">
 
             {/* LEFT — heading + CTAs */}
             <div>
               {/* Breadcrumb */}
-              <div className="sdlt-fade-up" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 24 }}>
+              <div className="sdlt-fade-up" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
                 <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
                 <span style={{ color: T.faint }}>/</span>
                 <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
@@ -182,13 +182,13 @@ export default function Page() {
               {/* Live badge */}
               <div className="sdlt-fade-up sdlt-fade-up-1" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
-                padding: '6px 14px 6px 10px', borderRadius: 999,
+                padding: '5px 12px 5px 9px', borderRadius: 999,
                 background: 'rgba(255,255,255,0.7)',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
                 border: `1px solid ${T.hair}`,
-                fontSize: 12, fontWeight: 600, color: T.body,
-                marginBottom: 28,
+                fontSize: 11.5, fontWeight: 600, color: T.body,
+                marginBottom: 16,
               }}>
                 <span style={{
                   width: 6, height: 6, borderRadius: 999, background: T.emerald,
@@ -199,8 +199,8 @@ export default function Page() {
 
               {/* Headline */}
               <h1 className="sdlt-fade-up sdlt-fade-up-2" style={{
-                fontSize: 'clamp(40px, 6vw, 84px)',
-                fontWeight: 700, lineHeight: 0.96,
+                fontSize: 'clamp(34px, 4.8vw, 64px)',
+                fontWeight: 700, lineHeight: 0.98,
                 letterSpacing: '-0.04em', color: T.ink,
                 margin: 0, maxWidth: '14ch',
               }}>
@@ -209,45 +209,45 @@ export default function Page() {
 
               {/* Subtitle */}
               <p className="sdlt-fade-up sdlt-fade-up-3" style={{
-                fontSize: 'clamp(16px, 1.8vw, 19px)',
-                lineHeight: 1.55, color: T.body, fontWeight: 400,
-                margin: '24px 0 0', maxWidth: '52ch',
+                fontSize: 'clamp(15px, 1.5vw, 17px)',
+                lineHeight: 1.5, color: T.body, fontWeight: 400,
+                margin: '14px 0 0', maxWidth: '54ch',
               }}>
-                The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, and full transparency on how every penny is calculated.
+                The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, full transparency.
               </p>
 
               {/* CTAs */}
               <div className="sdlt-fade-up sdlt-fade-up-4" style={{
-                display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 36,
+                display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20,
               }}>
                 <a href="#calculator" className="sdlt-cta-btn" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '14px 24px', borderRadius: 12,
+                  padding: '11px 20px', borderRadius: 10,
                   background: `linear-gradient(135deg, ${T.emerald} 0%, ${T.emeraldDk} 100%)`,
                   color: T.paper, textDecoration: 'none',
-                  fontSize: 14.5, fontWeight: 600,
+                  fontSize: 14, fontWeight: 600,
                   boxShadow: '0 8px 24px -8px rgba(4,120,87,0.45), inset 0 1px 0 rgba(255,255,255,0.15)',
                 }}>
                   Start calculating
-                  <span style={{ fontSize: 16 }}>→</span>
+                  <span style={{ fontSize: 15 }}>→</span>
                 </a>
                 <a href="#faq" className="sdlt-link-arrow" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
-                  padding: '14px 20px', borderRadius: 12,
+                  padding: '11px 16px', borderRadius: 10,
                   background: 'rgba(255,255,255,0.6)',
                   backdropFilter: 'blur(12px)',
                   border: `1px solid ${T.hair}`,
                   color: T.ink, textDecoration: 'none',
-                  fontSize: 14.5, fontWeight: 600,
+                  fontSize: 14, fontWeight: 600,
                 }}>
                   Read the FAQ
-                  <span className="sdlt-arrow-icon" style={{ fontSize: 14, color: T.muted }}>↗</span>
+                  <span className="sdlt-arrow-icon" style={{ fontSize: 13, color: T.muted }}>↗</span>
                 </a>
               </div>
 
               {/* Trust signals */}
               <div className="sdlt-fade-up sdlt-fade-up-4" style={{
-                display: 'flex', flexWrap: 'wrap', gap: 24, marginTop: 36, fontSize: 12.5, color: T.muted,
+                display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 18, fontSize: 12, color: T.muted,
               }}>
                 {[
                   'HMRC verified',
@@ -267,7 +267,7 @@ export default function Page() {
             </div>
 
             {/* RIGHT — floating preview cards */}
-            <div className="hidden lg:block" style={{ position: 'relative', minHeight: 400 }}>
+            <div className="hidden lg:block" style={{ position: 'relative', minHeight: 320 }}>
               <FloatingCard
                 position={{ top: 0, right: 0 }}
                 animDelay="0s"
@@ -285,7 +285,7 @@ export default function Page() {
               </FloatingCard>
 
               <FloatingCard
-                position={{ top: 130, left: 0 }}
+                position={{ top: 110, left: 0 }}
                 animDelay="-3s"
                 tone="emerald"
               >
@@ -303,7 +303,7 @@ export default function Page() {
               </FloatingCard>
 
               <FloatingCard
-                position={{ bottom: 0, right: 24 }}
+                position={{ bottom: 0, right: 16 }}
                 animDelay="-6s"
               >
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
@@ -339,28 +339,28 @@ export default function Page() {
           FAQ — premium accordion
       ═══════════════════════════════════════════ */}
       <section id="faq" style={{
-        paddingTop: 80, paddingBottom: 80,
+        paddingTop: 48, paddingBottom: 48,
         scrollMarginTop: 80,
       }}>
         <div style={wrap}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 48 }} className="lg:grid-cols-[320px_1fr]">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 28 }} className="lg:grid-cols-[300px_1fr] lg:gap-16">
             {/* Left: header */}
             <div>
               <div style={{
                 fontSize: 11, fontWeight: 700, color: T.gold,
-                letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 12,
+                letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8,
               }}>
                 Frequently asked
               </div>
               <h2 style={{
-                fontSize: 'clamp(28px, 3.4vw, 42px)', fontWeight: 700,
+                fontSize: 'clamp(24px, 2.6vw, 32px)', fontWeight: 700,
                 color: T.ink, margin: 0,
-                letterSpacing: '-0.03em', lineHeight: 1.1,
+                letterSpacing: '-0.025em', lineHeight: 1.1,
               }}>
                 Everything you need to know.
               </h2>
-              <p style={{ fontSize: 14.5, lineHeight: 1.6, color: T.muted, margin: '16px 0 0', maxWidth: '32ch' }}>
-                Common questions across SDLT, LBTT, LTT and the surcharge rules. Need more? Use the calculator&apos;s smart insights panel.
+              <p style={{ fontSize: 13.5, lineHeight: 1.55, color: T.muted, margin: '10px 0 0', maxWidth: '32ch' }}>
+                Common questions across SDLT, LBTT, LTT and surcharge rules.
               </p>
             </div>
 
@@ -373,28 +373,28 @@ export default function Page() {
                 }}>
                   <summary style={{
                     cursor: 'pointer', listStyle: 'none',
-                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
-                    padding: '20px 0',
-                    fontSize: 16, fontWeight: 600, color: T.ink,
-                    lineHeight: 1.4,
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14,
+                    padding: '14px 0',
+                    fontSize: 15, fontWeight: 600, color: T.ink,
+                    lineHeight: 1.35,
                   }}>
                     {f.q}
                     <span className="sdlt-faq-icon" style={{
-                      width: 28, height: 28, borderRadius: 8,
+                      width: 24, height: 24, borderRadius: 6,
                       background: T.surface,
                       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      color: T.muted, fontSize: 14, lineHeight: 1, flexShrink: 0,
+                      color: T.muted, fontSize: 12, lineHeight: 1, flexShrink: 0,
                       transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}>
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
                         <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                   </summary>
                   <p style={{
-                    fontSize: 14.5, lineHeight: 1.7, color: T.body,
-                    margin: 0, padding: '0 0 24px',
-                    maxWidth: '60ch',
+                    fontSize: 14, lineHeight: 1.65, color: T.body,
+                    margin: 0, padding: '0 0 16px',
+                    maxWidth: '62ch',
                   }}>
                     {f.a}
                   </p>
@@ -416,13 +416,13 @@ export default function Page() {
       {/* ═══════════════════════════════════════════
           CTA BANNER — premium full-width gradient
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '0 clamp(16px, 4vw, 96px) 80px' }}>
+      <section style={{ padding: '0 clamp(16px, 4vw, 96px) 48px' }}>
         <div style={{
           position: 'relative', overflow: 'hidden',
           maxWidth: 2400, margin: '0 auto',
-          borderRadius: 24,
+          borderRadius: 20,
           background: `linear-gradient(135deg, ${T.ink} 0%, #1F2937 60%, ${T.emeraldDk} 100%)`,
-          padding: 'clamp(48px, 7vw, 96px) clamp(28px, 5vw, 80px)',
+          padding: 'clamp(32px, 4.5vw, 56px) clamp(24px, 4vw, 56px)',
           color: T.paper,
         }}>
           {/* Orbs */}
@@ -447,54 +447,59 @@ export default function Page() {
             backgroundSize: '28px 28px',
           }} />
 
-          <div style={{ position: 'relative', maxWidth: 1200 }}>
-            <div style={{
-              fontSize: 11, fontWeight: 700,
-              color: 'rgba(255,255,255,0.6)',
-              letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 16,
-            }}>
-              The UK Desk
+          <div style={{
+            position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: 24,
+          }}>
+            <div style={{ maxWidth: 720 }}>
+              <div style={{
+                fontSize: 11, fontWeight: 700,
+                color: 'rgba(255,255,255,0.6)',
+                letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 10,
+              }}>
+                The UK Desk
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(24px, 3.2vw, 38px)', fontWeight: 700,
+                color: T.paper, lineHeight: 1.08,
+                letterSpacing: '-0.03em', margin: 0,
+                maxWidth: '24ch',
+              }}>
+                Every UK calculator, <span style={{
+                  background: 'linear-gradient(115deg, #ECFDF5 0%, #FBF6E7 100%)',
+                  WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
+                }}>verified and free.</span>
+              </h2>
+              <p style={{
+                fontSize: 'clamp(14px, 1.3vw, 16px)',
+                color: 'rgba(255,255,255,0.7)', lineHeight: 1.5,
+                margin: '10px 0 0', maxWidth: '52ch',
+              }}>
+                46 live calculators across UK tax, property, salary and visa life. Sourced from primary records, updated quarterly.
+              </p>
             </div>
-            <h2 style={{
-              fontSize: 'clamp(32px, 4.5vw, 56px)', fontWeight: 700,
-              color: T.paper, lineHeight: 1.05,
-              letterSpacing: '-0.035em', margin: 0,
-              maxWidth: '20ch',
-            }}>
-              Every UK calculator, <span style={{
-                background: 'linear-gradient(115deg, #ECFDF5 0%, #FBF6E7 100%)',
-                WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
-              }}>verified and free.</span>
-            </h2>
-            <p style={{
-              fontSize: 'clamp(15px, 1.6vw, 18px)',
-              color: 'rgba(255,255,255,0.7)', lineHeight: 1.55,
-              margin: '20px 0 0', maxWidth: '54ch',
-            }}>
-              46 live calculators across UK tax, property, salary and visa life. All sourced from primary records and updated quarterly. No accounts. No upsells. Forever free.
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 32 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
               <Link href="/tools" className="sdlt-cta-btn" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 24px', borderRadius: 12,
+                padding: '11px 20px', borderRadius: 10,
                 background: T.paper, color: T.ink, textDecoration: 'none',
-                fontSize: 14.5, fontWeight: 600,
+                fontSize: 14, fontWeight: 600,
                 boxShadow: '0 8px 24px -8px rgba(0,0,0,0.4)',
               }}>
                 Browse all 46 tools
-                <span style={{ fontSize: 16 }}>→</span>
+                <span style={{ fontSize: 15 }}>→</span>
               </Link>
               <Link href="/about" className="sdlt-link-arrow" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '14px 20px', borderRadius: 12,
+                padding: '11px 16px', borderRadius: 10,
                 background: 'rgba(255,255,255,0.10)',
                 border: '1px solid rgba(255,255,255,0.15)',
                 backdropFilter: 'blur(12px)',
                 color: T.paper, textDecoration: 'none',
-                fontSize: 14.5, fontWeight: 600,
+                fontSize: 14, fontWeight: 600,
               }}>
-                About the editor
-                <span className="sdlt-arrow-icon" style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>↗</span>
+                About
+                <span className="sdlt-arrow-icon" style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>↗</span>
               </Link>
             </div>
           </div>

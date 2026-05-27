@@ -119,11 +119,11 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
   const ftbRes   = allScen.find((r) => r.buyerType === 'firstTime')!;
 
   return (
-    <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 80 }}>
+    <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 32 }}>
 
       {/* ═══ HERO 3-COLUMN GRID ═══ */}
       <div style={wrap}>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1fr)] gap-5 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1fr)] gap-4 lg:gap-5">
           <CalculatorInputs
             country={country} setCountry={setCountry}
             flags={flags} setFlags={setFlags}
@@ -140,13 +140,13 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
       </div>
 
       {/* ═══ LIVE TRACKER STRIP ═══ */}
-      <div style={{ ...wrap, marginTop: 24 }}>
+      <div style={{ ...wrap, marginTop: 16 }}>
         <LiveTracker country={country} />
       </div>
 
       {/* ═══ TWO-COLUMN CHARTS ═══ */}
-      <div style={{ ...wrap, marginTop: 24 }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
+      <div style={{ ...wrap, marginTop: 16 }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
           <PriceSensitivityCard price={price} buyer={buyer} country={country} />
           <ComparativeLoadCard scenarios={allScen} current={buyer} />
         </div>
