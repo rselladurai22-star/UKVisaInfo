@@ -58,7 +58,7 @@ export default function FooterNewsletter() {
         <button
           type="submit"
           disabled={state === 'loading'}
-          className="inline-flex items-center justify-center gap-1.5 bg-[#00C4B4] text-white font-bold px-4 py-2.5 rounded-xl text-[13px] hover:bg-[#009E91] active:scale-[0.98] transition-[background,transform] duration-100 disabled:opacity-50 shadow-[0_4px_14px_rgba(0, 196, 180,0.32)]"
+          className="inline-flex items-center justify-center gap-1.5 bg-[#FF7A59] text-white font-bold px-4 py-2.5 rounded-xl text-[13px] hover:bg-[#FF5C35] active:scale-[0.98] transition-[background,transform] duration-100 disabled:opacity-50 shadow-[0_4px_14px_rgba(255,122,89,0.32)]"
         >
           <Send className="w-3.5 h-3.5" />
           {state === 'loading' ? 'Subscribing…' : 'Subscribe'}

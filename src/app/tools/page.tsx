@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, Search, ArrowUpRight, Briefcase, Scale, FileSearch } from 'lucide-react';
+import { Calculator, Search, ArrowRight, Briefcase, Scale, FileSearch } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Free UK Visa Tools — Salary Checker, Sponsor Search, Cost Calculator',
@@ -14,108 +14,152 @@ export const metadata: Metadata = {
   },
 };
 
+const FONT   = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const INK    = '#213343';
+const SLATE  = '#516F90';
+const MUTED  = '#7C98B6';
+const ORANGE = '#FF7A59';
+const HAIR   = 'rgba(33,51,67,0.08)';
+
 const TOOLS = [
   {
     href: '/tools/salary-checker',
     icon: Briefcase,
+    category: 'Skilled Worker',
     title: 'Skilled Worker salary checker',
     desc: 'Enter your offered salary and SOC 2020 code. See instantly whether you clear the £41,700 general threshold, the £33,400 new-entrant rate, and your occupation\'s going rate.',
-    cta: 'Check salary qualification',
-    accent: '#00C4B4',
-    soft: 'rgba(0, 196, 180,0.06)',
   },
   {
     href: '/tools/sponsor-search',
     icon: Search,
+    category: 'Sponsorship',
     title: 'UK sponsor licence search',
     desc: 'Find UK employers who hold a Skilled Worker sponsor licence. Filter by city, region, sector and rating. Built from the official Home Office register.',
-    cta: 'Find a licensed sponsor',
-    accent: '#0A2540',
-    soft: 'rgba(10, 37, 64,0.06)',
   },
   {
     href: '/tools/cost-calculator',
     icon: Calculator,
+    category: 'Cost',
     title: 'Advanced UK visa cost calculator',
     desc: 'Calculate the full cost of any UK visa including Home Office fees, multi-year IHS, dependants and priority service. With currency conversion.',
-    cta: 'Estimate visa costs',
-    accent: '#13325F',
-    soft: 'rgba(19, 50, 95,0.06)',
   },
   {
     href: '/tools/compare',
     icon: Scale,
+    category: 'Compare',
     title: 'Visa side-by-side comparison',
     desc: 'Compare any two UK visa routes on fees, IHS, salary thresholds, processing times, work rights and path to ILR. Decide which route fits your situation.',
-    cta: 'Compare visa routes',
-    accent: '#00A89A',
-    soft: 'rgba(0, 168, 154,0.06)',
   },
   {
     href: '/tools/refusal-analyzer',
     icon: FileSearch,
+    category: 'Refusal',
     title: 'Refusal letter analyzer',
     desc: 'Paste your UK visa refusal letter and get a plain-English breakdown of each ground — severity, what it means, and what to do next. Runs in your browser.',
-    cta: 'Decode my refusal',
-    accent: '#00C4B4',
-    soft: 'rgba(225,29,72,0.06)',
   },
 ];
 
 export default function ToolsIndex() {
   return (
-    <div className="bg-white">
+    <div style={{ background: '#FFFFFF', color: INK, fontFamily: FONT }}>
+
       {/* Hero */}
-      <section className="pt-[88px] md:pt-[104px] pb-12 md:pb-16 hero-light">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
+      <section className="pt-[120px] md:pt-[140px] pb-12 md:pb-16">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <p style={{
+            fontFamily: FONT, fontSize: 11, fontWeight: 700,
+            letterSpacing: '0.16em', textTransform: 'uppercase', color: ORANGE,
+            marginBottom: 14,
+          }}>
             Free interactive tools
-          </span>
-          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0A2540] tracking-tight leading-tight">
+          </p>
+          <h1 style={{
+            fontFamily: FONT, fontWeight: 700,
+            fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+            lineHeight: 1.04, letterSpacing: '-0.032em',
+            color: INK, maxWidth: '20ch',
+            textWrap: 'balance' as React.CSSProperties['textWrap'],
+          }}>
             UK visa tools that actually save you time
           </h1>
-          <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
-            Four free calculators and searches built from the official Home
-            Office data. No signup, no email required.
+          <p style={{
+            fontFamily: FONT, fontSize: 18, lineHeight: 1.6,
+            color: SLATE, marginTop: 18, maxWidth: 620,
+          }}>
+            Five free calculators and searches built from the official Home Office
+            data. No signup, no email required.
           </p>
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      {/* Cards */}
+      <section className="pb-20 md:pb-28">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
             {TOOLS.map((t) => (
               <Link
                 key={t.href}
                 href={t.href}
-                className="group relative overflow-hidden bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl md:rounded-3xl p-7 md:p-8 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all"
+                className="group lift-on-hover"
+                style={{
+                  background: '#FFFFFF',
+                  border: `1px solid ${HAIR}`,
+                  borderRadius: 24,
+                  padding: '32px 32px 28px',
+                  display: 'block',
+                  textDecoration: 'none',
+                  color: INK,
+                }}
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-60 blur-3xl"
-                  style={{ background: t.soft }}
-                />
-                <div className="relative z-10">
+                {/* Icon + eyebrow */}
+                <div className="flex items-center gap-3 mb-5">
                   <span
-                    className="inline-flex w-12 h-12 items-center justify-center rounded-2xl"
-                    style={{ background: t.soft, color: t.accent }}
+                    className="inline-flex items-center justify-center"
+                    style={{
+                      width: 44, height: 44,
+                      background: 'rgba(255,122,89,0.10)',
+                      color: ORANGE,
+                      borderRadius: 12,
+                    }}
                   >
-                    <t.icon className="w-6 h-6" />
+                    <t.icon className="w-5 h-5" />
                   </span>
-                  <h2 className="mt-5 font-display text-xl md:text-2xl font-bold text-[#0A2540] leading-tight">
-                    {t.title}
-                  </h2>
-                  <p className="mt-2.5 text-sm md:text-[15px] text-[#52596e] leading-relaxed">
-                    {t.desc}
-                  </p>
-                  <span
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold"
-                    style={{ color: t.accent }}
-                  >
-                    {t.cta}
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <span style={{
+                    fontFamily: FONT, fontSize: 11, fontWeight: 700,
+                    letterSpacing: '0.14em', textTransform: 'uppercase',
+                    color: ORANGE,
+                  }}>
+                    {t.category}
                   </span>
                 </div>
+
+                <h2 style={{
+                  fontFamily: FONT, fontWeight: 700,
+                  fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)',
+                  lineHeight: 1.15, letterSpacing: '-0.022em',
+                  color: INK, marginBottom: 10,
+                  textWrap: 'balance' as React.CSSProperties['textWrap'],
+                }}>
+                  {t.title}
+                </h2>
+
+                <p style={{
+                  fontFamily: FONT, fontSize: 14.5, lineHeight: 1.6,
+                  color: SLATE, marginBottom: 22,
+                }}>
+                  {t.desc}
+                </p>
+
+                <span
+                  className="inline-flex items-center gap-1.5 transition-all"
+                  style={{
+                    fontFamily: FONT, fontSize: 14, fontWeight: 600,
+                    color: ORANGE,
+                  }}
+                >
+                  Open tool
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
             ))}
           </div>

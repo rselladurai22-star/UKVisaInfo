@@ -37,7 +37,7 @@ export default function EditorByline({ verified, prefix = 'Written & verified by
       <div className="flex items-center gap-2.5 text-[12px]" style={{ color: SLATE }}>
         <span aria-hidden
               className="w-7 h-7 rounded-full inline-flex items-center justify-center text-[10.5px] font-bold tabular-nums flex-shrink-0"
-              style={{ background: INK, color: CREAM, fontFamily: 'Fraunces, serif', letterSpacing: '-0.01em' }}>
+              style={{ background: INK, color: CREAM, fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', letterSpacing: '-0.01em' }}>
           {e.initials}
         </span>
         <span>
@@ -55,7 +55,7 @@ export default function EditorByline({ verified, prefix = 'Written & verified by
       <div className="px-5 py-4 flex items-start gap-4">
         <span aria-hidden
               className="w-11 h-11 rounded-xl inline-flex items-center justify-center text-[14px] font-bold flex-shrink-0"
-              style={{ background: INK, color: CREAM, fontFamily: 'Fraunces, serif', letterSpacing: '-0.012em' }}>
+              style={{ background: INK, color: CREAM, fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', letterSpacing: '-0.012em' }}>
           {e.initials}
         </span>
         <div className="flex-1 min-w-0">

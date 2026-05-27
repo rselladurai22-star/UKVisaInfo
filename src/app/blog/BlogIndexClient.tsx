@@ -2,8 +2,16 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Clock, ArrowUpRight, Filter } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, ArrowUpRight, Filter } from 'lucide-react';
 import type { BlogPost } from '../../data/blog';
+
+const FONT   = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const INK    = '#213343';
+const SLATE  = '#516F90';
+const MUTED  = '#7C98B6';
+const ORANGE = '#FF7A59';
+const SOFT   = '#F5F8FA';
+const HAIR   = 'rgba(33,51,67,0.08)';
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-GB', {
@@ -11,23 +19,11 @@ function formatDate(dateStr: string) {
   });
 }
 
-const TAG_COLORS: Record<string, { bg: string; text: string }> = {
-  'Skilled Worker': { bg: 'rgba(0, 196, 180,0.08)',  text: '#00C4B4' },
-  'Student':        { bg: 'rgba(10, 37, 64,0.08)',  text: '#0A2540' },
-  'Family':         { bg: 'rgba(19, 50, 95,0.08)', text: '#13325F' },
-  'Visitor':        { bg: 'rgba(0, 196, 180,0.08)',  text: '#00C4B4' },
-  'Costs':          { bg: 'rgba(201, 161, 74,0.08)',  text: '#C9A14A' },
-  'Health':         { bg: 'rgba(0, 168, 154,0.08)',  text: '#00A89A' },
-  'Graduate':       { bg: 'rgba(0, 127, 118,0.08)', text: '#007F76' },
-};
-const tagStyle = (tag: string) => TAG_COLORS[tag] ?? { bg: 'rgba(14,20,36,0.06)', text: '#52596e' };
-
 export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => b.date.localeCompare(a.date)), [posts]);
 
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  /* Build tag → count map, sorted by frequency */
   const tagCounts = useMemo(() => {
     const m = new Map<string, number>();
     for (const p of sorted) for (const t of p.tags) m.set(t, (m.get(t) ?? 0) + 1);
@@ -39,30 +35,51 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
     return sorted.filter((p) => p.tags.includes(activeTag));
   }, [sorted, activeTag]);
 
-  const [featured, second, ...rest] = filtered;
+  const [featured, ...rest] = filtered;
 
   return (
-    <div className="bg-white">
+    <div style={{ background: '#FFFFFF', color: INK, fontFamily: FONT }}>
+
       {/* Page hero */}
-      <section className="pt-[88px] md:pt-[104px] pb-10 md:pb-12 hero-light">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
-            Blog & Guides
-          </span>
-          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0A2540] tracking-tight leading-tight">
+      <section className="pt-[120px] md:pt-[140px] pb-8 md:pb-10">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+          <p style={{
+            fontFamily: FONT, fontSize: 11, fontWeight: 700,
+            letterSpacing: '0.16em', textTransform: 'uppercase', color: ORANGE,
+            marginBottom: 14,
+          }}>
+            Blog &amp; Guides
+          </p>
+          <h1 style={{
+            fontFamily: FONT, fontWeight: 700,
+            fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+            lineHeight: 1.04, letterSpacing: '-0.032em',
+            color: INK, maxWidth: '20ch',
+            textWrap: 'balance' as React.CSSProperties['textWrap'],
+          }}>
             Long-form UK visa guides
           </h1>
-          <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
-            Plain-English deep dives on the rules behind your application — updated for
-            2026 thresholds, fees and processing times.
+          <p style={{
+            fontFamily: FONT, fontSize: 18, lineHeight: 1.6,
+            color: SLATE, marginTop: 18, maxWidth: 640,
+          }}>
+            Plain-English deep dives on the rules behind your application — updated
+            for 2026 thresholds, fees and processing times.
           </p>
         </div>
       </section>
 
-      {/* Tag filter strip */}
-      <div className="sticky top-[60px] md:top-[64px] z-30 bg-white/95 backdrop-blur border-y border-[rgba(14,20,36,0.06)]">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center gap-2 overflow-x-auto">
-          <Filter className="w-4 h-4 text-[#52596e] flex-shrink-0 ml-2" />
+      {/* Tag filter pill bar */}
+      <div className="sticky top-[62px] md:top-[70px] z-30"
+           style={{
+             background: 'rgba(255,255,255,0.95)',
+             backdropFilter: 'blur(12px)',
+             WebkitBackdropFilter: 'blur(12px)',
+             borderTop: `1px solid ${HAIR}`,
+             borderBottom: `1px solid ${HAIR}`,
+           }}>
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-3 flex items-center gap-2 overflow-x-auto mask-fade">
+          <Filter className="w-4 h-4 flex-shrink-0" style={{ color: MUTED }} />
           <Chip
             label="All"
             count={sorted.length}
@@ -76,144 +93,180 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
               count={count}
               active={activeTag === tag}
               onClick={() => setActiveTag(tag === activeTag ? null : tag)}
-              accent={tagStyle(tag).text}
             />
           ))}
         </div>
       </div>
 
       <section className="py-10 md:py-14">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <p className="text-[12.5px] text-[#7a8195] mb-7">
-            <span className="font-semibold text-[#0A2540] tabular-nums">{filtered.length}</span>
-            {' '}{filtered.length === 1 ? 'article' : 'articles'}
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+
+          <p style={{
+            fontFamily: FONT, fontSize: 13, color: MUTED, marginBottom: 28,
+          }}>
+            <span style={{ fontWeight: 700, color: INK, fontVariantNumeric: 'tabular-nums' }}>
+              {filtered.length}
+            </span>{' '}
+            {filtered.length === 1 ? 'article' : 'articles'}
             {activeTag && (
               <>
-                {' '}tagged <span className="font-semibold text-[#0A2540]">{activeTag}</span>
+                {' '}tagged{' '}
+                <span style={{ fontWeight: 700, color: INK }}>{activeTag}</span>
               </>
             )}
           </p>
 
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-dashed border-[rgba(14,20,36,0.12)] p-12 text-center">
-              <p className="text-[14px] text-[#7a8195]">No articles match this tag yet.</p>
+            <div style={{
+              background: '#FFFFFF', borderRadius: 16,
+              border: `1px dashed rgba(33,51,67,0.16)`,
+              padding: 48, textAlign: 'center',
+            }}>
+              <p style={{ fontFamily: FONT, fontSize: 14, color: MUTED }}>
+                No articles match this tag yet.
+              </p>
             </div>
           ) : (
             <>
-              {/* Featured post */}
+              {/* Featured article — HubSpot-style large card */}
               {featured && (
                 <Link
                   href={`/blog/${featured.slug}`}
-                  className="group block relative overflow-hidden hero-dark rounded-2xl md:rounded-3xl p-8 md:p-12 mb-10 md:mb-14 shadow-card"
+                  className="group block lift-on-hover"
+                  style={{
+                    background: '#FFFFFF',
+                    border: `1px solid ${HAIR}`,
+                    borderRadius: 28,
+                    padding: '40px 40px 36px',
+                    marginBottom: 40,
+                    textDecoration: 'none', color: INK,
+                    overflow: 'hidden',
+                    position: 'relative',
+                  }}
                 >
-                  <div className="dot-pattern absolute inset-0 opacity-40" aria-hidden="true" />
-                  <div className="relative z-10 max-w-3xl">
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[#C9A14A]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C9A14A]" />
-                        Latest article
+                  {/* Orange accent stripe across top */}
+                  <span aria-hidden style={{
+                    position: 'absolute', top: 0, left: 0, right: 0,
+                    height: 4, background: ORANGE,
+                  }} />
+                  <div className="flex flex-wrap items-center gap-3 mb-5">
+                    <span style={{
+                      fontFamily: FONT, fontSize: 11, fontWeight: 700,
+                      letterSpacing: '0.16em', textTransform: 'uppercase', color: ORANGE,
+                    }}>
+                      Latest article
+                    </span>
+                    {featured.tags.slice(0, 2).map((tag) => (
+                      <span key={tag} style={{
+                        fontFamily: FONT, fontSize: 10.5, fontWeight: 600,
+                        letterSpacing: '0.08em', textTransform: 'uppercase',
+                        color: SLATE, background: SOFT,
+                        padding: '3px 9px', borderRadius: 999,
+                      }}>
+                        {tag}
                       </span>
-                      {featured.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] font-bold uppercase tracking-[0.08em] px-2 py-0.5 rounded-full"
-                          style={{ background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)' }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h2 className="font-display text-white text-[1.375rem] md:text-[2rem] font-bold leading-tight">
-                      {featured.title}
-                    </h2>
-                    <p className="mt-3 text-white/55 text-sm md:text-base leading-relaxed line-clamp-2">
-                      {featured.description}
-                    </p>
-                    <div className="mt-6 flex items-center gap-5 text-xs text-white/45">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" /> {formatDate(featured.date)}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5" /> {featured.readMinutes} min read
-                      </span>
-                      <span className="ml-auto inline-flex items-center gap-1.5 text-[#C9A14A] font-semibold">
-                        Read article
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </span>
-                    </div>
+                    ))}
+                  </div>
+
+                  <h2 style={{
+                    fontFamily: FONT, fontWeight: 700,
+                    fontSize: 'clamp(1.6rem, 3.2vw, 2.4rem)',
+                    lineHeight: 1.1, letterSpacing: '-0.028em',
+                    color: INK, maxWidth: '24ch',
+                    textWrap: 'balance' as React.CSSProperties['textWrap'],
+                  }}>
+                    {featured.title}
+                  </h2>
+                  <p style={{
+                    fontFamily: FONT, fontSize: 16, lineHeight: 1.6,
+                    color: SLATE, marginTop: 14, maxWidth: '60ch',
+                  }}>
+                    {featured.description}
+                  </p>
+
+                  <div className="mt-7 flex flex-wrap items-center gap-5"
+                       style={{ fontFamily: FONT, fontSize: 13, color: MUTED }}>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {formatDate(featured.date)}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
+                      {featured.readMinutes} min read
+                    </span>
+                    <span className="ml-auto inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-150"
+                          style={{
+                            fontFamily: FONT, fontSize: 14, fontWeight: 600, color: ORANGE,
+                          }}>
+                      Read article
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </div>
                 </Link>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {second && (
-                  <Link
-                    href={`/blog/${second.slug}`}
-                    className="group md:row-span-2 flex flex-col bg-[#0A2540] rounded-2xl p-7 shadow-card hover:-translate-y-1 transition-all overflow-hidden relative"
-                  >
-                    <div className="dot-pattern absolute inset-0 opacity-25" aria-hidden="true" />
-                    <div className="relative z-10 flex flex-col flex-1">
-                      <div className="flex flex-wrap gap-1.5 mb-5">
-                        {second.tags.slice(0, 2).map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-bold uppercase tracking-[0.08em] px-2 py-0.5 rounded-full"
-                            style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="font-display text-white text-[1.125rem] md:text-[1.25rem] font-bold leading-snug flex-1">
-                        {second.title}
-                      </h3>
-                      <p className="mt-3 text-white/45 text-sm leading-relaxed line-clamp-3">
-                        {second.description}
-                      </p>
-                      <div className="mt-6 pt-5 border-t border-white/[0.08] flex items-center justify-between text-xs text-white/35">
-                        <span className="flex items-center gap-1.5">
-                          <Clock className="w-3 h-3" /> {second.readMinutes} min read
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-white/60 font-semibold group-hover:text-white transition-colors">
-                          Read <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                )}
-
+              {/* 3-col grid of remaining articles */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                 {rest.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group flex flex-col bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl p-6 md:p-7 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all"
+                    className="group lift-on-hover"
+                    style={{
+                      background: '#FFFFFF',
+                      border: `1px solid ${HAIR}`,
+                      borderRadius: 20,
+                      padding: '24px 24px 22px',
+                      textDecoration: 'none', color: INK,
+                      display: 'flex', flexDirection: 'column',
+                    }}
                   >
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {post.tags.slice(0, 2).map((tag) => {
-                        const s = tagStyle(tag);
-                        return (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-bold uppercase tracking-[0.08em] px-2 py-0.5 rounded-full"
-                            style={{ background: s.bg, color: s.text }}
-                          >
-                            {tag}
-                          </span>
-                        );
-                      })}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 2).map((tag, idx) => (
+                        <span key={tag} style={{
+                          fontFamily: FONT, fontSize: 10, fontWeight: 700,
+                          letterSpacing: '0.12em', textTransform: 'uppercase',
+                          color: idx === 0 ? ORANGE : SLATE,
+                          background: idx === 0 ? 'rgba(255,122,89,0.10)' : SOFT,
+                          padding: '3px 8px', borderRadius: 999,
+                        }}>
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                    <h3 className="font-display text-[1rem] md:text-[1.0625rem] font-bold text-[#0A2540] leading-snug flex-1 group-hover:text-[#00C4B4] transition-colors">
+
+                    <h3 style={{
+                      fontFamily: FONT, fontWeight: 700,
+                      fontSize: 17, lineHeight: 1.2, letterSpacing: '-0.018em',
+                      color: INK, flex: 1,
+                    }}>
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-sm text-[#52596e] leading-relaxed line-clamp-2">
+
+                    <p style={{
+                      fontFamily: FONT, fontSize: 13.5, lineHeight: 1.55,
+                      color: SLATE, marginTop: 10,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}>
                       {post.description}
                     </p>
-                    <div className="mt-5 pt-4 border-t border-[rgba(14,20,36,0.07)] flex items-center justify-between text-xs text-[#52596e]">
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="w-3 h-3" /> {post.readMinutes} min read
+
+                    <div className="mt-5 pt-4 flex items-center justify-between"
+                         style={{
+                           borderTop: `1px solid ${HAIR}`,
+                           fontFamily: FONT, fontSize: 12, color: MUTED,
+                         }}>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="w-3 h-3" />
+                        {post.readMinutes} min read
                       </span>
-                      <span className="inline-flex items-center gap-1 text-[#00C4B4] font-semibold">
-                        Read <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <span className="inline-flex items-center gap-1 group-hover:gap-2 transition-[gap] duration-150"
+                            style={{ color: ORANGE, fontWeight: 600 }}>
+                        Read
+                        <ArrowUpRight className="w-3 h-3" />
                       </span>
                     </div>
                   </Link>
@@ -228,25 +281,43 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
 }
 
 function Chip({
-  label, count, active, onClick, accent,
+  label, count, active, onClick,
 }: {
-  label: string; count: number; active: boolean; onClick: () => void; accent?: string;
+  label: string; count: number; active: boolean; onClick: () => void;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`
-        inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12.5px] font-semibold whitespace-nowrap
-        transition-colors duration-75 flex-shrink-0
-        ${active
-          ? 'bg-[#0A2540] text-white'
-          : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#e6eaf5] hover:text-[#0A2540]'}
-      `}
+      className="inline-flex items-center gap-1.5 whitespace-nowrap transition-all duration-100 flex-shrink-0"
+      style={{
+        fontFamily: FONT, fontSize: 12.5, fontWeight: 600,
+        padding: '6px 14px', borderRadius: 999,
+        background: active ? ORANGE : SOFT,
+        color: active ? '#FFFFFF' : SLATE,
+        border: active ? `1px solid ${ORANGE}` : '1px solid transparent',
+      }}
+      onMouseEnter={(e) => {
+        if (!active) {
+          e.currentTarget.style.background = '#EAF0F6';
+          e.currentTarget.style.color = INK;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!active) {
+          e.currentTarget.style.background = SOFT;
+          e.currentTarget.style.color = SLATE;
+        }
+      }}
     >
-      {!active && accent && <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />}
       {label}
-      <span className={`tabular-nums text-[11px] ${active ? 'text-white/55' : 'text-[#9aa3b8]'}`}>{count}</span>
+      <span style={{
+        fontFamily: FONT, fontSize: 11, fontWeight: 500,
+        fontVariantNumeric: 'tabular-nums',
+        color: active ? 'rgba(255,255,255,0.7)' : MUTED,
+      }}>
+        {count}
+      </span>
     </button>
   );
 }

@@ -1,58 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Single-font system: Inter only — thin, bright, professional, no stylish display face */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-headline: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Single-font system: Lexend Deca — designed for reading proficiency, matches the
+     HubSpot Sans fallback stack used on blog.hubspot.com. Clean, neutral, very readable. */
+  --font-sans: "Lexend Deca", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Lexend Deca", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Lexend Deca", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-headline: "Lexend Deca", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ════════════════════════════════════════════
-     EDITORIAL PREMIUM PALETTE — May 2026
-     Cream paper + ink black + deep emerald + warm gold
+     HUBSPOT PALETTE — May 2026
+     White paper + HubSpot navy ink + HubSpot orange accent
   ════════════════════════════════════════════ */
 
-  /* Primary — Ink black (headings, primary UI) */
-  --color-primary: #0B0F19;
-  --color-primary-container: #1F2937;
-  --color-primary-soft: #F1F2F4;
+  /* Primary — HubSpot navy (headings, primary UI) */
+  --color-primary: #213343;
+  --color-primary-container: #33475B;
+  --color-primary-soft: #EAF0F6;
   --color-primary-ink: #000000;
 
-  /* Secondary — Deep editorial emerald */
-  --color-secondary: #047857;
-  --color-secondary-soft: #ECFDF5;
-  --color-secondary-strong: #064E3B;
+  /* Secondary — HubSpot brand orange */
+  --color-secondary: #FF7A59;
+  --color-secondary-soft: #FFEEE9;
+  --color-secondary-strong: #FF5C35;
 
-  /* Accent — Warm editorial gold */
+  /* Accent — Warm gold (kept as warm complement to orange) */
   --color-accent: #B8860B;
   --color-accent-soft: #FBF6E7;
 
-  /* Success — Refined emerald (semantic) */
+  /* Success — Emerald kept as semantic "verified" trust signal */
   --color-success: #047857;
   --color-success-soft: #ECFDF5;
   --color-success-strong: #064E3B;
 
-  /* Surfaces — Cream paper + pure white card stack */
-  --color-surface: #FAFAF7;
+  /* Surfaces — Pure white primary + HubSpot light-blue alternating */
+  --color-surface: #FFFFFF;
   --color-surface-container-lowest: #FFFFFF;
-  --color-surface-container-low: #F6F5F0;
-  --color-surface-container: #F1EFE8;
-  --color-surface-container-high: #EBE9E0;
-  --color-surface-container-highest: #E2DFD3;
+  --color-surface-container-low: #F5F8FA;
+  --color-surface-container: #EAF0F6;
+  --color-surface-container-high: #CBD6E2;
+  --color-surface-container-highest: #99ACC2;
 
   /* Text */
-  --color-on-surface: #0B0F19;
-  --color-on-surface-variant: #475569;
+  --color-on-surface: #213343;
+  --color-on-surface-variant: #516F90;
 
-  /* Borders — warm hairline */
-  --color-outline: #D8D5CA;
-  --color-outline-variant: #ECEAE0;
+  /* Borders — cool hairline */
+  --color-outline: #CBD6E2;
+  --color-outline-variant: #DFE3EB;
 
   /* Consistent card border */
-  --color-border: rgba(11, 15, 25, 0.08);
-  --color-border-strong: rgba(11, 15, 25, 0.14);
+  --color-border: rgba(33, 51, 67, 0.08);
+  --color-border-strong: rgba(33, 51, 67, 0.14);
 }
 
 /* ════════════════════════════════════════════
@@ -157,11 +158,6 @@ html.dark body {
   line-height: 0.95;
   color: #0B0F19;
   text-wrap: balance;
-}
-
-/* Tabular numbers — prevents layout shift when digits change */
-.num-tabular {
-  font-variant-numeric: tabular-nums;
 }
 
 /* Body deck below headline */
