@@ -17,12 +17,10 @@
 
 import { useMemo, useState } from 'react';
 import {
-  Settings, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
-  Home, Sparkles, ChevronDown, Info,
+  Settings, ArrowRight, Info, Sparkles, Home,
 } from 'lucide-react';
 import {
-  calculateSDLT, calculateAllScenarios, calculateAllCountries, calculateRefund,
-  COUNTRY_LABEL,
+  calculateSDLT, calculateAllScenarios, calculateAllCountries,
   type BuyerType, type Country, type SDLTResult,
 } from '../../lib/sdlt/calc';
 
@@ -117,11 +115,10 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
   const allScen  = useMemo(() => calculateAllScenarios(price, country), [price, country]);
 
   return (
-    <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 32 }}>
-
-      {/* ═══ HERO 3-COLUMN GRID ═══ */}
+    <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 40 }}>
       <div style={wrap}>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1fr)] gap-4 lg:gap-5">
+        {/* Mobile: stacked; tablet (md): Inputs full-width + Breakdown; desktop (xl): all 3 side-by-side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1fr)] gap-4 xl:gap-6">
           <CalculatorInputs
             country={country} setCountry={setCountry}
             flags={flags} setFlags={setFlags}
@@ -129,24 +126,14 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
             mode={mode} setMode={setMode}
           />
           <TaxBreakdown result={result} price={price} />
-          <ScenarioComparison
-            price={price} country={country} flags={flags}
-            result={result} allScen={allScen}
-            onApply={(b) => setFlags(flagsForBuyer(b))}
-          />
-        </div>
-      </div>
-
-      {/* ═══ LIVE TRACKER STRIP ═══ */}
-      <div style={{ ...wrap, marginTop: 16 }}>
-        <LiveTracker country={country} />
-      </div>
-
-      {/* ═══ TWO-COLUMN CHARTS ═══ */}
-      <div style={{ ...wrap, marginTop: 16 }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
-          <PriceSensitivityCard price={price} buyer={buyer} country={country} />
-          <ComparativeLoadCard scenarios={allScen} current={buyer} />
+          {/* On tablet the Scenario panel spans full width so the table isn't squashed */}
+          <div className="md:col-span-2 xl:col-span-1">
+            <ScenarioComparison
+              price={price} country={country} flags={flags}
+              result={result} allScen={allScen}
+              onApply={(b) => setFlags(flagsForBuyer(b))}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -981,258 +968,6 @@ function ScenarioComparison({
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   4. LIVE TRACKER STRIP (full-width)
-═══════════════════════════════════════════════════════════════ */
-function LiveTracker({ country }: { country: Country }) {
-  const items =
-    country === 'scotland' ? [
-      { label: 'LBTT nil-rate',  value: '£145k', delta: 'stable',       trend: 'flat' as const },
-      { label: 'ADS surcharge',  value: '8%',    delta: '↑ from 6%',    trend: 'up' as const },
-      { label: 'Filing window',  value: '30d',   delta: 'unchanged',    trend: 'flat' as const },
-    ] :
-    country === 'wales' ? [
-      { label: 'LTT nil-rate',     value: '£225k', delta: 'highest UK', trend: 'flat' as const },
-      { label: 'Higher-rate',      value: '5%',    delta: '↑ from 4%',  trend: 'up' as const },
-      { label: 'Filing window',    value: '30d',   delta: 'unchanged',  trend: 'flat' as const },
-    ] : [
-      { label: 'SDLT nil-rate',    value: '£125k', delta: '↓ from £250k Apr 2025', trend: 'down' as const },
-      { label: 'FTB cap',          value: '£500k', delta: 'unchanged',              trend: 'flat' as const },
-      { label: 'Filing window',    value: '14d',   delta: 'unchanged',              trend: 'flat' as const },
-    ];
-
-  return (
-    <Card padding={0}>
-      <div style={{ padding: '18px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-        <div>
-          <h2 style={{ fontSize: 15, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.01em' }}>
-            Live {country === 'england' ? 'SDLT' : country === 'scotland' ? 'LBTT' : 'LTT'} Rate Tracker
-          </h2>
-          <p style={{ fontSize: 12, color: T.muted, margin: '4px 0 0' }}>
-            Current thresholds and year-on-year changes
-          </p>
-        </div>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '5px 12px', borderRadius: 999,
-          background: T.emeraldT, color: T.emerald,
-          fontSize: 11, fontWeight: 600,
-        }}>
-          <span style={{ width: 6, height: 6, borderRadius: 999, background: T.emerald }} />
-          Live Updates
-        </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: T.hair }}>
-        {items.map((it, i) => (
-          <div key={i} style={{ background: T.paper, padding: '20px 24px' }}>
-            <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-              {it.label}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginTop: 8, gap: 8 }}>
-              <div style={{ fontSize: 32, fontWeight: 700, color: T.ink, letterSpacing: '-0.028em', ...NUM, lineHeight: 1 }}>
-                {it.value}
-              </div>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: 4,
-                fontSize: 11, fontWeight: 600,
-                color: it.trend === 'up' ? T.amber : it.trend === 'down' ? T.emerald : T.muted,
-              }}>
-                {it.trend === 'up' && <TrendingUp size={11} />}
-                {it.trend === 'down' && <TrendingDown size={11} />}
-                {it.delta}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Card>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   5. PRICE SENSITIVITY (area chart card)
-═══════════════════════════════════════════════════════════════ */
-function PriceSensitivityCard({ price, buyer, country }: { price: number; buyer: BuyerType; country: Country }) {
-  const [range, setRange] = useState<10 | 25>(10);
-
-  const points = useMemo(() => {
-    const lo = price * (1 - range / 100);
-    const hi = price * (1 + range / 100);
-    const arr: { p: number; t: number }[] = [];
-    const steps = 40;
-    for (let i = 0; i <= steps; i++) {
-      const p = lo + (i / steps) * (hi - lo);
-      arr.push({ p, t: calculateSDLT(p, buyer, country).total });
-    }
-    return arr;
-  }, [price, buyer, country, range]);
-
-  const W = 720, H = 300;
-  const PAD = { l: 56, r: 20, t: 20, b: 40 };
-  const innerW = W - PAD.l - PAD.r;
-  const innerH = H - PAD.t - PAD.b;
-
-  const xs = points.map((p) => p.p);
-  const ts = points.map((p) => p.t);
-  const minP = Math.min(...xs), maxP = Math.max(...xs);
-  const minT = 0;
-  const maxT = Math.max(...ts) * 1.1 || 1;
-
-  const xScale = (p: number) => PAD.l + ((p - minP) / (maxP - minP || 1)) * innerW;
-  const yScale = (t: number) => PAD.t + innerH - ((t - minT) / (maxT - minT)) * innerH;
-
-  const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xScale(p.p).toFixed(2)} ${yScale(p.t).toFixed(2)}`).join(' ');
-  const area = `${path} L ${xScale(maxP).toFixed(2)} ${yScale(0).toFixed(2)} L ${xScale(minP).toFixed(2)} ${yScale(0).toFixed(2)} Z`;
-
-  const cx = xScale(price);
-  const cy = yScale(calculateSDLT(price, buyer, country).total);
-
-  const xTicks = 5;
-  const xLabels = Array.from({ length: xTicks }, (_, i) => minP + (i / (xTicks - 1)) * (maxP - minP));
-
-  return (
-    <Card padding={0}>
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          Price Sensitivity
-        </h2>
-        <div style={{
-          display: 'inline-flex', padding: 3, gap: 2,
-          background: T.surface, borderRadius: 8,
-        }}>
-          {[10, 25].map((r) => (
-            <button key={r} type="button" onClick={() => setRange(r as 10 | 25)}
-              style={{
-                padding: '5px 10px', borderRadius: 6,
-                background: range === r ? T.paper : 'transparent',
-                color: range === r ? T.ink : T.muted,
-                border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                fontSize: 11, fontWeight: 600,
-                boxShadow: range === r ? T.shadowSm : 'none',
-              }}>
-              ±{r}%
-            </button>
-          ))}
-        </div>
-      </div>
-      <div style={{ padding: 24 }}>
-        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: 'auto', display: 'block' }}>
-          <defs>
-            <linearGradient id="psGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={T.blue} stopOpacity="0.20" />
-              <stop offset="100%" stopColor={T.blue} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          {/* Grid */}
-          {[0.25, 0.5, 0.75].map((f, i) => {
-            const y = PAD.t + innerH * (1 - f);
-            return <line key={i} x1={PAD.l} y1={y} x2={W - PAD.r} y2={y} stroke={T.divide} strokeWidth="1" />;
-          })}
-          {/* Y labels */}
-          {[0, 0.5, 1].map((f, i) => {
-            const t = minT + (maxT - minT) * f;
-            return <text key={i} x={PAD.l - 8} y={yScale(t) + 4} fontSize="10" fill={T.faint} textAnchor="end" style={NUM}>{fmtK(t)}</text>;
-          })}
-          {/* Area + curve */}
-          <path d={area} fill="url(#psGrad)" />
-          <path d={path} stroke={T.blue} strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          {/* Current price marker */}
-          <line x1={cx} y1={PAD.t} x2={cx} y2={PAD.t + innerH} stroke={T.blue} strokeWidth="1" strokeDasharray="3 3" opacity="0.4" />
-          <circle cx={cx} cy={cy} r="6" fill={T.paper} stroke={T.blue} strokeWidth="2.5" />
-          {/* X labels */}
-          {xLabels.map((p, i) => (
-            <text key={i} x={xScale(p)} y={H - PAD.b + 18} fontSize="10" fill={T.faint} textAnchor="middle" style={NUM}>
-              {fmtK(p)}
-            </text>
-          ))}
-        </svg>
-      </div>
-    </Card>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   6. COMPARATIVE LOAD (bar chart card)
-═══════════════════════════════════════════════════════════════ */
-function ComparativeLoadCard({ scenarios, current }: { scenarios: SDLTResult[]; current: BuyerType }) {
-  const FEE_EST = 1500; // estimated conveyancing + searches
-  const showing = scenarios.filter((s) => ['standard', 'firstTime', 'additional', 'nonResident'].includes(s.buyerType));
-  const maxTotal = Math.max(...showing.map((s) => s.total + FEE_EST), 1);
-
-  const W = 720, H = 300;
-  const PAD = { l: 20, r: 20, t: 20, b: 56 };
-  const innerW = W - PAD.l - PAD.r;
-  const innerH = H - PAD.t - PAD.b;
-  const bw = innerW / showing.length;
-  const barW = bw * 0.5;
-
-  return (
-    <Card padding={0} id="compare">
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          Comparative Load
-        </h2>
-        <div style={{ display: 'flex', gap: 14, fontSize: 11, color: T.muted, fontWeight: 500 }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: 2, background: T.blue }} />
-            SDLT
-          </span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: 2, background: T.purple }} />
-            Fees
-          </span>
-        </div>
-      </div>
-      <div style={{ padding: 24 }}>
-        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: 'auto', display: 'block' }}>
-          {/* Bars */}
-          {showing.map((s, i) => {
-            const totalH = ((s.total + FEE_EST) / maxTotal) * innerH;
-            const sdltH = (s.total / maxTotal) * innerH;
-            const feeH  = (FEE_EST  / maxTotal) * innerH;
-            const x = PAD.l + bw * i + (bw - barW) / 2;
-            const yBaseSdlt = PAD.t + innerH - sdltH;
-            const yBaseFee  = PAD.t + innerH - sdltH - feeH;
-            const active = s.buyerType === current;
-            const labelShort = s.buyerType === 'standard' ? 'Standard' : s.buyerType === 'firstTime' ? 'FTB' : s.buyerType === 'additional' ? 'Additional' : 'Non-UK';
-            return (
-              <g key={s.buyerType} opacity={active ? 1 : 0.85}>
-                {/* Fees segment */}
-                {s.total + FEE_EST > 0 && (
-                  <rect x={x} y={yBaseFee} width={barW} height={feeH} fill={T.purple} rx="2" />
-                )}
-                {/* SDLT segment */}
-                {s.total > 0 && (
-                  <rect x={x} y={yBaseSdlt} width={barW} height={sdltH} fill={active ? T.blueDk : T.blue} rx="2" />
-                )}
-                {/* If both zero, show small fee bar */}
-                {s.total === 0 && (
-                  <rect x={x} y={PAD.t + innerH - feeH} width={barW} height={feeH} fill={T.purple} rx="2" />
-                )}
-                {/* Label */}
-                <text x={x + barW / 2} y={H - PAD.b + 18}
-                  fontSize="11" fill={active ? T.ink : T.muted}
-                  fontWeight={active ? 700 : 500}
-                  textAnchor="middle">
-                  {labelShort}
-                </text>
-                <text x={x + barW / 2} y={H - PAD.b + 34}
-                  fontSize="10" fill={T.faint}
-                  textAnchor="middle" style={NUM}>
-                  {fmtK(s.total + FEE_EST)}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-        <div style={{ fontSize: 11, color: T.faint, marginTop: 8, textAlign: 'center' }}>
-          Fees assumed at £{FEE_EST.toLocaleString()} (conveyancing + searches, indicative)
-        </div>
-      </div>
-    </Card>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
    PRIMITIVES
 ═══════════════════════════════════════════════════════════════ */
 function Card({
@@ -1458,7 +1193,7 @@ function flagsForBuyer(b: BuyerType): Flags {
 }
 
 const wrap: React.CSSProperties = {
-  maxWidth: 2400,
-  margin: '0 auto',
-  padding: '0 clamp(16px, 4vw, 96px)',
+  width: '100%',
+  padding: '0 clamp(12px, 3vw, 48px)',
+  boxSizing: 'border-box',
 };
