@@ -46,6 +46,27 @@ const FONT: React.CSSProperties = {
   fontFamily: '"Hanken Grotesk", "Inter", system-ui, -apple-system, sans-serif',
 };
 const NUM: React.CSSProperties = { fontVariantNumeric: 'tabular-nums' };
+
+/**
+ * Fluid type scale — clamp(min, preferred-vw, max)
+ * Scales smoothly from ~375px mobile → 1440px desktop.
+ */
+const T = {
+  /** Section headings (Your Purchase, Tax Breakdown…) */
+  heading:    'clamp(16px, 2.2vw, 20px)',
+  /** Large price / donut total number */
+  display:    'clamp(22px, 4.5vw, 34px)',
+  /** Donut center total */
+  donutTotal: 'clamp(18px, 3.5vw, 28px)',
+  /** Table primary numbers */
+  tableNum:   'clamp(14px, 2.2vw, 18px)',
+  /** Body / description text */
+  body:       'clamp(13px, 1.6vw, 14px)',
+  /** Small / caption / sub-labels */
+  caption:    'clamp(11px, 1.2vw, 12px)',
+  /** Medium labels */
+  label:      'clamp(12px, 1.5vw, 14px)',
+};
 const gbp = (n: number) =>
   n.toLocaleString('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 0, maximumFractionDigits: 0 });
 const pct = (n: number) => (n * 100).toFixed(2) + '%';
@@ -140,14 +161,14 @@ function CalculatorInputs({
     <Panel>
       {/* Header */}
       <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}`, display: 'flex', alignItems: 'center', gap: 10 }}>
-        <h2 style={{ flex: 1, fontSize: 20, fontWeight: 700, color: C.primary, margin: 0 }}>Your Purchase</h2>
+        <h2 style={{ flex: 1, fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Your Purchase</h2>
         <button type="button" onClick={() => setMode(mode === 'simple' ? 'advanced' : 'simple')}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 5,
             padding: '5px 12px', borderRadius: 999,
             background: mode === 'advanced' ? C.secondaryContainer : C.surfaceLow,
             color: mode === 'advanced' ? C.onSecondaryContainer : C.onSurfaceVariant,
-            border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 13, fontWeight: 500,
+            border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: T.label, fontWeight: 500,
           }}>
           <Settings size={13} />
           Advanced
@@ -162,14 +183,14 @@ function CalculatorInputs({
 
           {/* Large price input */}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, borderBottom: `2px solid ${C.secondary}`, paddingBottom: 8 }}>
-            <span style={{ fontSize: 28, fontWeight: 400, color: C.onSurfaceVariant, lineHeight: 1, ...NUM }}>£</span>
+            <span style={{ fontSize: T.display, fontWeight: 400, color: C.onSurfaceVariant, lineHeight: 1, ...NUM }}>£</span>
             <input
               type="number" inputMode="decimal" value={price || ''}
               onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
               min={0} step={5000} aria-label="Property price"
               style={{
                 flex: 1, minWidth: 0, ...NUM,
-                fontSize: 34, fontWeight: 700, color: C.primary,
+                fontSize: T.display, fontWeight: 700, color: C.primary,
                 background: 'transparent', border: 'none', outline: 'none',
                 fontFamily: 'inherit', letterSpacing: '-0.02em', padding: 0, lineHeight: 1,
               }}
@@ -189,10 +210,10 @@ function CalculatorInputs({
               />
             </div>
             {/* Preset markers */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: C.outline, marginTop: 8, fontFamily: 'monospace' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: T.caption, color: C.outline, marginTop: 8, fontFamily: 'monospace' }}>
               {[250_000, 425_000, 625_000, 925_000].map(v => (
                 <button key={v} type="button" onClick={() => setPrice(v)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: price === v ? C.secondary : C.outline, fontWeight: price === v ? 700 : 400, fontFamily: 'monospace', padding: 0 }}>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: T.caption, color: price === v ? C.secondary : C.outline, fontWeight: price === v ? 700 : 400, fontFamily: 'monospace', padding: 0 }}>
                   £{v / 1000}k
                 </button>
               ))}
@@ -222,8 +243,8 @@ function CalculatorInputs({
                     boxShadow: active ? '0 2px 8px rgba(0,108,71,0.22)' : 'none',
                     transition: 'all 0.15s ease',
                   }}>
-                  <span style={{ fontSize: 13, fontWeight: 700 }}>{name}</span>
-                  <span style={{ fontSize: 11, opacity: active ? 0.8 : 0.6 }}>{tax}</span>
+                  <span style={{ fontSize: T.label, fontWeight: 700 }}>{name}</span>
+                  <span style={{ fontSize: T.caption, opacity: active ? 0.8 : 0.6 }}>{tax}</span>
                 </button>
               );
             })}
@@ -260,7 +281,7 @@ function CalculatorInputs({
         {/* Advanced toggles */}
         {mode === 'advanced' && (
           <div style={{ paddingTop: 16, borderTop: `1px solid ${C.surfaceContainer}` }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Advanced</div>
+            <div style={{ fontSize: T.caption, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Advanced</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               <AdvToggle on={flags.mixedUse} onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: v, company: false })} label="Mixed-use property" desc="Commercial element — no 3% surcharge applies" />
               <AdvToggle on={flags.company}  onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: false, company: v })} label="Company-bought" desc="Non-natural person, 15% flat if > £500k" />
@@ -282,8 +303,8 @@ function TaxBreakdown({ result }: { result: SDLTResult }) {
   return (
     <Panel>
       <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}` }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: C.primary, margin: 0 }}>Tax Breakdown</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: 12, color: C.outline }}>
+        <h2 style={{ fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Tax Breakdown</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: T.caption, color: C.outline }}>
           <span style={{ width: 7, height: 7, borderRadius: '50%', background: C.secondary, display: 'inline-block', flexShrink: 0 }} />
           Updated live
         </div>
@@ -298,8 +319,8 @@ function TaxBreakdown({ result }: { result: SDLTResult }) {
         {/* Band list */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Breakdown by band</span>
-            <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 4, background: C.surfaceLow, color: C.outline }}>
+            <span style={{ fontSize: T.caption, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Breakdown by band</span>
+            <span style={{ fontSize: T.caption, fontWeight: 700, padding: '2px 8px', borderRadius: 4, background: C.surfaceLow, color: C.outline }}>
               {activeBands.length} bands · {result.taxName}
             </span>
           </div>
@@ -307,19 +328,19 @@ function TaxBreakdown({ result }: { result: SDLTResult }) {
             {activeBands.map((b, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 8, background: C.surfaceLowest, border: `1px solid ${C.surfaceContainer}` }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: C.onSurface }}>Band {i + 1} · {(b.rate * 100).toFixed(0)}%</div>
-                  <div style={{ fontSize: 11.5, color: C.outline, marginTop: 2 }}>{b.label.split(':').pop()?.trim()} · {gbp(b.taxOn)}</div>
+                  <div style={{ fontSize: T.body, fontWeight: 600, color: C.onSurface }}>Band {i + 1} · {(b.rate * 100).toFixed(0)}%</div>
+                  <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>{b.label.split(':').pop()?.trim()} · {gbp(b.taxOn)}</div>
                 </div>
-                <span style={{ fontSize: 16, fontWeight: 700, color: C.primary, ...NUM }}>{gbp(b.tax)}</span>
+                <span style={{ fontSize: T.label, fontWeight: 700, color: C.primary, ...NUM }}>{gbp(b.tax)}</span>
               </div>
             ))}
             {result.surchargeAmount > 0 && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 8, background: C.amberBg, border: `1px solid ${C.amber}33` }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: C.amber }}>Surcharge</div>
-                  <div style={{ fontSize: 11.5, color: C.amber, opacity: 0.85, marginTop: 2 }}>{result.surchargeLabel}</div>
+                  <div style={{ fontSize: T.body, fontWeight: 600, color: C.amber }}>Surcharge</div>
+                  <div style={{ fontSize: T.caption, color: C.amber, opacity: 0.85, marginTop: 2 }}>{result.surchargeLabel}</div>
                 </div>
-                <span style={{ fontSize: 16, fontWeight: 700, color: C.amber, ...NUM }}>{gbp(result.surchargeAmount)}</span>
+                <span style={{ fontSize: T.label, fontWeight: 700, color: C.amber, ...NUM }}>{gbp(result.surchargeAmount)}</span>
               </div>
             )}
           </div>
@@ -331,8 +352,8 @@ function TaxBreakdown({ result }: { result: SDLTResult }) {
             <Home size={18} />
           </span>
           <span style={{ flex: 1 }}>
-            <span style={{ display: 'block', fontSize: 14, fontWeight: 700, color: C.onSurface }}>Monthly costs?</span>
-            <span style={{ display: 'block', fontSize: 12, color: C.outline, marginTop: 1 }}>Estimate your mortgage repayments</span>
+            <span style={{ display: 'block', fontSize: T.body, fontWeight: 700, color: C.onSurface }}>Monthly costs?</span>
+            <span style={{ display: 'block', fontSize: T.caption, color: C.outline, marginTop: 1 }}>Estimate your mortgage repayments</span>
           </span>
           <ArrowRight size={15} style={{ color: C.secondary, flexShrink: 0 }} />
         </a>
@@ -373,11 +394,11 @@ function Donut({ result }: { result: SDLTResult }) {
         })}
       </svg>
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', textAlign: 'center' }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
+        <div style={{ fontSize: T.caption, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
           Total {result.taxName}
         </div>
-        <div style={{ fontSize: 28, fontWeight: 700, color: C.primary, letterSpacing: '-0.02em', ...NUM, lineHeight: 1 }}>{gbp(total)}</div>
-        <div style={{ fontSize: 12, color: C.onSurfaceVariant, marginTop: 5, ...NUM }}>{pct(result.effectiveRate)} effective</div>
+        <div style={{ fontSize: T.donutTotal, fontWeight: 700, color: C.primary, letterSpacing: '-0.02em', ...NUM, lineHeight: 1 }}>{gbp(total)}</div>
+        <div style={{ fontSize: T.caption, color: C.onSurfaceVariant, marginTop: 5, ...NUM }}>{pct(result.effectiveRate)} effective</div>
       </div>
     </div>
   );
@@ -407,10 +428,10 @@ function ScenarioComparison({
 
   function DeltaCell({ r }: { r: SDLTResult }) {
     const d = result.total - r.total;
-    if (d === 0) return <span style={{ color: C.outline, fontSize: 13 }}>— Baseline</span>;
+    if (d === 0) return <span style={{ color: C.outline, fontSize: T.caption }}>— Baseline</span>;
     const saving = d > 0;
     return (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 5, fontSize: 12, fontWeight: 700, background: saving ? C.secondaryContainer : C.amberBg, color: saving ? C.onSecondaryContainer : C.amber, ...NUM }}>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 5, fontSize: T.caption, fontWeight: 700, background: saving ? C.secondaryContainer : C.amberBg, color: saving ? C.onSecondaryContainer : C.amber, ...NUM }}>
         {saving ? <ArrowDown size={11} /> : <ArrowUp size={11} />}
         {saving ? '-' : '+'}{gbp(Math.abs(d))}
       </span>
@@ -421,8 +442,8 @@ function ScenarioComparison({
     <Panel>
       {/* Header */}
       <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}`, display: 'flex', alignItems: 'center', gap: 10 }}>
-        <h2 style={{ flex: 1, fontSize: 20, fontWeight: 700, color: C.primary, margin: 0 }}>Scenario Comparison</h2>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', padding: '3px 8px', borderRadius: 4, background: C.surfaceLow, color: C.secondaryFixedDim }}>
+        <h2 style={{ flex: 1, fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Scenario Comparison</h2>
+        <span style={{ fontSize: T.caption, fontWeight: 700, letterSpacing: '0.08em', padding: '3px 8px', borderRadius: 4, background: C.surfaceLow, color: C.secondaryFixedDim }}>
           4 SCENARIOS
         </span>
         <div style={{ display: 'flex', gap: 6 }}>
@@ -433,9 +454,9 @@ function ScenarioComparison({
 
       {/* Comparison table */}
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, textAlign: 'left', minWidth: 340 }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: T.body, textAlign: 'left', minWidth: 340 }}>
           <thead>
-            <tr style={{ background: C.surfaceLow, fontSize: 11, color: C.outline, borderBottom: `1px solid ${C.outlineVariant}` }}>
+            <tr style={{ background: C.surfaceLow, fontSize: T.caption, color: C.outline, borderBottom: `1px solid ${C.outlineVariant}` }}>
               <th style={{ padding: '12px 16px', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', width: '24%' }}>Metric</th>
               {cols.map((c, i) => (
                 <th key={i} style={{ padding: '12px 14px', fontWeight: 700, borderLeft: `1px solid ${C.surfaceHigh}`, background: c.highlight ? C.surfaceLow : 'transparent', color: c.highlight ? C.secondary : C.outline }}>
@@ -448,23 +469,23 @@ function ScenarioComparison({
             {/* Total Tax */}
             <tr style={{ borderBottom: `1px solid ${C.surfaceContainer}` }}>
               <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface }}>Total Tax</div>
-                <div style={{ fontSize: 11.5, color: C.outline, marginTop: 2 }}>Payable now</div>
+                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Total Tax</div>
+                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>Payable now</div>
               </td>
               {cols.map((c, i) => (
                 <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent' }}>
-                  <span style={{ fontSize: 18, fontWeight: 800, color: c.highlight ? C.secondary : C.primary, letterSpacing: '-0.02em', ...NUM }}>{gbp(c.r.total)}</span>
+                  <span style={{ fontSize: T.tableNum, fontWeight: 800, color: c.highlight ? C.secondary : C.primary, letterSpacing: '-0.02em', ...NUM }}>{gbp(c.r.total)}</span>
                 </td>
               ))}
             </tr>
             {/* Effective Rate */}
             <tr style={{ borderBottom: `1px solid ${C.surfaceContainer}` }}>
               <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface }}>Effective Rate</div>
-                <div style={{ fontSize: 11.5, color: C.outline, marginTop: 2 }}>% of price</div>
+                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Effective Rate</div>
+                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>% of price</div>
               </td>
               {cols.map((c, i) => (
-                <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent', fontWeight: 700, color: c.highlight ? C.secondary : C.onSurface, ...NUM }}>
+                <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent', fontWeight: 700, fontSize: T.body, color: c.highlight ? C.secondary : C.onSurface, ...NUM }}>
                   {pct(c.r.effectiveRate)}
                 </td>
               ))}
@@ -472,8 +493,8 @@ function ScenarioComparison({
             {/* Delta */}
             <tr>
               <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface }}>Delta vs Current</div>
-                <div style={{ fontSize: 11.5, color: C.outline, marginTop: 2 }}>Savings / Extra</div>
+                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Delta vs Current</div>
+                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>Savings / Extra</div>
               </td>
               {cols.map((c, i) => (
                 <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent' }}>
@@ -493,16 +514,16 @@ function ScenarioComparison({
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 4 }}>
-              <span style={{ fontSize: 10, fontWeight: 800, color: C.secondary, letterSpacing: '0.10em', textTransform: 'uppercase' }}>Best for you</span>
-              <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 5px', borderRadius: 3, background: C.secondary, color: C.onSecondary }}>AI MATCH</span>
+              <span style={{ fontSize: T.caption, fontWeight: 800, color: C.secondary, letterSpacing: '0.10em', textTransform: 'uppercase' }}>Best for you</span>
+              <span style={{ fontSize: T.caption, fontWeight: 700, padding: '2px 5px', borderRadius: 3, background: C.secondary, color: C.onSecondary }}>AI MATCH</span>
             </div>
-            <div style={{ fontSize: 13, color: C.onSurface, lineHeight: 1.5 }}>
+            <div style={{ fontSize: T.label, color: C.onSurface, lineHeight: 1.5 }}>
               {bestScen.buyerType === 'firstTime' ? 'First-Time Buyer' : 'Standard'} relief saves you{' '}
               <strong style={{ color: C.secondary, ...NUM }}>{gbp(bestSaving)}</strong> vs current rate.
             </div>
           </div>
           <button type="button" onClick={() => onApply(bestScen.buyerType)}
-            style={{ padding: '8px 14px', borderRadius: 8, background: C.secondary, color: C.onSecondary, border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 13, fontWeight: 700, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5 }}>
+            style={{ padding: '8px 14px', borderRadius: 8, background: C.secondary, color: C.onSecondary, border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: T.label, fontWeight: 700, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5 }}>
             Apply <ArrowRight size={12} />
           </button>
         </div>
@@ -533,8 +554,8 @@ function IconBtn({ children }: { children: React.ReactNode }) {
 function StepBadge({ n, label, active }: { n: number; label: string; active: boolean }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: active ? C.secondaryContainer : C.surfaceContainer, color: active ? C.onSecondaryContainer : C.onSurfaceVariant, fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{n}</span>
-      <span style={{ fontSize: 11, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: active ? C.secondaryContainer : C.surfaceContainer, color: active ? C.onSecondaryContainer : C.onSurfaceVariant, fontSize: T.caption, fontWeight: 700, flexShrink: 0 }}>{n}</span>
+      <span style={{ fontSize: T.caption, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</span>
     </div>
   );
 }
@@ -554,8 +575,8 @@ function CheckboxCard({ checked, onChange, label, description, disabled }: {
         )}
       </div>
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 14, fontWeight: 600, color: checked ? C.primary : C.onSurface }}>{label}</div>
-        <div style={{ fontSize: 12, color: C.outline, marginTop: 2 }}>{description}</div>
+        <div style={{ fontSize: T.body, fontWeight: 600, color: checked ? C.primary : C.onSurface }}>{label}</div>
+        <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>{description}</div>
       </div>
     </label>
   );
@@ -566,8 +587,8 @@ function Callout({ icon, color, bg, border, title, body }: { icon: React.ReactNo
     <div style={{ padding: '10px 12px', borderRadius: 8, background: bg, border: `1px solid ${border}`, display: 'flex', alignItems: 'flex-start', gap: 10 }}>
       <div style={{ color, marginTop: 2, flexShrink: 0 }}>{icon}</div>
       <div>
-        <div style={{ fontSize: 12.5, fontWeight: 700, color }}>{title}</div>
-        <div style={{ fontSize: 11.5, color: C.onSurfaceVariant, marginTop: 2 }}>{body}</div>
+        <div style={{ fontSize: T.label, fontWeight: 700, color }}>{title}</div>
+        <div style={{ fontSize: T.caption, color: C.onSurfaceVariant, marginTop: 2 }}>{body}</div>
       </div>
     </div>
   );
@@ -581,8 +602,8 @@ function AdvToggle({ on, onChange, label, desc }: { on: boolean; onChange: (v: b
         <span style={{ position: 'absolute', top: 2, left: 2, width: 14, height: 14, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,0.12)', transform: on ? 'translateX(14px)' : 'translateX(0)', transition: 'transform 0.18s ease', display: 'block' }} />
       </span>
       <span style={{ flex: 1 }}>
-        <span style={{ display: 'block', fontSize: 13.5, fontWeight: 600, color: C.onSurface }}>{label}</span>
-        <span style={{ display: 'block', fontSize: 12, color: C.outline, marginTop: 2 }}>{desc}</span>
+        <span style={{ display: 'block', fontSize: T.body, fontWeight: 600, color: C.onSurface }}>{label}</span>
+        <span style={{ display: 'block', fontSize: T.caption, color: C.outline, marginTop: 2 }}>{desc}</span>
       </span>
     </button>
   );
