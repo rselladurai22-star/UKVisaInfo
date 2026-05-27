@@ -1,131 +1,163 @@
-﻿'use client';
+'use client';
 
-/**
- * Stamp Duty Calculator — Material Design 3 redesign (May 2026 v5).
- *
- * 3-column layout: Your Purchase | Tax Breakdown | Scenario Comparison
- * Design: Hanken Grotesk, blue-tinted MD3 surfaces, emerald green brand.
- */
-
-import { useMemo, useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
-  Settings, Download, Share2, CheckCircle2,
-  ArrowRight, ArrowDown, ArrowUp, Info, Home,
+  SlidersHorizontal, Check, Sparkles, Globe,
+  RefreshCw, Coins, Download, Share2, CheckCircle, Save,
 } from 'lucide-react';
-import {
-  calculateSDLT, calculateAllScenarios,
-  type BuyerType, type Country, type SDLTResult,
-} from '../../lib/sdlt/calc';
 
-/* ─── Design tokens — Material Design 3 blue-surface / emerald brand ─── */
-const C = {
-  surface:              '#f8f9ff',
-  surfaceLowest:        '#ffffff',
-  surfaceLow:           '#eff4ff',
-  surfaceContainer:     '#e5eeff',
-  surfaceHigh:          '#dce9ff',
-  surfaceHighest:       '#d3e4fe',
-  onSurface:            '#0b1c30',
-  onSurfaceVariant:     '#404946',
-  outline:              '#707975',
-  outlineVariant:       '#c0c8c4',
-  primary:              '#00221b',
-  secondary:            '#006c47',
-  onSecondary:          '#ffffff',
-  secondaryContainer:   '#54fbb3',
-  onSecondaryContainer: '#00714a',
-  secondaryFixedDim:    '#2de19b',
-  amber:                '#cc8e00',
-  amberBg:              'rgba(255,186,59,0.16)',
-  error:                '#ba1a1a',
-  errorBg:              '#ffdad6',
-  shadow: '0 1px 3px rgba(11,28,48,0.07), 0 4px 16px -4px rgba(11,28,48,0.07)',
-};
+/* ─── Types ─── */
+type Region = 'England' | 'Scotland' | 'Wales';
 
-const FONT: React.CSSProperties = {
-  fontFamily: '"Hanken Grotesk", "Inter", system-ui, -apple-system, sans-serif',
-};
-const NUM: React.CSSProperties = { fontVariantNumeric: 'tabular-nums' };
-
-/**
- * Fluid type scale — clamp(min, preferred-vw, max)
- * Scales smoothly from ~375px mobile → 1440px desktop.
- */
-const T = {
-  /** Section headings (Your Purchase, Tax Breakdown…) */
-  heading:    'clamp(16px, 2.2vw, 20px)',
-  /** Large price / donut total number */
-  display:    'clamp(22px, 4.5vw, 34px)',
-  /** Donut center total */
-  donutTotal: 'clamp(18px, 3.5vw, 28px)',
-  /** Table primary numbers */
-  tableNum:   'clamp(14px, 2.2vw, 18px)',
-  /** Body / description text */
-  body:       'clamp(13px, 1.6vw, 14px)',
-  /** Small / caption / sub-labels */
-  caption:    'clamp(11px, 1.2vw, 12px)',
-  /** Medium labels */
-  label:      'clamp(12px, 1.5vw, 14px)',
-};
-const gbp = (n: number) =>
-  n.toLocaleString('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 0, maximumFractionDigits: 0 });
-const pct = (n: number) => (n * 100).toFixed(2) + '%';
-
-/* ─── Buyer state machine ─── */
-interface Flags { ftb: boolean; additional: boolean; nonResident: boolean; mixedUse: boolean; company: boolean; }
-
-function deriveBuyer(f: Flags): BuyerType {
-  if (f.mixedUse)  return 'mixedUse';
-  if (f.company)   return 'company';
-  if (f.ftb)       return 'firstTime';
-  if (f.additional && f.nonResident) return 'addNonRes';
-  if (f.additional)  return 'additional';
-  if (f.nonResident) return 'nonResident';
-  return 'standard';
+interface BuyerProfileState {
+  isFirstTimeBuyer: boolean;
+  isAdditionalProperty: boolean;
+  isNonUKResident: boolean;
+  propertyType?: 'residential' | 'non-residential';
+  sharedOwnershipPercent?: number;
+  isCouncilRightToBuy?: boolean;
 }
 
-function flagsForBuyer(b: BuyerType): Flags {
-  return {
-    ftb:         b === 'firstTime',
-    additional:  b === 'additional'  || b === 'addNonRes',
-    nonResident: b === 'nonResident' || b === 'addNonRes',
-    mixedUse:    b === 'mixedUse',
-    company:     b === 'company',
-  };
+interface SavedCalcItem {
+  id: string;
+  name: string;
+  timestamp: string;
+  price: number;
+  region: Region;
+  profile: BuyerProfileState;
+  taxAmount: number;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+interface TaxBandBreakdown {
+  name: string;
+  rate: number;
+  minLimit: number;
+  maxLimit: number | null;
+  taxableAmountInBand: number;
+  taxPaidInBand: number;
+  description: string;
+}
+
+interface CalcResult {
+  totalTax: number;
+  effectiveRate: number;
+  bands: TaxBandBreakdown[];
+  propertyPrice: number;
+  region: Region;
+  profile: BuyerProfileState;
+}
+
+/* ─── Band tables ─── */
+const ENGLAND_BANDS    = [{m:0,x:250000,r:0},{m:250000,x:925000,r:.05},{m:925000,x:1500000,r:.10},{m:1500000,x:null,r:.12}];
+const ENGLAND_FTB      = [{m:0,x:300000,r:0},{m:300000,x:500000,r:.05},{m:500000,x:925000,r:.05},{m:925000,x:1500000,r:.10},{m:1500000,x:null,r:.12}];
+const SCOTLAND_BANDS   = [{m:0,x:145000,r:0},{m:145000,x:250000,r:.02},{m:250000,x:325000,r:.05},{m:325000,x:750000,r:.10},{m:750000,x:null,r:.12}];
+const SCOTLAND_FTB     = [{m:0,x:175000,r:0},{m:175000,x:250000,r:.02},{m:250000,x:325000,r:.05},{m:325000,x:750000,r:.10},{m:750000,x:null,r:.12}];
+const WALES_BANDS      = [{m:0,x:225000,r:0},{m:225000,x:400000,r:.06},{m:400000,x:750000,r:.075},{m:750000,x:1500000,r:.10},{m:1500000,x:null,r:.12}];
+const ENG_NR_BANDS     = [{m:0,x:150000,r:0},{m:150000,x:250000,r:.02},{m:250000,x:null,r:.05}];
+const SCO_NR_BANDS     = [{m:0,x:150000,r:0},{m:150000,x:250000,r:.01},{m:250000,x:null,r:.05}];
+const WAL_NR_BANDS     = [{m:0,x:225000,r:0},{m:225000,x:250000,r:.01},{m:250000,x:1000000,r:.05},{m:1000000,x:null,r:.06}];
+
+function calcSDLT(price: number, region: Region, profile: BuyerProfileState): CalcResult {
+  const share = profile.sharedOwnershipPercent ?? 100;
+  const tp = (price * share) / 100;
+  const isNonRes = profile.propertyType === 'non-residential';
+  let sr = 0;
+  let rawBands: {m:number;x:number|null;r:number}[];
+
+  if (region === 'England') {
+    rawBands = isNonRes ? ENG_NR_BANDS : (profile.isFirstTimeBuyer && tp <= 500000 ? ENGLAND_FTB : ENGLAND_BANDS);
+    if (!isNonRes) { if (profile.isAdditionalProperty) sr += .05; if (profile.isNonUKResident) sr += .02; }
+  } else if (region === 'Scotland') {
+    rawBands = isNonRes ? SCO_NR_BANDS : (profile.isFirstTimeBuyer ? SCOTLAND_FTB : SCOTLAND_BANDS);
+    if (!isNonRes) { if (profile.isAdditionalProperty) sr += .08; if (profile.isNonUKResident) sr += .02; }
+  } else {
+    rawBands = isNonRes ? WAL_NR_BANDS : WALES_BANDS;
+    if (!isNonRes) { if (profile.isAdditionalProperty) sr += .04; if (profile.isNonUKResident) sr += .02; }
+  }
+
+  const breakdowns: TaxBandBreakdown[] = [];
+  let calculatedTax = 0;
+
+  rawBands.forEach((band, i) => {
+    const { m: min, x: max, r: rate } = band;
+    const totalRate = rate + sr;
+    const rLabel = `${((totalRate)*100)%1===0 ? (totalRate*100).toFixed(0) : (totalRate*100).toFixed(1)}%`;
+    if (tp > min) {
+      const span = max === null ? tp - min : Math.min(tp - min, max - min);
+      const tax = span * totalRate;
+      calculatedTax += tax;
+      const minStr = min >= 1e6 ? `\u00a3${(min/1e6).toFixed(1)}m` : `\u00a3${min.toLocaleString()}`;
+      const maxStr = max === null ? '+' : max >= 1e6 ? `\u2013\u00a3${(max/1e6).toFixed(1)}m` : `\u2013\u00a3${(max/1000).toFixed(0)}k`;
+      breakdowns.push({ name: `Band ${i+1} \u00b7 ${rLabel}`, rate: totalRate, minLimit: min, maxLimit: max, taxableAmountInBand: span, taxPaidInBand: tax, description: `${minStr}${maxStr} \u00b7 \u00a3${span.toLocaleString()}` });
+    } else {
+      breakdowns.push({ name: `Band ${i+1} \u00b7 ${rLabel}`, rate: totalRate, minLimit: min, maxLimit: max, taxableAmountInBand: 0, taxPaidInBand: 0, description: `${min >= 1e6 ? `\u00a3${(min/1e6).toFixed(1)}m` : `\u00a3${min.toLocaleString()}`}${max === null ? '+' : max >= 1e6 ? `\u2013\u00a3${(max/1e6).toFixed(1)}m` : `\u2013\u00a3${(max/1000).toFixed(0)}k`} \u00b7 \u00a30` });
+    }
+  });
+
+  return { totalTax: calculatedTax, effectiveRate: tp > 0 ? (calculatedTax / tp) * 100 : 0, bands: breakdowns, propertyPrice: price, region, profile };
+}
+
+const getTaxLabel = (r: Region) => r === 'England' ? 'SDLT' : r === 'Scotland' ? 'LBTT' : 'LTT';
+
+/* ═══════════════════════════════════
    ROOT
-═══════════════════════════════════════════════════════════════ */
-export default function SdltClient({ initialPrice = 350_000 }: { initialPrice?: number }) {
-  const [price, setPrice]     = useState(initialPrice);
-  const [country, setCountry] = useState<Country>('england');
-  const [flags, setFlags]     = useState<Flags>({ ftb: false, additional: false, nonResident: false, mixedUse: false, company: false });
-  const [mode, setMode]       = useState<'simple' | 'advanced'>('simple');
+═══════════════════════════════════ */
+export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: number }) {
+  const [price, setPrice]   = useState(initialPrice);
+  const [region, setRegion] = useState<Region>('England');
+  const [profile, setProfile] = useState<BuyerProfileState>({
+    isFirstTimeBuyer: false, isAdditionalProperty: false, isNonUKResident: false,
+  });
+  const [savedList, setSavedList] = useState<SavedCalcItem[]>([]);
 
-  const buyer   = deriveBuyer(flags);
-  const result  = useMemo(() => calculateSDLT(price, buyer, country), [price, buyer, country]);
-  const allScen = useMemo(() => calculateAllScenarios(price, country), [price, country]);
+  useEffect(() => {
+    try { setSavedList(JSON.parse(localStorage.getItem('taxcalc_saved_quotes') ?? '[]')); } catch { /* noop */ }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('taxcalc_saved_quotes', JSON.stringify(savedList));
+  }, [savedList]);
+
+  const result = calcSDLT(price, region, profile);
+
+  const handleSave = (name?: string) => {
+    const ts = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    setSavedList(prev => [{ id: crypto.randomUUID(), name: name || `Quote: \u00a3${price.toLocaleString()} (${region})`, timestamp: ts, price, region, profile: { ...profile }, taxAmount: result.totalTax }, ...prev]);
+  };
 
   return (
-    <div style={{ ...FONT, color: C.onSurface, background: C.surface, paddingBottom: 48 }}>
-      <div style={{ width: '100%', padding: '0 clamp(12px, 3vw, 48px)', boxSizing: 'border-box' }}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-3">
-            <CalculatorInputs
-              country={country} setCountry={setCountry}
-              flags={flags} setFlags={setFlags}
+    <div className="bg-white text-slate-800" style={{ fontFamily: "'Hanken Grotesk', 'Inter', system-ui, sans-serif" }}>
+      {/* Hero */}
+      <section className="text-center max-w-3xl mx-auto py-4 md:py-6 px-4">
+        <div className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-blue-600 font-black mb-3">
+          &#x2726; EXCLUSIVELY CURATED FOR 2026 CALCULATIONS &#x2726;
+        </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">
+          CALCULATE UK <span className="text-blue-600">STAMP DUTY</span>
+        </h1>
+        <p className="text-xs md:text-sm font-medium tracking-wide text-slate-500 mt-3 max-w-2xl mx-auto leading-relaxed">
+          The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live comparisons, full transparency.
+        </p>
+      </section>
+
+      {/* 3-Column grid */}
+      <div className="w-full max-w-[1440px] xl:max-w-[1600px] mx-auto px-4 md:px-6 xl:px-8 pb-8 md:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div className="lg:col-span-4 xl:col-span-3">
+            <SidebarInputs
               price={price} setPrice={setPrice}
-              mode={mode} setMode={setMode}
+              region={region} setRegion={setRegion}
+              profile={profile} setProfile={setProfile}
             />
           </div>
           <div className="lg:col-span-4">
             <TaxBreakdown result={result} />
           </div>
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4 xl:col-span-5">
             <ScenarioComparison
-              flags={flags} result={result} allScen={allScen}
-              onApply={(b) => setFlags(flagsForBuyer(b))}
+              currentResult={result}
+              onSave={handleSave}
+              onApplyProfile={(ftb, add) => setProfile({ isFirstTimeBuyer: ftb, isAdditionalProperty: add, isNonUKResident: false })}
             />
           </div>
         </div>
@@ -134,477 +166,452 @@ export default function SdltClient({ initialPrice = 350_000 }: { initialPrice?: 
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   1. CALCULATOR INPUTS (left column)
-═══════════════════════════════════════════════════════════════ */
-function CalculatorInputs({
-  country, setCountry, flags, setFlags, price, setPrice, mode, setMode,
-}: {
-  country: Country; setCountry: (c: Country) => void;
-  flags: Flags; setFlags: (f: Flags) => void;
-  price: number; setPrice: (n: number) => void;
-  mode: 'simple' | 'advanced'; setMode: (m: 'simple' | 'advanced') => void;
+/* ═══════════════════════════════════
+   SIDEBAR INPUTS
+═══════════════════════════════════ */
+function SidebarInputs({ price, setPrice, region, setRegion, profile, setProfile }: {
+  price: number; setPrice: (p: number) => void;
+  region: Region; setRegion: (r: Region) => void;
+  profile: BuyerProfileState; setProfile: (p: BuyerProfileState) => void;
 }) {
-  const SLIDER_MIN = 50_000, SLIDER_MAX = 2_000_000;
-  const sliderPct = Math.min(100, Math.max(0, ((price - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100));
-  const ftbCap = country === 'england' ? 500_000 : country === 'scotland' ? 175_000 : null;
+  const [inputVal, setInputVal] = useState(price.toLocaleString());
+  const [advOpen, setAdvOpen]   = useState(false);
 
-  const setStatus = (key: 'ftb' | 'additional' | 'nonResident', val: boolean) => {
-    if (key === 'ftb') {
-      setFlags({ ...flags, ftb: val, additional: val ? false : flags.additional, nonResident: val ? false : flags.nonResident, mixedUse: false, company: false });
-      return;
-    }
-    setFlags({ ...flags, ftb: false, mixedUse: false, company: false, [key]: val } as Flags);
+  const handlePriceChange = (n: number) => {
+    const v = Math.max(0, n);
+    setPrice(v);
+    setInputVal(v.toLocaleString());
   };
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const cleaned = e.target.value.replace(/\D/g, '');
+    const num = cleaned ? parseInt(cleaned, 10) : 0;
+    setPrice(num);
+    setInputVal(num.toLocaleString());
+  };
+
+  const toggleProfile = (key: keyof BuyerProfileState) => {
+    const updated = { ...profile, [key]: !(profile as unknown as Record<string,unknown>)[key] } as BuyerProfileState;
+    if (key === 'isFirstTimeBuyer' && updated.isFirstTimeBuyer)   updated.isAdditionalProperty = false;
+    if (key === 'isAdditionalProperty' && updated.isAdditionalProperty) updated.isFirstTimeBuyer = false;
+    setProfile(updated);
+  };
+
+  const surchargeLabel = region === 'Scotland' ? '+8% Surcharge' : region === 'Wales' ? '+4% Surcharge' : '+5% Surcharge';
+  const ftbLabel       = region === 'Scotland' ? '0% up to \u00a3175k' : region === 'Wales' ? 'Standard rates apply' : '0% up to \u00a3425k';
+
   return (
-    <Panel>
-      {/* Header */}
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}`, display: 'flex', alignItems: 'center', gap: 10 }}>
-        <h2 style={{ flex: 1, fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Your Purchase</h2>
-        <button type="button" onClick={() => setMode(mode === 'simple' ? 'advanced' : 'simple')}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            padding: '5px 12px', borderRadius: 999,
-            background: mode === 'advanced' ? C.secondaryContainer : C.surfaceLow,
-            color: mode === 'advanced' ? C.onSecondaryContainer : C.onSurfaceVariant,
-            border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: T.label, fontWeight: 500,
-          }}>
-          <Settings size={13} />
-          Advanced
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-100/40 flex flex-col h-full overflow-hidden">
+      {/* Strip header */}
+      <div className="flex justify-between items-center bg-slate-50 px-5 py-4 border-b border-slate-200">
+        <h2 className="font-extrabold text-[11px] uppercase tracking-[0.2em] text-slate-800">Your Purchase</h2>
+        <button onClick={() => handlePriceChange(850000)} className="flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg text-[10px] tracking-wider uppercase font-bold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors shadow-sm cursor-pointer">
+          <SlidersHorizontal className="w-3 h-3 text-blue-600" />
+          <span>Optimize</span>
         </button>
       </div>
 
-      <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 28 }}>
-
-        {/* ── STEP 1: PROPERTY PRICE ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <StepBadge n={1} label="PROPERTY PRICE £" active />
-
-          {/* Large price input */}
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, borderBottom: `2px solid ${C.secondary}`, paddingBottom: 8 }}>
-            <span style={{ fontSize: T.display, fontWeight: 400, color: C.onSurfaceVariant, lineHeight: 1, ...NUM }}>£</span>
+      <div className="px-5 md:px-6 py-5 md:py-6 flex flex-col gap-6">
+        {/* Step 01 — Price */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <StepBadge n="01" active />
+              <span className="text-[10px] font-bold text-slate-500 tracking-[0.12em] uppercase">PROPERTY PRICE</span>
+            </div>
+            <button onClick={() => handlePriceChange(850000)} className="text-[10px] font-bold uppercase text-blue-600 hover:text-blue-700 cursor-pointer transition-colors tracking-wide">
+              Reset &#x00a3;850k
+            </button>
+          </div>
+          <div className="flex items-baseline gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-blue-100 focus-within:border-blue-400 transition-all">
+            <span className="font-mono font-bold text-slate-400 text-xl">&#x00a3;</span>
             <input
-              type="number" inputMode="decimal" value={price || ''}
-              onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
-              min={0} step={5000} aria-label="Property price"
-              style={{
-                flex: 1, minWidth: 0, ...NUM,
-                fontSize: T.display, fontWeight: 700, color: C.primary,
-                background: 'transparent', border: 'none', outline: 'none',
-                fontFamily: 'inherit', letterSpacing: '-0.02em', padding: 0, lineHeight: 1,
-              }}
+              type="text"
+              value={inputVal}
+              onChange={handleInput}
+              onBlur={() => setInputVal(price.toLocaleString())}
+              className="bg-transparent font-mono font-bold text-2xl sm:text-3xl text-blue-600 border-none focus:outline-none focus:ring-0 p-0 w-full tracking-tight"
+              placeholder="0"
             />
           </div>
-
-          {/* Custom slider */}
-          <div>
-            <div style={{ position: 'relative', height: 8, borderRadius: 999, background: C.surfaceContainer }}>
-              <div style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: `${sliderPct}%`, borderRadius: 999, background: C.secondary, transition: 'width 0.08s ease', pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, -50%)', left: `${sliderPct}%`, width: 16, height: 16, borderRadius: '50%', background: C.secondary, border: '2px solid #fff', boxShadow: '0 1px 4px rgba(0,0,0,0.2)', pointerEvents: 'none', transition: 'left 0.08s ease' }} />
-              <input type="range"
-                value={price} onChange={(e) => setPrice(+e.target.value)}
-                min={SLIDER_MIN} max={SLIDER_MAX} step={5000}
-                aria-label="Property price slider"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer', margin: 0 }}
-              />
-            </div>
-            {/* Preset markers */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: T.caption, color: C.outline, marginTop: 8, fontFamily: 'monospace' }}>
-              {[250_000, 425_000, 625_000, 925_000].map(v => (
-                <button key={v} type="button" onClick={() => setPrice(v)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: T.caption, color: price === v ? C.secondary : C.outline, fontWeight: price === v ? 700 : 400, fontFamily: 'monospace', padding: 0 }}>
-                  £{v / 1000}k
-                </button>
-              ))}
+          <div className="pt-1">
+            <input
+              type="range" min="10000" max="2500000" step="5000" value={price}
+              onChange={e => handlePriceChange(parseInt(e.target.value, 10))}
+              className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-blue-600"
+            />
+            <div className="flex justify-between text-[9px] text-slate-400 mt-2 font-mono uppercase tracking-wider">
+              <span>&#x00a3;250k</span><span>&#x00a3;750k</span><span>&#x00a3;1.25m</span><span>&#x00a3;2.5m</span>
             </div>
           </div>
         </div>
 
-        {/* ── STEP 2: REGION ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 16, borderTop: `1px solid ${C.surfaceContainer}` }}>
-          <StepBadge n={2} label="REGION" active={false} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            {([
-              { key: 'england', name: 'England', tax: 'SDLT' },
-              { key: 'scotland', name: 'Scotland', tax: 'LBTT' },
-              { key: 'wales',   name: 'Wales',    tax: 'LTT'  },
-            ] as const).map(({ key, name, tax }) => {
-              const active = country === key;
-              return (
-                <button key={key} type="button" onClick={() => setCountry(key)} aria-pressed={active}
-                  style={{
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-                    padding: '12px 6px', borderRadius: 8,
-                    background: active ? C.secondary : C.surfaceLow,
-                    border: `1px solid ${active ? C.secondary : 'transparent'}`,
-                    color: active ? C.onSecondary : C.onSurface,
-                    cursor: 'pointer', fontFamily: 'inherit',
-                    boxShadow: active ? '0 2px 8px rgba(0,108,71,0.22)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}>
-                  <span style={{ fontSize: T.label, fontWeight: 700 }}>{name}</span>
-                  <span style={{ fontSize: T.caption, opacity: active ? 0.8 : 0.6 }}>{tax}</span>
-                </button>
-              );
-            })}
+        {/* Step 02 — Region */}
+        <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
+          <div className="flex items-center gap-2">
+            <StepBadge n="02" active={false} />
+            <span className="text-[10px] font-bold text-slate-500 tracking-[0.12em] uppercase">TAX REGION</span>
           </div>
-        </div>
-
-        {/* ── STEP 3: BUYER PROFILE ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 16, borderTop: `1px solid ${C.surfaceContainer}` }}>
-          <StepBadge n={3} label="BUYER PROFILE" active={false} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <CheckboxCard checked={flags.ftb}          onChange={(v) => setStatus('ftb', v)}          label="First-time buyer"     description="0% up to £300k"   disabled={flags.additional || flags.nonResident} />
-            <CheckboxCard checked={flags.additional}   onChange={(v) => setStatus('additional', v)}   label="Additional property"  description="+5% surcharge"    disabled={flags.ftb} />
-            <CheckboxCard checked={flags.nonResident}  onChange={(v) => setStatus('nonResident', v)}  label="Non-UK resident"      description="+2% surcharge"    disabled={flags.ftb} />
-          </div>
-
-          {/* Smart eligibility callouts */}
-          {!flags.ftb && !flags.additional && !flags.nonResident && ftbCap && price > 0 && price <= ftbCap && (
-            <Callout icon={<Info size={14} />} color={C.secondary} bg={C.surfaceLow} border={C.outlineVariant}
-              title="You may qualify for FTB relief"
-              body="Tick 'First-time buyer' above if you've never owned residential property anywhere." />
-          )}
-          {flags.ftb && country === 'england' && price > 500_000 && (
-            <Callout icon={<Info size={14} />} color={C.amber} bg={C.amberBg} border={`${C.amber}44`}
-              title="FTB relief not available above £500k"
-              body="Standard rates apply at this price point." />
-          )}
-          {flags.additional && (
-            <Callout icon={<Info size={14} />} color={C.secondary} bg={C.surfaceLow} border={C.outlineVariant}
-              title="Selling your main home soon?"
-              body="You can reclaim the +5% surcharge if you sell within 36 months of completion." />
-          )}
-        </div>
-
-        {/* Advanced toggles */}
-        {mode === 'advanced' && (
-          <div style={{ paddingTop: 16, borderTop: `1px solid ${C.surfaceContainer}` }}>
-            <div style={{ fontSize: T.caption, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Advanced</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <AdvToggle on={flags.mixedUse} onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: v, company: false })} label="Mixed-use property" desc="Commercial element — no 3% surcharge applies" />
-              <AdvToggle on={flags.company}  onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: false, company: v })} label="Company-bought" desc="Non-natural person, 15% flat if > £500k" />
-            </div>
-          </div>
-        )}
-      </div>
-    </Panel>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   2. TAX BREAKDOWN (center column)
-═══════════════════════════════════════════════════════════════ */
-const WEDGE_COLORS = ['#006c47', '#2de19b', '#0f766e', '#ffba3b', '#ba1a1a'];
-
-function TaxBreakdown({ result }: { result: SDLTResult }) {
-  const activeBands = result.bands.filter(b => b.taxOn > 0);
-  return (
-    <Panel>
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}` }}>
-        <h2 style={{ fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Tax Breakdown</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: T.caption, color: C.outline }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: C.secondary, display: 'inline-block', flexShrink: 0 }} />
-          Updated live
-        </div>
-      </div>
-
-      <div style={{ padding: '24px 24px 20px', display: 'flex', flexDirection: 'column', gap: 24 }}>
-        {/* Donut */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Donut result={result} />
-        </div>
-
-        {/* Band list */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-            <span style={{ fontSize: T.caption, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Breakdown by band</span>
-            <span style={{ fontSize: T.caption, fontWeight: 700, padding: '2px 8px', borderRadius: 4, background: C.surfaceLow, color: C.outline }}>
-              {activeBands.length} bands · {result.taxName}
-            </span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {activeBands.map((b, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 8, background: C.surfaceLowest, border: `1px solid ${C.surfaceContainer}` }}>
-                <div>
-                  <div style={{ fontSize: T.body, fontWeight: 600, color: C.onSurface }}>Band {i + 1} · {(b.rate * 100).toFixed(0)}%</div>
-                  <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>{b.label.split(':').pop()?.trim()} · {gbp(b.taxOn)}</div>
-                </div>
-                <span style={{ fontSize: T.label, fontWeight: 700, color: C.primary, ...NUM }}>{gbp(b.tax)}</span>
-              </div>
+          <div className="grid grid-cols-3 gap-2">
+            {(['England','Scotland','Wales'] as Region[]).map(r => (
+              <button key={r} onClick={() => setRegion(r)}
+                className={`py-2.5 px-1 rounded-xl text-[10px] font-extrabold flex flex-col items-center border transition-all cursor-pointer ${region===r ? 'bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-100' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'}`}>
+                <span className="uppercase tracking-wider">{r}</span>
+                <span className={`text-[9px] mt-0.5 font-mono ${region===r ? 'opacity-80' : 'text-slate-400'}`}>{r==='England' ? 'SDLT' : r==='Scotland' ? 'LBTT' : 'LTT'}</span>
+              </button>
             ))}
-            {result.surchargeAmount > 0 && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 8, background: C.amberBg, border: `1px solid ${C.amber}33` }}>
-                <div>
-                  <div style={{ fontSize: T.body, fontWeight: 600, color: C.amber }}>Surcharge</div>
-                  <div style={{ fontSize: T.caption, color: C.amber, opacity: 0.85, marginTop: 2 }}>{result.surchargeLabel}</div>
-                </div>
-                <span style={{ fontSize: T.label, fontWeight: 700, color: C.amber, ...NUM }}>{gbp(result.surchargeAmount)}</span>
-              </div>
-            )}
+          </div>
+          <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-medium">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span>Active: <strong className="text-slate-800 font-bold uppercase">{region} {getTaxLabel(region)}</strong></span>
           </div>
         </div>
 
-        {/* Monthly costs CTA */}
-        <a href="/mortgage-affordability" style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', borderRadius: 10, background: C.surfaceLowest, border: `1.5px solid ${C.outlineVariant}`, textDecoration: 'none', transition: 'border-color 0.15s' }}>
-          <span style={{ width: 38, height: 38, borderRadius: 8, flexShrink: 0, background: C.surfaceLow, color: C.secondary, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Home size={18} />
-          </span>
-          <span style={{ flex: 1 }}>
-            <span style={{ display: 'block', fontSize: T.body, fontWeight: 700, color: C.onSurface }}>Monthly costs?</span>
-            <span style={{ display: 'block', fontSize: T.caption, color: C.outline, marginTop: 1 }}>Estimate your mortgage repayments</span>
-          </span>
-          <ArrowRight size={15} style={{ color: C.secondary, flexShrink: 0 }} />
-        </a>
-      </div>
-    </Panel>
-  );
-}
-
-function Donut({ result }: { result: SDLTResult }) {
-  const size = 192, stroke = 22;
-  const r = (size - stroke) / 2;
-  const cx = size / 2, cy = size / 2;
-  const circumference = 2 * Math.PI * r;
-  const total = result.total;
-  const isZero = total === 0;
-  const segments: { value: number; color: string; key: string }[] = [];
-  result.bands.filter(b => b.tax > 0).forEach((b, i) => {
-    segments.push({ value: b.tax, color: WEDGE_COLORS[i % WEDGE_COLORS.length], key: `b${i}` });
-  });
-  if (result.surchargeAmount > 0) segments.push({ value: result.surchargeAmount, color: C.amber, key: 'surch' });
-  let cumulative = 0;
-  const gap = 2;
-
-  return (
-    <div style={{ position: 'relative', width: size, height: size, flexShrink: 0 }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)', display: 'block' }}>
-        <circle cx={cx} cy={cy} r={r} fill="none" stroke={C.surfaceHigh} strokeWidth={stroke} />
-        {!isZero && segments.map((seg) => {
-          const segLen = (seg.value / total) * circumference;
-          const dashArr = `${Math.max(segLen - gap, 0.1)} ${circumference}`;
-          const offset = -cumulative;
-          cumulative += segLen;
-          return (
-            <circle key={seg.key} cx={cx} cy={cy} r={r} fill="none" stroke={seg.color} strokeWidth={stroke}
-              strokeDasharray={dashArr} strokeDashoffset={offset} strokeLinecap="butt"
-              style={{ transition: 'stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease' }} />
-          );
-        })}
-      </svg>
-      <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', textAlign: 'center' }}>
-        <div style={{ fontSize: T.caption, fontWeight: 700, color: C.outline, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
-          Total {result.taxName}
+        {/* Step 03 — Buyer Profile */}
+        <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
+          <div className="flex items-center gap-2">
+            <StepBadge n="03" active={false} />
+            <span className="text-[10px] font-bold text-slate-500 tracking-[0.12em] uppercase">BUYER PROFILE</span>
+          </div>
+          <div className="flex flex-col gap-2.5">
+            <ProfileCard checked={profile.isFirstTimeBuyer}    onClick={() => toggleProfile('isFirstTimeBuyer')}    color="blue"  label="First-time Buyer"    sub={ftbLabel} />
+            <ProfileCard checked={profile.isAdditionalProperty} onClick={() => toggleProfile('isAdditionalProperty')} color="amber" label="Additional Property"  sub={surchargeLabel} badge="2nd Home" />
+            <ProfileCard checked={profile.isNonUKResident}     onClick={() => toggleProfile('isNonUKResident')}     color="red"   label="Non-UK Resident"     sub="+2% surcharge across all bands" icon={<Globe className="w-3 h-3 text-red-500" />} />
+          </div>
         </div>
-        <div style={{ fontSize: T.donutTotal, fontWeight: 700, color: C.primary, letterSpacing: '-0.02em', ...NUM, lineHeight: 1 }}>{gbp(total)}</div>
-        <div style={{ fontSize: T.caption, color: C.onSurfaceVariant, marginTop: 5, ...NUM }}>{pct(result.effectiveRate)} effective</div>
+
+        {/* Advanced */}
+        <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
+          <button onClick={() => setAdvOpen(v => !v)}
+            className="w-full flex justify-between items-center bg-slate-50 hover:bg-slate-100 px-4 py-3 rounded-xl border border-slate-200 cursor-pointer transition-colors text-[11px] font-extrabold uppercase tracking-widest text-slate-700">
+            <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-blue-600" /><span>Advanced Scenarios</span></span>
+            <span className="text-blue-600 text-[10px] font-mono">{advOpen ? 'HIDE \u25b2' : 'SHOW \u25bc'}</span>
+          </button>
+
+          {advOpen && (
+            <div className="flex flex-col gap-4 p-4 bg-slate-50/60 rounded-2xl border border-slate-200">
+              {/* Property type */}
+              <div className="flex flex-col gap-2">
+                <span className="text-[9px] font-bold tracking-[0.1em] text-slate-400 uppercase">Property Category</span>
+                <div className="grid grid-cols-2 gap-2">
+                  {(['residential','non-residential'] as const).map(t => (
+                    <button key={t} onClick={() => setProfile({...profile, propertyType: t})}
+                      className={`py-2 px-1 rounded-lg text-[10px] font-extrabold uppercase border transition-all cursor-pointer ${(profile.propertyType ?? 'residential')===t ? 'bg-white border-blue-400 text-blue-600 shadow-sm' : 'bg-transparent text-slate-500 border-slate-200 hover:bg-white'}`}>
+                      {t==='residential' ? 'Residential' : 'Commercial'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {/* Shared ownership */}
+              <div className="flex flex-col gap-2 border-t border-slate-200 pt-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] font-bold tracking-[0.1em] text-slate-400 uppercase">Shared Ownership</span>
+                  <span className="text-[10px] font-mono font-bold text-blue-600">{profile.sharedOwnershipPercent ?? 100}% Share</span>
+                </div>
+                <input type="range" min="10" max="100" step="5" value={profile.sharedOwnershipPercent ?? 100}
+                  onChange={e => setProfile({...profile, sharedOwnershipPercent: parseInt(e.target.value, 10)})}
+                  className="w-full h-1.5 bg-slate-200 rounded-full appearance-none cursor-pointer accent-blue-600" />
+                <div className="flex justify-between text-[8px] text-slate-400 font-mono"><span>10%</span><span>50%</span><span>100%</span></div>
+                {(profile.sharedOwnershipPercent ?? 100) < 100 && (
+                  <div className="bg-blue-50 border border-blue-100 p-2 rounded-lg text-[10px] text-blue-700 font-mono uppercase tracking-wider">
+                    Taxable: &#x00a3;{((price * (profile.sharedOwnershipPercent ?? 100)) / 100).toLocaleString()}
+                  </div>
+                )}
+              </div>
+              {/* Right to Buy */}
+              <div onClick={() => setProfile({...profile, isCouncilRightToBuy: !profile.isCouncilRightToBuy})}
+                className={`flex items-start gap-2.5 p-3 rounded-xl border cursor-pointer ${profile.isCouncilRightToBuy ? 'border-blue-300 bg-blue-50/30' : 'border-slate-200 bg-white hover:bg-slate-50'}`}>
+                <div className={`mt-0.5 w-4 h-4 rounded border flex items-center justify-center ${profile.isCouncilRightToBuy ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'}`}>
+                  {profile.isCouncilRightToBuy && <Check className="w-3 h-3 stroke-[3px]" />}
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-extrabold text-slate-700 text-[10px] uppercase tracking-wide">Right To Buy Scheme</span>
+                  <span className="text-[9px] font-mono text-slate-400 mt-0.5">Calculated on discounted net council price.</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   3. SCENARIO COMPARISON (right column)
-═══════════════════════════════════════════════════════════════ */
-function ScenarioComparison({
-  flags, result, allScen, onApply,
-}: {
-  flags: Flags; result: SDLTResult; allScen: SDLTResult[];
-  onApply: (b: BuyerType) => void;
-}) {
-  const buyer     = deriveBuyer(flags);
-  const ftbR      = allScen.find(r => r.buyerType === 'firstTime')!;
-  const addR      = allScen.find(r => r.buyerType === 'additional')!;
-  const bestScen  = allScen.reduce((b, s) => s.total < b.total ? s : b, allScen[0]);
-  const bestSaving = result.total - bestScen.total;
-  const alreadyBest = bestScen.buyerType === buyer;
-
-  const cols = [
-    { label: 'Current',    sub: result.taxName,    r: result, isCurrent: true,  highlight: false },
-    { label: 'First-time', sub: '0% up to £300k',  r: ftbR,   isCurrent: false, highlight: ftbR.total < result.total },
-    { label: 'Additional', sub: '+5% surcharge',   r: addR,   isCurrent: false, highlight: false },
-  ];
-
-  function DeltaCell({ r }: { r: SDLTResult }) {
-    const d = result.total - r.total;
-    if (d === 0) return <span style={{ color: C.outline, fontSize: T.caption }}>— Baseline</span>;
-    const saving = d > 0;
-    return (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 5, fontSize: T.caption, fontWeight: 700, background: saving ? C.secondaryContainer : C.amberBg, color: saving ? C.onSecondaryContainer : C.amber, ...NUM }}>
-        {saving ? <ArrowDown size={11} /> : <ArrowUp size={11} />}
-        {saving ? '-' : '+'}{gbp(Math.abs(d))}
-      </span>
-    );
-  }
+/* ═══════════════════════════════════
+   TAX BREAKDOWN
+═══════════════════════════════════ */
+function TaxBreakdown({ result }: { result: CalcResult }) {
+  const { totalTax, effectiveRate, bands, propertyPrice, region, profile } = result;
+  const r = 70;
+  const circ = 2 * Math.PI * r;
+  const pctOfMax = Math.min(100, (effectiveRate / 15) * 100);
+  const dashOffset = circ - (pctOfMax / 100) * circ;
+  const hasSurcharge = profile.isAdditionalProperty || profile.isNonUKResident;
 
   return (
-    <Panel>
-      {/* Header */}
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${C.outlineVariant}`, display: 'flex', alignItems: 'center', gap: 10 }}>
-        <h2 style={{ flex: 1, fontSize: T.heading, fontWeight: 700, color: C.primary, margin: 0 }}>Scenario Comparison</h2>
-        <span style={{ fontSize: T.caption, fontWeight: 700, letterSpacing: '0.08em', padding: '3px 8px', borderRadius: 4, background: C.surfaceLow, color: C.secondaryFixedDim }}>
-          4 SCENARIOS
-        </span>
-        <div style={{ display: 'flex', gap: 6 }}>
-          <IconBtn><Download size={16} /></IconBtn>
-          <IconBtn><Share2 size={16} /></IconBtn>
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-100/40 p-5 md:p-6 flex flex-col gap-6 h-full">
+      <div className="flex justify-between items-center border-b border-slate-100 pb-4">
+        <div>
+          <h2 className="font-extrabold text-[11px] uppercase tracking-[0.2em] text-slate-800">Tax Breakdown</h2>
+          <span className="flex items-center gap-1.5 text-[10px] font-bold tracking-wider text-slate-400 uppercase mt-1.5">
+            <RefreshCw className="w-3.5 h-3.5 text-blue-500" style={{animation:'spin 6s linear infinite'}} />
+            Updated live for 2026
+          </span>
+        </div>
+        <div className="bg-blue-50 px-2.5 py-1 rounded-lg text-[10px] tracking-wider uppercase font-bold text-blue-700 flex items-center gap-1 border border-blue-100">
+          <Coins className="w-3.5 h-3.5 text-blue-600" />
+          <span>Tiers</span>
         </div>
       </div>
 
-      {/* Comparison table */}
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: T.body, textAlign: 'left', minWidth: 340 }}>
-          <thead>
-            <tr style={{ background: C.surfaceLow, fontSize: T.caption, color: C.outline, borderBottom: `1px solid ${C.outlineVariant}` }}>
-              <th style={{ padding: '12px 16px', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', width: '24%' }}>Metric</th>
-              {cols.map((c, i) => (
-                <th key={i} style={{ padding: '12px 14px', fontWeight: 700, borderLeft: `1px solid ${C.surfaceHigh}`, background: c.highlight ? C.surfaceLow : 'transparent', color: c.highlight ? C.secondary : C.outline }}>
-                  {c.label}
-                </th>
-              ))}
+      {/* Donut */}
+      <div className="flex flex-col items-center py-4">
+        <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+          <svg className="w-full h-full -rotate-90" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r={r} className="stroke-slate-100 fill-none" strokeWidth="11" />
+            <circle cx="80" cy="80" r={r} fill="none" stroke={hasSurcharge ? '#f59e0b' : '#2563EB'} strokeWidth="11"
+              strokeDasharray={circ} strokeDashoffset={totalTax > 0 ? dashOffset : circ}
+              strokeLinecap="round" style={{transition:'stroke-dashoffset 0.5s ease-out'}} />
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] leading-none">TOTAL {getTaxLabel(region)}</span>
+            <span className="font-mono font-black text-slate-800 text-xl sm:text-2xl leading-none my-1.5">
+              &#x00a3;{totalTax.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})}
+            </span>
+            <span className="text-[10px] font-bold text-blue-600 uppercase">{effectiveRate.toFixed(2)}%</span>
+            <span className="text-[9px] text-slate-400 lowercase">effective rate</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Shared ownership notice */}
+      {(profile.sharedOwnershipPercent ?? 100) < 100 && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-800 flex items-start gap-2.5">
+          <span className="text-amber-500 font-extrabold mt-0.5 shrink-0">&#x24D8;</span>
+          <div>
+            <p className="font-bold uppercase tracking-wider text-[9px] text-amber-700 mb-0.5">Shared Ownership Active</p>
+            <p className="font-mono text-[10px]">
+              {profile.sharedOwnershipPercent}% share &#x00a3;{((propertyPrice*(profile.sharedOwnershipPercent??100))/100).toLocaleString()} of &#x00a3;{propertyPrice.toLocaleString()}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Band list */}
+      <div className="flex flex-col gap-3 mt-auto">
+        <div className="flex justify-between items-center text-[10px]">
+          <span className="text-slate-500 tracking-[0.12em] uppercase font-bold">BY TAX BAND</span>
+          <span className="text-slate-400 font-mono uppercase text-[9px]">{bands.filter(b=>b.taxPaidInBand>0).length} active</span>
+        </div>
+        <div className="flex flex-col gap-1.5 max-h-72 overflow-y-auto pr-0.5">
+          {bands.map((band, idx) => {
+            const active = band.taxPaidInBand > 0;
+            return (
+              <div key={idx} className={`rounded-xl p-3 flex justify-between items-center border transition-all ${active ? 'bg-blue-50/40 border-blue-100' : 'bg-slate-50/40 border-slate-100/70 opacity-50'}`}>
+                <div className="flex flex-col pr-2">
+                  <span className={`font-bold text-xs uppercase tracking-wide ${active ? 'text-slate-800' : 'text-slate-400'}`}>{band.name}</span>
+                  <span className="text-[10px] font-mono text-slate-400 mt-0.5">{band.description}</span>
+                </div>
+                <div className="flex flex-col items-end shrink-0">
+                  <span className={`font-mono font-bold text-xs ${active ? 'text-blue-600' : 'text-slate-400'}`}>
+                    &#x00a3;{band.taxPaidInBand.toLocaleString(undefined,{maximumFractionDigits:0})}
+                  </span>
+                  {active && totalTax > 0 && (
+                    <span className="text-[9px] font-mono text-slate-400 mt-0.5">
+                      {((band.taxPaidInBand/totalTax)*100).toFixed(0)}%
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
+   SCENARIO COMPARISON
+═══════════════════════════════════ */
+function ScenarioComparison({ currentResult, onSave, onApplyProfile }: {
+  currentResult: CalcResult;
+  onSave: (name?: string) => void;
+  onApplyProfile: (ftb: boolean, add: boolean) => void;
+}) {
+  const { totalTax, effectiveRate, propertyPrice, region, profile } = currentResult;
+  const [saveName, setSaveName] = useState('');
+  const [saveOk,   setSaveOk]   = useState(false);
+
+  const ftbResult = calcSDLT(propertyPrice, region, { isFirstTimeBuyer: true,  isAdditionalProperty: false, isNonUKResident: false });
+  const addResult = calcSDLT(propertyPrice, region, { isFirstTimeBuyer: false, isAdditionalProperty: true,  isNonUKResident: false });
+  const ftbDelta  = ftbResult.totalTax - totalTax;
+  const addDelta  = addResult.totalTax - totalTax;
+  const hasSavings = !profile.isFirstTimeBuyer && ftbDelta < 0;
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSave(saveName.trim() || `Quote: &#x00a3;${propertyPrice.toLocaleString()} (${region})`);
+    setSaveName('');
+    setSaveOk(true);
+    setTimeout(() => setSaveOk(false), 3000);
+  };
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-100/40 p-5 md:p-6 flex flex-col gap-6 h-full">
+      <div className="flex justify-between items-center border-b border-slate-100 pb-4">
+        <div className="flex items-center gap-2">
+          <h2 className="font-extrabold text-[11px] uppercase tracking-[0.2em] text-slate-800">Compare Scenarios</h2>
+          <span className="bg-slate-100 border border-slate-200 text-slate-600 font-bold px-2 py-0.5 rounded-md text-[8px] uppercase tracking-[0.1em]">3 Cohorts</span>
+        </div>
+        <div className="flex gap-1.5">
+          <button onClick={() => alert('Export coming soon')} title="Download" className="p-1.5 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-colors bg-white cursor-pointer">
+            <Download className="w-4 h-4" />
+          </button>
+          <button onClick={() => { navigator.clipboard.writeText(window.location.href); alert('URL copied!'); }} title="Share" className="p-1.5 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-400 hover:text-blue-600 transition-colors bg-white cursor-pointer">
+            <Share2 className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto border border-slate-200 rounded-xl">
+        <table className="w-full text-xs border-collapse">
+          <thead className="text-[10px] uppercase tracking-wider bg-slate-50 border-b border-slate-200">
+            <tr>
+              <th className="px-3 py-3 font-bold text-slate-500 text-left w-1/4">Scenario</th>
+              <th className="px-3 py-3 font-bold text-slate-600 text-left border-l border-slate-200">Current</th>
+              <th className="px-3 py-3 font-bold text-blue-700 text-left border-l border-slate-200 bg-blue-50/30">First-Time</th>
+              <th className="px-3 py-3 font-bold text-amber-700 text-left border-l border-slate-200 bg-amber-50/10">Additional</th>
             </tr>
           </thead>
           <tbody>
-            {/* Total Tax */}
-            <tr style={{ borderBottom: `1px solid ${C.surfaceContainer}` }}>
-              <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Total Tax</div>
-                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>Payable now</div>
+            <tr className="border-b border-slate-100">
+              <td className="px-3 py-3 text-left">
+                <div className="font-bold text-slate-700 uppercase text-[10px] tracking-wide">Total Tax</div>
+                <div className="text-[9px] text-slate-400 font-medium mt-0.5">payable</div>
               </td>
-              {cols.map((c, i) => (
-                <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent' }}>
-                  <span style={{ fontSize: T.tableNum, fontWeight: 800, color: c.highlight ? C.secondary : C.primary, letterSpacing: '-0.02em', ...NUM }}>{gbp(c.r.total)}</span>
-                </td>
-              ))}
+              <td className="px-3 py-3 border-l border-slate-100 font-mono font-bold text-slate-800">&#x00a3;{totalTax.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+              <td className="px-3 py-3 border-l border-slate-100 font-mono font-bold text-blue-700 bg-blue-50/30">&#x00a3;{ftbResult.totalTax.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
+              <td className="px-3 py-3 border-l border-slate-100 font-mono font-bold text-amber-700 bg-amber-50/10">&#x00a3;{addResult.totalTax.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
             </tr>
-            {/* Effective Rate */}
-            <tr style={{ borderBottom: `1px solid ${C.surfaceContainer}` }}>
-              <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Effective Rate</div>
-                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>% of price</div>
+            <tr className="border-b border-slate-100">
+              <td className="px-3 py-3 text-left">
+                <div className="font-bold text-slate-700 uppercase text-[10px] tracking-wide">Eff. Rate</div>
+                <div className="text-[9px] text-slate-400 font-medium mt-0.5">% of price</div>
               </td>
-              {cols.map((c, i) => (
-                <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent', fontWeight: 700, fontSize: T.body, color: c.highlight ? C.secondary : C.onSurface, ...NUM }}>
-                  {pct(c.r.effectiveRate)}
-                </td>
-              ))}
+              <td className="px-3 py-3 border-l border-slate-100 font-mono text-slate-700">{effectiveRate.toFixed(2)}%</td>
+              <td className="px-3 py-3 border-l border-slate-100 font-mono font-bold text-blue-700 bg-blue-50/30">{ftbResult.effectiveRate.toFixed(2)}%</td>
+              <td className="px-3 py-3 border-l border-slate-100 font-mono text-amber-700 bg-amber-50/10">{addResult.effectiveRate.toFixed(2)}%</td>
             </tr>
-            {/* Delta */}
             <tr>
-              <td style={{ padding: '14px 16px' }}>
-                <div style={{ fontWeight: 600, color: C.onSurface, fontSize: T.body }}>Delta vs Current</div>
-                <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>Savings / Extra</div>
+              <td className="px-3 py-3 text-left">
+                <div className="font-bold text-slate-700 uppercase text-[10px] tracking-wide">Delta</div>
+                <div className="text-[9px] text-slate-400 font-medium mt-0.5">vs current</div>
               </td>
-              {cols.map((c, i) => (
-                <td key={i} style={{ padding: '14px 14px', borderLeft: `1px solid ${C.surfaceContainer}`, background: c.highlight ? C.surfaceLow : 'transparent' }}>
-                  <DeltaCell r={c.r} />
-                </td>
-              ))}
+              <td className="px-3 py-3 border-l border-slate-100 text-[10px] text-slate-400 font-mono uppercase">Baseline</td>
+              <td className="px-3 py-3 border-l border-slate-100 bg-blue-50/30">
+                {ftbDelta === 0
+                  ? <span className="text-[9px] font-mono text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold uppercase">Active</span>
+                  : ftbDelta < 0
+                  ? <span className="inline-flex items-center gap-0.5 bg-emerald-50 text-emerald-800 border border-emerald-100 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono">&#x2212;&#x00a3;{Math.abs(ftbDelta).toLocaleString()}</span>
+                  : <span className="inline-flex items-center gap-0.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono">+&#x00a3;{ftbDelta.toLocaleString()}</span>
+                }
+              </td>
+              <td className="px-3 py-3 border-l border-slate-100 bg-amber-50/10">
+                {addDelta === 0
+                  ? <span className="text-[9px] font-mono text-amber-700 bg-amber-100 px-2 py-0.5 rounded font-bold uppercase">Active</span>
+                  : addDelta > 0
+                  ? <span className="inline-flex items-center gap-0.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono">+&#x00a3;{addDelta.toLocaleString()}</span>
+                  : <span className="inline-flex items-center gap-0.5 bg-emerald-50 text-emerald-800 border border-emerald-100 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono">&#x2212;&#x00a3;{Math.abs(addDelta).toLocaleString()}</span>
+                }
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      {/* Best-for-you banner */}
-      {bestSaving > 0 && !alreadyBest && (
-        <div style={{ margin: '16px 20px 20px', padding: '14px 16px', background: C.surfaceLow, borderRadius: 12, border: `1px solid ${C.surfaceHighest}`, display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 38, height: 38, borderRadius: 8, flexShrink: 0, background: C.secondary, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <CheckCircle2 size={20} color={C.onSecondary} />
+      {/* Recommendation banner */}
+      <div className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors ${profile.isFirstTimeBuyer ? 'bg-emerald-50/50 border-emerald-200/60' : 'bg-slate-50/80 border-slate-200'}`}>
+        <div className="flex items-start gap-3">
+          <div className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-sm shrink-0">
+            <CheckCircle className={`w-5 h-5 ${profile.isFirstTimeBuyer ? 'text-emerald-600' : 'text-blue-600'}`} />
           </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 4 }}>
-              <span style={{ fontSize: T.caption, fontWeight: 800, color: C.secondary, letterSpacing: '0.10em', textTransform: 'uppercase' }}>Best for you</span>
-              <span style={{ fontSize: T.caption, fontWeight: 700, padding: '2px 5px', borderRadius: 3, background: C.secondary, color: C.onSecondary }}>AI MATCH</span>
+          <div>
+            <div className="flex items-center gap-1.5 mb-1">
+              <span className={`text-[9px] font-extrabold tracking-[0.15em] uppercase ${profile.isFirstTimeBuyer ? 'text-emerald-700' : 'text-blue-700'}`}>
+                {profile.isFirstTimeBuyer ? 'Incentive Applied' : 'Optimization Potential'}
+              </span>
+              <span className={`text-[8px] px-1.5 py-0.5 rounded font-mono font-bold uppercase ${profile.isFirstTimeBuyer ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}`}>2026</span>
             </div>
-            <div style={{ fontSize: T.label, color: C.onSurface, lineHeight: 1.5 }}>
-              {bestScen.buyerType === 'firstTime' ? 'First-Time Buyer' : 'Standard'} relief saves you{' '}
-              <strong style={{ color: C.secondary, ...NUM }}>{gbp(bestSaving)}</strong> vs current rate.
-            </div>
+            {profile.isFirstTimeBuyer ? (
+              <p className="text-[11px] text-slate-600">Relief active. You save <strong className="text-emerald-700">&#x00a3;{Math.abs(ftbDelta).toLocaleString()}</strong> vs standard rate.</p>
+            ) : hasSavings ? (
+              <p className="text-[11px] text-slate-600">FTB relief could save <strong className="text-blue-600">&#x00a3;{Math.abs(ftbDelta).toLocaleString()}</strong> if eligible.</p>
+            ) : profile.isAdditionalProperty ? (
+              <p className="text-[11px] text-slate-600">Additional surcharge active. Extra <strong className="text-red-600">&#x00a3;{addDelta.toLocaleString()}</strong> vs standard.</p>
+            ) : (
+              <p className="text-[11px] text-slate-600">Standard rate. Additional surcharge would add <strong className="text-blue-600">&#x00a3;{addDelta.toLocaleString()}</strong>.</p>
+            )}
           </div>
-          <button type="button" onClick={() => onApply(bestScen.buyerType)}
-            style={{ padding: '8px 14px', borderRadius: 8, background: C.secondary, color: C.onSecondary, border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: T.label, fontWeight: 700, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5 }}>
-            Apply <ArrowRight size={12} />
-          </button>
         </div>
-      )}
-    </Panel>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PRIMITIVES
-═══════════════════════════════════════════════════════════════ */
-function Panel({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ background: C.surfaceLowest, border: `1px solid ${C.outlineVariant}`, borderRadius: 12, boxShadow: C.shadow, overflow: 'hidden' }}>
-      {children}
-    </div>
-  );
-}
-
-function IconBtn({ children }: { children: React.ReactNode }) {
-  return (
-    <button type="button" style={{ padding: 6, borderRadius: 6, border: `1px solid ${C.outlineVariant}`, background: 'transparent', cursor: 'pointer', color: C.onSurfaceVariant, display: 'flex', alignItems: 'center' }}>
-      {children}
-    </button>
-  );
-}
-
-function StepBadge({ n, label, active }: { n: number; label: string; active: boolean }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: active ? C.secondaryContainer : C.surfaceContainer, color: active ? C.onSecondaryContainer : C.onSurfaceVariant, fontSize: T.caption, fontWeight: 700, flexShrink: 0 }}>{n}</span>
-      <span style={{ fontSize: T.caption, fontWeight: 700, color: C.onSurfaceVariant, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</span>
-    </div>
-  );
-}
-
-function CheckboxCard({ checked, onChange, label, description, disabled }: {
-  checked: boolean; onChange: (v: boolean) => void;
-  label: string; description: string; disabled?: boolean;
-}) {
-  return (
-    <label style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '12px', borderRadius: 8, background: C.surfaceLowest, border: `1px solid ${checked ? C.secondary : C.outlineVariant}`, cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.5 : 1, transition: 'border-color 0.15s' }}>
-      <input type="checkbox" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} style={{ display: 'none' }} />
-      <div style={{ width: 20, height: 20, borderRadius: 4, flexShrink: 0, marginTop: 1, border: `2px solid ${checked ? C.secondary : C.outline}`, background: checked ? C.secondary : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}>
-        {checked && (
-          <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
-            <path d="M1 4L4 7L10 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+        {hasSavings && (
+          <button onClick={() => onApplyProfile(true, false)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg font-bold text-[10px] uppercase tracking-[0.1em] transition-colors cursor-pointer self-start sm:self-center shrink-0 shadow-sm shadow-blue-100">
+            Apply Relief
+          </button>
         )}
       </div>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: T.body, fontWeight: 600, color: checked ? C.primary : C.onSurface }}>{label}</div>
-        <div style={{ fontSize: T.caption, color: C.outline, marginTop: 2 }}>{description}</div>
-      </div>
-    </label>
-  );
-}
 
-function Callout({ icon, color, bg, border, title, body }: { icon: React.ReactNode; color: string; bg: string; border: string; title: string; body: string }) {
-  return (
-    <div style={{ padding: '10px 12px', borderRadius: 8, background: bg, border: `1px solid ${border}`, display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-      <div style={{ color, marginTop: 2, flexShrink: 0 }}>{icon}</div>
-      <div>
-        <div style={{ fontSize: T.label, fontWeight: 700, color }}>{title}</div>
-        <div style={{ fontSize: T.caption, color: C.onSurfaceVariant, marginTop: 2 }}>{body}</div>
-      </div>
+      {/* Save quote */}
+      <form onSubmit={handleSave} className="flex flex-col gap-2 pt-4 border-t border-slate-100">
+        <label className="text-[10px] font-bold text-slate-500 tracking-wider uppercase">Save Calculation Quote</label>
+        <div className="flex gap-2">
+          <input
+            type="text" value={saveName} onChange={e => setSaveName(e.target.value)}
+            placeholder={`Quote for &#x00a3;${propertyPrice.toLocaleString()} (${region})`}
+            className="flex-1 bg-slate-50 border border-slate-200 text-slate-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-blue-400 placeholder-slate-400 font-mono min-w-0"
+          />
+          <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-1.5 font-bold text-[10px] uppercase tracking-wider transition-colors cursor-pointer shadow-sm shadow-blue-100 shrink-0">
+            <Save className="w-3.5 h-3.5" />
+            <span>Save</span>
+          </button>
+        </div>
+        {saveOk && <p className="text-[10px] font-bold font-mono text-emerald-600 uppercase tracking-widest">&#x2713; Quote stored in browser cache.</p>}
+      </form>
     </div>
   );
 }
 
-function AdvToggle({ on, onChange, label, desc }: { on: boolean; onChange: (v: boolean) => void; label: string; desc: string }) {
+/* ─── Shared primitives ─── */
+function StepBadge({ n, active }: { n: string; active: boolean }) {
   return (
-    <button type="button" role="switch" aria-checked={on} onClick={() => onChange(!on)}
-      style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '10px 0', width: '100%', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}>
-      <span style={{ position: 'relative', width: 32, height: 18, borderRadius: 999, flexShrink: 0, marginTop: 1, background: on ? C.secondary : C.outlineVariant, transition: 'background 0.18s ease', display: 'inline-block' }}>
-        <span style={{ position: 'absolute', top: 2, left: 2, width: 14, height: 14, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 2px rgba(0,0,0,0.12)', transform: on ? 'translateX(14px)' : 'translateX(0)', transition: 'transform 0.18s ease', display: 'block' }} />
-      </span>
-      <span style={{ flex: 1 }}>
-        <span style={{ display: 'block', fontSize: T.body, fontWeight: 600, color: C.onSurface }}>{label}</span>
-        <span style={{ display: 'block', fontSize: T.caption, color: C.outline, marginTop: 2 }}>{desc}</span>
-      </span>
-    </button>
+    <div className={`border w-5 h-5 rounded-md flex items-center justify-center font-bold text-[10px] ${active ? 'border-blue-200 bg-blue-50 text-blue-600' : 'border-slate-200 bg-slate-50 text-slate-500'}`}>
+      {n}
+    </div>
+  );
+}
+
+function ProfileCard({ checked, onClick, color, label, sub, badge, icon }: {
+  checked: boolean; onClick: () => void; color: 'blue'|'amber'|'red';
+  label: string; sub: string; badge?: string; icon?: React.ReactNode;
+}) {
+  const activeCls = color==='blue' ? 'border-blue-300 bg-blue-50/40' : color==='amber' ? 'border-amber-300 bg-amber-50/30' : 'border-red-300 bg-red-50/20';
+  const boxCls    = color==='blue' ? 'border-blue-600 bg-blue-600' : color==='amber' ? 'border-amber-600 bg-amber-600' : 'border-red-600 bg-red-600';
+  return (
+    <div onClick={onClick} className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all ${checked ? activeCls : 'border-slate-200 bg-slate-50/50 hover:border-slate-300 hover:bg-slate-50'}`}>
+      <div className="mt-0.5 shrink-0">
+        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${checked ? `${boxCls} text-white` : 'border-slate-300 bg-white'}`}>
+          {checked && <Check className="w-3 h-3 stroke-[3px]" />}
+        </div>
+      </div>
+      <div className="flex flex-col min-w-0 w-full">
+        <div className="flex items-center justify-between gap-1 flex-wrap">
+          <span className="font-bold text-slate-800 text-xs uppercase tracking-wide flex items-center gap-1.5">{label}{icon}</span>
+          {badge && <span className="text-[8px] bg-amber-50 border border-amber-200 text-amber-800 px-1.5 py-0.5 rounded-md font-mono shrink-0">{badge}</span>}
+        </div>
+        <span className="text-[10px] font-mono text-slate-400 mt-0.5">{sub}</span>
+      </div>
+    </div>
   );
 }

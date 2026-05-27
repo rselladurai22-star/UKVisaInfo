@@ -159,6 +159,11 @@ html.dark body {
   text-wrap: balance;
 }
 
+/* Tabular numbers — prevents layout shift when digits change */
+.num-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
 /* Body deck below headline */
 .serif-deck {
   font-family: var(--font-sans);
