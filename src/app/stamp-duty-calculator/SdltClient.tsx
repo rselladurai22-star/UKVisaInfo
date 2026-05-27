@@ -17,8 +17,8 @@
 
 import { useMemo, useState } from 'react';
 import {
-  Settings, Check, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
-  Home, Sparkles, ChevronDown,
+  Settings, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
+  Home, Sparkles, ChevronDown, Info,
 } from 'lucide-react';
 import {
   calculateSDLT, calculateAllScenarios, calculateAllCountries, calculateRefund,
@@ -156,7 +156,8 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   1. CALCULATOR INPUTS (left column)
+   1. CALCULATOR INPUTS (left column) — redesigned May 2026
+   3-step flow: Price → Region → Buyer profile
 ═══════════════════════════════════════════════════════════════ */
 function CalculatorInputs({
   country, setCountry, flags, setFlags, price, setPrice, mode, setMode,
@@ -166,111 +167,66 @@ function CalculatorInputs({
   price: number; setPrice: (n: number) => void;
   mode: 'simple' | 'advanced'; setMode: (m: 'simple' | 'advanced') => void;
 }) {
-  const STATUSES: { id: string; label: string; key: keyof Flags | 'standard' }[] = [
-    { id: 'standard',  label: 'Standard',   key: 'standard' },
-    { id: 'firstTime', label: 'First-Time', key: 'ftb' },
-    { id: 'additional', label: 'Additional', key: 'additional' },
-    { id: 'nonResident', label: 'Non-UK',   key: 'nonResident' },
+  /* Price quick-presets — anchored to UK market realities */
+  const PRICE_PRESETS = [
+    { v: 250_000, label: '£250k', sub: 'UK median'  },
+    { v: 425_000, label: '£425k', sub: 'FTB ceiling' },
+    { v: 625_000, label: '£625k', sub: 'avg detached' },
+    { v: 925_000, label: '£925k', sub: '10% band'    },
   ];
 
-  const activeStatus =
-    flags.ftb         ? 'firstTime'   :
-    flags.additional  ? 'additional'  :
-    flags.nonResident ? 'nonResident' : 'standard';
+  /* Buyer-profile chips — multi-select where it makes sense.
+     FTB is exclusive (a FTB is by definition not buying additional or as non-resident usually).
+     Additional + Non-UK can stack (calc supports 'addNonRes'). */
+  const setStatus = (key: 'ftb' | 'additional' | 'nonResident', val: boolean) => {
+    if (key === 'ftb') {
+      // FTB toggles on -> clear the others; off -> clear self
+      setFlags({
+        ...flags,
+        ftb: val,
+        additional: val ? false : flags.additional,
+        nonResident: val ? false : flags.nonResident,
+        mixedUse: false, company: false,
+      });
+      return;
+    }
+    // additional / nonResident — multi-select, but clear FTB & advanced
+    setFlags({
+      ...flags,
+      ftb: false,
+      mixedUse: false, company: false,
+      [key]: val,
+    } as Flags);
+  };
 
   return (
     <Card padding={0}>
       {/* Header */}
       <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          Calculator Inputs
+          Your purchase
         </h2>
         <button type="button" onClick={() => setMode(mode === 'simple' ? 'advanced' : 'simple')}
           style={{
-            width: 32, height: 32, borderRadius: 8,
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '6px 10px', borderRadius: 8,
             background: mode === 'advanced' ? T.blueT : 'transparent',
             color: mode === 'advanced' ? T.blue : T.muted,
             border: 'none', cursor: 'pointer',
+            fontFamily: 'inherit', fontSize: 11.5, fontWeight: 600,
             transition: 'all 0.15s ease',
           }}
           title="Toggle advanced mode"
           aria-label="Toggle advanced mode">
-          <Settings size={16} />
+          <Settings size={13} />
+          Advanced
         </button>
       </div>
 
       <div style={{ padding: 24 }}>
-        {/* BUYER STATUS */}
-        <Label>Buyer Status</Label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
-          {STATUSES.map((s) => {
-            const active = activeStatus === s.id;
-            return (
-              <button key={s.id} type="button"
-                onClick={() => setFlags({
-                  ftb: s.id === 'firstTime',
-                  additional: s.id === 'additional',
-                  nonResident: s.id === 'nonResident',
-                  mixedUse: false, company: false,
-                })}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                  padding: '12px 12px', borderRadius: 10,
-                  background: active ? T.blueT : T.paper,
-                  border: `1.5px solid ${active ? T.blue : T.hair}`,
-                  color: active ? T.blue : T.body,
-                  cursor: 'pointer', fontFamily: 'inherit',
-                  fontSize: 13.5, fontWeight: 600,
-                  transition: 'all 0.15s ease',
-                }}>
-                {active && <Check size={14} strokeWidth={3} />}
-                {s.label}
-              </button>
-            );
-          })}
-        </div>
+        {/* ─── STEP 1 ─── PROPERTY PRICE ─── */}
+        <StepHeader n={1} title="Property price" icon="£" />
 
-        {/* REGION */}
-        <Label>Region</Label>
-        <div style={{ display: 'grid', gap: 8, marginBottom: 28 }}>
-          {(['england', 'scotland', 'wales'] as Country[]).map((c) => {
-            const active = country === c;
-            return (
-              <button key={c} type="button" onClick={() => setCountry(c)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  padding: '12px 14px', borderRadius: 10,
-                  background: T.paper,
-                  border: `1.5px solid ${active ? T.blue : T.hair}`,
-                  cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
-                  transition: 'border 0.15s ease',
-                }}>
-                <span style={{
-                  position: 'relative', width: 18, height: 18, borderRadius: '50%',
-                  border: `2px solid ${active ? T.blue : T.ghost}`,
-                  flexShrink: 0, transition: 'border 0.15s ease',
-                }}>
-                  {active && <span style={{
-                    position: 'absolute', top: 3, left: 3, width: 8, height: 8, borderRadius: '50%',
-                    background: T.blue,
-                  }} />}
-                </span>
-                <span style={{ flex: 1 }}>
-                  <span style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
-                    {c === 'england' ? 'England & NI' : c === 'scotland' ? 'Scotland' : 'Wales'}
-                  </span>
-                </span>
-                <span style={{ fontSize: 10, fontWeight: 600, color: T.faint, letterSpacing: '0.08em' }}>
-                  {c === 'england' ? 'SDLT' : c === 'scotland' ? 'LBTT' : 'LTT'}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* PROPERTY PRICE */}
-        <Label>Property Price</Label>
         <div style={{
           display: 'flex', alignItems: 'baseline', gap: 4,
           padding: '4px 0',
@@ -279,6 +235,7 @@ function CalculatorInputs({
           <input type="number" inputMode="decimal" value={price || ''}
             onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
             min={0} step={5000}
+            aria-label="Property price"
             style={{
               flex: 1, minWidth: 0, ...NUM,
               fontSize: 32, fontWeight: 700, color: T.ink,
@@ -287,17 +244,178 @@ function CalculatorInputs({
               padding: 0, lineHeight: 1.1,
             }} />
         </div>
+
+        {/* Band-position tracker — shows where this price sits across UK bands */}
+        <BandPositionTracker price={price} country={country} />
+
         <input type="range" value={price} onChange={(e) => setPrice(+e.target.value)}
           min={50_000} max={2_000_000} step={5000}
+          aria-label="Property price slider"
           style={{ width: '100%', marginTop: 14, accentColor: T.blue, cursor: 'pointer' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, color: T.faint, marginTop: 4, ...NUM }}>
           <span>£50k</span><span>£500k</span><span>£1m</span><span>£2m</span>
         </div>
 
-        {/* ADVANCED OPTIONS */}
+        {/* Quick-pick presets */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, marginTop: 14 }}>
+          {PRICE_PRESETS.map((p) => {
+            const active = price === p.v;
+            return (
+              <button key={p.v} type="button" onClick={() => setPrice(p.v)}
+                title={`${p.label} — ${p.sub}`}
+                style={{
+                  padding: '8px 6px', borderRadius: 8,
+                  background: active ? T.blueT : T.paper,
+                  border: `1px solid ${active ? T.blue : T.hair}`,
+                  color: active ? T.blue : T.body,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+                  transition: 'all 0.15s ease',
+                }}>
+                <span style={{ fontSize: 12.5, fontWeight: 700, ...NUM }}>{p.label}</span>
+                <span style={{ fontSize: 9.5, color: active ? T.blue : T.faint, fontWeight: 500 }}>{p.sub}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ─── STEP 2 ─── REGION ─── */}
+        <div style={{ marginTop: 28 }} />
+        <StepHeader n={2} title="Region" icon="📍" />
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
+          {(['england', 'scotland', 'wales'] as Country[]).map((c) => {
+            const active = country === c;
+            return (
+              <button key={c} type="button" onClick={() => setCountry(c)}
+                aria-pressed={active}
+                style={{
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                  padding: '12px 8px', borderRadius: 10,
+                  background: active ? T.blueT : T.paper,
+                  border: `1.5px solid ${active ? T.blue : T.hair}`,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'all 0.15s ease',
+                }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: active ? T.blue : T.ink, lineHeight: 1.2 }}>
+                  {c === 'england' ? 'England & NI' : c === 'scotland' ? 'Scotland' : 'Wales'}
+                </span>
+                <span style={{
+                  fontSize: 9.5, fontWeight: 700, letterSpacing: '0.08em',
+                  padding: '2px 6px', borderRadius: 4,
+                  background: active ? T.blue : T.surface,
+                  color: active ? T.paper : T.faint,
+                }}>
+                  {c === 'england' ? 'SDLT' : c === 'scotland' ? 'LBTT' : 'LTT'}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ─── STEP 3 ─── BUYER PROFILE ─── */}
+        <div style={{ marginTop: 28 }} />
+        <StepHeader n={3} title="Buyer profile" icon="👤" />
+
+        <p style={{ fontSize: 11.5, color: T.muted, margin: '0 0 12px', lineHeight: 1.5 }}>
+          Leave all unchecked if you&apos;re replacing your main home. Tick any that apply — surcharges stack.
+        </p>
+
+        <div style={{ display: 'grid', gap: 8 }}>
+          <BuyerChip
+            on={flags.ftb}
+            onChange={(v) => setStatus('ftb', v)}
+            label="First-time buyer"
+            tip="Never owned residential property anywhere in the world. Relief: 0% to £300k, 5% to £500k. Lost above £500k."
+            badge="0% up to £300k"
+            disabled={flags.additional || flags.nonResident}
+          />
+          <BuyerChip
+            on={flags.additional}
+            onChange={(v) => setStatus('additional', v)}
+            label="Additional property"
+            tip="You already own residential property (anywhere in the world) and this isn't replacing your main home. +5% surcharge on every band, applied to the full price."
+            badge="+5% surcharge"
+            disabled={flags.ftb}
+          />
+          <BuyerChip
+            on={flags.nonResident}
+            onChange={(v) => setStatus('nonResident', v)}
+            label="Non-UK resident"
+            tip="You haven't been UK-resident in the 12 months before completion. +2% surcharge on top of standard rates. Stacks with the additional-property surcharge."
+            badge="+2% surcharge"
+            disabled={flags.ftb}
+          />
+        </div>
+
+        {/* Smart eligibility callout — surfaces non-obvious savings/penalties */}
+        {(() => {
+          const ftbCap = country === 'england' ? 500_000 : country === 'scotland' ? 175_000 : null;
+          // FTB available, not yet selected, eligible by price+region
+          if (!flags.ftb && !flags.additional && !flags.nonResident && ftbCap && price > 0 && price <= ftbCap) {
+            return (
+              <div style={{
+                marginTop: 12, padding: '10px 12px', borderRadius: 10,
+                background: T.purpleT, border: `1px solid ${T.purple}33`,
+                display: 'flex', alignItems: 'flex-start', gap: 10,
+              }}>
+                <Sparkles size={14} style={{ color: T.purple, marginTop: 2, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: T.purple, lineHeight: 1.35 }}>
+                    You may qualify for first-time-buyer relief
+                  </div>
+                  <div style={{ fontSize: 11, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>
+                    At this price{country === 'england' ? ' in England' : country === 'scotland' ? ' in Scotland' : ''}, FTB relief could save you thousands. Tick it above if eligible.
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          // FTB selected but over the cap — relief is lost
+          if (flags.ftb && country === 'england' && price > 500_000) {
+            return (
+              <div style={{
+                marginTop: 12, padding: '10px 12px', borderRadius: 10,
+                background: T.amberT, border: `1px solid ${T.amber}33`,
+                display: 'flex', alignItems: 'flex-start', gap: 10,
+              }}>
+                <Info size={14} style={{ color: T.amber, marginTop: 2, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: T.amber, lineHeight: 1.35 }}>
+                    FTB relief not available above £500k
+                  </div>
+                  <div style={{ fontSize: 11, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>
+                    You&apos;ll pay the standard rate — same as any non-FTB buyer at this price point.
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          // Additional property — possible refund if replacing main home within 36 months
+          if (flags.additional) {
+            return (
+              <div style={{
+                marginTop: 12, padding: '10px 12px', borderRadius: 10,
+                background: T.blueT, border: `1px solid ${T.blue}22`,
+                display: 'flex', alignItems: 'flex-start', gap: 10,
+              }}>
+                <Info size={14} style={{ color: T.blue, marginTop: 2, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: T.blue, lineHeight: 1.35 }}>
+                    Selling your old main home soon?
+                  </div>
+                  <div style={{ fontSize: 11, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>
+                    If you sell within 36 months of completion, you can reclaim the +5% surcharge.
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
         {mode === 'advanced' && (
-          <div style={{ marginTop: 24, paddingTop: 20, borderTop: `1px solid ${T.divide}` }}>
-            <Label>Advanced Options</Label>
+          <div style={{ marginTop: 22, paddingTop: 18, borderTop: `1px solid ${T.divide}` }}>
+            <Label>Advanced</Label>
             <div style={{ display: 'grid', gap: 6 }}>
               <AdvToggle on={flags.mixedUse}
                 onChange={(v) => setFlags({
@@ -305,7 +423,7 @@ function CalculatorInputs({
                   mixedUse: v, company: false,
                 })}
                 label="Mixed-use property"
-                desc="Has commercial element — no 3% surcharge" />
+                desc="Has commercial element — no 3% surcharge applies" />
               <AdvToggle on={flags.company}
                 onChange={(v) => setFlags({
                   ftb: false, additional: false, nonResident: false,
@@ -947,6 +1065,155 @@ function AdvToggle({
         <span style={{ display: 'block', fontSize: 11.5, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>{desc}</span>
       </span>
     </button>
+  );
+}
+
+function StepHeader({ n, title, icon }: { n: number; title: string; icon: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+      <span style={{
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        width: 22, height: 22, borderRadius: '50%',
+        background: T.blueT, color: T.blue,
+        fontSize: 11, fontWeight: 800, ...NUM,
+        flexShrink: 0,
+      }}>{n}</span>
+      <span style={{ fontSize: 13.5, fontWeight: 700, color: T.ink, letterSpacing: '-0.01em' }}>
+        {title}
+      </span>
+      <span style={{ fontSize: 14, lineHeight: 1, opacity: 0.7 }} aria-hidden="true">{icon}</span>
+    </div>
+  );
+}
+
+function BuyerChip({
+  on, onChange, label, tip, badge, disabled,
+}: {
+  on: boolean; onChange: (v: boolean) => void;
+  label: string; tip: string; badge: string; disabled?: boolean;
+}) {
+  return (
+    <label
+      style={{
+        display: 'flex', alignItems: 'center', gap: 12,
+        padding: '12px 14px', borderRadius: 10,
+        background: on ? T.blueT : T.paper,
+        border: `1.5px solid ${on ? T.blue : T.hair}`,
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.45 : 1,
+        transition: 'all 0.15s ease',
+      }}>
+      <input type="checkbox" checked={on} disabled={disabled}
+        onChange={(e) => onChange(e.target.checked)}
+        style={{
+          width: 18, height: 18, accentColor: T.blue,
+          cursor: disabled ? 'not-allowed' : 'pointer', flexShrink: 0,
+          margin: 0,
+        }} />
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{ fontSize: 13.5, fontWeight: 600, color: on ? T.blue : T.ink, lineHeight: 1.3 }}>
+            {label}
+          </span>
+          <span title={tip} style={{
+            display: 'inline-flex', cursor: 'help', color: T.faint,
+            transition: 'color 0.15s',
+          }}>
+            <Info size={12} />
+          </span>
+        </span>
+      </span>
+      <span style={{
+        fontSize: 10.5, fontWeight: 700, ...NUM,
+        padding: '3px 8px', borderRadius: 6,
+        background: on ? T.blue : T.surface,
+        color: on ? T.paper : T.muted,
+        whiteSpace: 'nowrap',
+      }}>{badge}</span>
+    </label>
+  );
+}
+
+/* Lightweight band tracker — shows position of user's price within the
+   first 5 SDLT/LBTT/LTT bands (truncated at £1.5m for visual clarity). */
+function BandPositionTracker({ price, country }: { price: number; country: Country }) {
+  const BANDS: Record<Country, { upTo: number; rate: number; label: string }[]> = {
+    england: [
+      { upTo: 250_000,   rate: 0,  label: '0%' },
+      { upTo: 925_000,   rate: 5,  label: '5%' },
+      { upTo: 1_500_000, rate: 10, label: '10%' },
+      { upTo: 2_000_000, rate: 12, label: '12%' },
+    ],
+    scotland: [
+      { upTo: 145_000,   rate: 0,  label: '0%' },
+      { upTo: 250_000,   rate: 2,  label: '2%' },
+      { upTo: 325_000,   rate: 5,  label: '5%' },
+      { upTo: 750_000,   rate: 10, label: '10%' },
+      { upTo: 2_000_000, rate: 12, label: '12%' },
+    ],
+    wales: [
+      { upTo: 225_000,   rate: 0,  label: '0%' },
+      { upTo: 400_000,   rate: 6,  label: '6%' },
+      { upTo: 750_000,   rate: 7.5, label: '7.5%' },
+      { upTo: 1_500_000, rate: 10, label: '10%' },
+      { upTo: 2_000_000, rate: 12, label: '12%' },
+    ],
+  };
+  const bands = BANDS[country];
+  const max = bands[bands.length - 1].upTo;
+  const pct = Math.min(100, (price / max) * 100);
+
+  // Find current band index
+  const currentIdx = bands.findIndex(b => price <= b.upTo);
+  const activeIdx = currentIdx === -1 ? bands.length - 1 : currentIdx;
+
+  return (
+    <div style={{ marginTop: 14 }}>
+      <div style={{
+        position: 'relative', height: 6, borderRadius: 999,
+        background: T.surface, overflow: 'hidden',
+      }}>
+        {/* Band segments */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
+          {bands.map((b, i) => {
+            const prev = i === 0 ? 0 : bands[i - 1].upTo;
+            const width = ((b.upTo - prev) / max) * 100;
+            const isActive = i === activeIdx;
+            return (
+              <div key={i} style={{
+                width: `${width}%`,
+                background: isActive ? T.blue : i < activeIdx ? T.blueDk : 'transparent',
+                opacity: isActive ? 1 : i < activeIdx ? 0.45 : 0,
+                borderRight: i < bands.length - 1 ? `1px solid ${T.paper}` : 'none',
+                transition: 'all 0.25s ease',
+              }} />
+            );
+          })}
+        </div>
+        {/* Position marker */}
+        <div style={{
+          position: 'absolute', top: -3, left: `calc(${pct}% - 6px)`,
+          width: 12, height: 12, borderRadius: '50%',
+          background: T.paper, border: `2.5px solid ${T.blue}`,
+          boxShadow: '0 1px 3px rgba(0,0,0,0.18)',
+          transition: 'left 0.25s ease',
+        }} aria-hidden="true" />
+      </div>
+      <div style={{
+        marginTop: 8, display: 'flex', alignItems: 'center', gap: 6,
+        fontSize: 11, color: T.muted,
+      }}>
+        <span style={{
+          display: 'inline-block', width: 8, height: 8, borderRadius: '50%',
+          background: T.blue,
+        }} />
+        <span>
+          You&apos;re in the <strong style={{ color: T.ink, fontWeight: 700 }}>
+            {bands[activeIdx].label} band
+          </strong> ({country === 'england' ? 'SDLT' : country === 'scotland' ? 'LBTT' : 'LTT'})
+        </span>
+      </div>
+    </div>
   );
 }
 
