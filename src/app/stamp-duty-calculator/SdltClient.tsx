@@ -1,18 +1,25 @@
 'use client';
 
 /**
- * Stamp Duty — full product experience (May 2026).
+ * Stamp Duty — dashboard product redesign (May 2026 — v4).
  *
- * Layout rhythm: light → dark → light → light
- *   1. Calculator card        (light, white surface, the form)
- *   2. INSIGHTS section       (dark inverse, SVG line chart + bar chart)
- *   3. Country comparison     (light, 3 cards)
- *   4. Refund tool            (light, conditional)
- *   5. Quick reference        (light, stat strip)
+ * Matches mockup spec:
+ *   3-column hero grid:  Inputs | Tax Breakdown (donut) | What-If Scenarios
+ *   Strip:               Live SDLT thresholds tracker
+ *   2-column charts:     Price Sensitivity (area) | Comparative Load (bars)
+ *
+ * Modes: Simple (Standard/FTB/Additional/Non-UK pills) +
+ *        Advanced (adds Mixed-use, Company, Joint).
+ *
+ * Visual: cream page, white cards, blue/indigo primary accent,
+ * Inter cv11+ss01 typography, subtle 1px borders, soft shadows.
  */
 
 import { useMemo, useState } from 'react';
-import { Sparkles, AlertCircle, Info, TrendingUp, TrendingDown, Check, ArrowRight } from 'lucide-react';
+import {
+  Settings, Check, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
+  Home, Users, User, Sparkles, ChevronDown,
+} from 'lucide-react';
 import {
   calculateSDLT, calculateAllScenarios, calculateAllCountries, calculateRefund,
   COUNTRY_LABEL,
@@ -20,43 +27,44 @@ import {
 } from '../../lib/sdlt/calc';
 
 /* ─────────────────────────────────────────────
-   TOKENS
+   TOKENS — cream/blue dashboard palette
 ───────────────────────────────────────────── */
 const T = {
-  // Light theme
-  black:    '#09090B',
-  ink:      '#18181B',
-  body:     '#3F3F46',
-  muted:    '#71717A',
-  faint:    '#A1A1AA',
-  ghost:    '#D4D4D8',
-  paper:    '#FFFFFF',
-  surface:  '#FAFAFA',
-  page:     '#F4F4F5',
-  hair:     '#E4E4E7',
-  divide:   '#F4F4F5',
-  brand:    '#047857',
-  brandT:   '#ECFDF5',
-  warn:     '#B45309',
-  warnT:    '#FEF3C7',
-  danger:   '#B91C1C',
-  // Dark theme
-  dBlack:   '#09090B',
-  dInk:     '#FAFAFA',
-  dBody:    '#D4D4D8',
-  dMuted:   '#A1A1AA',
-  dFaint:   '#71717A',
-  dHair:    'rgba(255,255,255,0.08)',
-  dDivide:  'rgba(255,255,255,0.04)',
-  dBrand:   '#34D399',
-  dWarn:    '#FBBF24',
+  // Surfaces
+  page:      '#FAF7F4',
+  paper:     '#FFFFFF',
+  surface:   '#F8FAFC',
+  // Text
+  ink:       '#0F172A',
+  body:      '#334155',
+  muted:     '#64748B',
+  faint:     '#94A3B8',
+  ghost:     '#CBD5E1',
+  // Borders
+  hair:      '#E2E8F0',
+  divide:    '#F1F5F9',
+  // Primary (blue)
+  blue:      '#2563EB',
+  blueDk:    '#1D4ED8',
+  blueT:     '#EFF6FF',
+  blueT2:    '#DBEAFE',
+  // Secondary (indigo/purple for FTB scenario)
+  purple:    '#7C3AED',
+  purpleT:   '#F5F3FF',
+  // Accents
+  emerald:   '#15803D',
+  emeraldT:  '#DCFCE7',
+  amber:     '#B45309',
+  amberT:    '#FEF3C7',
+  rose:      '#BE123C',
+  roseT:     '#FFE4E6',
   // Shadows
-  shadowSm: '0 1px 2px rgba(9,9,11,0.04)',
-  shadow:   '0 1px 3px rgba(9,9,11,0.05), 0 1px 2px rgba(9,9,11,0.04)',
-  shadowMd: '0 4px 12px -2px rgba(9,9,11,0.08), 0 2px 4px rgba(9,9,11,0.04)',
+  shadowSm:  '0 1px 2px rgba(15,23,42,0.04)',
+  shadow:    '0 1px 3px rgba(15,23,42,0.05), 0 1px 2px rgba(15,23,42,0.04)',
+  shadowMd:  '0 4px 16px -2px rgba(15,23,42,0.06), 0 2px 4px rgba(15,23,42,0.04)',
 };
 
-const FONT_FEAT: React.CSSProperties = {
+const FONT: React.CSSProperties = {
   fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
   fontFeatureSettings: '"cv11", "ss01"',
 };
@@ -69,18 +77,12 @@ const gbp  = (n: number) => n.toLocaleString('en-GB', { style: 'currency', curre
 const pct  = (n: number) => (n * 100).toFixed(2) + '%';
 const fmtK = (n: number) => n >= 1_000_000 ? `£${(n/1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}m` : `£${(n/1000).toFixed(0)}k`;
 
-function bandColour(rate: number): string {
-  if (rate === 0)    return '#F4F4F5';
-  if (rate <= 0.02)  return '#D1FAE5';
-  if (rate <= 0.05)  return '#A7F3D0';
-  if (rate <= 0.075) return '#6EE7B7';
-  if (rate <= 0.10)  return '#34D399';
-  return '#10B981';
+/* Flag-based state machine */
+interface Flags {
+  ftb: boolean; additional: boolean; nonResident: boolean;
+  mixedUse: boolean; company: boolean; joint: boolean;
 }
-
-/* Buyer state machine */
-interface Flags { ftb: boolean; additional: boolean; nonResident: boolean; mixedUse: boolean; company: boolean }
-function deriveBuyerType(f: Flags): BuyerType {
+function deriveBuyer(f: Flags): BuyerType {
   if (f.mixedUse) return 'mixedUse';
   if (f.company)  return 'company';
   if (f.ftb)      return 'firstTime';
@@ -91,784 +93,424 @@ function deriveBuyerType(f: Flags): BuyerType {
 }
 function buyerLabel(b: BuyerType): string {
   return {
-    standard: 'Standard buyer', firstTime: 'First-time buyer',
+    standard: 'Standard', firstTime: 'First-time buyer',
     additional: 'Additional property', nonResident: 'Non-UK resident',
-    addNonRes: 'Additional + Non-resident', mixedUse: 'Mixed-use property',
+    addNonRes: 'Additional + Non-resident', mixedUse: 'Mixed-use',
     company: 'Company-owned',
   }[b];
 }
-function flagsForBuyer(b: BuyerType): Flags {
-  return {
-    ftb:         b === 'firstTime',
-    additional:  b === 'additional'  || b === 'addNonRes',
-    nonResident: b === 'nonResident' || b === 'addNonRes',
-    mixedUse:    b === 'mixedUse',
-    company:     b === 'company',
-  };
-}
 
 /* ═══════════════════════════════════════════════════════════════
-   MAIN EXPERIENCE — renders multiple sections (light/dark rhythm)
+   ROOT EXPERIENCE
 ═══════════════════════════════════════════════════════════════ */
 export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: number }) {
   const [price, setPrice]     = useState(initialPrice);
   const [country, setCountry] = useState<Country>('england');
   const [flags, setFlags] = useState<Flags>({
-    ftb: false, additional: false, nonResident: false, mixedUse: false, company: false,
+    ftb: false, additional: false, nonResident: false,
+    mixedUse: false, company: false, joint: false,
   });
+  const [mode, setMode] = useState<'simple' | 'advanced'>('simple');
 
-  const buyer    = deriveBuyerType(flags);
+  const buyer    = deriveBuyer(flags);
   const result   = useMemo(() => calculateSDLT(price, buyer, country), [price, buyer, country]);
   const allScen  = useMemo(() => calculateAllScenarios(price, country), [price, country]);
-  const allCtry  = useMemo(() => calculateAllCountries(price, buyer), [price, buyer]);
-
-  const stdResult = allScen.find((r) => r.buyerType === 'standard')!;
-  const ftbResult = allScen.find((r) => r.buyerType === 'firstTime')!;
-
-  const insights = useMemo(() => {
-    const items: { tone: 'good' | 'warn' | 'info'; label: string; detail: string }[] = [];
-    if (!flags.ftb && !flags.additional && !flags.nonResident && price <= 500_000) {
-      const saving = stdResult.total - ftbResult.total;
-      if (saving > 0) items.push({ tone: 'good', label: `Save ${gbp(saving)} as a first-time buyer`, detail: 'If eligible, FTB relief replaces standard rates' });
-    }
-    if (flags.ftb && price > 500_000) {
-      items.push({ tone: 'warn', label: 'FTB relief lost above £500k cap', detail: 'Standard rates now apply to the full price' });
-    }
-    if (flags.additional) {
-      items.push({ tone: 'info', label: 'Refund window: 36 months', detail: 'Sell previous main home to reclaim the 3% surcharge' });
-    }
-    const deadline = country === 'england' ? '14 days' : '30 days';
-    items.push({ tone: 'info', label: `Filing deadline ${deadline}`, detail: 'From the effective date of the transaction' });
-    return items.slice(0, 3);
-  }, [flags, price, country, stdResult.total, ftbResult.total]);
+  const stdRes   = allScen.find((r) => r.buyerType === 'standard')!;
+  const ftbRes   = allScen.find((r) => r.buyerType === 'firstTime')!;
 
   return (
-    <div style={FONT_FEAT}>
+    <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 80 }}>
 
-      {/* ═══════════════════════════════════════════
-          1. CALCULATOR CARD (light)
-      ═══════════════════════════════════════════ */}
-      <Section bg={T.surface} pt={32} pb={48}>
-        <Wrap>
-          <CalculatorCard
+      {/* ═══ HERO 3-COLUMN GRID ═══ */}
+      <div style={wrap}>
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)_minmax(0,1fr)] gap-5 lg:gap-6">
+          <CalculatorInputs
             country={country} setCountry={setCountry}
             flags={flags} setFlags={setFlags}
             price={price} setPrice={setPrice}
-            buyer={buyer} result={result}
-            insights={insights}
+            mode={mode} setMode={setMode}
           />
-        </Wrap>
-      </Section>
-
-      {/* ═══════════════════════════════════════════
-          2. INSIGHTS — dark inverse, charts
-      ═══════════════════════════════════════════ */}
-      <Section bg={T.dBlack} pt={80} pb={80} dark>
-        <Wrap>
-          <DarkInsights
-            price={price} country={country} buyer={buyer} flags={flags}
-            allScen={allScen} setFlags={setFlags}
+          <TaxBreakdown result={result} price={price} />
+          <WhatIfScenarios
+            price={price} country={country} flags={flags}
+            current={result.total} stdRes={stdRes} ftbRes={ftbRes}
+            onApply={(b) => setFlags(flagsForBuyer(b))}
           />
-        </Wrap>
-      </Section>
+        </div>
+      </div>
 
-      {/* ═══════════════════════════════════════════
-          3. COUNTRY COMPARISON (light)
-      ═══════════════════════════════════════════ */}
-      <Section bg={T.surface} pt={64} pb={48}>
-        <Wrap>
-          <CountrySection results={allCtry} current={country} onSelect={setCountry} buyer={buyer} price={price} />
-        </Wrap>
-      </Section>
+      {/* ═══ LIVE TRACKER STRIP ═══ */}
+      <div style={{ ...wrap, marginTop: 24 }}>
+        <LiveTracker country={country} />
+      </div>
 
-      {/* ═══════════════════════════════════════════
-          4. REFUND TOOL (light, conditional)
-      ═══════════════════════════════════════════ */}
-      {(buyer === 'additional' || buyer === 'addNonRes') && (
-        <Section bg={T.surface} pt={0} pb={48}>
-          <Wrap>
-            <RefundSection defaultPrice={price} />
-          </Wrap>
-        </Section>
-      )}
-
-      {/* ═══════════════════════════════════════════
-          5. QUICK REFERENCE (light)
-      ═══════════════════════════════════════════ */}
-      <Section bg={T.paper} pt={48} pb={48} topRule>
-        <Wrap>
-          <QuickRef country={country} />
-        </Wrap>
-      </Section>
+      {/* ═══ TWO-COLUMN CHARTS ═══ */}
+      <div style={{ ...wrap, marginTop: 24 }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
+          <PriceSensitivityCard price={price} buyer={buyer} country={country} />
+          <ComparativeLoadCard scenarios={allScen} current={buyer} />
+        </div>
+      </div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SECTION + WRAP PRIMITIVES
+   1. CALCULATOR INPUTS (left column)
 ═══════════════════════════════════════════════════════════════ */
-function Section({
-  bg, pt = 64, pb = 64, topRule = false, dark = false, children,
-}: {
-  bg: string; pt?: number; pb?: number; topRule?: boolean; dark?: boolean; children: React.ReactNode;
-}) {
-  return (
-    <section style={{
-      background: bg,
-      paddingTop: pt, paddingBottom: pb,
-      borderTop: topRule ? `1px solid ${T.hair}` : 'none',
-      color: dark ? T.dInk : T.ink,
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      {dark && (
-        <>
-          <div aria-hidden style={{
-            position: 'absolute', inset: 0, pointerEvents: 'none',
-            background: 'radial-gradient(ellipse 60% 50% at 85% 10%, rgba(52,211,153,0.08), transparent 60%)',
-          }} />
-          <div aria-hidden style={{
-            position: 'absolute', inset: 0, pointerEvents: 'none',
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)',
-            backgroundSize: '32px 32px',
-          }} />
-        </>
-      )}
-      <div style={{ position: 'relative' }}>{children}</div>
-    </section>
-  );
-}
-
-function Wrap({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(16px, 3vw, 32px)' }}>
-      {children}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   CALCULATOR CARD
-═══════════════════════════════════════════════════════════════ */
-function CalculatorCard({
-  country, setCountry, flags, setFlags, price, setPrice, buyer, result, insights,
+function CalculatorInputs({
+  country, setCountry, flags, setFlags, price, setPrice, mode, setMode,
 }: {
   country: Country; setCountry: (c: Country) => void;
   flags: Flags; setFlags: (f: Flags) => void;
   price: number; setPrice: (n: number) => void;
-  buyer: BuyerType; result: SDLTResult;
-  insights: { tone: 'good' | 'warn' | 'info'; label: string; detail: string }[];
+  mode: 'simple' | 'advanced'; setMode: (m: 'simple' | 'advanced') => void;
 }) {
-  return (
-    <div style={{
-      background: T.paper, borderRadius: 16,
-      border: `1px solid ${T.hair}`, boxShadow: T.shadow,
-      overflow: 'hidden',
-    }}>
-      <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr]">
+  const STATUSES: { id: string; label: string; key: keyof Flags | 'standard' }[] = [
+    { id: 'standard',  label: 'Standard',   key: 'standard' },
+    { id: 'firstTime', label: 'First-Time', key: 'ftb' },
+    { id: 'additional', label: 'Additional', key: 'additional' },
+    { id: 'nonResident', label: 'Non-UK',   key: 'nonResident' },
+  ];
 
-        {/* INPUTS PANEL */}
-        <div style={{ background: T.surface, padding: 'clamp(24px, 3vw, 32px)' }}>
-
-          <Field label="Region">
-            <Segmented value={country} onChange={(v) => setCountry(v as Country)}
-              options={[
-                { id: 'england',  label: 'England & NI', sub: 'SDLT' },
-                { id: 'scotland', label: 'Scotland',     sub: 'LBTT' },
-                { id: 'wales',    label: 'Wales',        sub: 'LTT'  },
-              ]} />
-          </Field>
-
-          <Field label="Property price" topGap={28}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-              <span style={{ fontSize: 32, fontWeight: 400, color: T.faint, lineHeight: 1, ...NUM }}>£</span>
-              <input type="number" inputMode="decimal" value={price || ''}
-                onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
-                min={0} step={5000}
-                style={{
-                  flex: 1, minWidth: 0, ...NUM,
-                  fontSize: 32, fontWeight: 600, color: T.black,
-                  background: 'transparent', border: 'none', outline: 'none',
-                  fontFamily: 'inherit', letterSpacing: '-0.025em',
-                  padding: 0, lineHeight: 1.1,
-                }} />
-            </div>
-            <input type="range" value={price} onChange={(e) => setPrice(+e.target.value)}
-              min={50_000} max={2_000_000} step={5000}
-              style={{ width: '100%', marginTop: 16, accentColor: T.brand, cursor: 'pointer' }} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: T.faint, marginTop: 6, ...NUM }}>
-              {[50_000, 250_000, 500_000, 1_000_000, 2_000_000].map((v) => (
-                <span key={v}>{fmtK(v)}</span>
-              ))}
-            </div>
-          </Field>
-
-          <Field label="Your status" topGap={32}>
-            <div style={{ display: 'grid', gap: 4 }}>
-              <Toggle on={flags.ftb}
-                onChange={(v) => setFlags({ ...flags, ftb: v, additional: v ? false : flags.additional })}
-                disabled={flags.mixedUse || flags.company}
-                label="First-time buyer"
-                desc="Never owned a residential property anywhere" />
-              <Toggle on={flags.additional}
-                onChange={(v) => setFlags({ ...flags, additional: v, ftb: v ? false : flags.ftb })}
-                disabled={flags.mixedUse || flags.company}
-                label="I own other property"
-                desc="Buy-to-let, second home, inherited share" />
-              <Toggle on={flags.nonResident}
-                onChange={(v) => setFlags({ ...flags, nonResident: v })}
-                disabled={flags.mixedUse || flags.company || country !== 'england'}
-                label="Non-UK resident"
-                desc="Less than 183 days in UK in past 12 months" />
-              <Toggle on={flags.mixedUse}
-                onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: v, company: false })}
-                label="Mixed-use property"
-                desc="Has substantive commercial element" />
-              <Toggle on={flags.company}
-                onChange={(v) => setFlags({ ftb: false, additional: false, nonResident: false, mixedUse: false, company: v })}
-                label="Bought through a company"
-                desc="Non-natural person, possible 15% flat" />
-            </div>
-          </Field>
-
-          <div style={{
-            marginTop: 28, padding: '10px 14px',
-            background: T.paper, border: `1px solid ${T.hair}`, borderRadius: 8,
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-          }}>
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 600, color: T.muted, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                Active scenario
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: T.ink, marginTop: 2 }}>
-                {buyerLabel(buyer)}
-              </div>
-            </div>
-            <span style={{
-              fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 4,
-              background: T.brandT, color: T.brand,
-            }}>{result.taxName}</span>
-          </div>
-        </div>
-
-        {/* RESULT CANVAS */}
-        <div style={{
-          padding: 'clamp(28px, 3.5vw, 40px)',
-          display: 'flex', flexDirection: 'column',
-          borderTop: `1px solid ${T.hair}`,
-        }} className="lg:border-t-0 lg:border-l">
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-              You&apos;ll pay
-            </div>
-            <div style={{
-              fontSize: 'clamp(48px, 8vw, 88px)',
-              fontWeight: 700, color: T.black,
-              lineHeight: 0.95, letterSpacing: '-0.045em',
-              marginTop: 12, ...NUM,
-            }}>
-              {gbp(result.total)}
-            </div>
-            <div style={{ marginTop: 14, display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 13, color: T.muted, alignItems: 'center' }}>
-              <span>On <strong style={{ color: T.ink, fontWeight: 600 }}>{gbp(price)}</strong> purchase</span>
-              <Dot />
-              <span>Effective <strong style={{ color: T.ink, fontWeight: 600, ...NUM }}>{pct(result.effectiveRate)}</strong></span>
-              {price > 0 && (
-                <>
-                  <Dot />
-                  <span style={NUM}>£{(result.total / price * 1000).toFixed(0)} per £1k</span>
-                </>
-              )}
-            </div>
-          </div>
-
-          {result.bands.length > 0 && (
-            <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${T.divide}` }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-                  How it&apos;s calculated
-                </div>
-                <div style={{ fontSize: 11, color: T.faint }}>
-                  {result.bands.length} band{result.bands.length === 1 ? '' : 's'} applied
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', height: 8, borderRadius: 4, overflow: 'hidden', background: T.divide }}>
-                {result.bands.map((b, i) => (
-                  <div key={i} style={{
-                    width: `${(b.taxOn / price) * 100}%`,
-                    background: bandColour(b.rate),
-                    borderRight: i < result.bands.length - 1 ? `1px solid ${T.paper}` : 'none',
-                  }} />
-                ))}
-              </div>
-
-              <div style={{ marginTop: 14, display: 'grid', gap: 4 }}>
-                {result.bands.map((b, i) => (
-                  <div key={i} style={{
-                    display: 'grid', gridTemplateColumns: '12px 1fr auto auto', gap: 12,
-                    alignItems: 'center', padding: '8px 0',
-                    borderBottom: i < result.bands.length - 1 ? `1px solid ${T.divide}` : 'none',
-                  }}>
-                    <span style={{ width: 8, height: 8, borderRadius: 2, background: bandColour(b.rate) }} />
-                    <span style={{ fontSize: 13, color: T.body }}>{b.label}</span>
-                    <span style={{ fontSize: 12, color: T.faint, ...NUM }}>{gbp(b.taxOn)}</span>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: T.ink, ...NUM, minWidth: 76, textAlign: 'right' }}>
-                      {gbp(b.tax)}
-                    </span>
-                  </div>
-                ))}
-                {result.surchargeAmount > 0 && (
-                  <div style={{
-                    display: 'grid', gridTemplateColumns: '12px 1fr auto auto', gap: 12,
-                    alignItems: 'center', padding: '10px 12px', marginTop: 4,
-                    background: T.warnT, borderRadius: 6,
-                  }}>
-                    <AlertCircle size={10} style={{ color: T.warn }} />
-                    <span style={{ fontSize: 13, color: T.warn, fontWeight: 500 }}>{result.surchargeLabel}</span>
-                    <span style={{ fontSize: 12, color: T.warn, ...NUM }}>{gbp(price)}</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: T.warn, ...NUM, minWidth: 76, textAlign: 'right' }}>
-                      {gbp(result.surchargeAmount)}
-                    </span>
-                  </div>
-                )}
-                <div style={{ display: 'grid', gridTemplateColumns: '12px 1fr auto auto', gap: 12, alignItems: 'center', padding: '12px 0 0', marginTop: 4 }}>
-                  <span />
-                  <span style={{ fontSize: 13, fontWeight: 700, color: T.black }}>Total {result.taxName}</span>
-                  <span />
-                  <span style={{ fontSize: 18, fontWeight: 700, color: T.black, ...NUM, minWidth: 76, textAlign: 'right', letterSpacing: '-0.015em' }}>
-                    {gbp(result.total)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {insights.length > 0 && (
-            <div style={{ marginTop: 28, paddingTop: 24, borderTop: `1px solid ${T.divide}` }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 12 }}>
-                Smart insights
-              </div>
-              <div style={{ display: 'grid', gap: 8 }}>
-                {insights.map((it, i) => {
-                  const styles = {
-                    good: { bg: T.brandT, fg: T.brand, Icon: Sparkles },
-                    warn: { bg: T.warnT,  fg: T.warn,  Icon: AlertCircle },
-                    info: { bg: T.surface,fg: T.muted, Icon: Info },
-                  }[it.tone];
-                  const Icon = styles.Icon;
-                  return (
-                    <div key={i} style={{
-                      display: 'flex', alignItems: 'flex-start', gap: 12,
-                      padding: '12px 14px', borderRadius: 8, background: styles.bg,
-                      border: it.tone === 'info' ? `1px solid ${T.hair}` : 'none',
-                    }}>
-                      <Icon size={14} style={{ color: styles.fg, marginTop: 2, flexShrink: 0 }} />
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: T.ink, lineHeight: 1.4 }}>{it.label}</div>
-                        <div style={{ fontSize: 12, color: T.muted, marginTop: 2, lineHeight: 1.5 }}>{it.detail}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   DARK INSIGHTS — price curve + scenario bars
-═══════════════════════════════════════════════════════════════ */
-function DarkInsights({
-  price, country, buyer, flags, allScen, setFlags,
-}: {
-  price: number; country: Country; buyer: BuyerType; flags: Flags;
-  allScen: SDLTResult[]; setFlags: (f: Flags) => void;
-}) {
-  return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 32, flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: T.dBrand, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>
-            Insights
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(24px, 3vw, 34px)', fontWeight: 600, color: T.dInk,
-            margin: 0, letterSpacing: '-0.025em', lineHeight: 1.1, maxWidth: '24ch',
-          }}>
-            Your tax across every price point and scenario.
-          </h2>
-        </div>
-        <div style={{
-          padding: '6px 12px', borderRadius: 999,
-          background: 'rgba(52,211,153,0.10)', border: `1px solid rgba(52,211,153,0.20)`,
-          fontSize: 11, color: T.dBrand, fontWeight: 500, letterSpacing: '0.06em',
-        }}>
-          {buyerLabel(buyer)} · {country === 'england' ? 'England & NI' : country === 'scotland' ? 'Scotland' : 'Wales'}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-8">
-        {/* Price curve */}
-        <div style={{
-          background: 'rgba(255,255,255,0.025)',
-          border: `1px solid ${T.dHair}`, borderRadius: 16,
-          padding: 'clamp(20px, 2.5vw, 28px)',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 18 }}>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: T.dInk }}>Price sensitivity</div>
-              <div style={{ fontSize: 12, color: T.dMuted, marginTop: 2 }}>How your bill changes from £50k to £2m</div>
-            </div>
-          </div>
-          <PriceCurveChart price={price} country={country} buyer={buyer} />
-        </div>
-
-        {/* Scenario bars */}
-        <div style={{
-          background: 'rgba(255,255,255,0.025)',
-          border: `1px solid ${T.dHair}`, borderRadius: 16,
-          padding: 'clamp(20px, 2.5vw, 28px)',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 18 }}>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: T.dInk }}>All scenarios</div>
-              <div style={{ fontSize: 12, color: T.dMuted, marginTop: 2 }}>At {gbp(price)} · tap to switch</div>
-            </div>
-          </div>
-          <ScenarioBarChart scenarios={allScen} current={buyer} setFlags={setFlags} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── SVG line chart: SDLT(price) for current scenario ─── */
-function PriceCurveChart({ price, country, buyer }: { price: number; country: Country; buyer: BuyerType }) {
-  const W = 720, H = 320;
-  const PAD = { l: 64, r: 24, t: 24, b: 44 };
-  const innerW = W - PAD.l - PAD.r;
-  const innerH = H - PAD.t - PAD.b;
-  const maxPrice = 2_000_000;
-
-  const points = useMemo(() => {
-    const arr: { price: number; tax: number }[] = [];
-    const steps = 120;
-    for (let i = 0; i <= steps; i++) {
-      const p = (i / steps) * maxPrice;
-      arr.push({ price: p, tax: calculateSDLT(p, buyer, country).total });
-    }
-    return arr;
-  }, [buyer, country]);
-
-  const maxTax = Math.max(...points.map((p) => p.tax), 50_000);
-  const xScale = (p: number) => PAD.l + (p / maxPrice) * innerW;
-  const yScale = (t: number) => PAD.t + innerH - (t / maxTax) * innerH;
-
-  const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xScale(p.price).toFixed(2)} ${yScale(p.tax).toFixed(2)}`).join(' ');
-  const area = `${path} L ${xScale(maxPrice).toFixed(2)} ${yScale(0).toFixed(2)} L ${xScale(points[0].price).toFixed(2)} ${yScale(0).toFixed(2)} Z`;
-
-  const curTax = calculateSDLT(price, buyer, country).total;
-  const cx = xScale(price);
-  const cy = yScale(curTax);
-
-  // Y axis ticks (4 ticks: 0, 33%, 66%, 100%)
-  const yTicks = [0, maxTax * 0.33, maxTax * 0.66, maxTax];
-  // X axis ticks
-  const xTicks = [0, 500_000, 1_000_000, 1_500_000, 2_000_000];
-  // Threshold markers
-  const thresholds = country === 'england' ? [125_000, 250_000, 925_000, 1_500_000]
-                   : country === 'scotland' ? [145_000, 325_000, 750_000]
-                   : [225_000, 400_000, 750_000];
+  const activeStatus =
+    flags.ftb         ? 'firstTime'   :
+    flags.additional  ? 'additional'  :
+    flags.nonResident ? 'nonResident' : 'standard';
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: 'auto', display: 'block' }}>
-      <defs>
-        <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={T.dBrand} stopOpacity="0.30" />
-          <stop offset="100%" stopColor={T.dBrand} stopOpacity="0" />
-        </linearGradient>
-        <filter id="curveGlow">
-          <feGaussianBlur stdDeviation="3" result="b" />
-          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-
-      {/* Horizontal grid */}
-      {yTicks.map((t, i) => (
-        <g key={i}>
-          <line x1={PAD.l} y1={yScale(t)} x2={W - PAD.r} y2={yScale(t)} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-          <text x={PAD.l - 10} y={yScale(t) + 4} fontSize="10" fill={T.dFaint} textAnchor="end" style={NUM}>
-            {fmtK(t)}
-          </text>
-        </g>
-      ))}
-
-      {/* Threshold vertical lines */}
-      {thresholds.map((t, i) => (
-        <line key={i}
-          x1={xScale(t)} y1={PAD.t} x2={xScale(t)} y2={PAD.t + innerH}
-          stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="2 4" />
-      ))}
-
-      {/* Area fill */}
-      <path d={area} fill="url(#curveGrad)" />
-
-      {/* Curve */}
-      <path d={path} stroke={T.dBrand} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#curveGlow)" />
-
-      {/* X axis labels */}
-      {xTicks.map((t, i) => (
-        <text key={i} x={xScale(t)} y={H - PAD.b + 22} fontSize="10" fill={T.dFaint} textAnchor="middle" style={NUM}>
-          {t === 0 ? '£0' : fmtK(t)}
-        </text>
-      ))}
-
-      {/* Current price marker */}
-      <line x1={cx} y1={PAD.t} x2={cx} y2={PAD.t + innerH} stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeDasharray="3 3" />
-      <circle cx={cx} cy={cy} r="12" fill={T.dBrand} opacity="0.18" />
-      <circle cx={cx} cy={cy} r="5" fill={T.dBrand} />
-      <circle cx={cx} cy={cy} r="2" fill={T.dBlack} />
-
-      {/* Current value label */}
-      <g transform={`translate(${Math.min(Math.max(cx, PAD.l + 50), W - PAD.r - 60)} ${Math.max(cy - 30, PAD.t + 12)})`}>
-        <rect x="-50" y="-18" width="100" height="22" rx="4" fill={T.dBrand} />
-        <text x="0" y="-3" fontSize="11" fontWeight="700" fill={T.dBlack} textAnchor="middle" style={NUM}>
-          {gbp(curTax)}
-        </text>
-      </g>
-    </svg>
-  );
-}
-
-/* ─── Horizontal bar chart for scenario comparison ─── */
-function ScenarioBarChart({
-  scenarios, current, setFlags,
-}: {
-  scenarios: SDLTResult[]; current: BuyerType; setFlags: (f: Flags) => void;
-}) {
-  const maxVal = Math.max(...scenarios.map((s) => s.total), 1);
-  const std = scenarios.find((s) => s.buyerType === 'standard')!;
-
-  return (
-    <div style={{ display: 'grid', gap: 6 }}>
-      {scenarios.map((r) => {
-        const active = r.buyerType === current;
-        const delta = r.total - std.total;
-        const w = maxVal === 0 ? 0 : (r.total / maxVal) * 100;
-        return (
-          <button key={r.buyerType} type="button"
-            onClick={() => setFlags(flagsForBuyer(r.buyerType))}
-            style={{
-              background: 'transparent', border: 'none',
-              padding: 0, cursor: 'pointer', textAlign: 'left',
-              fontFamily: 'inherit',
-            }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-              <span style={{ fontSize: 12, fontWeight: active ? 600 : 500, color: active ? T.dInk : T.dBody }}>
-                {buyerLabel(r.buyerType)}
-              </span>
-              <span style={{ fontSize: 12, fontWeight: 600, color: active ? T.dBrand : T.dInk, ...NUM }}>
-                {gbp(r.total)}
-              </span>
-            </div>
-            <div style={{ position: 'relative', height: 22, background: 'rgba(255,255,255,0.04)', borderRadius: 4, overflow: 'hidden' }}>
-              <div style={{
-                width: `${w}%`, height: '100%',
-                background: active ? T.dBrand : 'rgba(255,255,255,0.20)',
-                borderRadius: 4,
-                transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s',
-                position: 'relative',
-                boxShadow: active ? '0 0 12px rgba(52,211,153,0.35)' : 'none',
-              }}>
-                {delta !== 0 && w > 25 && (
-                  <span style={{
-                    position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)',
-                    fontSize: 10, fontWeight: 600,
-                    color: active ? T.dBlack : T.dBody, ...NUM,
-                  }}>
-                    {delta > 0 ? '+' : ''}{gbp(delta)}
-                  </span>
-                )}
-              </div>
-            </div>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   COUNTRY SECTION
-═══════════════════════════════════════════════════════════════ */
-function CountrySection({
-  results, current, onSelect, buyer, price,
-}: {
-  results: SDLTResult[]; current: Country; onSelect: (c: Country) => void;
-  buyer: BuyerType; price: number;
-}) {
-  const maxVal = Math.max(...results.map((r) => r.total), 1);
-  return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-          Cross-border
-        </div>
-        <h2 style={{
-          fontSize: 'clamp(22px, 2.5vw, 28px)', fontWeight: 600, color: T.black,
-          margin: '8px 0 0', letterSpacing: '-0.02em',
-        }}>
-          Same purchase across UK nations
+    <Card padding={0}>
+      {/* Header */}
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Calculator Inputs
         </h2>
-        <p style={{ fontSize: 13.5, color: T.muted, margin: '6px 0 0', ...NUM }}>
-          {gbp(price)} · {buyerLabel(buyer)}
-        </p>
+        <button type="button" onClick={() => setMode(mode === 'simple' ? 'advanced' : 'simple')}
+          style={{
+            width: 32, height: 32, borderRadius: 8,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            background: mode === 'advanced' ? T.blueT : 'transparent',
+            color: mode === 'advanced' ? T.blue : T.muted,
+            border: 'none', cursor: 'pointer',
+            transition: 'all 0.15s ease',
+          }}
+          title="Toggle advanced mode"
+          aria-label="Toggle advanced mode">
+          <Settings size={16} />
+        </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
-        {results.map((r) => {
-          const active = r.country === current;
-          const fillW = maxVal === 0 ? 0 : (r.total / maxVal) * 100;
-          return (
-            <button key={r.country} type="button" onClick={() => onSelect(r.country)}
-              style={{
-                background: T.paper,
-                border: `1px solid ${active ? T.black : T.hair}`,
-                borderRadius: 14, padding: 24,
-                textAlign: 'left', cursor: 'pointer',
-                fontFamily: 'inherit',
-                boxShadow: active ? T.shadowMd : T.shadowSm,
-                transition: 'all 0.15s ease', position: 'relative', overflow: 'hidden',
-              }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: T.ink, letterSpacing: '-0.005em' }}>
-                    {COUNTRY_LABEL[r.country]}
-                  </div>
-                  <div style={{ fontSize: 10, fontWeight: 600, color: T.muted, marginTop: 4, letterSpacing: '0.08em' }}>
-                    {r.taxName}
-                  </div>
+      <div style={{ padding: 24 }}>
+        {/* Individual / Joint */}
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6,
+          padding: 4, background: T.surface, borderRadius: 10,
+          marginBottom: 28,
+        }}>
+          {[
+            { id: 'individual', label: 'Individual', Icon: User,  on: !flags.joint },
+            { id: 'joint',      label: 'Joint',      Icon: Users, on: flags.joint  },
+          ].map((opt) => {
+            const Icon = opt.Icon;
+            return (
+              <button key={opt.id} type="button"
+                onClick={() => setFlags({ ...flags, joint: opt.id === 'joint' })}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  padding: '10px 14px', borderRadius: 7,
+                  background: opt.on ? T.blue : 'transparent',
+                  color: opt.on ? T.paper : T.muted,
+                  border: 'none', cursor: 'pointer',
+                  fontFamily: 'inherit', fontSize: 13, fontWeight: 600,
+                  transition: 'all 0.15s ease',
+                  boxShadow: opt.on ? '0 1px 2px rgba(37,99,235,0.25)' : 'none',
+                }}>
+                <Icon size={14} />
+                {opt.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* BUYER STATUS */}
+        <Label>Buyer Status</Label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
+          {STATUSES.map((s) => {
+            const active = activeStatus === s.id;
+            return (
+              <button key={s.id} type="button"
+                onClick={() => setFlags({
+                  ftb: s.id === 'firstTime',
+                  additional: s.id === 'additional',
+                  nonResident: s.id === 'nonResident',
+                  mixedUse: false, company: false,
+                  joint: flags.joint,
+                })}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                  padding: '12px 12px', borderRadius: 10,
+                  background: active ? T.blueT : T.paper,
+                  border: `1.5px solid ${active ? T.blue : T.hair}`,
+                  color: active ? T.blue : T.body,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  fontSize: 13.5, fontWeight: 600,
+                  transition: 'all 0.15s ease',
+                }}>
+                {active && <Check size={14} strokeWidth={3} />}
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* REGION */}
+        <Label>Region</Label>
+        <div style={{ display: 'grid', gap: 8, marginBottom: 28 }}>
+          {(['england', 'scotland', 'wales'] as Country[]).map((c) => {
+            const active = country === c;
+            return (
+              <button key={c} type="button" onClick={() => setCountry(c)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 12,
+                  padding: '12px 14px', borderRadius: 10,
+                  background: T.paper,
+                  border: `1.5px solid ${active ? T.blue : T.hair}`,
+                  cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+                  transition: 'border 0.15s ease',
+                }}>
+                <span style={{
+                  position: 'relative', width: 18, height: 18, borderRadius: '50%',
+                  border: `2px solid ${active ? T.blue : T.ghost}`,
+                  flexShrink: 0, transition: 'border 0.15s ease',
+                }}>
+                  {active && <span style={{
+                    position: 'absolute', top: 3, left: 3, width: 8, height: 8, borderRadius: '50%',
+                    background: T.blue,
+                  }} />}
+                </span>
+                <span style={{ flex: 1 }}>
+                  <span style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
+                    {c === 'england' ? 'England & NI' : c === 'scotland' ? 'Scotland' : 'Wales'}
+                  </span>
+                </span>
+                <span style={{ fontSize: 10, fontWeight: 600, color: T.faint, letterSpacing: '0.08em' }}>
+                  {c === 'england' ? 'SDLT' : c === 'scotland' ? 'LBTT' : 'LTT'}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* PROPERTY PRICE */}
+        <Label>Property Price</Label>
+        <div style={{
+          display: 'flex', alignItems: 'baseline', gap: 4,
+          padding: '4px 0',
+        }}>
+          <span style={{ fontSize: 32, fontWeight: 400, color: T.faint, lineHeight: 1, ...NUM }}>£</span>
+          <input type="number" inputMode="decimal" value={price || ''}
+            onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
+            min={0} step={5000}
+            style={{
+              flex: 1, minWidth: 0, ...NUM,
+              fontSize: 32, fontWeight: 700, color: T.ink,
+              background: 'transparent', border: 'none', outline: 'none',
+              fontFamily: 'inherit', letterSpacing: '-0.025em',
+              padding: 0, lineHeight: 1.1,
+            }} />
+        </div>
+        <input type="range" value={price} onChange={(e) => setPrice(+e.target.value)}
+          min={50_000} max={2_000_000} step={5000}
+          style={{ width: '100%', marginTop: 14, accentColor: T.blue, cursor: 'pointer' }} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, color: T.faint, marginTop: 4, ...NUM }}>
+          <span>£50k</span><span>£500k</span><span>£1m</span><span>£2m</span>
+        </div>
+
+        {/* ADVANCED OPTIONS */}
+        {mode === 'advanced' && (
+          <div style={{ marginTop: 24, paddingTop: 20, borderTop: `1px solid ${T.divide}` }}>
+            <Label>Advanced Options</Label>
+            <div style={{ display: 'grid', gap: 6 }}>
+              <AdvToggle on={flags.mixedUse}
+                onChange={(v) => setFlags({
+                  ftb: false, additional: false, nonResident: false,
+                  mixedUse: v, company: false, joint: flags.joint,
+                })}
+                label="Mixed-use property"
+                desc="Has commercial element — no 3% surcharge" />
+              <AdvToggle on={flags.company}
+                onChange={(v) => setFlags({
+                  ftb: false, additional: false, nonResident: false,
+                  mixedUse: false, company: v, joint: flags.joint,
+                })}
+                label="Company-bought"
+                desc="Non-natural person, 15% flat if > £500k" />
+            </div>
+          </div>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. TAX BREAKDOWN (center column — donut + bands)
+═══════════════════════════════════════════════════════════════ */
+function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) {
+  return (
+    <Card padding={0}>
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}` }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Tax Breakdown
+        </h2>
+      </div>
+      <div style={{ padding: '32px 24px 24px' }}>
+
+        {/* DONUT */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+          <Donut result={result} />
+        </div>
+
+        {/* BAND ROWS */}
+        <div style={{ display: 'grid', gap: 8 }}>
+          {result.bands.filter((b) => b.taxOn > 0).map((b, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 16px',
+              background: b.tax > 0 ? T.blueT : T.surface,
+              borderRadius: 10,
+            }}>
+              <span style={{
+                width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
+                background: b.tax > 0 ? T.blue : T.ghost,
+              }} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
+                  Band {i + 1} ({b.label.split(':').pop()?.trim().replace(' on ', ' · ')})
                 </div>
-                {active && (
-                  <span style={{
-                    fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 4,
-                    background: T.brand, color: T.paper,
-                  }}>Active</span>
-                )}
+                <div style={{ fontSize: 11.5, color: T.muted, marginTop: 2 }}>
+                  {(b.rate * 100).toFixed(b.rate < 0.1 ? 0 : 0)}% on {gbp(b.taxOn)}
+                </div>
               </div>
-              <div style={{ fontSize: 36, fontWeight: 700, color: T.black, letterSpacing: '-0.03em', ...NUM, lineHeight: 1 }}>
-                {gbp(r.total)}
+              <div style={{ fontSize: 16, fontWeight: 700, color: T.ink, ...NUM, letterSpacing: '-0.015em' }}>
+                {gbp(b.tax)}
               </div>
-              <div style={{ marginTop: 12, fontSize: 11.5, color: T.muted, ...NUM }}>
-                Effective {pct(r.effectiveRate)}{r.surchargeAmount > 0 ? ` · +${gbp(r.surchargeAmount)} surcharge` : ''}
+            </div>
+          ))}
+          {result.surchargeAmount > 0 && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 16px', background: T.amberT, borderRadius: 10,
+            }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: T.amber, flexShrink: 0 }} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 13.5, fontWeight: 600, color: T.amber, lineHeight: 1.3 }}>
+                  Surcharge
+                </div>
+                <div style={{ fontSize: 11.5, color: T.amber, marginTop: 2, opacity: 0.85 }}>
+                  {result.surchargeLabel}
+                </div>
               </div>
-              <div style={{ marginTop: 16, height: 6, background: T.divide, borderRadius: 999, overflow: 'hidden' }}>
-                <div style={{
-                  width: `${fillW}%`, height: '100%',
-                  background: active ? T.brand : T.muted,
-                  borderRadius: 999,
-                  transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                }} />
+              <div style={{ fontSize: 16, fontWeight: 700, color: T.amber, ...NUM, letterSpacing: '-0.015em' }}>
+                {gbp(result.surchargeAmount)}
               </div>
-            </button>
+            </div>
+          )}
+        </div>
+
+        {/* MONTHLY COSTS CTA */}
+        <a href="/mortgage-affordability" style={{
+          display: 'flex', alignItems: 'center', gap: 14,
+          marginTop: 24, padding: '16px 18px',
+          background: T.paper, border: `1.5px solid ${T.purple}`,
+          borderRadius: 12, textDecoration: 'none',
+          transition: 'all 0.15s ease',
+        }}>
+          <span style={{
+            width: 40, height: 40, borderRadius: 10,
+            background: T.purpleT, color: T.purple,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <Home size={18} />
+          </span>
+          <span style={{ flex: 1 }}>
+            <span style={{ display: 'block', fontSize: 14.5, fontWeight: 700, color: T.ink, lineHeight: 1.3 }}>
+              Monthly costs?
+            </span>
+            <span style={{ display: 'block', fontSize: 12, color: T.muted, marginTop: 2 }}>
+              Estimate your mortgage repayments
+            </span>
+          </span>
+          <ArrowRight size={16} style={{ color: T.purple, flexShrink: 0 }} />
+        </a>
+      </div>
+    </Card>
+  );
+}
+
+/* ─── Donut chart ─── */
+function Donut({ result }: { result: SDLTResult }) {
+  const size = 240, stroke = 22;
+  const r = (size - stroke) / 2;
+  const cx = size / 2, cy = size / 2;
+  const circumference = 2 * Math.PI * r;
+
+  const total = result.total;
+  const segments: { value: number; color: string; key: string }[] = [];
+  result.bands.filter((b) => b.tax > 0).forEach((b, i) => {
+    segments.push({
+      value: b.tax,
+      color: i === 0 ? T.blue : i === 1 ? T.blueDk : T.purple,
+      key: `b${i}`,
+    });
+  });
+  if (result.surchargeAmount > 0) {
+    segments.push({ value: result.surchargeAmount, color: T.amber, key: 'surch' });
+  }
+
+  // If total is 0 (e.g. FTB at £200k), show a faint complete ring
+  const isZero = total === 0;
+  let cumulative = 0;
+  const gap = 2; // px gap between segments
+
+  return (
+    <div style={{ position: 'relative', width: size, height: size }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)' }}>
+        {/* Background ring */}
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke={T.divide} strokeWidth={stroke} />
+        {/* Segments */}
+        {!isZero && segments.map((seg) => {
+          const segLen = (seg.value / total) * circumference;
+          const dashArr = `${Math.max(segLen - gap, 0.1)} ${circumference}`;
+          const offset = -cumulative;
+          cumulative += segLen;
+          return (
+            <circle key={seg.key} cx={cx} cy={cy} r={r}
+              fill="none" stroke={seg.color} strokeWidth={stroke}
+              strokeDasharray={dashArr} strokeDashoffset={offset}
+              strokeLinecap="butt"
+              style={{ transition: 'stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease' }} />
           );
         })}
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   REFUND TOOL (conditional)
-═══════════════════════════════════════════════════════════════ */
-function RefundSection({ defaultPrice }: { defaultPrice: number }) {
-  const [price, setPrice]       = useState(defaultPrice);
-  const [months, setMonths]     = useState(8);
-  const [sold, setSold]         = useState(true);
-  const [resident, setResident] = useState(true);
-
-  const r = useMemo(() => calculateRefund({
-    purchasePrice: price, monthsSincePurchase: months,
-    isUKResident: resident, hasSoldOldHome: sold,
-  }), [price, months, sold, resident]);
-
-  return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-          Refund tool
-        </div>
-        <h2 style={{
-          fontSize: 'clamp(22px, 2.5vw, 28px)', fontWeight: 600, color: T.black,
-          margin: '8px 0 0', letterSpacing: '-0.02em',
-        }}>
-          Reclaim the 3% surcharge
-        </h2>
-        <p style={{ fontSize: 13.5, color: T.muted, margin: '6px 0 0' }}>
-          If you sold your previous main home within 36 months of paying the surcharge
-        </p>
-      </div>
+      </svg>
+      {/* Center label */}
       <div style={{
-        background: T.paper, border: `1px solid ${T.hair}`,
-        borderRadius: 14, overflow: 'hidden',
+        position: 'absolute', inset: 0,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        pointerEvents: 'none',
       }}>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px]">
-          <div style={{ padding: 24 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 20 }}>
-              <Field label="Property price">
-                <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: T.faint, fontSize: 14 }}>£</span>
-                  <input type="number" value={price || ''} onChange={(e) => setPrice(Math.max(0, +e.target.value || 0))}
-                    style={{
-                      width: '100%', fontSize: 14, padding: '8px 12px 8px 24px',
-                      border: `1px solid ${T.hair}`, borderRadius: 6, outline: 'none',
-                      color: T.ink, ...NUM, background: T.paper, fontFamily: 'inherit',
-                    }} />
-                </div>
-              </Field>
-              <Field label="Months since purchase">
-                <input type="number" min={0} max={60} value={months}
-                  onChange={(e) => setMonths(Math.max(0, +e.target.value || 0))}
-                  style={{
-                    width: '100%', fontSize: 14, padding: '8px 12px',
-                    border: `1px solid ${T.hair}`, borderRadius: 6, outline: 'none',
-                    color: T.ink, ...NUM, background: T.paper, fontFamily: 'inherit',
-                  }} />
-                <input type="range" min={0} max={60} value={months}
-                  onChange={(e) => setMonths(+e.target.value)}
-                  style={{ width: '100%', marginTop: 8, accentColor: T.brand }} />
-              </Field>
-            </div>
-            <div style={{ marginTop: 16, display: 'grid', gap: 4 }}>
-              <Toggle on={sold} onChange={setSold} label="Sold previous main home within 36 months" desc="Required for refund eligibility" />
-              <Toggle on={resident} onChange={setResident} label="UK-resident at refund claim date" desc="Tested under SDLT-specific residence rules" />
-            </div>
-          </div>
-          <div style={{
-            background: r.eligible ? T.brandT : T.surface,
-            padding: 24, borderTop: `1px solid ${T.hair}`,
-          }} className="lg:border-t-0 lg:border-l">
-            <div style={{
-              fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase',
-              color: r.eligible ? T.brand : T.muted,
-            }}>
-              {r.eligible ? 'Eligible' : 'Not eligible'}
-            </div>
-            <div style={{
-              fontSize: 36, fontWeight: 700, color: T.black,
-              marginTop: 8, letterSpacing: '-0.025em', lineHeight: 1, ...NUM,
-            }}>
-              {gbp(r.refundAmount)}
-            </div>
-            <div style={{ fontSize: 11.5, color: T.muted, marginTop: 8, lineHeight: 1.55 }}>
-              Potential refund of the 3% additional-property surcharge.
-            </div>
-          </div>
+        <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 4 }}>
+          Total SDLT
+        </div>
+        <div style={{
+          fontSize: 34, fontWeight: 700, color: T.blue,
+          letterSpacing: '-0.03em', ...NUM, lineHeight: 1,
+        }}>
+          {gbp(total)}
+        </div>
+        <div style={{ fontSize: 11, color: T.muted, marginTop: 6, ...NUM }}>
+          {pct(result.effectiveRate)} effective
         </div>
       </div>
     </div>
@@ -876,110 +518,425 @@ function RefundSection({ defaultPrice }: { defaultPrice: number }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   QUICK REFERENCE
+   3. WHAT-IF SCENARIOS (right column)
 ═══════════════════════════════════════════════════════════════ */
-function QuickRef({ country }: { country: Country }) {
-  const items = [
-    { label: 'Filing deadline',  value: country === 'england' ? '14 days' : '30 days', sub: 'from completion' },
-    { label: 'Late penalty',     value: '£100',  sub: 'rising to 100% of tax' },
-    { label: 'Refund window',    value: '36 months', sub: '3% surcharge reclaim' },
-    { label: 'Nil-rate band',    value: country === 'england' ? '£125k' : country === 'scotland' ? '£145k' : '£225k', sub: '0% threshold' },
-    { label: 'Filed by',         value: 'Solicitor', sub: 'as part of completion' },
-  ];
+function WhatIfScenarios({
+  current, stdRes, ftbRes, price, country, flags, onApply,
+}: {
+  current: number; stdRes: SDLTResult; ftbRes: SDLTResult;
+  price: number; country: Country; flags: Flags;
+  onApply: (b: BuyerType) => void;
+}) {
+  const ftbDelta = current - ftbRes.total; // positive = saving by switching to FTB
+  const additional = calculateSDLT(price, 'additional', country);
+  const addDelta = additional.total - current;
+  const nonRes = calculateSDLT(price, 'nonResident', country);
+  const nonResDelta = nonRes.total - current;
+
   return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-          Quick reference
-        </div>
-        <h2 style={{
-          fontSize: 'clamp(22px, 2.5vw, 28px)', fontWeight: 600, color: T.black,
-          margin: '8px 0 0', letterSpacing: '-0.02em',
-        }}>
-          Need-to-know facts
+    <Card padding={0}>
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}` }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          What-if Scenarios
         </h2>
       </div>
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: 1, background: T.hair, borderRadius: 14, overflow: 'hidden', border: `1px solid ${T.hair}`,
+      <div style={{ padding: 20, display: 'grid', gap: 10 }}>
+        <ScenarioCard
+          tone="purple" label="As a first-time buyer"
+          value={gbp(ftbRes.total)}
+          delta={ftbDelta > 0 ? `Save ${gbp(ftbDelta)}` : 'No saving available'}
+          deltaTone="good"
+          active={flags.ftb}
+          onClick={() => onApply('firstTime')}
+        />
+        <ScenarioCard
+          tone="amber" label="If additional property"
+          value={gbp(additional.total)}
+          delta={addDelta > 0 ? `Extra ${gbp(addDelta)}` : 'No change'}
+          deltaTone="warn"
+          active={flags.additional}
+          onClick={() => onApply('additional')}
+        />
+        <ScenarioCard
+          tone="rose" label="Non-UK resident"
+          value={gbp(nonRes.total)}
+          delta={nonResDelta > 0 ? `Extra ${gbp(nonResDelta)}` : 'Same'}
+          deltaTone="warn"
+          active={flags.nonResident}
+          onClick={() => onApply('nonResident')}
+        />
+
+        {/* Compare all button */}
+        <button type="button"
+          onClick={() => {
+            const el = document.getElementById('compare');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          style={{
+            marginTop: 8, padding: '12px 16px',
+            background: T.surface, border: `1px solid ${T.hair}`,
+            borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit',
+            fontSize: 13, fontWeight: 600, color: T.ink,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          }}>
+          Compare All Scenarios
+          <ArrowRight size={14} />
+        </button>
+      </div>
+    </Card>
+  );
+}
+
+function ScenarioCard({
+  tone, label, value, delta, deltaTone, active, onClick,
+}: {
+  tone: 'purple' | 'amber' | 'rose';
+  label: string; value: string; delta: string;
+  deltaTone: 'good' | 'warn';
+  active: boolean; onClick: () => void;
+}) {
+  const styles = {
+    purple: { bg: T.purpleT, border: T.purple,  text: T.purple },
+    amber:  { bg: T.amberT,  border: T.amber,   text: T.amber },
+    rose:   { bg: T.roseT,   border: T.rose,    text: T.rose },
+  }[tone];
+  const deltaColor = deltaTone === 'good' ? T.emerald : T.amber;
+  return (
+    <button type="button" onClick={onClick}
+      style={{
+        textAlign: 'left',
+        padding: '16px 18px',
+        background: styles.bg,
+        border: `1.5px solid ${active ? styles.border : 'transparent'}`,
+        borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit',
+        transition: 'all 0.15s ease',
       }}>
-        {items.map((r, i) => (
-          <div key={i} style={{ background: T.paper, padding: '20px 22px' }}>
-            <div style={{ fontSize: 10, fontWeight: 600, color: T.muted, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              {r.label}
+      <div style={{
+        fontSize: 10.5, fontWeight: 700, color: styles.text,
+        letterSpacing: '0.10em', textTransform: 'uppercase',
+        marginBottom: 8,
+      }}>
+        {label}
+      </div>
+      <div style={{
+        fontSize: 28, fontWeight: 700, color: T.ink,
+        letterSpacing: '-0.025em', ...NUM, lineHeight: 1,
+      }}>
+        {value}
+      </div>
+      <div style={{ fontSize: 12, color: deltaColor, marginTop: 8, fontWeight: 600 }}>
+        {delta.includes('Save') || delta.includes('Extra') ? (
+          <>
+            {delta.split(' ')[0]}{' '}
+            <span style={{ color: deltaColor, fontWeight: 700, ...NUM }}>
+              {delta.split(' ').slice(1).join(' ')}
+            </span>
+          </>
+        ) : delta}
+      </div>
+    </button>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. LIVE TRACKER STRIP (full-width)
+═══════════════════════════════════════════════════════════════ */
+function LiveTracker({ country }: { country: Country }) {
+  const items =
+    country === 'scotland' ? [
+      { label: 'LBTT nil-rate',  value: '£145k', delta: 'stable',       trend: 'flat' as const },
+      { label: 'ADS surcharge',  value: '8%',    delta: '↑ from 6%',    trend: 'up' as const },
+      { label: 'Filing window',  value: '30d',   delta: 'unchanged',    trend: 'flat' as const },
+    ] :
+    country === 'wales' ? [
+      { label: 'LTT nil-rate',     value: '£225k', delta: 'highest UK', trend: 'flat' as const },
+      { label: 'Higher-rate',      value: '5%',    delta: '↑ from 4%',  trend: 'up' as const },
+      { label: 'Filing window',    value: '30d',   delta: 'unchanged',  trend: 'flat' as const },
+    ] : [
+      { label: 'SDLT nil-rate',    value: '£125k', delta: '↓ from £250k Apr 2025', trend: 'down' as const },
+      { label: 'FTB cap',          value: '£500k', delta: 'unchanged',              trend: 'flat' as const },
+      { label: 'Filing window',    value: '14d',   delta: 'unchanged',              trend: 'flat' as const },
+    ];
+
+  return (
+    <Card padding={0}>
+      <div style={{ padding: '18px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <h2 style={{ fontSize: 15, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.01em' }}>
+            Live {country === 'england' ? 'SDLT' : country === 'scotland' ? 'LBTT' : 'LTT'} Rate Tracker
+          </h2>
+          <p style={{ fontSize: 12, color: T.muted, margin: '4px 0 0' }}>
+            Current thresholds and year-on-year changes
+          </p>
+        </div>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          padding: '5px 12px', borderRadius: 999,
+          background: T.emeraldT, color: T.emerald,
+          fontSize: 11, fontWeight: 600,
+        }}>
+          <span style={{ width: 6, height: 6, borderRadius: 999, background: T.emerald }} />
+          Live Updates
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: T.hair }}>
+        {items.map((it, i) => (
+          <div key={i} style={{ background: T.paper, padding: '20px 24px' }}>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase' }}>
+              {it.label}
             </div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: T.black, marginTop: 8, ...NUM, letterSpacing: '-0.02em' }}>
-              {r.value}
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginTop: 8, gap: 8 }}>
+              <div style={{ fontSize: 32, fontWeight: 700, color: T.ink, letterSpacing: '-0.028em', ...NUM, lineHeight: 1 }}>
+                {it.value}
+              </div>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: 4,
+                fontSize: 11, fontWeight: 600,
+                color: it.trend === 'up' ? T.amber : it.trend === 'down' ? T.emerald : T.muted,
+              }}>
+                {it.trend === 'up' && <TrendingUp size={11} />}
+                {it.trend === 'down' && <TrendingDown size={11} />}
+                {it.delta}
+              </div>
             </div>
-            <div style={{ fontSize: 11.5, color: T.faint, marginTop: 4 }}>{r.sub}</div>
           </div>
         ))}
       </div>
-    </div>
+    </Card>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. PRICE SENSITIVITY (area chart card)
+═══════════════════════════════════════════════════════════════ */
+function PriceSensitivityCard({ price, buyer, country }: { price: number; buyer: BuyerType; country: Country }) {
+  const [range, setRange] = useState<10 | 25>(10);
+
+  const points = useMemo(() => {
+    const lo = price * (1 - range / 100);
+    const hi = price * (1 + range / 100);
+    const arr: { p: number; t: number }[] = [];
+    const steps = 40;
+    for (let i = 0; i <= steps; i++) {
+      const p = lo + (i / steps) * (hi - lo);
+      arr.push({ p, t: calculateSDLT(p, buyer, country).total });
+    }
+    return arr;
+  }, [price, buyer, country, range]);
+
+  const W = 560, H = 240;
+  const PAD = { l: 50, r: 16, t: 16, b: 36 };
+  const innerW = W - PAD.l - PAD.r;
+  const innerH = H - PAD.t - PAD.b;
+
+  const xs = points.map((p) => p.p);
+  const ts = points.map((p) => p.t);
+  const minP = Math.min(...xs), maxP = Math.max(...xs);
+  const minT = 0;
+  const maxT = Math.max(...ts) * 1.1 || 1;
+
+  const xScale = (p: number) => PAD.l + ((p - minP) / (maxP - minP || 1)) * innerW;
+  const yScale = (t: number) => PAD.t + innerH - ((t - minT) / (maxT - minT)) * innerH;
+
+  const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xScale(p.p).toFixed(2)} ${yScale(p.t).toFixed(2)}`).join(' ');
+  const area = `${path} L ${xScale(maxP).toFixed(2)} ${yScale(0).toFixed(2)} L ${xScale(minP).toFixed(2)} ${yScale(0).toFixed(2)} Z`;
+
+  const cx = xScale(price);
+  const cy = yScale(calculateSDLT(price, buyer, country).total);
+
+  const xTicks = 5;
+  const xLabels = Array.from({ length: xTicks }, (_, i) => minP + (i / (xTicks - 1)) * (maxP - minP));
+
+  return (
+    <Card padding={0}>
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Price Sensitivity
+        </h2>
+        <div style={{
+          display: 'inline-flex', padding: 3, gap: 2,
+          background: T.surface, borderRadius: 8,
+        }}>
+          {[10, 25].map((r) => (
+            <button key={r} type="button" onClick={() => setRange(r as 10 | 25)}
+              style={{
+                padding: '5px 10px', borderRadius: 6,
+                background: range === r ? T.paper : 'transparent',
+                color: range === r ? T.ink : T.muted,
+                border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                fontSize: 11, fontWeight: 600,
+                boxShadow: range === r ? T.shadowSm : 'none',
+              }}>
+              ±{r}%
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{ padding: 24 }}>
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: 'auto', display: 'block' }}>
+          <defs>
+            <linearGradient id="psGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={T.blue} stopOpacity="0.20" />
+              <stop offset="100%" stopColor={T.blue} stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {/* Grid */}
+          {[0.25, 0.5, 0.75].map((f, i) => {
+            const y = PAD.t + innerH * (1 - f);
+            return <line key={i} x1={PAD.l} y1={y} x2={W - PAD.r} y2={y} stroke={T.divide} strokeWidth="1" />;
+          })}
+          {/* Y labels */}
+          {[0, 0.5, 1].map((f, i) => {
+            const t = minT + (maxT - minT) * f;
+            return <text key={i} x={PAD.l - 8} y={yScale(t) + 4} fontSize="10" fill={T.faint} textAnchor="end" style={NUM}>{fmtK(t)}</text>;
+          })}
+          {/* Area + curve */}
+          <path d={area} fill="url(#psGrad)" />
+          <path d={path} stroke={T.blue} strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Current price marker */}
+          <line x1={cx} y1={PAD.t} x2={cx} y2={PAD.t + innerH} stroke={T.blue} strokeWidth="1" strokeDasharray="3 3" opacity="0.4" />
+          <circle cx={cx} cy={cy} r="6" fill={T.paper} stroke={T.blue} strokeWidth="2.5" />
+          {/* X labels */}
+          {xLabels.map((p, i) => (
+            <text key={i} x={xScale(p)} y={H - PAD.b + 18} fontSize="10" fill={T.faint} textAnchor="middle" style={NUM}>
+              {fmtK(p)}
+            </text>
+          ))}
+        </svg>
+      </div>
+    </Card>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. COMPARATIVE LOAD (bar chart card)
+═══════════════════════════════════════════════════════════════ */
+function ComparativeLoadCard({ scenarios, current }: { scenarios: SDLTResult[]; current: BuyerType }) {
+  const FEE_EST = 1500; // estimated conveyancing + searches
+  const showing = scenarios.filter((s) => ['standard', 'firstTime', 'additional', 'nonResident'].includes(s.buyerType));
+  const maxTotal = Math.max(...showing.map((s) => s.total + FEE_EST), 1);
+
+  const W = 560, H = 240;
+  const PAD = { l: 16, r: 16, t: 16, b: 50 };
+  const innerW = W - PAD.l - PAD.r;
+  const innerH = H - PAD.t - PAD.b;
+  const bw = innerW / showing.length;
+  const barW = bw * 0.45;
+
+  return (
+    <Card padding={0} id="compare">
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Comparative Load
+        </h2>
+        <div style={{ display: 'flex', gap: 14, fontSize: 11, color: T.muted, fontWeight: 500 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 2, background: T.blue }} />
+            SDLT
+          </span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 2, background: T.purple }} />
+            Fees
+          </span>
+        </div>
+      </div>
+      <div style={{ padding: 24 }}>
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: 'auto', display: 'block' }}>
+          {/* Bars */}
+          {showing.map((s, i) => {
+            const totalH = ((s.total + FEE_EST) / maxTotal) * innerH;
+            const sdltH = (s.total / maxTotal) * innerH;
+            const feeH  = (FEE_EST  / maxTotal) * innerH;
+            const x = PAD.l + bw * i + (bw - barW) / 2;
+            const yBaseSdlt = PAD.t + innerH - sdltH;
+            const yBaseFee  = PAD.t + innerH - sdltH - feeH;
+            const active = s.buyerType === current;
+            const labelShort = s.buyerType === 'standard' ? 'Standard' : s.buyerType === 'firstTime' ? 'FTB' : s.buyerType === 'additional' ? 'Additional' : 'Non-UK';
+            return (
+              <g key={s.buyerType} opacity={active ? 1 : 0.85}>
+                {/* Fees segment */}
+                {s.total + FEE_EST > 0 && (
+                  <rect x={x} y={yBaseFee} width={barW} height={feeH} fill={T.purple} rx="2" />
+                )}
+                {/* SDLT segment */}
+                {s.total > 0 && (
+                  <rect x={x} y={yBaseSdlt} width={barW} height={sdltH} fill={active ? T.blueDk : T.blue} rx="2" />
+                )}
+                {/* If both zero, show small fee bar */}
+                {s.total === 0 && (
+                  <rect x={x} y={PAD.t + innerH - feeH} width={barW} height={feeH} fill={T.purple} rx="2" />
+                )}
+                {/* Label */}
+                <text x={x + barW / 2} y={H - PAD.b + 18}
+                  fontSize="11" fill={active ? T.ink : T.muted}
+                  fontWeight={active ? 700 : 500}
+                  textAnchor="middle">
+                  {labelShort}
+                </text>
+                <text x={x + barW / 2} y={H - PAD.b + 34}
+                  fontSize="10" fill={T.faint}
+                  textAnchor="middle" style={NUM}>
+                  {fmtK(s.total + FEE_EST)}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+        <div style={{ fontSize: 11, color: T.faint, marginTop: 8, textAlign: 'center' }}>
+          Fees assumed at £{FEE_EST.toLocaleString()} (conveyancing + searches, indicative)
+        </div>
+      </div>
+    </Card>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════
    PRIMITIVES
 ═══════════════════════════════════════════════════════════════ */
-function Field({ label, children, topGap = 0 }: { label: string; children: React.ReactNode; topGap?: number }) {
+function Card({
+  children, padding = 24, id,
+}: { children: React.ReactNode; padding?: number; id?: string }) {
   return (
-    <div style={{ marginTop: topGap }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 10 }}>
-        {label}
-      </div>
+    <div id={id} style={{
+      background: T.paper,
+      border: `1px solid ${T.hair}`,
+      borderRadius: 14,
+      boxShadow: T.shadow,
+      padding,
+      overflow: 'hidden',
+    }}>
       {children}
     </div>
   );
 }
 
-function Segmented({
-  value, onChange, options,
-}: { value: string; onChange: (v: string) => void; options: { id: string; label: string; sub?: string }[] }) {
+function Label({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: `repeat(${options.length}, 1fr)`,
-      gap: 4, padding: 4, background: T.page, borderRadius: 10,
+      fontSize: 11, fontWeight: 700, color: T.muted,
+      letterSpacing: '0.10em', textTransform: 'uppercase',
+      marginBottom: 12,
     }}>
-      {options.map((o) => {
-        const active = value === o.id;
-        return (
-          <button key={o.id} type="button" onClick={() => onChange(o.id)}
-            style={{
-              padding: '8px 10px', borderRadius: 6,
-              background: active ? T.paper : 'transparent',
-              color: active ? T.ink : T.muted,
-              border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-              boxShadow: active ? T.shadowSm : 'none',
-              transition: 'all 0.12s ease',
-            }}>
-            <div style={{ fontSize: 12, fontWeight: 600, lineHeight: 1.2 }}>{o.label}</div>
-            {o.sub && <div style={{ fontSize: 10, color: T.faint, marginTop: 2, letterSpacing: '0.06em' }}>{o.sub}</div>}
-          </button>
-        );
-      })}
+      {children}
     </div>
   );
 }
 
-function Toggle({
-  on, onChange, label, desc, disabled = false,
-}: { on: boolean; onChange: (v: boolean) => void; label: string; desc: string; disabled?: boolean }) {
+function AdvToggle({
+  on, onChange, label, desc,
+}: { on: boolean; onChange: (v: boolean) => void; label: string; desc: string }) {
   return (
     <button type="button" role="switch" aria-checked={on}
-      onClick={() => !disabled && onChange(!on)}
-      disabled={disabled}
+      onClick={() => onChange(!on)}
       style={{
-        display: 'flex', alignItems: 'flex-start', gap: 14,
+        display: 'flex', alignItems: 'flex-start', gap: 12,
         padding: '10px 0', width: '100%',
         background: 'transparent', border: 'none',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.4 : 1,
-        fontFamily: 'inherit', textAlign: 'left',
+        cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
       }}>
       <span style={{
         position: 'relative', width: 32, height: 18, borderRadius: 999,
-        background: on ? T.brand : T.ghost, flexShrink: 0, marginTop: 1,
+        background: on ? T.blue : T.ghost, flexShrink: 0, marginTop: 1,
         transition: 'background 0.18s ease',
       }}>
         <span style={{
@@ -991,13 +948,26 @@ function Toggle({
         }} />
       </span>
       <span style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, fontWeight: 500, color: T.ink, lineHeight: 1.3 }}>{label}</div>
-        <div style={{ fontSize: 11.5, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>{desc}</div>
+        <span style={{ display: 'block', fontSize: 13, fontWeight: 500, color: T.ink, lineHeight: 1.3 }}>{label}</span>
+        <span style={{ display: 'block', fontSize: 11.5, color: T.muted, marginTop: 2, lineHeight: 1.45 }}>{desc}</span>
       </span>
     </button>
   );
 }
 
-function Dot() {
-  return <span style={{ width: 2, height: 2, borderRadius: 999, background: T.ghost }} />;
+function flagsForBuyer(b: BuyerType): Flags {
+  return {
+    ftb:         b === 'firstTime',
+    additional:  b === 'additional'  || b === 'addNonRes',
+    nonResident: b === 'nonResident' || b === 'addNonRes',
+    mixedUse:    b === 'mixedUse',
+    company:     b === 'company',
+    joint:       false,
+  };
 }
+
+const wrap: React.CSSProperties = {
+  maxWidth: 1280,
+  margin: '0 auto',
+  padding: '0 clamp(16px, 3vw, 32px)',
+};
