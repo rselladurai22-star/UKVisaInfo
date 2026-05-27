@@ -252,6 +252,6 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 }
 
 const wrap: React.CSSProperties = {
-  maxWidth: 1280, margin: '0 auto',
-  padding: '0 clamp(16px, 3vw, 32px)',
+  maxWidth: 2400, margin: '0 auto',
+  padding: '0 clamp(16px, 4vw, 96px)',
 };

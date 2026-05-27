@@ -123,7 +123,7 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
 
       {/* ═══ HERO 3-COLUMN GRID ═══ */}
       <div style={wrap}>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)_minmax(0,1fr)] gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1fr)] gap-5 lg:gap-8">
           <CalculatorInputs
             country={country} setCountry={setCountry}
             flags={flags} setFlags={setFlags}
@@ -146,7 +146,7 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
 
       {/* ═══ TWO-COLUMN CHARTS ═══ */}
       <div style={{ ...wrap, marginTop: 24 }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
           <PriceSensitivityCard price={price} buyer={buyer} country={country} />
           <ComparativeLoadCard scenarios={allScen} current={buyer} />
         </div>
@@ -451,7 +451,7 @@ function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) 
 
 /* ─── Donut chart ─── */
 function Donut({ result }: { result: SDLTResult }) {
-  const size = 240, stroke = 22;
+  const size = 280, stroke = 26;
   const r = (size - stroke) / 2;
   const cx = size / 2, cy = size / 2;
   const circumference = 2 * Math.PI * r;
@@ -475,8 +475,8 @@ function Donut({ result }: { result: SDLTResult }) {
   const gap = 2; // px gap between segments
 
   return (
-    <div style={{ position: 'relative', width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)' }}>
+    <div style={{ position: 'relative', width: '100%', maxWidth: size, aspectRatio: '1' }}>
+      <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)', display: 'block' }}>
         {/* Background ring */}
         <circle cx={cx} cy={cy} r={r} fill="none" stroke={T.divide} strokeWidth={stroke} />
         {/* Segments */}
@@ -724,8 +724,8 @@ function PriceSensitivityCard({ price, buyer, country }: { price: number; buyer:
     return arr;
   }, [price, buyer, country, range]);
 
-  const W = 560, H = 240;
-  const PAD = { l: 50, r: 16, t: 16, b: 36 };
+  const W = 720, H = 300;
+  const PAD = { l: 56, r: 20, t: 20, b: 40 };
   const innerW = W - PAD.l - PAD.r;
   const innerH = H - PAD.t - PAD.b;
 
@@ -816,12 +816,12 @@ function ComparativeLoadCard({ scenarios, current }: { scenarios: SDLTResult[]; 
   const showing = scenarios.filter((s) => ['standard', 'firstTime', 'additional', 'nonResident'].includes(s.buyerType));
   const maxTotal = Math.max(...showing.map((s) => s.total + FEE_EST), 1);
 
-  const W = 560, H = 240;
-  const PAD = { l: 16, r: 16, t: 16, b: 50 };
+  const W = 720, H = 300;
+  const PAD = { l: 20, r: 20, t: 20, b: 56 };
   const innerW = W - PAD.l - PAD.r;
   const innerH = H - PAD.t - PAD.b;
   const bw = innerW / showing.length;
-  const barW = bw * 0.45;
+  const barW = bw * 0.5;
 
   return (
     <Card padding={0} id="compare">
@@ -967,7 +967,7 @@ function flagsForBuyer(b: BuyerType): Flags {
 }
 
 const wrap: React.CSSProperties = {
-  maxWidth: 1280,
+  maxWidth: 2400,
   margin: '0 auto',
-  padding: '0 clamp(16px, 3vw, 32px)',
+  padding: '0 clamp(16px, 4vw, 96px)',
 };
