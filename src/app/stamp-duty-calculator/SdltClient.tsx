@@ -18,7 +18,7 @@
 import { useMemo, useState } from 'react';
 import {
   Settings, Check, ArrowRight, ArrowUpRight, TrendingUp, TrendingDown,
-  Home, Users, User, Sparkles, ChevronDown,
+  Home, Sparkles, ChevronDown,
 } from 'lucide-react';
 import {
   calculateSDLT, calculateAllScenarios, calculateAllCountries, calculateRefund,
@@ -80,7 +80,7 @@ const fmtK = (n: number) => n >= 1_000_000 ? `£${(n/1_000_000).toFixed(n % 1_00
 /* Flag-based state machine */
 interface Flags {
   ftb: boolean; additional: boolean; nonResident: boolean;
-  mixedUse: boolean; company: boolean; joint: boolean;
+  mixedUse: boolean; company: boolean;
 }
 function deriveBuyer(f: Flags): BuyerType {
   if (f.mixedUse) return 'mixedUse';
@@ -108,7 +108,7 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
   const [country, setCountry] = useState<Country>('england');
   const [flags, setFlags] = useState<Flags>({
     ftb: false, additional: false, nonResident: false,
-    mixedUse: false, company: false, joint: false,
+    mixedUse: false, company: false,
   });
   const [mode, setMode] = useState<'simple' | 'advanced'>('simple');
 
@@ -201,37 +201,6 @@ function CalculatorInputs({
       </div>
 
       <div style={{ padding: 24 }}>
-        {/* Individual / Joint */}
-        <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6,
-          padding: 4, background: T.surface, borderRadius: 10,
-          marginBottom: 28,
-        }}>
-          {[
-            { id: 'individual', label: 'Individual', Icon: User,  on: !flags.joint },
-            { id: 'joint',      label: 'Joint',      Icon: Users, on: flags.joint  },
-          ].map((opt) => {
-            const Icon = opt.Icon;
-            return (
-              <button key={opt.id} type="button"
-                onClick={() => setFlags({ ...flags, joint: opt.id === 'joint' })}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                  padding: '10px 14px', borderRadius: 7,
-                  background: opt.on ? T.blue : 'transparent',
-                  color: opt.on ? T.paper : T.muted,
-                  border: 'none', cursor: 'pointer',
-                  fontFamily: 'inherit', fontSize: 13, fontWeight: 600,
-                  transition: 'all 0.15s ease',
-                  boxShadow: opt.on ? '0 1px 2px rgba(37,99,235,0.25)' : 'none',
-                }}>
-                <Icon size={14} />
-                {opt.label}
-              </button>
-            );
-          })}
-        </div>
-
         {/* BUYER STATUS */}
         <Label>Buyer Status</Label>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
@@ -244,7 +213,6 @@ function CalculatorInputs({
                   additional: s.id === 'additional',
                   nonResident: s.id === 'nonResident',
                   mixedUse: false, company: false,
-                  joint: flags.joint,
                 })}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
@@ -334,14 +302,14 @@ function CalculatorInputs({
               <AdvToggle on={flags.mixedUse}
                 onChange={(v) => setFlags({
                   ftb: false, additional: false, nonResident: false,
-                  mixedUse: v, company: false, joint: flags.joint,
+                  mixedUse: v, company: false,
                 })}
                 label="Mixed-use property"
                 desc="Has commercial element — no 3% surcharge" />
               <AdvToggle on={flags.company}
                 onChange={(v) => setFlags({
                   ftb: false, additional: false, nonResident: false,
-                  mixedUse: false, company: v, joint: flags.joint,
+                  mixedUse: false, company: v,
                 })}
                 label="Company-bought"
                 desc="Non-natural person, 15% flat if > £500k" />
@@ -353,10 +321,23 @@ function CalculatorInputs({
   );
 }
 
+/* Donut wedge colors — also used as legend swatch colors below */
+const WEDGE_COLORS = ['#047857', '#0F766E', '#15803D', '#B8860B'];
+
 /* ═══════════════════════════════════════════════════════════════
    2. TAX BREAKDOWN (center column — donut + bands)
 ═══════════════════════════════════════════════════════════════ */
 function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) {
+  // Index map: which color belongs to each taxable band (only bands with tax > 0)
+  const taxableIndexByBand = new Map<number, number>();
+  let tIdx = 0;
+  result.bands.forEach((b, i) => {
+    if (b.tax > 0) {
+      taxableIndexByBand.set(i, tIdx);
+      tIdx += 1;
+    }
+  });
+
   return (
     <Card padding={0}>
       <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}` }}>
@@ -371,32 +352,44 @@ function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) 
           <Donut result={result} />
         </div>
 
-        {/* BAND ROWS */}
+        {/* BAND ROWS — legend matched to donut wedges by color */}
+        <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+          Breakdown by band
+        </div>
         <div style={{ display: 'grid', gap: 8 }}>
-          {result.bands.filter((b) => b.taxOn > 0).map((b, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: 'center', gap: 12,
-              padding: '14px 16px',
-              background: b.tax > 0 ? T.blueT : T.surface,
-              borderRadius: 10,
-            }}>
-              <span style={{
-                width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
-                background: b.tax > 0 ? T.blue : T.ghost,
-              }} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
-                  Band {i + 1} ({b.label.split(':').pop()?.trim().replace(' on ', ' · ')})
+          {result.bands.filter((b) => b.taxOn > 0).map((b, i) => {
+            // Find this band's original index to look up its donut color
+            const origIdx = result.bands.indexOf(b);
+            const colorIdx = taxableIndexByBand.get(origIdx);
+            const swatchColor = b.tax > 0 && colorIdx !== undefined
+              ? WEDGE_COLORS[colorIdx % WEDGE_COLORS.length]
+              : T.ghost;
+            return (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '14px 16px',
+                background: b.tax > 0 ? T.surface : T.surface,
+                borderRadius: 10,
+                border: `1px solid ${T.divide}`,
+              }}>
+                <span style={{
+                  width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
+                  background: swatchColor,
+                }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
+                    Band {i + 1} · {(b.rate * 100).toFixed(0)}%
+                  </div>
+                  <div style={{ fontSize: 11.5, color: T.muted, marginTop: 2 }}>
+                    {b.label.split(':').pop()?.trim()} · on {gbp(b.taxOn)}
+                  </div>
                 </div>
-                <div style={{ fontSize: 11.5, color: T.muted, marginTop: 2 }}>
-                  {(b.rate * 100).toFixed(b.rate < 0.1 ? 0 : 0)}% on {gbp(b.taxOn)}
+                <div style={{ fontSize: 16, fontWeight: 700, color: T.ink, ...NUM, letterSpacing: '-0.015em' }}>
+                  {gbp(b.tax)}
                 </div>
               </div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: T.ink, ...NUM, letterSpacing: '-0.015em' }}>
-                {gbp(b.tax)}
-              </div>
-            </div>
-          ))}
+            );
+          })}
           {result.surchargeAmount > 0 && (
             <div style={{
               display: 'flex', alignItems: 'center', gap: 12,
@@ -458,12 +451,11 @@ function Donut({ result }: { result: SDLTResult }) {
 
   const total = result.total;
   const segments: { value: number; color: string; key: string }[] = [];
-  // Sequential emerald scale by band index for clean visual hierarchy
-  const wedgeColors = ['#047857', '#0F766E', '#15803D', '#B8860B'];
+  // Sequential emerald scale by band index — matches the legend below
   result.bands.filter((b) => b.tax > 0).forEach((b, i) => {
     segments.push({
       value: b.tax,
-      color: wedgeColors[i % wedgeColors.length],
+      color: WEDGE_COLORS[i % WEDGE_COLORS.length],
       key: `b${i}`,
     });
   });
@@ -965,7 +957,6 @@ function flagsForBuyer(b: BuyerType): Flags {
     nonResident: b === 'nonResident' || b === 'addNonRes',
     mixedUse:    b === 'mixedUse',
     company:     b === 'company',
-    joint:       false,
   };
 }
 

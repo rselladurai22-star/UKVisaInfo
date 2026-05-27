@@ -242,26 +242,6 @@ export default function Page() {
                 <span className="sdlt-arrow-icon" style={{ fontSize: 13, color: T.muted }}>↗</span>
               </a>
             </div>
-
-            {/* Trust signals */}
-            <div className="sdlt-fade-up sdlt-fade-up-4" style={{
-              display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16, marginTop: 18, fontSize: 12, color: T.muted,
-            }}>
-              {[
-                'HMRC verified',
-                'Revenue Scotland verified',
-                'Welsh Revenue Authority verified',
-                '£0 forever',
-              ].map((t) => (
-                <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <circle cx="7" cy="7" r="6.5" stroke={T.emerald} strokeWidth="1" />
-                    <path d="M4 7l2 2 4-4" stroke={T.emerald} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  {t}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
