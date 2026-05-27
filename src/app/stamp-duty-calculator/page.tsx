@@ -133,12 +133,12 @@ export default function Page() {
       `}</style>
 
       {/* ═══════════════════════════════════════════
-          HERO — compact premium with floating cards
+          HERO — compact, centered, flows straight into calculator
       ═══════════════════════════════════════════ */}
       <section style={{
         position: 'relative', overflow: 'hidden',
-        paddingTop: 'clamp(80px, 9vh, 104px)',
-        paddingBottom: 'clamp(24px, 4vh, 40px)',
+        paddingTop: 'clamp(72px, 8vh, 96px)',
+        paddingBottom: 'clamp(16px, 2.5vh, 28px)',
       }}>
         {/* Animated gradient orbs */}
         <div aria-hidden style={{
@@ -166,163 +166,101 @@ export default function Page() {
         }} />
 
         <div style={{ ...wrap, position: 'relative' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32, alignItems: 'center' }} className="lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-12">
+          <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
 
-            {/* LEFT — heading + CTAs */}
-            <div>
-              {/* Breadcrumb */}
-              <div className="sdlt-fade-up" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
-                <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
-                <span style={{ color: T.faint }}>/</span>
-                <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
-                <span style={{ color: T.faint }}>/</span>
-                <span style={{ color: T.ink, fontWeight: 500 }}>Stamp duty</span>
-              </div>
-
-              {/* Live badge */}
-              <div className="sdlt-fade-up sdlt-fade-up-1" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 10,
-                padding: '5px 12px 5px 9px', borderRadius: 999,
-                background: 'rgba(255,255,255,0.7)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: `1px solid ${T.hair}`,
-                fontSize: 11.5, fontWeight: 600, color: T.body,
-                marginBottom: 16,
-              }}>
-                <span style={{
-                  width: 6, height: 6, borderRadius: 999, background: T.emerald,
-                  animation: 'pulse-ring 2s infinite',
-                }} />
-                Live · Verified May 2026 · SDLT · LBTT · LTT
-              </div>
-
-              {/* Headline */}
-              <h1 className="sdlt-fade-up sdlt-fade-up-2" style={{
-                fontSize: 'clamp(34px, 4.8vw, 64px)',
-                fontWeight: 700, lineHeight: 0.98,
-                letterSpacing: '-0.04em', color: T.ink,
-                margin: 0, maxWidth: '14ch',
-              }}>
-                Calculate UK <span className="sdlt-grad-text">stamp duty</span> in seconds.
-              </h1>
-
-              {/* Subtitle */}
-              <p className="sdlt-fade-up sdlt-fade-up-3" style={{
-                fontSize: 'clamp(15px, 1.5vw, 17px)',
-                lineHeight: 1.5, color: T.body, fontWeight: 400,
-                margin: '14px 0 0', maxWidth: '54ch',
-              }}>
-                The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, full transparency.
-              </p>
-
-              {/* CTAs */}
-              <div className="sdlt-fade-up sdlt-fade-up-4" style={{
-                display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20,
-              }}>
-                <a href="#calculator" className="sdlt-cta-btn" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '11px 20px', borderRadius: 10,
-                  background: `linear-gradient(135deg, ${T.emerald} 0%, ${T.emeraldDk} 100%)`,
-                  color: T.paper, textDecoration: 'none',
-                  fontSize: 14, fontWeight: 600,
-                  boxShadow: '0 8px 24px -8px rgba(4,120,87,0.45), inset 0 1px 0 rgba(255,255,255,0.15)',
-                }}>
-                  Start calculating
-                  <span style={{ fontSize: 15 }}>→</span>
-                </a>
-                <a href="#faq" className="sdlt-link-arrow" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  padding: '11px 16px', borderRadius: 10,
-                  background: 'rgba(255,255,255,0.6)',
-                  backdropFilter: 'blur(12px)',
-                  border: `1px solid ${T.hair}`,
-                  color: T.ink, textDecoration: 'none',
-                  fontSize: 14, fontWeight: 600,
-                }}>
-                  Read the FAQ
-                  <span className="sdlt-arrow-icon" style={{ fontSize: 13, color: T.muted }}>↗</span>
-                </a>
-              </div>
-
-              {/* Trust signals */}
-              <div className="sdlt-fade-up sdlt-fade-up-4" style={{
-                display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 18, fontSize: 12, color: T.muted,
-              }}>
-                {[
-                  'HMRC verified',
-                  'Revenue Scotland verified',
-                  'Welsh Revenue Authority verified',
-                  '£0 forever',
-                ].map((t) => (
-                  <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <circle cx="7" cy="7" r="6.5" stroke={T.emerald} strokeWidth="1" />
-                      <path d="M4 7l2 2 4-4" stroke={T.emerald} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {t}
-                  </span>
-                ))}
-              </div>
+            {/* Breadcrumb */}
+            <div className="sdlt-fade-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
+              <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
+              <span style={{ color: T.faint }}>/</span>
+              <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
+              <span style={{ color: T.faint }}>/</span>
+              <span style={{ color: T.ink, fontWeight: 500 }}>Stamp duty</span>
             </div>
 
-            {/* RIGHT — floating preview cards */}
-            <div className="hidden lg:block" style={{ position: 'relative', minHeight: 320 }}>
-              <FloatingCard
-                position={{ top: 0, right: 0 }}
-                animDelay="0s"
-              >
-                <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 8 }}>
-                  Your SDLT
-                </div>
-                <div style={{ fontSize: 36, fontWeight: 700, color: T.ink, letterSpacing: '-0.025em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
-                  £7,500
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10, fontSize: 11.5 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: 999, background: T.emerald }} />
-                  <span style={{ color: T.muted }}>On £350k · 2.14% effective</span>
-                </div>
-              </FloatingCard>
+            {/* Live badge */}
+            <div className="sdlt-fade-up sdlt-fade-up-1" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              padding: '5px 12px 5px 9px', borderRadius: 999,
+              background: 'rgba(255,255,255,0.7)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: `1px solid ${T.hair}`,
+              fontSize: 11.5, fontWeight: 600, color: T.body,
+              marginBottom: 16,
+            }}>
+              <span style={{
+                width: 6, height: 6, borderRadius: 999, background: T.emerald,
+                animation: 'pulse-ring 2s infinite',
+              }} />
+              Live · Verified May 2026 · SDLT · LBTT · LTT
+            </div>
 
-              <FloatingCard
-                position={{ top: 110, left: 0 }}
-                animDelay="-3s"
-                tone="emerald"
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 13l4 4L19 7" stroke={T.emerald} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Headline */}
+            <h1 className="sdlt-fade-up sdlt-fade-up-2" style={{
+              fontSize: 'clamp(34px, 4.8vw, 64px)',
+              fontWeight: 700, lineHeight: 1.0,
+              letterSpacing: '-0.04em', color: T.ink,
+              margin: '0 auto', maxWidth: '16ch',
+            }}>
+              Calculate UK <span className="sdlt-grad-text">stamp duty</span> in seconds.
+            </h1>
+
+            {/* Subtitle */}
+            <p className="sdlt-fade-up sdlt-fade-up-3" style={{
+              fontSize: 'clamp(15px, 1.5vw, 17px)',
+              lineHeight: 1.55, color: T.body, fontWeight: 400,
+              margin: '14px auto 0', maxWidth: '54ch',
+            }}>
+              The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, full transparency.
+            </p>
+
+            {/* CTAs */}
+            <div className="sdlt-fade-up sdlt-fade-up-4" style={{
+              display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 22,
+            }}>
+              <a href="#calculator" className="sdlt-cta-btn" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '11px 20px', borderRadius: 10,
+                background: `linear-gradient(135deg, ${T.emerald} 0%, ${T.emeraldDk} 100%)`,
+                color: T.paper, textDecoration: 'none',
+                fontSize: 14, fontWeight: 600,
+                boxShadow: '0 8px 24px -8px rgba(4,120,87,0.45), inset 0 1px 0 rgba(255,255,255,0.15)',
+              }}>
+                Start calculating
+                <span style={{ fontSize: 15 }}>→</span>
+              </a>
+              <a href="#faq" className="sdlt-link-arrow" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '11px 16px', borderRadius: 10,
+                background: 'rgba(255,255,255,0.6)',
+                backdropFilter: 'blur(12px)',
+                border: `1px solid ${T.hair}`,
+                color: T.ink, textDecoration: 'none',
+                fontSize: 14, fontWeight: 600,
+              }}>
+                Read the FAQ
+                <span className="sdlt-arrow-icon" style={{ fontSize: 13, color: T.muted }}>↗</span>
+              </a>
+            </div>
+
+            {/* Trust signals */}
+            <div className="sdlt-fade-up sdlt-fade-up-4" style={{
+              display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16, marginTop: 18, fontSize: 12, color: T.muted,
+            }}>
+              {[
+                'HMRC verified',
+                'Revenue Scotland verified',
+                'Welsh Revenue Authority verified',
+                '£0 forever',
+              ].map((t) => (
+                <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle cx="7" cy="7" r="6.5" stroke={T.emerald} strokeWidth="1" />
+                    <path d="M4 7l2 2 4-4" stroke={T.emerald} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: T.emerald, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                    Save £5,000
-                  </span>
-                </div>
-                <div style={{ fontSize: 13, color: T.body, lineHeight: 1.45 }}>
-                  As a <strong style={{ color: T.ink }}>first-time buyer</strong> at this price
-                </div>
-              </FloatingCard>
-
-              <FloatingCard
-                position={{ bottom: 0, right: 16 }}
-                animDelay="-6s"
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-                  {[
-                    { l: 'England', v: '£7.5k', a: true  },
-                    { l: 'Scotland', v: '£11.4k', a: false },
-                    { l: 'Wales',  v: '£11.3k', a: false },
-                  ].map((r) => (
-                    <div key={r.l}>
-                      <div style={{ fontSize: 10, fontWeight: 600, color: T.faint, letterSpacing: '0.06em' }}>
-                        {r.l}
-                      </div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: r.a ? T.emerald : T.ink, marginTop: 4, fontVariantNumeric: 'tabular-nums' }}>
-                        {r.v}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </FloatingCard>
+                  {t}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -505,37 +443,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-/* Floating preview card for hero */
-function FloatingCard({
-  children, position, animDelay = '0s', tone = 'plain',
-}: {
-  children: React.ReactNode;
-  position: { top?: number; left?: number; right?: number; bottom?: number };
-  animDelay?: string;
-  tone?: 'plain' | 'emerald';
-}) {
-  const isEmerald = tone === 'emerald';
-  return (
-    <div style={{
-      position: 'absolute',
-      ...position,
-      maxWidth: 280,
-      padding: '20px 22px',
-      background: isEmerald
-        ? `linear-gradient(135deg, ${T.emeraldT} 0%, rgba(255,255,255,0.9) 100%)`
-        : 'rgba(255,255,255,0.85)',
-      border: `1px solid ${isEmerald ? 'rgba(4,120,87,0.2)' : T.hair}`,
-      backdropFilter: 'blur(20px)',
-      WebkitBackdropFilter: 'blur(20px)',
-      borderRadius: 16,
-      boxShadow: '0 20px 50px -20px rgba(11,15,25,0.18), 0 4px 12px -4px rgba(11,15,25,0.06)',
-      animation: `float-card 6s ease-in-out infinite ${animDelay}`,
-    }}>
-      {children}
     </div>
   );
 }
