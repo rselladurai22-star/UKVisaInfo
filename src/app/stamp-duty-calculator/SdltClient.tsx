@@ -115,8 +115,6 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
   const buyer    = deriveBuyer(flags);
   const result   = useMemo(() => calculateSDLT(price, buyer, country), [price, buyer, country]);
   const allScen  = useMemo(() => calculateAllScenarios(price, country), [price, country]);
-  const stdRes   = allScen.find((r) => r.buyerType === 'standard')!;
-  const ftbRes   = allScen.find((r) => r.buyerType === 'firstTime')!;
 
   return (
     <div style={{ ...FONT, color: T.ink, background: T.page, paddingBottom: 32 }}>
@@ -131,9 +129,9 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
             mode={mode} setMode={setMode}
           />
           <TaxBreakdown result={result} price={price} />
-          <WhatIfScenarios
+          <ScenarioComparison
             price={price} country={country} flags={flags}
-            current={result.total} stdRes={stdRes} ftbRes={ftbRes}
+            result={result} allScen={allScen}
             onApply={(b) => setFlags(flagsForBuyer(b))}
           />
         </div>
@@ -202,23 +200,21 @@ function CalculatorInputs({
   return (
     <Card padding={0}>
       {/* Header */}
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          Your purchase
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <h2 style={{ flex: 1, fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Your Purchase
         </h2>
         <button type="button" onClick={() => setMode(mode === 'simple' ? 'advanced' : 'simple')}
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            padding: '6px 10px', borderRadius: 8,
-            background: mode === 'advanced' ? T.blueT : 'transparent',
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+            padding: '5px 11px', borderRadius: 20,
+            background: mode === 'advanced' ? T.blueT : T.surface,
             color: mode === 'advanced' ? T.blue : T.muted,
-            border: 'none', cursor: 'pointer',
-            fontFamily: 'inherit', fontSize: 11.5, fontWeight: 600,
-            transition: 'all 0.15s ease',
-          }}
-          title="Toggle advanced mode"
-          aria-label="Toggle advanced mode">
-          <Settings size={13} />
+            border: `1px solid ${mode === 'advanced' ? T.blueT2 : T.hair}`,
+            cursor: 'pointer', fontFamily: 'inherit',
+            fontSize: 11.5, fontWeight: 600,
+          }}>
+          <Settings size={12} />
           Advanced
         </button>
       </div>
@@ -446,22 +442,16 @@ const WEDGE_COLORS = ['#047857', '#0F766E', '#15803D', '#B8860B'];
    2. TAX BREAKDOWN (center column — donut + bands)
 ═══════════════════════════════════════════════════════════════ */
 function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) {
-  // Index map: which color belongs to each taxable band (only bands with tax > 0)
-  const taxableIndexByBand = new Map<number, number>();
-  let tIdx = 0;
-  result.bands.forEach((b, i) => {
-    if (b.tax > 0) {
-      taxableIndexByBand.set(i, tIdx);
-      tIdx += 1;
-    }
-  });
-
   return (
     <Card padding={0}>
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}` }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          Tax Breakdown
-        </h2>
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div>
+          <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>Tax Breakdown</h2>
+          <div style={{ fontSize: 11.5, color: T.muted, marginTop: 3, display: 'flex', alignItems: 'center', gap: 5 }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.emerald, display: 'inline-block' }} />
+            Updated live
+          </div>
+        </div>
       </div>
       <div style={{ padding: '32px 24px 24px' }}>
 
@@ -471,29 +461,24 @@ function TaxBreakdown({ result, price }: { result: SDLTResult; price: number }) 
         </div>
 
         {/* BAND ROWS — legend matched to donut wedges by color */}
-        <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
-          Breakdown by band
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            Breakdown by band
+          </div>
+          <span style={{ fontSize: 9.5, fontWeight: 700, padding: '2px 8px', borderRadius: 5, background: T.surface, color: T.muted }}>
+            {result.bands.filter(b => b.taxOn > 0).length} bands · {result.taxName}
+          </span>
         </div>
         <div style={{ display: 'grid', gap: 8 }}>
           {result.bands.filter((b) => b.taxOn > 0).map((b, i) => {
-            // Find this band's original index to look up its donut color
-            const origIdx = result.bands.indexOf(b);
-            const colorIdx = taxableIndexByBand.get(origIdx);
-            const swatchColor = b.tax > 0 && colorIdx !== undefined
-              ? WEDGE_COLORS[colorIdx % WEDGE_COLORS.length]
-              : T.ghost;
             return (
               <div key={i} style={{
                 display: 'flex', alignItems: 'center', gap: 12,
                 padding: '14px 16px',
-                background: b.tax > 0 ? T.surface : T.surface,
+                background: T.surface,
                 borderRadius: 10,
                 border: `1px solid ${T.divide}`,
               }}>
-                <span style={{
-                  width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
-                  background: swatchColor,
-                }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 13.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>
                     Band {i + 1} · {(b.rate * 100).toFixed(0)}%
@@ -630,123 +615,368 @@ function Donut({ result }: { result: SDLTResult }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   3. WHAT-IF SCENARIOS (right column)
+   3. SCENARIO COMPARISON (right column)
 ═══════════════════════════════════════════════════════════════ */
-function WhatIfScenarios({
-  current, stdRes, ftbRes, price, country, flags, onApply,
-}: {
-  current: number; stdRes: SDLTResult; ftbRes: SDLTResult;
-  price: number; country: Country; flags: Flags;
-  onApply: (b: BuyerType) => void;
-}) {
-  const ftbDelta = current - ftbRes.total; // positive = saving by switching to FTB
-  const additional = calculateSDLT(price, 'additional', country);
-  const addDelta = additional.total - current;
-  const nonRes = calculateSDLT(price, 'nonResident', country);
-  const nonResDelta = nonRes.total - current;
-
+function BandDots({ r }: { r: SDLTResult }) {
+  const active = r.bands.filter(b => b.taxOn > 0);
+  const colors = ['#22c55e', '#16a34a', '#f59e0b', '#ef4444', '#9f1239'];
+  const displayed = active.slice(0, 5);
+  const blanks = Math.max(0, 5 - displayed.length);
   return (
-    <Card padding={0}>
-      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}` }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
-          What-if Scenarios
-        </h2>
-      </div>
-      <div style={{ padding: 20, display: 'grid', gap: 10 }}>
-        <ScenarioCard
-          tone="purple" label="As a first-time buyer"
-          value={gbp(ftbRes.total)}
-          delta={ftbDelta > 0 ? `Save ${gbp(ftbDelta)}` : 'No saving available'}
-          deltaTone="good"
-          active={flags.ftb}
-          onClick={() => onApply('firstTime')}
-        />
-        <ScenarioCard
-          tone="amber" label="If additional property"
-          value={gbp(additional.total)}
-          delta={addDelta > 0 ? `Extra ${gbp(addDelta)}` : 'No change'}
-          deltaTone="warn"
-          active={flags.additional}
-          onClick={() => onApply('additional')}
-        />
-        <ScenarioCard
-          tone="rose" label="Non-UK resident"
-          value={gbp(nonRes.total)}
-          delta={nonResDelta > 0 ? `Extra ${gbp(nonResDelta)}` : 'Same'}
-          deltaTone="warn"
-          active={flags.nonResident}
-          onClick={() => onApply('nonResident')}
-        />
-
-        {/* Compare all button */}
-        <button type="button"
-          onClick={() => {
-            const el = document.getElementById('compare');
-            el?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          style={{
-            marginTop: 8, padding: '12px 16px',
-            background: T.surface, border: `1px solid ${T.hair}`,
-            borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit',
-            fontSize: 13, fontWeight: 600, color: T.ink,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          }}>
-          Compare All Scenarios
-          <ArrowRight size={14} />
-        </button>
-      </div>
-    </Card>
+    <div style={{ display: 'flex', gap: 2, marginTop: 4 }}>
+      {displayed.map((b, i) => (
+        <span key={i} style={{
+          display: 'inline-block', width: 14, height: 6, borderRadius: 2,
+          background: b.tax > 0 ? colors[i] || T.ghost : T.ghost,
+          opacity: b.tax > 0 ? 1 : 0.3,
+        }} />
+      ))}
+      {Array.from({ length: blanks }).map((_, i) => (
+        <span key={`g${i}`} style={{ display: 'inline-block', width: 14, height: 6, borderRadius: 2, background: T.ghost, opacity: 0.3 }} />
+      ))}
+    </div>
   );
 }
 
-function ScenarioCard({
-  tone, label, value, delta, deltaTone, active, onClick,
+function ScenarioComparison({
+  price, country, flags, result, allScen, onApply,
 }: {
-  tone: 'purple' | 'amber' | 'rose';
-  label: string; value: string; delta: string;
-  deltaTone: 'good' | 'warn';
-  active: boolean; onClick: () => void;
+  price: number; country: Country; flags: Flags;
+  result: SDLTResult; allScen: SDLTResult[];
+  onApply: (b: BuyerType) => void;
 }) {
-  const styles = {
-    purple: { bg: T.purpleT, border: T.purple,  text: T.purple },
-    amber:  { bg: T.amberT,  border: T.amber,   text: T.amber },
-    rose:   { bg: T.roseT,   border: T.rose,    text: T.rose },
-  }[tone];
-  const deltaColor = deltaTone === 'good' ? T.emerald : T.amber;
+  const [tab, setTab] = useState<'buyer' | 'region' | 'price'>('buyer');
+  const buyer = deriveBuyer(flags);
+
+  const ftbR = allScen.find(r => r.buyerType === 'firstTime')!;
+  const addR = allScen.find(r => r.buyerType === 'additional')!;
+  const nonR = allScen.find(r => r.buyerType === 'nonResident')!;
+
+  const allCountries = useMemo(() => calculateAllCountries(price, buyer), [price, buyer]);
+  const engR = allCountries.find(r => r.country === 'england')!;
+  const scoR = allCountries.find(r => r.country === 'scotland')!;
+  const walR = allCountries.find(r => r.country === 'wales')!;
+
+  const minus10R = useMemo(() => calculateSDLT(price * 0.9, buyer, country), [price, buyer, country]);
+  const plus10R  = useMemo(() => calculateSDLT(price * 1.1, buyer, country), [price, buyer, country]);
+
+  const bestScen = allScen.reduce((b, s) => s.total < b.total ? s : b, allScen[0]);
+  const bestSaving = result.total - bestScen.total;
+  const alreadyBest = bestScen.buyerType === buyer;
+
+  const ftbCap = country === 'england' ? 500_000 : country === 'scotland' ? 175_000 : 0;
+  const ftbEligible = ftbCap > 0 && price <= ftbCap;
+
+  function eligibilityFor(b: BuyerType): { icon: string; label: string; color: string } {
+    if (b === buyer) return { icon: '✓', label: 'Qualified', color: T.blue };
+    if (b === 'firstTime') {
+      if (ftbCap === 0) return { icon: '⊗', label: 'Not available', color: T.rose };
+      return ftbEligible
+        ? { icon: '✓', label: 'Eligible', color: T.blue }
+        : { icon: '⊗', label: 'Not applicable', color: T.faint };
+    }
+    if (b === 'additional') return { icon: '⚠', label: 'Conditional', color: T.amber };
+    return { icon: '⊗', label: 'Not applicable', color: T.faint };
+  }
+
+  function topBandRate(r: SDLTResult): number {
+    const taxed = r.bands.filter(b => b.tax > 0);
+    if (taxed.length === 0) return 0;
+    return Math.max(...taxed.map(b => b.rate));
+  }
+
+  const TABS = [
+    { id: 'buyer' as const, icon: '👤', label: 'By Buyer' },
+    { id: 'region' as const, icon: '📍', label: 'By Region' },
+    { id: 'price' as const, icon: '📈', label: 'Price ±10%' },
+  ];
+
+  function colHeader(label: string, sub: string, isHighlight: boolean, isCurrent: boolean) {
+    return (
+      <div style={{
+        padding: '10px 8px 10px',
+        background: isHighlight ? T.blueT2 : isCurrent ? T.surface : 'transparent',
+        borderRadius: '8px 8px 0 0',
+        textAlign: 'center' as const,
+      }}>
+        <div style={{ fontSize: 9.5, fontWeight: 800, color: isHighlight ? T.blue : isCurrent ? T.ink : T.muted, letterSpacing: '0.08em', textTransform: 'uppercase' as const, lineHeight: 1.3 }}>
+          {isCurrent && <span style={{ marginRight: 3 }}>★</span>}{label}
+        </div>
+        <div style={{ fontSize: 9, color: isHighlight ? T.blue : T.faint, marginTop: 2, fontWeight: 500 }}>{sub}</div>
+      </div>
+    );
+  }
+
+  function colCell(content: React.ReactNode, isHighlight: boolean, isCurrent: boolean) {
+    return (
+      <div style={{
+        padding: '10px 8px',
+        background: isHighlight ? '#f0fdf4' : isCurrent ? T.surface : 'transparent',
+        textAlign: 'center' as const,
+        borderTop: `1px solid ${T.hair}`,
+      }}>
+        {content}
+      </div>
+    );
+  }
+
+  function rowLabel(title: string, sub: string) {
+    return (
+      <div style={{ padding: '10px 0', borderTop: `1px solid ${T.hair}` }}>
+        <div style={{ fontSize: 12.5, fontWeight: 600, color: T.ink, lineHeight: 1.3 }}>{title}</div>
+        <div style={{ fontSize: 10.5, color: T.faint, marginTop: 2 }}>{sub}</div>
+      </div>
+    );
+  }
+
+  function deltaCell(delta: number, isHighlight: boolean, isCurrent: boolean) {
+    if (delta === 0) {
+      return colCell(<span style={{ fontSize: 11.5, color: T.faint, fontWeight: 500 }}>— Baseline</span>, isHighlight, isCurrent);
+    }
+    const saving = delta > 0;
+    const color = saving ? T.blue : T.rose;
+    return colCell(
+      <span style={{ fontSize: 12.5, fontWeight: 700, color, ...NUM }}>
+        {saving ? '−' : '+'}{gbp(Math.abs(delta))}
+      </span>,
+      isHighlight, isCurrent
+    );
+  }
+
+  const buyerCols = [
+    { result: result, label: 'CURRENT', sub: `${result.taxName} · ${buyer === 'standard' ? 'Standard' : buyerLabel(buyer)}`, isHighlight: false, isCurrent: true, bType: buyer },
+    { result: ftbR, label: 'FIRST-TIME', sub: ftbR.total < result.total ? 'Best for you' : '0% up to £300k', isHighlight: ftbR.total < result.total, isCurrent: false, bType: 'firstTime' as BuyerType },
+    { result: addR, label: 'ADDITIONAL', sub: '+ADS 5%', isHighlight: false, isCurrent: false, bType: 'additional' as BuyerType },
+    { result: nonR, label: 'NON-UK', sub: '+2% surcharge', isHighlight: false, isCurrent: false, bType: 'nonResident' as BuyerType },
+  ];
+
   return (
-    <button type="button" onClick={onClick}
-      style={{
-        textAlign: 'left',
-        padding: '16px 18px',
-        background: styles.bg,
-        border: `1.5px solid ${active ? styles.border : 'transparent'}`,
-        borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit',
-        transition: 'all 0.15s ease',
-      }}>
-      <div style={{
-        fontSize: 10.5, fontWeight: 700, color: styles.text,
-        letterSpacing: '0.10em', textTransform: 'uppercase',
-        marginBottom: 8,
-      }}>
-        {label}
+    <Card padding={0}>
+      {/* Header */}
+      <div style={{ padding: '20px 24px', borderBottom: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <h2 style={{ flex: 1, fontSize: 17, fontWeight: 700, color: T.ink, margin: 0, letterSpacing: '-0.015em' }}>
+          Scenario Comparison
+        </h2>
+        <span style={{
+          fontSize: 9.5, fontWeight: 800, letterSpacing: '0.10em', textTransform: 'uppercase',
+          padding: '4px 8px', borderRadius: 6, background: T.blueT, color: T.blue,
+        }}>4 SCENARIOS</span>
       </div>
-      <div style={{
-        fontSize: 28, fontWeight: 700, color: T.ink,
-        letterSpacing: '-0.025em', ...NUM, lineHeight: 1,
-      }}>
-        {value}
+
+      {/* Tabs */}
+      <div style={{ display: 'flex', borderBottom: `1px solid ${T.hair}`, padding: '0 8px' }}>
+        {TABS.map(t => (
+          <button key={t.id} type="button" onClick={() => setTab(t.id)}
+            style={{
+              flex: 1, padding: '11px 6px', border: 'none', cursor: 'pointer',
+              fontFamily: 'inherit', fontSize: 11, fontWeight: 600,
+              background: 'transparent',
+              color: tab === t.id ? T.blue : T.muted,
+              borderBottom: `2px solid ${tab === t.id ? T.blue : 'transparent'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+              transition: 'all 0.15s ease',
+            }}>
+            <span style={{ fontSize: 13 }}>{t.icon}</span>
+            {t.label}
+          </button>
+        ))}
       </div>
-      <div style={{ fontSize: 12, color: deltaColor, marginTop: 8, fontWeight: 600 }}>
-        {delta.includes('Save') || delta.includes('Extra') ? (
-          <>
-            {delta.split(' ')[0]}{' '}
-            <span style={{ color: deltaColor, fontWeight: 700, ...NUM }}>
-              {delta.split(' ').slice(1).join(' ')}
-            </span>
-          </>
-        ) : delta}
-      </div>
-    </button>
+
+      {/* By Buyer tab */}
+      {tab === 'buyer' && (
+        <div style={{ padding: '0 16px 16px', overflowX: 'auto' }}>
+          <div style={{ minWidth: 320 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4, paddingTop: 12 }}>
+              <div />
+              {buyerCols.map((c, i) => (
+                <div key={i}>{colHeader(c.label, c.sub, c.isHighlight, c.isCurrent)}</div>
+              ))}
+            </div>
+
+            {/* Row: Total Tax */}
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4 }}>
+              {rowLabel('Total Tax', 'Payable now')}
+              {buyerCols.map((c, i) => colCell(
+                <div key={i} style={{ fontSize: 13.5, fontWeight: 700, color: c.isHighlight ? T.blue : T.ink, ...NUM, letterSpacing: '-0.02em' }}>
+                  {gbp(c.result.total)}
+                </div>,
+                c.isHighlight, c.isCurrent
+              ))}
+            </div>
+
+            {/* Row: Effective Rate */}
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4 }}>
+              {rowLabel('Eff. Rate', '% of price')}
+              {buyerCols.map((c, i) => colCell(
+                <div key={i}>
+                  <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ink, ...NUM }}>{(c.result.effectiveRate * 100).toFixed(2)}%</div>
+                  <div style={{ marginTop: 3, height: 3, borderRadius: 2, background: T.surface, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${Math.min(100, c.result.effectiveRate * 500)}%`, background: c.isHighlight ? T.blue : T.faint, borderRadius: 2 }} />
+                  </div>
+                </div>,
+                c.isHighlight, c.isCurrent
+              ))}
+            </div>
+
+            {/* Row: Delta vs Current */}
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4 }}>
+              {rowLabel('Delta', 'vs Current')}
+              {buyerCols.map((c) => deltaCell(result.total - c.result.total, c.isHighlight, c.isCurrent))}
+            </div>
+
+            {/* Row: Top Band */}
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4 }}>
+              {rowLabel('Top Band', 'Highest tier')}
+              {buyerCols.map((c, i) => colCell(
+                <div key={i}>
+                  <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ink, ...NUM }}>
+                    {(topBandRate(c.result) * 100).toFixed(0)}%
+                  </div>
+                  <BandDots r={c.result} />
+                </div>,
+                c.isHighlight, c.isCurrent
+              ))}
+            </div>
+
+            {/* Row: Eligibility */}
+            <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(4, 1fr)', gap: 4 }}>
+              {rowLabel('Eligibility', 'Live check')}
+              {buyerCols.map((c) => {
+                const elig = eligibilityFor(c.bType);
+                return colCell(
+                  <div style={{ textAlign: 'center' as const }}>
+                    <div style={{ fontSize: 14, color: elig.color }}>{elig.icon}</div>
+                    <div style={{ fontSize: 9.5, color: elig.color, fontWeight: 600, marginTop: 2, lineHeight: 1.3 }}>{elig.label}</div>
+                  </div>,
+                  c.isHighlight, c.isCurrent
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* By Region tab */}
+      {tab === 'region' && (
+        <div style={{ padding: '12px 16px 16px' }}>
+          {[
+            { label: 'England & NI', sub: 'SDLT', r: engR, active: country === 'england' },
+            { label: 'Scotland', sub: 'LBTT', r: scoR, active: country === 'scotland' },
+            { label: 'Wales', sub: 'LTT', r: walR, active: country === 'wales' },
+          ].map((col) => (
+            <div key={col.sub} style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '13px 14px', marginBottom: 8,
+              background: col.active ? T.blueT : T.surface,
+              border: `1.5px solid ${col.active ? T.blue : T.hair}`,
+              borderRadius: 10,
+            }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: col.active ? T.blue : T.ink }}>{col.label}</div>
+                <div style={{ fontSize: 10.5, color: T.faint, marginTop: 2 }}>{col.sub} · {(col.r.effectiveRate * 100).toFixed(2)}% effective</div>
+                {col.r.total !== result.total && (
+                  <div style={{
+                    fontSize: 10.5, fontWeight: 700, marginTop: 4,
+                    color: col.r.total < result.total ? T.blue : T.rose,
+                    ...NUM,
+                  }}>
+                    {col.r.total < result.total ? `Save ${gbp(result.total - col.r.total)}` : `+${gbp(col.r.total - result.total)} extra`}
+                  </div>
+                )}
+              </div>
+              <div style={{ textAlign: 'right' as const }}>
+                <div style={{ fontSize: 20, fontWeight: 700, color: col.active ? T.blue : T.ink, letterSpacing: '-0.02em', ...NUM }}>
+                  {gbp(col.r.total)}
+                </div>
+              </div>
+            </div>
+          ))}
+          <p style={{ fontSize: 11, color: T.faint, margin: '8px 0 0', lineHeight: 1.5 }}>
+            Comparison uses same price and buyer type across all three tax regimes.
+          </p>
+        </div>
+      )}
+
+      {/* Price ±10% tab */}
+      {tab === 'price' && (
+        <div style={{ padding: '12px 16px 16px' }}>
+          {[
+            { label: '−10%', price: price * 0.9, r: minus10R },
+            { label: 'Current', price, r: result },
+            { label: '+10%', price: price * 1.1, r: plus10R },
+          ].map((col) => {
+            const isCurrent = col.label === 'Current';
+            const delta = col.r.total - result.total;
+            return (
+              <div key={col.label} style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                padding: '13px 14px', marginBottom: 8,
+                background: isCurrent ? T.blueT : T.surface,
+                border: `1.5px solid ${isCurrent ? T.blue : T.hair}`,
+                borderRadius: 10,
+              }}>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: isCurrent ? T.blue : T.ink }}>{col.label} · {fmtK(col.price)}</div>
+                  <div style={{ fontSize: 10.5, color: T.faint, marginTop: 2 }}>
+                    {(col.r.effectiveRate * 100).toFixed(2)}% effective rate
+                  </div>
+                  {!isCurrent && (
+                    <div style={{ fontSize: 10.5, fontWeight: 700, marginTop: 4, color: delta < 0 ? T.blue : T.rose, ...NUM }}>
+                      {delta < 0 ? `Save ${gbp(-delta)}` : `+${gbp(delta)} extra`}
+                    </div>
+                  )}
+                </div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: isCurrent ? T.blue : T.ink, letterSpacing: '-0.02em', ...NUM }}>
+                  {gbp(col.r.total)}
+                </div>
+              </div>
+            );
+          })}
+          <p style={{ fontSize: 11, color: T.faint, margin: '8px 0 0', lineHeight: 1.5 }}>
+            Shows tax impact of a ±10% price movement with same buyer profile.
+          </p>
+        </div>
+      )}
+
+      {/* Best for you callout */}
+      {bestSaving > 0 && !alreadyBest && (
+        <div style={{
+          margin: '0 16px 16px',
+          padding: '14px 16px',
+          background: T.blueT, borderRadius: 12,
+          display: 'flex', alignItems: 'center', gap: 12,
+          border: `1px solid ${T.blueT2}`,
+        }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+            background: T.blue, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <Sparkles size={16} color={T.paper} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', gap: 6, marginBottom: 4, flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ fontSize: 9.5, fontWeight: 800, color: T.blue, letterSpacing: '0.10em', textTransform: 'uppercase' }}>BEST FOR YOU</span>
+              <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 4, background: T.blue, color: T.paper, letterSpacing: '0.05em' }}>AI MATCH</span>
+            </div>
+            <div style={{ fontSize: 12, color: T.ink, lineHeight: 1.5 }}>
+              {buyerLabel(bestScen.buyerType)} saves you{' '}
+              <strong style={{ color: T.blue, ...NUM }}>{gbp(bestSaving)}</strong>
+              {' '}vs the standard rate.
+            </div>
+          </div>
+          <button type="button" onClick={() => onApply(bestScen.buyerType)}
+            style={{
+              padding: '8px 14px', borderRadius: 8,
+              background: T.blue, color: T.paper,
+              border: 'none', cursor: 'pointer',
+              fontFamily: 'inherit', fontSize: 12, fontWeight: 700,
+              flexShrink: 0, display: 'flex', alignItems: 'center', gap: 5,
+            }}>
+            Apply <ArrowRight size={12} />
+          </button>
+        </div>
+      )}
+    </Card>
   );
 }
 
