@@ -126,23 +126,24 @@ export default function SdltClient({ initialPrice = 350000 }: { initialPrice?: n
   };
 
   return (
-    <div className="bg-white text-slate-800" style={{ fontFamily: "'Hanken Grotesk', 'Inter', system-ui, sans-serif" }}>
-      {/* Hero */}
-      <section className="text-center max-w-3xl mx-auto py-4 md:py-6 px-4">
-        <div className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-blue-600 font-black mb-3">
-          &#x2726; EXCLUSIVELY CURATED FOR 2026 CALCULATIONS &#x2726;
+    <div className="bg-white text-slate-800 min-h-screen" style={{ fontFamily: "'Hanken Grotesk', 'Inter', system-ui, sans-serif" }}>
+      {/* Hero — large, centered, prominent */}
+      <section className="text-center max-w-4xl mx-auto pt-10 md:pt-16 pb-6 md:pb-10 px-4">
+        <div className="inline-flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-blue-600 font-black mb-5 bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-full">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+          LIVE 2026 RATES &middot; SDLT &middot; LBTT &middot; LTT
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">
-          CALCULATE UK <span className="text-blue-600">STAMP DUTY</span>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[0.95] uppercase">
+          CALCULATE UK<br className="sm:hidden" /> <span className="text-blue-600">STAMP DUTY</span>
         </h1>
-        <p className="text-xs md:text-sm font-medium tracking-wide text-slate-500 mt-3 max-w-2xl mx-auto leading-relaxed">
-          The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live comparisons, full transparency.
+        <p className="text-sm md:text-base font-medium text-slate-500 mt-5 max-w-2xl mx-auto leading-relaxed">
+          The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, full transparency.
         </p>
       </section>
 
       {/* 3-Column grid */}
-      <div className="w-full max-w-[1440px] xl:max-w-[1600px] mx-auto px-4 md:px-6 xl:px-8 pb-8 md:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div className="w-full max-w-[1440px] xl:max-w-[1600px] mx-auto px-4 md:px-6 xl:px-8 pb-12 md:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 items-stretch">
           <div className="lg:col-span-4 xl:col-span-3">
             <SidebarInputs
               price={price} setPrice={setPrice}
