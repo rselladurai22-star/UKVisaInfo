@@ -2,33 +2,35 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import SdltClient from './SdltClient';
 import FaqJsonLd from '../../components/calc-shell/FaqJsonLd';
+import EditorByline from '../../components/EditorByline';
 import { primaryEditorSchema } from '../../data/editorialTeam';
 
 export const metadata: Metadata = {
   title: 'UK Stamp Duty Calculator 2026 — SDLT, LBTT, LTT',
-  description: 'The most precise and authoritative tool for calculating Stamp Duty Land Tax across the UK. Live SDLT, LBTT, LTT across every buyer scenario with what-if comparisons. Verified May 2026.',
+  description: 'The most precise UK Stamp Duty calculator. Live SDLT, LBTT, LTT across every buyer scenario with what-if comparisons. Verified May 2026.',
   alternates: { canonical: '/stamp-duty-calculator' },
   openGraph: {
     title: 'UK Stamp Duty Calculator 2026',
-    description: 'The most precise UK stamp duty calculator. SDLT, LBTT, LTT with what-if scenarios.',
+    description: 'The most precise UK Stamp Duty calculator. SDLT, LBTT, LTT with what-if scenarios.',
     url: 'https://ukvisainfo.co.uk/stamp-duty-calculator',
     type: 'article',
   },
 };
 
+/* Match site theme exactly */
 const T = {
-  page:    '#FAF7F4',
+  page:    '#FAFAF7',
   paper:   '#FFFFFF',
-  surface: '#F8FAFC',
-  ink:     '#0F172A',
-  body:    '#334155',
-  muted:   '#64748B',
+  surface: '#F6F5F0',
+  ink:     '#0B0F19',
+  body:    '#1F2937',
+  muted:   '#475569',
   faint:   '#94A3B8',
-  hair:    '#E2E8F0',
-  divide:  '#F1F5F9',
-  blue:    '#2563EB',
-  blueT:   '#EFF6FF',
-  emerald: '#15803D',
+  hair:    'rgba(11,15,25,0.08)',
+  divide:  'rgba(11,15,25,0.05)',
+  emerald: '#047857',
+  emeraldT:'#ECFDF5',
+  gold:    '#B8860B',
 };
 
 const FAQS = [
@@ -61,8 +63,8 @@ export default function Page() {
   };
 
   return (
-    <main style={{
-      background: T.page, color: T.ink, minHeight: '100vh',
+    <div style={{
+      background: T.page, color: T.ink,
       fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
       fontFeatureSettings: '"cv11", "ss01"',
     }}>
@@ -70,70 +72,89 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <FaqJsonLd faqs={FAQS} />
 
-      {/* Slim hero (breadcrumb + minimal title bar above the grid) */}
-      <section style={{ paddingTop: 'clamp(96px, 12vh, 128px)', paddingBottom: 24 }}>
+      {/* Hero — clean, editorial */}
+      <section style={{ paddingTop: 'clamp(96px, 12vh, 128px)', paddingBottom: 32 }}>
         <div style={wrap}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: T.muted, marginBottom: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 16 }}>
             <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
             <span style={{ color: T.faint }}>/</span>
             <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
             <span style={{ color: T.faint }}>/</span>
             <span style={{ color: T.ink, fontWeight: 500 }}>Stamp duty</span>
           </div>
-          <h1 style={{
-            fontSize: 'clamp(28px, 3.4vw, 36px)',
-            fontWeight: 700, lineHeight: 1.1,
-            letterSpacing: '-0.025em', color: T.ink,
-            margin: 0, maxWidth: '32ch',
-          }}>
-            UK Stamp Duty Calculator
-          </h1>
-          <p style={{
-            fontSize: 14.5, lineHeight: 1.5, color: T.muted,
-            margin: '6px 0 0', maxWidth: '60ch',
-          }}>
-            The most precise tool for SDLT, LBTT and LTT across every UK buyer scenario.
-          </p>
+
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
+            <div>
+              <h1 style={{
+                fontSize: 'clamp(32px, 4.2vw, 52px)',
+                fontWeight: 700, lineHeight: 1.04,
+                letterSpacing: '-0.035em', color: T.ink,
+                margin: 0, maxWidth: '20ch',
+              }}>
+                UK Stamp Duty <span style={{ color: T.muted, fontWeight: 500 }}>Calculator</span>
+              </h1>
+              <p style={{
+                fontSize: 'clamp(15px, 1.5vw, 17px)',
+                lineHeight: 1.5, color: T.body,
+                margin: '14px 0 0', maxWidth: '60ch',
+                fontWeight: 400,
+              }}>
+                Live SDLT, LBTT and LTT across every UK buyer scenario with side-by-side comparison and what-if analysis.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13, color: T.muted }}>
+              <EditorByline verified="May 2026" prefix="By" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Dashboard — 3-col grid + tracker + 2-col charts (in SdltClient) */}
+      {/* Dashboard (calculator + tracker + charts) */}
       <SdltClient initialPrice={350000} />
 
-      {/* FAQ — 2-column grid */}
-      <section style={{ paddingTop: 48, paddingBottom: 64 }}>
+      {/* FAQ — 2-col card grid */}
+      <section style={{ paddingTop: 48, paddingBottom: 72 }}>
         <div style={wrap}>
-          <h2 style={{
-            fontSize: 'clamp(24px, 3vw, 30px)', fontWeight: 700,
-            color: T.ink, margin: '0 0 24px',
-            letterSpacing: '-0.02em',
-          }}>
-            Frequently Asked Questions
-          </h2>
+          <div style={{ marginBottom: 28 }}>
+            <div style={{
+              fontSize: 11, fontWeight: 700, color: T.gold,
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              marginBottom: 8,
+            }}>
+              FAQ
+            </div>
+            <h2 style={{
+              fontSize: 'clamp(24px, 2.8vw, 32px)', fontWeight: 700,
+              color: T.ink, margin: 0,
+              letterSpacing: '-0.025em', lineHeight: 1.15,
+            }}>
+              Frequently Asked Questions
+            </h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }} className="md:grid-cols-2">
             {FAQS.map((f, i) => (
               <details key={i} style={{
                 background: T.paper, border: `1px solid ${T.hair}`,
                 borderRadius: 12, overflow: 'hidden',
-                transition: 'border-color 0.15s ease',
               }}>
                 <summary style={{
                   cursor: 'pointer', listStyle: 'none',
-                  padding: '16px 20px',
+                  padding: '18px 22px',
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-                  fontSize: 14.5, fontWeight: 600, color: T.ink,
+                  fontSize: 15, fontWeight: 600, color: T.ink,
+                  lineHeight: 1.35,
                 }}>
                   {f.q}
                   <span style={{
-                    width: 24, height: 24, borderRadius: 6,
+                    width: 26, height: 26, borderRadius: 6,
                     background: T.surface,
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    color: T.muted, fontSize: 14, lineHeight: 1,
+                    color: T.muted, fontSize: 14, lineHeight: 1, flexShrink: 0,
                   }}>⌄</span>
                 </summary>
                 <p style={{
-                  fontSize: 14, lineHeight: 1.65, color: T.body,
-                  margin: 0, padding: '0 20px 18px',
+                  fontSize: 14.5, lineHeight: 1.65, color: T.body,
+                  margin: 0, padding: '0 22px 20px',
                 }}>
                   {f.a}
                 </p>
@@ -142,112 +163,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer style={{ background: T.paper, borderTop: `1px solid ${T.hair}`, padding: '48px 0 32px' }}>
-        <div style={wrap}>
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1.4fr] gap-10 md:gap-8">
-            {/* Logo + tagline */}
-            <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                <span style={{
-                  width: 28, height: 28, borderRadius: 8,
-                  background: T.blue, color: T.paper,
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 14, fontWeight: 700,
-                }}>£</span>
-                <span style={{ fontSize: 15, fontWeight: 700, color: T.ink }}>UK SDLT Calc</span>
-              </div>
-              <p style={{ fontSize: 13, lineHeight: 1.55, color: T.muted, margin: '12px 0 0', maxWidth: '30ch' }}>
-                The most precise and authoritative tool for calculating Stamp Duty Land Tax across the United Kingdom.
-              </p>
-              <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-                {[
-                  { href: 'https://www.gov.uk/stamp-duty-land-tax', label: '🌐' },
-                  { href: 'mailto:rselladurai22@gmail.com',          label: '✉' },
-                ].map((l, i) => (
-                  <a key={i} href={l.href} style={{
-                    width: 32, height: 32, borderRadius: 8,
-                    background: T.surface, border: `1px solid ${T.hair}`,
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 13, color: T.muted, textDecoration: 'none',
-                  }}>{l.label}</a>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick links */}
-            <div>
-              <FooterHeader>Quick Links</FooterHeader>
-              <FooterLink href="/tools">Calculators</FooterLink>
-              <FooterLink href="/stamp-duty-calculator">Scotland (LBTT)</FooterLink>
-              <FooterLink href="/stamp-duty-calculator">Wales (LTT)</FooterLink>
-            </div>
-
-            {/* More */}
-            <div>
-              <FooterHeader>&nbsp;</FooterHeader>
-              <FooterLink href="/news">Insights</FooterLink>
-              <FooterLink href="/about">About Us</FooterLink>
-              <FooterLink href="/contact">Contact</FooterLink>
-            </div>
-
-            {/* Subscribe */}
-            <div>
-              <FooterHeader>Subscribe to our insights</FooterHeader>
-              <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
-                <input type="email" placeholder="Your email" style={{
-                  flex: 1, fontSize: 13, padding: '9px 12px',
-                  background: T.paper, border: `1px solid ${T.hair}`,
-                  borderRadius: 8, outline: 'none', color: T.ink,
-                  fontFamily: 'inherit',
-                }} />
-                <button type="button" style={{
-                  padding: '9px 18px', borderRadius: 8,
-                  background: T.blue, color: T.paper, border: 'none',
-                  fontFamily: 'inherit', fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                }}>Join</button>
-              </div>
-              <p style={{ fontSize: 11, color: T.muted, margin: '10px 0 0', lineHeight: 1.55 }}>
-                Get market updates and tax law changes directly to your inbox.
-              </p>
-            </div>
-          </div>
-
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between',
-            gap: 12, marginTop: 40, paddingTop: 24,
-            borderTop: `1px solid ${T.hair}`,
-            fontSize: 12, color: T.muted,
-          }}>
-            <span>© 2026 UK SDLT Calc. All rights reserved.</span>
-            <div style={{ display: 'flex', gap: 20 }}>
-              <Link href="/privacy" style={{ color: T.muted, textDecoration: 'none' }}>Privacy Policy</Link>
-              <Link href="/terms"   style={{ color: T.muted, textDecoration: 'none' }}>Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </main>
-  );
-}
-
-function FooterHeader({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{
-      fontSize: 10.5, fontWeight: 700, color: T.muted,
-      letterSpacing: '0.10em', textTransform: 'uppercase',
-      marginBottom: 12, minHeight: 16,
-    }}>{children}</div>
-  );
-}
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link href={href} style={{
-      display: 'block', fontSize: 13.5, color: T.ink,
-      textDecoration: 'none', padding: '6px 0',
-    }}>{children}</Link>
+    </div>
   );
 }
 

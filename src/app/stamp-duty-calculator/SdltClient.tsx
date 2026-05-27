@@ -30,33 +30,33 @@ import {
    TOKENS — cream/blue dashboard palette
 ───────────────────────────────────────────── */
 const T = {
-  // Surfaces
-  page:      '#FAF7F4',
+  // Surfaces — match site theme (FAFAF7 cream + white cards)
+  page:      '#FAFAF7',
   paper:     '#FFFFFF',
-  surface:   '#F8FAFC',
-  // Text
-  ink:       '#0F172A',
-  body:      '#334155',
-  muted:     '#64748B',
+  surface:   '#F6F5F0',
+  // Text — match site theme (ink-black + slate hierarchy)
+  ink:       '#0B0F19',
+  body:      '#1F2937',
+  muted:     '#475569',
   faint:     '#94A3B8',
-  ghost:     '#CBD5E1',
-  // Borders
-  hair:      '#E2E8F0',
-  divide:    '#F1F5F9',
-  // Primary (blue)
-  blue:      '#2563EB',
-  blueDk:    '#1D4ED8',
-  blueT:     '#EFF6FF',
-  blueT2:    '#DBEAFE',
-  // Secondary (indigo/purple for FTB scenario)
-  purple:    '#7C3AED',
-  purpleT:   '#F5F3FF',
-  // Accents
-  emerald:   '#15803D',
-  emeraldT:  '#DCFCE7',
+  ghost:     '#D8D5CA',
+  // Borders — site standard warm hairline
+  hair:      'rgba(11,15,25,0.08)',
+  divide:    'rgba(11,15,25,0.05)',
+  // PRIMARY — site emerald (replaces blue)
+  blue:      '#047857',
+  blueDk:    '#065F46',
+  blueT:     '#ECFDF5',
+  blueT2:    '#D1FAE5',
+  // Secondary — site gold (replaces purple for FTB scenario)
+  purple:    '#B8860B',
+  purpleT:   '#FBF6E7',
+  // Accents — site palette
+  emerald:   '#047857',
+  emeraldT:  '#ECFDF5',
   amber:     '#B45309',
   amberT:    '#FEF3C7',
-  rose:      '#BE123C',
+  rose:      '#9F1239',
   roseT:     '#FFE4E6',
   // Shadows
   shadowSm:  '0 1px 2px rgba(15,23,42,0.04)',
@@ -458,10 +458,12 @@ function Donut({ result }: { result: SDLTResult }) {
 
   const total = result.total;
   const segments: { value: number; color: string; key: string }[] = [];
+  // Sequential emerald scale by band index for clean visual hierarchy
+  const wedgeColors = ['#047857', '#0F766E', '#15803D', '#B8860B'];
   result.bands.filter((b) => b.tax > 0).forEach((b, i) => {
     segments.push({
       value: b.tax,
-      color: i === 0 ? T.blue : i === 1 ? T.blueDk : T.purple,
+      color: wedgeColors[i % wedgeColors.length],
       key: `b${i}`,
     });
   });
