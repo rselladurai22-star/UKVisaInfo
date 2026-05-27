@@ -7,7 +7,7 @@ import { primaryEditorSchema } from '../../data/editorialTeam';
 
 export const metadata: Metadata = {
   title: 'UK Stamp Duty Calculator 2026 — SDLT, LBTT, LTT',
-  description: 'The most precise UK Stamp Duty calculator. Live SDLT, LBTT, LTT across every buyer scenario with what-if comparisons. Verified May 2026.',
+  description: 'The most precise UK Stamp Duty calculator. Live SDLT, LBTT, LTT across every buyer scenario. Verified against HMRC, Revenue Scotland and the Welsh Revenue Authority.',
   alternates: { canonical: '/stamp-duty-calculator' },
   openGraph: {
     title: 'UK Stamp Duty Calculator 2026',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* Match site theme exactly */
+/* Site theme tokens */
 const T = {
   page:    '#FAFAF7',
   paper:   '#FFFFFF',
@@ -29,8 +29,10 @@ const T = {
   hair:    'rgba(11,15,25,0.08)',
   divide:  'rgba(11,15,25,0.05)',
   emerald: '#047857',
+  emeraldDk:'#065F46',
   emeraldT:'#ECFDF5',
   gold:    '#B8860B',
+  goldT:   '#FBF6E7',
 };
 
 const FAQS = [
@@ -40,8 +42,12 @@ const FAQS = [
     a: 'A non-natural person (a company, partnership of companies, or collective investment scheme) buying a single dwelling worth more than £500,000 in England or NI pays a flat 15% SDLT, unless a specific relief applies (e.g. let to unconnected third parties on commercial terms).' },
   { q: 'What about other properties?',
     a: 'If you already own a residential property anywhere in the world and you are buying another, a 3% surcharge is applied to every band on the full purchase price. The Scottish equivalent (ADS) is 8% from December 2024; the Welsh equivalent is 5% from December 2024.' },
+  { q: 'When is SDLT due?',
+    a: 'Within 14 days of completion in England and NI; 30 days for LBTT (Scotland) and LTT (Wales). Your solicitor or conveyancer normally calculates, files and pays on your behalf as part of completion.' },
+  { q: 'Can I claim back the 3% surcharge?',
+    a: 'Yes — if you sell your previous main residence within 36 months of paying the surcharge, you can apply to HMRC for a full refund. Use the refund tool inside the calculator to check eligibility.' },
   { q: 'Can I estimate legal fees?',
-    a: 'Typical UK conveyancing fees for a residential purchase run £800–£2,000 (solicitor + searches + Land Registry), depending on property value and complexity. Add SDLT separately. We assume £1,500 in the Comparative Load chart above as a representative average — actual quotes vary widely.' },
+    a: 'Typical UK conveyancing fees run £800–£2,000 (solicitor + searches + Land Registry). We assume £1,500 in the Comparative Load chart as a representative average — actual quotes vary widely.' },
 ];
 
 export default function Page() {
@@ -67,102 +73,464 @@ export default function Page() {
       background: T.page, color: T.ink,
       fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
       fontFeatureSettings: '"cv11", "ss01"',
+      overflowX: 'hidden',
     }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <FaqJsonLd faqs={FAQS} />
 
-      {/* Hero — clean, editorial */}
-      <section style={{ paddingTop: 'clamp(96px, 12vh, 128px)', paddingBottom: 32 }}>
-        <div style={wrap}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 16 }}>
-            <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
-            <span style={{ color: T.faint }}>/</span>
-            <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
-            <span style={{ color: T.faint }}>/</span>
-            <span style={{ color: T.ink, fontWeight: 500 }}>Stamp duty</span>
-          </div>
+      {/* ───────────── Premium animations + utilities ───────────── */}
+      <style>{`
+        @keyframes orb-drift {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50%      { transform: translate(40px, -30px) scale(1.06); }
+        }
+        @keyframes float-card {
+          0%, 100% { transform: translateY(0); }
+          50%      { transform: translateY(-10px); }
+        }
+        @keyframes pulse-ring {
+          0%   { box-shadow: 0 0 0 0 rgba(4,120,87,0.45); }
+          70%  { box-shadow: 0 0 0 12px rgba(4,120,87,0); }
+          100% { box-shadow: 0 0 0 0 rgba(4,120,87,0); }
+        }
+        @keyframes shimmer {
+          0%   { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        @keyframes fade-up {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .sdlt-fade-up { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .sdlt-fade-up-1 { animation-delay: 0.05s; }
+        .sdlt-fade-up-2 { animation-delay: 0.15s; }
+        .sdlt-fade-up-3 { animation-delay: 0.25s; }
+        .sdlt-fade-up-4 { animation-delay: 0.35s; }
+        .sdlt-grad-text {
+          background: linear-gradient(115deg, #047857 0%, #B8860B 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        .sdlt-cta-btn {
+          position: relative; overflow: hidden;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .sdlt-cta-btn:hover { transform: translateY(-1px); }
+        .sdlt-cta-btn::after {
+          content: ''; position: absolute; inset: 0;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+          background-size: 200% 100%;
+          animation: shimmer 3s ease-in-out infinite;
+          pointer-events: none;
+        }
+        .sdlt-link-arrow { transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); }
+        .sdlt-link-arrow:hover .sdlt-arrow-icon { transform: translateX(3px); }
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+      `}</style>
 
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
+      {/* ═══════════════════════════════════════════
+          HERO — ultra premium with floating cards
+      ═══════════════════════════════════════════ */}
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        paddingTop: 'clamp(96px, 12vh, 140px)',
+        paddingBottom: 'clamp(48px, 7vh, 96px)',
+      }}>
+        {/* Animated gradient orbs */}
+        <div aria-hidden style={{
+          position: 'absolute', top: '-15%', left: '-8%',
+          width: 'min(640px, 60vw)', aspectRatio: '1', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(4,120,87,0.18) 0%, rgba(4,120,87,0) 65%)',
+          filter: 'blur(60px)', pointerEvents: 'none',
+          animation: 'orb-drift 22s ease-in-out infinite',
+        }} />
+        <div aria-hidden style={{
+          position: 'absolute', top: '25%', right: '-10%',
+          width: 'min(560px, 55vw)', aspectRatio: '1', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(184,134,11,0.14) 0%, rgba(184,134,11,0) 65%)',
+          filter: 'blur(60px)', pointerEvents: 'none',
+          animation: 'orb-drift 28s ease-in-out infinite reverse',
+        }} />
+
+        {/* Dot grid */}
+        <div aria-hidden style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(circle, rgba(11,15,25,0.08) 1px, transparent 0)',
+          backgroundSize: '36px 36px',
+          maskImage: 'radial-gradient(ellipse 70% 50% at 50% 40%, black, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 50% at 50% 40%, black, transparent 80%)',
+        }} />
+
+        <div style={{ ...wrap, position: 'relative' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 64, alignItems: 'center' }} className="lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+
+            {/* LEFT — heading + CTAs */}
             <div>
-              <h1 style={{
-                fontSize: 'clamp(32px, 4.2vw, 52px)',
-                fontWeight: 700, lineHeight: 1.04,
-                letterSpacing: '-0.035em', color: T.ink,
-                margin: 0, maxWidth: '20ch',
+              {/* Breadcrumb */}
+              <div className="sdlt-fade-up" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: T.muted, marginBottom: 24 }}>
+                <Link href="/" style={{ color: T.muted, textDecoration: 'none' }}>Home</Link>
+                <span style={{ color: T.faint }}>/</span>
+                <Link href="/tools" style={{ color: T.muted, textDecoration: 'none' }}>Calculators</Link>
+                <span style={{ color: T.faint }}>/</span>
+                <span style={{ color: T.ink, fontWeight: 500 }}>Stamp duty</span>
+              </div>
+
+              {/* Live badge */}
+              <div className="sdlt-fade-up sdlt-fade-up-1" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                padding: '6px 14px 6px 10px', borderRadius: 999,
+                background: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: `1px solid ${T.hair}`,
+                fontSize: 12, fontWeight: 600, color: T.body,
+                marginBottom: 28,
               }}>
-                UK Stamp Duty <span style={{ color: T.muted, fontWeight: 500 }}>Calculator</span>
+                <span style={{
+                  width: 6, height: 6, borderRadius: 999, background: T.emerald,
+                  animation: 'pulse-ring 2s infinite',
+                }} />
+                Live · Verified May 2026 · SDLT · LBTT · LTT
+              </div>
+
+              {/* Headline */}
+              <h1 className="sdlt-fade-up sdlt-fade-up-2" style={{
+                fontSize: 'clamp(40px, 6vw, 84px)',
+                fontWeight: 700, lineHeight: 0.96,
+                letterSpacing: '-0.04em', color: T.ink,
+                margin: 0, maxWidth: '14ch',
+              }}>
+                Calculate UK <span className="sdlt-grad-text">stamp duty</span> in seconds.
               </h1>
-              <p style={{
-                fontSize: 'clamp(15px, 1.5vw, 17px)',
-                lineHeight: 1.5, color: T.body,
-                margin: '14px 0 0', maxWidth: '60ch',
-                fontWeight: 400,
+
+              {/* Subtitle */}
+              <p className="sdlt-fade-up sdlt-fade-up-3" style={{
+                fontSize: 'clamp(16px, 1.8vw, 19px)',
+                lineHeight: 1.55, color: T.body, fontWeight: 400,
+                margin: '24px 0 0', maxWidth: '52ch',
               }}>
-                Live SDLT, LBTT and LTT across every UK buyer scenario with side-by-side comparison and what-if analysis.
+                The most precise SDLT, LBTT and LTT calculator. Every UK buyer scenario, live what-if comparisons, and full transparency on how every penny is calculated.
+              </p>
+
+              {/* CTAs */}
+              <div className="sdlt-fade-up sdlt-fade-up-4" style={{
+                display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 36,
+              }}>
+                <a href="#calculator" className="sdlt-cta-btn" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '14px 24px', borderRadius: 12,
+                  background: `linear-gradient(135deg, ${T.emerald} 0%, ${T.emeraldDk} 100%)`,
+                  color: T.paper, textDecoration: 'none',
+                  fontSize: 14.5, fontWeight: 600,
+                  boxShadow: '0 8px 24px -8px rgba(4,120,87,0.45), inset 0 1px 0 rgba(255,255,255,0.15)',
+                }}>
+                  Start calculating
+                  <span style={{ fontSize: 16 }}>→</span>
+                </a>
+                <a href="#faq" className="sdlt-link-arrow" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '14px 20px', borderRadius: 12,
+                  background: 'rgba(255,255,255,0.6)',
+                  backdropFilter: 'blur(12px)',
+                  border: `1px solid ${T.hair}`,
+                  color: T.ink, textDecoration: 'none',
+                  fontSize: 14.5, fontWeight: 600,
+                }}>
+                  Read the FAQ
+                  <span className="sdlt-arrow-icon" style={{ fontSize: 14, color: T.muted }}>↗</span>
+                </a>
+              </div>
+
+              {/* Trust signals */}
+              <div className="sdlt-fade-up sdlt-fade-up-4" style={{
+                display: 'flex', flexWrap: 'wrap', gap: 24, marginTop: 36, fontSize: 12.5, color: T.muted,
+              }}>
+                {[
+                  'HMRC verified',
+                  'Revenue Scotland verified',
+                  'Welsh Revenue Authority verified',
+                  '£0 forever',
+                ].map((t) => (
+                  <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <circle cx="7" cy="7" r="6.5" stroke={T.emerald} strokeWidth="1" />
+                      <path d="M4 7l2 2 4-4" stroke={T.emerald} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — floating preview cards */}
+            <div className="hidden lg:block" style={{ position: 'relative', minHeight: 400 }}>
+              <FloatingCard
+                position={{ top: 0, right: 0 }}
+                animDelay="0s"
+              >
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: T.muted, letterSpacing: '0.10em', textTransform: 'uppercase', marginBottom: 8 }}>
+                  Your SDLT
+                </div>
+                <div style={{ fontSize: 36, fontWeight: 700, color: T.ink, letterSpacing: '-0.025em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
+                  £7,500
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10, fontSize: 11.5 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: 999, background: T.emerald }} />
+                  <span style={{ color: T.muted }}>On £350k · 2.14% effective</span>
+                </div>
+              </FloatingCard>
+
+              <FloatingCard
+                position={{ top: 130, left: 0 }}
+                animDelay="-3s"
+                tone="emerald"
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 13l4 4L19 7" stroke={T.emerald} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: T.emerald, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                    Save £5,000
+                  </span>
+                </div>
+                <div style={{ fontSize: 13, color: T.body, lineHeight: 1.45 }}>
+                  As a <strong style={{ color: T.ink }}>first-time buyer</strong> at this price
+                </div>
+              </FloatingCard>
+
+              <FloatingCard
+                position={{ bottom: 0, right: 24 }}
+                animDelay="-6s"
+              >
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+                  {[
+                    { l: 'England', v: '£7.5k', a: true  },
+                    { l: 'Scotland', v: '£11.4k', a: false },
+                    { l: 'Wales',  v: '£11.3k', a: false },
+                  ].map((r) => (
+                    <div key={r.l}>
+                      <div style={{ fontSize: 10, fontWeight: 600, color: T.faint, letterSpacing: '0.06em' }}>
+                        {r.l}
+                      </div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: r.a ? T.emerald : T.ink, marginTop: 4, fontVariantNumeric: 'tabular-nums' }}>
+                        {r.v}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </FloatingCard>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          THE CALCULATOR (dashboard from SdltClient)
+      ═══════════════════════════════════════════ */}
+      <div id="calculator" style={{ scrollMarginTop: 80 }}>
+        <SdltClient initialPrice={350000} />
+      </div>
+
+      {/* ═══════════════════════════════════════════
+          FAQ — premium accordion
+      ═══════════════════════════════════════════ */}
+      <section id="faq" style={{
+        paddingTop: 80, paddingBottom: 80,
+        scrollMarginTop: 80,
+      }}>
+        <div style={wrap}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 48 }} className="lg:grid-cols-[320px_1fr]">
+            {/* Left: header */}
+            <div>
+              <div style={{
+                fontSize: 11, fontWeight: 700, color: T.gold,
+                letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 12,
+              }}>
+                Frequently asked
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(28px, 3.4vw, 42px)', fontWeight: 700,
+                color: T.ink, margin: 0,
+                letterSpacing: '-0.03em', lineHeight: 1.1,
+              }}>
+                Everything you need to know.
+              </h2>
+              <p style={{ fontSize: 14.5, lineHeight: 1.6, color: T.muted, margin: '16px 0 0', maxWidth: '32ch' }}>
+                Common questions across SDLT, LBTT, LTT and the surcharge rules. Need more? Use the calculator&apos;s smart insights panel.
               </p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13, color: T.muted }}>
-              <EditorByline verified="May 2026" prefix="By" />
+
+            {/* Right: accordion */}
+            <div>
+              {FAQS.map((f, i) => (
+                <details key={i} className="sdlt-faq" style={{
+                  borderTop: i === 0 ? `1px solid ${T.hair}` : 'none',
+                  borderBottom: `1px solid ${T.hair}`,
+                }}>
+                  <summary style={{
+                    cursor: 'pointer', listStyle: 'none',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+                    padding: '20px 0',
+                    fontSize: 16, fontWeight: 600, color: T.ink,
+                    lineHeight: 1.4,
+                  }}>
+                    {f.q}
+                    <span className="sdlt-faq-icon" style={{
+                      width: 28, height: 28, borderRadius: 8,
+                      background: T.surface,
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      color: T.muted, fontSize: 14, lineHeight: 1, flexShrink: 0,
+                      transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <p style={{
+                    fontSize: 14.5, lineHeight: 1.7, color: T.body,
+                    margin: 0, padding: '0 0 24px',
+                    maxWidth: '60ch',
+                  }}>
+                    {f.a}
+                  </p>
+                </details>
+              ))}
+              <style>{`
+                details.sdlt-faq[open] .sdlt-faq-icon {
+                  transform: rotate(180deg);
+                  background: ${T.emeraldT};
+                  color: ${T.emerald};
+                }
+                details.sdlt-faq summary:hover { color: ${T.emerald}; }
+              `}</style>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Dashboard (calculator + tracker + charts) */}
-      <SdltClient initialPrice={350000} />
+      {/* ═══════════════════════════════════════════
+          CTA BANNER — premium full-width gradient
+      ═══════════════════════════════════════════ */}
+      <section style={{ padding: '0 clamp(16px, 4vw, 96px) 80px' }}>
+        <div style={{
+          position: 'relative', overflow: 'hidden',
+          maxWidth: 2400, margin: '0 auto',
+          borderRadius: 24,
+          background: `linear-gradient(135deg, ${T.ink} 0%, #1F2937 60%, ${T.emeraldDk} 100%)`,
+          padding: 'clamp(48px, 7vw, 96px) clamp(28px, 5vw, 80px)',
+          color: T.paper,
+        }}>
+          {/* Orbs */}
+          <div aria-hidden style={{
+            position: 'absolute', top: '-30%', right: '-10%',
+            width: 500, height: 500, borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(184,134,11,0.30) 0%, transparent 65%)',
+            filter: 'blur(40px)', pointerEvents: 'none',
+            animation: 'orb-drift 18s ease-in-out infinite',
+          }} />
+          <div aria-hidden style={{
+            position: 'absolute', bottom: '-30%', left: '-5%',
+            width: 400, height: 400, borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(4,120,87,0.30) 0%, transparent 65%)',
+            filter: 'blur(40px)', pointerEvents: 'none',
+            animation: 'orb-drift 24s ease-in-out infinite reverse',
+          }} />
+          {/* Dot grid */}
+          <div aria-hidden style={{
+            position: 'absolute', inset: 0, opacity: 0.10, pointerEvents: 'none',
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 0)',
+            backgroundSize: '28px 28px',
+          }} />
 
-      {/* FAQ — 2-col card grid */}
-      <section style={{ paddingTop: 48, paddingBottom: 72 }}>
-        <div style={wrap}>
-          <div style={{ marginBottom: 28 }}>
+          <div style={{ position: 'relative', maxWidth: 1200 }}>
             <div style={{
-              fontSize: 11, fontWeight: 700, color: T.gold,
-              letterSpacing: '0.14em', textTransform: 'uppercase',
-              marginBottom: 8,
+              fontSize: 11, fontWeight: 700,
+              color: 'rgba(255,255,255,0.6)',
+              letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 16,
             }}>
-              FAQ
+              The UK Desk
             </div>
             <h2 style={{
-              fontSize: 'clamp(24px, 2.8vw, 32px)', fontWeight: 700,
-              color: T.ink, margin: 0,
-              letterSpacing: '-0.025em', lineHeight: 1.15,
+              fontSize: 'clamp(32px, 4.5vw, 56px)', fontWeight: 700,
+              color: T.paper, lineHeight: 1.05,
+              letterSpacing: '-0.035em', margin: 0,
+              maxWidth: '20ch',
             }}>
-              Frequently Asked Questions
+              Every UK calculator, <span style={{
+                background: 'linear-gradient(115deg, #ECFDF5 0%, #FBF6E7 100%)',
+                WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
+              }}>verified and free.</span>
             </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }} className="md:grid-cols-2">
-            {FAQS.map((f, i) => (
-              <details key={i} style={{
-                background: T.paper, border: `1px solid ${T.hair}`,
-                borderRadius: 12, overflow: 'hidden',
+            <p style={{
+              fontSize: 'clamp(15px, 1.6vw, 18px)',
+              color: 'rgba(255,255,255,0.7)', lineHeight: 1.55,
+              margin: '20px 0 0', maxWidth: '54ch',
+            }}>
+              46 live calculators across UK tax, property, salary and visa life. All sourced from primary records and updated quarterly. No accounts. No upsells. Forever free.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 32 }}>
+              <Link href="/tools" className="sdlt-cta-btn" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '14px 24px', borderRadius: 12,
+                background: T.paper, color: T.ink, textDecoration: 'none',
+                fontSize: 14.5, fontWeight: 600,
+                boxShadow: '0 8px 24px -8px rgba(0,0,0,0.4)',
               }}>
-                <summary style={{
-                  cursor: 'pointer', listStyle: 'none',
-                  padding: '18px 22px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-                  fontSize: 15, fontWeight: 600, color: T.ink,
-                  lineHeight: 1.35,
-                }}>
-                  {f.q}
-                  <span style={{
-                    width: 26, height: 26, borderRadius: 6,
-                    background: T.surface,
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    color: T.muted, fontSize: 14, lineHeight: 1, flexShrink: 0,
-                  }}>⌄</span>
-                </summary>
-                <p style={{
-                  fontSize: 14.5, lineHeight: 1.65, color: T.body,
-                  margin: 0, padding: '0 22px 20px',
-                }}>
-                  {f.a}
-                </p>
-              </details>
-            ))}
+                Browse all 46 tools
+                <span style={{ fontSize: 16 }}>→</span>
+              </Link>
+              <Link href="/about" className="sdlt-link-arrow" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '14px 20px', borderRadius: 12,
+                background: 'rgba(255,255,255,0.10)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                backdropFilter: 'blur(12px)',
+                color: T.paper, textDecoration: 'none',
+                fontSize: 14.5, fontWeight: 600,
+              }}>
+                About the editor
+                <span className="sdlt-arrow-icon" style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>↗</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+/* Floating preview card for hero */
+function FloatingCard({
+  children, position, animDelay = '0s', tone = 'plain',
+}: {
+  children: React.ReactNode;
+  position: { top?: number; left?: number; right?: number; bottom?: number };
+  animDelay?: string;
+  tone?: 'plain' | 'emerald';
+}) {
+  const isEmerald = tone === 'emerald';
+  return (
+    <div style={{
+      position: 'absolute',
+      ...position,
+      maxWidth: 280,
+      padding: '20px 22px',
+      background: isEmerald
+        ? `linear-gradient(135deg, ${T.emeraldT} 0%, rgba(255,255,255,0.9) 100%)`
+        : 'rgba(255,255,255,0.85)',
+      border: `1px solid ${isEmerald ? 'rgba(4,120,87,0.2)' : T.hair}`,
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+      borderRadius: 16,
+      boxShadow: '0 20px 50px -20px rgba(11,15,25,0.18), 0 4px 12px -4px rgba(11,15,25,0.06)',
+      animation: `float-card 6s ease-in-out infinite ${animDelay}`,
+    }}>
+      {children}
     </div>
   );
 }

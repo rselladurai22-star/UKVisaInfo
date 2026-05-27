@@ -58,10 +58,10 @@ const T = {
   amberT:    '#FEF3C7',
   rose:      '#9F1239',
   roseT:     '#FFE4E6',
-  // Shadows
-  shadowSm:  '0 1px 2px rgba(15,23,42,0.04)',
-  shadow:    '0 1px 3px rgba(15,23,42,0.05), 0 1px 2px rgba(15,23,42,0.04)',
-  shadowMd:  '0 4px 16px -2px rgba(15,23,42,0.06), 0 2px 4px rgba(15,23,42,0.04)',
+  // Shadows — premium layered
+  shadowSm:  '0 1px 2px rgba(11,15,25,0.04)',
+  shadow:    '0 1px 3px rgba(11,15,25,0.04), 0 4px 12px -2px rgba(11,15,25,0.06)',
+  shadowMd:  '0 8px 24px -6px rgba(11,15,25,0.08), 0 2px 6px rgba(11,15,25,0.04)',
 };
 
 const FONT: React.CSSProperties = {
@@ -902,10 +902,11 @@ function Card({
     <div id={id} style={{
       background: T.paper,
       border: `1px solid ${T.hair}`,
-      borderRadius: 14,
+      borderRadius: 16,
       boxShadow: T.shadow,
       padding,
       overflow: 'hidden',
+      transition: 'box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
     }}>
       {children}
     </div>
