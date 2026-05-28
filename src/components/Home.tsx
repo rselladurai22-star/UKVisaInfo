@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * UKDesk — Homepage (Lexend Deca / blog.hubspot.com type system)
+ * UKDesk — Homepage (Space Grotesk + Inter + JetBrains Mono type system)
  *
  * Sections:
  *   1. Hero            — big bold sans headline, search, quick chips
@@ -27,7 +27,10 @@ import {
 /* ─────────────────────────────────────────────
    FONT + BRAND TOKENS
 ───────────────────────────────────────────── */
-const FONT     = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const FONT         = '"Inter", -apple-system, system-ui, sans-serif';         // body, forms, buttons
+const FONT_DISPLAY = '"Space Grotesk", -apple-system, system-ui, sans-serif'; // hero + block headers
+const FONT_MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace'; // numbers, metrics, tags
+const FONT_SERIF   = '"Playfair Display", ui-serif, Georgia, serif';          // editorial accents
 const INK      = '#213343';   // HubSpot navy
 const CREAM    = '#FFFFFF';   // page surface — pure white
 const PAPER    = '#FFFFFF';   // card surface
@@ -189,7 +192,7 @@ export default function Home() {
           {/* Big bold sans headline — HubSpot blog feel */}
           <h1 className="mx-auto text-center"
               style={{
-                fontFamily: FONT,
+                fontFamily: FONT_DISPLAY,
                 fontWeight: 700,
                 fontSize: 'clamp(2.6rem, 6.4vw, 5.2rem)',
                 lineHeight: 1.02,
@@ -358,7 +361,7 @@ export default function Home() {
                     Most used · {CATEGORY_COPY[featuredPrimary.category].title}
                   </p>
                   <h3 style={{
-                    fontFamily: FONT,
+                    fontFamily: FONT_DISPLAY,
                     fontWeight: 700,
                     fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)',
                     lineHeight: 1.08,
@@ -411,7 +414,7 @@ export default function Home() {
                         {CATEGORY_COPY[t.category].title}
                       </p>
                       <h4 style={{
-                        fontFamily: FONT, fontWeight: 700, fontSize: 20,
+                        fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 20,
                         lineHeight: 1.15, letterSpacing: '-0.02em', color: INK,
                         marginTop: 8,
                       }}>
@@ -455,7 +458,7 @@ export default function Home() {
               The directory
             </p>
             <h2 style={{
-              fontFamily: FONT,
+              fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: 'clamp(1.9rem, 4.2vw, 3.2rem)',
               lineHeight: 1.04,
@@ -505,7 +508,7 @@ export default function Home() {
                   </div>
 
                   <h3 style={{
-                    fontFamily: FONT,
+                    fontFamily: FONT_DISPLAY,
                     fontWeight: 700,
                     fontSize: 26,
                     letterSpacing: '-0.025em',
@@ -613,7 +616,7 @@ export default function Home() {
                 Today in the UK
               </p>
               <h3 style={{
-                fontFamily: FONT, fontWeight: 700, fontSize: 22,
+                fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 22,
                 letterSpacing: '-0.018em', color: INK, marginTop: 6,
               }}>
                 Reference rates the calculators read from.
@@ -638,8 +641,8 @@ export default function Home() {
                   {p.label}
                 </div>
                 <div style={{
-                  fontFamily: FONT, fontWeight: 700, fontSize: 26,
-                  letterSpacing: '-0.025em', color: INK, lineHeight: 1.1,
+                  fontFamily: FONT_MONO, fontWeight: 600, fontSize: 24,
+                  letterSpacing: '-0.02em', color: INK, lineHeight: 1.1,
                   marginTop: 8, fontVariantNumeric: 'tabular-nums',
                 }}>
                   {p.value}
@@ -681,7 +684,7 @@ export default function Home() {
               The principle
             </p>
             <h2 style={{
-              fontFamily: FONT,
+              fontFamily: FONT_DISPLAY,
               fontWeight: 700,
               fontSize: 'clamp(1.9rem, 4.2vw, 3.2rem)',
               lineHeight: 1.04,
@@ -712,7 +715,7 @@ export default function Home() {
               {
                 icon: Eye,
                 title: 'Designed to be read',
-                body: 'Plain English over legalese. Lexend Deca type for proven readability, generous ' +
+                body: 'Plain English over legalese. Inter for body, Space Grotesk for headlines, generous ' +
                       'line height, tabular numbers. Clarity is the whole product.',
                 stat: 'WCAG AA',
               },
@@ -723,7 +726,7 @@ export default function Home() {
                   <v.icon className="w-5 h-5" style={{ color: EMERALD }} />
                 </div>
                 <h3 style={{
-                  fontFamily: FONT, fontWeight: 700, fontSize: 20,
+                  fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 20,
                   letterSpacing: '-0.02em', color: INK, lineHeight: 1.2,
                   marginBottom: 12,
                 }}>
@@ -768,7 +771,7 @@ export default function Home() {
             One more thing
           </p>
           <h2 style={{
-            fontFamily: FONT,
+            fontFamily: FONT_DISPLAY,
             fontWeight: 700,
             fontSize: 'clamp(2.1rem, 4.8vw, 3.8rem)',
             lineHeight: 1.02,

@@ -14,7 +14,9 @@ export const metadata: Metadata = {
   },
 };
 
-const FONT   = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const FONT         = '"Inter", -apple-system, system-ui, sans-serif';
+const FONT_DISPLAY = '"Space Grotesk", -apple-system, system-ui, sans-serif';
+const FONT_MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
 const INK    = '#213343';
 const SLATE  = '#516F90';
 const MUTED  = '#7C98B6';
@@ -74,7 +76,7 @@ export default function ToolsIndex() {
             Free interactive tools
           </p>
           <h1 style={{
-            fontFamily: FONT, fontWeight: 700,
+            fontFamily: FONT_DISPLAY, fontWeight: 700,
             fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
             lineHeight: 1.04, letterSpacing: '-0.032em',
             color: INK, maxWidth: '20ch',
@@ -134,7 +136,7 @@ export default function ToolsIndex() {
                 </div>
 
                 <h2 style={{
-                  fontFamily: FONT, fontWeight: 700,
+                  fontFamily: FONT_DISPLAY, fontWeight: 700,
                   fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)',
                   lineHeight: 1.15, letterSpacing: '-0.022em',
                   color: INK, marginBottom: 10,

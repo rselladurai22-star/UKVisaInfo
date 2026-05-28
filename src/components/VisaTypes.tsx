@@ -12,7 +12,9 @@ import { VISA_DETAILS } from '../data/visaDetails';
 
 type Category = 'All' | 'Work' | 'Study' | 'Family' | 'Visit';
 
-const FONT   = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const FONT         = '"Inter", -apple-system, system-ui, sans-serif';
+const FONT_DISPLAY = '"Space Grotesk", -apple-system, system-ui, sans-serif';
+const FONT_MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
 const INK    = '#213343';
 const SLATE  = '#516F90';
 const MUTED  = '#7C98B6';
@@ -114,7 +116,7 @@ export default function VisaTypes() {
             Directory
           </p>
           <h1 style={{
-            fontFamily: FONT, fontWeight: 700,
+            fontFamily: FONT_DISPLAY, fontWeight: 700,
             fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
             lineHeight: 1.04, letterSpacing: '-0.032em',
             color: INK, maxWidth: '20ch',
@@ -227,7 +229,7 @@ export default function VisaTypes() {
                     </div>
 
                     <h3 style={{
-                      fontFamily: FONT, fontWeight: 700,
+                      fontFamily: FONT_DISPLAY, fontWeight: 700,
                       fontSize: 19, lineHeight: 1.2, letterSpacing: '-0.02em',
                       color: INK,
                     }}>
@@ -255,7 +257,7 @@ export default function VisaTypes() {
                           <Banknote className="w-3 h-3" /> Salary
                         </dt>
                         <dd style={{
-                          fontFamily: FONT, fontSize: 13.5, fontWeight: 700, color: INK,
+                          fontFamily: FONT_MONO, fontSize: 13.5, fontWeight: 600, color: INK,
                         }}>{visa.salary}</dd>
                       </div>
                       <div style={{
@@ -271,7 +273,7 @@ export default function VisaTypes() {
                           <Clock className="w-3 h-3" /> Duration
                         </dt>
                         <dd style={{
-                          fontFamily: FONT, fontSize: 13.5, fontWeight: 700, color: INK,
+                          fontFamily: FONT_MONO, fontSize: 13.5, fontWeight: 600, color: INK,
                         }}>{visa.duration}</dd>
                       </div>
                     </dl>

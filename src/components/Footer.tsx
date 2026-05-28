@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { ExternalLink, Mail } from 'lucide-react';
 import FooterNewsletter from './FooterNewsletter';
 
-const FONT    = '"Lexend Deca", -apple-system, system-ui, sans-serif';
+const FONT         = '"Inter", -apple-system, system-ui, sans-serif';
+const FONT_DISPLAY = '"Space Grotesk", -apple-system, system-ui, sans-serif';
+const FONT_MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
 const INK     = '#213343';   // HubSpot navy
 const CREAM   = '#FFFFFF';   // pure white
 const EMERALD = '#FF7A59';   // HubSpot brand orange (legacy name)
@@ -93,7 +95,7 @@ function FooterLogo() {
               }} />
       </span>
       <span style={{
-        fontFamily: FONT, fontWeight: 700, fontSize: 21,
+        fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 21,
         color: CREAM, letterSpacing: '-0.025em', lineHeight: 1,
       }}>
         UKDesk<span style={{ color: '#A7F3D0' }}>.</span>
@@ -151,7 +153,7 @@ export default function Footer() {
              style={{ borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
           <div>
             <h2 style={{
-              fontFamily: FONT, fontWeight: 700,
+              fontFamily: FONT_DISPLAY, fontWeight: 700,
               fontSize: 'clamp(1.5rem, 2.6vw, 1.875rem)',
               color: CREAM, letterSpacing: '-0.022em', lineHeight: 1.15,
               maxWidth: '20ch',

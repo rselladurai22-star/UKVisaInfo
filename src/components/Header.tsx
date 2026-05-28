@@ -21,8 +21,11 @@ import {
 } from '../data/tools';
 
 /* ─────────────────────────────────────────────
-   BRAND TOKENS — Editorial Premium
+   FONT + BRAND TOKENS
 ───────────────────────────────────────────── */
+const FONT         = '"Inter", -apple-system, system-ui, sans-serif';
+const FONT_DISPLAY = '"Space Grotesk", -apple-system, system-ui, sans-serif';
+const FONT_MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
 const INK     = '#213343';   // HubSpot navy
 const CREAM   = '#FFFFFF';   // pure white
 const EMERALD = '#FF7A59';   // HubSpot brand orange (legacy name)
@@ -52,7 +55,7 @@ function Logo({ onClick, small = false }: { onClick?: () => void; small?: boolea
         <span
           aria-hidden
           style={{
-            fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+            fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
             fontWeight: 600,
             fontSize: letterSize,
             color: CREAM,
@@ -76,13 +79,12 @@ function Logo({ onClick, small = false }: { onClick?: () => void; small?: boolea
       </span>
       <span
         style={{
-          fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+          fontFamily: FONT_DISPLAY,
           fontWeight: 700,
           fontSize: wordSize,
           color: INK,
           letterSpacing: '-0.025em',
           lineHeight: 1,
-          fontFeatureSettings: '"ss01"',
         }}
       >
         UKDesk<span style={{ color: EMERALD }}>.</span>
@@ -432,7 +434,7 @@ function ToolsPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
         {/* Right rail — featured tools CTA card */}
         <aside className="col-span-3 flex flex-col">
           <p style={{
-            fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+            fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
             fontSize: 11, fontWeight: 700,
             letterSpacing: '0.16em', textTransform: 'uppercase', color: EMERALD,
             marginBottom: 12,
@@ -451,7 +453,7 @@ function ToolsPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
           >
             <div className="relative z-10 flex flex-col h-full">
               <div style={{
-                fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                fontFamily: FONT_DISPLAY,
                 fontWeight: 700, fontSize: 22, lineHeight: 1.1, letterSpacing: '-0.025em',
                 color: INK, marginBottom: 10,
               }}>
@@ -459,7 +461,7 @@ function ToolsPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
                 in one calm place.
               </div>
               <p style={{
-                fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
                 fontSize: 13.5, lineHeight: 1.55, color: SLATE, flex: 1,
               }}>
                 {APP_TILES.length} live tools across 8 categories. Verified against gov.uk,
@@ -467,7 +469,7 @@ function ToolsPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
               </p>
               <span className="mt-5 inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-150"
                     style={{
-                      fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                      fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
                       fontSize: 13, fontWeight: 600, color: EMERALD,
                     }}>
                 Browse all tools
@@ -511,7 +513,7 @@ function CategoryBlock({
         <h3
           className="font-display"
           style={{
-            fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+            fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
             fontWeight: 600,
             fontSize: 15,
             letterSpacing: '-0.015em',
@@ -574,7 +576,7 @@ function VisasPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
         </div>
         <aside className="col-span-3 flex flex-col">
           <p style={{
-            fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+            fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
             fontSize: 11, fontWeight: 700,
             letterSpacing: '0.16em', textTransform: 'uppercase', color: EMERALD,
             marginBottom: 12,
@@ -593,7 +595,7 @@ function VisasPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
           >
             <div className="relative z-10 flex flex-col h-full">
               <div style={{
-                fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                fontFamily: FONT_DISPLAY,
                 fontWeight: 700, fontSize: 22, lineHeight: 1.1, letterSpacing: '-0.025em',
                 color: INK, marginBottom: 10,
               }}>
@@ -601,7 +603,7 @@ function VisasPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
                 UK visa route.
               </div>
               <p style={{
-                fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
                 fontSize: 13.5, lineHeight: 1.55, color: SLATE, flex: 1,
               }}>
                 14 routes, side-by-side fees, English requirements, time to settlement.
@@ -609,7 +611,7 @@ function VisasPanel({ pathname, onClose }: { pathname: string; onClose: () => vo
               </p>
               <span className="mt-5 inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-150"
                     style={{
-                      fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                      fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
                       fontSize: 13, fontWeight: 600, color: EMERALD,
                     }}>
                 Visa hub
@@ -650,7 +652,7 @@ function VisaGroupBlock({
     <div>
       <div className="flex items-baseline justify-between mb-3 pb-2" style={{ borderBottom: `1px solid ${HAIR}` }}>
         <h3 style={{
-          fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 15,
+          fontFamily: '"Inter", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 15,
           letterSpacing: '-0.015em', color: INK,
         }}>
           {group.heading}
@@ -700,7 +702,7 @@ function GuidesPanel({ pathname, onClose }: { pathname: string; onClose: () => v
             <div key={g.heading}>
               <div className="flex items-baseline justify-between mb-3 pb-2" style={{ borderBottom: `1px solid ${HAIR}` }}>
                 <h3 style={{
-                  fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 15,
+                  fontFamily: '"Inter", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 15,
                   letterSpacing: '-0.015em', color: INK,
                 }}>{g.heading}</h3>
               </div>
@@ -735,7 +737,7 @@ function GuidesPanel({ pathname, onClose }: { pathname: string; onClose: () => v
 
         <aside className="col-span-3 flex flex-col">
           <p style={{
-            fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+            fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
             fontSize: 11, fontWeight: 700,
             letterSpacing: '0.16em', textTransform: 'uppercase', color: EMERALD,
             marginBottom: 12,
@@ -751,14 +753,14 @@ function GuidesPanel({ pathname, onClose }: { pathname: string; onClose: () => v
             }}
           >
             <div style={{
-              fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+              fontFamily: FONT_DISPLAY,
               fontWeight: 700, fontSize: 22, lineHeight: 1.1, letterSpacing: '-0.025em',
               color: INK, marginBottom: 10,
             }}>
               The Tuesday brief.
             </div>
             <p style={{
-              fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+              fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
               fontSize: 13.5, lineHeight: 1.55, color: SLATE, marginBottom: 20,
             }}>
               Rule changes, fee updates, route news. 3-minute read, every Tuesday.
@@ -768,7 +770,7 @@ function GuidesPanel({ pathname, onClose }: { pathname: string; onClose: () => v
               onClick={onClose}
               className="inline-flex items-center gap-1.5"
               style={{
-                fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif',
+                fontFamily: '"Inter", -apple-system, system-ui, sans-serif',
                 fontSize: 13, fontWeight: 600, color: EMERALD,
               }}
             >
@@ -916,7 +918,7 @@ function DrawerRoot({
           onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
         >
           <div>
-            <div style={{ fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.015em', color: INK }}>
+            <div style={{ fontFamily: '"Inter", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.015em', color: INK }}>
               {it.label}
             </div>
             <div className="text-[12.5px] mt-0.5" style={{ color: MUTED }}>{it.desc}</div>
@@ -968,7 +970,7 @@ function DrawerToolsList({ onDrill }: { onDrill: (c: CategoryId) => void }) {
           >
             <div className="flex items-center gap-3">
               <div>
-                <div style={{ fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 16, letterSpacing: '-0.012em', color: INK }}>
+                <div style={{ fontFamily: '"Inter", -apple-system, system-ui, sans-serif', fontWeight: 600, fontSize: 16, letterSpacing: '-0.012em', color: INK }}>
                   {c.label}
                 </div>
                 <div className="text-[12px] mt-0.5" style={{ color: MUTED }}>{c.description}</div>
@@ -996,7 +998,7 @@ function DrawerToolsCategory({
     <div className="p-4">
       <p className="px-2 eyebrow mb-2" style={{ color: GOLD }}>{meta.description}</p>
       <h2 className="px-2 mb-4"
-          style={{ fontFamily: '"Lexend Deca", -apple-system, system-ui, sans-serif', fontWeight: 700, fontSize: 22, letterSpacing: '-0.025em', color: INK }}>
+          style={{ fontFamily: '"Inter", -apple-system, system-ui, sans-serif', fontWeight: 700, fontSize: 22, letterSpacing: '-0.025em', color: INK }}>
         {meta.label}
       </h2>
       <ul className="space-y-1">
