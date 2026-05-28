@@ -384,3 +384,63 @@ export const TOTAL_SOON_COUNT = SOON_TOOLS.length + PLANNED_TOOLS.length;
 
 /** Live tool count */
 export const LIVE_COUNT = APP_TILES.length;
+
+/* ─────────────────────────────────────────────
+   3-LEVEL NAV MAP — Category → Sub-category → Tool hrefs
+   Drives the mega-menu structure in Header.tsx
+───────────────────────────────────────────── */
+export interface CategorySubgroup {
+  label: string;
+  toolHrefs: string[];
+}
+
+export const CATEGORY_SUBGROUPS: Record<CategoryId, CategorySubgroup[]> = {
+  tax: [
+    { label: 'Income & PAYE',     toolHrefs: ['/take-home-pay', '/tax-code', '/national-insurance', '/self-assessment-calculator'] },
+    { label: 'Investments',       toolHrefs: ['/dividend-tax', '/cgt-calculator'] },
+    { label: 'Estate & Property', toolHrefs: ['/inheritance-tax'] },
+    { label: 'Allowances',        toolHrefs: ['/marriage-allowance-calculator', '/company-car-tax', '/vat-calculator'] },
+  ],
+  employment: [
+    { label: 'Pay',      toolHrefs: ['/salary-compare', '/payslip-decoder', '/minimum-wage-checker', '/salary-sacrifice-calculator', '/student-loan-repayment'] },
+    { label: 'Time off', toolHrefs: ['/holiday-pay', '/maternity-pay', '/sick-pay'] },
+    { label: 'Leaving',  toolHrefs: ['/redundancy-pay'] },
+  ],
+  property: [
+    { label: 'Buying',      toolHrefs: ['/mortgage-affordability', '/stamp-duty-calculator'] },
+    { label: 'Owning',      toolHrefs: ['/council-tax-band', '/overpayment-mortgage', '/energy-bill', '/cost-of-living-uk'] },
+    { label: 'Renting out', toolHrefs: ['/rental-income-tax', '/rental-yield-calculator'] },
+    { label: 'Selling',     toolHrefs: ['/property-cgt-calculator'] },
+  ],
+  savings: [
+    { label: 'ISAs',     toolHrefs: ['/isa-calculator', '/lifetime-isa-calculator'] },
+    { label: 'Pensions', toolHrefs: ['/pension-allowance', '/state-pension', '/pension-drawdown-calculator'] },
+  ],
+  business: [
+    { label: 'Setup',  toolHrefs: ['/sole-trader-vs-limited'] },
+    { label: 'Status', toolHrefs: ['/ir35-calculator', '/contractor-day-rate'] },
+  ],
+  immigration: [
+    { label: 'Visa tools', toolHrefs: ['/tools/cost-calculator', '/ihs-calculator', '/skilled-worker-points-check'] },
+    { label: 'Routes',     toolHrefs: ['/visa-types'] },
+    { label: 'Lookups',    toolHrefs: ['/postcode'] },
+  ],
+  benefits: [
+    { label: 'Family support', toolHrefs: ['/child-benefit-calculator', '/childcare-calculator'] },
+  ],
+  vehicles: [
+    { label: 'Compliance', toolHrefs: ['/ulez-check', '/mot-check'] },
+  ],
+};
+
+/** Short, nav-friendly label for each top-level category */
+export const CATEGORY_NAV_LABEL: Record<CategoryId, string> = {
+  tax:         'Tax',
+  employment:  'Work',
+  property:    'Property',
+  savings:     'Savings',
+  business:    'Business',
+  immigration: 'Visas',
+  benefits:    'Benefits',
+  vehicles:    'Vehicles',
+};
