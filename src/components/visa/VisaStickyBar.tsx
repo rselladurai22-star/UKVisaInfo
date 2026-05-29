@@ -10,11 +10,11 @@ import { useEffect, useState } from 'react';
 import { ExternalLink, Calculator } from 'lucide-react';
 import Link from 'next/link';
 
-const INK     = '#1A1F36';
-const CREAM   = '#FCFCFD';
-const EMERALD = '#635BFF';
-const SLATE   = '#3C4257';
-const MUTED   = '#697386';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#52525B';
 
 interface Props {
   title: string;

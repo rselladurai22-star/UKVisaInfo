@@ -19,12 +19,12 @@ import { useScenario, FAMILY_LABEL, type Family, type ApplyFrom } from './useSce
 import type { VisaVariant } from '../../../data/visaVariants';
 import { NATIONALITIES } from '../../../data/visaNationalities';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UKDesk — modern editorial direction (preview)</title>
+
+<!-- The two fonts, loaded for real. Fraunces variable (optical sizing) for display, Inter for body/UI. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — the Step 1 system, corrected for "modern editorial"
+   (calm + readable, but with type personality, one bold accent,
+    tasteful depth and high contrast — not flat/basic)
+   ============================================================ */
+:root{
+  /* Surfaces — warm paper + pure white cards + one sunken band */
+  --paper:#FAF9F5;
+  --paper-card:#FFFFFF;
+  --paper-sunken:#F3F1EA;
+
+  /* Text — high contrast, all AA+ on paper */
+  --ink:#0B0F19;        /* headings */
+  --text:#21262F;       /* body  ~13:1 */
+  --text-soft:#454B55;  /* secondary ~8:1 */
+  --text-muted:#5B6068; /* meta ~5.2:1 (AA) — replaces the old faint #94908A */
+
+  /* The ONE accent — deep editorial emerald (AA on paper) */
+  --accent:#0A6B4D;
+  --accent-strong:#064E3B;
+  --accent-soft:#E9F5EF;
+  --accent-line:rgba(10,107,77,.22);
+
+  /* Warm gold — DECORATION ONLY (rules/dots), never text */
+  --gold:#B8860B;
+
+  /* Lines */
+  --line:#E7E3D8;
+  --line-strong:rgba(11,15,25,.12);
+
+  /* Radii — confident, not bubbly */
+  --r-sm:10px; --r-md:14px; --r-lg:20px; --r-full:999px;
+
+  /* Elevation — three tasteful steps */
+  --shadow-rest:0 1px 2px rgba(11,15,25,.04), 0 0 0 1px rgba(11,15,25,.05);
+  --shadow-raised:0 14px 34px -14px rgba(11,15,25,.22), 0 2px 6px rgba(11,15,25,.04), 0 0 0 1px rgba(11,15,25,.06);
+  --shadow-overlay:0 28px 60px -18px rgba(11,15,25,.30), 0 0 0 1px rgba(11,15,25,.06);
+
+  /* Type */
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Reading measure */
+  --measure:62ch;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"ss01","cv02";
+  line-height:1.6;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Layered, very subtle background — depth without noise */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 4%, rgba(10,107,77,.06), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 90% 90%, rgba(184,134,11,.05), transparent 60%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(rgba(11,15,25,.05) 1px, transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 55% at 50% 22%, #000, transparent 75%);
+  mask-image:radial-gradient(ellipse 80% 55% at 50% 22%, #000, transparent 75%);
+  opacity:.5;
+}
+
+a{color:inherit;text-decoration:none;}
+::selection{background:rgba(10,107,77,.16);color:var(--accent-strong);}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:6px;}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+/* ============================================================ HEADER */
+header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(250,249,245,.78);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
+.brand{display:flex;align-items:baseline;gap:1px;font-family:var(--display);font-optical-sizing:auto;}
+.brand .uk{font-weight:600;font-size:22px;letter-spacing:-.02em;color:var(--ink);}
+.brand .desk{font-weight:600;font-size:22px;letter-spacing:-.02em;color:var(--accent);font-style:italic;}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:14.5px;font-weight:500;color:var(--text-soft);transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{font-size:14px;font-weight:600;color:#fff;background:var(--ink);padding:9px 16px;border-radius:var(--r-full);transition:transform .15s, background .15s;}
+.nav-cta:hover{background:var(--accent-strong);transform:translateY(-1px);}
+@media (max-width:720px){.nav-links a:not(.nav-cta){display:none;}}
+
+/* ============================================================ HERO */
+.hero{text-align:center;padding:84px 0 26px;}
+
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 15px 7px 12px;border-radius:var(--r-full);
+  background:var(--accent-soft);border:1px solid var(--accent-line);
+  font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent-strong);
+}
+.pill .dot{position:relative;display:inline-flex;width:7px;height:7px;}
+.pill .dot::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:ping 2.4s ease-out infinite;}
+.pill .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);}
+.pill .num{font-variant-numeric:tabular-nums;}
+
+h1{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:580;
+  font-size:clamp(2.7rem, 6.4vw, 5rem);
+  line-height:1.02;letter-spacing:-.032em;color:var(--ink);
+  text-wrap:balance;max-width:16ch;margin:26px auto 0;
+}
+h1 em{font-style:italic;font-weight:500;color:var(--accent);}
+
+.deck{
+  font-size:clamp(1.05rem,1.6vw,1.25rem);
+  line-height:1.62;color:var(--text-soft);font-weight:400;
+  max-width:35rem;margin:24px auto 0;text-wrap:pretty;
+}
+
+/* ---- SEARCH (the signature element) ---- */
+.search-zone{max-width:620px;margin:38px auto 0;position:relative;}
+.search{
+  display:flex;align-items:center;gap:2px;
+  background:var(--paper-card);
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-raised);
+  padding:0 8px 0 18px;height:66px;
+  transition:box-shadow .2s, border-color .2s, transform .2s;
+}
+.search:focus-within{
+  border-color:var(--accent);
+  box-shadow:0 0 0 5px rgba(10,107,77,.12), var(--shadow-raised);
+  transform:translateY(-1px);
+}
+.search svg.s-icon{width:21px;height:21px;color:var(--text-muted);flex:0 0 auto;transition:color .2s;}
+.search:focus-within svg.s-icon{color:var(--accent);}
+.search input{
+  flex:1;border:0;outline:0;background:transparent;
+  font-family:var(--sans);font-size:16.5px;font-weight:500;color:var(--ink);
+  padding:0 12px;height:100%;min-width:0;
+}
+.search input::placeholder{color:var(--text-muted);font-weight:400;}
+.kbd{
+  display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
+  font-size:11.5px;font-weight:600;color:var(--text-soft);
+  background:var(--paper-sunken);border:1px solid var(--line);
+  padding:6px 9px;border-radius:8px;
+}
+@media (max-width:560px){.kbd{display:none;}}
+
+/* Sample results panel — pure-CSS reveal on focus (demonstrates the search UX, zero JS) */
+.results{
+  position:absolute;left:0;right:0;top:calc(100% + 10px);
+  background:var(--paper-card);border:1px solid var(--line-strong);
+  border-radius:var(--r-md);box-shadow:var(--shadow-overlay);
+  overflow:hidden;text-align:left;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .18s, transform .18s, visibility .18s;z-index:40;
+}
+.search-zone:focus-within .results{opacity:1;visibility:visible;transform:translateY(0);}
+.r-row{display:flex;align-items:center;gap:13px;padding:13px 18px;border-bottom:1px solid var(--line);transition:background .12s;}
+.r-row:last-child{border-bottom:0;}
+.r-row:hover,.r-row:first-child{background:var(--accent-soft);}
+.r-ic{width:34px;height:34px;border-radius:9px;background:var(--paper-sunken);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.r-ic svg{width:17px;height:17px;color:var(--accent);}
+.r-tx{flex:1;min-width:0;}
+.r-tt{font-size:14px;font-weight:600;color:var(--ink);}
+.r-hint{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.r-tag{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);background:var(--paper-sunken);padding:4px 8px;border-radius:6px;flex:0 0 auto;}
+
+/* ---- quick chips ---- */
+.chips{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:26px;}
+.chips .lbl{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);}
+.chip{font-size:13px;font-weight:500;color:var(--text-soft);background:var(--paper-card);border:1px solid var(--line);padding:7px 14px;border-radius:var(--r-full);transition:all .15s;}
+.chip:hover{color:var(--accent);border-color:var(--accent-line);transform:translateY(-1px);box-shadow:var(--shadow-rest);}
+
+/* ============================================================ TILES */
+.tiles-sec{padding:64px 0 28px;}
+.tiles-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;gap:16px;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+.tiles-head h2{font-family:var(--display);font-optical-sizing:auto;font-weight:560;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.025em;color:var(--ink);line-height:1.1;margin-top:7px;}
+.see-all{font-size:13.5px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+.see-all svg{width:15px;height:15px;transition:transform .15s;}
+.see-all:hover svg{transform:translate(2px,-2px);}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media (max-width:880px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.grid{grid-template-columns:1fr;}}
+
+.tile{
+  position:relative;background:var(--paper-card);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:26px 24px 22px;
+  box-shadow:var(--shadow-rest);overflow:hidden;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s, border-color .2s;
+}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.22,1,.36,1);}
+.tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-raised);border-color:transparent;}
+.tile:hover::before{transform:scaleX(1);}
+.tile-ic{width:44px;height:44px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:background .2s;}
+.tile-ic svg{width:21px;height:21px;color:var(--accent);}
+.tile h3{font-family:var(--display);font-optical-sizing:auto;font-weight:600;font-size:21px;letter-spacing:-.02em;color:var(--ink);line-height:1.15;margin-bottom:7px;}
+.tile p{font-size:13.5px;line-height:1.55;color:var(--text-muted);}
+.tile .go{margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--accent);}
+.tile .go svg{width:14px;height:14px;transition:transform .15s;}
+.tile:hover .go svg{transform:translateX(3px);}
+.tile .cnt{position:absolute;top:24px;right:22px;font-size:12px;font-weight:500;color:var(--text-muted);font-variant-numeric:tabular-nums;}
+
+/* ============================================================ TRUST LINE */
+.trust{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;text-align:center;padding:46px 0 8px;color:var(--text-muted);font-size:13.5px;}
+.trust svg{width:16px;height:16px;color:var(--accent);flex:0 0 auto;}
+.trust a{color:var(--text-soft);font-weight:600;border-bottom:1px solid var(--accent-line);transition:color .15s;}
+.trust a:hover{color:var(--accent);}
+.trust .sep{color:var(--line-strong);}
+
+footer{padding:56px 0 40px;text-align:center;color:var(--text-muted);font-size:12.5px;}
+.note{max-width:760px;margin:30px auto 0;padding:16px 20px;background:var(--paper-sunken);border:1px dashed var(--line-strong);border-radius:var(--r-md);font-size:13px;color:var(--text-soft);line-height:1.55;text-align:left;}
+.note b{color:var(--ink);}
+
+/* ============================================================ MOTION */
+.rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.22,1,.36,1) forwards;}
+.d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}.d4{animation-delay:.29s}.d5{animation-delay:.37s}
+@keyframes rise{to{opacity:1;transform:none;}}
+@keyframes ping{0%{transform:scale(1);opacity:.6}80%,100%{transform:scale(2.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+  .rise{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#"><span class="uk">UK</span><span class="desk">Desk</span></a>
+    <nav class="nav-links">
+      <a href="#">Tools</a>
+      <a href="#">Visas</a>
+      <a href="#">Guides</a>
+      <a href="#">News</a>
+      <a href="#" class="nav-cta">Browse all</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <span class="pill rise d1"><span class="dot"></span><span class="num">46</span>&nbsp;free tools · verified May 2026</span>
+
+    <h1 class="rise d2">UK money, tax&nbsp;and&nbsp;visas — <em>in&nbsp;plain&nbsp;English.</em></h1>
+
+    <p class="deck rise d3">Free calculators, visa routes and rule explainers for everyday UK admin — each one checked against GOV.UK, HMRC and ONS. No sign-up. No clutter.</p>
+
+    <!-- SEARCH -->
+    <div class="search-zone rise d4">
+      <label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search UKDesk</label>
+      <div class="search">
+        <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="q" type="text" placeholder="Search a calculator, visa route or postcode…" autocomplete="off" />
+        <span class="kbd">⌘&nbsp;K</span>
+      </div>
+
+      <!-- sample results, revealed on focus (pure CSS for the demo) -->
+      <div class="results" role="listbox" aria-label="Suggestions">
+        <a class="r-row" href="#">
+          <span class="r-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span>
+          <span class="r-tx"><span class="r-tt">Take-home pay</span><span class="r-hint">Salary after tax, NI &amp; student loan</span></span>
+          <span class="r-tag">Tool</span>
+        </a>
+        <a class="r-row" href="#">
+          <span class="r-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <span class="r-tx"><span class="r-tt">Stamp duty</span><span class="r-hint">SDLT on any property purchase</span></span>
+          <span class="r-tag">Tool</span>
+        </a>
+        <a class="r-row" href="#">
+          <span class="r-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+          <span class="r-tx"><span class="r-tt">Skilled Worker visa</span><span class="r-hint">£41,700 threshold · sponsored route</span></span>
+          <span class="r-tag">Visa</span>
+        </a>
+        <a class="r-row" href="#">
+          <span class="r-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="r-tx"><span class="r-tt">Postcode super-lookup</span><span class="r-hint">Council · MP · NHS · police</span></span>
+          <span class="r-tag">Place</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- chips -->
+    <div class="chips rise d5">
+      <span class="lbl">Popular</span>
+      <a class="chip" href="#">Take-home pay</a>
+      <a class="chip" href="#">Stamp duty</a>
+      <a class="chip" href="#">Skilled Worker visa</a>
+      <a class="chip" href="#">Council tax band</a>
+      <a class="chip" href="#">Postcode lookup</a>
+    </div>
+  </section>
+
+  <!-- ============ TOPIC TILES ============ -->
+  <section class="tiles-sec">
+    <div class="tiles-head">
+      <div>
+        <span class="eyebrow">Browse by topic</span>
+        <h2>Eight areas of UK life, sorted.</h2>
+      </div>
+      <a class="see-all" href="#">All 46 tools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    </div>
+
+    <div class="grid">
+      <!-- Tax -->
+      <a class="tile" href="#">
+        <span class="cnt">10 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span>
+        <h3>Tax &amp; Income</h3>
+        <p>PAYE, National Insurance, dividends and the codes on your payslip — decoded.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <!-- Property -->
+      <a class="tile" href="#">
+        <span class="cnt">9 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <h3>Property</h3>
+        <p>Stamp duty, mortgage affordability, council tax bands and the cost of renting.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <!-- Immigration -->
+      <a class="tile" href="#">
+        <span class="cnt">5 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+        <h3>Immigration</h3>
+        <p>Every UK visa route, real 2026 fees, the IHS surcharge and time to settlement.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <!-- Employment -->
+      <a class="tile" href="#">
+        <span class="cnt">11 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+        <h3>Employment</h3>
+        <p>Holiday pay, redundancy, maternity and sick pay — your statutory rights at work.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <!-- Savings -->
+      <a class="tile" href="#">
+        <span class="cnt">7 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span>
+        <h3>Savings &amp; Pensions</h3>
+        <p>ISAs, Lifetime ISAs, pension drawdown and long-term compound growth.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <!-- Benefits -->
+      <a class="tile" href="#">
+        <span class="cnt">2 tools</span>
+        <span class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <h3>Benefits</h3>
+        <p>Child benefit, the high-income charge, childcare hours and family support.</p>
+        <span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ TRUST LINE ============ -->
+  <div class="trust">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span>Every figure traces back to <a href="#">GOV.UK</a>, <a href="#">HMRC</a> and <a href="#">ONS</a></span>
+    <span class="sep">·</span>
+    <span>Last updated May 2026</span>
+  </div>
+
+  <footer>
+    <div class="note">
+      <b>This is a static visual proof</b> of the “modern editorial” direction — open it to judge look &amp; feel. Note what changed vs. the live site: <b>Fraunces actually loads</b> (no more Times New Roman), the palette is one committed accent at AA contrast, depth is tasteful (not flat), and the page follows your brief’s <b>restrained front-door structure</b> — one statement, one dominant search, six tiles, one trust line. Next step: port into Next.js with <b>next/font</b> (self-hosted, zero CLS), a server-rendered page, and the search as the single hydrated island.
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>

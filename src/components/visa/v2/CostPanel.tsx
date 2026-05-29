@@ -20,13 +20,13 @@ import { useScenario, familyCounts } from './useScenario';
 import type { VisaVariant } from '../../../data/visaVariants';
 import CostDialog from './CostDialog';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {
@@ -102,7 +102,7 @@ export default function CostPanel(props: Props) {
                 Your total for this scenario
               </p>
               <p className="tabular-nums leading-none"
-                 style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: 'clamp(2.4rem, 5.5vw, 3.6rem)', letterSpacing: '-0.04em', color: INK }}>
+                 style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 700, fontSize: 'clamp(2.4rem, 5.5vw, 3.6rem)', letterSpacing: '-0.04em', color: INK }}>
                 {gbp(total)}
               </p>
               <p className="mt-2 text-[13px]" style={{ color: SLATE }}>
@@ -171,7 +171,7 @@ function Row({ icon: Icon, label, sub, value, highlight }:
       </div>
       <p className="tabular-nums leading-[1.05]"
          style={{
-           fontFamily: 'Fraunces, serif',
+           fontFamily: 'var(--font-grotesk), sans-serif',
            fontWeight: 700,
            fontSize: 'clamp(1.05rem, 2vw, 1.35rem)',
            letterSpacing: '-0.022em',

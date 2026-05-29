@@ -7,30 +7,30 @@
 
 /* ─── tokens — match CalcPageShell Quartz ─────────────────── */
 const Q = {
-  bg:        '#FCFCFD',
-  bgAlt:     '#F7F8FA',
-  bgInput:   '#F7F8FA',
+  bg:        '#FFFFFF',
+  bgAlt:     '#FAFAFB',
+  bgInput:   '#FAFAFB',
   surface:   '#FFFFFF',
-  ink:       '#1A1F36',
-  ink2:      '#3C4257',
-  mid:       '#697386',
-  mid2:      '#8792A2',
-  faint:     '#A3ACB9',
-  border:    '#E3E8EE',
-  borderStr: '#CFD7DF',
-  accent:    '#635BFF',
-  accentDk:  '#5851DB',
-  accentSoft:'#EFEEFF',
-  positive:  '#08855D',
-  positiveSoft: '#E6F7EF',
-  warning:   '#BF6A02',
-  warningSoft: '#FCEDD3',
-  negative:  '#CD3D64',
-  negativeSoft: '#FDEEF0',
+  ink:       '#18181B',
+  ink2:      '#3F3F46',
+  mid:       '#52525B',
+  mid2:      '#6B7280',
+  faint:     '#9CA3AF',
+  border:    '#ECECEF',
+  borderStr: '#E2E2E7',
+  accent:    '#6366F1',
+  accentDk:  '#4F46E5',
+  accentSoft:'#EEF2FF',
+  positive:  '#047857',
+  positiveSoft: '#ECFDF5',
+  warning:   '#B45309',
+  warningSoft: '#FEF3C7',
+  negative:  '#BE123C',
+  negativeSoft: '#FFE4E6',
 };
-const DISPLAY = '"Inter Tight", Inter, system-ui, sans-serif';
-const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
-const MONO    = '"JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
+const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
+const MONO    = 'var(--font-jetbrains), "JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
 
 /* ─── formatters ──────────────────────────────────────────── */
 export function fmtGBP(n: number) {
@@ -252,7 +252,7 @@ export function Section({ title, eyebrow, children, tone = 'default' }: {
   accent?: string; tone?: 'default' | 'inputs' | 'results';
 }) {
   const bg     = tone === 'inputs' ? Q.bgAlt : tone === 'results' ? Q.accentSoft : 'transparent';
-  const border = tone === 'default' ? 'none' : `1px solid ${tone === 'results' ? '#DDD8FF' : Q.border}`;
+  const border = tone === 'default' ? 'none' : `1px solid ${tone === 'results' ? '#C7D2FE' : Q.border}`;
   const pad    = tone === 'default' ? 0 : 'clamp(18px,3vw,22px)';
   return (
     <section style={{
@@ -301,7 +301,7 @@ export function StatCard({ label, value, sub, tone = 'default', accent }: {
     tone === 'muted'    ? Q.bgAlt :
                           Q.surface;
   const border =
-    tone === 'primary'  ? '#DDD8FF' :
+    tone === 'primary'  ? '#C7D2FE' :
     tone === 'positive' ? '#BFE3D3' :
     tone === 'negative' ? '#F8C9D2' :
                           Q.border;
@@ -344,7 +344,7 @@ export function SummaryHero({ label, value, sub, tone = 'navy', badge }: {
 }) {
   const isNavy = tone === 'navy';
   const bg =
-    isNavy ? 'linear-gradient(135deg, #1A1F36 0%, #2D2456 100%)' :
+    isNavy ? 'linear-gradient(135deg, #221552 0%, #3A2370 60%, #4A2C6E 100%)' :
     tone === 'teal' ? 'linear-gradient(135deg, #06593F 0%, #08855D 100%)' :
                       'linear-gradient(135deg, #8B1538 0%, #CD3D64 100%)';
   const numColor = isNavy ? '#FFFFFF' : '#FFFFFF';
@@ -500,7 +500,7 @@ export function ScenarioTabs<T extends string>({ options, value, onChange }: {
 /* ─── Tip — alert/callout ────────────────────────────────── */
 export function Tip({ children, tone = 'info' }: { children: React.ReactNode; tone?: 'info' | 'warn' | 'success' }) {
   const s = {
-    info:    { bg: Q.accentSoft,    border: '#DDD8FF', barClr: Q.accent,   txt: Q.accentDk, icon: 'ⓘ' },
+    info:    { bg: Q.accentSoft,    border: '#C7D2FE', barClr: Q.accent,   txt: Q.accentDk, icon: 'ⓘ' },
     warn:    { bg: Q.warningSoft,   border: '#F5D88B', barClr: Q.warning,  txt: '#7E4A02',  icon: '⚠' },
     success: { bg: Q.positiveSoft,  border: '#BFE3D3', barClr: Q.positive, txt: '#054A36',  icon: '✓' },
   }[tone];

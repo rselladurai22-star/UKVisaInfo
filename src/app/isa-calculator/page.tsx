@@ -77,7 +77,7 @@ export default function IsaPage() {
       sidebar={{
         keyRates: [
           { label: 'Adult ISA allowance', value: '£20,000/yr', sub: 'All ISA types combined — 2026/27', accent: '#0F766E' },
-          { label: 'Lifetime ISA sub-limit', value: '£4,000/yr', sub: 'Counts toward the £20,000 total', accent: '#635BFF' },
+          { label: 'Lifetime ISA sub-limit', value: '£4,000/yr', sub: 'Counts toward the £20,000 total', accent: '#6366F1' },
           { label: 'LISA government bonus', value: '25%', sub: 'Up to £1,000 bonus per year' },
           { label: 'Junior ISA (JISA)', value: '£9,000/yr', sub: 'Separate from adult allowance' },
           { label: 'Tax on ISA gains/income', value: '£0', sub: 'No Income Tax, no CGT, no declaration' },

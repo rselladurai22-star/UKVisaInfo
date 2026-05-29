@@ -12,13 +12,13 @@ import {
 } from 'lucide-react';
 import type { VisaVariant } from '../../data/visaVariants';
 
-const INK     = '#1A1F36';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#635BFF';
-const GOLD    = '#5851DB';
-const SLATE   = '#3C4257';
-const MUTED   = '#697386';
-const HAIR    = '#E3E8EE';
+const EMERALD = '#6366F1';
+const GOLD    = '#4F46E5';
+const SLATE   = '#3F3F46';
+const MUTED   = '#52525B';
+const HAIR    = '#ECECEF';
 
 interface Props {
   variants: VisaVariant[];
@@ -69,7 +69,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
               key={vv.id} type="button" onClick={() => setActiveIdx(i)}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-100 mb-3"
               style={isActive
-                ? { background: INK, color: '#FCFCFD', boxShadow: '0 4px 14px -4px rgba(26,31,54,0.30)' }
+                ? { background: INK, color: '#FFFFFF', boxShadow: '0 4px 14px -4px rgba(26,31,54,0.30)' }
                 : { background: 'rgba(26,31,54,0.05)', color: INK }}>
               {vv.label}
               {typeof vv.feeAmount === 'number' && (
@@ -129,7 +129,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
         {/* Right: fee meta + actions */}
         <div className="col-span-12 md:col-span-5 p-7">
           <dl className="rounded-lg overflow-hidden mb-4"
-              style={{ background: '#FCFCFD', border: `1px solid ${HAIR}` }}>
+              style={{ background: '#FFFFFF', border: `1px solid ${HAIR}` }}>
             {typeof v.feeAmount === 'number' && (
               <RowItem label="Application fee" value={`£${v.feeAmount.toLocaleString('en-GB')}`} />
             )}
@@ -150,7 +150,7 @@ export default function VariantPicker({ variants, visaId, accent }: Props) {
                   className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-[13.5px] font-semibold transition-all active:scale-[0.98]"
                   style={{
                     background: INK,
-                    color: '#FCFCFD',
+                    color: '#FFFFFF',
                     boxShadow: '0 4px 16px -4px rgba(26,31,54,0.30)',
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = EMERALD; }}

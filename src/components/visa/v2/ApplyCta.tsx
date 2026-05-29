@@ -12,9 +12,9 @@ import { ExternalLink, ShieldCheck } from 'lucide-react';
 import { useScenario } from './useScenario';
 import { APPLY_LINKS } from '../../../data/visaApplyLinks';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
 
 interface Props {
   slug: string;
@@ -43,7 +43,7 @@ export default function ApplyCta({ slug, visaTitle, fallbackUrl, defaultVariant 
             Direct apply · gov.uk
           </p>
           <h3 className="mb-3"
-              style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', letterSpacing: '-0.028em', lineHeight: 1.08, color: CREAM }}>
+              style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', letterSpacing: '-0.028em', lineHeight: 1.08, color: CREAM }}>
             Apply for the <span style={{ fontStyle: 'italic', color: '#A7F3D0' }}>{visaTitle}</span> {scenario.from === 'inside' ? 'from inside the UK' : 'from outside the UK'}
           </h3>
           <p className="text-[13.5px] leading-[1.6]" style={{ color: 'rgba(250,250,247,0.65)' }}>

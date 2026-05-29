@@ -124,11 +124,11 @@ const FX: Record<Currency, { rate: number; symbol: string; flag: string }> = {
 
 /* ── Quartz tokens (shared with visa pages) ── */
 const C = {
-  ink:'#0A0F1F', ink2:'#1A1F36', ink3:'#3C4257',
+  ink:'#0A0F1F', ink2:'#18181B', ink3:'#3F3F46',
   mid:'#697386', mid2:'#8792A2', faint:'#A3ACB9',
   bg:'#FFFFFF', bg2:'#FAFBFC', bg3:'#F4F6F8',
-  border:'#E3E8EE', hair:'#EDF0F4',
-  accent:'#635BFF', accentDk:'#4F47CC', accentSoft:'#EFEEFF',
+  border:'#ECECEF', hair:'#EDF0F4',
+  accent:'#6366F1', accentDk:'#4F47CC', accentSoft:'#EFEEFF',
   ok:'#08855D', okSoft:'#E6F7EF',
   warn:'#BF6A02', warnSoft:'#FCEDD3',
   teal:'#0B7285', tealSoft:'#E0F2F4',

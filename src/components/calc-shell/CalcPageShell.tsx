@@ -44,28 +44,28 @@ const DEFAULT_VERIFIED = 'May 2026';
 
 /* ─── design tokens — Stripe-inspired Quartz palette ────── */
 const Q = {
-  bg:        '#FCFCFD',
-  bgAlt:     '#F7F8FA',
+  bg:        '#FFFFFF',
+  bgAlt:     '#FAFAFB',
   surface:   '#FFFFFF',
-  ink:       '#1A1F36',
-  ink2:      '#3C4257',
-  mid:       '#697386',
-  mid2:      '#8792A2',
-  faint:     '#A3ACB9',
-  border:    '#E3E8EE',
-  borderStr: '#CFD7DF',
-  accent:    '#635BFF',
-  accentDk:  '#5851DB',
-  accentSoft:'#EFEEFF',
-  positive:  '#08855D',
-  positiveSoft: '#E6F7EF',
-  warning:   '#BF6A02',
-  warningSoft: '#FCEDD3',
-  negative:  '#CD3D64',
+  ink:       '#18181B',
+  ink2:      '#3F3F46',
+  mid:       '#52525B',
+  mid2:      '#6B7280',
+  faint:     '#9CA3AF',
+  border:    '#ECECEF',
+  borderStr: '#E2E2E7',
+  accent:    '#6366F1',
+  accentDk:  '#4F46E5',
+  accentSoft:'#EEF2FF',
+  positive:  '#047857',
+  positiveSoft: '#ECFDF5',
+  warning:   '#B45309',
+  warningSoft: '#FEF3C7',
+  negative:  '#BE123C',
 };
 
-const DISPLAY = '"Inter Tight", Inter, system-ui, sans-serif';
-const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
+const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
 
 export default function CalcPageShell({
   eyebrow, title, deck, verified = 'gov.uk verified',
@@ -358,7 +358,7 @@ export default function CalcPageShell({
                           style={{ textDecoration: 'none' }}
                         >
                           <div
-                            className="hover:bg-[#F7F8FA] transition-colors duration-100"
+                            className="hover:bg-[#FAFAFB] transition-colors duration-100"
                             style={{
                               display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8,
                               padding: '10px 14px',
@@ -374,7 +374,7 @@ export default function CalcPageShell({
                                 {r.desc}
                               </div>
                             </div>
-                            <ArrowUpRight size={13} strokeWidth={2.2} color={Q.mid2} className="flex-shrink-0 mt-1 group-hover:text-[#635BFF] transition-colors" />
+                            <ArrowUpRight size={13} strokeWidth={2.2} color={Q.mid2} className="flex-shrink-0 mt-1 group-hover:text-[#6366F1] transition-colors" />
                           </div>
                         </Link>
                       ))}
@@ -397,7 +397,7 @@ export default function CalcPageShell({
                       textDecoration: 'none',
                       transition: 'border-color 0.15s ease',
                     }}
-                    className="hover:border-[#635BFF]"
+                    className="hover:border-[#6366F1]"
                   >
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontFamily: TEXT, fontSize: 10.5, fontWeight: 600, color: Q.mid2, letterSpacing: '0.04em', textTransform: 'uppercase' }}>Source</div>

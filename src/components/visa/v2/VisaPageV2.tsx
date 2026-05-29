@@ -36,13 +36,13 @@ import DocumentsCard from './DocumentsCard';
 import RefusalsCard from './RefusalsCard';
 import EditorCommentary from './EditorCommentary';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 const CATEGORY_LABEL: Record<string, string> = {
@@ -143,7 +143,7 @@ export default function VisaPageV2({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
             <div className="lg:col-span-7">
               <h1 style={{
-                fontFamily: 'Fraunces, serif',
+                fontFamily: 'var(--font-grotesk), sans-serif',
                 fontWeight: 600,
                 fontSize: 'clamp(2rem, 5vw, 3.6rem)',
                 lineHeight: 0.98,
@@ -327,7 +327,7 @@ export default function VisaPageV2({
               <div className="space-y-2.5">
                 {visa.notes.map((note, i) => (
                   <div key={i} className="rounded-2xl p-5 flex items-start gap-4"
-                       style={{ background: '#FBF6E7', border: '1px solid rgba(184,134,11,0.30)' }}>
+                       style={{ background: '#EEF2FF', border: '1px solid rgba(184,134,11,0.30)' }}>
                     <span className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
                           style={{ background: 'rgba(184,134,11,0.15)', color: GOLD }}>
                       <AlertTriangle className="w-3.5 h-3.5" strokeWidth={2.2} />
@@ -394,7 +394,7 @@ function SectionShell({ eyebrow, title, sub, children }:
          style={{ color: GOLD }}>{eyebrow}</p>
       <h2 className="mb-3"
           style={{
-            fontFamily: 'Fraunces, serif',
+            fontFamily: 'var(--font-grotesk), sans-serif',
             fontWeight: 600,
             fontSize: 'clamp(1.5rem, 3vw, 2rem)',
             letterSpacing: '-0.028em',
@@ -448,7 +448,7 @@ function Stat({ label, value, highlight, icon: Icon }:
       </div>
       <p className="tabular-nums leading-[1.05]"
          style={{
-           fontFamily: 'Fraunces, serif',
+           fontFamily: 'var(--font-grotesk), sans-serif',
            fontWeight: 700,
            fontSize: 'clamp(1.2rem, 2.3vw, 1.5rem)',
            letterSpacing: '-0.028em',

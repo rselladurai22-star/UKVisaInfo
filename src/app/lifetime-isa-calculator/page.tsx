@@ -76,7 +76,7 @@ export default function LifetimeIsaPage() {
       faqs={FAQS}
       sidebar={{
         keyRates: [
-          { label: 'Annual contribution limit', value: '£4,000/yr', sub: 'Counts toward £20,000 ISA allowance', accent: '#635BFF' },
+          { label: 'Annual contribution limit', value: '£4,000/yr', sub: 'Counts toward £20,000 ISA allowance', accent: '#6366F1' },
           { label: 'Government bonus', value: '25%', sub: 'Up to £1,000 per tax year', accent: '#0F766E' },
           { label: 'Maximum lifetime bonus', value: '£33,000', sub: '33 years × £1,000 (ages 18–50)' },
           { label: 'Property price cap', value: '£450,000', sub: 'First home only — not second home' },

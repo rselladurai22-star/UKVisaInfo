@@ -28,19 +28,19 @@ interface Props {
 
 const Q = {
   surface:    '#FFFFFF',
-  bgAlt:      '#F7F8FA',
-  ink:        '#1A1F36',
-  ink2:       '#3C4257',
-  mid:        '#697386',
-  mid2:       '#8792A2',
-  border:     '#E3E8EE',
-  accent:     '#635BFF',
-  accentDk:   '#5851DB',
-  accentSoft: '#EFEEFF',
+  bgAlt:      '#FAFAFB',
+  ink:        '#18181B',
+  ink2:       '#3F3F46',
+  mid:        '#52525B',
+  mid2:       '#6B7280',
+  border:     '#ECECEF',
+  accent:     '#6366F1',
+  accentDk:   '#4F46E5',
+  accentSoft: '#EEF2FF',
 };
 
-const DISPLAY = '"Inter Tight", Inter, system-ui, sans-serif';
-const TEXT    = 'Inter, system-ui, -apple-system, sans-serif';
+const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
 
 export default function Methodology({ summary, govUrl, govLabel }: Props) {
   return (

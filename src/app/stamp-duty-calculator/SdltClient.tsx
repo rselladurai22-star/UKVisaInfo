@@ -30,42 +30,42 @@ import {
    TOKENS — cream/blue dashboard palette
 ───────────────────────────────────────────── */
 const T = {
-  // Surfaces — match site theme (FAFAF7 cream + white cards)
-  page:      '#FAFAF7',
+  // Surfaces — Vivid (white page + white cards + soft alt)
+  page:      '#FFFFFF',
   paper:     '#FFFFFF',
-  surface:   '#F6F5F0',
-  // Text — match site theme (ink-black + slate hierarchy)
-  ink:       '#0B0F19',
-  body:      '#1F2937',
-  muted:     '#475569',
-  faint:     '#94A3B8',
-  ghost:     '#D8D5CA',
-  // Borders — site standard warm hairline
-  hair:      'rgba(11,15,25,0.08)',
-  divide:    'rgba(11,15,25,0.05)',
-  // PRIMARY — site emerald (replaces blue)
-  blue:      '#047857',
-  blueDk:    '#065F46',
-  blueT:     '#ECFDF5',
-  blueT2:    '#D1FAE5',
-  // Secondary — site gold (replaces purple for FTB scenario)
-  purple:    '#B8860B',
-  purpleT:   '#FBF6E7',
-  // Accents — site palette
+  surface:   '#FAFAFB',
+  // Text — Vivid ink + zinc hierarchy
+  ink:       '#18181B',
+  body:      '#3F3F46',
+  muted:     '#52525B',
+  faint:     '#9CA3AF',
+  ghost:     '#E2E2E7',
+  // Borders — Vivid hairline
+  hair:      'rgba(24,24,27,0.08)',
+  divide:    'rgba(24,24,27,0.05)',
+  // PRIMARY — Vivid indigo
+  blue:      '#6366F1',
+  blueDk:    '#4F46E5',
+  blueT:     '#EEF2FF',
+  blueT2:    '#E0E7FF',
+  // Secondary — Vivid pink (FTB scenario)
+  purple:    '#EC4899',
+  purpleT:   '#FCE7F3',
+  // Accents — semantic
   emerald:   '#047857',
   emeraldT:  '#ECFDF5',
   amber:     '#B45309',
   amberT:    '#FEF3C7',
-  rose:      '#9F1239',
+  rose:      '#BE123C',
   roseT:     '#FFE4E6',
-  // Shadows — premium layered
-  shadowSm:  '0 1px 2px rgba(11,15,25,0.04)',
-  shadow:    '0 1px 3px rgba(11,15,25,0.04), 0 4px 12px -2px rgba(11,15,25,0.06)',
-  shadowMd:  '0 8px 24px -6px rgba(11,15,25,0.08), 0 2px 6px rgba(11,15,25,0.04)',
+  // Shadows
+  shadowSm:  '0 1px 2px rgba(24,24,27,0.04)',
+  shadow:    '0 1px 3px rgba(24,24,27,0.05), 0 6px 18px -6px rgba(24,24,27,0.10)',
+  shadowMd:  '0 12px 30px -10px rgba(24,24,27,0.14), 0 2px 6px rgba(24,24,27,0.05)',
 };
 
 const FONT: React.CSSProperties = {
-  fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+  fontFamily: 'var(--font-inter), system-ui, -apple-system, sans-serif',
   fontFeatureSettings: '"cv11", "ss01"',
 };
 const NUM: React.CSSProperties = {
@@ -459,7 +459,7 @@ function Donut({ result }: { result: SDLTResult }) {
   const total = result.total;
   const segments: { value: number; color: string; key: string }[] = [];
   // Sequential emerald scale by band index for clean visual hierarchy
-  const wedgeColors = ['#047857', '#0F766E', '#15803D', '#B8860B'];
+  const wedgeColors = ['#047857', '#0F766E', '#15803D', '#EC4899'];
   result.bands.filter((b) => b.tax > 0).forEach((b, i) => {
     segments.push({
       value: b.tax,

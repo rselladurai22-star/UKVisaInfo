@@ -15,11 +15,11 @@ import StickyMobileCta from '../StickyMobileCta';
 
 /* ── Quartz tokens ── */
 const C = {
-  ink:'#0A0F1F', ink2:'#1A1F36', ink3:'#3C4257',
-  mid:'#697386', mid2:'#8792A2', faint:'#A3ACB9',
+  ink:'#0A0F1F', ink2:'#18181B', ink3:'#3F3F46',
+  mid:'#52525B', mid2:'#8792A2', faint:'#A3ACB9',
   bg:'#FFFFFF', bg2:'#FAFBFC', bg3:'#F4F6F8', bg4:'#EDEFF3',
-  border:'#E3E8EE', borderS:'#CFD7DF', hair:'#EDF0F4',
-  accent:'#635BFF', accent2:'#8B85FF', accentDk:'#4F47CC', accentSoft:'#EFEEFF',
+  border:'#ECECEF', borderS:'#CFD7DF', hair:'#EDF0F4',
+  accent:'#6366F1', accent2:'#8B85FF', accentDk:'#4F47CC', accentSoft:'#EFEEFF',
   ok:'#08855D', okSoft:'#E6F7EF',
   warn:'#BF6A02', warnSoft:'#FCEDD3',
   pink:'#CD3D64', pinkSoft:'#FCE6EC',
@@ -817,7 +817,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                       style={{ display:'block', padding:'14px 16px',
                                border:`1px solid ${C.border}`, borderRadius:9,
                                background:C.bg, textDecoration:'none' }}
-                      className="hover:border-[#635BFF] hover:bg-[#EFEEFF]">
+                      className="hover:border-[#6366F1] hover:bg-[#EFEEFF]">
                       <div style={{ fontSize:10, fontWeight:700, color:C.mid2,
                                     letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:6 }}>
                         Sub-route
@@ -897,7 +897,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                      style={{ fontSize:12.5, color:C.mid, textDecoration:'none',
                               padding:'7px 14px', borderLeft:`1px solid ${C.border}`,
                               display:'flex', alignItems:'center', gap:10 }}
-                     className="hover:text-[#0A0F1F] hover:border-l-[#635BFF] hover:bg-[#FAFBFC]">
+                     className="hover:text-[#0A0F1F] hover:border-l-[#6366F1] hover:bg-[#FAFBFC]">
                     <span style={{ fontSize:10, color:C.faint, minWidth:16, fontWeight:600, fontFamily:mono }}>
                       {s.num}
                     </span>

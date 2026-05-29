@@ -10,12 +10,12 @@ import { Clock, Zap, AlertCircle } from 'lucide-react';
 import { useScenario } from './useScenario';
 import { NATIONALITIES } from '../../../data/visaNationalities';
 
-const INK     = '#0B0F19';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {
@@ -93,7 +93,7 @@ function Tile({ accent, label, time, cost, note, emphasise }:
     <div className="rounded-3xl p-5"
          style={{
            background: emphasise ? INK : PAPER,
-           color: emphasise ? '#FAFAF7' : INK,
+           color: emphasise ? '#FFFFFF' : INK,
            border: `1px solid ${emphasise ? 'rgba(250,250,247,0.10)' : HAIR}`,
            boxShadow: emphasise ? '0 8px 26px -10px rgba(11,15,25,0.30)' : '0 2px 12px -6px rgba(11,15,25,0.08)',
          }}>
@@ -104,11 +104,11 @@ function Tile({ accent, label, time, cost, note, emphasise }:
       </div>
       <p className="tabular-nums leading-[1.05] mb-1.5"
          style={{
-           fontFamily: 'Fraunces, serif',
+           fontFamily: 'var(--font-grotesk), sans-serif',
            fontWeight: 700,
            fontSize: 'clamp(1.3rem, 2.4vw, 1.7rem)',
            letterSpacing: '-0.028em',
-           color: emphasise ? '#FAFAF7' : INK,
+           color: emphasise ? '#FFFFFF' : INK,
          }}>
         {time}
       </p>

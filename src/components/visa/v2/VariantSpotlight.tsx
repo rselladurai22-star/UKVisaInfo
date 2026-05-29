@@ -11,13 +11,13 @@ import { Sparkles, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { useScenario } from './useScenario';
 import type { VisaVariant } from '../../../data/visaVariants';
 
-const INK     = '#0B0F19';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {
@@ -46,7 +46,7 @@ export default function VariantSpotlight({ variants, defaultVariant }: Props) {
           <p className="text-[10.5px] font-bold uppercase tracking-[0.18em]" style={{ color: MUTED }}>
             Sub-route applied
           </p>
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: 17, letterSpacing: '-0.018em', color: INK, lineHeight: 1.1 }}>
+          <p style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: 17, letterSpacing: '-0.018em', color: INK, lineHeight: 1.1 }}>
             {v.label}
           </p>
         </div>

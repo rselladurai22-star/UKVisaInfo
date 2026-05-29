@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ExternalLink, ShieldCheck } from 'lucide-react';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 export const metadata: Metadata = {
@@ -86,7 +86,7 @@ export default function SourcesPage() {
         </p>
         <h1 className="mb-5"
             style={{
-              fontFamily: 'Fraunces, serif', fontWeight: 600,
+              fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600,
               fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
               lineHeight: 1.02, letterSpacing: '-0.032em', color: INK,
             }}>

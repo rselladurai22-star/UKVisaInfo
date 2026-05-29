@@ -9,10 +9,10 @@ import { useEffect, useState } from 'react';
 
 export interface Tab { id: string; label: string }
 
-const INK     = '#1A1F36';
-const CREAM   = '#FCFCFD';
-const EMERALD = '#635BFF';
-const SLATE   = '#3C4257';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const SLATE   = '#3F3F46';
 
 export default function VisaTabNav({ tabs, accent }: { tabs: Tab[]; accent?: string }) {
   const activeColor = accent ?? EMERALD;

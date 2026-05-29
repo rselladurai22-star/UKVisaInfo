@@ -6,13 +6,13 @@ import {
 } from 'lucide-react';
 import { PRIMARY_EDITOR } from '../../data/editorialTeam';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 const SITE = 'https://ukvisainfo.co.uk';
@@ -48,7 +48,7 @@ export default function ContactPage() {
           </p>
           <h1 className="mb-5"
               style={{
-                fontFamily: 'Fraunces, serif', fontWeight: 600,
+                fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600,
                 fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
                 lineHeight: 1.02, letterSpacing: '-0.032em', color: INK,
               }}>
@@ -95,11 +95,11 @@ export default function ContactPage() {
                  style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
               <span aria-hidden
                     className="w-14 h-14 rounded-2xl inline-flex items-center justify-center text-[18px] font-bold flex-shrink-0"
-                    style={{ background: INK, color: CREAM, fontFamily: 'Fraunces, serif' }}>
+                    style={{ background: INK, color: CREAM, fontFamily: 'var(--font-grotesk), sans-serif' }}>
                 {PRIMARY_EDITOR.initials}
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-[16px] font-semibold" style={{ color: INK, fontFamily: 'Fraunces, serif' }}>
+                <p className="text-[16px] font-semibold" style={{ color: INK, fontFamily: 'var(--font-grotesk), sans-serif' }}>
                   {PRIMARY_EDITOR.name}
                 </p>
                 <p className="text-[12.5px] font-semibold mt-0.5" style={{ color: EMERALD }}>
@@ -213,7 +213,7 @@ function Section({ eyebrow, title, children }:
         {eyebrow}
       </p>
       <h2 className="mb-5"
-          style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '1.7rem', letterSpacing: '-0.024em', lineHeight: 1.1, color: INK }}>
+          style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: '1.7rem', letterSpacing: '-0.024em', lineHeight: 1.1, color: INK }}>
         {title}
       </h2>
       {children}
@@ -277,7 +277,7 @@ function Row({ icon: Icon, label, value, emphasis, last }:
            dangerouslySetInnerHTML={{ __html: label }} />
       <span className="text-[12.5px] tabular-nums flex-shrink-0 ml-2"
             style={{
-              fontFamily: 'Fraunces, serif', fontWeight: 600,
+              fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600,
               color: emphasis ? EMERALD : INK,
               letterSpacing: '-0.01em',
             }}

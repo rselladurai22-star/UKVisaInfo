@@ -15,13 +15,13 @@ import Link from 'next/link';
 import { PRIMARY_EDITOR } from '../../../data/editorialTeam';
 import type { VisaCommentary } from '../../../data/visaCommentary';
 
-const INK     = '#0B0F19';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {
@@ -96,10 +96,10 @@ function Section({ index, title, body }: { index: number; title: string; body: s
       <div className="flex items-baseline gap-3 mb-3">
         <span aria-hidden
               className="text-[12px] tabular-nums font-bold"
-              style={{ color: GOLD, fontFamily: 'Fraunces, serif', letterSpacing: '-0.012em' }}>
+              style={{ color: GOLD, fontFamily: 'var(--font-grotesk), sans-serif', letterSpacing: '-0.012em' }}>
           0{index}.
         </span>
-        <h3 style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.018em', color: INK, lineHeight: 1.15 }}>
+        <h3 style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.018em', color: INK, lineHeight: 1.15 }}>
           {title}
         </h3>
       </div>

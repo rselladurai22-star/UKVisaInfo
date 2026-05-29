@@ -7,14 +7,14 @@ import Link from 'next/link';
 import { Calculator, ShieldCheck, ExternalLink, ArrowRight, AlertCircle } from 'lucide-react';
 import type { RouteBreakdown } from '../../data/settlementFees';
 
-const INK     = '#1A1F36';
-const CREAM   = '#FCFCFD';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#635BFF';
-const GOLD    = '#5851DB';
-const SLATE   = '#3C4257';
-const MUTED   = '#697386';
-const HAIR    = '#E3E8EE';
+const EMERALD = '#6366F1';
+const GOLD    = '#4F46E5';
+const SLATE   = '#3F3F46';
+const MUTED   = '#52525B';
+const HAIR    = '#ECECEF';
 
 const POUND = (n: number) => '£' + n.toLocaleString('en-GB');
 
@@ -131,7 +131,7 @@ export default function SettlementCostStack({
       {/* Note */}
       {breakdown.note && (
         <div className="mt-5 flex items-start gap-2.5 p-4 rounded-xl"
-             style={{ background: '#FBF6E7', border: '1px solid rgba(88,81,219,0.25)' }}>
+             style={{ background: '#EEF2FF', border: '1px solid rgba(88,81,219,0.25)' }}>
           <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
           <p className="text-[13px] leading-[1.6]" style={{ color: '#5C4A12' }}>{breakdown.note}</p>
         </div>

@@ -26,19 +26,19 @@ import { primaryEditorSchema } from '../../../data/editorialTeam';
 ═══════════════════════════════════════════════════ */
 const C = {
   ink:    '#0A0F1F',  // near-black
-  ink2:   '#1A1F36',
-  ink3:   '#3C4257',
-  mid:    '#697386',
+  ink2:   '#18181B',
+  ink3:   '#3F3F46',
+  mid:    '#52525B',
   mid2:   '#8792A2',
   faint:  '#A3ACB9',
   bg:     '#FFFFFF',
   bg2:    '#FAFBFC',
   bg3:    '#F4F6F8',
   bg4:    '#EDEFF3',
-  border: '#E3E8EE',
+  border: '#ECECEF',
   borderS:'#CFD7DF',
   hair:   '#EDF0F4',  // hairline grid
-  accent: '#635BFF',
+  accent: '#6366F1',
   accent2:'#8B85FF',
   accentDk:'#4F47CC',
   accentSoft:'#EFEEFF',
@@ -560,7 +560,7 @@ export default async function VisaPage({ params }: RouteParams) {
                          display: 'flex', alignItems: 'center', gap: 10,
                          fontVariantNumeric: 'tabular-nums',
                        }}
-                       className="hover:text-[#0A0F1F] hover:border-l-[#635BFF] hover:bg-[#FAFBFC]">
+                       className="hover:text-[#0A0F1F] hover:border-l-[#6366F1] hover:bg-[#FAFBFC]">
                       <span style={{ fontSize: 10, color: C.faint, minWidth: 14, fontWeight: 600 }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>

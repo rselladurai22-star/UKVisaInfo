@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts self-hosted via next/font — see src/app/layout.tsx (Inter + Space Grotesk + JetBrains Mono) */
 @import "tailwindcss";
 
 @theme {
-  /* Single-font system: Inter only — thin, bright, professional, no stylish display face */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-headline: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Vivid: Inter (body/UI) + Space Grotesk (display). Self-hosted via next/font; vars set on <html>. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline: var(--font-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ════════════════════════════════════════════
      EDITORIAL PREMIUM PALETTE — May 2026
@@ -53,6 +53,29 @@
   /* Consistent card border */
   --color-border: rgba(11, 15, 25, 0.08);
   --color-border-strong: rgba(11, 15, 25, 0.14);
+}
+
+/* ════════════════════════════════════════════
+   VIVID DESIGN TOKENS — May 2026 redesign (home + shell)
+   Consumed by Header / Footer / Home CSS modules.
+════════════════════════════════════════════ */
+:root {
+  --uk-ink:#18181B; --uk-text:#3F3F46; --uk-text-soft:#52525B; --uk-muted:#6B7280;
+  --uk-line:#ECECEF; --uk-line-strong:#E2E2E7; --uk-soft:#FAFAFB; --uk-card:#FFFFFF;
+  --uk-grad:linear-gradient(100deg,#6366F1,#EC4899);
+  --uk-indigo:#6366F1; --uk-indigo-strong:#4F46E5; --uk-pink:#EC4899; --uk-track:#E7E7EE;
+  --uk-c1:#6366F1; --uk-c1-bg:#EEF2FF; --uk-c1-tx:#4338CA;
+  --uk-c2:#F59E0B; --uk-c2-bg:#FEF3C7; --uk-c2-tx:#B45309;
+  --uk-c3:#8B5CF6; --uk-c3-bg:#F3E8FF; --uk-c3-tx:#6D28D9;
+  --uk-c4:#0EA5E9; --uk-c4-bg:#E0F2FE; --uk-c4-tx:#0369A1;
+  --uk-c5:#10B981; --uk-c5-bg:#D1FAE5; --uk-c5-tx:#047857;
+  --uk-c6:#F43F5E; --uk-c6-bg:#FFE4E6; --uk-c6-tx:#BE123C;
+  --uk-c7:#EC4899; --uk-c7-bg:#FCE7F3; --uk-c7-tx:#BE185D;
+  --uk-c8:#14B8A6; --uk-c8-bg:#CCFBF1; --uk-c8-tx:#0F766E;
+  --uk-shadow-sm:0 6px 20px -10px rgba(24,24,27,.18);
+  --uk-shadow-md:0 20px 50px -22px rgba(99,102,241,.38);
+  --uk-shadow-lg:0 30px 64px -22px rgba(24,24,27,.32);
+  --uk-shell:1120px;
 }
 
 /* ════════════════════════════════════════════

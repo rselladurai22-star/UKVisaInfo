@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UKDesk — 3 directions to choose from</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+svg{display:block;}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px;}
+
+/* ===== PICKER BAR ===== */
+.picker{position:sticky;top:0;z-index:100;background:#0B0F19;color:#fff;border-bottom:1px solid rgba(255,255,255,.1);}
+.picker .inner{max-width:1140px;margin:0 auto;padding:13px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.picker b{font-size:14px;font-weight:700;}
+.picker span{font-size:13px;color:rgba(255,255,255,.6);}
+.picker .jump{margin-left:auto;display:flex;gap:8px;}
+.picker .jump a{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.18);transition:background .15s;}
+.picker .jump a:hover{background:rgba(255,255,255,.12);}
+.tagrow{position:relative;}
+.ctag{position:absolute;top:22px;left:50%;transform:translateX(-50%);z-index:20;font-family:"Space Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;border-radius:999px;}
+
+/* ============================================================
+   CONCEPT A — MIDNIGHT  (dark, high-tech, glow / glass)
+   ============================================================ */
+.ca{position:relative;background:#070A12;color:#E9ECF5;padding:96px 0 90px;overflow:hidden;}
+.ca::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 50% 40% at 20% 0%, rgba(52,229,176,.18), transparent 60%),
+  radial-gradient(ellipse 45% 40% at 85% 100%, rgba(99,102,241,.20), transparent 60%);}
+.ca::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:54px 54px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000,transparent 80%);mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000,transparent 80%);}
+.ca .ctag{background:rgba(52,229,176,.14);color:#5EEAC0;border:1px solid rgba(52,229,176,.3);}
+.ca .wrap{position:relative;z-index:2;text-align:center;}
+.ca .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#A9F0D6;backdrop-filter:blur(8px);}
+.ca .pill i{width:7px;height:7px;border-radius:50%;background:#34E5B0;box-shadow:0 0 12px #34E5B0;}
+.ca h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2.8rem,6.6vw,5.2rem);line-height:1.02;letter-spacing:-.03em;margin:26px auto 0;max-width:15ch;color:#fff;}
+.ca h1 em{font-style:normal;background:linear-gradient(100deg,#34E5B0,#38BDF8 60%,#818CF8);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.ca .deck{font-size:clamp(1.05rem,1.6vw,1.22rem);line-height:1.6;color:#9AA3B8;max-width:36rem;margin:22px auto 0;}
+.ca .search{display:flex;align-items:center;gap:10px;max-width:600px;margin:36px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:0 8px 0 18px;height:64px;backdrop-filter:blur(12px);transition:.2s;}
+.ca .search:focus-within{border-color:#34E5B0;box-shadow:0 0 0 4px rgba(52,229,176,.16),0 0 40px rgba(52,229,176,.12);}
+.ca .search input{flex:1;background:transparent;border:0;outline:0;color:#fff;font-family:inherit;font-size:16px;font-weight:500;}
+.ca .search input::placeholder{color:#6B7488;}
+.ca .search .go{background:linear-gradient(100deg,#34E5B0,#38BDF8);color:#06210F;font-weight:700;font-size:14px;border:0;border-radius:11px;height:48px;padding:0 20px;cursor:pointer;}
+.ca .chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:24px;}
+.ca .chip{font-size:13px;font-weight:500;color:#C3CADC;padding:8px 15px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);transition:.15s;}
+.ca .chip:hover{border-color:rgba(52,229,176,.5);color:#5EEAC0;}
+.ca .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px;}
+.ca .tile{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:24px;transition:.22s;}
+.ca .tile:hover{transform:translateY(-4px);border-color:rgba(52,229,176,.4);box-shadow:0 24px 50px -20px rgba(0,0,0,.6),0 0 30px -10px rgba(52,229,176,.3);background:rgba(255,255,255,.05);}
+.ca .tile .ic{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,rgba(52,229,176,.18),rgba(56,189,248,.16));display:flex;align-items:center;justify-content:center;color:#5EEAC0;margin-bottom:16px;}
+.ca .tile h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px;color:#fff;margin-bottom:6px;letter-spacing:-.01em;}
+.ca .tile p{font-size:13px;color:#8A93A8;line-height:1.5;}
+.ca .trust{text-align:center;margin-top:48px;font-size:13px;color:#6B7488;}
+.ca .trust b{color:#A9F0D6;font-weight:600;}
+
+/* ============================================================
+   CONCEPT B — VIVID  (bold, colourful, friendly, light)
+   ============================================================ */
+.cb{position:relative;background:#FFFFFF;color:#18181B;padding:96px 0 90px;overflow:hidden;}
+.cb::before{content:"";position:absolute;inset:0;pointer-events:none;filter:blur(10px);background:
+  radial-gradient(circle 340px at 8% 6%, rgba(99,102,241,.16), transparent 70%),
+  radial-gradient(circle 320px at 92% 12%, rgba(236,72,153,.14), transparent 70%),
+  radial-gradient(circle 300px at 78% 92%, rgba(245,158,11,.14), transparent 70%),
+  radial-gradient(circle 320px at 16% 96%, rgba(20,184,166,.14), transparent 70%);}
+.cb .ctag{background:#18181B;color:#fff;}
+.cb .wrap{position:relative;z-index:2;text-align:center;}
+.cb .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;background:#fff;border:1.5px solid #EAEAEF;box-shadow:0 6px 20px -8px rgba(99,102,241,.3);font-size:12px;font-weight:700;letter-spacing:.03em;color:#6D28D9;}
+.cb .pill i{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#EC4899);}
+.cb h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2.9rem,6.8vw,5.4rem);line-height:1;letter-spacing:-.035em;margin:24px auto 0;max-width:15ch;}
+.cb h1 em{font-style:normal;position:relative;background:linear-gradient(100deg,#6366F1,#EC4899);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cb .deck{font-size:clamp(1.08rem,1.6vw,1.28rem);line-height:1.58;color:#52525B;max-width:35rem;margin:22px auto 0;}
+.cb .search{display:flex;align-items:center;gap:10px;max-width:600px;margin:36px auto 0;background:#fff;border:2px solid #EAEAEF;border-radius:20px;padding:0 8px 0 20px;height:68px;box-shadow:0 20px 50px -22px rgba(99,102,241,.4);transition:.2s;}
+.cb .search:focus-within{border-color:#6366F1;box-shadow:0 0 0 5px rgba(99,102,241,.14),0 20px 50px -22px rgba(99,102,241,.5);}
+.cb .search input{flex:1;border:0;outline:0;font-family:inherit;font-size:16.5px;font-weight:500;color:#18181B;}
+.cb .search input::placeholder{color:#A1A1AA;}
+.cb .search .go{background:linear-gradient(100deg,#6366F1,#EC4899);color:#fff;font-weight:700;font-size:14px;border:0;border-radius:14px;height:52px;padding:0 22px;cursor:pointer;}
+.cb .chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:24px;}
+.cb .chip{font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;transition:.15s;}
+.cb .chip:nth-child(1){background:#EEF2FF;color:#4338CA;}
+.cb .chip:nth-child(2){background:#FCE7F3;color:#BE185D;}
+.cb .chip:nth-child(3){background:#FEF3C7;color:#B45309;}
+.cb .chip:nth-child(4){background:#CCFBF1;color:#0F766E;}
+.cb .chip:hover{transform:translateY(-2px) scale(1.04);}
+.cb .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px;}
+.cb .tile{border-radius:20px;padding:26px 24px;transition:.22s;border:1.5px solid transparent;}
+.cb .tile:hover{transform:translateY(-5px);}
+.cb .tile.t1{background:#EEF2FF;}.cb .tile.t1 .ic{background:#6366F1;}.cb .tile.t1 .go{color:#4338CA;}
+.cb .tile.t2{background:#FCE7F3;}.cb .tile.t2 .ic{background:#EC4899;}.cb .tile.t2 .go{color:#BE185D;}
+.cb .tile.t3{background:#CCFBF1;}.cb .tile.t3 .ic{background:#14B8A6;}.cb .tile.t3 .go{color:#0F766E;}
+.cb .tile .ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:16px;box-shadow:0 10px 22px -8px rgba(0,0,0,.25);}
+.cb .tile h3{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px;color:#18181B;margin-bottom:6px;letter-spacing:-.02em;}
+.cb .tile p{font-size:13.5px;color:#52525B;line-height:1.5;}
+.cb .tile .go{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;}
+.cb .trust{text-align:center;margin-top:48px;font-size:13.5px;color:#71717A;}
+.cb .trust b{color:#18181B;}
+
+/* ============================================================
+   CONCEPT C — BLUEPRINT  (crisp Swiss grid / utility / structured)
+   ============================================================ */
+.cc{position:relative;background:#F6F6F2;color:#111417;padding:0 0 88px;border-top:1px solid #111417;}
+.cc .ctag{background:#1F44E0;color:#fff;}
+.cc .grid-top{border-bottom:1px solid #D8D8CF;}
+.cc .hero{display:grid;grid-template-columns:1.5fr 1fr;gap:0;border-left:1px solid #D8D8CF;border-right:1px solid #D8D8CF;}
+.cc .hero-l{padding:84px 44px 48px;border-right:1px solid #D8D8CF;}
+.cc .hero-r{padding:84px 36px 48px;display:flex;flex-direction:column;justify-content:center;gap:22px;background:#FBFBF8;}
+@media(max-width:820px){.cc .hero{grid-template-columns:1fr;}.cc .hero-l{border-right:0;border-bottom:1px solid #D8D8CF;}}
+.cc .kicker{font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1F44E0;display:flex;align-items:center;gap:10px;}
+.cc .kicker::before{content:"";width:26px;height:2px;background:#1F44E0;}
+.cc h1{font-family:"Inter",sans-serif;font-weight:700;font-size:clamp(2.6rem,5.4vw,4.3rem);line-height:1.02;letter-spacing:-.035em;margin:22px 0 0;max-width:14ch;}
+.cc h1 em{font-style:normal;color:#1F44E0;}
+.cc .deck{font-size:1.1rem;line-height:1.55;color:#44484E;max-width:30rem;margin:20px 0 0;}
+.cc .search{display:flex;align-items:center;gap:10px;margin-top:32px;background:#fff;border:1.5px solid #111417;border-radius:8px;padding:0 6px 0 16px;height:60px;max-width:520px;}
+.cc .search:focus-within{box-shadow:4px 4px 0 #1F44E0;}
+.cc .search input{flex:1;border:0;outline:0;font-family:"Space Mono",monospace;font-size:14.5px;color:#111417;}
+.cc .search input::placeholder{color:#9A9A90;}
+.cc .search .go{background:#1F44E0;color:#fff;font-weight:700;font-size:13.5px;border:0;border-radius:5px;height:46px;padding:0 18px;cursor:pointer;font-family:"Space Mono",monospace;}
+.cc .stat{border:1px solid #D8D8CF;background:#fff;padding:20px 22px;}
+.cc .stat .n{font-family:"Inter",sans-serif;font-weight:700;font-size:46px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;}
+.cc .stat .l{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6A6E74;margin-top:8px;}
+.cc .stat .src{font-size:12px;color:#9A9A90;margin-top:4px;}
+.cc .tiles{border-left:1px solid #D8D8CF;border-right:1px solid #D8D8CF;border-bottom:1px solid #D8D8CF;display:grid;grid-template-columns:repeat(3,1fr);}
+@media(max-width:820px){.cc .tiles{grid-template-columns:1fr;}}
+.cc .tile{padding:30px 28px;border-right:1px solid #D8D8CF;border-top:1px solid #D8D8CF;background:#FBFBF8;transition:background .15s;position:relative;}
+.cc .tile:nth-child(3n){border-right:0;}
+.cc .tile:hover{background:#fff;}
+.cc .tile:hover .idx{color:#1F44E0;}
+.cc .idx{font-family:"Space Mono",monospace;font-size:13px;font-weight:700;color:#C0C0B6;letter-spacing:.05em;}
+.cc .tile h3{font-family:"Inter",sans-serif;font-weight:700;font-size:21px;letter-spacing:-.02em;margin:16px 0 8px;}
+.cc .tile p{font-size:13.5px;color:#5A5E64;line-height:1.55;}
+.cc .tile .go{margin-top:16px;font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1F44E0;display:inline-flex;align-items:center;gap:7px;}
+.cc .trust{border-left:1px solid #D8D8CF;border-right:1px solid #D8D8CF;border-bottom:1px solid #D8D8CF;padding:18px 28px;font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.04em;color:#6A6E74;background:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.cc .trust b{color:#111417;}
+</style>
+</head>
+<body>
+
+<!-- ===== PICKER BAR ===== -->
+<div class="picker">
+  <div class="inner">
+    <b>3 directions — all 100% different.</b>
+    <span>Scroll through, then tell me <b style="color:#34E5B0">A</b>, <b style="color:#EC4899">B</b> or <b style="color:#6E8BFF">C</b> (or mix).</span>
+    <div class="jump">
+      <a href="#a">A · Dark</a>
+      <a href="#b">B · Vivid</a>
+      <a href="#c">C · Blueprint</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONCEPT A — MIDNIGHT ============ -->
+<section class="ca tagrow" id="a">
+  <span class="ctag">A · Midnight — dark · high-tech · glow</span>
+  <div class="wrap">
+    <span class="pill"><i></i>46 FREE TOOLS · LIVE 2026</span>
+    <h1>UK money, tax and visas, <em>solved in seconds.</em></h1>
+    <p class="deck">Calculators, visa routes and rule explainers for every part of UK life — checked against GOV.UK, HMRC and ONS.</p>
+    <div class="search">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6B7488" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input placeholder="Search a tool, visa route or postcode…" />
+      <button class="go">Search</button>
+    </div>
+    <div class="chips"><a class="chip">Take-home pay</a><a class="chip">Stamp duty</a><a class="chip">Skilled Worker visa</a><a class="chip">Council tax</a></div>
+    <div class="tiles">
+      <div class="tile"><div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></div><h3>Tax &amp; Income</h3><p>PAYE, NI, dividends and your payslip codes, decoded.</p></div>
+      <div class="tile"><div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Property</h3><p>Stamp duty, mortgages, council tax and renting costs.</p></div>
+      <div class="tile"><div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>Immigration</h3><p>Every visa route, 2026 fees and time to settlement.</p></div>
+    </div>
+    <p class="trust">Every figure traces back to <b>GOV.UK · HMRC · ONS</b> &nbsp;·&nbsp; Last updated May 2026</p>
+  </div>
+</section>
+
+<!-- ============ CONCEPT B — VIVID ============ -->
+<section class="cb tagrow" id="b">
+  <span class="ctag">B · Vivid — bold · colourful · friendly</span>
+  <div class="wrap">
+    <span class="pill"><i></i>46 FREE TOOLS</span>
+    <h1>Everything for UK life, <em>made simple.</em></h1>
+    <p class="deck">Calculators, visa routes and plain-English rule explainers — all free, all checked against GOV.UK, HMRC and ONS.</p>
+    <div class="search">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input placeholder="Search a tool, visa route or postcode…" />
+      <button class="go">Search</button>
+    </div>
+    <div class="chips"><a class="chip">Take-home pay</a><a class="chip">Stamp duty</a><a class="chip">Skilled Worker</a><a class="chip">Council tax</a></div>
+    <div class="tiles">
+      <div class="tile t1"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></div><h3>Tax &amp; Income</h3><p>PAYE, NI, dividends and your payslip codes, decoded.</p><span class="go">Explore →</span></div>
+      <div class="tile t2"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Property</h3><p>Stamp duty, mortgages, council tax and renting costs.</p><span class="go">Explore →</span></div>
+      <div class="tile t3"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>Immigration</h3><p>Every visa route, 2026 fees and time to settlement.</p><span class="go">Explore →</span></div>
+    </div>
+    <p class="trust">Every figure traces back to <b>GOV.UK · HMRC · ONS</b> &nbsp;·&nbsp; Last updated May 2026</p>
+  </div>
+</section>
+
+<!-- ============ CONCEPT C — BLUEPRINT ============ -->
+<section class="cc tagrow" id="c">
+  <span class="ctag">C · Blueprint — crisp · structured · utility</span>
+  <div class="hero">
+    <div class="hero-l">
+      <div class="kicker">UKDesk · 46 tools live</div>
+      <h1>UK money, tax &amp; visas — <em>in plain English.</em></h1>
+      <p class="deck">Calculators, visa routes and rule explainers for every part of UK life, checked against official sources.</p>
+      <div class="search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A9A90" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input placeholder="search tool / visa / postcode" />
+        <button class="go">→</button>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="stat"><div class="n">46</div><div class="l">Free tools, maintained</div><div class="src">Across 8 areas of UK life</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">Sourced</div><div class="src">GOV.UK · HMRC · ONS</div></div>
+    </div>
+  </div>
+  <div class="tiles">
+    <div class="tile"><span class="idx">01</span><h3>Tax &amp; Income</h3><p>PAYE, NI, dividends and the codes on your payslip, decoded.</p><span class="go">View 10 →</span></div>
+    <div class="tile"><span class="idx">02</span><h3>Property</h3><p>Stamp duty, mortgage affordability, council tax and renting.</p><span class="go">View 9 →</span></div>
+    <div class="tile"><span class="idx">03</span><h3>Immigration</h3><p>Every UK visa route, real 2026 fees and time to settlement.</p><span class="go">View 5 →</span></div>
+  </div>
+  <div class="trust">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F44E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span><b>SOURCED:</b> GOV.UK / HMRC / ONS / BANK OF ENGLAND &nbsp;·&nbsp; UPDATED 2026-05</span>
+  </div>
+</section>
+
+</body>
+</html>

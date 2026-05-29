@@ -5,13 +5,13 @@ import {
 } from 'lucide-react';
 import { EDITORS, PRIMARY_EDITOR, primaryEditorSchema } from '../../data/editorialTeam';
 
-const INK     = '#0B0F19';
-const CREAM   = '#FAFAF7';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
-const GOLD    = '#B8860B';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const EMERALD = '#6366F1';
+const GOLD    = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 const SITE = 'https://ukvisainfo.co.uk';
@@ -63,7 +63,7 @@ export default function AboutPage() {
           </p>
           <h1 className="mb-5"
               style={{
-                fontFamily: 'Fraunces, serif', fontWeight: 600,
+                fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600,
                 fontSize: 'clamp(2rem, 4.5vw, 3.4rem)',
                 lineHeight: 1.02, letterSpacing: '-0.032em', color: INK,
               }}>
@@ -84,11 +84,11 @@ export default function AboutPage() {
                 <div className="flex items-start gap-5">
                   <span aria-hidden
                         className="w-16 h-16 rounded-2xl inline-flex items-center justify-center text-[22px] font-bold flex-shrink-0"
-                        style={{ background: INK, color: CREAM, fontFamily: 'Fraunces, serif', letterSpacing: '-0.015em' }}>
+                        style={{ background: INK, color: CREAM, fontFamily: 'var(--font-grotesk), sans-serif', letterSpacing: '-0.015em' }}>
                     {e.initials}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[18px] font-semibold" style={{ color: INK, fontFamily: 'Fraunces, serif' }}>
+                    <p className="text-[18px] font-semibold" style={{ color: INK, fontFamily: 'var(--font-grotesk), sans-serif' }}>
                       {e.name}
                     </p>
                     <p className="text-[13.5px] font-semibold mt-0.5" style={{ color: EMERALD }}>
@@ -249,7 +249,7 @@ function Section({ eyebrow, title, children }:
         {eyebrow}
       </p>
       <h2 className="mb-5"
-          style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '1.7rem', letterSpacing: '-0.024em', lineHeight: 1.1, color: INK }}
+          style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: '1.7rem', letterSpacing: '-0.024em', lineHeight: 1.1, color: INK }}
           dangerouslySetInnerHTML={{ __html: title }} />
       {children}
     </section>

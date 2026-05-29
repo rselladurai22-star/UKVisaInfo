@@ -5,6 +5,21 @@ import AppShell from '../components/AppShell';
 import AdSenseScript from '../components/AdSenseScript';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import { PRIMARY_EDITOR, primaryEditorSchema } from '../data/editorialTeam';
+import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-grotesk',
+  display: 'swap',
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+});
 
 const SITE_URL = 'https://ukvisainfo.co.uk';
 
@@ -148,10 +163,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}

@@ -9,12 +9,12 @@
 import { useState } from 'react';
 import { IdCard, Wallet, Building2, Stethoscope, Check } from 'lucide-react';
 
-const INK     = '#0B0F19';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const SLATE   = '#475569';
-const MUTED   = '#94908A';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const SLATE   = '#3F3F46';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface DocGroup {
@@ -89,7 +89,7 @@ export default function DocumentsCard({ documents }: Props) {
                   <Icon className="w-4 h-4" strokeWidth={2} />
                 </span>
                 <h3 className="flex-1"
-                    style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: 15.5, letterSpacing: '-0.018em', color: INK, lineHeight: 1.1 }}>
+                    style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 600, fontSize: 15.5, letterSpacing: '-0.018em', color: INK, lineHeight: 1.1 }}>
                   {group.label}
                 </h3>
                 <span className="text-[11px] font-mono tabular-nums" style={{ color: MUTED }}>

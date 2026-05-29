@@ -19,20 +19,20 @@ export const metadata: Metadata = {
 
 /* Site theme tokens */
 const T = {
-  page:    '#FAFAF7',
+  page:    '#FFFFFF',
   paper:   '#FFFFFF',
-  surface: '#F6F5F0',
-  ink:     '#0B0F19',
-  body:    '#1F2937',
-  muted:   '#475569',
-  faint:   '#94A3B8',
-  hair:    'rgba(11,15,25,0.08)',
-  divide:  'rgba(11,15,25,0.05)',
-  emerald: '#047857',
-  emeraldDk:'#065F46',
-  emeraldT:'#ECFDF5',
-  gold:    '#B8860B',
-  goldT:   '#FBF6E7',
+  surface: '#FAFAFB',
+  ink:     '#18181B',
+  body:    '#3F3F46',
+  muted:   '#52525B',
+  faint:   '#9CA3AF',
+  hair:    'rgba(24,24,27,0.08)',
+  divide:  'rgba(24,24,27,0.05)',
+  emerald: '#6366F1',
+  emeraldDk:'#4F46E5',
+  emeraldT:'#EEF2FF',
+  gold:    '#EC4899',
+  goldT:   '#FCE7F3',
 };
 
 const FAQS = [
@@ -71,7 +71,7 @@ export default function Page() {
   return (
     <div style={{
       background: T.page, color: T.ink,
-      fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+      fontFamily: 'var(--font-inter), system-ui, -apple-system, sans-serif',
       fontFeatureSettings: '"cv11", "ss01"',
       overflowX: 'hidden',
     }}>
@@ -108,7 +108,7 @@ export default function Page() {
         .sdlt-fade-up-3 { animation-delay: 0.25s; }
         .sdlt-fade-up-4 { animation-delay: 0.35s; }
         .sdlt-grad-text {
-          background: linear-gradient(115deg, #047857 0%, #B8860B 100%);
+          background: linear-gradient(115deg, #047857 0%, #EC4899 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;

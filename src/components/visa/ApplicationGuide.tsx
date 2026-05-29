@@ -16,14 +16,14 @@ import {
 } from 'lucide-react';
 import { NATIONALITIES } from '../../data/visaNationalities';
 
-const INK     = '#1A1F36';
-const CREAM   = '#FCFCFD';
+const INK     = '#18181B';
+const CREAM   = '#FFFFFF';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#635BFF';
-const GOLD    = '#5851DB';
-const SLATE   = '#3C4257';
-const MUTED   = '#697386';
-const HAIR    = '#E3E8EE';
+const EMERALD = '#6366F1';
+const GOLD    = '#4F46E5';
+const SLATE   = '#3F3F46';
+const MUTED   = '#52525B';
+const HAIR    = '#ECECEF';
 
 interface Step { title: string; desc: string }
 

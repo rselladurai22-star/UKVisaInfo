@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UKDesk — 3 menu styles to choose from</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --display:"Space Grotesk","Inter",sans-serif; --sans:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --bg:#FFFFFF; --bg-soft:#FAFAFB; --ink:#18181B; --text:#3F3F46; --muted:#6B7280;
+  --line:#ECECEF; --line-strong:#E2E2E7;
+  --grad:linear-gradient(100deg,#6366F1,#EC4899); --indigo:#6366F1; --indigo-strong:#4F46E5; --pink:#EC4899;
+  --c1:#6366F1; --c2:#F59E0B; --c3:#8B5CF6; --c4:#0EA5E9; --c5:#10B981; --c6:#F43F5E; --c7:#EC4899; --c8:#14B8A6;
+  --shadow-sm:0 6px 20px -10px rgba(24,24,27,.18);
+  --shadow-lg:0 30px 64px -22px rgba(24,24,27,.32);
+  --shell:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:var(--sans);background:#fff;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;} button{font-family:inherit;cursor:pointer;border:0;background:none;} svg{display:block;}
+:focus-visible{outline:2.5px solid var(--indigo);outline-offset:2px;border-radius:8px;}
+.wrap{max-width:var(--shell);margin:0 auto;padding:0 24px;}
+
+/* picker */
+.picker{position:sticky;top:0;z-index:200;background:#0B0F19;color:#fff;}
+.picker .inner{max-width:var(--shell);margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.picker b{font-size:14px;font-weight:700;} .picker span{font-size:13px;color:rgba(255,255,255,.62);}
+.picker .jump{margin-left:auto;display:flex;gap:8px;}
+.picker .jump a{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.18);}
+.picker .jump a:hover{background:rgba(255,255,255,.12);}
+
+.variant{position:relative;overflow:visible;min-height:540px;padding-bottom:60px;border-bottom:1px solid var(--line);}
+.ctag{position:absolute;top:18px;left:24px;z-index:5;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:999px;background:var(--ink);color:#fff;}
+.cap{max-width:640px;margin:30px auto 0;text-align:center;padding:0 24px;}
+.cap h3{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);}
+.cap p{font-size:14px;color:var(--muted);margin-top:6px;}
+.ghost{max-width:var(--shell);margin:34px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.ghost div{height:90px;border:1px dashed var(--line-strong);border-radius:14px;}
+
+/* brand + shared bits */
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--ink);flex:0 0 auto;}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
+.item{display:inline-flex;align-items:center;gap:5px;padding:9px 13px;border-radius:10px;font-size:14.5px;font-weight:600;color:var(--text);transition:background .14s,color .14s;}
+.item:hover,.has-dd:hover .item,.has-dd:focus-within .item{background:var(--bg-soft);color:var(--ink);}
+.item .chev{width:15px;height:15px;color:var(--muted);transition:transform .2s;}
+.has-dd:hover .item .chev,.has-dd:focus-within .item .chev{transform:rotate(180deg);}
+.cta{background:var(--ink);color:#fff;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;transition:transform .15s,box-shadow .15s;}
+.cta:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm);}
+.cta.grad{background:var(--grad);}
+
+/* shared dropdown */
+.has-dd{position:relative;}
+.dd{position:absolute;top:100%;left:0;padding-top:12px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.2s;z-index:80;}
+.has-dd:hover .dd,.has-dd:focus-within .dd{opacity:1;visibility:visible;transform:none;}
+.dd-inner{background:#fff;border:1px solid var(--line-strong);border-radius:16px;box-shadow:var(--shadow-lg);padding:14px;width:470px;}
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.dd-cat{display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;transition:background .12s;}
+.dd-cat:hover{background:var(--bg-soft);}
+.dd-cat .ic{width:34px;height:34px;border-radius:9px;color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.dd-cat .nm{font-size:13.5px;font-weight:600;color:var(--ink);}
+.dd-cat .ct{font-size:11px;color:var(--muted);}
+.dd-foot{margin-top:8px;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+.dd-foot a{font-size:13px;font-weight:700;color:var(--indigo-strong);display:inline-flex;gap:6px;align-items:center;}
+.dd-foot span{font-size:11.5px;color:var(--muted);}
+
+/* ===================================================== V1 — COMMAND BAR */
+.v-cmd{background:#fff;border-bottom:1px solid var(--line);}
+.v-cmd .bar{display:flex;align-items:center;gap:18px;height:74px;}
+.cmd-search{flex:1;max-width:540px;margin:0 12px;position:relative;}
+.cmd-field{display:flex;align-items:center;gap:11px;height:48px;padding:0 14px;border-radius:14px;background:var(--bg-soft);border:1.5px solid var(--line-strong);color:var(--muted);font-size:14.5px;font-weight:500;transition:.18s;}
+.cmd-search:focus-within .cmd-field{border-color:var(--indigo);background:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.12);color:var(--ink);}
+.cmd-field .kbd{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 7px;}
+.cmd-pop{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line-strong);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s;z-index:90;}
+.cmd-search:focus-within .cmd-pop{opacity:1;visibility:visible;transform:none;}
+.cmd-sec{padding:8px;}
+.cmd-sec+.cmd-sec{border-top:1px solid var(--line);}
+.cmd-sec h6{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 10px 4px;}
+.cmd-row{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;}
+.cmd-row:first-of-type,.cmd-row:hover{background:var(--bg-soft);}
+.cmd-row .ic{width:30px;height:30px;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.cmd-row .t{font-size:13.5px;font-weight:600;color:var(--ink);}
+.cmd-row .h{font-size:11.5px;color:var(--muted);}
+.cmd-row .tag{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+
+/* ===================================================== V2 — FLOATING PILL */
+.v-pill-bg{background:linear-gradient(120deg,#EEF2FF 0%,#FCE7F3 55%,#FEF3C7 100%);padding:26px 0 0;}
+.v-pill{max-width:960px;margin:0 auto;background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 44px -18px rgba(24,24,27,.3);border-radius:999px;}
+.v-pill .bar{display:flex;align-items:center;gap:8px;height:60px;padding:0 12px 0 20px;}
+.v-pill .menu{display:flex;align-items:center;gap:2px;margin:0 auto;}
+.v-pill .iconbtn{width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:var(--text);transition:background .14s;}
+.v-pill .iconbtn:hover{background:rgba(255,255,255,.7);color:var(--ink);}
+.v-pill .dd-inner{border-radius:18px;}
+
+/* ===================================================== V3 — TWO-TIER AUTHORITY */
+.v-tier .util{background:var(--ink);}
+.v-tier .util .wrap{display:flex;align-items:center;justify-content:space-between;height:40px;}
+.v-tier .util .l{display:flex;align-items:center;gap:8px;font-size:12.5px;color:rgba(255,255,255,.82);font-weight:500;}
+.v-tier .util .l svg{color:#6EE7B7;}
+.v-tier .util .r{display:flex;gap:20px;}
+.v-tier .util .r a{font-size:12.5px;color:rgba(255,255,255,.62);font-weight:500;}
+.v-tier .util .r a:hover{color:#fff;}
+.v-tier .main{background:#fff;}
+.v-tier .main .bar{display:flex;align-items:center;gap:20px;height:64px;}
+.v-tier .main .menu{display:flex;align-items:center;gap:2px;}
+.v-tier .main .right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.v-tier .hsearch{display:flex;align-items:center;gap:9px;width:210px;height:42px;padding:0 12px;border-radius:999px;background:var(--bg-soft);border:1px solid var(--line-strong);color:var(--muted);font-size:13.5px;font-weight:500;transition:.15s;}
+.v-tier .hsearch:hover{border-color:var(--indigo);color:var(--ink);}
+.v-tier .catstrip{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.v-tier .catstrip .wrap{display:flex;gap:6px;height:50px;align-items:center;overflow-x:auto;}
+.v-tier .catstrip a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--text);padding:7px 13px;border-radius:999px;display:inline-flex;gap:8px;align-items:center;transition:.14s;}
+.v-tier .catstrip a:hover{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);}
+.v-tier .catstrip a .d{width:7px;height:7px;border-radius:3px;flex:0 0 auto;}
+
+@media(max-width:900px){
+  .cmd-search{max-width:none;} .v-pill{margin:0 16px;}
+  .menu,.has-dd,.v-tier .hsearch,.cmd-search{display:none;}
+  .v-tier .catstrip{display:none;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="picker"><div class="inner">
+  <b>3 menu styles.</b><span>Hover <b style="color:#fff">Tools</b> · focus the search · then tell me 1, 2 or 3.</span>
+  <div class="jump"><a href="#v1">1 · Command</a><a href="#v2">2 · Floating pill</a><a href="#v3">3 · Two-tier</a></div>
+</div></div>
+
+<!-- ===================== V1 — COMMAND BAR ===================== -->
+<section class="variant" id="v1">
+  <span class="ctag">1 · Command bar — search-forward, ⌘K palette</span>
+  <header class="v-cmd" style="margin-top:54px">
+    <div class="wrap bar">
+      <a class="brand" href="#"><span class="mark">U</span>UKDesk</a>
+      <div class="cmd-search">
+        <div class="cmd-field" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search 46 tools, visa routes, postcodes…<span class="kbd">⌘K</span></div>
+        <div class="cmd-pop">
+          <div class="cmd-sec">
+            <h6>Jump to a tool</h6>
+            <a class="cmd-row"><span class="ic" style="background:var(--c1)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span><div class="t">Take-home pay</div><div class="h">Salary after tax &amp; NI</div></span><span class="tag">Tool</span></a>
+            <a class="cmd-row"><span class="ic" style="background:var(--c2)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span><div class="t">Stamp duty</div><div class="h">SDLT 2026</div></span><span class="tag">Tool</span></a>
+          </div>
+          <div class="cmd-sec">
+            <h6>Visa routes</h6>
+            <a class="cmd-row"><span class="ic" style="background:var(--c3)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span><span><div class="t">Skilled Worker visa</div><div class="h">£41,700 · sponsored</div></span><span class="tag">Visa</span></a>
+          </div>
+        </div>
+      </div>
+      <ul class="menu" style="display:flex;align-items:center;gap:2px;list-style:none">
+        <li class="has-dd">
+          <button class="item">Tools<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="dd"><div class="dd-inner">
+            <div class="dd-grid">
+              <a class="dd-cat"><span class="ic" style="background:var(--c1)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span><div class="nm">Tax &amp; Income</div><div class="ct">10 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c2)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span><div class="nm">Property</div><div class="ct">9 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c3)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span><span><div class="nm">Immigration</div><div class="ct">5 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c4)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><span><div class="nm">Employment</div><div class="ct">9 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c5)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 4 7"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="12" x2="12" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><line x1="3" x2="21" y1="22" y2="22"/></svg></span><span><div class="nm">Savings</div><div class="ct">5 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c8)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><span><div class="nm">Vehicles</div><div class="ct">2 tools</div></span></a>
+            </div>
+            <div class="dd-foot"><a>See all 46 tools <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><span>GOV.UK · HMRC · ONS</span></div>
+          </div></div>
+        </li>
+        <li><a class="item" href="#">Visas</a></li>
+      </ul>
+      <a class="cta" href="#">Browse all</a>
+    </div>
+  </header>
+  <div class="cap"><h3>Command bar</h3><p>Search is the hero of the header — focus it for a grouped command palette. Nav shrinks to essentials. Linear / Vercel energy.</p></div>
+  <div class="ghost"><div></div><div></div><div></div></div>
+</section>
+
+<!-- ===================== V2 — FLOATING PILL ===================== -->
+<section class="variant" id="v2" style="padding:0 0 60px;">
+  <span class="ctag">2 · Floating pill — detached, glassy, centered</span>
+  <div class="v-pill-bg" style="padding-top:64px;padding-bottom:80px;">
+    <header class="v-pill">
+      <div class="bar">
+        <a class="brand" href="#"><span class="mark">U</span>UKDesk</a>
+        <ul class="menu" style="list-style:none">
+          <li class="has-dd">
+            <button class="item">Tools<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="dd"><div class="dd-inner">
+              <div class="dd-grid">
+                <a class="dd-cat"><span class="ic" style="background:var(--c1)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span><div class="nm">Tax &amp; Income</div><div class="ct">10 tools</div></span></a>
+                <a class="dd-cat"><span class="ic" style="background:var(--c2)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span><div class="nm">Property</div><div class="ct">9 tools</div></span></a>
+                <a class="dd-cat"><span class="ic" style="background:var(--c3)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span><span><div class="nm">Immigration</div><div class="ct">5 tools</div></span></a>
+                <a class="dd-cat"><span class="ic" style="background:var(--c4)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><span><div class="nm">Employment</div><div class="ct">9 tools</div></span></a>
+                <a class="dd-cat"><span class="ic" style="background:var(--c5)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 4 7"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="12" x2="12" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><line x1="3" x2="21" y1="22" y2="22"/></svg></span><span><div class="nm">Savings</div><div class="ct">5 tools</div></span></a>
+                <a class="dd-cat"><span class="ic" style="background:var(--c7)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span><div class="nm">Benefits</div><div class="ct">2 tools</div></span></a>
+              </div>
+              <div class="dd-foot"><a>See all 46 tools <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><span>GOV.UK · HMRC · ONS</span></div>
+            </div></div>
+          </li>
+          <li><a class="item" href="#">Visas</a></li>
+          <li><a class="item" href="#">Guides</a></li>
+          <li><a class="item" href="#">News</a></li>
+        </ul>
+        <button class="iconbtn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        <a class="cta grad" href="#">Browse all</a>
+      </div>
+    </header>
+  </div>
+  <div class="cap"><h3>Floating pill</h3><p>A detached, glassy capsule that floats over the page — centered links, search icon, gradient CTA. Trendy and premium; great over a colourful hero.</p></div>
+  <div class="ghost"><div></div><div></div><div></div></div>
+</section>
+
+<!-- ===================== V3 — TWO-TIER AUTHORITY ===================== -->
+<section class="variant" id="v3" style="padding-bottom:60px;">
+  <span class="ctag" style="top:auto;margin-top:0;position:static;display:inline-block;margin:18px 0 0 24px;">3 · Two-tier — structured &amp; trustworthy</span>
+  <header class="v-tier" style="margin-top:14px;border-bottom:1px solid var(--line)">
+    <div class="util"><div class="wrap">
+      <span class="l"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against GOV.UK, HMRC &amp; ONS · Updated May 2026</span>
+      <span class="r"><a href="#">About</a><a href="#">Sources</a><a href="#">Editorial policy</a></span>
+    </div></div>
+    <div class="main"><div class="wrap bar">
+      <a class="brand" href="#"><span class="mark">U</span>UKDesk</a>
+      <ul class="menu" style="list-style:none">
+        <li class="has-dd">
+          <button class="item">Tools<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="dd"><div class="dd-inner">
+            <div class="dd-grid">
+              <a class="dd-cat"><span class="ic" style="background:var(--c1)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span><div class="nm">Tax &amp; Income</div><div class="ct">10 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c2)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span><div class="nm">Property</div><div class="ct">9 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c3)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span><span><div class="nm">Immigration</div><div class="ct">5 tools</div></span></a>
+              <a class="dd-cat"><span class="ic" style="background:var(--c5)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 4 7"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="12" x2="12" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><line x1="3" x2="21" y1="22" y2="22"/></svg></span><span><div class="nm">Savings</div><div class="ct">5 tools</div></span></a>
+            </div>
+            <div class="dd-foot"><a>See all 46 tools <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><span>8 categories</span></div>
+          </div></div>
+        </li>
+        <li><a class="item" href="#">Visas</a></li>
+        <li><a class="item" href="#">Guides</a></li>
+        <li><a class="item" href="#">News</a></li>
+      </ul>
+      <div class="right">
+        <span class="hsearch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search…</span>
+        <a class="cta" href="#">Browse all</a>
+      </div>
+    </div></div>
+    <div class="catstrip"><div class="wrap">
+      <a><span class="d" style="background:var(--c1)"></span>Tax</a>
+      <a><span class="d" style="background:var(--c2)"></span>Property</a>
+      <a><span class="d" style="background:var(--c3)"></span>Immigration</a>
+      <a><span class="d" style="background:var(--c4)"></span>Employment</a>
+      <a><span class="d" style="background:var(--c5)"></span>Savings &amp; Pensions</a>
+      <a><span class="d" style="background:var(--c6)"></span>Business</a>
+      <a><span class="d" style="background:var(--c7)"></span>Benefits</a>
+      <a><span class="d" style="background:var(--c8)"></span>Vehicles</a>
+    </div></div>
+  </header>
+  <div class="cap"><h3>Two-tier authority</h3><p>A thin trust strip on top, main nav in the middle, and every category one tap away in a strip below. Structured, credible, very content-hub — leans into your trust wedge.</p></div>
+  <div class="ghost"><div></div><div></div><div></div></div>
+</section>
+
+</body>
+</html>

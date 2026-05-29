@@ -6,11 +6,11 @@
 
 import { CheckCircle2 } from 'lucide-react';
 
-const INK     = '#0B0F19';
+const INK     = '#18181B';
 const PAPER   = '#FFFFFF';
-const CREAM   = '#FAFAF7';
-const EMERALD = '#047857';
-const MUTED   = '#94908A';
+const CREAM   = '#FFFFFF';
+const EMERALD = '#6366F1';
+const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 interface Props {
@@ -39,7 +39,7 @@ export default function EligibilityCard({ items }: Props) {
               style={{ borderBottom: i < items.length - 1 ? `1px solid ${HAIR}` : 'none' }}>
             <span aria-hidden
                   className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[12px] tabular-nums"
-                  style={{ background: INK, color: '#fff', fontFamily: 'Fraunces, serif', fontWeight: 700 }}>
+                  style={{ background: INK, color: '#fff', fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 700 }}>
               {i + 1}
             </span>
             <span className="flex-1 text-[14px] leading-[1.65]" style={{ color: INK }}>{item}</span>
