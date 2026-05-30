@@ -51,6 +51,7 @@ export default function Header(_props: { onApply?: () => void }) {
   }, []);
 
   return (
+    <>
     <header className={`${s.header} ${scrolled ? s.scrolled : ''}`}>
       <div className={s.bar}>
         <Link href="/" className={s.brand} aria-label="UKDesk — home">
@@ -149,7 +150,9 @@ export default function Header(_props: { onApply?: () => void }) {
         </div>
       </div>
 
-      {/* mobile drawer */}
+      </header>
+
+      {/* mobile drawer — rendered OUTSIDE <header>; the header's backdrop-filter would otherwise become the containing block for these position:fixed elements (trapping them in the 70px bar) */}
       <div className={`${s.scrim} ${open ? s.scrimOpen : ''}`} onClick={() => setOpen(false)} aria-hidden />
       <aside className={`${s.drawer} ${open ? s.drawerOpen : ''}`} aria-label="Menu" aria-hidden={!open}>
         <div className={s.drTop}>
@@ -188,6 +191,6 @@ export default function Header(_props: { onApply?: () => void }) {
         </div>
         <div className={s.drFoot}><Link href="/tools" className={s.drCta} onClick={() => setOpen(false)}>Browse all {APP_TILES.length} tools</Link></div>
       </aside>
-    </header>
+    </>
   );
 }
