@@ -1,126 +1,122 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, Search, ArrowUpRight, Briefcase, Scale, FileSearch } from 'lucide-react';
+import type { CSSProperties } from 'react';
+import {
+  ArrowRight, ArrowUpRight, Plane,
+  Wallet, Home as HomeIcon, Briefcase, Landmark, Building2, Users, Car,
+} from 'lucide-react';
+import { APP_TILES, CATEGORIES, type CategoryId } from '../../data/tools';
+import s from '../../components/calc/calc.module.css';
 
 export const metadata: Metadata = {
-  title: 'Free UK Visa Tools — Salary Checker, Sponsor Search, Cost Calculator',
+  title: 'All UK Calculators & Tools — Tax, Property, Visas, Benefits | UKDesk',
   description:
-    'Four free interactive UK visa tools: Skilled Worker salary checker by SOC code, sponsor licence search, advanced cost calculator with IHS, and side-by-side visa comparison. Updated for 2026.',
+    'Every free UKDesk tool in one place — take-home pay, stamp duty, mortgage, council tax, dividend & capital gains tax, ISAs, pensions, child benefit, visa fees and more. Checked against GOV.UK, HMRC and ONS.',
   alternates: { canonical: '/tools' },
   openGraph: {
-    title: 'Free UK Visa Tools',
-    description: 'Salary checker, sponsor search, cost calculator and visa comparison — all free.',
+    title: 'All UK Calculators & Tools — UKDesk',
+    description: 'Every free UKDesk calculator and tool, grouped by topic. No sign-up.',
     url: 'https://ukvisainfo.co.uk/tools',
   },
 };
 
-const TOOLS = [
-  {
-    href: '/tools/salary-checker',
-    icon: Briefcase,
-    title: 'Skilled Worker salary checker',
-    desc: 'Enter your offered salary and SOC 2020 code. See instantly whether you clear the £41,700 general threshold, the £33,400 new-entrant rate, and your occupation\'s going rate.',
-    cta: 'Check salary qualification',
-    accent: '#00C4B4',
-    soft: 'rgba(0, 196, 180,0.06)',
-  },
-  {
-    href: '/tools/sponsor-search',
-    icon: Search,
-    title: 'UK sponsor licence search',
-    desc: 'Find UK employers who hold a Skilled Worker sponsor licence. Filter by city, region, sector and rating. Built from the official Home Office register.',
-    cta: 'Find a licensed sponsor',
-    accent: '#0A2540',
-    soft: 'rgba(10, 37, 64,0.06)',
-  },
-  {
-    href: '/tools/cost-calculator',
-    icon: Calculator,
-    title: 'Advanced UK visa cost calculator',
-    desc: 'Calculate the full cost of any UK visa including Home Office fees, multi-year IHS, dependants and priority service. With currency conversion.',
-    cta: 'Estimate visa costs',
-    accent: '#13325F',
-    soft: 'rgba(19, 50, 95,0.06)',
-  },
-  {
-    href: '/tools/compare',
-    icon: Scale,
-    title: 'Visa side-by-side comparison',
-    desc: 'Compare any two UK visa routes on fees, IHS, salary thresholds, processing times, work rights and path to ILR. Decide which route fits your situation.',
-    cta: 'Compare visa routes',
-    accent: '#00A89A',
-    soft: 'rgba(0, 168, 154,0.06)',
-  },
-  {
-    href: '/tools/refusal-analyzer',
-    icon: FileSearch,
-    title: 'Refusal letter analyzer',
-    desc: 'Paste your UK visa refusal letter and get a plain-English breakdown of each ground — severity, what it means, and what to do next. Runs in your browser.',
-    cta: 'Decode my refusal',
-    accent: '#00C4B4',
-    soft: 'rgba(225,29,72,0.06)',
-  },
+const CAT: Record<CategoryId, { c: number; Icon: typeof Wallet }> = {
+  tax:         { c: 1, Icon: Wallet },
+  property:    { c: 2, Icon: HomeIcon },
+  immigration: { c: 3, Icon: Plane },
+  employment:  { c: 4, Icon: Briefcase },
+  savings:     { c: 5, Icon: Landmark },
+  business:    { c: 6, Icon: Building2 },
+  benefits:    { c: 7, Icon: Users },
+  vehicles:    { c: 8, Icon: Car },
+};
+
+// Interactive visa tools that aren't in the APP_TILES registry — surfaced in the Immigration section.
+const VISA_TOOLS = [
+  { href: '/tools/salary-checker', title: 'Skilled Worker salary checker', hint: 'Your salary vs the visa minimum + going rate, by SOC code' },
+  { href: '/tools/sponsor-search', title: 'Sponsor licence search', hint: 'Find licensed UK employers by city, sector and rating' },
+  { href: '/tools/compare', title: 'Visa comparison', hint: 'Compare any two routes side by side' },
+  { href: '/tools/refusal-analyzer', title: 'Refusal letter analyzer', hint: 'Plain-English breakdown of each refusal ground' },
 ];
+
+const catVar = (c: number): CSSProperties => ({ ['--tc']: `var(--uk-c${c})`, ['--tctx']: `var(--uk-c${c}-tx)` } as CSSProperties);
 
 export default function ToolsIndex() {
   return (
-    <div className="bg-white">
-      {/* Hero */}
-      <section className="pt-[88px] md:pt-[104px] pb-12 md:pb-16 hero-light">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
-            Free interactive tools
-          </span>
-          <h1 className="mt-2 font-display text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] font-bold text-[#0A2540] tracking-tight leading-tight">
-            UK visa tools that actually save you time
-          </h1>
-          <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
-            Four free calculators and searches built from the official Home
-            Office data. No signup, no email required.
-          </p>
-        </div>
-      </section>
+    <div className={s.page}>
+      <div className={s.wrap}>
+        <div className={s.crumb}><Link href="/">Home</Link><span className={s.sep}>›</span><span>All tools</span></div>
 
-      <section className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {TOOLS.map((t) => (
-              <Link
-                key={t.href}
-                href={t.href}
-                className="group relative overflow-hidden bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl md:rounded-3xl p-7 md:p-8 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all"
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-60 blur-3xl"
-                  style={{ background: t.soft }}
-                />
-                <div className="relative z-10">
-                  <span
-                    className="inline-flex w-12 h-12 items-center justify-center rounded-2xl"
-                    style={{ background: t.soft, color: t.accent }}
-                  >
-                    <t.icon className="w-6 h-6" />
-                  </span>
-                  <h2 className="mt-5 font-display text-xl md:text-2xl font-bold text-[#0A2540] leading-tight">
-                    {t.title}
-                  </h2>
-                  <p className="mt-2.5 text-sm md:text-[15px] text-[#52596e] leading-relaxed">
-                    {t.desc}
-                  </p>
-                  <span
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold"
-                    style={{ color: t.accent }}
-                  >
-                    {t.cta}
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className={s.toolHead} style={{ maxWidth: 760 }}>
+          <span className={s.tag}>Browse everything</span>
+          <h1 className={s.h1}>All {APP_TILES.length} tools</h1>
+          <p className={s.intro}>Every UKDesk calculator and lookup, grouped by topic — each one checked against GOV.UK, HMRC and ONS. No sign-up.</p>
         </div>
-      </section>
+
+        {/* category jump nav */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingBottom: 28, borderBottom: '1px solid var(--uk-line)' }}>
+          {CATEGORIES.map((cat) => (
+            <a key={cat.id} href={`#${cat.id}`} style={{
+              display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 13, fontWeight: 600,
+              color: 'var(--uk-text)', background: 'var(--uk-soft)', border: '1px solid var(--uk-line)',
+              padding: '7px 13px', borderRadius: 999, textDecoration: 'none',
+            }}>
+              <span style={{ width: 8, height: 8, borderRadius: 3, background: `var(--uk-c${CAT[cat.id].c})` }} />
+              {cat.label}
+              <span style={{ color: 'var(--uk-muted)', fontVariantNumeric: 'tabular-nums' }}>{APP_TILES.filter((t) => t.category === cat.id).length}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* category sections */}
+        {CATEGORIES.map((cat) => {
+          const tools = APP_TILES.filter((t) => t.category === cat.id);
+          const m = CAT[cat.id];
+          const Icon = m.Icon;
+          const isImmigration = cat.id === 'immigration';
+          return (
+            <section key={cat.id} id={cat.id} style={{ scrollMarginTop: 88, paddingTop: 40 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 13, marginBottom: 18 }}>
+                <span style={{ width: 44, height: 44, borderRadius: 12, background: `var(--uk-c${m.c})`, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
+                  <Icon size={22} />
+                </span>
+                <h2 style={{ fontFamily: 'var(--font-grotesk), sans-serif', fontWeight: 700, fontSize: '1.55rem', letterSpacing: '-0.025em', color: 'var(--uk-ink)', margin: 0 }}>
+                  {cat.label}
+                </h2>
+                <span style={{ marginLeft: 'auto', fontSize: 13, fontWeight: 600, color: 'var(--uk-muted)', fontVariantNumeric: 'tabular-nums' }}>
+                  {tools.length + (isImmigration ? VISA_TOOLS.length + 1 : 0)} tools
+                </span>
+              </div>
+
+              <div className={s.relGrid} style={{ ['--cv' as string]: '' } as CSSProperties}>
+                {isImmigration && (
+                  <Link href="/visa-types" className={s.relCard} style={{ ...catVar(m.c), background: 'var(--uk-c3-bg)', borderColor: 'transparent' } as CSSProperties}>
+                    <h3 style={{ display: 'flex', alignItems: 'center', gap: 7 }}>Visa hub — all routes</h3>
+                    <p>Every UK visa route in one place: fees, eligibility, English level and time to settlement.</p>
+                    <span style={{ color: 'var(--uk-c3-tx)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}>
+                      Open the visa hub <ArrowRight size={14} />
+                    </span>
+                  </Link>
+                )}
+                {tools.map((t) => (
+                  <Link key={t.href} href={t.href} className={s.relCard}>
+                    <h3>{t.label}</h3>
+                    <p>{t.hint}</p>
+                    <span>Open <ArrowUpRight size={13} /></span>
+                  </Link>
+                ))}
+                {isImmigration && VISA_TOOLS.map((t) => (
+                  <Link key={t.href} href={t.href} className={s.relCard}>
+                    <h3>{t.title}</h3>
+                    <p>{t.hint}</p>
+                    <span>Open <ArrowUpRight size={13} /></span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }

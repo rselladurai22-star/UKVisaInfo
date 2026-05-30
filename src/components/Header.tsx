@@ -68,7 +68,7 @@ export default function Header(_props: { onApply?: () => void }) {
                     {CATEGORIES.map((cat) => {
                       const m = CAT_META[cat.id]; const Icon = m.Icon;
                       return (
-                        <Link key={cat.id} href="/tools" className={s.megaCat}>
+                        <Link key={cat.id} href={cat.id === 'immigration' ? '/visa-types' : `/tools#${cat.id}`} className={s.megaCat}>
                           <span className={s.ic} style={{ background: `var(--uk-${m.c})` }}><Icon size={19} /></span>
                           <span className={s.txt}>
                             <span className={s.nm}>{cat.label}<span className={s.ct}>{count(cat.id)}</span></span>
@@ -163,7 +163,7 @@ export default function Header(_props: { onApply?: () => void }) {
             <button className={s.accHead} onClick={() => setAcc(acc === 'tools' ? null : 'tools')}>Tools<ChevronDown className={s.chev} size={20} /></button>
             <div className={s.accBody}><div className={s.accInner}>
               {CATEGORIES.map((cat) => { const m = CAT_META[cat.id]; const Icon = m.Icon; return (
-                <Link key={cat.id} href="/tools" className={s.dsub} onClick={() => setOpen(false)}>
+                <Link key={cat.id} href={cat.id === 'immigration' ? '/visa-types' : `/tools#${cat.id}`} className={s.dsub} onClick={() => setOpen(false)}>
                   <span className={s.dIc} style={{ background: `var(--uk-${m.c})` }}><Icon size={16} /></span>{cat.label}
                 </Link>
               ); })}

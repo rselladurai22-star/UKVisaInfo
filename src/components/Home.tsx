@@ -104,7 +104,7 @@ export default function Home() {
           </div>
           <div className={s.grid}>
             {CATEGORIES.map((cat) => { const m = CAT[cat.id]; const Icon = m.Icon; return (
-              <Link key={cat.id} href="/tools" className={s.tile} style={tileVars(m.c)}>
+              <Link key={cat.id} href={cat.id === 'immigration' ? '/visa-types' : `/tools#${cat.id}`} className={s.tile} style={tileVars(m.c)}>
                 <span className={s.cnt}>{count(cat.id)}</span>
                 <span className={s.tileIc}><Icon size={22} /></span>
                 <h3>{cat.label}</h3>
