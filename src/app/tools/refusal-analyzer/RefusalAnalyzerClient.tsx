@@ -37,9 +37,9 @@ export default function RefusalAnalyzerClient() {
   return (
     <>
       {/* Hero */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
+      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#18181B] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
         <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/20 blur-[120px] pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#6366F1]/20 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
           <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-4">
@@ -65,12 +65,12 @@ export default function RefusalAnalyzerClient() {
 
             <main className="col-span-12 lg:col-span-8 space-y-5">
               {/* Input */}
-              <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
+              <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(24, 24, 27,0.04)]">
                 <div className="mb-4">
-                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
+                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#6366F1] mb-1.5">
                     01 · Paste your letter
                   </div>
-                  <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] tracking-[-0.015em] leading-tight">
+                  <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#18181B] tracking-[-0.015em] leading-tight">
                     Paste the refusal letter text below
                   </h2>
                   <p className="mt-2 text-[13px] text-[#7a8195] leading-relaxed">
@@ -82,7 +82,7 @@ export default function RefusalAnalyzerClient() {
                   value={text}
                   onChange={(e) => { setText(e.target.value); if (submitted) setSubmitted(false); }}
                   placeholder="Paste the full refusal letter or the &quot;Reasons for Refusal&quot; section here…&#10;&#10;Example: &quot;Your application has been refused under paragraph 320(7A) of the Immigration Rules because…&quot;"
-                  className="w-full min-h-[260px] md:min-h-[320px] p-4 rounded-2xl border border-[rgba(14,20,36,0.1)] bg-white focus:bg-white focus:border-[#0A2540] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#0A2540] placeholder:text-[#9aa3b8] font-mono resize-y"
+                  className="w-full min-h-[260px] md:min-h-[320px] p-4 rounded-2xl border border-[rgba(14,20,36,0.1)] bg-white focus:bg-white focus:border-[#18181B] outline-none transition-colors duration-100 text-[14px] leading-relaxed text-[#18181B] placeholder:text-[#9aa3b8] font-mono resize-y"
                   spellCheck={false}
                 />
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
@@ -95,7 +95,7 @@ export default function RefusalAnalyzerClient() {
                       <button
                         type="button"
                         onClick={onReset}
-                        className="inline-flex items-center gap-1.5 bg-white border border-[rgba(14,20,36,0.1)] text-[#52596e] font-semibold px-4 py-2.5 rounded-xl text-[13px] hover:border-[rgba(14,20,36,0.18)] hover:bg-white transition-colors duration-100"
+                        className="inline-flex items-center gap-1.5 bg-white border border-[rgba(14,20,36,0.1)] text-[#52525B] font-semibold px-4 py-2.5 rounded-xl text-[13px] hover:border-[rgba(14,20,36,0.18)] hover:bg-white transition-colors duration-100"
                       >
                         <RotateCcw className="w-3.5 h-3.5" /> Clear
                       </button>
@@ -104,7 +104,7 @@ export default function RefusalAnalyzerClient() {
                       type="button"
                       onClick={onAnalyze}
                       disabled={text.trim().length < 50}
-                      className="inline-flex items-center gap-2 bg-[#00C4B4] text-white font-bold px-5 py-2.5 rounded-xl text-[13px] hover:bg-[#009E91] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-[background,transform] duration-100 shadow-[0_4px_14px_rgba(0, 196, 180,0.32)]"
+                      className="inline-flex items-center gap-2 bg-[#6366F1] text-white font-bold px-5 py-2.5 rounded-xl text-[13px] hover:bg-[#009E91] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-[background,transform] duration-100 shadow-[0_4px_14px_rgba(99, 102, 241,0.32)]"
                     >
                       <Sparkles className="w-3.5 h-3.5" /> Analyze letter
                     </button>
@@ -114,12 +114,12 @@ export default function RefusalAnalyzerClient() {
 
               {/* Results */}
               {submitted && (
-                <section id="analysis-results" className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)] scroll-mt-24">
+                <section id="analysis-results" className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(24, 24, 27,0.04)] scroll-mt-24">
                   <div className="mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
-                    <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
+                    <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#6366F1] mb-1.5">
                       02 · Analysis
                     </div>
-                    <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#0A2540] tracking-[-0.015em] leading-tight">
+                    <h2 className="font-display text-[1.375rem] md:text-[1.625rem] font-bold text-[#18181B] tracking-[-0.015em] leading-tight">
                       {findings.length === 0
                         ? 'No common refusal patterns detected'
                         : findings.length === 1
@@ -152,8 +152,8 @@ export default function RefusalAnalyzerClient() {
                   )}
 
                   {/* Always-on advice */}
-                  <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#0A2540] to-[#0F2C4B] text-white relative overflow-hidden">
-                    <div className="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
+                  <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#18181B] to-[#0F2C4B] text-white relative overflow-hidden">
+                    <div className="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-[#6366F1]/25 blur-3xl pointer-events-none" />
                     <div className="relative z-10">
                       <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A] mb-2">
                         Important
@@ -169,9 +169,9 @@ export default function RefusalAnalyzerClient() {
 
               {/* How it works */}
               {!submitted && (
-                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
-                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-2">How it works</div>
-                  <h3 className="font-display text-[1.125rem] font-bold text-[#0A2540] mb-4">
+                <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-7 shadow-[0_2px_12px_rgba(24, 24, 27,0.04)]">
+                  <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#6366F1] mb-2">How it works</div>
+                  <h3 className="font-display text-[1.125rem] font-bold text-[#18181B] mb-4">
                     Three quick steps
                   </h3>
                   <ol className="space-y-3">
@@ -181,10 +181,10 @@ export default function RefusalAnalyzerClient() {
                       { t: 'You get a plain-English breakdown', d: 'Each ground is categorised by severity (critical / high / medium) with what it means and what to do next.' },
                     ].map((s, i) => (
                       <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">
-                        <span className="w-7 h-7 rounded-full bg-[#0A2540] text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                        <span className="w-7 h-7 rounded-full bg-[#18181B] text-white font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0">{i + 1}</span>
                         <div>
-                          <div className="text-[14.5px] font-bold text-[#0A2540]">{s.t}</div>
-                          <div className="text-[13px] text-[#52596e] mt-0.5">{s.d}</div>
+                          <div className="text-[14.5px] font-bold text-[#18181B]">{s.t}</div>
+                          <div className="text-[13px] text-[#52525B] mt-0.5">{s.d}</div>
                         </div>
                       </li>
                     ))}
@@ -203,16 +203,16 @@ export default function RefusalAnalyzerClient() {
                       <MessageCircle className="w-3.5 h-3.5" />
                     </span>
                     <div>
-                      <div className="text-[13.5px] font-bold text-[#0A2540] leading-tight">Need expert help?</div>
+                      <div className="text-[13.5px] font-bold text-[#18181B] leading-tight">Need expert help?</div>
                       <div className="text-[11px] text-[#7a8195]">Free 15-min consult</div>
                     </div>
                   </div>
-                  <p className="text-[12.5px] text-[#52596e] leading-snug mb-3">
+                  <p className="text-[12.5px] text-[#52525B] leading-snug mb-3">
                     Critical and high-severity refusals are worth a 15-minute review with a UK OISC-regulated immigration solicitor.
                   </p>
                   <Link
                     href="/eligibility"
-                    className="block text-center bg-[#0A2540] text-white text-[12.5px] font-bold py-2.5 rounded-xl hover:bg-[#0F2C4B] transition-colors duration-100"
+                    className="block text-center bg-[#18181B] text-white text-[12.5px] font-bold py-2.5 rounded-xl hover:bg-[#0F2C4B] transition-colors duration-100"
                   >
                     Get matched with a solicitor →
                   </Link>
@@ -231,9 +231,9 @@ export default function RefusalAnalyzerClient() {
                       <li key={l.href}>
                         <Link
                           href={l.href}
-                          className="group flex items-start gap-2 text-[13px] text-[#52596e] hover:text-[#0A2540] transition-colors duration-100"
+                          className="group flex items-start gap-2 text-[13px] text-[#52525B] hover:text-[#18181B] transition-colors duration-100"
                         >
-                          <BookOpen className="w-3.5 h-3.5 text-[#00C4B4] flex-shrink-0 mt-0.5" />
+                          <BookOpen className="w-3.5 h-3.5 text-[#6366F1] flex-shrink-0 mt-0.5" />
                           <span className="leading-snug">{l.label}</span>
                           <ArrowRight className="w-3 h-3 text-[#cfd5e0] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
                         </Link>
@@ -248,7 +248,7 @@ export default function RefusalAnalyzerClient() {
                   <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8] mb-1.5 flex items-center gap-1.5">
                     <Lock className="w-3 h-3" /> Private by design
                   </div>
-                  <p className="text-[12px] text-[#52596e] leading-snug">
+                  <p className="text-[12px] text-[#52525B] leading-snug">
                     Pattern matching runs entirely in your browser. No text leaves your device, and nothing is stored on our servers.
                   </p>
                 </div>
@@ -272,7 +272,7 @@ function FindingCard({ finding: f, index }: { finding: AnalysisFinding; index: n
       style={{ background: s.bg, boxShadow: `inset 4px 0 0 ${s.border}` }}
     >
       <div className="flex items-center gap-3 mb-3">
-        <span className="w-7 h-7 rounded-full bg-white text-[#0A2540] font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0 border border-[rgba(14,20,36,0.08)]">
+        <span className="w-7 h-7 rounded-full bg-white text-[#18181B] font-display font-bold text-[12px] flex items-center justify-center flex-shrink-0 border border-[rgba(14,20,36,0.08)]">
           {index}
         </span>
         <span
@@ -287,7 +287,7 @@ function FindingCard({ finding: f, index }: { finding: AnalysisFinding; index: n
         </span>
       </div>
 
-      <h3 className="font-display font-bold text-[1.0625rem] md:text-[1.125rem] text-[#0A2540] leading-tight tracking-[-0.01em] mb-3">
+      <h3 className="font-display font-bold text-[1.0625rem] md:text-[1.125rem] text-[#18181B] leading-tight tracking-[-0.01em] mb-3">
         {f.title}
       </h3>
 
@@ -298,7 +298,7 @@ function FindingCard({ finding: f, index }: { finding: AnalysisFinding; index: n
       </dl>
 
       <div className="mt-3 pt-3 border-t border-[rgba(14,20,36,0.08)] text-[11.5px] text-[#7a8195]">
-        Matched on: <code className="bg-white/60 px-1.5 py-0.5 rounded font-mono text-[#0A2540]">&ldquo;{f.matchedText}&rdquo;</code>
+        Matched on: <code className="bg-white/60 px-1.5 py-0.5 rounded font-mono text-[#18181B]">&ldquo;{f.matchedText}&rdquo;</code>
       </div>
     </li>
   );
@@ -310,7 +310,7 @@ function Row({ label, children, highlight }: { label: string; children: React.Re
       <dt className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#7a8195] sm:w-32 flex-shrink-0 pt-1">
         {label}
       </dt>
-      <dd className={`flex-1 leading-[1.65] ${highlight ? 'font-semibold text-[#0A2540]' : 'text-[#1a2240]'}`}>
+      <dd className={`flex-1 leading-[1.65] ${highlight ? 'font-semibold text-[#18181B]' : 'text-[#1a2240]'}`}>
         {children}
       </dd>
     </div>

@@ -73,15 +73,15 @@ export default function SalaryChecker() {
       <section className="pt-[88px] md:pt-[104px] pb-10 md:pb-12 hero-light">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 mb-3">
-            <Briefcase className="w-4 h-4 text-[#00C4B4]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#00C4B4]">
+            <Briefcase className="w-4 h-4 text-[#6366F1]" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#6366F1]">
               Tool · Salary checker
             </span>
           </div>
-          <h1 className="font-display text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-[#0A2540] tracking-tight leading-tight">
+          <h1 className="font-display text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-[#18181B] tracking-tight leading-tight">
             UK Skilled Worker salary checker
           </h1>
-          <p className="mt-3 max-w-2xl text-[#52596e] text-base md:text-lg leading-relaxed">
+          <p className="mt-3 max-w-2xl text-[#52525B] text-base md:text-lg leading-relaxed">
             Find your SOC 2020 occupation code, enter your offered salary,
             and see instantly whether you clear all three Skilled Worker
             thresholds. Updated April 2026.
@@ -95,20 +95,20 @@ export default function SalaryChecker() {
           <div className="lg:col-span-7 bg-white rounded-2xl md:rounded-3xl shadow-soft border border-[rgba(14,20,36,0.08)] overflow-hidden">
             <div className="p-5 md:p-6 border-b border-[rgba(14,20,36,0.06)]">
               <div className="flex items-center gap-2 mb-3">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#00C4B4] text-white text-[11px] font-bold">1</span>
-                <h2 className="font-display font-bold text-base text-[#0A2540]">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#6366F1] text-white text-[11px] font-bold">1</span>
+                <h2 className="font-display font-bold text-base text-[#18181B]">
                   Find your occupation
                 </h2>
               </div>
 
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#52596e]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#52525B]" />
                 <input
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by job title or SOC code…"
-                  className="w-full pl-10 pr-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0A2540] rounded-xl text-sm placeholder:text-[#7a8195] outline-none transition-all"
+                  className="w-full pl-10 pr-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#18181B] rounded-xl text-sm placeholder:text-[#7a8195] outline-none transition-all"
                   aria-label="Search occupations"
                 />
               </div>
@@ -120,8 +120,8 @@ export default function SalaryChecker() {
                     onClick={() => setSelectedGroup(g)}
                     className={`whitespace-nowrap text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
                       selectedGroup === g
-                        ? 'bg-[#0A2540] text-white'
-                        : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#eaeef7]'
+                        ? 'bg-[#18181B] text-white'
+                        : 'bg-[#f3f5fb] text-[#52525B] hover:bg-[#eaeef7]'
                     }`}
                   >
                     {g}
@@ -143,20 +143,20 @@ export default function SalaryChecker() {
                       onClick={() => setPicked(o)}
                       className={`w-full text-left p-4 md:p-5 flex items-center gap-4 transition-colors ${
                         isPicked
-                          ? 'bg-[rgba(0, 196, 180,0.05)]'
+                          ? 'bg-[rgba(99, 102, 241,0.05)]'
                           : 'hover:bg-[#f9fafb]'
                       }`}
                     >
                       <span className={`font-mono text-[11px] font-bold px-2 py-1 rounded ${
                         isPicked
-                          ? 'bg-[#00C4B4] text-white'
-                          : 'bg-[#f3f5fb] text-[#52596e]'
+                          ? 'bg-[#6366F1] text-white'
+                          : 'bg-[#f3f5fb] text-[#52525B]'
                       }`}>
                         {o.code}
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className={`text-sm font-semibold truncate ${
-                          isPicked ? 'text-[#00C4B4]' : 'text-[#0A2540]'
+                          isPicked ? 'text-[#6366F1]' : 'text-[#18181B]'
                         }`}>
                           {o.title}
                         </div>
@@ -168,14 +168,14 @@ export default function SalaryChecker() {
                             </span>
                           )}
                           {o.closedToNewOverseas && (
-                            <span className="px-1.5 py-0.5 rounded bg-[rgba(0, 196, 180,0.12)] text-[#009E91] font-semibold uppercase tracking-wider">
+                            <span className="px-1.5 py-0.5 rounded bg-[rgba(99, 102, 241,0.12)] text-[#009E91] font-semibold uppercase tracking-wider">
                               Route closed
                             </span>
                           )}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-bold text-[#0A2540] tabular-nums">
+                        <div className="text-sm font-bold text-[#18181B] tabular-nums">
                           {fmt(o.goingRate)}
                         </div>
                         <div className="text-[10px] text-[#7a8195] uppercase tracking-wider">going rate</div>
@@ -191,14 +191,14 @@ export default function SalaryChecker() {
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="bg-white rounded-2xl md:rounded-3xl shadow-soft border border-[rgba(14,20,36,0.08)] p-5 md:p-6">
               <div className="flex items-center gap-2 mb-4">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#00C4B4] text-white text-[11px] font-bold">2</span>
-                <h2 className="font-display font-bold text-base text-[#0A2540]">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#6366F1] text-white text-[11px] font-bold">2</span>
+                <h2 className="font-display font-bold text-base text-[#18181B]">
                   Enter your offer
                 </h2>
               </div>
 
               <label className="block">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52525B]">
                   Annual salary
                 </span>
                 <div className="relative mt-1.5">
@@ -211,13 +211,13 @@ export default function SalaryChecker() {
                     value={salaryRaw}
                     onChange={(e) => setSalaryRaw(e.target.value)}
                     placeholder="41,700"
-                    className="w-full pl-7 pr-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0A2540] rounded-xl text-base font-semibold text-[#0A2540] tabular-nums outline-none transition-all"
+                    className="w-full pl-7 pr-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#18181B] rounded-xl text-base font-semibold text-[#18181B] tabular-nums outline-none transition-all"
                   />
                 </div>
               </label>
 
               <label className="block mt-4">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52525B]">
                   Weekly hours
                 </span>
                 <input
@@ -227,12 +227,12 @@ export default function SalaryChecker() {
                   min={1}
                   max={48}
                   step={0.5}
-                  className="w-full mt-1.5 px-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#0A2540] rounded-xl text-base font-semibold text-[#0A2540] tabular-nums outline-none transition-all"
+                  className="w-full mt-1.5 px-3 py-3 bg-[#f3f5fb] border border-transparent focus:bg-white focus:border-[#18181B] rounded-xl text-base font-semibold text-[#18181B] tabular-nums outline-none transition-all"
                 />
               </label>
 
               <div className="mt-4">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e] block mb-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#52525B] block mb-2">
                   Applicant type
                 </span>
                 <div className="grid grid-cols-2 gap-2">
@@ -240,8 +240,8 @@ export default function SalaryChecker() {
                     onClick={() => setEntry('general')}
                     className={`px-3 py-3 rounded-xl text-xs font-semibold transition-all ${
                       entry === 'general'
-                        ? 'bg-[#0A2540] text-white shadow-soft'
-                        : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#eaeef7]'
+                        ? 'bg-[#18181B] text-white shadow-soft'
+                        : 'bg-[#f3f5fb] text-[#52525B] hover:bg-[#eaeef7]'
                     }`}
                   >
                     General (£41,700)
@@ -250,8 +250,8 @@ export default function SalaryChecker() {
                     onClick={() => setEntry('newEntrant')}
                     className={`px-3 py-3 rounded-xl text-xs font-semibold transition-all ${
                       entry === 'newEntrant'
-                        ? 'bg-[#0A2540] text-white shadow-soft'
-                        : 'bg-[#f3f5fb] text-[#52596e] hover:bg-[#eaeef7]'
+                        ? 'bg-[#18181B] text-white shadow-soft'
+                        : 'bg-[#f3f5fb] text-[#52525B] hover:bg-[#eaeef7]'
                     }`}
                   >
                     New entrant (£33,400)
@@ -370,10 +370,10 @@ export default function SalaryChecker() {
       {/* Info section */}
       <section className="py-14 md:py-20 bg-[#f9fafb]">
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0A2540]">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#18181B]">
             How the 3-threshold rule works in 2026
           </h2>
-          <p className="mt-4 text-[#52596e] leading-relaxed">
+          <p className="mt-4 text-[#52525B] leading-relaxed">
             The Skilled Worker visa requires your salary to clear three
             independent tests. Caseworkers take the highest as your
             effective threshold. Falling short on any single test is a
@@ -388,14 +388,14 @@ export default function SalaryChecker() {
             ].map((t) => (
               <div key={t.num} className="bg-white border border-[rgba(14,20,36,0.08)] rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#0A2540] text-white text-xs font-bold">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#18181B] text-white text-xs font-bold">
                     {t.num}
                   </span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#52596e]">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#52525B]">
                     {t.label}
                   </span>
                 </div>
-                <div className="font-display text-2xl font-bold text-[#0A2540] tabular-nums">
+                <div className="font-display text-2xl font-bold text-[#18181B] tabular-nums">
                   {t.val}
                 </div>
                 <p className="mt-1.5 text-xs text-[#7a8195] leading-relaxed">{t.desc}</p>
@@ -403,27 +403,27 @@ export default function SalaryChecker() {
             ))}
           </div>
 
-          <div className="mt-10 bg-[rgba(10, 37, 64,0.05)] border border-[rgba(10, 37, 64,0.15)] rounded-2xl p-5 flex gap-3">
-            <Info className="w-5 h-5 text-[#0A2540] flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-[#0A2540] leading-relaxed">
+          <div className="mt-10 bg-[rgba(24, 24, 27,0.05)] border border-[rgba(24, 24, 27,0.15)] rounded-2xl p-5 flex gap-3">
+            <Info className="w-5 h-5 text-[#18181B] flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-[#18181B] leading-relaxed">
               This tool covers the most-sponsored 100+ SOC 2020 codes. For
               full coverage and definitive thresholds, see Home Office
               Appendix Skilled Occupations. Health & Care visa roles have
-              separate (lower) thresholds — see our <Link href="/blog/uk-health-care-worker-visa-2026-complete-guide" className="text-[#0A2540] underline">Health & Care guide</Link>.
+              separate (lower) thresholds — see our <Link href="/blog/uk-health-care-worker-visa-2026-complete-guide" className="text-[#18181B] underline">Health & Care guide</Link>.
             </p>
           </div>
 
           <div className="mt-12 flex flex-wrap gap-3">
             <Link
               href="/blog/uk-skilled-worker-visa-salary-threshold-2026"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#0A2540] text-white text-sm font-semibold rounded-xl hover:bg-[#13325F] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#18181B] text-white text-sm font-semibold rounded-xl hover:bg-[#4F46E5] transition-colors"
             >
               Full salary threshold guide
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/tools/sponsor-search"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-[rgba(14,20,36,0.12)] text-[#0A2540] text-sm font-semibold rounded-xl hover:border-[#0A2540] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-white border border-[rgba(14,20,36,0.12)] text-[#18181B] text-sm font-semibold rounded-xl hover:border-[#18181B] transition-colors"
             >
               Find a licensed sponsor
               <TrendingUp className="w-4 h-4" />

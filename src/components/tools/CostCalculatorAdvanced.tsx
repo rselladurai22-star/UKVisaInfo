@@ -273,9 +273,9 @@ export default function CostCalculatorAdvanced() {
                         }}
                         className="group text-left px-4 py-3.5 rounded-xl transition-all duration-100 border-2"
                         style={{
-                          background: isSelected ? '#0A2540' : '#fff',
-                          borderColor: isSelected ? '#0A2540' : 'rgba(10,37,64,0.08)',
-                          boxShadow: isSelected ? '0 4px 18px rgba(10,37,64,0.18)' : '0 1px 3px rgba(10,37,64,0.06)',
+                          background: isSelected ? '#18181B' : '#fff',
+                          borderColor: isSelected ? '#18181B' : 'rgba(24, 24, 27,0.08)',
+                          boxShadow: isSelected ? '0 4px 18px rgba(24, 24, 27,0.18)' : '0 1px 3px rgba(24, 24, 27,0.06)',
                         }}
                       >
                         <div className="text-[13.5px] font-bold leading-tight"
@@ -326,8 +326,8 @@ export default function CostCalculatorAdvanced() {
                           onClick={() => setLocation(val)}
                           className="text-left px-4 py-4 rounded-xl border-2 transition-all duration-100"
                           style={{
-                            background: isActive ? 'rgba(0,196,180,0.06)' : '#fff',
-                            borderColor: isActive ? '#00C4B4' : 'rgba(10,37,64,0.08)',
+                            background: isActive ? 'rgba(99, 102, 241,0.06)' : '#fff',
+                            borderColor: isActive ? '#6366F1' : 'rgba(24, 24, 27,0.08)',
                           }}
                         >
                           <div className="flex items-center gap-2 mb-2">
@@ -337,7 +337,7 @@ export default function CostCalculatorAdvanced() {
                               {isActive && <span className="w-2 h-2 rounded-full" style={{ background: C.accent }} />}
                             </span>
                           </div>
-                          <div className="text-[13.5px] font-bold" style={{ color: isActive ? '#0A2540' : '#374151' }}>
+                          <div className="text-[13.5px] font-bold" style={{ color: isActive ? '#18181B' : '#374151' }}>
                             {label}
                           </div>
                           <div className="text-[11.5px] mt-0.5" style={{ color: '#9CA3AF' }}>{sub}</div>
@@ -354,7 +354,7 @@ export default function CostCalculatorAdvanced() {
                       Visa duration
                     </p>
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
-                         style={{ background: '#0A2540' }}>
+                         style={{ background: '#18181B' }}>
                       <span className="font-display font-bold text-[15px] text-white tabular-nums">{years}</span>
                       <span className="text-[11px] text-white/60">year{years !== 1 ? 's' : ''}</span>
                     </div>
@@ -387,13 +387,13 @@ export default function CostCalculatorAdvanced() {
                       icon={User} label="Main applicant" sublabel="That's you"
                       value={1} min={1} max={1}
                       onChange={() => {}}
-                      accent="#0A2540"
+                      accent="#18181B"
                     />
                     <PersonCounter
                       icon={Users} label="Adult dependants" sublabel="Spouse, partner, family"
                       value={Math.max(0, adults - 1)} min={0} max={5}
                       onChange={(v) => setAdults(v + 1)}
-                      accent="#00C4B4"
+                      accent="#6366F1"
                     />
                     <PersonCounter
                       icon={Baby} label="Children" sublabel="Under 18"
@@ -463,9 +463,9 @@ export default function CostCalculatorAdvanced() {
                         style={{
                           opacity: disabled ? 0.45 : 1,
                           cursor: disabled ? 'not-allowed' : 'pointer',
-                          background: isActive ? '#0A2540' : '#fff',
-                          borderColor: isActive ? '#0A2540' : 'rgba(10,37,64,0.08)',
-                          boxShadow: isActive ? '0 4px 18px rgba(10,37,64,0.18)' : '0 1px 3px rgba(10,37,64,0.05)',
+                          background: isActive ? '#18181B' : '#fff',
+                          borderColor: isActive ? '#18181B' : 'rgba(24, 24, 27,0.08)',
+                          boxShadow: isActive ? '0 4px 18px rgba(24, 24, 27,0.18)' : '0 1px 3px rgba(24, 24, 27,0.05)',
                         }}
                       >
                         <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
@@ -476,7 +476,7 @@ export default function CostCalculatorAdvanced() {
                                 style={{ color: isActive ? C.accent : C.mid }} />
                         </div>
                         <div className="text-[13px] font-bold leading-tight"
-                             style={{ color: isActive ? '#fff' : '#0A2540' }}>
+                             style={{ color: isActive ? '#fff' : '#18181B' }}>
                           {label}
                         </div>
                         <div className="flex items-center gap-1 mt-1.5 text-[11px]"
@@ -485,7 +485,7 @@ export default function CostCalculatorAdvanced() {
                           {time}
                         </div>
                         <div className="mt-2.5 text-[12.5px] font-bold tabular-nums"
-                             style={{ color: isActive ? '#C9A14A' : '#0A2540' }}>
+                             style={{ color: isActive ? '#C9A14A' : '#18181B' }}>
                           {cost}
                         </div>
                       </button>
@@ -505,8 +505,8 @@ export default function CostCalculatorAdvanced() {
                         onClick={() => setCurrency(c)}
                         className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl border-2 transition-all duration-100"
                         style={{
-                          background: isActive ? '#0A2540' : '#fff',
-                          borderColor: isActive ? '#0A2540' : 'rgba(10,37,64,0.08)',
+                          background: isActive ? '#18181B' : '#fff',
+                          borderColor: isActive ? '#18181B' : 'rgba(24, 24, 27,0.08)',
                         }}
                       >
                         <span className="text-[16px] leading-none">{FX[c].flag}</span>
@@ -533,8 +533,8 @@ export default function CostCalculatorAdvanced() {
                 transition={{ duration: 0.18 }}
                 className="rounded-2xl overflow-hidden text-white"
                 style={{
-                  background: 'linear-gradient(155deg, #06192E 0%, #0A2540 50%, #13325F 100%)',
-                  boxShadow: '0 20px 60px -8px rgba(10,37,64,0.35)',
+                  background: 'linear-gradient(155deg, #06192E 0%, #18181B 50%, #4F46E5 100%)',
+                  boxShadow: '0 20px 60px -8px rgba(24, 24, 27,0.35)',
                 }}
               >
                 {/* Total */}
@@ -639,7 +639,7 @@ export default function CostCalculatorAdvanced() {
                    style={{ background: C.bg2, border: `1px solid ${C.border}`, borderRadius: 12 }}>
                 <Globe className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
                 <div>
-                  <p className="text-[12.5px] font-semibold" style={{ color: '#0A2540' }}>
+                  <p className="text-[12.5px] font-semibold" style={{ color: '#18181B' }}>
                     Sending money to the UK?
                   </p>
                   <a
@@ -668,8 +668,8 @@ export default function CostCalculatorAdvanced() {
                   className="flex items-center justify-center gap-1.5 py-3 rounded-xl text-[12.5px] font-semibold transition-all"
                   style={{
                     background: '#fff',
-                    color: '#0A2540',
-                    border: '1px solid rgba(10,37,64,0.12)',
+                    color: '#18181B',
+                    border: '1px solid rgba(24, 24, 27,0.12)',
                   }}
                 >
                   Compare routes
@@ -689,12 +689,12 @@ export default function CostCalculatorAdvanced() {
           <div className="grid sm:grid-cols-3 gap-4">
             {[
               {
-                icon: Banknote, color: '#00C4B4',
+                icon: Banknote, color: '#6366F1',
                 title: 'Home Office application fee',
                 desc: 'Paid per applicant. Varies by visa type, duration, and whether inside or outside UK.',
               },
               {
-                icon: ShieldCheck, color: '#0A2540',
+                icon: ShieldCheck, color: '#18181B',
                 title: 'Immigration Health Surcharge (IHS)',
                 desc: 'Paid upfront for the full visa duration. Adults £1,035/yr, students £776/yr. Health & Care main applicants exempt.',
               },
@@ -755,7 +755,7 @@ function StepCard({
       <div className="flex items-center gap-3 px-5 py-4"
            style={{ borderBottom: `1px solid ${C.border}`, background: C.bg2 }}>
         <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-             style={{ background: '#0A2540' }}>
+             style={{ background: '#18181B' }}>
           <span className="text-[11px] font-bold text-white tabular-nums">{String(step).padStart(2, '0')}</span>
         </div>
         <div>
@@ -798,7 +798,7 @@ function PersonCounter({
           disabled={!canDec}
           className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
           style={{
-            background: canDec ? '#0A2540' : 'rgba(10,37,64,0.06)',
+            background: canDec ? '#18181B' : 'rgba(24, 24, 27,0.06)',
             color: canDec ? '#fff' : '#D1D5DB',
           }}
           aria-label="Decrease"
@@ -806,7 +806,7 @@ function PersonCounter({
           <Minus className="w-3.5 h-3.5" />
         </button>
         <span className="font-display font-bold text-[22px] tabular-nums w-6 text-center"
-              style={{ color: '#0A2540' }}>
+              style={{ color: '#18181B' }}>
           {value}
         </span>
         <button
@@ -814,7 +814,7 @@ function PersonCounter({
           disabled={!canInc}
           className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
           style={{
-            background: canInc ? '#0A2540' : 'rgba(10,37,64,0.06)',
+            background: canInc ? '#18181B' : 'rgba(24, 24, 27,0.06)',
             color: canInc ? '#fff' : '#D1D5DB',
           }}
           aria-label="Increase"
