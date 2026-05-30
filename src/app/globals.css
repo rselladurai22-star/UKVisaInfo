@@ -122,6 +122,7 @@ html.dark body {
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
   }
   body {
     background: #FAFAF7;
@@ -131,6 +132,7 @@ html.dark body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
   @media (pointer: coarse) {
     button, a { min-height: 44px; }
