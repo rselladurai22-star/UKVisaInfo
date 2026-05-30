@@ -190,7 +190,7 @@ export default function CostCalculatorAdvanced() {
   const visasInCategory = VISAS.filter((v) => v.category === category);
 
   return (
-    <div style={{ background: C.bg2, minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, sans-serif', WebkitFontSmoothing: 'antialiased' }}>
+    <div style={{ background: C.bg2, minHeight: '100vh', fontFamily: 'var(--font-inter), system-ui, -apple-system, sans-serif', WebkitFontSmoothing: 'antialiased' }}>
 
       {/* ── Hero ── */}
       <section style={{ paddingTop: 'clamp(80px,10vw,104px)', paddingBottom: 32, background: C.bg, borderBottom: `1px solid ${C.border}` }}>
