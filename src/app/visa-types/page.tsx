@@ -1,27 +1,19 @@
 import type { Metadata } from 'next';
-import VisaHubClient from '../../components/VisaHubClient';
-import EditorByline from '../../components/EditorByline';
+import VisaHub from '../../components/VisaHub';
 
 export const metadata: Metadata = {
-  title: 'Every UK Visa Route 2026 — Work, Study, Family, Settlement & Citizenship',
+  title: 'Every UK Visa Route — Work, Study, Family, Settlement & Citizenship | UKDesk',
   description:
-    'Complete UK visa directory: 35+ routes covering Skilled Worker, Student, Family, Visitor, ILR, British citizenship and special visas. Interactive cost calculator, eligibility quiz and country guidance — all gov.uk verified.',
+    'The UK visa hub: work, study, family, visitor, settlement (ILR) and British citizenship routes — each with cost, timeline and requirements in plain English. Sourced from GOV.UK.',
   alternates: { canonical: '/visa-types' },
   openGraph: {
-    title: 'Every UK Visa Route 2026 — Work, Study, Family, Settlement & Citizenship',
+    title: 'Every UK Visa Route — UKDesk',
     description:
-      '35+ routes: Skilled Worker, Student, Family, Visitor, ILR, British Citizenship and more. Interactive cost calculator and eligibility quiz. gov.uk verified 2026.',
+      'Work, Study, Family, Visitor, ILR and British Citizenship routes — cost, timeline and requirements in plain English. GOV.UK-sourced.',
     url: 'https://ukvisainfo.co.uk/visa-types',
   },
 };
 
 export default function Page() {
-  return (
-    <>
-      <VisaHubClient />
-      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 py-10">
-        <EditorByline verified="May 2026" prefix="Edited & verified by" />
-      </div>
-    </>
-  );
+  return <VisaHub />;
 }
