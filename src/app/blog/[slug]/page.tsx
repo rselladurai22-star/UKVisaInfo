@@ -15,6 +15,7 @@ import SidebarAffiliate from '../../../components/blog/SidebarAffiliate';
 import Comments from '../../../components/blog/Comments';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
+import AdUnit from '../../../components/AdUnit';
 import { extractH2Headings } from '../../../components/blog/slug';
 import { parseSegments } from '../../../components/blog/parseSegments';
 
@@ -268,6 +269,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
             <article className="col-span-12 lg:col-span-7">
               <ArticleBody body={post.body} articleSlug={post.slug} />
 
+              {/* Mid-article ad — shown after body, before tags */}
+              <AdUnit slot="3456789012" format="auto" className="my-8" />
+
               {/* Tags strip */}
               <div className="mt-12 pt-8 border-t border-[rgba(14,20,36,0.08)]">
                 <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-3">Filed under</div>
@@ -295,6 +299,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
                 cta="Get the brief"
                 source={`blog:${post.slug}`}
               />
+
+              {/* Pre-comments ad */}
+              <AdUnit slot="4567890123" format="auto" className="my-6" />
 
               <RelatedPosts current={post} />
 

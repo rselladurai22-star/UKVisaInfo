@@ -272,6 +272,46 @@ Monthly living costs in London on top of this: £1,400–£1,800 covering rent (
 - Maintenance is a proof requirement, not a spending requirement. You can use the same money for tuition after the 28-day window.
 
 See our [full UK Student visa guide](/visa/student) for eligibility, documents and step-by-step application walkthrough, or try the [cost calculator](/costs) to model your specific situation.
+
+## How to fund UK studies — what actually works
+
+**University scholarships** are the most underused route. Most Russell Group universities ring-fence £2m–£8m annually for international merit awards. Apply in December or January for a September start — late applications go to the waitlist. Tie your personal statement to the scholarship criteria, not your course.
+
+**Government scholarships** worth knowing:
+- **Chevening** — fully funded master's for future leaders. £18,000 fees + £13,000 living + flights. Apply September–November for the following academic year.
+- **Commonwealth Scholarships** — for students from lower-middle income Commonwealth countries. Covers tuition, flights, living allowance.
+- **Great Scholarships** — UK government + universities, discipline-specific, smaller awards (£10,000–£15,000 typical).
+- **GREAT Britain campaign bursaries** — available for some South and Southeast Asian students.
+
+**Your employer** — if you're employed and studying part-time, UK employers with more than 50 staff have a legal Learning & Development obligation. Tuition contribution up to £7,000/year is tax-free. Ask before paying out of pocket.
+
+**Education loans from your home country** — compare rates carefully. Indian education loans via SBI or Axis Bank can fund the full course at 9–11% — cheaper than UK personal loans. Some UK universities accept these directly as maintenance evidence.
+
+## What happens if your savings fall short at application
+
+The Home Office does not accept bank statements showing funds were deposited and then withdrawn. If your balance drops below the required maintenance figure at any point in the 28-day window, the account fails the test — even by £1.
+
+If you're short, options are:
+1. **Parent or guardian sponsor** — your parent's account can be used if they sign a declaration they will fund you. Their statement must be bank-certified and translated if not in English.
+2. **University sponsorship letter** — if your university offers a fee waiver or bursary reducing the amount you owe, this reduces the maintenance calculation accordingly. Get it in writing on university letterhead.
+3. **Wait 28 days** — if funds have just arrived from selling property or a gift, you must wait a full 28 days from the date of receipt before applying.
+
+Applying with insufficient evidence and hoping for the best is the single most common reason for Student visa refusal. The Home Office will not tell you to reapply with better documents. They will simply refuse.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I work to cover costs during my studies?
+> A: Yes — Student visa holders can work up to 20 hours per week during term time, full-time during official vacations. London minimum wage is currently £12.21/hour. At 20 hours/week for 30 weeks that's roughly £7,300/year before tax — helpful but not enough to fund tuition.
+>
+> Q: Is the IHS refunded if my course is shorter than expected?
+> A: Partially. If your visa ends earlier than planned (you finish course early, leave voluntarily, or your visa is curtailed), you can claim a pro-rata IHS refund for complete unused months. Apply via UKVI's IHS refund form within 3 months of leaving.
+>
+> Q: Can I pay tuition in instalments?
+> A: Most UK universities allow two or three instalments per academic year. Some require a deposit (usually £1,000–£3,000) before issuing the CAS. Read the fee schedule carefully — late payment penalties are real.
+>
+> Q: Does my family back home need to prove income?
+> A: No. The maintenance requirement is about funds available to you, not your family's income. A parent's account works only if a sponsor declaration accompanies it. There's no income-based test for family sponsors — only the cash balance matters.
 `.trim(),
   },
 
@@ -423,6 +463,67 @@ If the sponsored applicant is a child and the other parent is already in the UK 
 5. If using savings, screenshot your balance the day after the 6-month window opens and again on application day.
 
 See our [Family visa guide](/visa/family) for the full document list and application walkthrough. If you're unsure whether your income combination qualifies, the Home Office's own Family Life Appendix FM-SE is the definitive text — every refusal reason cites it by paragraph.
+
+## Worked examples — combining income sources
+
+**Example 1: Salaried + savings shortfall**
+
+Maria earns £24,000/year as a nurse and has been with her employer 8 months. She wants to sponsor her husband.
+
+- Shortfall: £29,000 − £24,000 = £5,000
+- Required savings: £16,000 + (£5,000 × 2.5) = **£28,500** held for 6+ months
+- Category A (salary) + Category D (savings) — permitted combination
+
+**Example 2: Self-employed sponsor**
+
+Raj is a sole trader, filed SA302 showing £31,500 net profit for tax year 2024/25. He wants to sponsor his wife.
+
+- Qualifies under Category F — last full financial year ≥ £29,000
+- Must submit: SA302 for 2024/25, tax year overview, business bank statements, HMRC self-assessment registration
+- If his profit was only £27,000 in 2024/25 but averaged £31,000 over 2023/24 and 2024/25, he could qualify under Category G instead
+
+**Example 3: Rental income only**
+
+Claire owns a buy-to-let generating £32,000/year gross rent (after agent fees but before mortgage). She sponsors her partner.
+
+- Qualifies under Category C — £32,000 ≥ £29,000
+- Must submit: 12 months of bank statements showing rental credits, tenancy agreement, evidence of ownership (Land Registry title or mortgage statement)
+- The 12 months must show consistent receipts, not 11 months of data with projections
+
+## Overseas sponsors — does it work?
+
+Technically, a sponsor does not need to be in the UK at the time of application. However:
+
+- Their income must be received in the UK (a UK salary, UK rental, or UK pension)
+- Or they must have the cash savings meeting the formula
+- Overseas employment income from a foreign employer does not count unless the sponsor can show they will return to the UK and the income will continue here
+
+In practice, sponsors who are overseas with no UK income source almost always fail this test. If you're outside the UK earning a foreign salary, plan to secure a UK job or use the savings route.
+
+## What the "adequate maintenance" alternative actually means
+
+For sponsors exempt from the £29,000 threshold (disability benefit recipients), the test is whether you can maintain yourselves without recourse to public funds. UKVI calculates this as:
+
+- **£189.41/week** (2026 Income Support rate for a couple) as the baseline
+- Add your actual housing costs (rent or mortgage)
+- If your total income after housing costs exceeds the combined figure, you pass
+
+This is far easier to meet than £29,000 — the typical figure needed is around £9,000–£14,000 net, depending on rent.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can two part-time jobs be combined to reach £29,000?
+> A: Only if both qualify under the same category and the rules allow combination. Two Category A jobs (both 6+ months with the same employers) can be combined. Two Category B jobs cannot be reliably combined. Read Appendix FM-SE paragraph 12 carefully before combining.
+>
+> Q: My employer pays bonuses — do they count?
+> A: Only if the bonus is contractual and guaranteed. Discretionary bonuses cannot be included in the £29,000 calculation under Category A. They can be included under Category B if they form part of your regular earnings pattern across the 12-month look-back period.
+>
+> Q: Can my fiancé's income be counted (they're not in the UK yet)?
+> A: No. Only the sponsor's income counts. The applicant's overseas income cannot be used to meet the threshold.
+>
+> Q: What happens if my income drops after the visa is granted?
+> A: The income requirement applies at the point of application, not continuously. Your spouse's visa won't be revoked if your income later drops. It does matter again at the extension stage (2.5 years later), where you must meet the threshold again.
 `.trim(),
   },
 
@@ -526,6 +627,45 @@ The Home Office roadmap through 2026–2027:
 - **Longer term** — expansion to biometric at-border verification, potentially reducing the need for share codes at entry.
 
 For now, the job is straightforward: create your UKVI account, link your current passport, and test a share code before your next flight.
+
+## Step-by-step: creating your UKVI account in 2026
+
+The full process takes 15–30 minutes and requires your BRP (or decision letter reference), current passport and a mobile number.
+
+> [!STEPS]
+> 1. **Go to gov.uk/evisa** — Click "Create a UKVI account." Have your BRP and passport ready.
+> 2. **Verify your email address** — Enter a personal email address you check regularly. You'll receive a verification link within 2 minutes.
+> 3. **Enter your identity details** — Name, date of birth, nationality exactly as on your BRP.
+> 4. **Scan your BRP** — Use the UK Visas app (iOS/Android) to scan the chip on your BRP, or upload a photo. The chip scan takes 30 seconds; photo upload takes 24–48 hours for manual review.
+> 5. **Link your current passport** — If you have renewed since your visa was issued, enter the new passport number. This is the step most people forget.
+> 6. **Receive confirmation** — Your eVisa is now active. Test it immediately by generating a share code and entering it at gov.uk/view-right-to-work.
+
+If the chip scan fails, don't panic. Try again with the phone flat on a table, BRP underneath. The NFC chip is in the lower half of the card. If scanning fails after 3 attempts, choose photo upload and wait 48 hours.
+
+## What to do if something goes wrong
+
+**"Account already exists"** — someone already registered your data. This usually means an agent or employer set up an account on your behalf. Contact UKVI on 0300 123 2241 to merge or reclaim the account.
+
+**"Identity could not be verified"** — most common after a name change (marriage, deed poll). You need to provide both the old name evidence (marriage certificate) and a new passport. Submit via the UKVI Resolution Centre form.
+
+**"Your immigration status could not be confirmed"** — your leave record isn't matching. This can happen if you've recently been granted an extension and the system hasn't updated. Wait 5 working days then try again. If still not working, call UKVI.
+
+**Share code "invalid" error** — share codes are valid for 90 days and are type-specific (Work, Renting, General). Make sure you're generating the right type. If the code still fails, regenerate from your account.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: I lost my BRP — can I still create a UKVI account?
+> A: Yes. Use your Home Office reference number from your decision letter, or call UKVI (0300 123 2241) who can verify your identity and link the record manually. You do not need to apply for a replacement BRP.
+>
+> Q: My passport expires next year — should I renew before creating the account?
+> A: Either order works, but renew first if possible. If you create the account with your current passport and then renew, you must update the passport number in your account before travelling. Forgetting this step is the top cause of boarding refusals.
+>
+> Q: Can I use someone else's phone to create my account?
+> A: The app download is fine on any phone for the scan step. But the account credentials (email, password) should be your own. Do not use an employer's or agent's email address — you must control the recovery access.
+>
+> Q: What if my leave expires before I can link the eVisa?
+> A: Your leave isn't extended by applying for an account. If your visa is about to expire, apply to extend it first. The eVisa account is a record, not a grant of leave.
 `.trim(),
   },
 
@@ -657,6 +797,51 @@ Interviews are usually video calls, 30–60 minutes, conducted in English. Prepa
 5. **Save your GWF reference.** You cannot track without it.
 
 Service standards will almost certainly shift again before 2027. Our individual visa guides ([Skilled Worker](/visa/skilled-worker), [Student](/visa/student), [Family](/visa/family)) are updated as new targets are published.
+
+## Real waiting times by country — 2026 applicant data
+
+The following ranges are compiled from applicant reports on UK immigration forums and communities in the first quarter of 2026. They represent the middle 50% of reported times — outliers in either direction exist.
+
+| Country | Visit visa (standard) | Skilled Worker | Student | Family |
+|---|---|---|---|---|
+| India | 5–10 days | 12–18 days | 14–22 days | 14–18 weeks |
+| Nigeria | 7–14 days | 14–20 days | 18–28 days | 16–22 weeks |
+| Pakistan | 10–16 days | 14–21 days | 20–30 days | 18–26 weeks |
+| Bangladesh | 10–18 days | 14–21 days | 20–28 days | 16–24 weeks |
+| Philippines | 5–10 days | 10–16 days | 14–20 days | 12–18 weeks |
+| USA | 3–7 days | 8–14 days | 10–16 days | 12–16 weeks |
+| Australia | 2–5 days | 7–12 days | 10–14 days | 10–14 weeks |
+| China | 5–10 days | 10–16 days | 12–18 days | 12–18 weeks |
+| South Africa | 5–10 days | 12–18 days | 14–20 days | 14–18 weeks |
+| UAE | 3–7 days | 8–14 days | 10–16 days | 12–16 weeks |
+
+Family route times are significantly longer because applications are assessed against Appendix FM (financial, relationship and accommodation evidence), not just eligibility criteria.
+
+## What to tell your employer while waiting
+
+For Skilled Worker applicants, the period between biometrics and decision is the highest-anxiety point. What works:
+
+1. **Provide a reference number.** Your employer can track nothing, but having your GWF number shows you're organised.
+2. **Set a realistic "start no earlier than" date.** Most offer letters should say "subject to visa" with a start date 6 weeks after your biometrics appointment.
+3. **Don't resign from your current role until the visa is granted.** If refused, you need time to appeal or reapply.
+4. **Priority service is worth it for new job starts.** The £500 cost is minimal against forfeiting a job offer.
+
+UK employers are generally familiar with the process, but keeping them updated prevents the most common problem: employer assumes delay = withdrawal and re-posts the role.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I travel abroad while my UK visa application is being decided?
+> A: For in-country applications (switching or extending), no. Travel invalidates the application. For out-of-country applications, you can travel — your application remains active. However, if called for a biometrics appointment or interview, you must attend.
+>
+> Q: Does premium service guarantee a decision within 5 working days?
+> A: Priority service means your application is prioritised in the queue, not guaranteed within 5 days. If additional checks are needed, the process takes longer even with priority. Refunds are available if the service standard is missed — check UKVI's current policy on gov.uk.
+>
+> Q: What's the difference between "under consideration" and "being processed"?
+> A: "Under consideration" on your UKVI account means the application has been received and assigned. "Being processed" can mean several things: it's in the general queue, it's been allocated to a caseworker, or it's awaiting third-party checks. Neither status tells you the decision timeline.
+>
+> Q: How long does a UK visa appeal take?
+> A: First-tier Tribunal hearing dates are currently running 8–14 months from lodgement of the appeal. Administrative review (for eligible refusals) is faster — typically 8–12 weeks. Check whether your refusal letter states you have a right of appeal or only a right to administrative review.
 `.trim(),
   },
 
@@ -783,6 +968,48 @@ Without a path forward, you must leave the UK before your Graduate visa expires.
 That's it — far fewer documents than Student or Skilled Worker. The Graduate visa is the UK's friendliest route, and most students who qualify should apply.
 
 See our [full Graduate visa guide](/visa/graduate) and [Skilled Worker guide](/visa/skilled-worker) for the switching path, or [eligibility checker](/eligibility) if you're unsure which route fits.
+
+## Application timeline — when to apply
+
+The Graduate visa application opens the day your course completion is reported by your university to UKVI. Most universities batch-report completions weekly or monthly — ask your international office for the exact reporting date, not the graduation ceremony date.
+
+**Typical timeline:**
+
+| Milestone | Time from course completion |
+|---|---|
+| University reports completion to UKVI | 1–4 weeks |
+| Application window opens | On reporting date |
+| Standard processing | 8 weeks |
+| Priority processing | 5 working days |
+| Graduate visa granted | 2–10 weeks from submission |
+
+**Key deadline:** You must apply before your Student visa expires. If your Student visa expires in September and your university doesn't report until October, you have a problem. Chase your international office proactively — this is your responsibility, not theirs.
+
+If your course finishes in May but your Student visa runs until January, you have months of buffer. Don't rush — the Graduate visa clock only starts when granted, so applying late doesn't shorten the leave you receive.
+
+## Can doctors, nurses and healthcare workers use the Graduate visa?
+
+Yes — but most shouldn't. Doctors and nurses who have secured an NHS or private trust role are better served by the **Health & Care Worker visa**, which costs less (£551 vs £880), carries lower IHS (£776/year vs £1,035/year), and starts the ILR clock immediately. Graduate visa delay of 18 months before starting that ILR clock costs 18 months of settlement eligibility.
+
+Exception: if you graduated in a healthcare field but haven't secured a role yet, Graduate visa is the right bridge while job hunting. Apply, use the 18 months to find a sponsored role, then switch to Health & Care Worker or Skilled Worker.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I apply for the Graduate visa if I failed my final year and am resitting?
+> A: No. You must have successfully completed the course. UKVI checks the completion report from your university. If you're resitting, you remain on your Student visa until you pass and your university reports completion.
+>
+> Q: Does Graduate visa time count toward British citizenship?
+> A: Graduate visa time counts toward the 5-year continuous residence for citizenship, but not toward the ILR requirement that must precede citizenship. So: 2 years on Graduate + 5 years on Skilled Worker = 7 years UK residence — but citizenship eligibility starts after the ILR (year 5 of Skilled Worker), not from the Graduate start date.
+>
+> Q: Can my partner and children join me on a Graduate visa?
+> A: Only if they were already dependants on your Student visa. If your partner was not on your Student visa, they cannot be added as a dependant to your Graduate visa application. This changed in January 2024.
+>
+> Q: Is there a salary minimum on Graduate visa?
+> A: No salary minimum at all. You can work any job at any pay. Many Graduate visa holders take lower-paid roles initially to build UK work experience before switching to Skilled Worker at £41,700+.
+>
+> Q: Can I start a business on Graduate visa?
+> A: Yes — self-employment is permitted. You can freelance, consult, or build a startup. However, Graduate visa time does not count toward ILR, so there's no settlement benefit to starting a business on this route vs the Innovator Founder visa.
 `.trim(),
   },
 
@@ -3132,6 +3359,725 @@ For now, the action is simple but urgent: create the account, link the current p
 
 See our companion article on [BRP vs eVisa changes](/blog/brp-vs-evisa-2026-whats-changing) for the underlying policy, or [Visit visa documents](/blog/uk-visit-visa-documents-checklist-2026) if you\'re helping family members travel to the UK.
 `.trim(),
+  },
+
+  {
+    slug: 'uk-immigration-health-surcharge-ihs-2026',
+    title: 'UK Immigration Health Surcharge (IHS) 2026 — Who Pays, How Much, Exemptions',
+    description:
+      'Complete 2026 guide to the UK Immigration Health Surcharge: £1,035/year for adults, £776/year for students, who is exempt, how to pay, and how to claim a refund.',
+    date: '2026-05-01',
+    updated: '2026-05-31',
+    readMinutes: 9,
+    tags: ['IHS', 'Costs', 'Student visa', 'Skilled Worker'],
+    body: `
+The Immigration Health Surcharge (IHS) is a fee paid upfront by most non-UK visa applicants, giving them access to the National Health Service for the duration of their leave. In 2026 it costs **£1,035 per year** for most visa types and **£776 per year** for students and children under 18. It is paid as a lump sum before the visa is granted — not monthly, not after arrival.
+
+This guide covers who must pay, who is exempt, exactly how it is calculated, when you get a refund and the common mistakes that cause people to overpay or underpay.
+
+> [!STAT] £1,035 | Annual IHS rate for adult visa applicants in 2026 (£776 for students/under-18s)
+
+> [!KEY] Key facts before you read on
+> IHS must be paid **before** you submit your visa application — you cannot pay it later.
+> Partial years are charged as **full years** — 3 years and 1 day = 4 × annual rate.
+> The fee is per person. Your dependants each pay separately.
+> A **full refund** is available if the visa is refused. Partial refunds available if leave is shortened.
+
+## The 2026 rates
+
+| Applicant type | Annual rate | 2-year total | 3-year total |
+|---|---|---|---|
+| Adult (most visas) | £1,035 | £2,070 | £3,105 |
+| Student visa holder | £776 | £1,552 | £2,328 |
+| Child under 18 | £776 | £1,552 | £2,328 |
+| Adult on Youth Mobility Scheme | £1,035 | £2,070 | n/a |
+| ILR / Settlement applicant | £0 | n/a | n/a |
+
+The student rate applies to anyone holding a Student visa (Tier 4 or post-2021 Student visa). If you switch from Student to Skilled Worker, the higher adult rate applies from the date of the Skilled Worker visa.
+
+## Who must pay IHS
+
+You must pay IHS if you are applying for:
+- Skilled Worker visa (any duration over 6 months)
+- Student visa (any duration)
+- Family visa (spouse, partner, children, parents)
+- Graduate visa
+- Health & Care Worker visa
+- Innovator Founder / Global Talent
+- Youth Mobility Scheme
+- Any visa valid for more than 6 months
+
+Visas of **6 months or less** (standard visitor, short-term student, transit) do not require IHS payment.
+
+## Who is exempt from paying IHS
+
+Exemptions in 2026 are narrow. You do **not** pay IHS if you are:
+
+- A national of a country with a reciprocal healthcare arrangement with the UK — as of 2026 this list is limited to Australia and New Zealand (partial exemptions only; check gov.uk for current list)
+- Applying for or already hold ILR or Indefinite Leave to Enter
+- A British citizen or settled person (no visa required)
+- An asylum seeker whose claim is being processed
+- Applying for a visa of 6 months or less
+- A victim of domestic violence on the Destitution Domestic Violence Concession
+
+Former exemptions for healthcare workers, diplomats, and some others have been significantly narrowed since 2023. Do not assume a previous exemption still applies without checking.
+
+## How IHS is calculated — the key rules
+
+**Partial years count as full years.** This is the most expensive rule. If your visa is for 3 years and 4 months, you pay IHS for 4 years, not 3.33 years.
+
+**Round up, always.** The formula is: total months ÷ 12, round **up** to the nearest whole year, multiply by the annual rate.
+
+**Worked example:**
+- Skilled Worker visa: 3 years and 1 day
+- Years charged: 4 (3 full years + any remainder = +1 year)
+- IHS: £1,035 × 4 = **£4,140**
+
+This catches many people off-guard. A Skilled Worker visa is typically granted for the CoS duration plus a buffer. If your employer issues a CoS for "3 years" and the Home Office grants leave for "3 years and 14 days," you pay for 4 years.
+
+**Tip:** Check the exact months on your visa and calculate before paying to avoid surprises.
+
+## How to pay IHS
+
+IHS is paid during the online visa application process, before the application is submitted. You cannot bypass this step.
+
+1. Complete the online visa application form on gov.uk.
+2. The system automatically calculates the IHS amount based on visa duration and applicant type.
+3. Pay by Visa, Mastercard, or Maestro (debit or credit). American Express not accepted.
+4. Once paid, you receive an IHS reference number which must be included in the application.
+5. If you have dependants applying simultaneously, they each need their own IHS payment.
+
+You can pay IHS online and then submit the application days or weeks later — the IHS reference is valid for the application session. However, if you start a new application session, you may need to pay again (check the gov.uk system guidance).
+
+## Dependants and IHS
+
+Each dependant applying simultaneously pays IHS separately:
+
+- A spouse applying on a Skilled Worker dependant visa: £1,035/year × visa duration
+- A child under 18 accompanying a parent: £776/year × visa duration
+- A child turning 18 during the visa: the rate is set at application — if under 18 when applying, the child rate applies for the whole visa
+
+**Family example:**
+Adult + spouse + 2 children, 3-year visa:
+- Adult: £1,035 × 3 = £3,105
+- Spouse: £1,035 × 3 = £3,105
+- Child 1: £776 × 3 = £2,328
+- Child 2: £776 × 3 = £2,328
+- **Total IHS: £10,866**
+
+## IHS refunds
+
+**Full refund:** If your visa application is refused, the IHS is refunded in full within 6–10 weeks. No application is needed — the refund is processed automatically to the card used.
+
+**Partial refund:** If your leave is curtailed (shortened) after being granted — for example you leave the UK voluntarily, your visa is revoked, or you switch to a lower-surcharge visa — you can claim a refund for complete unused months. Apply via the IHS refund form on gov.uk within 3 months of your leave ending.
+
+**No refund if:** you use your leave fully, or you are removed from the UK following an immigration breach.
+
+## What IHS actually covers
+
+IHS gives you access to NHS treatment on the same basis as a UK resident:
+
+- ✅ GP appointments
+- ✅ A&E and urgent care
+- ✅ Hospital treatment (inpatient and outpatient)
+- ✅ NHS mental health services
+- ✅ Maternity care (most)
+
+Not covered (you pay regardless of IHS):
+
+- ❌ NHS prescription charges (currently £9.90 per item unless exempt)
+- ❌ NHS dentistry (you pay NHS treatment charges)
+- ❌ Optical (NHS sight tests reduced-cost; glasses full-price)
+- ❌ Assisted conception and some fertility treatments
+- ❌ Cosmetic procedures
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I opt out of IHS and buy private health insurance instead?
+> A: No. IHS is mandatory for all qualifying visa applicants. There is no opt-out, even if you have comprehensive private health insurance. You will pay IHS and your insurance will overlap.
+>
+> Q: My employer said they'd reimburse IHS — is that standard?
+> A: No, but it is increasingly common, especially for sponsored Skilled Workers. Around 40% of large UK employers in tech and finance now offer partial or full IHS reimbursement as part of the relocation package. Negotiate it before accepting an offer.
+>
+> Q: Does IHS payment give me an NHS number?
+> A: No. You get an NHS number when you register with a GP. IHS payment is a separate process from NHS registration. Register with a GP within a few weeks of arrival — don't wait until you're ill.
+>
+> Q: I paid IHS for my whole visa period but I'm leaving the UK after year 1. Can I get year 2 and 3 back?
+> A: You can claim a partial refund for unused complete months if your leave ends early. If you voluntarily depart, you must notify UKVI of your departure and then apply for the refund within 3 months.
+    `.trim(),
+  },
+
+  {
+    slug: 'uk-skilled-worker-visa-application-step-by-step-2026',
+    title: 'UK Skilled Worker Visa Application — Step-by-Step Guide 2026',
+    description:
+      'How to apply for a UK Skilled Worker visa in 2026: from Certificate of Sponsorship to biometrics. Timelines, fees, documents and what happens at each stage.',
+    date: '2026-05-05',
+    updated: '2026-05-31',
+    readMinutes: 11,
+    tags: ['Skilled Worker', 'Application', 'Sponsorship'],
+    body: `
+You've accepted a UK job offer from a licensed sponsor. Now you need to turn that into a visa. The Skilled Worker application process in 2026 has eight distinct stages, and a mistake at any of them — wrong document, wrong fee, expired certificate — can mean a refusal or months of delay. This guide walks through every stage in order with exact timelines and the mistakes that catch people at each step.
+
+> [!STAT] 3 weeks | Standard Home Office processing time for Skilled Worker visa (out-of-country, 2026)
+
+> [!KEY] Before you start
+> Your employer must be on the official Register of Licensed Sponsors **before** you apply. Check gov.uk/check-uk-visa — unlicensed employers cannot sponsor you regardless of job offer.
+> Your Certificate of Sponsorship (CoS) must be issued **before** you submit the application.
+> You must apply **before** your current visa expires if switching in the UK.
+
+## Stage 1 — Your employer issues a Certificate of Sponsorship
+
+The CoS is a unique reference number (not a physical document) that your employer's HR or immigration team generates in their Sponsor Management System. It confirms:
+- The job title, SOC code and salary
+- Start date and duration
+- That the role meets the skill and salary thresholds
+
+**What you need to check on the CoS:**
+- The salary figure matches your offer letter exactly
+- The start date gives you enough time to apply and receive the visa
+- Your name and date of birth match your passport precisely
+
+The CoS is valid for **3 months** from issue. You must submit your visa application within that window.
+
+> [!WARNING] A common error is accepting a CoS with a start date that's too soon — if your visa takes 3 weeks standard processing and the CoS start date is in 10 days, you won't make it without priority service.
+
+## Stage 2 — Check the salary thresholds
+
+Before paying anything, confirm your salary clears all three tests:
+
+1. **General minimum:** £41,700/year (or £33,400 if you qualify as a new entrant, on ISL, or have a relevant STEM PhD)
+2. **Occupation going rate:** check your SOC code on gov.uk/skilled-worker-visa/your-job
+3. **Hourly minimum:** £15.88/hour
+
+The Home Office uses the **highest** of these three as your effective threshold. If your salary is below any one of them, the application is refused at the salary stage.
+
+## Stage 3 — Gather your documents
+
+Standard required documents for a Skilled Worker application:
+
+| Document | Notes |
+|---|---|
+| Current passport | Valid for full visa duration requested |
+| CoS reference number | From employer — 8-character code |
+| Proof of English (if required) | Degree taught in English, or IELTS/UKVI B1 |
+| Bank statement | Last 28 days, showing £1,270+ |
+| TB test certificate | If applying from a listed country |
+| Previous UK visas | All pages, if applicable |
+| Academic certificates | If role requires qualification |
+
+**Maintenance funds:** You must show you have at least £1,270 in your bank account for 28 consecutive days immediately before your application. Your sponsor can certify this instead — ask them if they offer "A-rated" sponsorship, which waives the maintenance requirement.
+
+## Stage 4 — Pay the fees
+
+Total typical costs for a Skilled Worker visa (overseas applicant, 3-year visa):
+
+| Fee | Amount |
+|---|---|
+| Visa application fee (≤3 years) | £827 |
+| Immigration Health Surcharge (3 years) | £3,105 |
+| Priority service (optional) | £500 |
+| **Standard total** | **£3,932** |
+
+IHS is paid first during the online application. The visa fee is paid at the end of the application form.
+
+## Stage 5 — Submit the online application
+
+Go to gov.uk/apply-to-come-to-the-uk and complete the application form. You'll need:
+
+- IHS reference number (from Stage 4)
+- CoS reference number
+- Passport biographic details
+- Answers to immigration history questions (refusals, criminal convictions, travel to conflict zones)
+- Upload document scans (passport photo page, supporting documents)
+
+Be accurate on immigration history. The Home Office cross-references all applications against central records. Omitting a previous visa refusal — even from another country — is treated as deception and carries a 10-year ban.
+
+## Stage 6 — Book and attend the biometrics appointment
+
+After submitting, you'll receive an instruction to book a biometrics appointment at a UKVCAS (UK) or VFS/TLS (overseas) centre. At the appointment:
+- Fingerprints are scanned (all 10 fingers)
+- Photograph is taken
+- Your passport and key documents are checked
+
+Bring **originals** of all documents uploaded in the application. The officer does not routinely check them all, but if asked to produce an original and you don't have it, the application is referred for additional investigation.
+
+Biometrics appointments at VFS centres in popular countries (India, Nigeria, Pakistan) often have **2–3 week lead times**. Book as soon as your application is submitted — waiting increases the total time.
+
+## Stage 7 — Wait for the decision
+
+Standard processing is 3 weeks for out-of-country applications. Your application status updates in your UKVI account. Statuses:
+
+- **"Under consideration"** — received and in queue
+- **"Additional documents requested"** — respond within 10 working days or the application is refused
+- **"Decision made"** — check your email; positive decisions link your eVisa, refusals include the reasons
+
+Do not contact UKVI before the 3-week target is passed. Chasing earlier than the service standard provides no benefit and can slow processing.
+
+## Stage 8 — Receive your visa and travel
+
+From January 2025, most Skilled Worker visas are issued as eVisas only. You'll receive an email confirming your eVisa is live. Steps:
+
+1. Create your UKVI account at gov.uk/evisa if you don't have one
+2. Log in and confirm your eVisa status and leave dates
+3. Link the passport you will travel on
+4. Generate a share code for your employer's Right to Work check
+
+If your visa was granted for less duration than your CoS: this is normal if your passport expires before the CoS end date. The visa matches your passport validity. Apply for a new passport and then apply to update your visa dates.
+
+## Common mistakes at each stage
+
+| Stage | Common mistake | Consequence |
+|---|---|---|
+| CoS | Start date too soon for standard processing | Need expensive priority service last-minute |
+| Documents | Using an unofficial translation | Refused — all non-English docs need certified translation |
+| Maintenance | Bank balance dips below £1,270 during 28-day window | Maintenance fails; application refused |
+| Biometrics | Bringing copies, not originals | Referral for additional checks, delay |
+| Immigration history | Omitting an old refusal | 10-year deception ban |
+| Post-visa | Not linking new passport before travel | Boarding refusal overseas |
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can my employer pay my visa fees?
+> A: Yes — employers can and often do reimburse application fees and IHS. This is a taxable benefit in kind unless structured as a relocation allowance within HMRC limits. Get this in writing before applying.
+>
+> Q: Can I apply before receiving the CoS?
+> A: No. The CoS reference number must be entered in the application form. You cannot submit the application without it.
+>
+> Q: What is a "restricted" CoS and do I need one?
+> A: Most Skilled Worker roles use "unrestricted" CoS, which the sponsor issues freely. Restricted CoS are for roles paying below the going rate (rare, requires Home Office approval). Your employer's HR team will know which applies.
+>
+> Q: Can I bring my family in the same application?
+> A: Dependants apply separately and simultaneously. Your family members each complete their own application, referencing your CoS number as the lead applicant. They can submit at the same time and will typically receive decisions around the same time as yours.
+    `.trim(),
+  },
+
+  {
+    slug: 'uk-spouse-partner-visa-step-by-step-2026',
+    title: 'UK Spouse & Partner Visa — Step-by-Step Application Guide 2026',
+    description:
+      'How to apply for a UK spouse or partner visa in 2026: eligibility, £29,000 income requirement, documents, processing times and the 5-year route to settlement.',
+    date: '2026-05-10',
+    updated: '2026-05-31',
+    readMinutes: 12,
+    tags: ['Family visa', 'Spouse visa', 'Settlement'],
+    body: `
+The UK spouse and partner visa (formally "entry clearance under Appendix FM") is one of the most document-heavy and emotionally stressful applications in the UK immigration system. Refusals are common, the financial threshold is high and the evidence rules are precise. This guide cuts through the complexity and shows you exactly what you need, in what format, and what the Home Office actually checks at each stage.
+
+> [!STAT] 12 weeks | Standard overseas processing for UK spouse visa (2026 Home Office target)
+
+> [!KEY] Key facts
+> The income threshold is **£29,000 gross/year** (sponsor's income, not joint).
+> The visa lasts **30 months** initially, then 30-month extension, then ILR at 5 years.
+> Relationship evidence matters as much as financial evidence — "genuine and subsisting" is a legal test.
+> The application fee is **£1,846** (overseas, 2026). IHS is additional.
+
+## Who can apply under this route
+
+The spouse and partner visa covers:
+- **Married spouses** — legal marriage recognised in UK law
+- **Civil partners** — UK or overseas civil partnership
+- **Unmarried partners** — cohabiting for 2 years or more in a "relationship akin to marriage"
+- **Fiancé(e)s** — intending to marry in the UK within 6 months (different visa, shorter, no right to work initially)
+
+You cannot use this route if you're in a same-sex relationship that the Home Office does not recognise as a civil partnership (rare in 2026 given the Marriage (Same Sex Couples) Act). You also cannot use this route if either party holds a visitor visa or is applying as an asylum seeker.
+
+## The sponsor's role
+
+In UK immigration law, the person already in the UK (British citizen, settled person, or person with leave that permits family formation) is the **sponsor**. Their income, accommodation and status determine whether the application succeeds.
+
+**Sponsor eligibility requirements:**
+- British citizen, ILR holder, person with refugee leave, or person with other qualifying leave that includes the right to bring in family
+- Meets the financial requirement (£29,000 income or savings equivalent)
+- Adequate accommodation for all family members (not overcrowded under Housing Act standards)
+- Not subject to a deportation order or exclusion
+
+## The financial requirement in detail
+
+The £29,000 threshold applies to the sponsor's gross income. See our [dedicated Family visa income guide](/blog/uk-family-visa-minimum-income-2026-what-counts) for the full breakdown by income category. Key points:
+
+- Only the sponsor's income counts, not the applicant's overseas earnings
+- Income must come from qualifying categories (employment, self-employment, savings, pension, rental)
+- Savings of £88,500+ (held 6+ months) can replace income entirely
+
+## Relationship evidence — what "genuine and subsisting" means
+
+The Home Office must be satisfied that the relationship is real and ongoing. This is a subjective test, but the evidence types they expect are well-established:
+
+**Tier 1 — strongest evidence:**
+- Joint mortgage or tenancy agreement
+- Joint bank account with regular shared transactions
+- Joint utility bills or council tax in both names
+- Photos together at specific events spanning years (with dates in metadata)
+- Evidence of visits to each other's country (boarding passes, stamps, hotel receipts)
+
+**Tier 2 — supporting evidence:**
+- WhatsApp, email, or letter correspondence (printed, showing ongoing communication)
+- Evidence of families knowing each other (wedding attendance, holiday photos)
+- Engagement/wedding rings, marriage certificate (for married couples)
+- Evidence of children of the relationship
+
+**Tier 3 — context evidence:**
+- Explanation letter from both parties if you met online, have an age gap, or have a short relationship history
+- Cultural context where appropriate (arranged marriages have specific supporting letter conventions)
+
+Refusal on "genuine relationship" grounds is common when the couple has short shared history, no cohabitation, limited financial links, and no clear explanation for how the relationship developed. Front-load your evidence with the strongest tier.
+
+## Accommodation requirement
+
+Your accommodation in the UK must not be "overcrowded" per the Housing Act 1985 standard. UKVI uses:
+
+- 1 room for every 2 adults
+- Children under 10 share an adult's "slot"
+- Children aged 10+ count as adults for room purposes
+
+A couple moving into a studio flat satisfies the requirement. A couple and 2 children moving into a 1-bed may not, depending on the children's ages.
+
+Provide: tenancy agreement or mortgage statement, and a letter from the landlord or property owner if you're staying with family.
+
+## Step-by-step application process
+
+> [!STEPS]
+> 1. **Gather documents** — Collect sponsor's income evidence (6 months payslips + bank statements), relationship evidence (photos, comms, cohabitation proof), accommodation evidence and both passports. Allow 2–4 weeks.
+> 2. **Complete the online application** — Go to gov.uk/apply-to-come-to-the-uk, select "Family (spouse/partner)." You'll need the sponsor's details and the applicant's travel history.
+> 3. **Pay fees** — Application fee £1,846 + IHS upfront. IHS for 30 months = 3 × £1,035 = £3,105. Total at application: **£4,951**.
+> 4. **Book biometrics appointment** — Overseas applicants book at VFS or TLS centre. Lead times in high-demand countries: 2–4 weeks. Attend with originals of all documents uploaded.
+> 5. **Wait for decision** — Standard: 12 weeks from biometrics. Priority: 30 working days. No super priority available for Family route. Track on UKVI account.
+> 6. **Receive eVisa** — If approved, eVisa is issued (from Jan 2025 no BRP). Applicant creates UKVI account and links passport before travelling to UK.
+> 7. **Travel to UK** — No restrictions on when after grant. Visa is valid 30 months from the date of entry clearance issue (not arrival).
+
+## Costs summary 2026
+
+| Item | Amount |
+|---|---|
+| Application fee (overseas) | £1,846 |
+| IHS (30 months = 3 years rate) | £3,105 |
+| Priority service (optional) | £500 |
+| TB test (if required) | £80–£200 |
+| Document translations | £50–£300 |
+| **Minimum total** | **£4,951** |
+
+## The 5-year route to ILR
+
+The spouse visa route to settlement follows a prescribed timeline:
+
+| Stage | Duration | Leave granted |
+|---|---|---|
+| Initial entry clearance | 30 months | Spouse visa |
+| First extension (in-country) | 30 months | Extended leave |
+| ILR application | After 5 years total | Indefinite leave |
+| Naturalisation (citizenship) | 1 year after ILR | British citizenship |
+
+At each stage (initial, extension, ILR), you must re-demonstrate the relationship is genuine and subsisting, and the sponsor still meets the financial requirement. Couples who separate during the 5-year period can lose their route to settlement.
+
+The ILR application (form SET(M)) requires a Life in the UK test pass and B1 English evidence. Application fee: £3,226 (2026).
+
+## Common refusal reasons and how to avoid them
+
+1. **Insufficient financial evidence** — Missing payslips, bank statements that don't show salary deposits, self-employment with no SA302.
+2. **Thin relationship evidence** — Photos only with no financial links or communication history.
+3. **Accommodation doesn't meet Housing Act standard** — Overcrowded under the formula.
+4. **Immigration history not disclosed** — Previous refusals in any country.
+5. **Sponsor's leave doesn't permit family formation** — Some leave types don't allow you to sponsor under Appendix FM (check your sponsor's BRP/eVisa conditions).
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I apply for a spouse visa if my partner is on a Skilled Worker visa (not British)?
+> A: Yes — if your partner holds a Skilled Worker visa (or other qualifying leave), they can sponsor you. Their leave must include "no restriction on family formation." Check their visa vignette or eVisa conditions.
+>
+> Q: Can I work on a spouse visa?
+> A: Yes — no restriction on work. You can work full-time, part-time, or be self-employed. The only restriction is on accessing certain public funds during the probationary period.
+>
+> Q: We got married abroad — is the marriage recognised in the UK?
+> A: Generally yes if the marriage was legally valid in the country where it took place, both parties had legal capacity to marry, and neither was already married. Proxy marriages and some religious-only marriages have specific rules — check with a solicitor if uncertain.
+>
+> Q: What if I'm refused — can I appeal?
+> A: Yes. Most family visa refusals carry a right of appeal to the First-tier Tribunal (Immigration and Asylum Chamber). The appeal process takes 8–14 months. Consider whether the grounds for refusal are fixable (e.g. missing document) — in which case a new application may be faster than an appeal.
+    `.trim(),
+  },
+
+  {
+    slug: 'uk-high-potential-individual-visa-2026',
+    title: 'UK High Potential Individual Visa 2026 — Global Top-50 University Route',
+    description:
+      'Complete 2026 guide to the UK High Potential Individual (HPI) visa: which universities qualify, fees, duration, what you can do, and how to switch to Skilled Worker.',
+    date: '2026-05-15',
+    updated: '2026-05-31',
+    readMinutes: 9,
+    tags: ['Graduate visa', 'HPI', 'Post-study'],
+    body: `
+The UK High Potential Individual (HPI) visa is one of the least-known routes in the UK's points-based immigration system — and potentially the most powerful for the right person. It requires no job offer, no sponsor and no salary threshold. If you graduated from a qualifying global top-50 university in the last 5 years, you can live and work in the UK for up to 3 years with no restrictions. This guide explains who qualifies, how it compares to the Graduate visa, what it costs and how to use it as a pathway to settlement.
+
+> [!STAT] 37 | Number of qualifying universities on the 2025/26 HPI list (from the three approved ranking bodies)
+
+> [!KEY] Key facts
+> **No sponsor needed** — you do not need a UK job offer or employer.
+> **No salary minimum** — you can work any job at any pay level.
+> **Duration:** 2 years (bachelor's or master's), 3 years (PhD/doctoral).
+> Qualifying degree must have been awarded within the **last 5 years** from a listed institution.
+> HPI **cannot be extended** — you must switch into another route before it expires.
+
+## Which universities qualify
+
+The Home Office publishes an annual list of qualifying institutions drawn from three global ranking bodies. You must have been awarded your degree from an institution appearing on the list **in the year your degree was awarded** (or the current list, whichever is more recent).
+
+**Ranking bodies used:**
+- Times Higher Education (THE) World University Rankings
+- Quacquarelli Symonds (QS) World University Rankings
+- Academic Ranking of World Universities (ARWU / Shanghai Ranking)
+
+An institution qualifies if it appears in the top 50 of **any** of the three rankings. This means the effective qualifying list is approximately 37–50 unique institutions when deduplicated.
+
+**Examples of qualifying institutions (2025/26 list):**
+- MIT, Stanford, Harvard, Caltech (USA)
+- University of Toronto, McGill, UBC (Canada)
+- ETH Zurich (Switzerland)
+- National University of Singapore, Nanyang Technological University (Singapore)
+- University of Melbourne, University of Sydney, ANU (Australia)
+- Peking University, Tsinghua University (China)
+- Indian Institute of Science (IISc, Bangalore) — appeared on ARWU top 100 but check current list
+- University of Cape Town (South Africa) — periodically qualifies
+- University of Tokyo, Kyoto University (Japan)
+
+**UK universities** do not appear on the HPI list. UK graduates use the Graduate visa route instead (see below for comparison). Oxford, Cambridge and Imperial are UK institutions — their international graduates use Graduate visa, not HPI.
+
+Check the current qualifying list at gov.uk/high-potential-individual-visa before applying — it is updated annually.
+
+## HPI vs Graduate visa — which should you choose?
+
+If you graduated from a UK university, you cannot choose HPI. If you graduated from a qualifying overseas university, you can choose either (if you also studied at a UK institution). Here's the comparison:
+
+| Feature | HPI visa | Graduate visa |
+|---|---|---|
+| Qualification required | Overseas degree from top-50 institution | UK degree from HEP |
+| Duration (master's) | 2 years | 18 months |
+| Duration (PhD) | 3 years | 3 years |
+| Application fee | £822 | £880 |
+| IHS rate | £1,035/year | £1,035/year |
+| Work restrictions | None | None |
+| Extendable? | No | No |
+| Counts toward ILR? | No | No |
+
+For PhD holders, HPI and Graduate visa both give 3 years. For bachelor's/master's graduates, HPI gives 6 extra months (24 months vs 18 months). The extra time is worth something — 6 more months to find a Skilled Worker sponsor.
+
+## Costs in 2026
+
+| Item | Amount |
+|---|---|
+| Application fee | £822 |
+| IHS (2 years — master's/bachelor's) | £2,070 |
+| IHS (3 years — PhD) | £3,105 |
+| Priority service (optional) | £500 |
+
+No maintenance funds requirement. No English test requirement (your qualifying degree evidences English ability, unless it was taught entirely in a language other than English — in which case you need a B1-level test).
+
+## What you can do on HPI
+
+- Work for any employer in any sector at any salary
+- Work as a freelancer or sole trader
+- Start a business (including as a company director)
+- Volunteer
+- Travel freely in and out of the UK
+- Study (not as a primary purpose)
+- Bring dependants (spouse/partner and children) — unlike Graduate visa from 2024, HPI retains the dependant right even for master's graduates
+
+The retention of dependant rights is a significant advantage over Graduate visa for people whose family want to join them in the UK.
+
+## What you cannot do
+
+- Extend the HPI visa (hard limit — no exceptions)
+- Use HPI time toward ILR
+- Claim most public funds
+- Work as a professional sportsperson
+
+## The path to settlement
+
+HPI time does **not** count toward the 5-year ILR requirement. You must switch to a qualifying route — most commonly Skilled Worker — before the HPI expires, and then count your settlement time from the Skilled Worker start date.
+
+Typical plan for an HPI holder:
+- Months 1–8: Job search, interview, negotiate offer
+- Months 9–14: Receive and accept offer, employer gets CoS issued
+- Months 15–20: Apply to switch to Skilled Worker, receive decision
+- Months 21–24: Buffer (or extend stay on Skilled Worker if needed before HPI expires)
+
+With 2 years on HPI + 5 years on Skilled Worker = 7 years UK residency — eligible for citizenship at year 7 (1 year after ILR at year 6 from Skilled Worker start).
+
+## Application requirements
+
+> [!CHECKLIST] hpi-documents
+> - Valid passport (or valid travel document)
+> - Original degree certificate from qualifying institution
+> - Official transcript confirming degree classification
+> - Evidence English language meets B1 if degree not taught in English
+> - £822 application fee payment
+> - IHS payment (£1,035 × years)
+> - Proof of savings for maintenance (£1,270 for 28 days) OR letter from employer confirming salary ≥ £1,270/month
+
+If your degree certificate is in a foreign language, you need a certified English translation.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: I graduated from a qualifying university 4 years ago — am I still eligible?
+> A: Yes, if it is within 5 years of your degree award date on the date you apply. The 5-year window runs from the date on your degree certificate (or the official conferral date from your university), not from graduation ceremony.
+>
+> Q: Can I apply from inside the UK?
+> A: Yes. You can apply to switch from another visa (Student, Skilled Worker, Graduate) to HPI if you're already in the UK and your qualifying degree was from an overseas institution.
+>
+> Q: My university was in the top 50 when I graduated but has since dropped. Am I still eligible?
+> A: The Home Office's position is that you must meet the criteria either at the time of your application or the date of your degree award. If your institution was in the top 50 in the year your degree was awarded, you remain eligible even if it has since dropped.
+>
+> Q: Does a postgraduate diploma or certificate qualify?
+> A: No. The qualifying academic qualifications are bachelor's degrees, master's degrees, and doctoral degrees. Diplomas, certificates and foundation degrees do not qualify.
+>
+> Q: My family is overseas — can they apply as dependants?
+> A: Yes — a key advantage of HPI over Graduate visa. Spouses, civil partners, and children can apply as dependants on HPI. Each pays a separate application fee (£822) and IHS.
+    `.trim(),
+  },
+
+  {
+    slug: 'uk-student-visa-extension-or-change-of-course-2026',
+    title: 'UK Student Visa Extension & Change of Course 2026 — What You Need to Know',
+    description:
+      'How to extend a UK Student visa or change your course in 2026: new CAS requirements, maintenance funds, fees, timing rules and what happens if your studies take longer than planned.',
+    date: '2026-05-20',
+    updated: '2026-05-31',
+    readMinutes: 9,
+    tags: ['Student visa', 'Extension', 'Application'],
+    body: `
+Most international students in the UK don't plan to stay longer than their original Student visa — until they do. A resit, a course extension, a master's added after a bachelor's, a PhD that takes an extra year: all of these require either a Student visa extension or a new Student visa application. In 2026 the rules around this have tightened in several areas. This guide covers every scenario clearly.
+
+> [!STAT] 8 weeks | Standard Home Office processing time for in-country Student visa extension (2026)
+
+> [!KEY] Key facts
+> You must apply to extend **before** your current Student visa expires — even by a day.
+> A new CAS from your university is required for every extension application.
+> You must show maintenance funds again — the same amount as a fresh application.
+> Changing to a different course at a different university requires a new application, not just an update.
+
+## When you need to extend vs. apply fresh
+
+| Situation | What you need |
+|---|---|
+| Continuing at the same university (same course, longer duration) | In-country extension |
+| Progressing from bachelor's to master's at same university | In-country extension with new CAS |
+| Moving to a different university | New application (not extension) |
+| Changing to a different type of course (e.g. full-time → part-time) | New application |
+| Taking a gap year and returning | New application from overseas |
+| Completing resits that push graduation beyond visa expiry | Extension with CAS for resit period |
+
+## The 60-day rule for extensions
+
+You can apply to extend your Student visa up to **3 months before** your current visa expires, but not earlier. Most students apply in the final 28–60 days.
+
+If your visa expires and you haven't yet applied, you have entered the UK illegally (overstaying). The consequences:
+- Overstaying a student visa by more than 28 days without reasonable cause can trigger a re-entry ban
+- Your university must report a "suspected overstayer" to UKVI if you're still enrolled
+- Overstaying does not automatically cancel your enrolment, but many universities have policies requiring active immigration status
+
+**Apply early, but not too early.** The earliest you can apply in-country is 3 months before expiry. The latest is the day before expiry.
+
+## What you need for a Student visa extension
+
+**1. New CAS from your university**
+
+Your university's International Student Office issues a new CAS for the extension period. The CAS must state:
+- The new course end date (or resit period)
+- Confirmation you've been attending and progressing satisfactorily
+- Your new tuition balance (fees owed for the extension period)
+
+Most universities generate CAS codes within 5–10 working days of your request. Give them 2 weeks to be safe.
+
+**2. Maintenance funds**
+
+Same rule as the initial application: you need to show the required amount has been in your account for 28 consecutive days immediately before applying.
+
+| Course location | Monthly amount | 9-month total |
+|---|---|---|
+| London | £1,483/month | £13,347 |
+| Elsewhere | £1,136/month | £10,224 |
+
+Even for a 3-month extension, you must show the full 9-month equivalent maintenance — the Home Office does not pro-rate this.
+
+**3. Passport and previous visa evidence**
+
+Your current passport plus any previous passports showing relevant visas. If you've renewed your passport since arrival, bring both.
+
+**4. Proof of academic progress**
+
+Not always explicitly required, but recommended:
+- Most recent academic transcript
+- Letter from your tutor or personal supervisor confirming progress
+- Enrolment confirmation letter dated within 28 days of application
+
+## Fees for a Student visa extension
+
+| Fee | Amount |
+|---|---|
+| Application fee | £524 |
+| IHS for extension period (1 year = £776) | £776–£2,328 |
+| Priority service (optional) | £500 |
+
+Total minimum for a 1-year extension: **£1,300**. For a 2-year extension (PhD): **£2,076**.
+
+Note: if you're switching from another visa type into Student for further study, the same fees apply as an initial application.
+
+## Changing your course — what's allowed
+
+**Within the same institution:** Your university can update your CAS to reflect a course change without you needing to submit a new visa application, **if** the new course is at the same level or higher. Switching from PGCE to MSc at the same university — no new application needed.
+
+**Dropping a level** (e.g. master's to bachelor's) — you must apply for a new Student visa, even at the same institution.
+
+**Moving to a different institution** — you must apply for a new visa with a new CAS from the new institution. You can apply in-country before your current visa expires. The new visa will overlap the old one — UKVI cancels the old visa when the new one is issued.
+
+> [!WARNING] If your university loses its "track record of compliance" (Home Office approval) while you are a student, you must transfer to a compliant institution or leave the UK. Check your university's status periodically at the Tier 4 register on gov.uk. Loss of status is rare but has happened.
+
+## Resits and failed years
+
+If you fail a year and must resit, your Student visa may not cover the resit period. In that case:
+
+1. Ask your university to issue a new CAS for the resit year
+2. Apply to extend your Student visa using that CAS
+3. Show maintenance funds for the full 9-month equivalent
+4. Pay the extension fee (£524 + IHS)
+
+If your visa expires before your resit results are confirmed, you must apply for the extension while in the UK (on or before expiry day) on the basis that the resit is pending. Your university should provide a letter confirming the timeline.
+
+## Part-time study — is it allowed?
+
+Student visa holders must be studying full-time. Part-time study is not permitted on a UK Student visa. However:
+
+- Studying part-time at a university while on a **different** visa (Skilled Worker, spouse visa) is permitted
+- Distance learning from overseas with a UK institution does not require a Student visa
+- If you switch to part-time study mid-way, UKVI expects you to notify them and may curtail your leave
+
+## After your extension — what comes next?
+
+Student visas cannot lead directly to ILR. After completing your studies:
+- Apply for a **Graduate visa** (if eligible — see our [Graduate visa guide](/blog/uk-graduate-visa-2026-no-sponsor-needed))
+- Or apply to switch directly to **Skilled Worker** if you have a job offer
+- Or return home and re-enter later
+
+Graduate visa time and Student visa time both do not count toward the 5-year ILR clock. Your settlement path effectively begins on the day your first qualifying "settlement route" visa (Skilled Worker, spouse visa, etc.) is granted.
+
+## Frequently asked questions
+
+> [!FAQ]
+> Q: Can I apply for a Student visa extension if I'm working part-time and my employer is also interested in sponsoring me?
+> A: Yes — but keep them separate. Apply for the Student extension to cover your remaining studies. Then, once you graduate, apply for Graduate visa or switch to Skilled Worker. Mixing applications increases complexity and can confuse both caseworkers and your employer.
+>
+> Q: My course end date on my CAS is wrong — what do I do?
+> A: Contact your university's International Student Office immediately. The CAS details must match your actual course. An incorrect end date can cause the visa to be issued for the wrong duration.
+>
+> Q: I took a break from study for health reasons — does that affect my extension?
+> A: Medical interruptions may require explanation. Your university must provide a letter confirming the interruption was authorised and that you are resuming studies. Keep all medical documentation.
+>
+> Q: Can I travel outside the UK while my extension application is being processed?
+> A: No. Travelling while your in-country extension is pending may invalidate it. Wait until the extension is granted, then travel. If you need to travel urgently, withdraw the application, travel, and reapply from overseas.
+    `.trim(),
   },
 ];
 
