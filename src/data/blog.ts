@@ -29,6 +29,12 @@ The Skilled Worker visa is the UK's main work route, and in 2026 the salary rule
 
 > [!WARNING] If your salary falls **below all three thresholds** (general minimum, going rate, hourly minimum), your application will be refused at the salary stage with no judgement and no appeal on that ground.
 
+> [!KEY] Before you read on
+> Your salary must clear **three** tests at once — general minimum, occupation going rate, and **£15.88/hour**.
+> The Home Office uses the **highest** of the three as your effective threshold.
+> The **new-entrant rate (£33,400)** is the most commonly missed discount — it can save you **£8,300/year**.
+> Care worker (6135) is **closed** to new overseas applicants from March 2025.
+
 ## The three numbers you need to know
 
 There is no single "Skilled Worker salary threshold." Your application must clear **three** separate salary tests simultaneously:
@@ -71,6 +77,16 @@ Every SOC 2020 code has its own going rate, set at the 25th percentile of UK ear
 - **Secondary school teacher (2314)** — £31,650 (under education pay scale)
 - **Chef (5434)** — £33,400 (Immigration Salary List)
 - **Graphic designer (3421)** — £33,400 (under new-entrant rate only)
+
+> [!BARS] 2026 going rate vs the £41,700 general minimum
+> IT business analyst / architect (2135) :: 52300 :: £52,300
+> Software developer (2136) :: 49400 :: £49,400
+> Management consultant (2423) :: 42900 :: £42,900
+> General minimum (most roles) :: 41700 :: £41,700
+> Civil engineer (2121) :: 40500 :: £40,500
+> Chartered accountant (2421) :: 39700 :: £39,700
+> Mechanical engineer (2122) :: 38900 :: £38,900
+> Chef — ISL (5434) :: 33400 :: £33,400
 
 If your role's going rate is **above** £41,700, the going rate applies. If it's below, £41,700 applies (unless you qualify for a discount group).
 

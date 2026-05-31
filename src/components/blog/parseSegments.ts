@@ -39,12 +39,15 @@ export type Segment =
   | { type: 'steps'; items: StepItem[] }
   | { type: 'checklist'; name: string; items: string[] }
   | { type: 'faq'; items: FaqItem[] }
-  | { type: 'quote'; content: string; attribution?: string };
+  | { type: 'quote'; content: string; attribution?: string }
+  | { type: 'key'; title: string; items: string[] }
+  | { type: 'bars'; title: string; items: BarItem[] };
 
 export interface StepItem { title: string; body: string }
 export interface FaqItem  { q: string; a: string }
+export interface BarItem  { label: string; value: number; display: string }
 
-const DIRECTIVE = /^>\s*\[!(INFO|WARNING|TIP|NOTE|STAT|STEPS|CHECKLIST|FAQ|QUOTE)\](?:\s+(.*))?$/i;
+const DIRECTIVE = /^>\s*\[!(INFO|WARNING|TIP|NOTE|STAT|STEPS|CHECKLIST|FAQ|QUOTE|KEY|BARS)\](?:\s+(.*))?$/i;
 
 export function parseSegments(md: string): Segment[] {
   const lines = md.split('\n');
@@ -76,8 +79,9 @@ export function parseSegments(md: string): Segment[] {
 
     // Collect all subsequent blockquote lines (allows internal blank lines)
     const blockLines: string[] = [];
-    if (type !== 'STAT' && type !== 'CHECKLIST' && inlineArg) {
+    if (type !== 'STAT' && type !== 'CHECKLIST' && type !== 'KEY' && type !== 'BARS' && inlineArg) {
       // For callouts/quotes, the inline content is the first body line.
+      // STAT/CHECKLIST/KEY/BARS treat the inline arg as a value or title instead.
       blockLines.push(inlineArg);
     }
     i++;
@@ -141,6 +145,32 @@ export function parseSegments(md: string): Segment[] {
       case 'FAQ': {
         const items = parseFaq(blockText);
         segments.push({ type: 'faq', items });
+        break;
+      }
+
+      case 'KEY': {
+        const items = blockText
+          .split('\n')
+          .map((l) => l.replace(/^[-*]\s+/, '').trim())
+          .filter(Boolean);
+        segments.push({ type: 'key', title: inlineArg, items });
+        break;
+      }
+
+      case 'BARS': {
+        // Each line: "Label :: 49400 :: £49,400"  (display optional)
+        const items: BarItem[] = blockText
+          .split('\n')
+          .map((l) => l.trim())
+          .filter(Boolean)
+          .map((l) => {
+            const parts = l.split('::').map((p) => p.trim());
+            const label = parts[0] ?? '';
+            const value = parseFloat((parts[1] ?? '').replace(/[^0-9.]/g, '')) || 0;
+            const display = parts[2] || parts[1] || '';
+            return { label, value, display };
+          });
+        segments.push({ type: 'bars', title: inlineArg, items });
         break;
       }
 

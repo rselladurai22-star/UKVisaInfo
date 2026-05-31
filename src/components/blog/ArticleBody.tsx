@@ -4,12 +4,15 @@ import remarkGfm from 'remark-gfm';
 import { Link as LinkIcon } from 'lucide-react';
 import { parseSegments } from './parseSegments';
 import { headingSlug } from './slug';
+import Reveal from './Reveal';
 import Callout from './blocks/Callout';
 import StatCard from './blocks/StatCard';
 import StepsTimeline from './blocks/StepsTimeline';
 import Checklist from './blocks/Checklist';
 import FaqAccordion from './blocks/FaqAccordion';
 import PullQuote from './blocks/PullQuote';
+import KeyTakeaways from './blocks/KeyTakeaways';
+import BarChart from './blocks/BarChart';
 import GlossaryTerm from '../GlossaryTerm';
 import { GLOSSARY } from '../../data/glossary';
 
@@ -60,27 +63,59 @@ export default function ArticleBody({ body, articleSlug }: Props) {
   const segments = parseSegments(body);
 
   return (
-    <div className="article-body">
+    <div className="article-body max-w-[720px]">
       {segments.map((seg, i) => {
         switch (seg.type) {
           case 'markdown':
             return <MarkdownChunk key={i} content={seg.content} />;
           case 'callout':
-            return <Callout key={i} variant={seg.variant} content={seg.content} />;
+            return <Reveal key={i}><Callout variant={seg.variant} content={seg.content} /></Reveal>;
           case 'stat':
-            return <StatCard key={i} value={seg.value} label={seg.label} />;
+            return <Reveal key={i}><StatCard value={seg.value} label={seg.label} /></Reveal>;
           case 'steps':
-            return <StepsTimeline key={i} items={seg.items} />;
+            return <Reveal key={i}><StepsTimeline items={seg.items} /></Reveal>;
           case 'checklist':
-            return <Checklist key={i} name={seg.name} items={seg.items} slug={articleSlug} />;
+            return <Reveal key={i}><Checklist name={seg.name} items={seg.items} slug={articleSlug} /></Reveal>;
           case 'faq':
-            return <FaqAccordion key={i} items={seg.items} />;
+            return <Reveal key={i}><FaqAccordion items={seg.items} /></Reveal>;
           case 'quote':
-            return <PullQuote key={i} content={seg.content} attribution={seg.attribution} />;
+            return <Reveal key={i}><PullQuote content={seg.content} attribution={seg.attribution} /></Reveal>;
+          case 'key':
+            return <Reveal key={i}><KeyTakeaways title={seg.title} items={seg.items} /></Reveal>;
+          case 'bars':
+            return <Reveal key={i}><BarChart title={seg.title} items={seg.items} /></Reveal>;
           default:
             return null;
         }
       })}
+
+      {/* Scoped reading-experience polish: list markers (fixes ordered lists
+          that previously rendered dots instead of numbers), table striping,
+          balanced line wrapping. */}
+      <style>{`
+        .article-body p { text-wrap: pretty; }
+        .article-body h2, .article-body h3 { text-wrap: balance; }
+
+        .article-body .md-ul { list-style: none; padding-left: 0; }
+        .article-body .md-ul > li { position: relative; padding-left: 1.6rem; }
+        .article-body .md-ul > li::before {
+          content: ''; position: absolute; left: 0.2rem; top: 0.72em;
+          width: 7px; height: 7px; border-radius: 9999px; background: #00C4B4;
+        }
+        .article-body .md-ol { list-style: none; counter-reset: li; padding-left: 0; }
+        .article-body .md-ol > li { position: relative; padding-left: 2.4rem; counter-increment: li; min-height: 1.65rem; }
+        .article-body .md-ol > li::before {
+          content: counter(li); position: absolute; left: 0; top: 0.05em;
+          width: 1.65rem; height: 1.65rem; border-radius: 9999px;
+          background: rgba(0,196,180,0.12); color: #0A2540;
+          font-weight: 700; font-size: 0.82rem;
+          display: flex; align-items: center; justify-content: center;
+          font-family: var(--font-display, sans-serif);
+        }
+
+        .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.025); }
+        .article-body table tbody tr:hover { background: rgba(0,196,180,0.06); }
+      `}</style>
     </div>
   );
 }
@@ -116,16 +151,15 @@ function MarkdownChunk({ content }: { content: string }) {
           </h3>
         ),
         p: ({ children }) => (
-          <p className="text-[#1a2240] text-[1.0625rem] md:text-[1.125rem] leading-[1.75] mb-5">
+          <p className="text-[#1a2240] text-[1.0625rem] md:text-[1.15rem] leading-[1.8] mb-6">
             {processChildren(children, seen)}
           </p>
         ),
-        ul: ({ children }) => <ul className="my-6 space-y-2.5 pl-0">{children}</ul>,
-        ol: ({ children }) => <ol className="my-6 space-y-2.5 pl-0">{children}</ol>,
+        ul: ({ children }) => <ul className="md-ul my-6 space-y-2.5">{children}</ul>,
+        ol: ({ children }) => <ol className="md-ol my-6 space-y-2.5">{children}</ol>,
         li: ({ children }) => (
-          <li className="flex gap-3 items-start text-[#1a2240] text-[1.0625rem] leading-[1.7]">
-            <span className="mt-[10px] w-1.5 h-1.5 rounded-full bg-[#00C4B4] flex-shrink-0" />
-            <span className="flex-1">{processChildren(children, seen)}</span>
+          <li className="text-[#1a2240] text-[1.0625rem] md:text-[1.1rem] leading-[1.7]">
+            {processChildren(children, seen)}
           </li>
         ),
         a: ({ href, children }) => (
@@ -140,7 +174,7 @@ function MarkdownChunk({ content }: { content: string }) {
           <strong className="font-bold text-[#0A2540]">{children}</strong>
         ),
         table: ({ children }) => (
-          <div className="my-9 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
+          <div className="my-9 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_12px_rgba(10,37,64,0.04)]">
             <table className="w-full text-[14px]">{children}</table>
           </div>
         ),
