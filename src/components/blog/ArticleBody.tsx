@@ -97,24 +97,26 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         .article-body h2, .article-body h3 { text-wrap: balance; }
 
         .article-body .md-ul { list-style: none; padding-left: 0; }
-        .article-body .md-ul > li { position: relative; padding-left: 1.6rem; }
+        .article-body .md-ul > li { position: relative; padding-left: 1.75rem; }
         .article-body .md-ul > li::before {
-          content: ''; position: absolute; left: 0.2rem; top: 0.72em;
-          width: 7px; height: 7px; border-radius: 9999px; background: #00C4B4;
+          content: ''; position: absolute; left: 0.25rem; top: 0.7em;
+          width: 8px; height: 8px; border-radius: 9999px;
+          background: linear-gradient(135deg, #00C4B4, #C9A14A);
         }
         .article-body .md-ol { list-style: none; counter-reset: li; padding-left: 0; }
-        .article-body .md-ol > li { position: relative; padding-left: 2.4rem; counter-increment: li; min-height: 1.65rem; }
+        .article-body .md-ol > li { position: relative; padding-left: 2.6rem; counter-increment: li; min-height: 1.8rem; }
         .article-body .md-ol > li::before {
-          content: counter(li); position: absolute; left: 0; top: 0.05em;
-          width: 1.65rem; height: 1.65rem; border-radius: 9999px;
-          background: rgba(0,196,180,0.12); color: #0A2540;
-          font-weight: 700; font-size: 0.82rem;
+          content: counter(li); position: absolute; left: 0; top: 0.1em;
+          width: 1.75rem; height: 1.75rem; border-radius: 9999px;
+          background: linear-gradient(135deg, rgba(0,196,180,0.18), rgba(0,196,180,0.08));
+          color: #007a72; font-weight: 800; font-size: 0.8rem;
           display: flex; align-items: center; justify-content: center;
           font-family: var(--font-display, sans-serif);
+          border: 1px solid rgba(0,196,180,0.25);
         }
 
-        .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.025); }
-        .article-body table tbody tr:hover { background: rgba(0,196,180,0.06); }
+        .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.02); }
+        .article-body table tbody tr:hover { background: rgba(0,196,180,0.05); }
       `}</style>
     </div>
   );
@@ -132,11 +134,13 @@ function MarkdownChunk({ content }: { content: string }) {
           const text = childrenToText(children);
           const id = headingSlug(text);
           return (
-            <h2 id={id} className="group relative font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0A2540] mt-14 mb-5 leading-tight tracking-[-0.015em] scroll-mt-28">
+            <h2 id={id} className="group relative font-display text-[1.5rem] md:text-[2rem] font-bold text-[#0A2540] mt-16 mb-6 leading-[1.15] tracking-[-0.02em] scroll-mt-28">
+              {/* decorative accent line above heading */}
+              <span aria-hidden="true" className="block w-8 h-[3px] rounded-full bg-gradient-to-r from-[#00C4B4] to-[#C9A14A] mb-3" />
               <a
                 href={`#${id}`}
                 aria-label="Anchor link"
-                className="absolute -left-7 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[#00C4B4] hidden md:inline-flex"
+                className="absolute -left-7 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[#00C4B4] hidden md:inline-flex"
               >
                 <LinkIcon className="w-4 h-4" />
               </a>
@@ -145,73 +149,79 @@ function MarkdownChunk({ content }: { content: string }) {
           );
         },
         h3: ({ children }) => (
-          <h3 className="font-display text-[1.125rem] md:text-[1.3125rem] font-bold text-[#0A2540] mt-10 mb-3 leading-snug tracking-[-0.01em] flex items-center gap-2.5">
-            <span className="w-1 h-5 bg-[#00C4B4] rounded-full flex-shrink-0" aria-hidden="true" />
-            {children}
+          <h3 className="font-display text-[1.125rem] md:text-[1.375rem] font-bold text-[#0A2540] mt-11 mb-4 leading-snug tracking-[-0.01em]">
+            <span className="inline-flex items-center gap-2.5">
+              <span className="w-[3px] h-[1.2em] bg-[#00C4B4] rounded-full flex-shrink-0 inline-block align-middle" aria-hidden="true" />
+              {children}
+            </span>
           </h3>
         ),
         p: ({ children }) => (
-          <p className="text-[#1a2240] text-[1.0625rem] md:text-[1.15rem] leading-[1.8] mb-6">
+          <p className="text-[#1f2a45] text-[1.0625rem] md:text-[1.1875rem] leading-[1.85] mb-7 font-[390]">
             {processChildren(children, seen)}
           </p>
         ),
-        ul: ({ children }) => <ul className="md-ul my-6 space-y-2.5">{children}</ul>,
-        ol: ({ children }) => <ol className="md-ol my-6 space-y-2.5">{children}</ol>,
+        ul: ({ children }) => <ul className="md-ul my-7 space-y-3">{children}</ul>,
+        ol: ({ children }) => <ol className="md-ol my-7 space-y-3">{children}</ol>,
         li: ({ children }) => (
-          <li className="text-[#1a2240] text-[1.0625rem] md:text-[1.1rem] leading-[1.7]">
+          <li className="text-[#1f2a45] text-[1.0625rem] md:text-[1.125rem] leading-[1.75]">
             {processChildren(children, seen)}
           </li>
         ),
         a: ({ href, children }) => (
           <a
             href={href}
-            className="text-[#00C4B4] underline decoration-[#00C4B4]/35 decoration-[1.5px] hover:decoration-[#00C4B4] underline-offset-[3px] font-medium transition-[text-decoration-color]"
+            className="text-[#007a72] underline decoration-[#00C4B4]/40 decoration-[1.5px] hover:text-[#00C4B4] hover:decoration-[#00C4B4] underline-offset-[4px] font-[500] transition-colors duration-100"
           >
             {children}
           </a>
         ),
         strong: ({ children }) => (
-          <strong className="font-bold text-[#0A2540]">{children}</strong>
+          <strong className="font-[700] text-[#0A2540] bg-[rgba(201,161,74,0.12)] px-[3px] py-[1px] rounded-[3px]">{children}</strong>
         ),
         table: ({ children }) => (
-          <div className="my-9 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_12px_rgba(10,37,64,0.04)]">
-            <table className="w-full text-[14px]">{children}</table>
+          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_16px_rgba(10,37,64,0.06)]">
+            <table className="w-full text-[14.5px]">{children}</table>
           </div>
         ),
         thead: ({ children }) => (
-          <thead className="bg-[#f7f9fd] border-b border-[rgba(14,20,36,0.09)]">{children}</thead>
+          <thead className="bg-gradient-to-r from-[#f7f9fd] to-[#eef1f8] border-b-2 border-[rgba(14,20,36,0.08)]">{children}</thead>
         ),
         th: ({ children }) => (
-          <th className="text-left px-4 py-3 font-bold text-[#0A2540] text-[11px] uppercase tracking-[0.08em] whitespace-nowrap">
+          <th className="text-left px-5 py-3.5 font-bold text-[#0A2540] text-[11px] uppercase tracking-[0.1em] whitespace-nowrap">
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-4 py-3.5 border-t border-[rgba(14,20,36,0.05)] text-[#1a2240] text-[14.5px] leading-relaxed">
+          <td className="px-5 py-4 border-t border-[rgba(14,20,36,0.05)] text-[#1f2a45] text-[14.5px] leading-relaxed">
             {children}
           </td>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="my-8 relative bg-gradient-to-br from-[#f7f9fd] to-white border-l-[3px] border-[#00C4B4] rounded-r-xl p-5 md:p-6">
+          <blockquote className="my-10 relative overflow-hidden rounded-2xl p-6 md:p-8" style={{ background: 'linear-gradient(135deg, rgba(0,196,180,0.07) 0%, rgba(201,161,74,0.05) 100%)', boxShadow: 'inset 0 0 0 1px rgba(0,196,180,0.2)' }}>
             <span
               aria-hidden="true"
-              className="absolute top-2 right-4 font-display font-bold text-[3.5rem] leading-none text-[#00C4B4]/15 select-none"
+              className="absolute -top-2 -left-1 font-display font-black text-[6rem] leading-none text-[#00C4B4]/10 select-none pointer-events-none"
             >&ldquo;</span>
-            <div className="relative text-[#0A2540] text-[1.0625rem] md:text-[1.125rem] leading-[1.65] italic font-medium">
+            <div className="relative text-[#0A2540] text-[1.125rem] md:text-[1.25rem] leading-[1.7] italic font-[500] tracking-[-0.005em]">
               {children}
             </div>
           </blockquote>
         ),
         code: ({ children }) => (
-          <code className="bg-[#f3f5fb] text-[#00C4B4] px-1.5 py-0.5 rounded-md text-[0.875em] font-mono border border-[rgba(14,20,36,0.07)] tabular-nums">
+          <code className="bg-[#eef6f5] text-[#007a72] px-1.5 py-0.5 rounded-md text-[0.875em] font-mono border border-[#00C4B4]/20 tabular-nums font-[500]">
             {children}
           </code>
         ),
         hr: () => (
-          <div className="my-12 flex items-center justify-center gap-2" aria-hidden="true">
-            <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
-            <span className="w-1 h-1 rounded-full bg-[#0A2540]/20" />
-            <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
+          <div className="my-14 flex items-center gap-0" aria-hidden="true">
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.1)] to-transparent" />
+            <span className="mx-4 flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A14A]" />
+              <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
+            </span>
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.1)] to-transparent" />
           </div>
         ),
       }}

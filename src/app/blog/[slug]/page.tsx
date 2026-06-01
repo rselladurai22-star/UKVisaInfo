@@ -353,17 +353,20 @@ export default async function BlogPostPage({ params }: RouteParams) {
         .article-body > p:first-of-type::first-letter {
           font-family: var(--font-display, 'Syne'), serif;
           float: left;
-          font-size: 4.2rem;
-          line-height: 0.9;
-          font-weight: 800;
-          padding: 0.35rem 0.7rem 0 0;
-          color: #00C4B4;
-          letter-spacing: -0.03em;
+          font-size: 4.8rem;
+          line-height: 0.85;
+          font-weight: 900;
+          padding: 0.25rem 0.75rem 0 0;
+          background: linear-gradient(135deg, #00C4B4, #007a72);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          letter-spacing: -0.04em;
         }
         @media (max-width: 640px) {
           .article-body > p:first-of-type::first-letter {
-            font-size: 3.4rem;
-            padding: 0.3rem 0.55rem 0 0;
+            font-size: 3.75rem;
+            padding: 0.2rem 0.6rem 0 0;
           }
         }
       `}</style>
