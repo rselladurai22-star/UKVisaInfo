@@ -25,14 +25,22 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
             {step.title}
           </h4>
           {step.body && (
-            <div className="text-[#52596e] text-[15px] leading-[1.65]">
+            <div
+              className="text-[#3d4a5e] text-[15.5px] leading-[1.75]"
+              style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
+            >
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  p: ({ children }) => <p>{children}</p>,
-                  strong: ({ children }) => <strong className="font-semibold text-[#0A2540]">{children}</strong>,
+                  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                  strong: ({ children }) => (
+                    <strong
+                      className="font-bold text-[#0A2540]"
+                      style={{ background: 'rgba(0,196,180,0.1)', padding: '0 3px', borderRadius: '3px' }}
+                    >{children}</strong>
+                  ),
                   a: ({ href, children }) => (
-                    <a href={href} className="text-[#00C4B4] underline decoration-[#00C4B4]/35 hover:decoration-[#00C4B4] font-medium">{children}</a>
+                    <a href={href} className="text-[#007a72] underline decoration-[#00C4B4]/40 hover:text-[#005f58] font-semibold">{children}</a>
                   ),
                 }}
               >

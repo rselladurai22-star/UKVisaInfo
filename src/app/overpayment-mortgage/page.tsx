@@ -3,7 +3,7 @@ import CalcPageShell from '../../components/calc-shell/CalcPageShell';
 import MortgageOverpaymentClient from './MortgageOverpaymentClient';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Overpayment Calculator 2025 — Interest Saved & Years Cut',
+  title: 'Mortgage Overpayment Calculator 2026 — Interest Saved & Years Cut',
   description: 'UK mortgage overpayment calculator. Enter your balance, rate, and extra monthly payment to see exactly how much interest you save and how many years you cut off your mortgage.',
   alternates: { canonical: '/overpayment-mortgage' },
 };

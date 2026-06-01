@@ -36,22 +36,22 @@ export interface TeamMember {
 
 export const EDITORS: TeamMember[] = [
   {
-    id: 'r-selladurai',
-    name: 'R. Selladurai',
+    id: 'ukdesk-editorial',
+    name: 'UKDesk Editorial',
     role: 'Editor & Researcher',
     scope:
       'Reads gov.uk, HMRC and ONS source pages, verifies every figure, and writes the plain-English explainers on UKDesk.',
     bio:
-      'R. Selladurai founded UKDesk in 2026 to make UK immigration rules, tax thresholds and council-level lookups understandable without legalese. Every figure on the site is traced back to the cited gov.uk page on the day it is published, and re-verified at each fee uplift. Not a solicitor and not an OISC-regulated adviser — UKDesk is editorial research, not legal advice.',
+      'UKDesk was founded in 2026 to make UK immigration rules, tax thresholds and council-level lookups understandable without legalese. Every figure on the site is traced back to the cited gov.uk page on the day it is published, and re-verified at each fee uplift. Not a solicitor and not an OISC-regulated adviser — UKDesk is editorial research, not legal advice.',
     expertise: [
       'UK visa routes (Skilled Worker, Student, Family, Health & Care, Talent, Graduate, BN(O), ILR, Citizenship)',
       'UK tax & take-home pay (HMRC PAYE, NI, Self Assessment, IHT, CGT, dividends)',
       'UK property finance (Stamp Duty / SDLT, mortgage affordability, rental yield)',
       'UK administrative lookups (postcode → council / NHS / police / MP, council tax bands)',
     ],
-    profileUrl: '/about#r-selladurai',
+    profileUrl: '/about#ukdesk-editorial',
     email: 'contact@ukvisainfo.co.uk',
-    initials: 'RS',
+    initials: 'UK',
   },
 ];
 

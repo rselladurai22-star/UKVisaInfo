@@ -104,13 +104,13 @@ export default function PrivacyPage() {
           <li>
             <strong>Advertising cookies</strong> — used by Google AdSense and
             its partners to serve relevant ads. Set only with your consent via
-            the cookie banner.
+            our consent banner.
           </li>
         </ul>
         <p>
           You can withdraw cookie consent at any time by clearing your
-          browser&apos;s cookies for this domain or returning to the cookie
-          banner.
+          browser&apos;s cookies and local storage for this domain, which resets
+          the consent banner on your next visit.
         </p>
 
         <h2 id="adsense" className="text-2xl font-bold text-primary mt-8 mb-3 scroll-mt-32">
@@ -137,20 +137,16 @@ export default function PrivacyPage() {
             page content, not based on your profile).
           </li>
           <li>
-            <strong>The consent banner.</strong> We use{' '}
-            <a className="text-secondary underline"
-               href="https://support.google.com/fundingchoices/"
-               target="_blank" rel="noopener noreferrer">
-              Google Funding Choices
-            </a>{' '}
-            (a Google-certified Consent Management Platform) to record your
-            choice. The banner gives you three options: consent to personalised
-            ads, decline (non-personalised ads only), or read more first.
+            <strong>The consent banner.</strong> We use a custom consent banner
+            built into this site. It appears on your first visit and gives you
+            two options: accept personalised ads or decline (non-personalised,
+            contextual ads only). Your choice is stored in your browser&apos;s
+            local storage and remembered on future visits.
           </li>
           <li>
-            <strong>Withdrawing consent.</strong> Clear cookies for this domain
-            in your browser to reset the banner and choose again. You can also
-            opt out of personalised advertising across the web at{' '}
+            <strong>Withdrawing consent.</strong> Clear this site&apos;s local
+            storage and cookies in your browser to reset your choice. You can
+            also opt out of personalised advertising across the web at{' '}
             <a className="text-secondary underline"
                href="https://www.google.com/settings/ads"
                target="_blank" rel="noopener noreferrer">

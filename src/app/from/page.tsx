@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'UK Visa by Country — Country-Specific Application Guides',
   description: 'UK visa requirements, documents, application centres and processing notes broken down by your country of origin.',
   alternates: { canonical: '/from' },
+  robots: { index: false, follow: true },
 };
 
 export default function FromIndex() {

@@ -63,7 +63,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
   const segments = parseSegments(body);
 
   return (
-    <div className="article-body max-w-[720px]">
+    <div className="article-body max-w-[720px]" style={{ fontFamily: 'var(--font-lora), Georgia, ui-serif, serif' }}>
       {segments.map((seg, i) => {
         switch (seg.type) {
           case 'markdown':
@@ -89,34 +89,62 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         }
       })}
 
-      {/* Scoped reading-experience polish: list markers (fixes ordered lists
-          that previously rendered dots instead of numbers), table striping,
-          balanced line wrapping. */}
+      {/* Scoped reading-experience polish */}
       <style>{`
-        .article-body p { text-wrap: pretty; }
-        .article-body h2, .article-body h3 { text-wrap: balance; }
-
-        .article-body .md-ul { list-style: none; padding-left: 0; }
-        .article-body .md-ul > li { position: relative; padding-left: 1.75rem; }
-        .article-body .md-ul > li::before {
-          content: ''; position: absolute; left: 0.25rem; top: 0.7em;
-          width: 8px; height: 8px; border-radius: 9999px;
-          background: linear-gradient(135deg, #00C4B4, #C9A14A);
+        /* Headings override inherited Lora with Space Grotesk */
+        .article-body h2,
+        .article-body h3,
+        .article-body h4 {
+          font-family: var(--font-grotesk), ui-sans-serif, sans-serif;
+          text-wrap: balance;
         }
+        .article-body p { text-wrap: pretty; }
+
+        /* Unordered list — teal bullet */
+        .article-body .md-ul { list-style: none; padding-left: 0; }
+        .article-body .md-ul > li { position: relative; padding-left: 1.85rem; }
+        .article-body .md-ul > li::before {
+          content: ''; position: absolute; left: 0.4rem; top: 0.7em;
+          width: 7px; height: 7px; border-radius: 9999px;
+          background: #00C4B4;
+          box-shadow: 0 0 0 2px rgba(0,196,180,0.18);
+        }
+
+        /* Ordered list — numbered badge */
         .article-body .md-ol { list-style: none; counter-reset: li; padding-left: 0; }
-        .article-body .md-ol > li { position: relative; padding-left: 2.6rem; counter-increment: li; min-height: 1.8rem; }
+        .article-body .md-ol > li { position: relative; padding-left: 2.5rem; counter-increment: li; min-height: 1.8rem; }
         .article-body .md-ol > li::before {
           content: counter(li); position: absolute; left: 0; top: 0.1em;
-          width: 1.75rem; height: 1.75rem; border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(0,196,180,0.18), rgba(0,196,180,0.08));
-          color: #007a72; font-weight: 800; font-size: 0.8rem;
+          width: 1.7rem; height: 1.7rem; border-radius: 5px;
+          background: rgba(0,196,180,0.1);
+          color: #007a72; font-weight: 700; font-size: 0.75rem;
           display: flex; align-items: center; justify-content: center;
-          font-family: var(--font-display, sans-serif);
           border: 1px solid rgba(0,196,180,0.25);
+          font-family: var(--font-grotesk), sans-serif;
+          letter-spacing: 0;
         }
 
+        /* Table */
         .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.02); }
-        .article-body table tbody tr:hover { background: rgba(0,196,180,0.05); }
+        .article-body table tbody tr:hover { background: rgba(0,196,180,0.04); }
+
+        /* First paragraph after heading — slightly larger drop-in */
+        .article-body h2 + p,
+        .article-body h3 + p {
+          font-size: 1.0625rem;
+        }
+
+        /* Running text first-letter on first p after H2 (editorial feel) */
+        .article-body .lead-para::first-letter {
+          float: left;
+          font-family: var(--font-grotesk), sans-serif;
+          font-size: 3.4em;
+          line-height: 0.85;
+          margin-right: 0.1em;
+          margin-top: 0.07em;
+          color: #0A2540;
+          font-weight: 700;
+        }
       `}</style>
     </div>
   );
@@ -134,13 +162,15 @@ function MarkdownChunk({ content }: { content: string }) {
           const text = childrenToText(children);
           const id = headingSlug(text);
           return (
-            <h2 id={id} className="group relative font-display text-[1.5rem] md:text-[2rem] font-bold text-[#0A2540] mt-16 mb-6 leading-[1.15] tracking-[-0.02em] scroll-mt-28">
-              {/* decorative accent line above heading */}
-              <span aria-hidden="true" className="block w-8 h-[3px] rounded-full bg-gradient-to-r from-[#00C4B4] to-[#C9A14A] mb-3" />
+            <h2
+              id={id}
+              className="group relative font-display text-[1.25rem] md:text-[1.625rem] font-bold text-[#0A2540] mt-20 mb-5 leading-[1.2] tracking-[-0.018em] scroll-mt-28 pl-5 py-3 rounded-r-2xl"
+              style={{ borderLeft: '3px solid #00C4B4', background: 'linear-gradient(to right, rgba(0,196,180,0.08) 0%, rgba(0,196,180,0.03) 55%, transparent 100%)' }}
+            >
               <a
                 href={`#${id}`}
                 aria-label="Anchor link"
-                className="absolute -left-7 top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[#00C4B4] hidden md:inline-flex"
+                className="absolute -left-8 top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[#00C4B4] hidden md:inline-flex"
               >
                 <LinkIcon className="w-4 h-4" />
               </a>
@@ -149,79 +179,110 @@ function MarkdownChunk({ content }: { content: string }) {
           );
         },
         h3: ({ children }) => (
-          <h3 className="font-display text-[1.125rem] md:text-[1.375rem] font-bold text-[#0A2540] mt-11 mb-4 leading-snug tracking-[-0.01em]">
+          <h3 className="font-display text-[1.0625rem] md:text-[1.25rem] font-bold text-[#0A2540] mt-9 mb-3 leading-snug tracking-[-0.01em] pt-5 border-t border-[rgba(10,37,64,0.07)]">
             <span className="inline-flex items-center gap-2.5">
-              <span className="w-[3px] h-[1.2em] bg-[#00C4B4] rounded-full flex-shrink-0 inline-block align-middle" aria-hidden="true" />
+              <span className="w-5 h-5 rounded-md bg-[#0A2540] flex-shrink-0 inline-flex items-center justify-center" aria-hidden="true">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
+              </span>
               {children}
             </span>
           </h3>
         ),
         p: ({ children }) => (
-          <p className="text-[#1f2a45] text-[1.0625rem] md:text-[1.1875rem] leading-[1.85] mb-7 font-[390]">
+          <p className="text-[#1e2a42] text-[1.0625rem] md:text-[1.125rem] leading-[1.9] mb-7 font-normal tracking-[0.003em]">
             {processChildren(children, seen)}
           </p>
         ),
         ul: ({ children }) => <ul className="md-ul my-7 space-y-3">{children}</ul>,
         ol: ({ children }) => <ol className="md-ol my-7 space-y-3">{children}</ol>,
         li: ({ children }) => (
-          <li className="text-[#1f2a45] text-[1.0625rem] md:text-[1.125rem] leading-[1.75]">
+          <li className="text-[#1e2a42] text-[1.0rem] md:text-[1.0625rem] leading-[1.85] font-normal">
             {processChildren(children, seen)}
           </li>
         ),
         a: ({ href, children }) => (
           <a
             href={href}
-            className="text-[#007a72] underline decoration-[#00C4B4]/40 decoration-[1.5px] hover:text-[#00C4B4] hover:decoration-[#00C4B4] underline-offset-[4px] font-[500] transition-colors duration-100"
+            className="text-[#007a72] underline decoration-[#00C4B4]/45 decoration-[1.5px] hover:text-[#005f58] hover:decoration-[#00C4B4] underline-offset-[4px] font-semibold transition-colors duration-100"
+            style={{ fontFamily: 'inherit' }}
           >
             {children}
           </a>
         ),
         strong: ({ children }) => (
-          <strong className="font-[700] text-[#0A2540] bg-[rgba(201,161,74,0.12)] px-[3px] py-[1px] rounded-[3px]">{children}</strong>
+          <strong
+            className="font-bold text-[#0A2540]"
+            style={{
+              background: 'rgba(0,196,180,0.1)',
+              padding: '1px 4px',
+              borderRadius: '3px',
+              fontFamily: 'inherit',
+            }}
+          >{children}</strong>
+        ),
+        em: ({ children }) => (
+          <em className="italic text-[#2c3a55]" style={{ fontFamily: 'inherit' }}>{children}</em>
         ),
         table: ({ children }) => (
-          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_16px_rgba(10,37,64,0.06)]">
-            <table className="w-full text-[14.5px]">{children}</table>
+          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_20px_rgba(10,37,64,0.07)]">
+            <table className="w-full">{children}</table>
           </div>
         ),
         thead: ({ children }) => (
-          <thead className="bg-gradient-to-r from-[#f7f9fd] to-[#eef1f8] border-b-2 border-[rgba(14,20,36,0.08)]">{children}</thead>
+          <thead className="bg-gradient-to-r from-[#f4f6fb] to-[#eceff7] border-b-2 border-[rgba(14,20,36,0.08)]">{children}</thead>
         ),
         th: ({ children }) => (
-          <th className="text-left px-5 py-3.5 font-bold text-[#0A2540] text-[11px] uppercase tracking-[0.1em] whitespace-nowrap">
+          <th
+            className="text-left px-5 py-3.5 font-bold text-[#0A2540] text-[11px] uppercase tracking-[0.1em] whitespace-nowrap"
+            style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
+          >
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-5 py-4 border-t border-[rgba(14,20,36,0.05)] text-[#1f2a45] text-[14.5px] leading-relaxed">
+          <td className="px-5 py-4 border-t border-[rgba(14,20,36,0.05)] text-[#1e2a42] text-[0.9375rem] leading-relaxed">
             {children}
           </td>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="my-10 relative overflow-hidden rounded-2xl p-6 md:p-8" style={{ background: 'linear-gradient(135deg, rgba(0,196,180,0.07) 0%, rgba(201,161,74,0.05) 100%)', boxShadow: 'inset 0 0 0 1px rgba(0,196,180,0.2)' }}>
-            <span
-              aria-hidden="true"
-              className="absolute -top-2 -left-1 font-display font-black text-[6rem] leading-none text-[#00C4B4]/10 select-none pointer-events-none"
-            >&ldquo;</span>
-            <div className="relative text-[#0A2540] text-[1.125rem] md:text-[1.25rem] leading-[1.7] italic font-[500] tracking-[-0.005em]">
-              {children}
+          <figure className="my-12 relative">
+            <div
+              className="rounded-r-2xl pl-7 pr-6 py-6"
+              style={{
+                borderLeft: '4px solid #0A2540',
+                background: 'linear-gradient(to right, rgba(10,37,64,0.04) 0%, rgba(10,37,64,0.015) 60%, transparent 100%)',
+              }}
+            >
+              <div
+                className="text-[#1a2540] text-[1.1rem] md:text-[1.2rem] leading-[1.8] italic font-medium"
+                style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
+              >
+                {children}
+              </div>
             </div>
-          </blockquote>
+          </figure>
         ),
         code: ({ children }) => (
-          <code className="bg-[#eef6f5] text-[#007a72] px-1.5 py-0.5 rounded-md text-[0.875em] font-mono border border-[#00C4B4]/20 tabular-nums font-[500]">
+          <code
+            className="text-[#007a72] px-1.5 py-0.5 rounded-md text-[0.875em] font-mono tabular-nums"
+            style={{
+              background: 'rgba(0,196,180,0.08)',
+              border: '1px solid rgba(0,196,180,0.2)',
+              fontFamily: 'var(--font-jetbrains), ui-monospace, monospace',
+            }}
+          >
             {children}
           </code>
         ),
         hr: () => (
-          <div className="my-14 flex items-center gap-0" aria-hidden="true">
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.1)] to-transparent" />
-            <span className="mx-4 flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A14A]" />
-              <span className="w-1 h-1 rounded-full bg-[#00C4B4]" />
+          <div className="my-16 flex items-center" aria-hidden="true">
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.12)] to-transparent" />
+            <span className="mx-5 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
+              <span className="w-2 h-2 rounded-full bg-[#C9A14A]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
             </span>
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.1)] to-transparent" />
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.12)] to-transparent" />
           </div>
         ),
       }}

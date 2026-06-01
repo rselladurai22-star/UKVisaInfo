@@ -210,7 +210,7 @@ export default function VisaPageV2({
             <SectionShell
               eyebrow={`${pad(sec.next())} — Editor’s analysis`}
               title="The honest read on this route"
-              sub="Original commentary from R. Selladurai — not paraphrased from gov.uk.">
+              sub="Original UKDesk editorial commentary — not paraphrased from gov.uk.">
               <EditorCommentary commentary={commentary} />
             </SectionShell>
           )}

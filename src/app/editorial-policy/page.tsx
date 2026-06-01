@@ -59,7 +59,7 @@ export default function EditorialPolicyPage() {
               <p className="mt-1.5 text-[13.5px] leading-[1.6]" style={{ color: SLATE }}>
                 {e.bio}
               </p>
-              <Link href="/about#r-selladurai"
+              <Link href="/about#ukdesk-editorial"
                     className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-semibold"
                     style={{ color: EMERALD }}>
                 Full profile <ExternalLink className="w-3 h-3" />

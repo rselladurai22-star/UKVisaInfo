@@ -5,7 +5,7 @@ import AppShell from '../components/AppShell';
 import AdSenseScript from '../components/AdSenseScript';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import { PRIMARY_EDITOR, primaryEditorSchema } from '../data/editorialTeam';
-import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import { Inter, Space_Grotesk, JetBrains_Mono, Lora } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const spaceGrotesk = Space_Grotesk({
@@ -18,6 +18,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-jetbrains',
+  display: 'swap',
+});
+const lora = Lora({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-lora',
   display: 'swap',
 });
 
@@ -163,7 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en-GB" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en-GB" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${lora.variable}`}>
       <head>
         <script
           type="application/ld+json"

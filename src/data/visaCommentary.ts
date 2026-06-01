@@ -8,7 +8,7 @@
  *      the formal eligibility list
  *   3. "What gov.uk doesn't tell you" — observation / synthesis insight
  *
- * Verified: 2026-05-19. Reviewer: R. Selladurai.
+ * Verified: 2026-05-19. Reviewer: UKDesk Editorial.
  */
 
 export interface VisaCommentary {

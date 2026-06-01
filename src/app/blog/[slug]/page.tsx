@@ -4,14 +4,11 @@ import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, ArrowRight } from 'lucide-react';
 import { BLOG_POSTS, getPost } from '../../../data/blog';
 import { primaryEditorSchema, PRIMARY_EDITOR } from '../../../data/editorialTeam';
-import EditorByline from '../../../components/EditorByline';
-import AffiliateCallouts from '../../../components/AffiliateCallouts';
 import RelatedPosts from '../../../components/RelatedPosts';
 import ReadingProgress from '../../../components/blog/ReadingProgress';
 import ArticleToc from '../../../components/blog/ArticleToc';
 import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
-import SidebarAffiliate from '../../../components/blog/SidebarAffiliate';
 import Comments from '../../../components/blog/Comments';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
@@ -49,7 +46,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
     authors: [
-      { name: 'R. Selladurai', url: 'https://ukvisainfo.co.uk/about#r-selladurai' },
+      { name: 'UKDesk Editorial', url: 'https://ukvisainfo.co.uk/about#ukdesk-editorial' },
       { name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
     ],
     openGraph: {
@@ -59,7 +56,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: ['https://ukvisainfo.co.uk/about#r-selladurai'],
+      authors: ['https://ukvisainfo.co.uk/about#ukdesk-editorial'],
       tags: post.tags,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
     },
@@ -240,17 +237,6 @@ export default async function BlogPostPage({ params }: RouteParams) {
         </div>
       </header>
 
-      {/* Named-editor byline immediately below the dark hero — the
-          first signal a reader sees inside the article body. */}
-      <div className="bg-white border-b border-[rgba(14,20,36,0.06)]">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 pt-6 pb-4">
-          <EditorByline
-            verified={new Date(post.updated).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
-            prefix="Written & verified by"
-          />
-        </div>
-      </div>
-
       {/* ═══════════════════════
           3-COLUMN ARTICLE LAYOUT
       ═══════════════════════ */}
@@ -270,7 +256,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               <ArticleBody body={post.body} articleSlug={post.slug} />
 
               {/* Mid-article ad — shown after body, before tags */}
-              <AdUnit slot="3456789012" format="auto" className="my-8" />
+              <AdUnit slot="3862206036" format="auto" className="my-8" />
 
               {/* Tags strip */}
               <div className="mt-12 pt-8 border-t border-[rgba(14,20,36,0.08)]">
@@ -291,8 +277,6 @@ export default async function BlogPostPage({ params }: RouteParams) {
                 </div>
               </div>
 
-              <AffiliateCallouts tags={post.tags} />
-
               <EmailCapture
                 title="Stay on top of UK visa changes"
                 subtitle="Rule updates, fee changes and route news in a weekly 3-minute brief."
@@ -301,7 +285,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               />
 
               {/* Pre-comments ad */}
-              <AdUnit slot="4567890123" format="auto" className="my-6" />
+              <AdUnit slot="8847243325" format="auto" className="my-6" />
 
               <RelatedPosts current={post} />
 
@@ -337,11 +321,10 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
             </article>
 
-            {/* ── RIGHT RAIL: SHARE + AFFILIATE ── */}
+            {/* ── RIGHT RAIL: SHARE ── */}
             <aside className="hidden lg:block lg:col-span-2">
               <div className="sticky top-[110px] space-y-6">
                 <ShareRail title={post.title} />
-                <SidebarAffiliate tags={post.tags} />
               </div>
             </aside>
           </div>
@@ -351,22 +334,19 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* Article-specific typography polish */}
       <style>{`
         .article-body > p:first-of-type::first-letter {
-          font-family: var(--font-display, 'Syne'), serif;
+          font-family: var(--font-display, sans-serif);
           float: left;
-          font-size: 4.8rem;
-          line-height: 0.85;
-          font-weight: 900;
-          padding: 0.25rem 0.75rem 0 0;
-          background: linear-gradient(135deg, #00C4B4, #007a72);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          letter-spacing: -0.04em;
+          font-size: 4.5rem;
+          line-height: 0.82;
+          font-weight: 800;
+          padding: 0.2rem 0.65rem 0 0;
+          color: #00C4B4;
+          letter-spacing: -0.03em;
         }
         @media (max-width: 640px) {
           .article-body > p:first-of-type::first-letter {
-            font-size: 3.75rem;
-            padding: 0.2rem 0.6rem 0 0;
+            font-size: 3.5rem;
+            padding: 0.15rem 0.5rem 0 0;
           }
         }
       `}</style>

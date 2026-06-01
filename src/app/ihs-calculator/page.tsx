@@ -3,7 +3,7 @@ import CalcPageShell from '../../components/calc-shell/CalcPageShell';
 import IhsClient from './IhsClient';
 
 export const metadata: Metadata = {
-  title: 'IHS Calculator 2025 — Immigration Health Surcharge UK Visa Cost',
+  title: 'IHS Calculator 2026 — Immigration Health Surcharge UK Visa Cost',
   description: 'UK Immigration Health Surcharge calculator. Standard £1,035/year, student £776/year. Calculate total IHS for main applicant + dependants across any visa duration. Rounds up to full years.',
   alternates: { canonical: '/ihs-calculator' },
 };

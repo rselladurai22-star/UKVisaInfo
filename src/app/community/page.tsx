@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     'ask UK visa questions', 'UK visa experiences', 'UK visa updates alerts',
   ],
   alternates: { canonical: '/community' },
+  robots: { index: false, follow: true },
   openGraph: {
     title, description,
     url: 'https://ukvisainfo.co.uk/community',
