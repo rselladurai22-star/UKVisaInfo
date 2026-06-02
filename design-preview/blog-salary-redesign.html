@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DESIGN PREVIEW v4 — Next-gen editorial / data clarity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ─── tokens ─────────────────────────────── */
+:root{
+  /* Near-blacks — cooler, blue-tinted (not warm brown-black) */
+  --ink:     #0c0e12;
+  --body:    #1c2028;
+  --muted:   #454d5c;
+  --quiet:   #6b7485;
+
+  /* Surfaces */
+  --surface: #f5f6f8;
+  --surface2:#eceef2;
+  --bg:      #ffffff;
+  --line:    #e1e4ea;
+  --line-dk: #c8cdd8;
+
+  /* Single accent */
+  --blue:    #0f62fe;
+  --blue-lt: rgba(15,98,254,.06);
+  --blue-md: rgba(15,98,254,.12);
+
+  /* Semantic */
+  --pass:    #166534;
+  --pass-lt: rgba(22,101,52,.06);
+  --warn:    #92400e;
+  --warn-lt: rgba(146,64,14,.06);
+  --fail:    #991b1b;
+  --fail-lt: rgba(153,27,27,.06);
+
+  --f:    'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --col:  68ch;
+}
+*{ box-sizing:border-box; margin:0; padding:0 }
+html{ scroll-behavior:smooth; overflow-x:clip }
+body{
+  font-family: var(--f);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.78;
+  color: var(--body);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:inherit; text-decoration:none }
+button{ font-family:var(--f); cursor:pointer; border:none; background:none }
+
+/* ─── reading progress ───────────────────── */
+#bar{
+  position:fixed; top:0; left:0; height:3px; width:0;
+  background: linear-gradient(90deg, var(--blue) 0%, #5b9cf6 100%);
+  z-index:999; transition:width .06s linear; pointer-events:none;
+  box-shadow: 0 0 8px rgba(15,98,254,.35);
+}
+
+/* ─── header ─────────────────────────────── */
+header{
+  position:sticky; top:0; z-index:100; height:48px;
+  background:rgba(255,255,255,.96); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.h-inner{ max-width:1160px; margin:0 auto; padding:0 24px; width:100%; height:100%; display:flex; align-items:center; gap:0 }
+.brand{ font-size:13.5px; font-weight:700; color:var(--ink); letter-spacing:.01em; display:flex; align-items:center; gap:7px }
+.brand-sq{ width:20px; height:20px; background:var(--ink); display:flex; align-items:center; justify-content:center; border-radius:3px }
+.brand-sq svg{ display:block }
+.h-sep{ font-size:13px; color:var(--line-dk); margin:0 12px }
+.h-crumb{ font-size:13px; font-weight:400; color:var(--muted) }
+.h-crumb a{ color:var(--muted) }
+.h-crumb a:hover{ color:var(--blue); text-decoration:underline }
+
+/* ─── hero ───────────────────────────────── */
+.hero{
+  border-bottom:1px solid var(--line);
+  padding:48px 0 0;
+  background:var(--bg);
+}
+.hero-inner{ max-width:1160px; margin:0 auto; padding:0 24px }
+.hero-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; align-items:center }
+.tag{
+  font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  padding:3px 9px; border:1px solid var(--line-dk); color:var(--muted);
+  border-radius:3px;
+}
+.tag.primary{ border-color:var(--blue); color:var(--blue); background:var(--blue-lt) }
+
+h1{
+  font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.022em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-width: 22ch;
+}
+.deck{
+  font-size:16.5px; font-weight:400; line-height:1.7;
+  color:var(--muted); max-width:58ch; margin-bottom:28px;
+}
+
+/* ─── threshold strip (inside hero) ─────── */
+.threshold-strip{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  margin-bottom: 0;
+}
+.ts-cell{
+  padding: 16px 20px;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+.ts-label{
+  font-size: 10.5px; font-weight: 600; letter-spacing:.09em;
+  text-transform: uppercase; color: var(--quiet);
+  margin-bottom: 5px;
+}
+.ts-val{
+  font-family: var(--mono);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.ts-val.accent{ color: var(--blue) }
+.ts-note{
+  font-size: 11.5px; color: var(--muted); margin-top: 3px;
+  font-weight: 400;
+}
+
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:20px;
+  font-size:12.5px; font-weight:400; color:var(--quiet);
+  padding:14px 0;
+  border-top:1px solid var(--line);
+}
+.hero-meta-item{ display:flex; align-items:center; gap:5px }
+.hero-meta-author{ margin-left:auto; color:var(--muted); font-weight:500 }
+
+/* ─── layout ─────────────────────────────── */
+.page{ max-width:1160px; margin:0 auto; padding:0 24px }
+.layout{ display:grid; grid-template-columns:180px 1fr 180px; gap:48px; padding:48px 0 96px; align-items:start }
+
+/* ─── TOC ────────────────────────────────── */
+.toc{ position:sticky; top:62px }
+.toc-hd{
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--quiet); margin-bottom:14px;
+}
+.toc-list{ list-style:none; border-left:1px solid var(--line) }
+.toc-item{ position:relative }
+.toc-line{
+  position:absolute; left:-1px; top:0; bottom:0; width:2px;
+  background:var(--blue); transform:scaleY(0); transform-origin:top;
+  transition:transform .15s cubic-bezier(.4,0,.2,1);
+}
+.toc-item.active .toc-line{ transform:scaleY(1) }
+.toc-a{
+  display:flex; align-items:baseline; gap:8px;
+  padding:5px 0 5px 14px; font-size:12px; font-weight:400; color:var(--quiet);
+  transition:color .1s; line-height:1.35;
+}
+.toc-a:hover{ color:var(--body) }
+.toc-item.active .toc-a{ color:var(--blue); font-weight:600 }
+.toc-num{
+  font-size:10px; font-family:var(--mono); color:var(--line-dk); flex-shrink:0;
+}
+.toc-item.active .toc-num{ color:var(--blue) }
+.toc-ft{
+  margin-top:16px; padding-top:12px;
+  border-top:1px solid var(--line);
+  font-size:11px; color:var(--quiet);
+}
+
+/* ─── prose ──────────────────────────────── */
+.prose{ min-width:0 }
+.lead{
+  font-size:17.5px; font-weight:400; line-height:1.82;
+  color:var(--body); margin-bottom:32px; max-width:var(--col);
+}
+.lead::first-letter{
+  font-size:4.25rem; font-weight:700; float:left;
+  line-height:.82; padding:.1rem .55rem 0 0; color:var(--blue);
+  font-family:var(--mono);
+}
+
+/* Section heading — modern editorial */
+.prose h2{
+  font-size:1.125rem; font-weight:700; color:var(--ink);
+  letter-spacing:-.005em; margin:56px 0 18px;
+  padding-left:14px;
+  border-left:3px solid var(--blue);
+  scroll-margin-top:62px;
+  line-height:1.3;
+}
+.prose h2 .sec-n{
+  display:block;
+  font-size:10px; font-weight:600; font-family:var(--mono);
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:3px;
+  opacity:.7;
+}
+.prose h3{
+  font-size:1rem; font-weight:600; color:var(--ink);
+  margin:28px 0 10px; letter-spacing:-.005em;
+}
+.prose p{
+  font-size:16px; font-weight:400; line-height:1.8;
+  color:var(--body); margin-bottom:20px; max-width:var(--col);
+}
+.prose ul{ margin:14px 0 22px; padding:0; list-style:none; max-width:var(--col) }
+.prose ul li{
+  position:relative; padding-left:18px; font-size:16px; font-weight:400;
+  line-height:1.75; color:var(--body); margin-bottom:7px;
+}
+.prose ul li::before{
+  content:''; position:absolute; left:0; top:.65em;
+  width:6px; height:6px; background:var(--blue); border-radius:50%;
+}
+.prose strong{ font-weight:700; color:var(--ink) }
+.prose a{
+  color:var(--blue); text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:rgba(15,98,254,.3);
+}
+.prose a:hover{ text-decoration-color:var(--blue) }
+.prose hr{ border:none; border-top:1px solid var(--line); margin:44px 0 }
+
+/* ─── three-test summary table ───────────── */
+.test-table{
+  width:100%; border-collapse:collapse;
+  margin:28px 0; max-width:var(--col);
+  border:1px solid var(--line-dk);
+  border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 3px rgba(12,14,18,.06);
+}
+.test-table th{
+  text-align:left; padding:10px 16px;
+  font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); background:var(--surface);
+  border-bottom:1px solid var(--line-dk);
+}
+.test-table td{
+  padding:13px 16px; border-bottom:1px solid var(--line);
+  font-size:14.5px; font-weight:400; vertical-align:top;
+}
+.test-table tr:last-child td{ border-bottom:none }
+.test-table tbody tr:hover td{ background:var(--surface) }
+.t-val{
+  font-size:19px; font-weight:600; color:var(--ink);
+  font-family:var(--mono); letter-spacing:-.015em;
+  display:block; margin-bottom:3px;
+}
+.t-val.key{ color:var(--blue) }
+.t-note{ font-size:12.5px; color:var(--muted); font-weight:400; line-height:1.5 }
+.t-badge{
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; padding:2px 7px; border-radius:3px; margin-top:6px;
+}
+.t-all{ background:var(--pass-lt); color:var(--pass); border:1px solid rgba(22,101,52,.18) }
+.t-var{ background:var(--warn-lt); color:var(--warn); border:1px solid rgba(146,64,14,.18) }
+
+/* ─── callout notes ──────────────────────── */
+.note{
+  max-width:var(--col); margin:22px 0;
+  border-left:3px solid var(--line-dk); padding:14px 18px;
+  background:var(--surface); font-size:15px; font-weight:400;
+  line-height:1.7; border-radius:0 6px 6px 0;
+}
+.note.warn  { border-left-color:#d97706; background:var(--warn-lt) }
+.note.pass  { border-left-color:#16a34a; background:var(--pass-lt) }
+.note.fail  { border-left-color:#dc2626; background:var(--fail-lt) }
+.note.info  { border-left-color:var(--blue); background:var(--blue-lt) }
+.note-lbl{
+  font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  margin-bottom:5px;
+}
+.note.warn .note-lbl{ color:#92400e }
+.note.pass .note-lbl{ color:#166534 }
+.note.fail .note-lbl{ color:#991b1b }
+.note.info .note-lbl{ color:var(--blue) }
+
+/* ─── key box ────────────────────────────── */
+.key-box{
+  max-width:var(--col); margin:24px 0; padding:18px 22px;
+  border:1px solid var(--line-dk); background:var(--surface);
+  border-radius:8px;
+  box-shadow:0 1px 3px rgba(12,14,18,.05);
+}
+.key-hd{
+  font-size:10.5px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--blue); margin-bottom:14px;
+}
+.key-list{ list-style:none; display:flex; flex-direction:column; gap:10px }
+.key-item{ display:flex; gap:11px; font-size:15px; font-weight:400; line-height:1.6; color:var(--body) }
+.k-chk{
+  flex-shrink:0; width:17px; height:17px; background:var(--blue);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:9px; font-weight:700; margin-top:3px;
+  border-radius:4px;
+}
+
+/* ─── data table ─────────────────────────── */
+.data-table{
+  width:100%; border-collapse:collapse; margin:22px 0;
+  font-size:14.5px; border:1px solid var(--line-dk);
+  border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 3px rgba(12,14,18,.06);
+}
+.data-table thead tr{ background:var(--surface) }
+.data-table th{
+  text-align:left; padding:10px 14px;
+  font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); border-bottom:1px solid var(--line-dk);
+}
+.data-table td{
+  padding:12px 14px; border-bottom:1px solid var(--line);
+  vertical-align:top; line-height:1.55; font-weight:400;
+}
+.data-table tr:last-child td{ border-bottom:none }
+.data-table tbody tr:nth-child(even) td{ background:var(--surface) }
+.data-table tbody tr:hover td{ background:#edf2ff }
+.d-val{
+  font-family:var(--mono); font-size:15.5px; font-weight:600;
+  color:var(--ink); display:block; margin-bottom:2px; letter-spacing:-.01em;
+}
+.d-save{ font-size:11px; font-weight:600; color:var(--pass) }
+.d-group{ font-weight:600; color:var(--ink); font-size:14.5px }
+.d-sub{ font-size:12px; color:var(--muted); margin-top:2px; font-weight:400 }
+
+/* ─── salary chart ───────────────────────── */
+.chart{
+  margin:24px 0; border:1px solid var(--line-dk);
+  max-width:var(--col); border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 3px rgba(12,14,18,.06);
+}
+.chart-head{
+  padding:14px 18px; background:var(--surface);
+  border-bottom:1px solid var(--line);
+}
+.chart-title{ font-size:13px; font-weight:700; color:var(--ink) }
+.chart-sub{ font-size:12px; color:var(--muted); margin-top:3px; font-weight:400; line-height:1.5 }
+.chart-body{ padding:16px 18px 14px }
+.c-row{
+  display:grid; grid-template-columns:152px 1fr 76px;
+  align-items:center; gap:10px; margin-bottom:8px;
+}
+.c-row:last-child{ margin-bottom:0 }
+.c-lbl{ font-size:12px; font-weight:400; color:var(--body); text-align:right; line-height:1.3 }
+.c-soc{ display:block; font-size:10.5px; color:var(--quiet); font-family:var(--mono) }
+.c-track{
+  position:relative; height:26px;
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:3px; overflow:hidden;
+}
+.c-fill{
+  position:absolute; left:0; top:0; bottom:0; width:0%;
+  display:flex; align-items:center; padding-left:8px;
+  transition:width .9s cubic-bezier(.22,1,.36,1) .1s;
+  border-radius:2px 0 0 2px;
+}
+.c-fill.above{ background:var(--blue-md); border-right:2px solid var(--blue) }
+.c-fill.below{ background:rgba(146,64,14,.1); border-right:2px solid #d97706 }
+.c-fill-txt{ font-size:10px; font-weight:600; color:var(--body); white-space:nowrap; font-family:var(--mono) }
+.c-thresh{
+  position:absolute; top:0; bottom:0; width:1px;
+  background:var(--fail); z-index:4; pointer-events:none;
+}
+.c-thresh::after{
+  content:'£41,700'; position:absolute; bottom:calc(100% + 4px); left:50%;
+  transform:translateX(-50%); font-size:9px; font-weight:700; color:var(--fail);
+  white-space:nowrap; font-family:var(--mono); letter-spacing:-.01em;
+}
+.c-num{ font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--ink) }
+.chart-foot{
+  display:flex; gap:18px; padding:10px 18px;
+  border-top:1px solid var(--line); background:var(--surface);
+}
+.cl-item{ display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--muted) }
+.cl-sq{ width:10px; height:10px; border-radius:2px }
+
+/* ─── steps ──────────────────────────────── */
+.steps{ max-width:var(--col); margin:22px 0; counter-reset:step }
+.s-row{
+  display:flex; gap:16px; padding:16px 0;
+  border-bottom:1px solid var(--line); counter-increment:step;
+}
+.s-row:last-child{ border-bottom:none }
+.s-n{
+  flex-shrink:0; width:24px; height:24px;
+  border:1.5px solid var(--line-dk);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; color:var(--muted);
+  font-family:var(--mono); border-radius:4px; margin-top:1px;
+  background:var(--surface);
+}
+.s-title{ font-size:15px; font-weight:700; color:var(--ink); margin-bottom:4px }
+.s-desc{ font-size:14px; font-weight:400; color:var(--muted); line-height:1.65 }
+
+/* ─── checklist ──────────────────────────── */
+.checklist{
+  max-width:var(--col); margin:22px 0;
+  border:1px solid var(--line-dk); border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 3px rgba(12,14,18,.05);
+}
+.cl-head{
+  padding:11px 16px; background:var(--surface);
+  border-bottom:1px solid var(--line-dk);
+  display:flex; align-items:center; gap:8px;
+}
+.cl-head-t{ font-size:13px; font-weight:700; color:var(--ink) }
+.cl-head-n{ margin-left:auto; font-size:11.5px; color:var(--muted) }
+.cl-row{
+  display:flex; align-items:flex-start; gap:11px;
+  padding:11px 16px; border-bottom:1px solid var(--line); cursor:pointer;
+  transition:background .1s;
+}
+.cl-row:last-child{ border-bottom:none }
+.cl-row:hover{ background:var(--surface) }
+.cl-box{
+  flex-shrink:0; margin-top:2px; width:16px; height:16px;
+  border:1.5px solid var(--line-dk); background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  transition:all .12s; border-radius:4px;
+}
+.cl-box.on{ background:var(--pass); border-color:var(--pass) }
+.cl-box.on::after{ content:'✓'; font-size:9px; font-weight:800; color:#fff }
+.cl-txt{ font-size:14px; font-weight:400; color:var(--body); line-height:1.55; flex:1 }
+.cl-req{
+  font-size:10px; font-weight:700; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--fail); margin-left:8px;
+}
+
+/* ─── FAQ ────────────────────────────────── */
+.faq{
+  max-width:var(--col); margin:22px 0;
+  border:1px solid var(--line-dk); border-radius:8px; overflow:hidden;
+  box-shadow:0 1px 3px rgba(12,14,18,.05);
+}
+.faq-item{ border-bottom:1px solid var(--line) }
+.faq-item:last-child{ border-bottom:none }
+.faq-q{
+  width:100%; text-align:left; padding:15px 18px;
+  display:flex; align-items:flex-start; gap:12px; cursor:pointer;
+  transition:background .1s;
+}
+.faq-q:hover{ background:var(--surface) }
+.faq-ic{
+  flex-shrink:0; width:18px; height:18px;
+  border:1.5px solid var(--line-dk);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:var(--muted);
+  transition:all .15s; margin-top:1px; border-radius:4px;
+}
+.faq-item.open .faq-ic{
+  background:var(--blue); border-color:var(--blue);
+  color:#fff; transform:rotate(45deg);
+}
+.faq-qt{ font-size:14.5px; font-weight:600; color:var(--ink); line-height:1.45; flex:1 }
+.faq-a{
+  display:none; padding:4px 18px 16px 48px;
+  font-size:14px; font-weight:400; color:var(--muted); line-height:1.75;
+}
+.faq-item.open .faq-a{ display:block }
+
+/* ─── pull quote ─────────────────────────── */
+.pq{
+  max-width:var(--col); margin:40px 0; padding:20px 24px;
+  border-left:4px solid var(--ink); background:var(--surface);
+  border-radius:0 8px 8px 0;
+}
+.pq-t{
+  font-size:16.5px; font-weight:400; font-style:italic;
+  color:var(--ink); line-height:1.65; margin-bottom:10px;
+}
+.pq-a{
+  font-size:11.5px; font-weight:700; color:var(--muted);
+  letter-spacing:.06em; text-transform:uppercase;
+}
+
+/* ─── CTA ────────────────────────────────── */
+.cta{
+  margin-top:52px; padding:30px 34px;
+  background:var(--ink); max-width:var(--col);
+  border-radius:10px;
+}
+.cta-eye{
+  font-size:10.5px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:9px;
+}
+.cta h3{ font-size:1.25rem; font-weight:600; color:#fff; line-height:1.3; margin-bottom:9px }
+.cta p{
+  font-size:14.5px; font-weight:400; color:rgba(255,255,255,.6);
+  margin-bottom:20px; line-height:1.65; max-width:46ch;
+}
+.cta-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:#fff; color:var(--ink); font-weight:700;
+  font-size:13.5px; padding:10px 20px; border-radius:5px;
+  transition:opacity .12s;
+}
+.cta-btn:hover{ opacity:.88 }
+
+/* ─── sidebar ────────────────────────────── */
+.sb{ position:sticky; top:62px; font-size:13px }
+.sb-card{
+  border:1px solid var(--line); padding:14px 16px;
+  margin-bottom:10px; background:var(--bg); border-radius:6px;
+}
+.sb-lbl{
+  font-size:10px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--quiet); margin-bottom:10px;
+}
+.sb-tags{ display:flex; flex-wrap:wrap; gap:5px }
+.sb-tag{
+  font-size:11px; font-weight:400; padding:3px 8px;
+  border:1px solid var(--line); color:var(--muted); border-radius:3px;
+}
+.sh-btns{ display:flex; gap:6px }
+.sh-btn{
+  flex:1; padding:8px; border:1px solid var(--line);
+  font-size:12px; font-weight:500; color:var(--muted);
+  display:flex; align-items:center; justify-content:center; gap:4px;
+  transition:border-color .12s, color .12s; border-radius:4px;
+}
+.sh-btn:hover{ border-color:var(--blue); color:var(--blue) }
+.sb-tool{
+  border:1px solid var(--line); padding:16px;
+  background:var(--surface); border-radius:6px;
+}
+.sb-tool-t{ font-size:13px; font-weight:700; color:var(--ink); margin-bottom:5px }
+.sb-tool-d{
+  font-size:12.5px; font-weight:400; color:var(--muted);
+  line-height:1.55; margin-bottom:14px;
+}
+.sb-tool-btn{
+  display:block; text-align:center; padding:9px; background:var(--blue);
+  color:#fff; font-weight:700; font-size:12.5px; border-radius:5px;
+}
+
+/* ─── responsive ─────────────────────────── */
+@media(max-width:960px){
+  .layout{ grid-template-columns:1fr; gap:0 }
+  .toc,.sb{ display:none }
+  .threshold-strip{ grid-template-columns:1fr 1fr }
+  .threshold-strip .ts-cell:last-child{ grid-column:1/-1 }
+}
+@media(max-width:600px){
+  h1{ font-size:1.75rem }
+  .c-row{ grid-template-columns:100px 1fr 64px; gap:8px }
+  .c-lbl{ font-size:11px }
+  .data-table{ font-size:13.5px }
+  .threshold-strip{ grid-template-columns:1fr }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="h-inner">
+    <div class="brand">
+      <div class="brand-sq">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="white" stroke="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </div>
+      UKDesk
+    </div>
+    <span class="h-sep">/</span>
+    <span class="h-crumb"><a href="/blog">Guides</a></span>
+    <span class="h-sep">/</span>
+    <span class="h-crumb" style="color:var(--body)">Skilled Worker salary 2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tags">
+      <span class="tag primary">Skilled Worker</span>
+      <span class="tag">Salary</span>
+      <span class="tag">Sponsorship</span>
+    </div>
+    <h1>UK Skilled Worker Visa Salary Threshold 2026</h1>
+    <p class="deck">The rules changed again in April 2026. Your salary must clear three separate tests simultaneously. Miss any one — refused on the spot, no appeal on that ground.</p>
+
+    <!-- Immediate data value — key thresholds at a glance -->
+    <div class="threshold-strip">
+      <div class="ts-cell">
+        <div class="ts-label">General minimum</div>
+        <div class="ts-val accent">£41,700</div>
+        <div class="ts-note">Most new applicants · gross basic only</div>
+      </div>
+      <div class="ts-cell">
+        <div class="ts-label">Going rate (your SOC code)</div>
+        <div class="ts-val">Varies</div>
+        <div class="ts-note">Could be higher than the general min</div>
+      </div>
+      <div class="ts-cell">
+        <div class="ts-label">Hourly floor</div>
+        <div class="ts-val accent">£15.88/hr</div>
+        <div class="ts-note">Based on actual contracted hours</div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        23 April 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        9 min read
+      </div>
+      <div class="hero-meta-author">R. Selladurai · UKDesk</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE -->
+<div class="page">
+<div class="layout">
+
+<!-- TOC -->
+<aside class="toc">
+  <div class="toc-hd">On this page</div>
+  <ol class="toc-list" id="toc-list">
+    <li class="toc-item active" data-id="s1"><span class="toc-line"></span><a href="#s1" class="toc-a"><span class="toc-num">01</span>The three tests</a></li>
+    <li class="toc-item" data-id="s2"><span class="toc-line"></span><a href="#s2" class="toc-a"><span class="toc-num">02</span>Discount groups</a></li>
+    <li class="toc-item" data-id="s3"><span class="toc-line"></span><a href="#s3" class="toc-a"><span class="toc-num">03</span>Going rates by role</a></li>
+    <li class="toc-item" data-id="s4"><span class="toc-line"></span><a href="#s4" class="toc-a"><span class="toc-num">04</span>Immigration Salary List</a></li>
+    <li class="toc-item" data-id="s5"><span class="toc-line"></span><a href="#s5" class="toc-a"><span class="toc-num">05</span>How salary is assessed</a></li>
+    <li class="toc-item" data-id="s6"><span class="toc-line"></span><a href="#s6" class="toc-a"><span class="toc-num">06</span>Extensions &amp; pay rises</a></li>
+    <li class="toc-item" data-id="s7"><span class="toc-line"></span><a href="#s7" class="toc-a"><span class="toc-num">07</span>Salary check workflow</a></li>
+    <li class="toc-item" data-id="s8"><span class="toc-line"></span><a href="#s8" class="toc-a"><span class="toc-num">08</span>Document checklist</a></li>
+    <li class="toc-item" data-id="s9"><span class="toc-line"></span><a href="#s9" class="toc-a"><span class="toc-num">09</span>Common questions</a></li>
+  </ol>
+  <div class="toc-ft">9 sections · 9 min</div>
+</aside>
+
+<!-- ARTICLE -->
+<article class="prose" id="art">
+
+<p class="lead">The Skilled Worker visa is the UK's main work route, and in 2026 the salary bar is higher than most people expect. If your pay doesn't clear the threshold, the Home Office refuses at the salary stage — no judgement, no appeal on that ground. It takes about five minutes to check if you're safe. This is how.</p>
+
+<div class="key-box">
+  <div class="key-hd">Before you read on</div>
+  <ul class="key-list">
+    <li class="key-item"><div class="k-chk">✓</div><div>Three tests run simultaneously. The Home Office uses the <strong>highest</strong> of the three as your effective bar.</div></li>
+    <li class="key-item"><div class="k-chk">✓</div><div>The <strong>new-entrant discount (£33,400)</strong> saves £8,300/yr on the threshold — most commonly missed.</div></li>
+    <li class="key-item"><div class="k-chk">✓</div><div><strong>Bonuses don't count.</strong> Commission, overtime, pension — none of it. Gross basic salary only.</div></li>
+    <li class="key-item"><div class="k-chk">✓</div><div>Care worker (SOC 6135) is <strong>closed to new overseas applicants</strong> from March 2025.</div></li>
+  </ul>
+</div>
+
+<!-- S1 -->
+<h2 id="s1"><span class="sec-n">01 / Three tests</span>The three numbers you need to know</h2>
+
+<p>There isn't one Skilled Worker salary threshold — there are three, and you must clear all of them at once. The Home Office takes the highest of the three as your effective bar.</p>
+
+<table class="test-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Test</th>
+      <th>Amount</th>
+      <th>Applies to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-family:var(--mono);font-weight:600;color:var(--quiet);font-size:12px">01</td>
+      <td><strong>General minimum</strong><br><span style="font-size:12.5px;color:var(--muted);font-weight:400">Gross basic salary per year</span></td>
+      <td><span class="t-val key">£41,700</span><span class="t-badge t-all">All applicants</span></td>
+      <td><span class="t-note">Most new applicants from 8 April 2026. No bonuses, commission or allowances counted.</span></td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--mono);font-weight:600;color:var(--quiet);font-size:12px">02</td>
+      <td><strong>Going rate</strong><br><span style="font-size:12.5px;color:var(--muted);font-weight:400">25th percentile for your SOC 2020 code</span></td>
+      <td><span class="t-val">Varies</span><span class="t-badge t-var">Role-specific</span></td>
+      <td><span class="t-note">Can be higher than £41,700. Check Appendix Skilled Occupations for your specific code.</span></td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--mono);font-weight:600;color:var(--quiet);font-size:12px">03</td>
+      <td><strong>Hourly floor</strong><br><span style="font-size:12.5px;color:var(--muted);font-weight:400">Against actual contracted hours</span></td>
+      <td><span class="t-val key">£15.88</span><span class="t-badge t-all">All applicants</span></td>
+      <td><span class="t-note">Not against a 37.5-hr FTE. Use your actual contracted weekly hours in the calculation.</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note fail">
+  <div class="note-lbl">Refused on the spot</div>
+  Fall below any one of the three tests and the application is refused at the salary stage. No discretion, no appeal on that ground. Do not pay the fee until you've run all three checks.
+</div>
+
+<!-- S2 -->
+<h2 id="s2"><span class="sec-n">02 / Discount groups</span>Who qualifies for a lower threshold?</h2>
+
+<p>Five groups can apply below £41,700. The new-entrant discount is the one people most often miss — if you're 25, recently graduated, or switching from a Student visa, that's £8,300 a year less you need to earn.</p>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Minimum salary</th>
+      <th>Key condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="d-group">New entrant</div>
+        <div class="d-sub">Under 26, recent graduate, or switching from Student visa</div>
+      </td>
+      <td>
+        <div class="d-val">£33,400</div>
+        <div class="d-save">Saves £8,300/yr</div>
+      </td>
+      <td style="font-size:13.5px;color:var(--muted);font-weight:400">70% of going rate · max 4 years on this rate</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="d-group">STEM PhD relevant to role</div>
+      </td>
+      <td>
+        <div class="d-val">£34,830</div>
+        <div class="d-save">Saves £6,870/yr</div>
+      </td>
+      <td style="font-size:13.5px;color:var(--muted);font-weight:400">80% of going rate · subject must match the role</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="d-group">Non-STEM PhD</div>
+      </td>
+      <td>
+        <div class="d-val">£41,700</div>
+        <div style="font-size:11px;color:var(--fail);font-weight:600">No discount from April 2025</div>
+      </td>
+      <td style="font-size:13.5px;color:var(--muted);font-weight:400">Removed in last policy update</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="d-group">Immigration Salary List (ISL)</div>
+        <div class="d-sub">Replaced SOL in April 2024</div>
+      </td>
+      <td>
+        <div class="d-val">£33,400</div>
+      </td>
+      <td style="font-size:13.5px;color:var(--muted);font-weight:400">100% of going rate still required — unlike new-entrant (70%)</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="d-group">Health &amp; Care visa</div>
+        <div class="d-sub">Eligible NHS / healthcare roles only</div>
+      </td>
+      <td>
+        <div class="d-val">£25,000</div>
+      </td>
+      <td style="font-size:13.5px;color:var(--muted);font-weight:400">Or going rate, whichever is higher · separate application route</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note info">
+  <div class="note-lbl">New entrant vs ISL</div>
+  Both share the £33,400 cash floor, but new entrant only requires 70% of the going rate while ISL still requires 100%. If you qualify for new entrant, it's almost always the better option.
+</div>
+
+<!-- S3 -->
+<h2 id="s3"><span class="sec-n">03 / Going rates</span>Going rates for the most-sponsored roles</h2>
+
+<p>Every SOC 2020 code has its own going rate. Roles above the £41,700 line mean the going rate is your real bar, not the general minimum.</p>
+
+<div class="chart">
+  <div class="chart-head">
+    <div class="chart-title">2026 going rates vs £41,700 general minimum</div>
+    <div class="chart-sub">Blue = above threshold (going rate is the test). Amber = below (general minimum applies). Red line = £41,700.</div>
+  </div>
+  <div class="chart-body" id="chart-body">
+    <div class="c-row">
+      <div class="c-lbl">IT business analyst<span class="c-soc">SOC 2135</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill above" data-w="100%"><span class="c-fill-txt">£52,300</span></div>
+      </div>
+      <div class="c-num">£52,300</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Software developer<span class="c-soc">SOC 2136</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill above" data-w="94.5%"><span class="c-fill-txt">£49,400</span></div>
+      </div>
+      <div class="c-num">£49,400</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Mgmt consultant<span class="c-soc">SOC 2423</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill above" data-w="82%"><span class="c-fill-txt">£42,900</span></div>
+      </div>
+      <div class="c-num">£42,900</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Civil engineer<span class="c-soc">SOC 2121</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill below" data-w="77.4%"><span class="c-fill-txt">£40,500</span></div>
+      </div>
+      <div class="c-num">£40,500</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Chartered accountant<span class="c-soc">SOC 2421</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill below" data-w="75.9%"><span class="c-fill-txt">£39,700</span></div>
+      </div>
+      <div class="c-num">£39,700</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Mech. engineer<span class="c-soc">SOC 2122</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill below" data-w="74.4%"><span class="c-fill-txt">£38,900</span></div>
+      </div>
+      <div class="c-num">£38,900</div>
+    </div>
+    <div class="c-row">
+      <div class="c-lbl">Chef — ISL<span class="c-soc">SOC 5434</span></div>
+      <div class="c-track">
+        <div class="c-thresh" style="left:79.7%"></div>
+        <div class="c-fill below" data-w="63.9%"><span class="c-fill-txt">£33,400</span></div>
+      </div>
+      <div class="c-num">£33,400</div>
+    </div>
+  </div>
+  <div class="chart-foot">
+    <div class="cl-item"><div class="cl-sq" style="background:var(--blue-md);border:1px solid var(--blue)"></div>Going rate &gt; £41,700</div>
+    <div class="cl-item"><div class="cl-sq" style="background:rgba(146,64,14,.14);border:1px solid #d97706"></div>Going rate &lt; £41,700 — general minimum applies</div>
+  </div>
+</div>
+
+<!-- S4 -->
+<h2 id="s4"><span class="sec-n">04 / ISL</span>The Immigration Salary List — what changed in 2024</h2>
+
+<p>The old Shortage Occupation List was scrapped in April 2024. The Immigration Salary List (ISL) replaced it, but works slightly differently: unlike new-entrant status (which requires 70% of going rate), ISL still requires 100% of the going rate for your occupation.</p>
+
+<p>ISL roles in 2026 include bricklayers and masons (5312), roofers and roof tilers (5313), construction supervisors (5330), laboratory technicians (3111), animal care services (6139, partial), stonemasons (5311), and boat and ship builders (5235).</p>
+
+<!-- S5 -->
+<h2 id="s5"><span class="sec-n">05 / Assessment</span>How the Home Office actually calculates your salary</h2>
+
+<p>The figure on your offer letter isn't always the figure they use. Two things catch people out more than anything else.</p>
+
+<div class="note warn">
+  <div class="note-lbl">Does not count toward the threshold</div>
+  Bonuses · commission · overtime · London weighting (in most cases) · pension contributions · accommodation allowances · in-kind benefits. Even contractual guarantees don't count unless they're written into the Certificate of Sponsorship as unconditional.
+</div>
+
+<div class="note pass">
+  <div class="note-lbl">What does count</div>
+  Gross basic salary. Guaranteed allowances written into the CoS and paid regardless of performance or attendance — in limited cases only.
+</div>
+
+<div class="note info">
+  <div class="note-lbl">Part-time workers — run both calculations</div>
+  Your annual salary is pro-rated to 37.5 hours for the general minimum test, which can make it look fine. But the £15.88/hour test uses your actual contracted hours. A 30-hour-per-week offer at £30,000 looks like £37,500 FTE — below £41,700 — but the hourly test (£30,000 ÷ 52 ÷ 30 = £19.23) passes. Run both.
+</div>
+
+<!-- S6 -->
+<h2 id="s6"><span class="sec-n">06 / Extensions</span>Extensions, pay rises, and the 2023 problem</h2>
+
+<p>Your threshold is locked at the time the Certificate of Sponsorship is issued. If you got your visa when the threshold was lower, you're safe for the current grant — but your extension will be judged at whatever the rate is when you apply.</p>
+
+<p>This is already causing real problems. People granted leave in 2022–2023 at the old £26,200 threshold will face £41,700 when they extend in 2027–2028. That's a £15,500 gap. If your employer won't match it, you'll need to move jobs before the visa expires.</p>
+
+<!-- S7 -->
+<h2 id="s7"><span class="sec-n">07 / Workflow</span>How to check your salary — step by step</h2>
+
+<p>Run these four checks before your employer issues the CoS. A margin of less than £500 is risky — caseworkers round down, not up.</p>
+
+<div class="steps">
+  <div class="s-row">
+    <div class="s-n">1</div>
+    <div>
+      <div class="s-title">Find your SOC 2020 code</div>
+      <div class="s-desc">Your sponsor should know. If not, the ONS SOC 2020 lookup lets you search by job title. Check the occupation description matches what you actually do — the code is everything.</div>
+    </div>
+  </div>
+  <div class="s-row">
+    <div class="s-n">2</div>
+    <div>
+      <div class="s-title">Look up the going rate for that code</div>
+      <div class="s-desc">Home Office Appendix Skilled Occupations lists every SOC 2020 code with the published going rate. Your offer must meet or beat it.</div>
+    </div>
+  </div>
+  <div class="s-row">
+    <div class="s-n">3</div>
+    <div>
+      <div class="s-title">Apply the most generous discount that fits you</div>
+      <div class="s-desc">New entrant, STEM PhD, or ISL — work out which applies and use the best one. New entrant is usually the most generous if you qualify.</div>
+    </div>
+  </div>
+  <div class="s-row">
+    <div class="s-n">4</div>
+    <div>
+      <div class="s-title">Run the £15.88/hour check separately</div>
+      <div class="s-desc">Divide your annual salary by 52, then by your actual contracted weekly hours. Must exceed £15.88. Use your real hours, not a 37.5-hour equivalent.</div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 -->
+<h2 id="s8"><span class="sec-n">08 / Documents</span>Documents you'll need for the salary stage</h2>
+
+<div class="checklist">
+  <div class="cl-head">
+    <div class="cl-head-t">Salary evidence — required documents</div>
+    <div class="cl-head-n">8 items</div>
+  </div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Current passport valid for the full duration of the visa<span class="cl-req">required</span></div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Certificate of Sponsorship (CoS) from your employer<span class="cl-req">required</span></div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Signed offer letter showing gross annual salary<span class="cl-req">required</span></div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Contract of employment showing actual contracted weekly hours<span class="cl-req">required</span></div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">English language evidence at B2 level or above<span class="cl-req">required</span></div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">TB test certificate — if applying from a country on the required list</div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Bank statements for the last 90 days — if not exempt</div></div>
+  <div class="cl-row" onclick="tog(this)"><div class="cl-box"></div><div class="cl-txt">Criminal record certificate — healthcare and education roles only</div></div>
+</div>
+
+<!-- S9 -->
+<h2 id="s9"><span class="sec-n">09 / FAQ</span>Questions people actually ask</h2>
+
+<div class="faq">
+  <div class="faq-item">
+    <button class="faq-q" onclick="faq(this.parentElement)"><div class="faq-ic">+</div><div class="faq-qt">My offer is £36,000 but I get a guaranteed £6,000 bonus every year. Does that clear the threshold?</div></button>
+    <div class="faq-a">No. Bonuses don't count even when they're contractual and guaranteed in writing. The threshold calculation uses gross basic salary only. Your effective salary for this test is £36,000.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="faq(this.parentElement)"><div class="faq-ic">+</div><div class="faq-qt">I'm 25 and switching from a Student visa. Can I stay on the new-entrant rate indefinitely?</div></button>
+    <div class="faq-a">Up to 4 years on the Skilled Worker route from your first grant date. After that, you need the full going rate to extend or change employer. Plan for the step-up well before it arrives.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="faq(this.parentElement)"><div class="faq-ic">+</div><div class="faq-qt">My employer offers London weighting. Does it count toward the threshold?</div></button>
+    <div class="faq-a">Usually yes, if it's a guaranteed allowance written into the CoS and paid regardless of performance or attendance. Discretionary uplifts don't count.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="faq(this.parentElement)"><div class="faq-ic">+</div><div class="faq-qt">My role isn't on the Immigration Salary List. Can I still apply?</div></button>
+    <div class="faq-a">Yes. The ISL only provides a discount — it's not a gate. You can apply for any eligible SOC 2020 occupation at RQF Level 6 or above, as long as you meet £41,700 and the going rate for your code.</div>
+  </div>
+</div>
+
+<div class="pq">
+  <div class="pq-t">The salary stage is the single biggest cause of Skilled Worker refusals in 2026. Get this number right before you pay any application fee.</div>
+  <div class="pq-a">UKDesk editorial team</div>
+</div>
+
+<div class="cta">
+  <div class="cta-eye">Start here</div>
+  <h3>Find the right UK visa route in 60 seconds.</h3>
+  <p>Take our free eligibility check — it works out your salary test, going rate, and which discount groups apply to your situation.</p>
+  <a href="/eligibility" class="cta-btn">
+    Start eligibility check
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+</article>
+
+<!-- SIDEBAR -->
+<aside class="sb">
+  <div class="sb-card">
+    <div class="sb-lbl">Share</div>
+    <div class="sh-btns">
+      <button class="sh-btn">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Copy link
+      </button>
+    </div>
+  </div>
+  <div class="sb-card">
+    <div class="sb-lbl">Topics</div>
+    <div class="sb-tags">
+      <span class="sb-tag">Skilled Worker</span>
+      <span class="sb-tag">Salary</span>
+      <span class="sb-tag">Sponsorship</span>
+    </div>
+  </div>
+  <div class="sb-tool">
+    <div class="sb-tool-t">Salary check tool</div>
+    <div class="sb-tool-d">Enter your offer and job code — see your exact threshold and which discount applies.</div>
+    <a href="/tools/salary-checker" class="sb-tool-btn">Open checker</a>
+  </div>
+</aside>
+
+</div></div>
+
+<script>
+// progress bar
+const pb = document.getElementById('bar');
+window.addEventListener('scroll',()=>{
+  const a=document.getElementById('art');
+  if(!a)return;
+  const r=a.getBoundingClientRect();
+  const t=r.height-window.innerHeight+200;
+  pb.style.width=Math.max(0,Math.min(100,(-r.top+200)/Math.max(1,t)*100))+'%';
+},{passive:true});
+
+// chart animate
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll('.c-fill').forEach(b=>{b.style.width=b.dataset.w;});io.unobserve(e.target);});},{threshold:.25});
+const cb=document.getElementById('chart-body');
+if(cb)io.observe(cb);
+
+// TOC
+const sids=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+const tis=document.querySelectorAll('.toc-item');
+const so=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=sids.indexOf(e.target.id);if(i<0)return;tis.forEach(t=>t.classList.remove('active'));tis[i]?.classList.add('active');});},{rootMargin:'-60px 0px -70% 0px',threshold:0});
+sids.forEach(id=>{const el=document.getElementById(id);if(el)so.observe(el);});
+
+// FAQ
+function faq(item){item.classList.toggle('open');}
+
+// checklist
+function tog(row){row.querySelector('.cl-box').classList.toggle('on');}
+</script>
+</body>
+</html>

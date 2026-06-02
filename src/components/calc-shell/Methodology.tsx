@@ -28,15 +28,15 @@ interface Props {
 
 const Q = {
   surface:    '#FFFFFF',
-  bgAlt:      '#FAFAFB',
-  ink:        '#18181B',
-  ink2:       '#3F3F46',
-  mid:        '#52525B',
-  mid2:       '#6B7280',
-  border:     '#ECECEF',
-  accent:     '#6366F1',
-  accentDk:   '#4F46E5',
-  accentSoft: '#EEF2FF',
+  bgAlt:      '#FAFAF7',
+  ink:        '#0B0F19',
+  ink2:       '#1F2937',
+  mid:        '#475569',
+  mid2:       '#64748B',
+  border:     'rgba(11, 15, 25, 0.08)',
+  accent:     '#047857',
+  accentDk:   '#064E3B',
+  accentSoft: '#ECFDF5',
 };
 
 const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
@@ -49,9 +49,10 @@ export default function Methodology({ summary, govUrl, govLabel }: Props) {
       style={{
         background: Q.surface,
         border: `1px solid ${Q.border}`,
-        borderRadius: 12,
+        borderRadius: 16,
+        boxShadow: '0 1px 2px rgba(11, 15, 25, 0.04), 0 6px 24px -10px rgba(11, 15, 25, 0.08)',
         overflow: 'hidden',
-        margin: '24px 0 16px',
+        margin: '32px 0 16px',
       }}
     >
       <header
@@ -59,7 +60,7 @@ export default function Methodology({ summary, govUrl, govLabel }: Props) {
           display: 'flex',
           alignItems: 'center',
           gap: 8,
-          padding: '11px 16px',
+          padding: '12px 16px',
           background: Q.bgAlt,
           borderBottom: `1px solid ${Q.border}`,
         }}

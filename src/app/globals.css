@@ -60,22 +60,34 @@
    Consumed by Header / Footer / Home CSS modules.
 ════════════════════════════════════════════ */
 :root {
-  --uk-ink:#18181B; --uk-text:#3F3F46; --uk-text-soft:#52525B; --uk-muted:#6B7280;
-  --uk-line:#ECECEF; --uk-line-strong:#E2E2E7; --uk-soft:#FAFAFB; --uk-card:#FFFFFF;
-  --uk-grad:linear-gradient(100deg,#6366F1,#EC4899);
-  --uk-indigo:#6366F1; --uk-indigo-strong:#4F46E5; --uk-pink:#EC4899; --uk-track:#E7E7EE;
-  --uk-c1:#6366F1; --uk-c1-bg:#EEF2FF; --uk-c1-tx:#4338CA;
-  --uk-c2:#F59E0B; --uk-c2-bg:#FEF3C7; --uk-c2-tx:#B45309;
-  --uk-c3:#8B5CF6; --uk-c3-bg:#F3E8FF; --uk-c3-tx:#6D28D9;
-  --uk-c4:#0EA5E9; --uk-c4-bg:#E0F2FE; --uk-c4-tx:#0369A1;
-  --uk-c5:#10B981; --uk-c5-bg:#D1FAE5; --uk-c5-tx:#047857;
-  --uk-c6:#F43F5E; --uk-c6-bg:#FFE4E6; --uk-c6-tx:#BE123C;
-  --uk-c7:#EC4899; --uk-c7-bg:#FCE7F3; --uk-c7-tx:#BE185D;
-  --uk-c8:#14B8A6; --uk-c8-bg:#CCFBF1; --uk-c8-tx:#0F766E;
-  --uk-shadow-sm:0 6px 20px -10px rgba(24,24,27,.18);
-  --uk-shadow-md:0 20px 50px -22px rgba(99,102,241,.38);
-  --uk-shadow-lg:0 30px 64px -22px rgba(24,24,27,.32);
-  --uk-shell:1120px;
+  --uk-ink: #0F172A; --uk-text: #334155; --uk-text-soft: #475569; --uk-muted: #64748B;
+  --uk-line: #E2E8F0; --uk-line-strong: #CBD5E1; --uk-soft: #F8FAFC; --uk-card: #FFFFFF;
+  --uk-grad: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%);
+  --uk-indigo: #4F46E5; --uk-indigo-strong: #3730A3; --uk-pink: #06B6D4; --uk-track: #E2E8F0;
+  --uk-c1: #3B82F6; --uk-c1-bg: #EFF6FF; --uk-c1-tx: #1D4ED8;
+  --uk-c2: #D97706; --uk-c2-bg: #FEF3C7; --uk-c2-tx: #92400E;
+  --uk-c3: #8B5CF6; --uk-c3-bg: #F3E8FF; --uk-c3-tx: #6D28D9;
+  --uk-c4: #0284C7; --uk-c4-bg: #F0F9FF; --uk-c4-tx: #0369A1;
+  --uk-c5: #059669; --uk-c5-bg: #ECFDF5; --uk-c5-tx: #047857;
+  --uk-c6: #E11D48; --uk-c6-bg: #FFF1F2; --uk-c6-tx: #BE123C;
+  --uk-c7: #DB2777; --uk-c7-bg: #FDF2F8; --uk-c7-tx: #BE185D;
+  --uk-c8: #0D9488; --uk-c8-bg: #F0FDFA; --uk-c8-tx: #0F766E;
+  --uk-shadow-sm: 0 2px 8px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.04);
+  --uk-shadow-md: 0 12px 30px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.05);
+  --uk-shadow-lg: 0 24px 50px -16px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  --uk-shell: 1160px;
+}
+
+/* Widen the shell on large monitors so content scales up instead of
+   leaving huge empty margins on 27"/32" displays. */
+@media (min-width: 1440px) {
+  :root { --uk-shell: 1320px; }
+}
+@media (min-width: 1800px) {
+  :root { --uk-shell: 1480px; }
+}
+@media (min-width: 2200px) {
+  :root { --uk-shell: 1680px; }
 }
 
 /* ════════════════════════════════════════════
@@ -125,8 +137,8 @@ html.dark body {
     overflow-x: clip;
   }
   body {
-    background: #FAFAF7;
-    color: #0B0F19;
+    background: #F8FAFC;
+    color: #0F172A;
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv02", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -622,3 +634,51 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
   body { background: #fff !important; }
   [class*="bg-gradient-to"] { background: #fff !important; color: #000 !important; }
 }
+
+/* ════════════════════════════════════════════
+   NEXT-GEN DASHBOARD GLOBAL UTILITIES
+════════════════════════════════════════════ */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(11, 15, 25, 0.06);
+  box-shadow: 0 4px 20px -4px rgba(11, 15, 25, 0.04), 
+              0 0 0 1px rgba(11, 15, 25, 0.02);
+}
+
+html.dark .glass-card {
+  background: rgba(15, 20, 30, 0.65);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.glow-c1:hover { box-shadow: 0 8px 30px -4px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1); }
+.glow-c2:hover { box-shadow: 0 8px 30px -4px rgba(217, 119, 6, 0.15), 0 0 0 1px rgba(217, 119, 6, 0.1); }
+.glow-c3:hover { box-shadow: 0 8px 30px -4px rgba(139, 92, 246, 0.15), 0 0 0 1px rgba(139, 92, 246, 0.1); }
+.glow-c4:hover { box-shadow: 0 8px 30px -4px rgba(2, 132, 199, 0.15), 0 0 0 1px rgba(2, 132, 199, 0.1); }
+.glow-c5:hover { box-shadow: 0 8px 30px -4px rgba(5, 150, 105, 0.15), 0 0 0 1px rgba(5, 150, 105, 0.1); }
+.glow-c6:hover { box-shadow: 0 8px 30px -4px rgba(225, 29, 72, 0.15), 0 0 0 1px rgba(225, 29, 72, 0.1); }
+.glow-c7:hover { box-shadow: 0 8px 30px -4px rgba(219, 39, 119, 0.15), 0 0 0 1px rgba(219, 39, 119, 0.1); }
+.glow-c8:hover { box-shadow: 0 8px 30px -4px rgba(13, 148, 136, 0.15), 0 0 0 1px rgba(13, 148, 136, 0.1); }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 0.4; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.pulse-border {
+  animation: pulse-ring 2s infinite ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

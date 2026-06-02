@@ -98,7 +98,7 @@ export default function MarriageAllowancePage() {
       }}
       related={[
         { href: '/take-home-pay', title: 'Take-home pay calculator', desc: 'See both partners\' net salary after tax and NI.' },
-        { href: '/self-assessment-calculator', title: 'Self Assessment estimator', desc: 'Model backdated Marriage Allowance on your SA return.' },
+        { href: '/self-employed-tax', title: 'Self Assessment estimator', desc: 'Model backdated Marriage Allowance on your SA return.' },
         { href: '/salary-sacrifice-calculator', title: 'Salary sacrifice calculator', desc: 'Reduce income below £12,570 to qualify as the lower earner.' },
       ]}
       educational={[

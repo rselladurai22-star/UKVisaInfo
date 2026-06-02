@@ -7,30 +7,30 @@
 
 /* ─── tokens — match CalcPageShell Quartz ─────────────────── */
 const Q = {
-  bg:        '#FFFFFF',
+  bg:        '#f8fafc',
   bgAlt:     '#FAFAFB',
-  bgInput:   '#FAFAFB',
+  bgInput:   '#f8fafc',
   surface:   '#FFFFFF',
   ink:       '#18181B',
   ink2:      '#3F3F46',
   mid:       '#52525B',
   mid2:      '#6B7280',
   faint:     '#9CA3AF',
-  border:    '#ECECEF',
-  borderStr: '#E2E2E7',
+  border:    'rgba(15, 23, 42, 0.06)',
+  borderStr: 'rgba(15, 23, 42, 0.08)',
   accent:    '#6366F1',
   accentDk:  '#4F46E5',
   accentSoft:'#EEF2FF',
   positive:  '#047857',
-  positiveSoft: '#ECFDF5',
+  positiveSoft: '#ecfdf5',
   warning:   '#B45309',
   warningSoft: '#FEF3C7',
   negative:  '#BE123C',
   negativeSoft: '#FFE4E6',
 };
-const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
-const TEXT    = 'var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
-const MONO    = 'var(--font-jetbrains), "JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
+const DISPLAY = 'var(--font-display), var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
+const TEXT    = 'var(--font-sans), var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
+const MONO    = 'var(--font-mono), var(--font-jetbrains), "JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
 
 /* ─── formatters ──────────────────────────────────────────── */
 export function fmtGBP(n: number) {
@@ -49,7 +49,7 @@ export function Field({ label, children, hint }: { label: string; children: Reac
         display: 'block',
         fontFamily: TEXT,
         fontSize: 13,
-        fontWeight: 500,
+        fontWeight: 600,
         color: Q.ink2,
         letterSpacing: '-0.005em',
         marginBottom: 6,
@@ -79,16 +79,16 @@ export function NumberField({
           display: 'flex', alignItems: 'center', gap: 6,
           background: Q.bgInput,
           border: `1px solid ${Q.border}`,
-          borderRadius: 8,
-          padding: '0 12px',
-          height: 40,
-          transition: 'box-shadow 0.12s ease, border-color 0.12s ease',
+          borderRadius: 10,
+          padding: '0 14px',
+          height: 42,
+          transition: 'all 0.12s ease',
         }}
         onFocusCapture={(e) => {
           const el = e.currentTarget as HTMLElement;
           el.style.borderColor = Q.accent;
           el.style.background = Q.surface;
-          el.style.boxShadow = `0 0 0 3px ${Q.accent}26`;
+          el.style.boxShadow = `0 0 0 3px ${Q.accent}1a`;
         }}
         onBlurCapture={(e) => {
           const el = e.currentTarget as HTMLElement;
@@ -97,19 +97,19 @@ export function NumberField({
           el.style.boxShadow = 'none';
         }}
       >
-        {prefix && <span style={{ fontFamily: TEXT, fontSize: 14, fontWeight: 500, color: Q.mid }}>{prefix}</span>}
+        {prefix && <span style={{ fontFamily: TEXT, fontSize: 14.5, fontWeight: 600, color: Q.mid }}>{prefix}</span>}
         <input
           type="number" inputMode="decimal" step={step} value={value}
           onChange={(e) => onChange(e.target.value)}
           style={{
             flex: 1, minWidth: 0, background: 'transparent', border: 'none', outline: 'none',
-            fontFamily: TEXT, fontSize: 14.5, fontWeight: 500, color: Q.ink,
+            fontFamily: TEXT, fontSize: 14.5, fontWeight: 600, color: Q.ink,
             fontVariantNumeric: 'tabular-nums',
             letterSpacing: '-0.005em',
             height: '100%',
           }}
         />
-        {suffix && <span style={{ fontFamily: TEXT, fontSize: 13, color: Q.mid2 }}>{suffix}</span>}
+        {suffix && <span style={{ fontFamily: TEXT, fontSize: 13, fontWeight: 500, color: Q.mid2 }}>{suffix}</span>}
       </div>
     </Field>
   );
@@ -132,19 +132,20 @@ export function SelectField<T extends string>({
             width: '100%',
             background: Q.bgInput,
             border: `1px solid ${Q.border}`,
-            borderRadius: 8,
-            padding: '0 36px 0 12px',
-            height: 40,
-            fontFamily: TEXT, fontSize: 14.5, fontWeight: 500, color: Q.ink,
+            borderRadius: 10,
+            padding: '0 36px 0 14px',
+            height: 42,
+            fontFamily: TEXT, fontSize: 14.5, fontWeight: 600, color: Q.ink,
             letterSpacing: '-0.005em',
             outline: 'none', cursor: 'pointer',
             appearance: 'none' as const,
             WebkitAppearance: 'none' as const,
+            transition: 'all 0.12s ease',
           }}
           onFocus={(e) => {
             e.currentTarget.style.borderColor = Q.accent;
             e.currentTarget.style.background = Q.surface;
-            e.currentTarget.style.boxShadow = `0 0 0 3px ${Q.accent}26`;
+            e.currentTarget.style.boxShadow = `0 0 0 3px ${Q.accent}1a`;
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = Q.border;
@@ -156,7 +157,7 @@ export function SelectField<T extends string>({
         </select>
         <svg
           width="10" height="6" viewBox="0 0 10 6" fill="none"
-          style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+          style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
         >
           <path d="M1 1l4 4 4-4" stroke={Q.mid2} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -176,10 +177,10 @@ export function ToggleRow<T extends string>({
   return (
     <div style={{
       display: 'inline-flex', gap: 2,
-      background: Q.bgInput,
+      background: '#f1f5f9',
       padding: 3,
-      borderRadius: 8,
-      border: `1px solid ${Q.border}`,
+      borderRadius: 10,
+      border: '1px solid #e2e8f0',
     }}>
       {options.map((o) => {
         const active = o.value === value;
@@ -187,14 +188,14 @@ export function ToggleRow<T extends string>({
           <button
             key={o.value} type="button" onClick={() => onChange(o.value)}
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: 5,
-              padding: '6px 12px',
-              fontFamily: TEXT, fontSize: 13, fontWeight: 500,
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '8px 16px',
+              fontFamily: TEXT, fontSize: 13, fontWeight: 600,
               letterSpacing: '-0.005em',
-              borderRadius: 6, border: 'none', cursor: 'pointer',
-              background: active ? Q.surface : 'transparent',
-              color: active ? Q.ink : Q.mid,
-              boxShadow: active ? '0 1px 2px rgba(26,31,54,0.08), 0 0 0 1px rgba(26,31,54,0.04)' : 'none',
+              borderRadius: 8, border: 'none', cursor: 'pointer',
+              background: active ? '#ffffff' : 'transparent',
+              color: active ? '#4f46e5' : '#64748b',
+              boxShadow: active ? '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02)' : 'none',
               transition: 'all 0.12s ease',
             }}
           >
@@ -212,24 +213,29 @@ export function ResultBox({
 }: {
   label: string; value: string; primary?: boolean; muted?: boolean; accent?: string; sub?: string;
 }) {
-  const clr = accent ?? (primary ? Q.accent : muted ? Q.mid2 : Q.ink);
+  const clr = accent ?? (primary ? Q.accentDk : muted ? Q.mid2 : Q.ink);
   return (
-    <div style={{ paddingLeft: 0 }}>
+    <div style={{
+      background: primary ? Q.accentSoft : '#f8fafc',
+      border: `1px solid ${primary ? '#c7d2fe' : Q.border}`,
+      borderRadius: 12,
+      padding: '16px 20px',
+    }}>
       <div style={{
-        fontFamily: TEXT, fontSize: 11, fontWeight: 600,
-        letterSpacing: '0.04em', textTransform: 'uppercase' as const,
-        color: Q.mid2, marginBottom: 6,
+        fontFamily: TEXT, fontSize: 10.5, fontWeight: 700,
+        letterSpacing: '0.06em', textTransform: 'uppercase' as const,
+        color: primary ? Q.accentDk : Q.mid2, marginBottom: 6,
       }}>
         {label}
       </div>
       <div style={{
-        fontFamily: DISPLAY, fontSize: 28, fontWeight: 700,
-        color: clr, letterSpacing: '-0.025em', lineHeight: 1.1,
+        fontFamily: DISPLAY, fontSize: 32, fontWeight: 800,
+        color: clr, letterSpacing: '-0.03em', lineHeight: 1.1,
         fontVariantNumeric: 'tabular-nums',
       }}>
         {value}
       </div>
-      {sub && <div style={{ fontFamily: TEXT, fontSize: 12.5, color: Q.mid, marginTop: 4, lineHeight: 1.5 }}>{sub}</div>}
+      {sub && <div style={{ fontFamily: TEXT, fontSize: 12, color: primary ? Q.accentDk : Q.mid, opacity: 0.8, marginTop: 4, lineHeight: 1.5 }}>{sub}</div>}
     </div>
   );
 }
@@ -251,25 +257,27 @@ export function Section({ title, eyebrow, children, tone = 'default' }: {
   title: string; eyebrow?: string; children: React.ReactNode;
   accent?: string; tone?: 'default' | 'inputs' | 'results';
 }) {
-  const bg     = tone === 'inputs' ? Q.bgAlt : tone === 'results' ? Q.accentSoft : 'transparent';
-  const border = tone === 'default' ? 'none' : `1px solid ${tone === 'results' ? '#C7D2FE' : Q.border}`;
-  const pad    = tone === 'default' ? 0 : 'clamp(18px,3vw,22px)';
+  const bg     = tone === 'inputs' ? Q.bgAlt : tone === 'results' ? '#f8fafc' : 'transparent';
+  const border = tone === 'default' ? 'none' : `1px solid rgba(15, 23, 42, 0.06)`;
+  const pad    = tone === 'default' ? 0 : 'clamp(18px,3vw,24px)';
   return (
     <section style={{
-      background: bg, border, borderRadius: tone === 'default' ? 0 : 12, padding: pad,
+      background: bg, border, borderRadius: tone === 'default' ? 0 : 16, padding: pad,
+      boxShadow: tone !== 'default' ? '0 4px 20px -6px rgba(15, 23, 42, 0.02)' : 'none',
+      marginBottom: 20,
     }}>
       <header style={{ marginBottom: 16 }}>
         {eyebrow && (
           <div style={{
-            fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+            fontFamily: TEXT, fontSize: 10.5, fontWeight: 700,
             letterSpacing: '0.06em', textTransform: 'uppercase' as const,
-            color: Q.mid2, marginBottom: 4,
+            color: Q.accent, marginBottom: 4,
           }}>
             {eyebrow}
           </div>
         )}
         <h3 style={{
-          fontFamily: DISPLAY, fontSize: 16, fontWeight: 600,
+          fontFamily: DISPLAY, fontSize: 16.5, fontWeight: 700,
           color: Q.ink, letterSpacing: '-0.015em', margin: 0, lineHeight: 1.3,
         }}>
           {title}
@@ -304,7 +312,7 @@ export function StatCard({ label, value, sub, tone = 'default', accent }: {
     tone === 'primary'  ? '#C7D2FE' :
     tone === 'positive' ? '#BFE3D3' :
     tone === 'negative' ? '#F8C9D2' :
-                          Q.border;
+                          'rgba(15, 23, 42, 0.06)';
   const numClr = accent ?? (
     tone === 'primary'  ? Q.accentDk :
     tone === 'positive' ? Q.positive :
@@ -315,18 +323,19 @@ export function StatCard({ label, value, sub, tone = 'default', accent }: {
     <div style={{
       background: bg,
       border: `1px solid ${border}`,
-      borderRadius: 10,
-      padding: '14px 16px',
+      borderRadius: 12,
+      padding: '16px 20px',
+      boxShadow: '0 2px 8px -2px rgba(15, 23, 42, 0.02)',
     }}>
       <div style={{
-        fontFamily: TEXT, fontSize: 11, fontWeight: 600,
+        fontFamily: TEXT, fontSize: 10.5, fontWeight: 700,
         letterSpacing: '0.04em', textTransform: 'uppercase' as const,
         color: Q.mid2, marginBottom: 6,
       }}>
         {label}
       </div>
       <div style={{
-        fontFamily: DISPLAY, fontSize: 22, fontWeight: 700,
+        fontFamily: DISPLAY, fontSize: 24, fontWeight: 800,
         color: numClr, letterSpacing: '-0.025em', lineHeight: 1.15,
         fontVariantNumeric: 'tabular-nums',
       }}>
@@ -408,21 +417,22 @@ export function BreakdownTable({ rows, highlightLast }: {
   highlightLast?: boolean;
 }) {
   return (
-    <div style={{ border: `1px solid ${Q.border}`, borderRadius: 10, overflow: 'hidden', background: Q.surface }}>
+    <div style={{ border: `1px solid rgba(15, 23, 42, 0.06)`, borderRadius: 12, overflow: 'hidden', background: Q.surface, boxShadow: '0 2px 8px -2px rgba(15, 23, 42, 0.02)' }}>
       {rows.map((r, i) => {
         const last = highlightLast && i === rows.length - 1;
         return (
           <div key={i} style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-            padding: '12px 16px',
-            borderTop: i > 0 ? `1px solid ${Q.border}` : 'none',
-            background: last ? Q.bgAlt : Q.surface,
+            padding: '14px 18px',
+            borderTop: i > 0 ? `1px solid rgba(15, 23, 42, 0.04)` : 'none',
+            background: last ? '#ecfdf5' : Q.surface,
+            borderLeft: last ? '3px solid #10b981' : 'none',
           }}>
             <div style={{ minWidth: 0 }}>
               <div style={{
                 fontFamily: TEXT, fontSize: 13.5,
-                fontWeight: r.bold || last ? 600 : 400,
-                color: r.bold || last ? Q.ink : Q.ink2,
+                fontWeight: r.bold || last ? 700 : 500,
+                color: last ? '#047857' : r.bold ? Q.ink : Q.ink2,
                 letterSpacing: '-0.005em',
               }}>
                 {r.label}
@@ -431,9 +441,9 @@ export function BreakdownTable({ rows, highlightLast }: {
             </div>
             <div style={{
               fontFamily: TEXT,
-              fontSize: 14,
-              fontWeight: r.bold || last ? 600 : 500,
-              color: last ? Q.ink : r.negative ? Q.negative : r.positive ? Q.positive : Q.ink2,
+              fontSize: 14.5,
+              fontWeight: r.bold || last ? 700 : 600,
+              color: last ? '#047857' : r.negative ? Q.negative : r.positive ? Q.positive : Q.ink2,
               letterSpacing: '-0.005em',
               fontVariantNumeric: 'tabular-nums',
               flexShrink: 0,
@@ -527,25 +537,25 @@ export function CheckboxField({ label, checked, onChange, hint }: {
   return (
     <label style={{
       display: 'flex', alignItems: 'flex-start', gap: 10,
-      border: `1px solid ${checked ? Q.accent : Q.border}`,
-      borderRadius: 10, padding: '12px 14px', cursor: 'pointer',
+      border: `1px solid ${checked ? Q.accent : 'rgba(15, 23, 42, 0.06)'}`,
+      borderRadius: 12, padding: '14px 16px', cursor: 'pointer',
       background: checked ? Q.accentSoft : Q.surface,
-      boxShadow: checked ? `0 0 0 3px ${Q.accent}1f` : 'none',
+      boxShadow: checked ? `0 4px 12px -3px ${Q.accent}15` : '0 2px 8px -2px rgba(15, 23, 42, 0.02)',
       transition: 'all 0.12s ease',
     }}>
       <input
         type="checkbox" checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        style={{ marginTop: 2, accentColor: Q.accent, width: 15, height: 15, flexShrink: 0 }}
+        style={{ marginTop: 2, accentColor: Q.accent, width: 16, height: 16, flexShrink: 0 }}
       />
       <span style={{ minWidth: 0 }}>
         <span style={{
-          display: 'block', fontFamily: TEXT, fontSize: 13.5, fontWeight: 500,
+          display: 'block', fontFamily: TEXT, fontSize: 13.5, fontWeight: 600,
           color: Q.ink, letterSpacing: '-0.005em',
         }}>
           {label}
         </span>
-        {hint && <span style={{ display: 'block', fontFamily: TEXT, fontSize: 12, color: Q.mid, marginTop: 3, lineHeight: 1.5 }}>{hint}</span>}
+        {hint && <span style={{ display: 'block', fontFamily: TEXT, fontSize: 12, color: Q.mid, marginTop: 4, lineHeight: 1.5 }}>{hint}</span>}
       </span>
     </label>
   );

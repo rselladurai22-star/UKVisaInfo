@@ -17,7 +17,7 @@ export default function ChildcarePage() {
       deck="Free hours, Tax-Free Childcare, Universal Credit — there are multiple forms of support. See which ones you qualify for and what your true monthly bill looks like after every entitlement is applied."
       verified="gov.uk/free-childcare-education-eligible-children"
       related={[
-        { href: '/child-benefit-calculator', title: 'Child Benefit', desc: 'Don\'t forget to also claim Child Benefit.' },
+        { href: '/child-benefit-trap', title: 'Child Benefit', desc: 'Don\'t forget to also claim Child Benefit.' },
         { href: '/salary-sacrifice-calculator', title: 'Salary sacrifice', desc: 'Some employers offer childcare voucher-style sacrifice schemes.' },
         { href: '/take-home-pay', title: 'Take-home pay', desc: 'See your net pay alongside childcare costs.' },
       ]}

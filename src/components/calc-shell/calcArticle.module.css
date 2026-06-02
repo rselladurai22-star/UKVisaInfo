@@ -1,0 +1,331 @@
+/* ════════════════════════════════════════════════════
+   CALC ARTICLE — long-form guide in a full-width card
+   Cream paper · ink black · emerald accent · warm gold notes
+   Aligns with home + hub + calc UI palette.
+════════════════════════════════════════════════════ */
+
+.wrap {
+  margin-top: 48px;
+  background: #ffffff;
+  border: 1px solid rgba(11, 15, 25, 0.08);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 56px);
+  box-shadow: 0 1px 2px rgba(11, 15, 25, 0.04), 0 22px 56px -28px rgba(11, 15, 25, 0.18);
+  font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: #0B0F19;
+}
+
+/* ── header ── */
+.header {
+  padding-bottom: 28px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #ECEAE0;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #047857;
+  background: #ECFDF5;
+  border: 1px solid rgba(4, 120, 87, 0.18);
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.heading {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  color: #0B0F19;
+  line-height: 1.1;
+  margin: 18px 0 0;
+}
+.meta {
+  font-size: 13px;
+  color: #64748B;
+  margin: 12px 0 0;
+  font-weight: 500;
+}
+
+/* ── layout: sticky TOC + reading column ── */
+.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: stretch;
+}
+
+/* TOC */
+.tocCol { position: relative; }
+.toc {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 30px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.toc::-webkit-scrollbar { width: 5px; }
+.toc::-webkit-scrollbar-thumb { background: rgba(11, 15, 25, 0.12); border-radius: 999px; }
+.tocLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748B;
+  padding: 0 14px 12px;
+}
+.tocLink {
+  position: relative;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: none;
+  padding: 9px 14px;
+  border-radius: 9px;
+  line-height: 1.45;
+  transition: color 0.15s, background 0.15s;
+}
+.tocLink:hover { color: #0B0F19; background: #FAFAF7; }
+.tocLinkActive {
+  color: #064E3B;
+  font-weight: 700;
+  background: #ECFDF5;
+}
+.tocLinkActive::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 3px;
+  border-radius: 999px;
+  background: #047857;
+}
+
+/* ── reading column ── */
+.prose {
+  width: 100%;
+  max-width: 72ch;
+  margin: 0 auto;
+  padding-top: 26px;
+}
+.section {
+  position: relative;
+  scroll-margin-top: 90px;
+  padding-left: 52px;
+}
+.section + .section {
+  margin-top: 48px;
+  padding-top: 44px;
+  border-top: 1px solid #ECEAE0;
+}
+.sectionTitleRow { margin: 0 0 20px; }
+.sectionNum {
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #064E3B;
+  background: #ECFDF5;
+  border: 1px solid rgba(4, 120, 87, 0.2);
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+.section + .section .sectionNum { top: 45px; }
+.sectionTitle {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  color: #0B0F19;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ── body typography ── */
+.prose :global(h4) {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #0B0F19;
+  letter-spacing: -0.01em;
+  margin: 32px 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid #047857;
+}
+.prose :global(p) {
+  font-size: 17px;
+  line-height: 1.78;
+  color: #334155;
+  font-weight: 400;
+  letter-spacing: -0.002em;
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+.section :global(p:first-of-type) {
+  font-size: 18.5px;
+  line-height: 1.7;
+  color: #1F2937;
+  font-weight: 400;
+}
+.prose :global(strong) { color: #0B0F19; font-weight: 700; }
+.prose :global(em) { color: #475569; font-style: italic; }
+
+.prose :global(ul),
+.prose :global(ol) {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.prose :global(li) {
+  position: relative;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #334155;
+  font-weight: 400;
+  padding-left: 28px;
+}
+.prose :global(li)::before {
+  content: "";
+  position: absolute;
+  left: 4px; top: 10px;
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: #047857;
+}
+.prose :global(ol) { counter-reset: pstep; }
+.prose :global(ol > li) { counter-increment: pstep; padding-left: 36px; }
+.prose :global(ol > li)::before {
+  content: counter(pstep);
+  width: auto; height: auto; background: transparent;
+  left: 0; top: 0;
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #064E3B;
+  background: #ECFDF5;
+  border: 1px solid rgba(4, 120, 87, 0.18);
+  border-radius: 6px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose :global(a) {
+  color: #047857;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.14s;
+}
+.prose :global(a:hover) { color: #064E3B; }
+
+.prose :global(blockquote) {
+  margin: 4px 0 22px;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid #047857;
+  color: #1F2937;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* highlighted note card */
+.prose :global(.note) {
+  background: linear-gradient(135deg, #FBF6E7 0%, #FAFAF7 100%);
+  border: 1px solid rgba(184, 134, 11, 0.22);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 4px 0 24px;
+}
+.prose :global(.note) :global(p) { margin-bottom: 0; font-size: 15.5px; color: #1F2937; }
+.prose :global(.note) :global(.noteTitle) {
+  font-family: var(--font-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #78350F;
+  margin: 0 0 7px;
+  display: block;
+}
+
+/* data tables */
+.prose :global(table) {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 6px 0 26px;
+  font-size: 14.5px;
+  border: 1px solid #ECEAE0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.prose :global(thead) { background: #FAFAF7; }
+.prose :global(th) {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  padding: 12px 16px;
+}
+.prose :global(td) {
+  padding: 13px 16px;
+  border-top: 1px solid #ECEAE0;
+  color: #1F2937;
+  font-variant-numeric: tabular-nums;
+}
+.prose :global(tbody tr:nth-child(even)) { background: rgba(11, 15, 25, 0.018); }
+
+/* inline code & figures */
+.prose :global(code) {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.92em;
+  background: #F1EFE8;
+  border: 1px solid #ECEAE0;
+  color: #064E3B;
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+.prose :global(figure) { margin: 6px 0 22px; }
+.prose :global(figcaption) {
+  font-size: 12.5px;
+  color: #64748B;
+  margin-top: 8px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .tocCol { display: none; }
+  .prose { max-width: none; padding-top: 22px; }
+  .section { padding-left: 46px; }
+}
+@media (max-width: 520px) {
+  .wrap { border-radius: 18px; padding: 22px; }
+  .section { padding-left: 42px; }
+  .sectionNum { width: 30px; height: 30px; font-size: 12px; }
+  .prose :global(p), .prose :global(li) { font-size: 16px; }
+}

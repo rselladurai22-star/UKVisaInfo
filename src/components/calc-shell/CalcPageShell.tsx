@@ -4,7 +4,7 @@
  * Light · refined neutrals · one disciplined indigo accent · hairline borders
  */
 import Link from 'next/link';
-import { ShieldCheck, ExternalLink, ArrowUpRight, CalendarDays, BarChart3, Sparkles, Layers } from 'lucide-react';
+import { ShieldCheck, ExternalLink, ArrowUpRight, CalendarDays, BarChart3, Sparkles, Layers, ChevronRight } from 'lucide-react';
 import FaqJsonLd, { type FaqItem } from './FaqJsonLd';
 import EditorByline from '../EditorByline';
 import Methodology from './Methodology';
@@ -26,6 +26,8 @@ export interface MethodologyData {
 interface Props {
   eyebrow: string; title: string; deck: string;
   verified?: string; url?: string;
+  /** Optional breadcrumb trail rendered above the hero. */
+  crumb?: { label: string; href?: string }[];
   sidebar?: SidebarData;
   related?: { href: string; title: string; desc: string }[];
   educational?: { title: string; body: string }[];
@@ -44,7 +46,7 @@ const DEFAULT_VERIFIED = 'May 2026';
 
 /* ─── design tokens — Stripe-inspired Quartz palette ────── */
 const Q = {
-  bg:        '#FFFFFF',
+  bg:        '#f8fafc',
   bgAlt:     '#FAFAFB',
   surface:   '#FFFFFF',
   ink:       '#18181B',
@@ -52,13 +54,13 @@ const Q = {
   mid:       '#52525B',
   mid2:      '#6B7280',
   faint:     '#9CA3AF',
-  border:    '#ECECEF',
-  borderStr: '#E2E2E7',
+  border:    'rgba(15, 23, 42, 0.06)',
+  borderStr: 'rgba(15, 23, 42, 0.08)',
   accent:    '#6366F1',
   accentDk:  '#4F46E5',
   accentSoft:'#EEF2FF',
   positive:  '#047857',
-  positiveSoft: '#ECFDF5',
+  positiveSoft: '#ecfdf5',
   warning:   '#B45309',
   warningSoft: '#FEF3C7',
   negative:  '#BE123C',
@@ -67,9 +69,23 @@ const Q = {
 const DISPLAY = 'var(--font-grotesk), "Inter Tight", Inter, system-ui, sans-serif';
 const TEXT    = 'var(--font-inter), Inter, system-ui, -apple-system, sans-serif';
 
+const DotGrid = () => (
+  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 600, pointerEvents: 'none', zIndex: 0, opacity: 0.5, overflow: 'hidden' }}>
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dot-grid-shell" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1" fill="rgba(79, 70, 229, 0.08)" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dot-grid-shell)" />
+    </svg>
+    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, #f8fafc 100%)' }} />
+  </div>
+);
+
 export default function CalcPageShell({
   eyebrow, title, deck, verified = 'gov.uk verified',
-  url, sidebar, related, educational, faqs,
+  url, crumb, sidebar, related, educational, faqs,
   editorVerified = DEFAULT_VERIFIED, hideByline = false, methodology,
   children,
 }: Props) {
@@ -82,84 +98,70 @@ export default function CalcPageShell({
   } : null;
 
   return (
-    <div style={{
-      background: Q.bg,
-      minHeight: '100vh',
-      fontFamily: TEXT,
-      color: Q.ink,
-      WebkitFontSmoothing: 'antialiased',
-      MozOsxFontSmoothing: 'grayscale',
-    }}>
+    <div className="bg-surface text-on-surface min-h-screen" style={{ fontFamily: TEXT }}>
       {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       {faqs && faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header style={{
-        background: Q.surface,
-        borderBottom: `1px solid ${Q.border}`,
-      }}>
-        <div style={{
-          maxWidth: 1240,
-          margin: '0 auto',
-          padding: 'clamp(80px,11vw,108px) clamp(20px,4vw,40px) clamp(36px,6vw,56px)',
-        }}>
-          {/* eyebrow + breadcrumb-style label */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18, flexWrap: 'wrap' }}>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: Q.accentSoft,
-              color: Q.accentDk,
-              fontFamily: TEXT,
-              fontSize: 12,
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              padding: '4px 10px',
-              borderRadius: 999,
-              border: `1px solid ${Q.accent}1f`,
-            }}>
-              <Sparkles size={11} strokeWidth={2.5} />
+      <section className="relative overflow-hidden border-b border-border">
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 opacity-[0.55]"
+          style={{
+            background:
+              'radial-gradient(55% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(45% 65% at 95% 10%, #FBF6E7 0%, transparent 65%)',
+          }}
+        />
+        <div className="mx-auto max-w-6xl px-6 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16">
+          {crumb && crumb.length > 0 && (
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-on-surface-variant">
+              {crumb.map((b, i) => (
+                <span key={i} className="inline-flex items-center gap-1.5">
+                  {b.href ? (
+                    <Link href={b.href} className="transition hover:text-primary">{b.label}</Link>
+                  ) : (
+                    <span className="text-primary">{b.label}</span>
+                  )}
+                  {i < crumb.length - 1 && <ChevronRight className="h-3 w-3 opacity-50" />}
+                </span>
+              ))}
+            </nav>
+          )}
+
+          <div className={crumb && crumb.length > 0 ? 'mt-7 max-w-3xl' : 'max-w-3xl'}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
+              <Sparkles className="h-3.5 w-3.5 text-secondary" />
               {eyebrow}
             </span>
-          </div>
 
-          {/* title — Inter Tight, optically tuned */}
-          <h1 style={{
-            fontFamily: DISPLAY,
-            fontSize: 'clamp(1.75rem, 4.5vw, 2.875rem)',
-            fontWeight: 700,
-            color: Q.ink,
-            letterSpacing: '-0.025em',
-            lineHeight: 1.1,
-            maxWidth: 800,
-            margin: '0 0 18px',
-          }}>
-            {title}
-          </h1>
+            <h1
+              className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-[3.4rem]"
+              style={{ fontFamily: DISPLAY }}
+            >
+              {title}
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
+              {deck}
+            </p>
 
-          {/* deck — generous line height, optimal measure */}
-          <p style={{
-            fontFamily: TEXT,
-            fontSize: 'clamp(15px, 1.5vw, 17px)',
-            color: Q.mid,
-            lineHeight: 1.65,
-            maxWidth: 660,
-            margin: '0 0 24px',
-            fontWeight: 400,
-          }}>
-            {deck}
-          </p>
-
-          {/* trust signals row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-            <Chip icon={<ShieldCheck size={12} strokeWidth={2.5} />} label={verified} tone="success" />
-            <Chip label="Free · No signup" tone="default" />
-            <Chip label="Updated 2025/26" tone="default" />
+            <ul className="mt-6 flex flex-wrap gap-2">
+              <li className="inline-flex items-center gap-1.5 rounded-full border border-secondary/20 bg-secondary-soft px-3 py-1.5 text-xs font-semibold text-secondary">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                {verified}
+              </li>
+              <li className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-container-lowest/80 px-3 py-1.5 text-xs font-medium text-on-surface-variant">
+                Free · No sign-up
+              </li>
+              <li className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-container-lowest/80 px-3 py-1.5 text-xs font-medium text-on-surface-variant">
+                Updated 2026/27
+              </li>
+            </ul>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* ── Body 2-column ────────────────────────────────── */}
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(28px,5vw,40px) clamp(20px,4vw,40px) 64px' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(28px,5vw,40px) clamp(20px,4vw,40px) 64px', position: 'relative', zIndex: 1 }}>
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
           {/* ── Main column ── */}
@@ -174,9 +176,9 @@ export default function CalcPageShell({
             {/* Calculator surface */}
             <div style={{
               background: Q.surface,
-              border: `1px solid ${Q.border}`,
-              borderRadius: 12,
-              boxShadow: `0 1px 2px rgba(26,31,54,0.04)`,
+              border: `1px solid rgba(15, 23, 42, 0.06)`,
+              borderRadius: 24,
+              boxShadow: `0 10px 30px -10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02)`,
               overflow: 'hidden',
             }}>
               <div style={{ padding: 'clamp(20px,3.5vw,32px)' }}>
@@ -208,10 +210,11 @@ export default function CalcPageShell({
                   {educational.map((e, i) => (
                     <details key={i} style={{
                       background: Q.surface,
-                      border: `1px solid ${Q.border}`,
-                      borderRadius: 10,
+                      border: `1px solid rgba(15, 23, 42, 0.06)`,
+                      borderRadius: 12,
+                      boxShadow: '0 2px 8px -2px rgba(15, 23, 42, 0.02)',
                       overflow: 'hidden',
-                      transition: 'border-color 0.15s ease',
+                      transition: 'all 0.15s ease',
                     }}>
                       <summary style={{
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12,
@@ -432,19 +435,19 @@ export default function CalcPageShell({
 
 function Chip({ icon, label, tone = 'default' }: { icon?: React.ReactNode; label: string; tone?: 'default' | 'success' }) {
   const styles = tone === 'success'
-    ? { bg: Q.positiveSoft, color: Q.positive, border: '#BFE3D3' }
+    ? { bg: Q.positiveSoft, color: Q.positive, border: 'rgba(4, 120, 87, 0.12)' }
     : { bg: Q.bgAlt, color: Q.ink2, border: Q.border };
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 5,
       fontFamily: TEXT,
       fontSize: 12,
-      fontWeight: 500,
+      fontWeight: 600,
       color: styles.color,
       background: styles.bg,
       border: `1px solid ${styles.border}`,
-      padding: '4px 9px',
-      borderRadius: 999,
+      padding: '6px 12px',
+      borderRadius: '10px',
       letterSpacing: '-0.005em',
     }}>
       {icon}
@@ -459,12 +462,16 @@ function SectionLabel({ icon, label, title }: { icon?: React.ReactNode; label: s
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         fontFamily: TEXT,
-        fontSize: 11,
-        fontWeight: 600,
-        color: Q.mid2,
-        letterSpacing: '0.06em',
+        fontSize: 10,
+        fontWeight: 700,
+        color: Q.accentDk,
+        background: 'rgba(79, 70, 229, 0.06)',
+        border: '1px solid rgba(79, 70, 229, 0.12)',
+        padding: '4px 10px',
+        borderRadius: 999,
+        letterSpacing: '0.08em',
         textTransform: 'uppercase',
-        marginBottom: 6,
+        marginBottom: 10,
       }}>
         {icon}
         {label}
@@ -472,7 +479,7 @@ function SectionLabel({ icon, label, title }: { icon?: React.ReactNode; label: s
       <h2 style={{
         fontFamily: DISPLAY,
         fontSize: 22,
-        fontWeight: 700,
+        fontWeight: 800,
         color: Q.ink,
         letterSpacing: '-0.02em',
         lineHeight: 1.2,
@@ -491,13 +498,14 @@ function SideCard({ icon, title, sub, subtle, children }: {
   return (
     <div style={{
       background: Q.surface,
-      border: `1px solid ${Q.border}`,
-      borderRadius: 12,
+      border: `1px solid rgba(15, 23, 42, 0.06)`,
+      borderRadius: 16,
+      boxShadow: `0 4px 20px -6px rgba(15, 23, 42, 0.02), 0 1px 2px rgba(15, 23, 42, 0.01)`,
       overflow: 'hidden',
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
-        padding: '11px 14px',
+        padding: '12px 16px',
         background: subtle ? Q.bgAlt : Q.surface,
         borderBottom: `1px solid ${Q.border}`,
       }}>
@@ -505,10 +513,10 @@ function SideCard({ icon, title, sub, subtle, children }: {
           {icon}
           <span style={{
             fontFamily: DISPLAY,
-            fontSize: 13,
-            fontWeight: 600,
+            fontSize: 13.5,
+            fontWeight: 700,
             color: Q.ink,
-            letterSpacing: '-0.01em',
+            letterSpacing: '-0.015em',
           }}>
             {title}
           </span>
@@ -516,8 +524,8 @@ function SideCard({ icon, title, sub, subtle, children }: {
         {sub && (
           <span style={{
             fontFamily: TEXT,
-            fontSize: 10.5,
-            fontWeight: 500,
+            fontSize: 11,
+            fontWeight: 600,
             color: Q.mid2,
             letterSpacing: '0.02em',
           }}>

@@ -1,0 +1,218 @@
+/* ════════════════════════════════════════════════════
+   VISUAL CONTENT KIT — reusable presentational blocks
+   for in-depth guides: stat tiles, rate bands, step
+   chart, compare matrix, flow diagram, tip cards.
+════════════════════════════════════════════════════ */
+
+/* ── stat tiles ── */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 4px 0 24px;
+}
+.stat {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.stat::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--tone, #6366f1);
+}
+.statVal {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--uk-ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.statLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--uk-text-soft);
+  margin-top: 8px;
+}
+.statSub { font-size: 11.5px; color: var(--uk-muted); margin-top: 3px; line-height: 1.4; }
+
+/* ── rate bands (proportional horizontal bar) ── */
+.bands { margin: 4px 0 24px; }
+.bandsBar {
+  display: flex;
+  height: 52px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+.bandSeg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10px;
+  color: #fff;
+  min-width: 0;
+  position: relative;
+}
+.bandSegRate { font-family: var(--font-grotesk), sans-serif; font-size: 15px; font-weight: 800; line-height: 1; }
+.bandSegName { font-size: 10.5px; font-weight: 600; opacity: 0.9; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bandsAxis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--uk-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── step / marginal-rate chart ── */
+.chart {
+  margin: 4px 0 24px;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: 18px 18px 12px;
+}
+.chartTitle {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--uk-ink);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.chartTitle span { color: var(--uk-muted); font-weight: 500; }
+.chartSvg { width: 100%; height: auto; display: block; }
+
+/* ── compare matrix ── */
+.matrix {
+  margin: 4px 0 24px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.matrixHead {
+  display: grid;
+  background: var(--uk-soft);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+.matrixHeadCell {
+  padding: 14px 14px;
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--uk-ink);
+  letter-spacing: -0.01em;
+  border-left: 1px solid rgba(15, 23, 42, 0.06);
+}
+.matrixHeadCell:first-child { border-left: 0; color: var(--uk-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; }
+.matrixHeadBest {
+  background: #eef2ff;
+  position: relative;
+}
+.matrixBestTag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--uk-indigo);
+  padding: 1px 6px;
+  border-radius: 5px;
+  margin-left: 7px;
+  vertical-align: middle;
+}
+.matrixRow { display: grid; border-top: 1px solid rgba(15, 23, 42, 0.05); }
+.matrixRow:first-child { border-top: 0; }
+.matrixCell {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  color: #3f3f46;
+  border-left: 1px solid rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-variant-numeric: tabular-nums;
+}
+.matrixCell:first-child { border-left: 0; font-weight: 600; color: var(--uk-ink); }
+.matrixCellBest { background: #f5f3ff; }
+.mYes { color: #047857; display: inline-flex; }
+.mNo { color: #be123c; display: inline-flex; }
+
+/* ── flow diagram ── */
+.flow {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 24px;
+}
+.flowStep {
+  flex: 1 1 0;
+  min-width: 110px;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 13px 14px;
+}
+.flowStepAccent { border-color: rgba(79, 70, 229, 0.3); background: #eef2ff; }
+.flowOp {
+  align-self: center;
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--uk-muted);
+  flex: 0 0 auto;
+}
+.flowLabel { font-size: 11px; font-weight: 600; color: var(--uk-muted); }
+.flowVal {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--uk-ink);
+  letter-spacing: -0.02em;
+  margin-top: 3px;
+}
+
+/* ── tip cards ── */
+.tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 4px 0 24px;
+}
+.tip {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: 18px;
+}
+.tipIcon {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--uk-indigo);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.tipTitle {
+  font-family: var(--font-grotesk), sans-serif;
+  font-size: 14.5px; font-weight: 700; color: var(--uk-ink);
+  letter-spacing: -0.01em; margin-bottom: 5px;
+}
+.tipBody { font-size: 13.5px; line-height: 1.55; color: var(--uk-text-soft); }
+
+@media (max-width: 640px) {
+  .flow { flex-direction: column; }
+  .flowOp { align-self: flex-start; padding-left: 8px; }
+}

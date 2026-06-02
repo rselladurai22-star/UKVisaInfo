@@ -5,6 +5,7 @@ import { COUNTRIES } from '../data/countries';
 import { CITIES } from '../data/cities';
 import { NEWS_ITEMS } from '../data/news';
 import { VISA_VARIANTS } from '../data/visaVariants';
+import { CATEGORIES } from '../data/tools';
 
 const SITE = 'https://ukvisainfo.co.uk';
 const TODAY = new Date().toISOString().split('T')[0];
@@ -24,29 +25,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/settlement',      prio: 0.9,  freq: 'monthly' },
     { p: '/postcode',        prio: 0.95, freq: 'monthly' },
     { p: '/take-home-pay',         prio: 0.95, freq: 'monthly' },
+    { p: '/payslip-auditor',       prio: 0.95, freq: 'monthly' },
+    { p: '/self-employed-tax',     prio: 0.95, freq: 'monthly' },
+    { p: '/contractor-ir35',       prio: 0.95, freq: 'monthly' },
+    { p: '/director-dividend',     prio: 0.95, freq: 'monthly' },
+    { p: '/bonus-tax',             prio: 0.95, freq: 'monthly' },
+    { p: '/student-loan-repayment', prio: 0.90, freq: 'monthly' },
+    { p: '/salary-sacrifice-calculator', prio: 0.90, freq: 'monthly' },
+    { p: '/child-benefit-trap',    prio: 0.95, freq: 'monthly' },
     { p: '/stamp-duty-calculator', prio: 0.95, freq: 'monthly' },
     { p: '/mortgage-affordability', prio: 0.95, freq: 'monthly' },
     { p: '/council-tax-band',      prio: 0.95, freq: 'monthly' },
     { p: '/cost-of-living-uk',     prio: 0.90, freq: 'monthly' },
-    { p: '/vat-calculator',        prio: 0.95, freq: 'monthly' },
-    { p: '/tax-code',              prio: 0.90, freq: 'monthly' },
     { p: '/holiday-pay',           prio: 0.90, freq: 'monthly' },
     { p: '/salary-compare',        prio: 0.95, freq: 'monthly' },
     { p: '/cgt-calculator',        prio: 0.90, freq: 'monthly' },
-    { p: '/pension-allowance',     prio: 0.85, freq: 'monthly' },
     { p: '/state-pension',         prio: 0.90, freq: 'monthly' },
     { p: '/ulez-check',            prio: 0.90, freq: 'monthly' },
     { p: '/mot-check',             prio: 0.90, freq: 'monthly' },
     { p: '/energy-bill',           prio: 0.95, freq: 'weekly'  },
-    { p: '/student-loan-repayment', prio: 0.90, freq: 'monthly' },
     { p: '/redundancy-pay',         prio: 0.90, freq: 'monthly' },
     { p: '/maternity-pay',          prio: 0.90, freq: 'monthly' },
     { p: '/sick-pay',               prio: 0.90, freq: 'monthly' },
-    { p: '/dividend-tax',           prio: 0.90, freq: 'monthly' },
     { p: '/inheritance-tax',        prio: 0.90, freq: 'monthly' },
-    { p: '/national-insurance',     prio: 0.90, freq: 'monthly' },
-    { p: '/sole-trader-vs-limited', prio: 0.90, freq: 'monthly' },
-    { p: '/payslip-decoder',        prio: 0.85, freq: 'monthly' },
     { p: '/tools',           prio: 0.8,  freq: 'monthly' },
     { p: '/tools/salary-checker',     prio: 0.85, freq: 'monthly' },
     { p: '/tools/sponsor-search',     prio: 0.85, freq: 'monthly' },
@@ -59,13 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/privacy',         prio: 0.3,  freq: 'yearly' },
     { p: '/terms',           prio: 0.3,  freq: 'yearly' },
     /* ── Tier-2 calculators ── */
-    { p: '/child-benefit-calculator',    prio: 0.90, freq: 'monthly' },
     { p: '/marriage-allowance-calculator', prio: 0.90, freq: 'monthly' },
-    { p: '/company-car-tax',             prio: 0.90, freq: 'monthly' },
-    { p: '/ir35-calculator',             prio: 0.90, freq: 'monthly' },
-    { p: '/contractor-day-rate',         prio: 0.90, freq: 'monthly' },
-    { p: '/salary-sacrifice-calculator', prio: 0.90, freq: 'monthly' },
-    { p: '/self-assessment-calculator',  prio: 0.90, freq: 'monthly' },
     { p: '/rental-income-tax',           prio: 0.90, freq: 'monthly' },
     { p: '/rental-yield-calculator',     prio: 0.90, freq: 'monthly' },
     { p: '/overpayment-mortgage',        prio: 0.90, freq: 'monthly' },
@@ -84,6 +79,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: TODAY,
       changeFrequency: freq as MetadataRoute.Sitemap[number]['changeFrequency'],
       priority: prio,
+    });
+  }
+
+  /* ── Category hubs ── */
+  for (const cat of CATEGORIES) {
+    urls.push({
+      url: `${SITE}/category/${cat.id}`,
+      lastModified: TODAY,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     });
   }
 

@@ -41,7 +41,7 @@ export default function RentalIncomeTaxPage() {
       }}
       related={[
         { href: '/rental-yield-calculator', title: 'Rental yield', desc: 'Gross and net yield + BTL mortgage ICR check.' },
-        { href: '/self-assessment-calculator', title: 'Self Assessment estimator', desc: 'Rental profit feeds into your SA bill.' },
+        { href: '/self-employed-tax', title: 'Self Assessment estimator', desc: 'Rental profit feeds into your SA bill.' },
         { href: '/property-cgt-calculator', title: 'Property CGT', desc: 'Tax when you eventually sell the property.' },
       ]}
       educational={[

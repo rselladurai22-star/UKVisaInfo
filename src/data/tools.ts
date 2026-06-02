@@ -16,8 +16,9 @@ import {
   Baby, HeartPulse, PiggyBank, Banknote, LandmarkIcon, Users, ReceiptText,
   Heart, Shield, Coins, Star, Clock,
   RefreshCw, ShieldCheck, Gift, Target, CheckCircle2,
-  BookOpen, Flag, Wrench, Share2, Moon, Truck, Key, Calendar,
+  BookOpen, Flag, Wrench, Share2, Moon, Truck, Key, Calendar, Sparkles
 } from 'lucide-react';
+
 
 /* ─────────────────────────────────────────────
    TYPES
@@ -99,28 +100,27 @@ export const CATEGORIES: Category[] = [
    status: 'new'   = Tier-2 recently added
 ───────────────────────────────────────────── */
 export const APP_TILES: AppTile[] = [
-  // ── TAX & INCOME (10 live) ──────────────────────────────────────
+  // ── TAX & INCOME (12 live) ──────────────────────────────────────
   { href: '/take-home-pay',                label: 'Take-home Pay',        hint: 'PAYE + NI + student loan',              icon: Wallet,       accent: TEAL,   category: 'tax',        status: 'live', trending: true, featured: true, live: true, kbd: 'P' },
-  { href: '/vat-calculator',               label: 'VAT Calculator',       hint: 'Add or remove 20% / 5% / 0%',           icon: Percent,      accent: SKY,    category: 'tax',        status: 'live', live: true, kbd: 'A' },
-  { href: '/tax-code',                     label: 'Tax Code Decoder',     hint: 'Decode 1257L, K475, BR …',              icon: FileText,     accent: NAVY,   category: 'tax',        status: 'live', live: true, kbd: 'T' },
-  { href: '/dividend-tax',                 label: 'Dividend Tax',         hint: '£500 allowance · 8.75–39.35%',          icon: PiggyBank,    accent: EMERALD,category: 'tax',        status: 'live', live: true },
+  { href: '/payslip-auditor',              label: 'Payslip Auditor',      hint: 'Audit tax code + HMRC error check',     icon: FileText,     accent: NAVY,   category: 'tax',        status: 'new',  live: true, kbd: 'T' },
+  { href: '/self-employed-tax',            label: 'Self-Employed Tax',    hint: 'SA estimation + Payment on Account',    icon: Briefcase,    accent: AMBER,  category: 'tax',        status: 'new',  live: true },
+  { href: '/contractor-ir35',              label: 'Contractor & IR35',    hint: '3-way comparison (Ltd vs PAYE vs Perm)', icon: Briefcase,    accent: VIOLET, category: 'tax',        status: 'new',  live: true },
+  { href: '/director-dividend',            label: 'Director Dividend',    hint: 'Salary/dividend split optimizer',       icon: TrendingUp,   accent: EMERALD,category: 'tax',        status: 'new',  live: true },
+  { href: '/bonus-tax',                    label: 'Bonus & Overtime',     hint: 'Keep vs lose + pension redirect',       icon: Gift,         accent: ROSE,   category: 'tax',        status: 'new',  live: true },
+  { href: '/student-loan-repayment',       label: 'Student Loan Pay',     hint: 'Plan 1/2/4/5 + Postgraduate',           icon: GraduationCap,accent: VIOLET, category: 'tax',        status: 'live', live: true },
+  { href: '/salary-sacrifice-calculator',  label: 'Salary Sacrifice',     hint: 'EV lease, pension, cycle savings',      icon: PiggyBank,    accent: TEAL,   category: 'tax',        status: 'new',  live: true },
+  { href: '/child-benefit-trap',           label: 'Child Benefit Trap',   hint: 'HICBC clawback + pension escape',       icon: Users,        accent: PINK,   category: 'tax',        status: 'new',  live: true },
   { href: '/inheritance-tax',              label: 'Inheritance Tax',      hint: 'NRB £325k + RNRB £175k',                icon: LandmarkIcon, accent: GOLD,   category: 'tax',        status: 'live', live: true },
-  { href: '/national-insurance',           label: 'National Insurance',   hint: 'Employee · employer · self-employed',   icon: Users,        accent: TEAL,   category: 'tax',        status: 'live', trending: true, live: true },
   { href: '/cgt-calculator',               label: 'Capital Gains Tax',    hint: '£3,000 AEA · 18% / 24%',                icon: TrendingUp,   accent: BLUE,   category: 'tax',        status: 'live', live: true },
   { href: '/marriage-allowance-calculator',label: 'Marriage Allowance',   hint: '£1,260 PA transfer · £252 saving',      icon: Heart,        accent: ROSE,   category: 'tax',        status: 'new',  live: true },
-  { href: '/company-car-tax',              label: 'Company Car Tax',      hint: 'BiK · CO₂% · EV / PHEV / diesel',       icon: Car,          accent: NAVY,   category: 'tax',        status: 'new',  live: true },
-  { href: '/self-assessment-calculator',   label: 'Self Assessment',      hint: 'Multi-income SA estimate + POAC',        icon: FileText,     accent: AMBER,  category: 'tax',        status: 'new',  live: true },
 
-  // ── EMPLOYMENT (11 live) ────────────────────────────────────────
+  // ── EMPLOYMENT (6 live) ────────────────────────────────────────
   { href: '/holiday-pay',                  label: 'Holiday Pay',          hint: 'Statutory 5.6 weeks · 12.07%',          icon: Briefcase,    accent: BLUE,   category: 'employment', status: 'live', live: true },
   { href: '/salary-compare',               label: 'Salary Compare',       hint: 'City ↔ city equivalent gross',          icon: Scale,        accent: EMERALD,category: 'employment', status: 'live', trending: true, live: true, kbd: 'Q' },
   { href: '/redundancy-pay',               label: 'Redundancy Pay',       hint: '£719 weekly cap · £30k tax-free',       icon: Banknote,     accent: ROSE,   category: 'employment', status: 'live', live: true },
   { href: '/maternity-pay',                label: 'Maternity Pay',        hint: 'SMP 39 weeks · SPP',                    icon: Baby,         accent: PINK,   category: 'employment', status: 'live', live: true },
   { href: '/sick-pay',                     label: 'Sick Pay (SSP)',       hint: '£118.75/wk · 28-week max',              icon: HeartPulse,   accent: SKY,    category: 'employment', status: 'live', live: true },
-  { href: '/student-loan-repayment',       label: 'Student Loan',         hint: 'Plan 1/2/4/5 + Postgraduate',           icon: GraduationCap,accent: VIOLET, category: 'employment', status: 'live', live: true },
-  { href: '/payslip-decoder',              label: 'Payslip Decoder',      hint: 'Tax codes · NI letters · pensions',     icon: ReceiptText,  accent: AMBER,  category: 'employment', status: 'live', live: true },
   { href: '/minimum-wage-checker',         label: 'Minimum Wage',         hint: 'NLW £12.21 · Apr 2025 rates',           icon: Scale,        accent: EMERALD,category: 'employment', status: 'new',  live: true },
-  { href: '/salary-sacrifice-calculator',  label: 'Salary Sacrifice',     hint: 'IT + NI saving vs relief at source',    icon: PiggyBank,    accent: TEAL,   category: 'employment', status: 'new',  live: true },
 
   // ── PROPERTY & MORTGAGE (9 live) ───────────────────────────────
   { href: '/stamp-duty-calculator',        label: 'Stamp Duty',           hint: 'SDLT 2026 · FTB relief',                icon: Calculator,   accent: BLUE,   category: 'property',   status: 'live', trending: true, featured: true, live: true, kbd: 'S' },
@@ -133,17 +133,14 @@ export const APP_TILES: AppTile[] = [
   { href: '/overpayment-mortgage',         label: 'Mortgage Overpayment', hint: 'Interest saved · months off term',      icon: LandmarkIcon, accent: BLUE,   category: 'property',   status: 'new',  live: true },
   { href: '/property-cgt-calculator',      label: 'Property CGT',         hint: 'PPR relief · 18%/24% Oct 2024',         icon: Building2,    accent: NAVY,   category: 'property',   status: 'new',  live: true },
 
-  // ── SAVINGS & PENSIONS (7 live) ─────────────────────────────────
-  { href: '/pension-allowance',            label: 'Pension Allowance',    hint: 'Tapered + MPAA + carry-forward',        icon: Coins,        accent: GOLD,   category: 'savings',    status: 'live', live: true },
+  // ── SAVINGS & PENSIONS (4 live) ─────────────────────────────────
   { href: '/state-pension',                label: 'State Pension',        hint: 'From your NI years',                    icon: LandmarkIcon, accent: NAVY,   category: 'savings',    status: 'live', live: true },
   { href: '/isa-calculator',               label: 'ISA Growth',           hint: '£20k ISA · LISA bonus · projection',    icon: Wallet,       accent: TEAL,   category: 'savings',    status: 'new',  live: true },
   { href: '/lifetime-isa-calculator',      label: 'Lifetime ISA',         hint: '25% bonus · first home · retirement',   icon: Star,         accent: AMBER,  category: 'savings',    status: 'new',  live: true },
   { href: '/pension-drawdown-calculator',  label: 'Pension Drawdown',     hint: 'PCLS 25% · year-by-year projection',    icon: Coins,        accent: GOLD,   category: 'savings',    status: 'new',  live: true },
 
-  // ── BUSINESS & SELF-EMPLOYED (3 live) ───────────────────────────
-  { href: '/sole-trader-vs-limited',       label: 'Sole vs Ltd',          hint: 'Which keeps more of your profit?',      icon: Briefcase,    accent: BLUE,   category: 'business',   status: 'live', live: true },
-  { href: '/ir35-calculator',              label: 'IR35 Calculator',      hint: 'Inside vs outside — take-home diff',    icon: Shield,       accent: VIOLET, category: 'business',   status: 'new',  live: true },
-  { href: '/contractor-day-rate',          label: 'Contractor Day Rate',  hint: 'Day rate → Ltd vs PAYE comparison',     icon: Briefcase,    accent: BLUE,   category: 'business',   status: 'new',  live: true },
+  // ── BUSINESS & SELF-EMPLOYED (0 live) ───────────────────────────
+  // Note: sole trader vs ltd, ir35, and contractor day rate are consolidated under category 'tax'
 
   // ── IMMIGRATION (5 live) ────────────────────────────────────────
   { href: '/tools/cost-calculator',        label: 'Visa Cost Calculator', hint: 'Fees + IHS + dependants · 8 currencies', icon: Calculator,   accent: VIOLET, category: 'immigration', status: 'new', live: true, featured: true },
@@ -156,10 +153,9 @@ export const APP_TILES: AppTile[] = [
   { href: '/ulez-check',                   label: 'ULEZ / CAZ',           hint: 'Is your car compliant?',                icon: Car,          accent: VIOLET, category: 'vehicles',   status: 'live', live: true, kbd: 'U' },
   { href: '/mot-check',                    label: 'MOT & Tax Check',      hint: 'Validate any UK reg plate',             icon: Car,          accent: ROSE,   category: 'vehicles',   status: 'live', live: true, kbd: 'D' },
 
-  // ── BENEFITS (2 live) ───────────────────────────────────────────
-  { href: '/child-benefit-calculator',     label: 'Child Benefit',        hint: '£25.60/wk · HICBC taper',               icon: Baby,         accent: PINK,   category: 'benefits',   status: 'new', live: true },
   { href: '/childcare-calculator',         label: 'Childcare Costs',      hint: '15/30 free hrs · TFC · UC 85%',          icon: Baby,         accent: VIOLET, category: 'benefits',   status: 'new', live: true },
 ];
+
 
 /* ─────────────────────────────────────────────
    TIER-3 SOON TOOLS (50) — launching next
@@ -362,6 +358,57 @@ export const PLANNED_TOOLS: PlannedTool[] = [
   { label: 'SIPP Contribution Planner',    hint: 'Self-invested pension + relief',          category: 'savings' },
   { label: 'Pension Sharing Order',        hint: 'Divorce pension split calculator',        category: 'savings' },
 ];
+
+/* ─────────────────────────────────────────────
+   SUB-CATEGORIES (hub page grouping)
+   Each category hub groups its tools into labelled
+   sub-sections. Membership is by href so the same
+   list drives both AppTiles and the standalone visa
+   tools. Any tool not listed falls into a "More" group.
+───────────────────────────────────────────── */
+export interface SubGroup {
+  id: string;
+  label: string;       // eyebrow
+  title: string;       // section heading
+  description: string;
+  hrefs: string[];     // ordered membership
+}
+
+export const SUBCATEGORIES: Record<CategoryId, SubGroup[]> = {
+  tax: [
+    { id: 'paye',     label: 'Employed income', title: 'PAYE & Salary',              description: 'Net pay, payslip checks and salary-sacrifice savings under HMRC tax codes.', hrefs: ['/take-home-pay', '/payslip-auditor', '/bonus-tax', '/salary-sacrifice-calculator'] },
+    { id: 'selfemp',  label: 'Business & contracting', title: 'Self-Employed & Contracting', description: 'Sole-trader bills, IR35 comparisons and director salary/dividend planning.', hrefs: ['/self-employed-tax', '/contractor-ir35', '/director-dividend'] },
+    { id: 'reliefs',  label: 'Allowances & reliefs', title: 'Allowances & Reliefs',    description: 'Transfer allowances, dodge the child-benefit trap and plan student-loan repayment.', hrefs: ['/marriage-allowance-calculator', '/child-benefit-trap', '/student-loan-repayment'] },
+    { id: 'capital',  label: 'Capital & estate', title: 'Capital & Estate',           description: 'Tax on gains and what your estate owes on inheritance.', hrefs: ['/cgt-calculator', '/inheritance-tax'] },
+  ],
+  employment: [
+    { id: 'pay',   label: 'Pay & wages',    title: 'Pay & Wages',     description: 'Compare salaries, check minimum wage and work out holiday pay.', hrefs: ['/salary-compare', '/minimum-wage-checker', '/holiday-pay'] },
+    { id: 'leave', label: 'Leave & absence', title: 'Leave & Absence', description: 'Statutory maternity and sick-pay entitlements.', hrefs: ['/maternity-pay', '/sick-pay'] },
+    { id: 'exit',  label: 'Leaving a job',  title: 'Leaving a Job',   description: 'Redundancy pay and tax-free limits.', hrefs: ['/redundancy-pay'] },
+  ],
+  property: [
+    { id: 'buying',   label: 'Buying & mortgages', title: 'Buying & Mortgages', description: 'Stamp duty, affordability and overpayment savings.', hrefs: ['/stamp-duty-calculator', '/mortgage-affordability', '/overpayment-mortgage'] },
+    { id: 'landlord', label: 'Landlord & rental',  title: 'Landlord & Rental',  description: 'Rental income tax, yield and property capital gains.', hrefs: ['/rental-income-tax', '/rental-yield-calculator', '/property-cgt-calculator'] },
+    { id: 'costs',    label: 'Running costs',      title: 'Running Costs',      description: 'Council tax, energy bills and cost of living.', hrefs: ['/council-tax-band', '/energy-bill', '/cost-of-living-uk'] },
+  ],
+  savings: [
+    { id: 'isa',     label: 'Tax-free saving', title: 'ISAs & Savings',        description: 'Grow an ISA or claim the Lifetime ISA bonus.', hrefs: ['/isa-calculator', '/lifetime-isa-calculator'] },
+    { id: 'pension', label: 'Retirement',      title: 'Pensions & Retirement', description: 'State pension forecast and drawdown planning.', hrefs: ['/state-pension', '/pension-drawdown-calculator'] },
+  ],
+  business: [],
+  immigration: [
+    { id: 'routes',      label: 'Routes & fees',      title: 'Visa Routes & Fees',  description: 'Compare every route, total the fees and the health surcharge.', hrefs: ['/visa-types', '/tools/cost-calculator', '/ihs-calculator'] },
+    { id: 'eligibility', label: 'Eligibility',        title: 'Eligibility & Points', description: 'Check the 70-point threshold and your salary against the going rate.', hrefs: ['/skilled-worker-points-check', '/tools/salary-checker', '/tools/compare'] },
+    { id: 'support',     label: 'Employers & refusals', title: 'Employers & Refusals', description: 'Find a licensed sponsor or decode a refusal letter.', hrefs: ['/tools/sponsor-search', '/tools/refusal-analyzer'] },
+    { id: 'local',       label: 'Local lookups',      title: 'Local Lookups',       description: 'Council, MP, NHS and police by postcode.', hrefs: ['/postcode'] },
+  ],
+  benefits: [
+    { id: 'family', label: 'Family support', title: 'Family & Childcare', description: 'Free hours, Tax-Free Childcare and Universal Credit support.', hrefs: ['/childcare-calculator'] },
+  ],
+  vehicles: [
+    { id: 'checks', label: 'Compliance', title: 'Compliance & Checks', description: 'Clean-air zone compliance and MOT/tax validity.', hrefs: ['/ulez-check', '/mot-check'] },
+  ],
+};
 
 /* ─────────────────────────────────────────────
    DERIVED / HELPER EXPORTS

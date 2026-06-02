@@ -1,196 +1,379 @@
 'use client';
 
 /**
- * UKDesk — Vivid header (May 2026 redesign)
- * Desktop: CSS-hover mega-menus (Tools / Visas), command-style search, scroll-aware.
- * Mobile: slide-in drawer with accordions. Data-driven from tools.ts.
+ * UKDesk Header — June 2026 redesign
+ * Slim sticky bar · brand · search-pill (⌘K) · ghost links · primary CTA
+ * Mobile: hamburger opens the same command palette overlay.
  */
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import {
-  Search, ChevronDown, Menu, X, ArrowRight,
-  Wallet, Home as HomeIcon, Plane, Briefcase, Landmark, Building2, Users, Car,
-} from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ArrowRight, Menu, Search, X } from 'lucide-react';
 import { APP_TILES, CATEGORIES, type CategoryId } from '../data/tools';
-import s from './Header.module.css';
 
-const CAT_META: Record<CategoryId, { c: string; Icon: typeof Wallet; hint: string }> = {
-  tax:         { c: 'c1', Icon: Wallet,    hint: 'PAYE, NI, dividends, tax codes' },
-  property:    { c: 'c2', Icon: HomeIcon,  hint: 'Stamp duty, mortgage, council tax' },
-  immigration: { c: 'c3', Icon: Plane,     hint: 'Visa routes, IHS, points' },
-  employment:  { c: 'c4', Icon: Briefcase, hint: 'Holiday, redundancy, sick pay' },
-  savings:     { c: 'c5', Icon: Landmark,  hint: 'ISA, LISA, drawdown' },
-  business:    { c: 'c6', Icon: Building2, hint: 'Sole trader vs Ltd, IR35' },
-  benefits:    { c: 'c7', Icon: Users,     hint: 'Child benefit, childcare' },
-  vehicles:    { c: 'c8', Icon: Car,       hint: 'ULEZ, MOT, company car' },
-};
-const count = (id: CategoryId) => APP_TILES.filter((t) => t.category === id).length;
+const POPULAR = [
+  '/take-home-pay',
+  '/stamp-duty-calculator',
+  '/mortgage-affordability',
+  '/visa-types',
+  '/tools/cost-calculator',
+  '/council-tax-band',
+];
 
-export default function Header(_props: { onApply?: () => void }) {
-  const [open, setOpen] = useState(false);
+const NAV: { href: string; label: string }[] = [
+  { href: '/tools', label: 'All tools' },
+  { href: '/visa-types', label: 'Visas' },
+  { href: '/blog', label: 'Insights' },
+  { href: '/about', label: 'About' },
+];
+
+export default function Header() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
-  const [acc, setAcc] = useState<string | null>('tools');
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
+  /* scroll-aware shadow */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 4);
+    fn();
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [open]);
+  /* close on route change */
+  useEffect(() => { setOpen(false); }, [pathname]);
 
+  /* body scroll lock + focus + esc + ⌘K open */
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      if ((e.metaKey || e.ctrlKey) && k === 'k') { e.preventDefault(); setOpen((v) => !v); }
+      if (e.key === 'Escape') setOpen(false);
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) setTimeout(() => inputRef.current?.focus(), 30);
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  /* filter */
+  const q = query.trim().toLowerCase();
+  const results = useMemo(() => {
+    if (!q) return [] as typeof APP_TILES;
+    return APP_TILES
+      .filter((t) =>
+        t.label.toLowerCase().includes(q) ||
+        (t.hint?.toLowerCase().includes(q) ?? false) ||
+        t.category.toLowerCase().includes(q),
+      )
+      .slice(0, 12);
+  }, [q]);
+
+  const popularTiles = useMemo(
+    () => POPULAR.map((h) => APP_TILES.find((t) => t.href === h)).filter(Boolean) as typeof APP_TILES,
+    [],
+  );
+
+  const go = useCallback((href: string) => { setOpen(false); router.push(href); }, [router]);
+
   return (
     <>
-    <header className={`${s.header} ${scrolled ? s.scrolled : ''}`}>
-      <div className={s.bar}>
-        <Link href="/" className={s.brand} aria-label="UKDesk — home">
-          <span className={s.mark} aria-hidden>U</span>UKDesk
-        </Link>
+      <header
+        className={[
+          'sticky top-0 z-50 transition-all duration-150',
+          scrolled
+            ? 'bg-surface-container-lowest/95 backdrop-blur supports-[backdrop-filter]:bg-surface-container-lowest/80 border-b border-border shadow-[0_1px_0_rgba(11,15,25,0.04)]'
+            : 'bg-surface/80 backdrop-blur-sm border-b border-transparent',
+        ].join(' ')}
+      >
+        <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-3 px-4 sm:px-6">
+          {/* Brand */}
+          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="UKDesk home">
+            <span className="relative inline-flex h-9 w-9 items-center justify-center">
+              <svg
+                viewBox="0 0 64 64"
+                width={36}
+                height={36}
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="UKDesk"
+                className="h-9 w-9"
+              >
+                <rect width="64" height="64" rx="14" fill="#0B0F19" />
+                <path
+                  d="M19 17 V34 a13 13 0 0 0 26 0 V17"
+                  fill="none"
+                  stroke="#FAFAF7"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="49" cy="16" r="5.5" fill="#047857" />
+                <circle cx="49" cy="16" r="2" fill="#FAFAF7" />
+              </svg>
+            </span>
+            <span className="hidden font-display text-lg font-bold tracking-tight text-primary sm:inline">
+              UK<span className="text-secondary">Desk</span>
+            </span>
+          </Link>
 
-        <ul className={s.menu}>
-          <li className={s.hasMega}>
-            <button className={s.item} aria-haspopup="true">Tools<ChevronDown className={s.chev} size={15} /></button>
-            <div className={`${s.mega} ${s.tools}`}>
-              <div className={s.megaInner}>
-                <div>
-                  <div className={s.megaTitle}>Browse by topic</div>
-                  <div className={s.catGrid}>
-                    {CATEGORIES.map((cat) => {
-                      const m = CAT_META[cat.id]; const Icon = m.Icon;
-                      return (
-                        <Link key={cat.id} href={cat.id === 'immigration' ? '/visa-types' : `/tools#${cat.id}`} className={s.megaCat}>
-                          <span className={s.ic} style={{ background: `var(--uk-${m.c})` }}><Icon size={19} /></span>
-                          <span className={s.txt}>
-                            <span className={s.nm}>{cat.label}<span className={s.ct}>{count(cat.id)}</span></span>
-                            <span className={s.ht}>{m.hint}</span>
-                          </span>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className={s.megaSide}>
-                  <h5>Most used</h5>
-                  <Link href="/take-home-pay" className={s.sideTool}><span className={s.dot} style={{ background: 'var(--uk-c1)' }} /><span className={s.txt}><span className={s.stTt}>Take-home pay</span><span className={s.stHt}>After tax &amp; NI</span></span></Link>
-                  <Link href="/stamp-duty-calculator" className={s.sideTool}><span className={s.dot} style={{ background: 'var(--uk-c2)' }} /><span className={s.txt}><span className={s.stTt}>Stamp duty</span><span className={s.stHt}>SDLT 2026</span></span></Link>
-                  <Link href="/mortgage-affordability" className={s.sideTool}><span className={s.dot} style={{ background: 'var(--uk-c2)' }} /><span className={s.txt}><span className={s.stTt}>Mortgage</span><span className={s.stHt}>Max you can borrow</span></span></Link>
-                  <Link href="/self-assessment-calculator" className={s.promo}>
-                    <span className={s.tag}>New</span>
-                    <span className={s.pt}>Self Assessment 2026</span>
-                    <span className={s.pd}>Multi-income estimate + payments on account.</span>
-                    <span className={s.pl}>Try it <ArrowRight size={14} /></span>
-                  </Link>
-                </div>
-                <div className={s.megaFoot}>
-                  <Link href="/tools" className={s.lk}>See all {APP_TILES.length} tools <ArrowRight size={15} /></Link>
-                  <span className={s.src}>Verified against GOV.UK · HMRC · ONS</span>
-                </div>
-              </div>
-            </div>
-          </li>
+          {/* Nav (desktop) */}
+          <nav className="ml-auto hidden items-center gap-1 lg:flex">
+            {NAV.map((n) => {
+              const active = pathname === n.href || (n.href !== '/' && pathname?.startsWith(n.href));
+              return (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className={[
+                    'rounded-full px-3 py-1.5 text-sm font-semibold transition no-underline',
+                    active
+                      ? 'bg-primary-soft text-primary'
+                      : 'text-on-surface-variant hover:bg-surface-container-low hover:text-primary',
+                  ].join(' ')}
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-          <li className={s.hasMega}>
-            <button className={s.item} aria-haspopup="true">Visas<ChevronDown className={s.chev} size={15} /></button>
-            <div className={`${s.mega} ${s.visas}`}>
-              <div className={s.megaInner}>
-                <div>
-                  <div className={s.megaTitle}>UK visa routes</div>
-                  <div className={s.visaCols}>
-                    <div className={s.colLinks}>
-                      <span className={s.gl}>Work</span>
-                      <Link href="/visa/skilled-worker" className={s.rl}>Skilled Worker <small>£41,700</small></Link>
-                      <span className={s.gl} style={{ marginTop: 6 }}>Study</span>
-                      <Link href="/visa/student" className={s.rl}>Student <small>£558</small></Link>
-                      <Link href="/visa/graduate" className={s.rl}>Graduate</Link>
-                    </div>
-                    <div className={s.colLinks}>
-                      <span className={s.gl}>Family</span>
-                      <Link href="/visa/family" className={s.rl}>Spouse / partner <small>£29k</small></Link>
-                      <span className={s.gl} style={{ marginTop: 6 }}>Settlement</span>
-                      <Link href="/visa/ilr" className={s.rl}>Indefinite leave (ILR)</Link>
-                      <Link href="/visa/citizenship" className={s.rl}>Citizenship</Link>
-                    </div>
-                  </div>
-                </div>
-                <div className={s.megaSide}>
-                  <Link href="/eligibility" className={s.promo} style={{ marginTop: 0, background: 'linear-gradient(115deg,#8B5CF6,#6366F1)' }}>
-                    <span className={s.tag}>60-second quiz</span>
-                    <span className={s.pt}>Not sure which visa?</span>
-                    <span className={s.pd}>Answer 6 questions, get matched to the right route.</span>
-                    <span className={s.pl}>Start quiz <ArrowRight size={14} /></span>
-                  </Link>
-                </div>
-                <div className={s.megaFoot}>
-                  <Link href="/visa-types" className={s.lk}>Compare all routes <ArrowRight size={15} /></Link>
-                  <span className={s.src}>2026 Home Office fees</span>
-                </div>
-              </div>
-            </div>
-          </li>
+          {/* Search icon (desktop) — opens command palette */}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Search (Ctrl+K)"
+            className="ml-2 hidden h-9 items-center gap-1.5 rounded-full border border-border bg-surface-container-lowest pl-3 pr-2 text-sm font-medium text-on-surface-variant transition hover:border-primary/20 hover:text-primary lg:inline-flex"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-bold text-on-surface-variant">⌘K</kbd>
+          </button>
 
-          <li><Link className={s.item} href="/blog">Guides</Link></li>
-          <li><Link className={s.item} href="/news">News</Link></li>
-        </ul>
+          {/* CTA */}
+          <Link
+            href="/take-home-pay"
+            className="ml-2 hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-surface no-underline transition hover:bg-primary-container md:inline-flex"
+          >
+            Start free
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
 
-        <div className={s.actions}>
-          <Link href="/tools" className={s.hsearch}><Search size={17} />Search…<span className={s.kbd}>⌘K</span></Link>
-          <Link href="/tools" className={s.cta}>Browse all</Link>
-          <button className={s.burger} aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)}><Menu size={24} /></button>
+          {/* Mobile actions */}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Search"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-container-lowest text-primary md:hidden"
+          >
+            <Search className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-surface lg:hidden"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
         </div>
-      </div>
-
       </header>
 
-      {/* mobile drawer — rendered OUTSIDE <header>; the header's backdrop-filter would otherwise become the containing block for these position:fixed elements (trapping them in the 70px bar) */}
-      <div className={`${s.scrim} ${open ? s.scrimOpen : ''}`} onClick={() => setOpen(false)} aria-hidden />
-      <aside className={`${s.drawer} ${open ? s.drawerOpen : ''}`} aria-label="Menu" aria-hidden={!open}>
-        <div className={s.drTop}>
-          <Link href="/" className={s.brand} onClick={() => setOpen(false)}><span className={s.mark} aria-hidden>U</span>UKDesk</Link>
-          <button className={s.drClose} aria-label="Close menu" onClick={() => setOpen(false)}><X size={24} /></button>
-        </div>
-        <div className={s.drBody}>
-          <Link href="/tools" className={s.drSearch} onClick={() => setOpen(false)}><Search size={18} />Search a tool, visa or postcode…</Link>
+      {/* ── Command palette overlay ─────────────────────── */}
+      {open && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Search and browse"
+          className="fixed inset-0 z-[60] flex items-start justify-center bg-primary/40 px-4 pt-4 backdrop-blur-md animate-[fadeIn_120ms_ease-out] sm:pt-16"
+          onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
+        >
+          <div className="w-full max-w-3xl overflow-hidden rounded-3xl border border-border bg-surface shadow-[0_30px_80px_-20px_rgba(11,15,25,0.4)] animate-[popIn_160ms_cubic-bezier(0.22,1,0.36,1)]">
+            {/* Search row */}
+            <div className="flex items-center gap-3 border-b border-border bg-surface-container-lowest px-5 py-4">
+              <Search className="h-5 w-5 text-on-surface-variant" />
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search calculators, visas, guides…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && results[0]) go(results[0].href); }}
+                className="flex-1 border-0 bg-transparent text-base font-medium text-primary placeholder:text-on-surface-variant focus:outline-none focus:ring-0"
+                autoComplete="off"
+              />
+              <kbd className="hidden rounded-md border border-border bg-surface px-1.5 py-0.5 text-[10.5px] font-semibold text-on-surface-variant sm:inline-flex">
+                ESC
+              </kbd>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-surface-container-low text-primary transition hover:bg-surface-container sm:hidden"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
 
-          <div className={`${s.acc} ${acc === 'tools' ? s.accOpen : ''}`}>
-            <button className={s.accHead} onClick={() => setAcc(acc === 'tools' ? null : 'tools')}>Tools<ChevronDown className={s.chev} size={20} /></button>
-            <div className={s.accBody}><div className={s.accInner}>
-              {CATEGORIES.map((cat) => { const m = CAT_META[cat.id]; const Icon = m.Icon; return (
-                <Link key={cat.id} href={cat.id === 'immigration' ? '/visa-types' : `/tools#${cat.id}`} className={s.dsub} onClick={() => setOpen(false)}>
-                  <span className={s.dIc} style={{ background: `var(--uk-${m.c})` }}><Icon size={16} /></span>{cat.label}
-                </Link>
-              ); })}
-              <Link href="/tools" className={s.dsub} style={{ color: 'var(--uk-indigo-strong)', fontWeight: 700 }} onClick={() => setOpen(false)}>See all {APP_TILES.length} tools →</Link>
-            </div></div>
+            {/* Results / Browse */}
+            <div className="max-h-[70vh] overflow-y-auto p-5">
+              {q ? (
+                results.length === 0 ? (
+                  <p className="px-2 py-12 text-center text-sm text-on-surface-variant">
+                    No tools match <span className="font-semibold text-primary">&quot;{query}&quot;</span>. Try a broader term.
+                  </p>
+                ) : (
+                  <ul className="flex flex-col gap-1">
+                    {results.map((t) => {
+                      const Icon = t.icon;
+                      const cat = CATEGORIES.find((c) => c.id === t.category);
+                      return (
+                        <li key={t.href}>
+                          <Link
+                            href={t.href}
+                            onClick={() => setOpen(false)}
+                            className="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 no-underline transition hover:border-border hover:bg-surface-container-lowest"
+                          >
+                            <span
+                              className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-white"
+                              style={{ background: t.accent }}
+                            >
+                              <Icon className="h-4 w-4" />
+                            </span>
+                            <span className="min-w-0 flex-1">
+                              <span className="block truncate text-[14.5px] font-semibold text-primary">{t.label}</span>
+                              {t.hint && <span className="block truncate text-xs text-on-surface-variant">{t.hint}</span>}
+                            </span>
+                            {cat && (
+                              <span className="hidden rounded-full border border-border bg-surface px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wider text-on-surface-variant sm:inline-block">
+                                {cat.label.split(' ')[0]}
+                              </span>
+                            )}
+                            <ArrowRight className="h-4 w-4 text-on-surface-variant transition group-hover:translate-x-0.5 group-hover:text-secondary" />
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )
+              ) : (
+                <div className="flex flex-col gap-6">
+                  {/* Categories */}
+                  <section>
+                    <h3 className="px-2 pb-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">
+                      Browse by topic
+                    </h3>
+                    <ul className="grid grid-cols-2 gap-1 sm:grid-cols-3">
+                      {CATEGORIES.map((cat) => {
+                        const Icon = cat.icon;
+                        const n = APP_TILES.filter((t) => t.category === cat.id).length;
+                        return (
+                          <li key={cat.id}>
+                            <Link
+                              href={`/category/${cat.id as CategoryId}`}
+                              onClick={() => setOpen(false)}
+                              className="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 no-underline transition hover:border-border hover:bg-surface-container-lowest"
+                            >
+                              <span
+                                className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-white"
+                                style={{ background: cat.color }}
+                              >
+                                <Icon className="h-4 w-4" />
+                              </span>
+                              <span className="min-w-0 flex-1">
+                                <span className="block truncate text-[13.5px] font-semibold text-primary">{cat.label}</span>
+                                <span className="block text-[11px] font-medium text-on-surface-variant">{n} tools</span>
+                              </span>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </section>
+
+                  {/* Popular */}
+                  <section>
+                    <h3 className="px-2 pb-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">
+                      Most used
+                    </h3>
+                    <ul className="flex flex-col gap-1">
+                      {popularTiles.map((t) => {
+                        const Icon = t.icon;
+                        return (
+                          <li key={t.href}>
+                            <Link
+                              href={t.href}
+                              onClick={() => setOpen(false)}
+                              className="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 no-underline transition hover:border-border hover:bg-surface-container-lowest"
+                            >
+                              <span
+                                className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-white"
+                                style={{ background: t.accent }}
+                              >
+                                <Icon className="h-4 w-4" />
+                              </span>
+                              <span className="min-w-0 flex-1">
+                                <span className="block truncate text-[14px] font-semibold text-primary">{t.label}</span>
+                                {t.hint && <span className="block truncate text-xs text-on-surface-variant">{t.hint}</span>}
+                              </span>
+                              <ArrowRight className="h-4 w-4 text-on-surface-variant transition group-hover:translate-x-0.5 group-hover:text-secondary" />
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </section>
+
+                  {/* Mobile nav (shows extra links inside palette on small screens) */}
+                  <section className="lg:hidden">
+                    <h3 className="px-2 pb-2 text-[10.5px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">
+                      Navigate
+                    </h3>
+                    <ul className="grid grid-cols-2 gap-1">
+                      {NAV.map((n) => (
+                        <li key={n.href}>
+                          <Link
+                            href={n.href}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-xl border border-border px-3 py-2.5 text-[13.5px] font-semibold text-primary no-underline transition hover:bg-surface-container-lowest"
+                          >
+                            {n.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-surface-container-lowest px-5 py-3 text-[11px] text-on-surface-variant">
+              <span className="hidden sm:inline">
+                <span className="font-semibold text-primary">↵</span> open ·{' '}
+                <span className="font-semibold text-primary">esc</span> close
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-secondary" />
+                {APP_TILES.length} tools verified against GOV.UK
+              </span>
+            </div>
           </div>
-
-          <div className={`${s.acc} ${acc === 'visas' ? s.accOpen : ''}`}>
-            <button className={s.accHead} onClick={() => setAcc(acc === 'visas' ? null : 'visas')}>Visas<ChevronDown className={s.chev} size={20} /></button>
-            <div className={s.accBody}><div className={s.accInner}>
-              <Link href="/visa/skilled-worker" className={s.dsub} onClick={() => setOpen(false)}>Skilled Worker visa</Link>
-              <Link href="/visa/student" className={s.dsub} onClick={() => setOpen(false)}>Student visa</Link>
-              <Link href="/visa/family" className={s.dsub} onClick={() => setOpen(false)}>Family / spouse visa</Link>
-              <Link href="/visa/ilr" className={s.dsub} onClick={() => setOpen(false)}>Settlement (ILR)</Link>
-              <Link href="/eligibility" className={s.dsub} style={{ color: 'var(--uk-indigo-strong)', fontWeight: 700 }} onClick={() => setOpen(false)}>Eligibility quiz →</Link>
-            </div></div>
-          </div>
-
-          <Link href="/blog" className={s.flat} onClick={() => setOpen(false)}>Guides</Link>
-          <Link href="/news" className={s.flat} onClick={() => setOpen(false)}>News</Link>
-          <Link href="/about" className={s.flat} onClick={() => setOpen(false)}>About &amp; sources</Link>
         </div>
-        <div className={s.drFoot}><Link href="/tools" className={s.drCta} onClick={() => setOpen(false)}>Browse all {APP_TILES.length} tools</Link></div>
-      </aside>
+      )}
+
+      <style jsx global>{`
+        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+        @keyframes popIn  { from { opacity: 0; transform: translateY(8px) scale(0.985) }
+                            to   { opacity: 1; transform: translateY(0)   scale(1) } }
+      `}</style>
     </>
   );
 }

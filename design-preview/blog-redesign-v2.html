@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UKDesk — Design Preview v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+  --ink:         #0E0E12;
+  --ink-soft:    #3A3A45;
+  --ink-muted:   #7A7A8A;
+  --paper:       #F9F7F4;
+  --paper-2:     #F2EFEA;
+  --paper-3:     #E8E4DC;
+  --white:       #FFFFFF;
+  --accent:      #C94B1C;
+  --accent-soft: rgba(201,75,28,0.08);
+  --accent-warm: #E8672E;
+  --gold:        #B8940A;
+  --gold-soft:   rgba(184,148,10,0.1);
+  --green:       #1A7A50;
+  --green-soft:  rgba(26,122,80,0.08);
+  --blue:        #1A4F8A;
+  --blue-soft:   rgba(26,79,138,0.08);
+  --border:      rgba(14,14,18,0.08);
+  --border-mid:  rgba(14,14,18,0.14);
+  --shadow-sm:   0 1px 3px rgba(14,14,18,0.06), 0 4px 16px rgba(14,14,18,0.04);
+  --shadow-md:   0 4px 20px rgba(14,14,18,0.08), 0 1px 4px rgba(14,14,18,0.06);
+  --shadow-lg:   0 16px 48px rgba(14,14,18,0.12), 0 4px 16px rgba(14,14,18,0.08);
+  --r-sm:        6px;
+  --r-md:        12px;
+  --r-lg:        20px;
+  --font-display:'Cormorant', Georgia, serif;
+  --font-body:   'Outfit', system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ─────────────────────────────────────────────
+   PAGE SWITCHER (demo utility)
+───────────────────────────────────────────── */
+.demo-switcher {
+  position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+  display: flex; gap: 8px;
+}
+.demo-btn {
+  padding: 10px 18px; border-radius: 100px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  background: var(--ink); color: var(--white);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s, opacity 0.15s;
+}
+.demo-btn:hover { transform: translateY(-2px); }
+.demo-btn.active { background: var(--accent); }
+
+/* ─────────────────────────────────────────────
+   READING PROGRESS
+───────────────────────────────────────────── */
+#reading-progress {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0%; background: var(--accent);
+  transition: width 0.1s linear;
+  display: none;
+}
+
+/* ─────────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(249,247,244,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex; align-items: center; gap: 32px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+  flex: 1;
+}
+.nav-link {
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 14px; font-weight: 500;
+  color: var(--ink-soft);
+  transition: background 0.12s, color 0.12s;
+}
+.nav-link:hover { background: var(--paper-2); color: var(--ink); }
+.nav-link.active { background: var(--ink); color: var(--white); }
+.nav-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.nav-search {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 14px; border-radius: 100px;
+  background: var(--paper-2); border: 1px solid var(--border);
+  font-size: 13.5px; color: var(--ink-muted);
+  transition: border-color 0.12s;
+  cursor: text;
+}
+.nav-search:hover { border-color: var(--border-mid); }
+.nav-cta {
+  padding: 8px 20px; border-radius: 100px;
+  background: var(--accent); color: var(--white);
+  font-size: 13.5px; font-weight: 600;
+  transition: background 0.12s, transform 0.12s;
+}
+.nav-cta:hover { background: var(--accent-warm); transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────────
+   BLOG HOMEPAGE
+───────────────────────────────────────────── */
+#page-blog { display: block; }
+#page-article { display: none; }
+
+/* Hero */
+.blog-hero {
+  max-width: 1280px; margin: 0 auto;
+  padding: 64px 24px 56px;
+}
+.blog-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px;
+}
+.blog-hero-eyebrow::before {
+  content: ''; width: 24px; height: 2px; background: var(--accent);
+}
+.blog-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.blog-hero-title em { font-style: italic; color: var(--accent); }
+.blog-hero-sub {
+  font-size: 18px; font-weight: 400;
+  color: var(--ink-soft); max-width: 520px;
+  line-height: 1.65;
+}
+
+/* Category Tabs */
+.category-strip {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 24px 40px;
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap;
+}
+.cat-pill {
+  padding: 8px 18px; border-radius: 100px;
+  font-size: 13.5px; font-weight: 600;
+  background: var(--white); color: var(--ink-soft);
+  border: 1.5px solid var(--border);
+  transition: all 0.12s;
+  cursor: pointer;
+}
+.cat-pill:hover { border-color: var(--ink); color: var(--ink); }
+.cat-pill.active {
+  background: var(--ink); color: var(--white); border-color: var(--ink);
+}
+.cat-pill-count {
+  font-size: 11px; font-weight: 700; opacity: 0.6;
+  margin-left: 4px;
+}
+
+/* Featured Article */
+.featured-section {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 24px 64px;
+}
+.featured-card {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-radius: var(--r-lg);
+  overflow: hidden; background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.featured-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+.featured-img {
+  background: linear-gradient(135deg, #1A3A5C 0%, #0E1628 40%, #1C2838 100%);
+  min-height: 420px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 36px;
+  position: relative; overflow: hidden;
+}
+.featured-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(201,75,28,0.3) 0%, transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(26,79,138,0.4) 0%, transparent 50%);
+}
+.featured-img-grid {
+  position: absolute; inset: 0; opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.featured-img-stat {
+  position: relative; z-index: 2;
+}
+.featured-img-stat-num {
+  font-family: var(--font-display);
+  font-size: 4rem; font-weight: 700; color: var(--white);
+  line-height: 1; letter-spacing: -0.04em;
+  margin-bottom: 6px;
+}
+.featured-img-stat-label {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em;
+}
+.featured-content {
+  padding: 44px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.article-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 100px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.tag-visa    { background: rgba(201,75,28,0.1); color: var(--accent); }
+.tag-salary  { background: rgba(26,122,80,0.1); color: var(--green); }
+.tag-student { background: rgba(26,79,138,0.1); color: var(--blue); }
+.tag-family  { background: rgba(184,148,10,0.12); color: var(--gold); }
+.tag-costs   { background: rgba(107,60,160,0.1); color: #6B3CA0; }
+
+.featured-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.02em; color: var(--ink);
+  margin-bottom: 16px;
+}
+.featured-excerpt {
+  font-size: 15.5px; color: var(--ink-soft);
+  line-height: 1.7; margin-bottom: 28px;
+}
+.article-meta-row {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 13px; color: var(--ink-muted);
+}
+.article-meta-row .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-mid); }
+.read-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: 100px;
+  background: var(--ink); color: var(--white);
+  font-size: 14px; font-weight: 600;
+  transition: background 0.12s, gap 0.15s;
+  width: fit-content;
+}
+.read-btn:hover { background: var(--accent); gap: 12px; }
+
+/* Article Grid */
+.grid-section {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.grid-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 28px;
+}
+.grid-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.grid-more {
+  font-size: 13.5px; font-weight: 600;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 5px;
+  transition: gap 0.15s;
+}
+.grid-more:hover { gap: 9px; }
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.article-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.article-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.article-card-img {
+  height: 200px;
+  background: linear-gradient(135deg, #1C2838 0%, #0E1628 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.article-card-img-1 { background: linear-gradient(135deg, #1C3340 0%, #0E2030 100%); }
+.article-card-img-2 { background: linear-gradient(135deg, #2A1C10 0%, #1A1408 100%); }
+.article-card-img-3 { background: linear-gradient(135deg, #1A1C3A 0%, #0E1028 100%); }
+.article-card-img-4 { background: linear-gradient(135deg, #0E2818 0%, #081808 100%); }
+.article-card-img-5 { background: linear-gradient(135deg, #2A2010 0%, #1A1408 100%); }
+.article-card-img-6 { background: linear-gradient(135deg, #1A1030 0%, #0E0820 100%); }
+.card-stat-overlay {
+  text-align: center; position: relative; z-index: 2;
+}
+.card-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem; font-weight: 700;
+  color: var(--white); line-height: 1;
+  letter-spacing: -0.03em;
+}
+.card-stat-unit {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+}
+.article-card-body { padding: 22px; }
+.article-card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 700;
+  line-height: 1.3; color: var(--ink);
+  margin: 10px 0 10px;
+  letter-spacing: -0.01em;
+}
+.article-card-excerpt {
+  font-size: 14px; color: var(--ink-soft);
+  line-height: 1.65; margin-bottom: 16px;
+}
+.article-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12.5px; color: var(--ink-muted);
+}
+
+/* Stats bar */
+.stats-bar {
+  background: var(--ink); color: var(--white);
+  padding: 56px 24px;
+  margin-bottom: 0;
+}
+.stats-bar-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 3rem; font-weight: 700;
+  letter-spacing: -0.04em; color: var(--white);
+  line-height: 1;
+}
+.stat-num span { color: var(--accent); }
+.stat-label {
+  font-size: 14px; color: rgba(255,255,255,0.5);
+  margin-top: 8px; font-weight: 400;
+}
+
+/* Newsletter */
+.newsletter-section {
+  max-width: 700px; margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+.newsletter-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px;
+}
+.newsletter-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+  letter-spacing: -0.025em; line-height: 1.15;
+  color: var(--ink); margin-bottom: 14px;
+}
+.newsletter-sub {
+  font-size: 16px; color: var(--ink-soft);
+  line-height: 1.65; margin-bottom: 32px;
+}
+.newsletter-form {
+  display: flex; gap: 10px;
+  max-width: 440px; margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1; padding: 13px 18px;
+  border: 1.5px solid var(--border-mid);
+  border-radius: 100px; font-family: var(--font-body);
+  font-size: 15px; background: var(--white);
+  outline: none; color: var(--ink);
+  transition: border-color 0.12s;
+}
+.newsletter-input:focus { border-color: var(--accent); }
+.newsletter-input::placeholder { color: var(--ink-muted); }
+.newsletter-submit {
+  padding: 13px 24px; border-radius: 100px;
+  background: var(--accent); color: var(--white);
+  font-size: 14px; font-weight: 600; white-space: nowrap;
+  transition: background 0.12s, transform 0.12s;
+}
+.newsletter-submit:hover { background: var(--accent-warm); transform: translateY(-1px); }
+
+/* Footer */
+.footer {
+  background: var(--ink); color: rgba(255,255,255,0.5);
+  padding: 48px 24px 32px;
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 700;
+  color: var(--white);
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 13.5px; transition: color 0.12s; }
+.footer-link:hover { color: var(--white); }
+.footer-copy { font-size: 13px; width: 100%; text-align: center; margin-top: 16px; }
+
+
+/* ─────────────────────────────────────────────
+   ARTICLE PAGE
+───────────────────────────────────────────── */
+.article-hero {
+  background: var(--ink);
+  padding: 72px 24px 56px;
+  position: relative; overflow: hidden;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(201,75,28,0.25) 0%, transparent 55%),
+              radial-gradient(circle at 20% 80%, rgba(26,79,138,0.3) 0%, transparent 50%);
+}
+.article-hero-grid {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.article-hero-inner {
+  max-width: 800px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.article-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+}
+.article-breadcrumb a { transition: color 0.12s; }
+.article-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.article-breadcrumb-sep { opacity: 0.3; }
+.article-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.025em; color: var(--white);
+  margin-bottom: 20px;
+}
+.article-deck {
+  font-size: 17.5px; line-height: 1.65;
+  color: rgba(255,255,255,0.6); margin-bottom: 32px;
+  font-weight: 300; max-width: 660px;
+}
+.article-meta-bar {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 20px; padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px; color: rgba(255,255,255,0.45);
+}
+.article-author {
+  display: flex; align-items: center; gap: 10px;
+}
+.article-author-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; color: var(--white);
+  flex-shrink: 0;
+}
+.article-author-name { color: rgba(255,255,255,0.7); font-weight: 500; }
+.article-reading-time {
+  display: flex; align-items: center; gap: 6px;
+}
+.article-freshness {
+  display: flex; align-items: center; gap: 6px;
+  color: #34D399;
+}
+.freshness-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #34D399;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Article Layout */
+.article-layout {
+  max-width: 1200px; margin: 0 auto;
+  padding: 56px 24px 80px;
+  display: grid;
+  grid-template-columns: 240px 1fr 220px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* TOC */
+.toc-sidebar {
+  position: sticky; top: 88px;
+}
+.toc-label {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 16px;
+}
+.toc-list { display: flex; flex-direction: column; gap: 2px; }
+.toc-item {
+  padding: 6px 12px;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink-soft);
+  border-radius: var(--r-sm);
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.toc-item:hover { color: var(--ink); background: var(--paper-2); }
+.toc-item.active {
+  color: var(--accent); border-left-color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.toc-progress {
+  margin-top: 24px; padding: 16px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.toc-progress-label {
+  font-size: 11.5px; font-weight: 600;
+  color: var(--ink-muted); margin-bottom: 10px;
+}
+.toc-progress-bar {
+  height: 4px; background: var(--paper-2);
+  border-radius: 100px; overflow: hidden; margin-bottom: 6px;
+}
+.toc-progress-fill {
+  height: 100%; width: 35%;
+  background: linear-gradient(to right, var(--accent), var(--accent-warm));
+  border-radius: 100px;
+  transition: width 0.2s;
+}
+.toc-progress-pct {
+  font-size: 11.5px; color: var(--ink-muted); font-weight: 500;
+}
+
+/* Article Body */
+.article-body-col { min-width: 0; }
+
+/* Key Takeaways */
+.key-takeaways {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg); overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-sm);
+}
+.key-takeaways-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  background: linear-gradient(to right, rgba(201,75,28,0.06), transparent);
+  border-bottom: 1px solid var(--border);
+}
+.key-takeaways-icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+}
+.key-takeaways-title {
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent);
+}
+.key-takeaways-body { padding: 20px; }
+.takeaway-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px; color: var(--ink-soft);
+  line-height: 1.6;
+}
+.takeaway-item:last-child { border-bottom: none; padding-bottom: 0; }
+.takeaway-item:first-child { padding-top: 0; }
+.takeaway-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(26,122,80,0.1); color: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; flex-shrink: 0; margin-top: 2px;
+}
+
+/* Prose typography */
+.prose { font-size: 17px; line-height: 1.82; color: var(--ink-soft); }
+.prose > * + * { margin-top: 1.4em; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.65rem; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+  line-height: 1.2; margin-top: 2.5em; margin-bottom: 0.6em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border);
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem; font-weight: 700;
+  letter-spacing: -0.01em; color: var(--ink);
+  line-height: 1.3; margin-top: 2em; margin-bottom: 0.4em;
+}
+.prose p { font-family: 'Outfit', sans-serif; }
+.prose p.drop-cap::first-letter {
+  font-family: var(--font-display);
+  float: left; font-size: 4.2em; line-height: 0.82;
+  font-weight: 700; color: var(--ink);
+  margin-right: 0.12em; margin-top: 0.06em;
+}
+.prose strong { color: var(--ink); font-weight: 700; }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(201,75,28,0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.12s;
+}
+.prose a:hover { text-decoration-color: var(--accent); }
+.prose code {
+  font-family: var(--font-mono); font-size: 0.875em;
+  background: var(--paper-2); color: var(--accent);
+  padding: 2px 6px; border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.prose ul, .prose ol { padding-left: 0; }
+.prose li {
+  padding-left: 24px; position: relative;
+  margin-bottom: 6px;
+  font-size: 16.5px; color: var(--ink-soft);
+  line-height: 1.65;
+}
+.prose ul li::before {
+  content: '';
+  position: absolute; left: 4px; top: 11px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); opacity: 0.6;
+}
+
+/* Callout blocks */
+.callout {
+  border-radius: var(--r-md); overflow: hidden;
+  margin: 32px 0;
+}
+.callout-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+}
+.callout-icon {
+  width: 20px; height: 20px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--white); flex-shrink: 0;
+}
+.callout-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.callout-body {
+  padding: 14px 18px;
+  font-size: 15px; line-height: 1.7;
+}
+.callout-tip .callout-header  { background: rgba(26,122,80,0.08); }
+.callout-tip .callout-icon    { background: var(--green); }
+.callout-tip .callout-label   { color: var(--green); }
+.callout-tip .callout-body    { background: rgba(26,122,80,0.04); color: #1A3D2A; }
+.callout-warn .callout-header { background: rgba(201,75,28,0.08); }
+.callout-warn .callout-icon   { background: var(--accent); }
+.callout-warn .callout-label  { color: var(--accent); }
+.callout-warn .callout-body   { background: rgba(201,75,28,0.04); color: #4A2010; }
+.callout-info .callout-header { background: rgba(26,79,138,0.07); }
+.callout-info .callout-icon   { background: var(--blue); }
+.callout-info .callout-label  { color: var(--blue); }
+.callout-info .callout-body   { background: rgba(26,79,138,0.03); color: #1A2A4A; }
+
+/* Stats block */
+.stats-block {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin: 32px 0;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px; text-align: center;
+}
+.stat-card-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem; font-weight: 700;
+  letter-spacing: -0.03em; color: var(--ink);
+  line-height: 1;
+}
+.stat-card-num.accent { color: var(--accent); }
+.stat-card-label {
+  font-size: 12.5px; color: var(--ink-muted);
+  margin-top: 8px; line-height: 1.4;
+}
+
+/* Comparison table */
+.comparison-table {
+  margin: 32px 0; border-radius: var(--r-md);
+  overflow: hidden; border: 1px solid var(--border);
+  background: var(--white);
+}
+.comparison-table table { width: 100%; border-collapse: collapse; }
+.comparison-table thead {
+  background: var(--ink); color: var(--white);
+}
+.comparison-table th {
+  padding: 14px 20px; text-align: left;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.comparison-table td {
+  padding: 14px 20px; font-size: 14.5px; color: var(--ink-soft);
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+.comparison-table tr:hover td { background: var(--paper); }
+.comparison-table .highlight {
+  color: var(--accent); font-weight: 600;
+}
+.comparison-table .good { color: var(--green); }
+.comparison-table .bad { color: var(--accent); }
+
+/* Pull quote */
+.pull-quote {
+  margin: 40px -20px;
+  padding: 0 20px;
+  position: relative;
+}
+.pull-quote::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 8rem; line-height: 0.7;
+  color: var(--accent); opacity: 0.15;
+  position: absolute; top: 0; left: 0;
+  pointer-events: none;
+}
+.pull-quote blockquote {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 600; font-style: italic;
+  line-height: 1.4; letter-spacing: -0.015em;
+  color: var(--ink);
+  padding: 20px 0 0 36px;
+  border-left: 3px solid var(--accent);
+}
+.pull-quote-attr {
+  font-size: 12.5px; font-weight: 600;
+  color: var(--ink-muted); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-top: 12px;
+  padding-left: 36px;
+  display: flex; align-items: center; gap: 8px;
+}
+.pull-quote-attr::before {
+  content: ''; width: 20px; height: 1.5px; background: var(--accent);
+}
+
+/* Steps timeline */
+.steps { list-style: none; margin: 32px 0; position: relative; }
+.steps::before {
+  content: '';
+  position: absolute; left: 16px; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.step-item {
+  padding-left: 52px; padding-bottom: 32px;
+  position: relative;
+}
+.step-item:last-child { padding-bottom: 0; }
+.step-num {
+  position: absolute; left: 0; top: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--accent);
+  color: var(--accent); font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-body);
+}
+.step-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+}
+.step-body { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
+
+/* FAQ Accordion */
+.faq-block { margin: 32px 0; }
+.faq-block-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 16px;
+  letter-spacing: -0.015em;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  margin-bottom: 8px;
+  background: var(--white);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%; display: flex;
+  align-items: center; justify-content: space-between;
+  padding: 16px 20px; text-align: left;
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.faq-q:hover { background: var(--paper); }
+.faq-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--paper-2); color: var(--ink-muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1; flex-shrink: 0;
+  transition: transform 0.2s, background 0.12s;
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+  background: var(--accent); color: var(--white);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.2s;
+}
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a-inner {
+  padding: 0 20px 18px;
+  font-size: 14.5px; color: var(--ink-soft);
+  line-height: 1.7; border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* Article sidebar */
+.article-sidebar {
+  position: sticky; top: 88px;
+}
+.sidebar-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px; margin-bottom: 20px;
+}
+.sidebar-card-title {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 14px;
+}
+.sidebar-link-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: color 0.12s;
+}
+.sidebar-link-item:last-child { border-bottom: none; padding-bottom: 0; }
+.sidebar-link-item:first-child { padding-top: 0; }
+.sidebar-link-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--border-mid); line-height: 1;
+  flex-shrink: 0; width: 24px;
+}
+.sidebar-link-text { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+.sidebar-link-item:hover .sidebar-link-text { color: var(--accent); }
+.sidebar-cta {
+  background: linear-gradient(135deg, var(--ink) 0%, #1A2A3A 100%);
+  border-radius: var(--r-md); padding: 20px;
+  color: var(--white); text-align: center;
+  margin-bottom: 20px;
+}
+.sidebar-cta-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 700;
+  line-height: 1.25; margin-bottom: 8px;
+}
+.sidebar-cta-sub {
+  font-size: 12.5px; color: rgba(255,255,255,0.5);
+  line-height: 1.55; margin-bottom: 16px;
+}
+.sidebar-cta-btn {
+  display: block; padding: 10px 16px;
+  background: var(--accent); color: var(--white);
+  border-radius: 100px; font-size: 13px; font-weight: 600;
+  transition: background 0.12s;
+}
+.sidebar-cta-btn:hover { background: var(--accent-warm); }
+
+/* Related articles */
+.related-section {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.related-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r-md); overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
+}
+.related-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.related-card-img {
+  height: 140px;
+  background: linear-gradient(135deg, #1A2838 0%, #0E1628 100%);
+}
+.related-card-body { padding: 18px; }
+.related-card-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  line-height: 1.3; color: var(--ink); margin-bottom: 8px;
+}
+.related-card-meta { font-size: 12px; color: var(--ink-muted); }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .toc-sidebar, .article-sidebar { display: none; }
+  .article-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-card { grid-template-columns: 1fr; }
+  .featured-img { min-height: 280px; }
+  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .article-grid { grid-template-columns: 1fr; }
+  .stats-block { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .newsletter-form { flex-direction: column; }
+  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+  .featured-content { padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="reading-progress"></div>
+
+<!-- DEMO SWITCHER -->
+<div class="demo-switcher">
+  <button class="demo-btn active" onclick="showPage('blog')">Blog Home</button>
+  <button class="demo-btn" onclick="showPage('article')">Article Page</button>
+</div>
+
+<!-- ═════════════════════════════════════════
+     NAVIGATION
+═════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      UK<span class="nav-logo-dot"></span>Desk
+    </a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Guides</a>
+      <a class="nav-link" href="#">Calculators</a>
+      <a class="nav-link" href="#">Visa Routes</a>
+      <a class="nav-link" href="#">Tools</a>
+      <a class="nav-link" href="#">News</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Search guides&hellip;
+      </div>
+      <a class="nav-cta" href="#">Check eligibility</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═════════════════════════════════════════
+     BLOG HOMEPAGE
+═════════════════════════════════════════ -->
+<main id="page-blog">
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <div class="blog-hero-eyebrow">UKDesk Editorial</div>
+    <h1 class="blog-hero-title">
+      The UK visa &amp; finance guides<br>
+      <em>worth reading</em>
+    </h1>
+    <p class="blog-hero-sub">
+      Real answers to the questions that actually matter — written by researchers who read the Home Office guidance so you don't have to.
+    </p>
+  </section>
+
+  <!-- CATEGORY TABS -->
+  <div class="category-strip">
+    <button class="cat-pill active">All guides</button>
+    <button class="cat-pill">Skilled Worker <span class="cat-pill-count">8</span></button>
+    <button class="cat-pill">Student visas <span class="cat-pill-count">5</span></button>
+    <button class="cat-pill">Family routes <span class="cat-pill-count">6</span></button>
+    <button class="cat-pill">Costs &amp; fees <span class="cat-pill-count">4</span></button>
+    <button class="cat-pill">Settlement <span class="cat-pill-count">3</span></button>
+    <button class="cat-pill">Calculators <span class="cat-pill-count">12</span></button>
+  </div>
+
+  <!-- FEATURED -->
+  <section class="featured-section">
+    <div class="featured-card" onclick="showPage('article')">
+      <div class="featured-img article-card-img-1">
+        <div class="featured-img-grid"></div>
+        <div class="featured-img-stat">
+          <div class="featured-img-stat-num">£38,700</div>
+          <div class="featured-img-stat-label">Minimum salary threshold 2026</div>
+        </div>
+      </div>
+      <div class="featured-content">
+        <span class="article-tag tag-visa">
+          <svg width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+          Skilled Worker
+        </span>
+        <h2 class="featured-title">The 2026 Skilled Worker visa salary rules — what changed and who's affected</h2>
+        <p class="featured-excerpt">
+          After years of comparatively modest thresholds, the 2024 and 2025 rounds of increases have reset expectations permanently. Here's a plain-English breakdown of exactly where the numbers land today, which SOC codes get special treatment, and what employers are actually doing about it.
+        </p>
+        <div class="article-meta-row">
+          <span>UKDesk Editorial</span>
+          <span class="dot"></span>
+          <span>8 min read</span>
+          <span class="dot"></span>
+          <span>Updated 28 May 2026</span>
+        </div>
+        <br>
+        <div class="read-btn">
+          Read the guide
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE GRID -->
+  <section class="grid-section">
+    <div class="grid-header">
+      <h2 class="grid-title">Latest guides</h2>
+      <a class="grid-more" href="#">
+        View all
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="article-grid">
+
+      <!-- Card 1 -->
+      <div class="article-card" onclick="showPage('article')">
+        <div class="article-card-img article-card-img-2">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">£1,048</div>
+            <div class="card-stat-unit">per year IHS</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-costs">Costs</span>
+          <h3 class="article-card-title">What a UK Student visa actually costs in 2026 — every fee, laid out</h3>
+          <p class="article-card-excerpt">Application fee, IHS, priority processing, biometrics — the final bill surprises most applicants. Here's the complete breakdown.</p>
+          <div class="article-card-footer">
+            <span>6 min read</span>
+            <span>Updated May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="article-card">
+        <div class="article-card-img article-card-img-3">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">£29,000</div>
+            <div class="card-stat-unit">minimum income</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-family">Family</span>
+          <h3 class="article-card-title">Spouse visa income requirement 2026: what counts, what doesn't</h3>
+          <p class="article-card-excerpt">The threshold jumped again. We dig into which income sources are acceptable and how to evidence them correctly.</p>
+          <div class="article-card-footer">
+            <span>7 min read</span>
+            <span>Updated May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="article-card">
+        <div class="article-card-img article-card-img-4">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">5yrs</div>
+            <div class="card-stat-unit">to ILR</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-visa">Settlement</span>
+          <h3 class="article-card-title">Switching from Student to Skilled Worker: the step-by-step guide</h3>
+          <p class="article-card-excerpt">You don't have to leave the UK. But the timing and documentation need to be right. Here's exactly what to do.</p>
+          <div class="article-card-footer">
+            <span>9 min read</span>
+            <span>Updated April 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="article-card">
+        <div class="article-card-img article-card-img-5">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">70pts</div>
+            <div class="card-stat-unit">required</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-visa">Skilled Worker</span>
+          <h3 class="article-card-title">Graduate visa 2026: the one route that doesn't need a sponsor</h3>
+          <p class="article-card-excerpt">Two years to work freely after your degree. Here's who qualifies, what you can and can't do, and when to apply.</p>
+          <div class="article-card-footer">
+            <span>5 min read</span>
+            <span>Updated May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="article-card">
+        <div class="article-card-img article-card-img-6">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">28</div>
+            <div class="card-stat-unit">documents needed</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-visa">Visitor</span>
+          <h3 class="article-card-title">UK Tourist visa documents checklist — what officials actually look for</h3>
+          <p class="article-card-excerpt">The official guidance is vague. This guide tells you exactly what to include, how to bundle it, and what gets applications refused.</p>
+          <div class="article-card-footer">
+            <span>11 min read</span>
+            <span>Updated March 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="article-card">
+        <div class="article-card-img article-card-img-1">
+          <div class="card-stat-overlay">
+            <div class="card-stat-num">£3.2k</div>
+            <div class="card-stat-unit">average total cost</div>
+          </div>
+        </div>
+        <div class="article-card-body">
+          <span class="article-tag tag-family">Family</span>
+          <h3 class="article-card-title">Bringing parents to the UK: dependent relative visa reality check</h3>
+          <p class="article-card-excerpt">The bar is extremely high. We explain why most applications fail and what the rare successful cases look like.</p>
+          <div class="article-card-footer">
+            <span>8 min read</span>
+            <span>Updated April 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num">24<span>+</span></div>
+        <div class="stat-label">In-depth visa guides, updated for 2026</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12<span>+</span></div>
+        <div class="stat-label">Free UK calculators — pay, tax, mortgage &amp; more</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Sourced from gov.uk, HMRC &amp; ONS data</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">48<span>h</span></div>
+        <div class="stat-label">Average update time after Home Office changes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-eyebrow">Stay current</div>
+    <h2 class="newsletter-title">UK visa rules change. We track them so you don't have to.</h2>
+    <p class="newsletter-sub">
+      A weekly briefing covering fee changes, new guidance, and policy updates. No padding, no filler — just the information that affects your situation.
+    </p>
+    <form class="newsletter-form" onsubmit="return false">
+      <input class="newsletter-input" type="email" placeholder="your@email.com">
+      <button class="newsletter-submit">Send me the brief</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">UKDesk</div>
+      <div class="footer-links">
+        <a class="footer-link" href="#">About</a>
+        <a class="footer-link" href="#">Editorial policy</a>
+        <a class="footer-link" href="#">Privacy</a>
+        <a class="footer-link" href="#">Terms</a>
+        <a class="footer-link" href="#">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 UKDesk. Information only — not legal advice. Verified against gov.uk sources.</div>
+    </div>
+  </footer>
+
+</main>
+
+
+<!-- ═════════════════════════════════════════
+     ARTICLE PAGE
+═════════════════════════════════════════ -->
+<div id="page-article">
+
+  <!-- HERO -->
+  <header class="article-hero">
+    <div class="article-hero-grid"></div>
+    <div class="article-hero-inner">
+      <div class="article-breadcrumb">
+        <a href="#" onclick="showPage('blog');return false">Guides</a>
+        <span class="article-breadcrumb-sep">›</span>
+        <span>Skilled Worker</span>
+      </div>
+      <span class="article-tag tag-visa" style="margin-bottom:20px;display:inline-flex;">Skilled Worker</span>
+      <h1 class="article-title">
+        The 2026 Skilled Worker salary threshold — what changed, who's affected, and what to do next
+      </h1>
+      <p class="article-deck">
+        The £38,700 floor catches more applicants than before. Here's an honest breakdown of the new rules, the exceptions that genuinely apply, and what your options are if you fall short.
+      </p>
+      <div class="article-meta-bar">
+        <div class="article-author">
+          <div class="article-author-avatar">U</div>
+          <span class="article-author-name">UKDesk Editorial</span>
+        </div>
+        <span class="dot" style="color:rgba(255,255,255,0.3)">·</span>
+        <div class="article-reading-time">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          8 min read
+        </div>
+        <span class="dot" style="color:rgba(255,255,255,0.3)">·</span>
+        <div class="article-freshness">
+          <span class="freshness-dot"></span>
+          Updated 28 May 2026
+        </div>
+        <span class="dot" style="color:rgba(255,255,255,0.3)">·</span>
+        <span>Verified against gov.uk</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-COLUMN LAYOUT -->
+  <div class="article-layout">
+
+    <!-- TOC -->
+    <aside class="toc-sidebar">
+      <div class="toc-label">In this guide</div>
+      <ul class="toc-list">
+        <li class="toc-item active" onclick="scrollTo(0,0)">What changed in April 2024</li>
+        <li class="toc-item" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">The new salary figures</li>
+        <li class="toc-item" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">Shortage occupation exceptions</li>
+        <li class="toc-item" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">New entrant rate</li>
+        <li class="toc-item" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">What counts as salary</li>
+        <li class="toc-item" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">If you fall short</li>
+        <li class="toc-item">FAQs</li>
+      </ul>
+      <div class="toc-progress">
+        <div class="toc-progress-label">Reading progress</div>
+        <div class="toc-progress-bar">
+          <div class="toc-progress-fill" id="toc-fill"></div>
+        </div>
+        <div class="toc-progress-pct" id="toc-pct">35%</div>
+      </div>
+    </aside>
+
+    <!-- ARTICLE BODY -->
+    <article class="article-body-col">
+
+      <!-- KEY TAKEAWAYS -->
+      <div class="key-takeaways">
+        <div class="key-takeaways-header">
+          <div class="key-takeaways-icon">✦</div>
+          <span class="key-takeaways-title">Key takeaways</span>
+        </div>
+        <div class="key-takeaways-body">
+          <div class="takeaway-item">
+            <div class="takeaway-check">✓</div>
+            <span>The general threshold is <strong>£38,700</strong> per year as of April 2024 — up from £26,200</span>
+          </div>
+          <div class="takeaway-item">
+            <div class="takeaway-check">✓</div>
+            <span>New entrants can qualify at <strong>£30,960</strong> (80% of the full threshold)</span>
+          </div>
+          <div class="takeaway-item">
+            <div class="takeaway-check">✓</div>
+            <span>The Shortage Occupation List was <strong>abolished</strong> — replaced by the Immigration Salary List with no discount</span>
+          </div>
+          <div class="takeaway-item">
+            <div class="takeaway-check">✓</div>
+            <span>Health and care workers have a <strong>separate lower threshold</strong> of £29,000</span>
+          </div>
+          <div class="takeaway-item">
+            <div class="takeaway-check">✓</div>
+            <span>Your salary must meet <em>both</em> the general threshold and the going rate for your specific occupation code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROSE -->
+      <div class="prose">
+
+        <p class="drop-cap">
+          For years, the Skilled Worker visa operated on a comparatively accessible salary floor. Then April 2024 arrived. The threshold jumped from £26,200 to £38,700 in a single move — the largest single increase in the route's history. If you're applying now, renewing, or advising someone through the process, this is the number that shapes everything.
+        </p>
+
+        <p>
+          But the headline figure only tells part of the story. The thresholds interact with your occupation code, your circumstances as an applicant, and whether your employer qualifies for certain exemptions. Getting this wrong means a refused application and wasted fees. Getting it right means understanding the rules at a level of detail most guides skip over.
+        </p>
+
+        <h2 id="s2">The new salary figures — all of them</h2>
+
+        <p>
+          The Home Office operates three salary tests simultaneously. Your salary must clear all three that apply to your situation. Here's how they stack up:
+        </p>
+
+        <!-- STATS BLOCK -->
+        <div class="stats-block">
+          <div class="stat-card">
+            <div class="stat-card-num accent">£38,700</div>
+            <div class="stat-card-label">General threshold<br><em style="font-style:normal;font-size:11px;color:var(--ink-muted)">Most applicants</em></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" style="color:var(--blue)">£30,960</div>
+            <div class="stat-card-label">New entrant rate<br><em style="font-style:normal;font-size:11px;color:var(--ink-muted)">If you qualify</em></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" style="color:var(--green)">£29,000</div>
+            <div class="stat-card-label">Health &amp; care workers<br><em style="font-style:normal;font-size:11px;color:var(--ink-muted)">Specific SOC codes</em></div>
+          </div>
+        </div>
+
+        <p>
+          The going rate — the minimum salary for your specific occupation code — runs alongside these figures. If the going rate for your SOC code is <strong>higher than £38,700</strong>, that higher figure is what matters. The general threshold is a floor, not a ceiling for compliance.
+        </p>
+
+        <!-- CALLOUT: TIP -->
+        <div class="callout callout-tip">
+          <div class="callout-header">
+            <div class="callout-icon">💡</div>
+            <span class="callout-label">Practical tip</span>
+          </div>
+          <div class="callout-body">
+            Use UKDesk's Salary Checker tool to look up the exact going rate for your SOC code. Many applicants assume the general £38,700 threshold is sufficient and miss that their specific occupation has a higher floor.
+          </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <div class="comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Applicant type</th>
+                <th>Minimum salary</th>
+                <th>Conditions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Standard Skilled Worker</strong></td>
+                <td class="highlight">£38,700/yr</td>
+                <td>Must also meet going rate</td>
+              </tr>
+              <tr>
+                <td>New entrant (under 26, recent graduate)</td>
+                <td style="color:var(--blue);font-weight:600">£30,960/yr</td>
+                <td>Max 4 years at lower rate</td>
+              </tr>
+              <tr>
+                <td>Health &amp; care (specific codes)</td>
+                <td class="good">£29,000/yr</td>
+                <td>NHS and approved providers only</td>
+              </tr>
+              <tr>
+                <td>PhD-level occupation</td>
+                <td style="color:var(--blue);font-weight:600">£34,830/yr</td>
+                <td>10% discount on general threshold</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="s3">The Shortage Occupation List is gone</h2>
+
+        <p>
+          Until April 2024, certain roles on the Shortage Occupation List qualified for a 20% salary discount. That route no longer exists. The SOL has been replaced by the <strong>Immigration Salary List</strong> — which carries no discount whatsoever.
+        </p>
+
+        <!-- CALLOUT: WARNING -->
+        <div class="callout callout-warn">
+          <div class="callout-header">
+            <div class="callout-icon">⚠</div>
+            <span class="callout-label">Watch out</span>
+          </div>
+          <div class="callout-body">
+            Older guidance and many employer HR teams still refer to "shortage occupation discounts." These no longer exist. If you were planning to use the 20% discount route, your application is based on outdated information.
+          </div>
+        </div>
+
+        <h2 id="s4">The new entrant rate: who actually qualifies</h2>
+
+        <p>
+          The new entrant rate (£30,960) applies if you meet <em>at least one</em> of the following criteria:
+        </p>
+
+        <!-- STEPS -->
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-title">Under 26 years old at time of application</div>
+            <div class="step-body">The most straightforward qualifier. Age is assessed at the date of application, not grant. If you turn 26 during the process, the age at application date is what counts.</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-title">Working towards or recently completing a UK PhD</div>
+            <div class="step-body">You must have been awarded the doctorate or be in the process of completing it. The thesis must relate to your sponsored job. This route is assessed case by case.</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-title">Switched from a Student visa in the last 2 years</div>
+            <div class="step-body">If you graduated from a UK institution and are making your first switch to Skilled Worker within 24 months, you may qualify for the new entrant rate — even if you're over 26.</div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-title">Working in a role that qualifies under previous SOL</div>
+            <div class="step-body">Transitional protections apply for a limited window on some historical shortage occupations. This is a shrinking category — check current guidance.</div>
+          </li>
+        </ol>
+
+        <!-- PULL QUOTE -->
+        <div class="pull-quote">
+          <blockquote>
+            The going rate catches more applicants than the general threshold. Know your SOC code before you know your salary requirement.
+          </blockquote>
+          <div class="pull-quote-attr">UKDesk Editorial</div>
+        </div>
+
+        <h2 id="s5">What counts as salary — and what doesn't</h2>
+
+        <p>
+          The Home Office is specific about what forms of remuneration count towards the threshold. This matters because some employers try to structure packages in ways that technically reach the number on paper but wouldn't be accepted.
+        </p>
+
+        <!-- CALLOUT: INFO -->
+        <div class="callout callout-info">
+          <div class="callout-header">
+            <div class="callout-icon">ℹ</div>
+            <span class="callout-label">What counts</span>
+          </div>
+          <div class="callout-body">
+            <strong>Included:</strong> Basic salary, guaranteed allowances, payments for unsocial hours that are contractually guaranteed.<br><br>
+            <strong>Not included:</strong> Performance bonuses, overtime (unless guaranteed), benefits in kind (car allowances, healthcare, pension contributions), accommodation, meals.
+          </div>
+        </div>
+
+        <h2 id="s6">If your salary falls short</h2>
+
+        <p>
+          This is where many guides stop. Here's what's actually available to people who don't immediately qualify:
+        </p>
+
+        <ul>
+          <li>Request a salary increase before applying — many sponsors will accommodate a genuine conversation framed around visa compliance</li>
+          <li>Check whether the new entrant rate applies to your specific circumstances</li>
+          <li>Consider whether a different occupation code better reflects your actual role (done carefully and honestly — misrepresentation is a serious refusal ground)</li>
+          <li>If you're a recent graduate, the Graduate visa buys you time to find a better-paying sponsor role</li>
+          <li>Partner routes may be available if your partner holds a qualifying visa — check whether your circumstances allow for dependent switching</li>
+        </ul>
+
+      </div><!-- /prose -->
+
+      <!-- FAQ -->
+      <div class="faq-block" style="margin-top:40px;">
+        <h3 class="faq-block-title">Frequently asked questions</h3>
+
+        <div class="faq-item open">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Does the £38,700 threshold apply to part-time work?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              The threshold applies to annualised salary. If you're working part-time, your salary is pro-rated to a full-time equivalent — but the going rate is also adjusted. You cannot work part-time and then annualise to £38,700 if your actual contract pays less than the pro-rated minimum for your hours. Essentially, part-time roles need to be paid at a rate equivalent to £38,700 full-time for the going rate test to work.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can I include a guaranteed bonus to meet the threshold?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Only if the bonus is explicitly contractually guaranteed — not discretionary. "Guaranteed bonus" must be written into your employment contract as a fixed payment obligation. Performance-related bonuses, even if consistently paid, do not count. If in doubt, ask your employer to restructure the package as guaranteed basic salary rather than bonus.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What if I get a pay rise after applying but before my visa is decided?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              The salary on your Certificate of Sponsorship is what the Home Office assesses. If your CoS was issued at a compliant salary level, a subsequent pay rise doesn't affect the application. If your CoS was issued below threshold, you'll need your sponsor to withdraw and reissue it at the correct salary before the application can proceed.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            My employer says I qualify as a health worker at £29,000. How do I verify this?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              The lower £29,000 threshold for health and care workers applies only to specific occupation codes listed in the Immigration Rules, and only when the employer is the NHS, an NHS-commissioned provider, or a social care provider regulated by the CQC. Ask your employer for the specific SOC code they're using, then verify it against the current Appendix Skilled Worker to the Immigration Rules (available on gov.uk).
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="article-sidebar">
+
+      <div class="sidebar-cta">
+        <div class="sidebar-cta-title">Check your salary against the going rate</div>
+        <div class="sidebar-cta-sub">Enter your SOC code and see the exact minimum for your role.</div>
+        <a class="sidebar-cta-btn" href="#">Use the Salary Checker →</a>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Related guides</div>
+        <div class="sidebar-link-item">
+          <div class="sidebar-link-num">01</div>
+          <div class="sidebar-link-text">Skilled Worker points explained — the full scorecard</div>
+        </div>
+        <div class="sidebar-link-item">
+          <div class="sidebar-link-num">02</div>
+          <div class="sidebar-link-text">Certificate of Sponsorship: what it is and how to get one</div>
+        </div>
+        <div class="sidebar-link-item">
+          <div class="sidebar-link-num">03</div>
+          <div class="sidebar-link-text">IHS calculator: cost of healthcare surcharge</div>
+        </div>
+        <div class="sidebar-link-item">
+          <div class="sidebar-link-num">04</div>
+          <div class="sidebar-link-text">Graduate visa — working freely after your UK degree</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Key tools</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <a href="#" style="display:block;padding:10px 14px;background:var(--paper-2);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink);transition:background 0.12s;" onmouseover="this.style.background='var(--paper-3)'" onmouseout="this.style.background='var(--paper-2)'">
+            Take-home pay calculator →
+          </a>
+          <a href="#" style="display:block;padding:10px 14px;background:var(--paper-2);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink);transition:background 0.12s;" onmouseover="this.style.background='var(--paper-3)'" onmouseout="this.style.background='var(--paper-2)'">
+            Points-based check →
+          </a>
+          <a href="#" style="display:block;padding:10px 14px;background:var(--paper-2);border-radius:8px;font-size:13px;font-weight:600;color:var(--ink);transition:background 0.12s;" onmouseover="this.style.background='var(--paper-3)'" onmouseout="this.style.background='var(--paper-2)'">
+            IHS cost calculator →
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- /article-layout -->
+
+  <!-- RELATED -->
+  <section class="related-section">
+    <div class="grid-header">
+      <h2 class="grid-title" style="font-size:1.4rem;">More on Skilled Worker visas</h2>
+      <a class="grid-more" href="#" onclick="showPage('blog');return false">All guides →</a>
+    </div>
+    <div class="related-grid">
+      <div class="related-card">
+        <div class="related-card-img article-card-img-2"></div>
+        <div class="related-card-body">
+          <span class="article-tag tag-visa" style="font-size:10px;margin-bottom:8px">Skilled Worker</span>
+          <div class="related-card-title">Switching from Student to Skilled Worker: the complete guide</div>
+          <div class="related-card-meta">9 min · Updated April 2026</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <div class="related-card-img article-card-img-3"></div>
+        <div class="related-card-body">
+          <span class="article-tag tag-costs" style="font-size:10px;margin-bottom:8px">Costs</span>
+          <div class="related-card-title">Skilled Worker visa fees 2026: Home Office + IHS + total cost</div>
+          <div class="related-card-meta">5 min · Updated May 2026</div>
+        </div>
+      </div>
+      <div class="related-card">
+        <div class="related-card-img article-card-img-4"></div>
+        <div class="related-card-body">
+          <span class="article-tag tag-visa" style="font-size:10px;margin-bottom:8px">Settlement</span>
+          <div class="related-card-title">ILR after Skilled Worker visa: the 5-year route explained</div>
+          <div class="related-card-meta">7 min · Updated March 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">UKDesk</div>
+      <div class="footer-links">
+        <a class="footer-link" href="#">About</a>
+        <a class="footer-link" href="#">Editorial policy</a>
+        <a class="footer-link" href="#">Privacy</a>
+        <a class="footer-link" href="#">Terms</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 UKDesk. Information only — not legal advice. Verified against gov.uk sources.</div>
+    </div>
+  </footer>
+
+</div><!-- /page-article -->
+
+
+<script>
+/* PAGE SWITCHER */
+function showPage(name) {
+  document.getElementById('page-blog').style.display = name === 'blog' ? 'block' : 'none';
+  document.getElementById('page-article').style.display = name === 'article' ? 'block' : 'none';
+  document.getElementById('reading-progress').style.display = name === 'article' ? 'block' : 'none';
+  document.querySelectorAll('.demo-btn').forEach((btn, i) => {
+    btn.classList.toggle('active',
+      (name === 'blog' && i === 0) || (name === 'article' && i === 1)
+    );
+  });
+  window.scrollTo(0, 0);
+}
+
+/* FAQ ACCORDION */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+/* READING PROGRESS */
+function updateProgress() {
+  const articleEl = document.querySelector('#page-article .article-body-col');
+  if (!articleEl) return;
+  const rect = articleEl.getBoundingClientRect();
+  const total = articleEl.offsetHeight - window.innerHeight;
+  const scrolled = Math.max(0, -rect.top);
+  const pct = Math.min(100, Math.round((scrolled / total) * 100));
+  document.getElementById('reading-progress').style.width = pct + '%';
+  const fill = document.getElementById('toc-fill');
+  const pctEl = document.getElementById('toc-pct');
+  if (fill) fill.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+/* CAT PILLS */
+document.querySelectorAll('.cat-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

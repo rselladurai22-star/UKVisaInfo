@@ -94,10 +94,6 @@ export const metadata: Metadata = {
   verification: {
     google: 'pQMCtigbsU9Fme1xW_J9UqPEbmzm0O7ZX7vifV4kgjA',
   },
-  icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
-    shortcut: '/icon.svg',
-  },
   manifest: '/manifest.json',
 };
 
