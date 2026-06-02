@@ -85,8 +85,8 @@ function Hero() {
             'radial-gradient(60% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(50% 70% at 95% 10%, #FBF6E7 0%, transparent 65%)',
         }}
       />
-      <div className="mx-auto max-w-6xl px-6 pt-20 pb-20 sm:pt-28 sm:pb-24 lg:pt-32 lg:pb-28">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-end">
+      <div className="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:px-6 sm:pt-28 sm:pb-24 lg:pt-32 lg:pb-28">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-12">
           {/* Left — message */}
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-medium text-on-surface-variant">

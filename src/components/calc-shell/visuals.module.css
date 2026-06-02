@@ -99,6 +99,8 @@
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 16px;
   overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .matrixHead {
   display: grid;
@@ -215,4 +217,11 @@
 @media (max-width: 640px) {
   .flow { flex-direction: column; }
   .flowOp { align-self: flex-start; padding-left: 8px; }
+  .statVal { font-size: 1.4rem; }
+  .stat { padding: 14px; }
+  .tip { padding: 14px; }
+  .bandsBar { height: 46px; }
+  .bandSegRate { font-size: 13px; }
+  .bandSegName { font-size: 9.5px; }
+  .matrixHeadCell, .matrixCell { padding: 10px 10px; font-size: 12.5px; }
 }

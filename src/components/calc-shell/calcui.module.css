@@ -495,10 +495,17 @@
 }
 @media (max-width: 520px) {
   .panel, .results { border-radius: 16px; }
-  .panel { padding: 20px; }
-  .resultHero { padding: 22px 20px 20px; }
-  .barWrap, .legend, .kpi, .tableHead { padding-left: 20px; padding-right: 20px; }
-  .ledger th, .ledger td { padding-left: 20px; padding-right: 20px; }
+  .panel { padding: 18px 14px; }
+  .resultHero { padding: 20px 16px 18px; }
+  .barWrap, .legend, .kpi, .tableHead { padding-left: 16px; padding-right: 16px; }
+  .ledger th, .ledger td { padding-left: 16px; padding-right: 16px; }
   .fieldRow { grid-template-columns: 1fr; }
   .kpiVal { font-size: 20px; }
+  .primary { padding: 16px 14px 18px; }
+  .amountInput { font-size: 30px; }
+  .cur { font-size: 22px; }
+  .amountSuffix { font-size: 12px; }
+  .presets { gap: 6px; }
+  .presets button { padding: 6px 10px; font-size: 12px; }
+  .callout { margin: 14px 16px 18px; }
 }
