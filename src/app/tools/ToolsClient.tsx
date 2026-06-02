@@ -90,23 +90,23 @@ export default function ToolsIndex() {
               'radial-gradient(55% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(45% 65% at 95% 10%, #FBF6E7 0%, transparent 65%)',
           }}
         />
-        <div className="mx-auto max-w-7xl px-4 pt-10 pb-12 sm:px-6 sm:pt-14 sm:pb-14">
+        <div className="container-wide pt-10 pb-10 sm:pt-14 sm:pb-12">
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-on-surface-variant">
             <Link href="/" className="hover:text-primary">Home</Link>
             <span className="opacity-50">/</span>
             <span className="text-primary">All tools</span>
           </nav>
 
-          <div className="mt-7 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
                 <Sparkles className="h-3.5 w-3.5 text-secondary" />
                 Tool directory
               </span>
-              <h1 className="mt-4 text-[1.875rem] font-bold leading-[1.05] tracking-tight text-primary sm:text-5xl">
+              <h1 className="h-1 mt-4">
                 Every calculator, in one place.
               </h1>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
+              <p className="t-lead mt-4 max-w-xl">
                 {ALL.length} free UK calculators and lookups — tax, property, visas, benefits and more. Checked against GOV.UK, HMRC and ONS.
               </p>
             </div>
@@ -223,7 +223,7 @@ export default function ToolsIndex() {
       </section>
 
       {/* ─── Grid ─── */}
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
+      <section className="container-wide section-y-sm">
         <div className="mb-5 flex items-end justify-between gap-3">
           <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
             {filtered.length === ALL.length

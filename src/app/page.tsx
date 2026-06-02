@@ -76,7 +76,6 @@ export default function HomePage() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      {/* soft gradient wash */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-[0.55]"
@@ -85,27 +84,26 @@ function Hero() {
             'radial-gradient(60% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(50% 70% at 95% 10%, #FBF6E7 0%, transparent 65%)',
         }}
       />
-      <div className="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:px-6 sm:pt-28 sm:pb-24 lg:pt-32 lg:pb-28">
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-12">
-          {/* Left — message */}
+      <div className="container-page pt-10 pb-12 sm:pt-20 sm:pb-20 lg:pt-28 lg:pb-24">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-14">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-medium text-on-surface-variant">
               <Sparkles className="h-3.5 w-3.5 text-secondary" />
               Updated for tax year 2026/27
             </span>
 
-            <h1 className="mt-6 text-[2.25rem] font-bold leading-[1.05] tracking-tight text-primary sm:text-6xl lg:text-7xl">
+            <h1 className="h-display mt-5">
               UK life,<br />
               calculated&nbsp;clearly.
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-on-surface-variant">
+            <p className="t-lead mt-5 max-w-xl">
               One trusted home for every UK money, property and visa decision.
               Fifty plus calculators, no sign-ups, no upsells — verified against
               gov.uk, HMRC and ONS.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="/tools"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-surface-container-lowest transition hover:opacity-90"
@@ -122,17 +120,13 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right — stat board */}
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border">
+          <dl className="stat-row">
             {STATS.map((s) => (
-              <div
-                key={s.label}
-                className="bg-surface-container-lowest px-4 py-5 sm:px-6 sm:py-7"
-              >
-                <dt className="text-[11px] font-medium uppercase tracking-wider text-on-surface-variant sm:text-xs">
+              <div key={s.label}>
+                <dt className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
                   {s.label}
                 </dt>
-                <dd className="mt-2 text-2xl font-bold tracking-tight text-primary sm:text-4xl">
+                <dd className="mt-2 font-display text-[clamp(20px,3vw+8px,36px)] font-bold tracking-tight text-primary tabular-nums">
                   {s.value}
                 </dd>
               </div>
@@ -148,7 +142,7 @@ function Hero() {
 function Popular() {
   return (
     <section className="border-b border-border bg-surface-container-lowest">
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
+      <div className="container-page section-y">
         <SectionHead
           kicker="Popular this week"
           title="Start with the calculators most people open first."
@@ -198,7 +192,7 @@ function Popular() {
 function Browse() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
+      <div className="container-page section-y">
         <SectionHead
           kicker="Browse by topic"
           title="Eight focused areas. Every calculator you'll need in each."
@@ -271,14 +265,14 @@ function Immigration() {
             'radial-gradient(40% 60% at 80% 30%, #34D399 0%, transparent 70%), radial-gradient(50% 70% at 10% 90%, #B8860B 0%, transparent 70%)',
         }}
       />
-      <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+      <div className="relative container-page section-y">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start lg:gap-14">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-surface/80">
               <Plane className="h-3.5 w-3.5" />
               Immigration hub
             </span>
-            <h2 className="mt-6 text-[1.875rem] font-bold leading-tight tracking-tight sm:text-5xl">
+            <h2 className="h-2 mt-5 text-surface" style={{ color: 'var(--color-surface)' }}>
               Every UK visa route,<br />
               priced in your currency.
             </h2>
@@ -352,7 +346,7 @@ function Trust() {
 
   return (
     <section className="border-b border-border bg-surface-container-lowest">
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
+      <div className="container-page section-y">
         <SectionHead
           kicker="Why UKDesk"
           title="Built like a reference library, used like a tool kit."
@@ -408,13 +402,13 @@ function Trust() {
 function ClosingCta() {
   return (
     <section>
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
+      <div className="container-page section-y">
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface-container-lowest p-6 sm:gap-8 sm:p-10 lg:flex-row lg:items-center lg:p-14">
           <div className="max-w-xl">
-            <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+            <h2 className="h-2">
               Find your next answer in seconds.
             </h2>
-            <p className="mt-3 text-base text-on-surface-variant">
+            <p className="t-body mt-3">
               Fifty plus UK calculators, all in one place. Free, ad-light and
               kept current.
             </p>
@@ -445,10 +439,10 @@ function SectionHead({
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">
+        <p className="t-eyebrow text-secondary">
           {kicker}
         </p>
-        <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-primary sm:text-4xl">
+        <h2 className="h-2 mt-3">
           {title}
         </h2>
       </div>

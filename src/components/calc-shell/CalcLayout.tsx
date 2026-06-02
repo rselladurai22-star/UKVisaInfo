@@ -75,7 +75,7 @@ export default function CalcLayout({
               'radial-gradient(55% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(45% 65% at 95% 10%, #FBF6E7 0%, transparent 65%)',
           }}
         />
-        <div className="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:px-6 sm:pt-14 sm:pb-16 lg:pt-16">
+        <div className="container-page pt-10 pb-12 sm:pt-16 sm:pb-16 lg:pt-20">
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-on-surface-variant">
             {crumb.map((b, i) => (
               <span key={i} className="inline-flex items-center gap-1.5">
@@ -89,16 +89,16 @@ export default function CalcLayout({
             ))}
           </nav>
 
-          <div className="mt-7 max-w-3xl">
+          <div className="mt-6 max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
               <Sparkles className="h-3.5 w-3.5 text-secondary" />
               {eyebrow}
             </span>
 
-            <h1 className="mt-5 text-[1.875rem] font-bold leading-[1.1] tracking-tight text-primary sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="h-1 mt-5">
               {title}
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
+            <p className="t-lead mt-5 max-w-2xl">
               {deck}
             </p>
 
@@ -119,7 +119,7 @@ export default function CalcLayout({
       </section>
 
       {/* ───────────── BODY ───────────── */}
-      <div className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6">
+      <div className="container-page pb-20 pt-10">
         {sidebar ? (
           <div className={c.withSidebar}>
             {main}
