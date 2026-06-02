@@ -56,7 +56,7 @@ export default async function CategoryHub({ params }: RouteParams) {
           }}
         />
 
-        <div className="mx-auto max-w-6xl px-6 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20">
+          <div className="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:pt-20">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs font-medium text-on-surface-variant">
             <Link href="/" className="transition hover:text-primary">Home</Link>
@@ -83,7 +83,7 @@ export default async function CategoryHub({ params }: RouteParams) {
                 </span>
               </div>
 
-              <h1 className="mt-7 text-4xl font-bold leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-6xl">
+              <h1 className="mt-7 text-[1.875rem] font-bold leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-6xl">
                 {cat.label}
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-on-surface-variant">
@@ -122,7 +122,7 @@ export default async function CategoryHub({ params }: RouteParams) {
       )}
 
       {/* ───────────── SECTIONS ───────────── */}
-      <div className="mx-auto max-w-6xl px-6 pb-24 pt-4">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-4 sm:px-6">
         {total === 0 ? (
           <EmptyState label={cat.label} />
         ) : (
@@ -199,7 +199,7 @@ export default async function CategoryHub({ params }: RouteParams) {
 
       {/* ───────────── CLOSING BAR ───────────── */}
       <section className="border-t border-border bg-surface-container-lowest">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 py-12 sm:flex-row sm:items-center">
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-12 sm:flex-row sm:items-center sm:px-6">
           <div>
             <h3 className="text-xl font-bold tracking-tight text-primary">
               Need a different topic?

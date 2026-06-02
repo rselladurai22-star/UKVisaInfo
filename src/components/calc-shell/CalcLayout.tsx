@@ -75,7 +75,7 @@ export default function CalcLayout({
               'radial-gradient(55% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(45% 65% at 95% 10%, #FBF6E7 0%, transparent 65%)',
           }}
         />
-        <div className="mx-auto max-w-6xl px-6 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16">
+        <div className="mx-auto max-w-6xl px-4 pt-10 pb-14 sm:px-6 sm:pt-14 sm:pb-16 lg:pt-16">
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-on-surface-variant">
             {crumb.map((b, i) => (
               <span key={i} className="inline-flex items-center gap-1.5">
@@ -95,7 +95,7 @@ export default function CalcLayout({
               {eyebrow}
             </span>
 
-            <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="mt-5 text-[1.875rem] font-bold leading-[1.1] tracking-tight text-primary sm:text-5xl lg:text-[3.4rem]">
               {title}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
@@ -119,7 +119,7 @@ export default function CalcLayout({
       </section>
 
       {/* ───────────── BODY ───────────── */}
-      <div className="mx-auto max-w-6xl px-6 pb-20 pt-10">
+      <div className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6">
         {sidebar ? (
           <div className={c.withSidebar}>
             {main}

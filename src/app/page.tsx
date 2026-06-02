@@ -94,7 +94,7 @@ function Hero() {
               Updated for tax year 2026/27
             </span>
 
-            <h1 className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-primary sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 text-[2.25rem] font-bold leading-[1.05] tracking-tight text-primary sm:text-6xl lg:text-7xl">
               UK life,<br />
               calculated&nbsp;clearly.
             </h1>
@@ -127,12 +127,12 @@ function Hero() {
             {STATS.map((s) => (
               <div
                 key={s.label}
-                className="bg-surface-container-lowest px-6 py-7"
+                className="bg-surface-container-lowest px-4 py-5 sm:px-6 sm:py-7"
               >
-                <dt className="text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+                <dt className="text-[11px] font-medium uppercase tracking-wider text-on-surface-variant sm:text-xs">
                   {s.label}
                 </dt>
-                <dd className="mt-2 text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+                <dd className="mt-2 text-2xl font-bold tracking-tight text-primary sm:text-4xl">
                   {s.value}
                 </dd>
               </div>
@@ -148,7 +148,7 @@ function Hero() {
 function Popular() {
   return (
     <section className="border-b border-border bg-surface-container-lowest">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
         <SectionHead
           kicker="Popular this week"
           title="Start with the calculators most people open first."
@@ -198,7 +198,7 @@ function Popular() {
 function Browse() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
         <SectionHead
           kicker="Browse by topic"
           title="Eight focused areas. Every calculator you'll need in each."
@@ -271,14 +271,14 @@ function Immigration() {
             'radial-gradient(40% 60% at 80% 30%, #34D399 0%, transparent 70%), radial-gradient(50% 70% at 10% 90%, #B8860B 0%, transparent 70%)',
         }}
       />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-surface/80">
               <Plane className="h-3.5 w-3.5" />
               Immigration hub
             </span>
-            <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+            <h2 className="mt-6 text-[1.875rem] font-bold leading-tight tracking-tight sm:text-5xl">
               Every UK visa route,<br />
               priced in your currency.
             </h2>
@@ -352,7 +352,7 @@ function Trust() {
 
   return (
     <section className="border-b border-border bg-surface-container-lowest">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
         <SectionHead
           kicker="Why UKDesk"
           title="Built like a reference library, used like a tool kit."
@@ -408,8 +408,8 @@ function Trust() {
 function ClosingCta() {
   return (
     <section>
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <div className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-border bg-surface-container-lowest p-10 sm:p-14 lg:flex-row lg:items-center">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-24">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface-container-lowest p-6 sm:gap-8 sm:p-10 lg:flex-row lg:items-center lg:p-14">
           <div className="max-w-xl">
             <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
               Find your next answer in seconds.
@@ -464,3 +464,4 @@ function SectionHead({
     </div>
   );
 }
+

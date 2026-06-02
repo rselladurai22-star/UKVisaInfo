@@ -7,8 +7,8 @@
 /* ── stat tiles ── */
 .statGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
   margin: 4px 0 24px;
 }
 .stat {
@@ -187,7 +187,7 @@
 /* ── tip cards ── */
 .tips {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin: 4px 0 24px;
 }

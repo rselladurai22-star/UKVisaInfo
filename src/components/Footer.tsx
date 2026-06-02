@@ -37,7 +37,7 @@ const COLS: { h: string; links: [string, string][] }[] = [
 export default function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-50">
-      <div className="max-w-[1160px] mx-auto py-10 px-6 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-[30px] md:py-[54px] md:pb-[36px] md:gap-8">
+      <div className="max-w-[1160px] mx-auto py-10 px-4 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7 sm:px-6 md:py-[54px] md:pb-[36px] md:gap-8">
         <div className="max-w-none md:max-w-96">
           <Link href="/" className="inline-flex items-center gap-2.5 font-display font-bold text-[20px] tracking-tight text-slate-800 hover:text-slate-900 no-underline select-none" aria-label="UKDesk — home">
             <span className="w-[30px] h-[30px] rounded-lg bg-gradient-to-br from-[#4f46e5] to-[#06b6d4] flex items-center justify-center text-white text-[15px] font-bold shadow-sm" aria-hidden>U</span>UKDesk
