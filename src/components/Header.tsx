@@ -96,7 +96,7 @@ export default function Header() {
       >
         <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-3 px-4 sm:px-6">
           {/* Brand */}
-          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="UKDesk home">
+          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="des-kly.info home">
             <span className="relative inline-flex h-9 w-9 items-center justify-center">
               <svg
                 viewBox="0 0 64 64"
@@ -104,24 +104,34 @@ export default function Header() {
                 height={36}
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
-                aria-label="UKDesk"
+                aria-label="des-kly.info"
                 className="h-9 w-9"
               >
-                <rect width="64" height="64" rx="14" fill="#0B0F19" />
+                <defs>
+                  <linearGradient id="deskly-shield" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#4C6BF0" />
+                    <stop offset="1" stopColor="#1E40AF" />
+                  </linearGradient>
+                </defs>
                 <path
-                  d="M19 17 V34 a13 13 0 0 0 26 0 V17"
+                  d="M32 3.5 56 12 V31 C56 47 45.5 57.5 32 60.5 18.5 57.5 8 47 8 31 V12 Z"
+                  fill="url(#deskly-shield)"
+                />
+                <rect x="17.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
+                <rect x="30.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
+                <rect x="17.5" y="31" width="10" height="10" rx="2.5" fill="#FFFFFF" />
+                <path
+                  d="M31 36.5 l3.5 3.5 L42 32"
                   fill="none"
-                  stroke="#FAFAF7"
-                  strokeWidth="6"
+                  stroke="#22C55E"
+                  strokeWidth="4.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="49" cy="16" r="5.5" fill="#047857" />
-                <circle cx="49" cy="16" r="2" fill="#FAFAF7" />
               </svg>
             </span>
             <span className="hidden font-display text-lg font-bold tracking-tight text-primary sm:inline">
-              UK<span className="text-secondary">Desk</span>
+              <span className="text-on-surface">des-kly</span><span className="text-primary">.info</span>
             </span>
           </Link>
 

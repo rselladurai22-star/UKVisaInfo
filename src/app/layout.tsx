@@ -33,18 +33,18 @@ const SITE_URL = 'https://ukvisainfo.co.uk';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'UKDesk — UK Tools, Calculators & Guides for Money, Property, Visas',
-    template: '%s · UKDesk',
+    default: 'des-kly.info — UK Tools, Calculators & Guides for Money, Property, Visas',
+    template: '%s · des-kly.info',
   },
   description:
-    'UKDesk — free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
-  applicationName: 'UKDesk',
+    'des-kly.info — free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
+  applicationName: 'des-kly.info',
   authors: [
     { name: PRIMARY_EDITOR.name, url: `${SITE_URL}${PRIMARY_EDITOR.profileUrl}` },
-    { name: 'UKDesk', url: SITE_URL },
+    { name: 'des-kly.info', url: SITE_URL },
   ],
   creator: PRIMARY_EDITOR.name,
-  publisher: 'UKDesk',
+  publisher: 'des-kly.info',
   category: 'Reference & Utilities',
   keywords: [
     'UK take-home pay', 'UK mortgage calculator', 'UK stamp duty 2026', 'UK council tax band',
@@ -61,22 +61,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_GB',
     url: SITE_URL,
-    siteName: 'UKDesk',
-    title: 'UKDesk — Every UK Tool, Calculator and Guide in One Place',
+    siteName: 'des-kly.info',
+    title: 'des-kly.info — Every UK Tool, Calculator and Guide in One Place',
     description:
       'Free UK calculators and lookups: take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     images: [
       {
         url: `${SITE_URL}/opengraph-image`,
         width: 1200, height: 630,
-        alt: 'UKDesk — UK tools & calculators',
+        alt: 'des-kly.info — UK tools & calculators',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@ukdesk',
-    title: 'UKDesk — Every UK Tool, Calculator and Guide',
+    title: 'des-kly.info — Every UK Tool, Calculator and Guide',
     description: 'Free UK calculators and lookups: pay, mortgage, SDLT, council tax, postcode, visas. 100% gov.uk sourced.',
     images: [`${SITE_URL}/opengraph-image`],
   },
@@ -107,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const siteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'UKDesk',
+    name: 'des-kly.info',
     alternateName: 'ukvisainfo.co.uk',
     url: SITE_URL,
     description: 'Free UK calculators and lookups in one place — take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
@@ -123,8 +123,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${SITE_URL}#org`,
-    name: 'UKDesk',
-    legalName: 'UKDesk',
+    name: 'des-kly.info',
+    legalName: 'des-kly.info',
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',

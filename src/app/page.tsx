@@ -7,7 +7,7 @@ import {
 import { APP_TILES, CATEGORIES, type CategoryId } from '../data/tools';
 
 export const metadata: Metadata = {
-  title: 'UKDesk — UK Tools, Calculators & Visa Guides',
+  title: 'des-kly.info — UK Tools, Calculators & Visa Guides',
   description:
     'A single, trusted home for UK money, property and visa decisions. 50+ calculators verified against gov.uk, HMRC and ONS.',
   alternates: { canonical: '/' },
@@ -292,7 +292,7 @@ function WhyUs() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em]" style={{ color: ACCENT }}>
-              Why UKDesk
+              Why des-kly.info
             </p>
             <h2 className={`${H2} mb-10`} style={{ color: '#ebf1ff' }}>
               Built like a reference library,<br className="hidden sm:block" /> used like a tool kit.
