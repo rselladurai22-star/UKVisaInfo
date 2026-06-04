@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import {
-  ArrowRight, ArrowUpRight, ShieldCheck, Sparkles,
-  Compass, BookOpen, Plane, CheckCircle2,
+  ArrowRight, Search, Briefcase, GraduationCap, Users,
+  HeartPulse, Star, Award, ShieldCheck, Ban, BookOpen,
 } from 'lucide-react';
 import { APP_TILES, CATEGORIES, type CategoryId } from '../data/tools';
 
@@ -16,45 +16,45 @@ export const metadata: Metadata = {
 /* ────────────────────────────────────────────────
    CURATED CONTENT — built from canonical data sets
 ──────────────────────────────────────────────── */
-const POPULAR_HREFS = [
-  '/take-home-pay',
-  '/stamp-duty-calculator',
-  '/mortgage-affordability',
-  '/council-tax-band',
-  '/isa-calculator',
-  '/tools/cost-calculator',
+const STATS = [
+  { value: '50+',     label: 'Live calculators' },
+  { value: '14',      label: 'UK visa routes' },
+  { value: '2026/27', label: 'Tax year ready' },
+  { value: '100%',    label: 'gov.uk sourced' },
 ];
-
-const POPULAR_TOOLS = POPULAR_HREFS
-  .map((href) => APP_TILES.find((t) => t.href === href))
-  .filter((t): t is NonNullable<typeof t> => Boolean(t));
-
-const CATEGORY_PREVIEW: Record<CategoryId, string[]> = {
-  tax:         ['/take-home-pay', '/tax-code', '/national-insurance'],
-  employment:  ['/holiday-pay', '/salary-compare', '/redundancy-pay'],
-  property:    ['/stamp-duty-calculator', '/mortgage-affordability', '/council-tax-band'],
-  savings:     ['/isa-calculator', '/pension-allowance', '/state-pension'],
-  business:    ['/sole-trader-vs-limited', '/ir35-calculator', '/contractor-day-rate'],
-  immigration: ['/visa-types', '/tools/cost-calculator', '/skilled-worker-points-check'],
-  benefits:    ['/child-benefit-calculator', '/childcare-calculator'],
-  vehicles:    ['/ulez-check', '/mot-check'],
-};
 
 const VISA_ROUTES = [
-  { href: '/visa/skilled-worker', label: 'Skilled Worker',     meta: 'From £41,700 · sponsored' },
-  { href: '/visa/student',        label: 'Student',            meta: '£558 · degree-level study' },
-  { href: '/visa/family',         label: 'Family',             meta: '£29,000 income threshold' },
-  { href: '/visa/health-care-worker', label: 'Health & Care',  meta: 'Lower fee · NHS exemption' },
-  { href: '/visa/global-talent',  label: 'Global Talent',      meta: 'Endorsement route' },
-  { href: '/visa/graduate',       label: 'Graduate',           meta: '2 years · post-study' },
+  { href: '/visa/skilled-worker',     icon: Briefcase,     label: 'Skilled Worker', meta: 'From £41,700 · sponsored route',            cta: 'Check eligibility & fees' },
+  { href: '/visa/student',            icon: GraduationCap, label: 'Student Visa',   meta: '£558 fee · degree-level study requirements', cta: 'View requirement checklist' },
+  { href: '/visa/family',             icon: Users,         label: 'Family Visa',    meta: '£29,000 income threshold · spouse & partners', cta: 'Calculate income requirement' },
+  { href: '/visa/health-care-worker', icon: HeartPulse,    label: 'Health & Care',  meta: 'Lower application fee · NHS IHS exemption',   cta: 'Verify exemption status' },
+  { href: '/visa/global-talent',      icon: Star,          label: 'Global Talent',  meta: 'Endorsement route · no salary threshold',     cta: 'Find endorsing bodies' },
+  { href: '/visa/graduate',           icon: Award,         label: 'Graduate Visa',  meta: '2 years duration · post-study work',           cta: 'Calculate stay limits' },
 ];
 
-const STATS = [
-  { value: '50+',   label: 'live calculators' },
-  { value: '14',    label: 'UK visa routes' },
-  { value: '2026/27', label: 'tax year, up to date' },
-  { value: '100%',  label: 'gov.uk sourced' },
+/* Bento order + one or two sample tool links per category. */
+const BENTO_ORDER: CategoryId[] = [
+  'tax', 'employment', 'property', 'immigration',
+  'business', 'savings', 'benefits', 'vehicles',
 ];
+
+const CATEGORY_LINKS: Record<CategoryId, string[]> = {
+  tax:         ['/take-home-pay'],
+  employment:  ['/holiday-pay', '/salary-compare'],
+  property:    ['/stamp-duty-calculator', '/mortgage-affordability'],
+  immigration: ['/visa-types', '/tools/cost-calculator'],
+  business:    [],
+  savings:     ['/isa-calculator'],
+  benefits:    ['/childcare-calculator'],
+  vehicles:    ['/mot-check'],
+};
+
+const toolByHref = (href: string) => APP_TILES.find((t) => t.href === href);
+const liveCount = (id: CategoryId) => APP_TILES.filter((t) => t.category === id).length;
+
+/* Section heading — avoids the .h-2 / Tailwind h-2 (height:0.5rem) collision. */
+const H2 =
+  'font-display text-[clamp(26px,2.5vw+18px,40px)] font-bold leading-[1.12] tracking-tight text-on-surface [text-wrap:balance]';
 
 /* ────────────────────────────────────────────────
    PAGE
@@ -63,187 +63,210 @@ export default function HomePage() {
   return (
     <div className="bg-surface text-on-surface">
       <Hero />
-      <Popular />
-      <Browse />
-      <Immigration />
-      <Trust />
+      <Stats />
+      <VisaGrid />
+      <BrowseBento />
+      <WhyUs />
       <ClosingCta />
     </div>
   );
 }
 
 /* ───────────── 1. HERO ───────────── */
+const TRENDING = [
+  { label: 'Skilled Worker', href: '/visa/skilled-worker' },
+  { label: 'Student Visa',   href: '/visa/student' },
+  { label: 'Visa Fees',      href: '/tools/cost-calculator' },
+  { label: 'IHS Calculator', href: '/ihs-calculator' },
+];
+
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-[0.55]"
-        style={{
-          background:
-            'radial-gradient(60% 80% at 15% 0%, #ECFDF5 0%, transparent 60%), radial-gradient(50% 70% at 95% 10%, #FBF6E7 0%, transparent 65%)',
-        }}
-      />
-      <div className="container-page pt-10 pb-12 sm:pt-20 sm:pb-20 lg:pt-28 lg:pb-24">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-14">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-3 py-1 text-xs font-medium text-on-surface-variant">
-              <Sparkles className="h-3.5 w-3.5 text-secondary" />
-              Updated for tax year 2026/27
-            </span>
+    <section className="overflow-hidden bg-surface">
+      <div className="container-page pt-16 pb-12 lg:pt-24 lg:pb-16">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <span className="mb-5 inline-block rounded-full bg-secondary-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-secondary">
+            Updated for tax year 2026/27
+          </span>
 
-            <h1 className="h-display mt-5">
-              UK life,<br />
-              calculated&nbsp;clearly.
-            </h1>
+          <h1 className="h-display mb-6 leading-tight">
+            UK life,<br />
+            <span className="text-primary">calculated clearly.</span>
+          </h1>
 
-            <p className="t-lead mt-5 max-w-xl">
-              One trusted home for every UK money, property and visa decision.
-              Fifty plus calculators, no sign-ups, no upsells — verified against
-              gov.uk, HMRC and ONS.
-            </p>
+          <p className="t-lead mb-10 max-w-xl">
+            One trusted home for every UK money, property and visa decision.
+            Fifty plus calculators, no sign-ups, no upsells — verified against
+            gov.uk, HMRC and ONS.
+          </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                href="/tools"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-surface-container-lowest transition hover:opacity-90"
-              >
-                Browse all tools
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/visa-types"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container-lowest px-6 py-3 text-sm font-semibold text-primary transition hover:border-border-strong"
-              >
-                Explore visa routes
-              </Link>
+          {/* Search */}
+          <form action="/tools" method="get" className="group relative w-full">
+            <div
+              aria-hidden
+              className="absolute inset-0 rounded-xl bg-primary/5 blur-xl transition-all group-focus-within:bg-primary/10"
+            />
+            <div className="relative flex items-center rounded-xl border border-outline-variant/50 bg-surface-container-lowest px-5 py-3.5 shadow-card">
+              <Search className="mr-3 h-5 w-5 flex-none text-primary" />
+              <input
+                type="search"
+                name="q"
+                placeholder="Search 50+ visa guides and tools…"
+                className="flex-1 border-none bg-transparent text-base text-on-surface placeholder:text-outline/60 focus:outline-none focus:ring-0"
+              />
+              <kbd className="ml-3 hidden items-center rounded border border-outline-variant/30 bg-surface-container-low px-2 text-xs font-medium text-outline md:inline-flex">
+                ⌘ K
+              </kbd>
             </div>
-          </div>
+          </form>
 
-          <dl className="stat-row">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <dt className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
-                  {s.label}
-                </dt>
-                <dd className="mt-2 font-display text-[clamp(20px,3vw+8px,36px)] font-bold tracking-tight text-primary tabular-nums">
-                  {s.value}
-                </dd>
-              </div>
+          {/* Trending */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            <span className="text-sm text-outline">Trending:</span>
+            {TRENDING.map((t) => (
+              <Link
+                key={t.href}
+                href={t.href}
+                className="rounded-full bg-surface-container px-3.5 py-1 text-xs font-semibold text-primary transition hover:bg-primary hover:text-surface-container-lowest"
+              >
+                {t.label}
+              </Link>
             ))}
-          </dl>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ───────────── 2. POPULAR TOOLS ───────────── */
-function Popular() {
+/* ───────────── 2. STATS ROW ───────────── */
+function Stats() {
   return (
-    <section className="border-b border-border bg-surface-container-lowest">
-      <div className="container-page section-y">
-        <SectionHead
-          kicker="Popular this week"
-          title="Start with the calculators most people open first."
-          link={{ href: '/tools', label: 'See all 50+ tools' }}
-        />
-
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {POPULAR_TOOLS.map((t) => {
-            const Icon = t.icon;
-            return (
-              <li key={t.href} className="bg-surface-container-lowest">
-                <Link
-                  href={t.href}
-                  className="group flex h-full flex-col gap-5 p-7 transition hover:bg-surface-container-low"
-                >
-                  <span
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl"
-                    style={{ background: `${t.accent}14`, color: t.accent }}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary">
-                      {t.label}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-on-surface-variant">
-                      {t.hint}
-                    </p>
-                  </div>
-
-                  <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-secondary opacity-0 transition group-hover:opacity-100">
-                    Open calculator
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+    <section className="border-y border-border bg-surface">
+      <div className="container-page flex flex-wrap justify-between gap-8 py-10">
+        {STATS.map((s) => (
+          <div key={s.label} className="flex min-w-[140px] flex-col gap-1">
+            <span className="font-display text-3xl font-bold tracking-tight text-primary tabular-nums sm:text-4xl">
+              {s.value}
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">
+              {s.label}
+            </span>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-/* ───────────── 3. BROWSE BY CATEGORY ───────────── */
-function Browse() {
+/* ───────────── 3. FEATURED VISA ROUTES ───────────── */
+function VisaGrid() {
   return (
-    <section className="border-b border-border">
+    <section id="visas" className="bg-surface-container-low">
       <div className="container-page section-y">
-        <SectionHead
-          kicker="Browse by topic"
-          title="Eight focused areas. Every calculator you'll need in each."
-        />
+        <div className="mb-12 max-w-2xl">
+          <p className="t-eyebrow mb-2 text-primary">Immigration hub</p>
+          <h2 className={`${H2} mb-4`}>Every UK visa route, priced in your currency.</h2>
+          <p className="t-body">
+            Fees, IHS, dependants, points and settlement clocks — kept current
+            with Home Office guidance and shown in plain English.
+          </p>
+        </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map((cat) => {
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {VISA_ROUTES.map((r) => {
+            const Icon = r.icon;
+            return (
+              <Link
+                key={r.href}
+                href={r.href}
+                className="lift-on-hover group flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-card hover:shadow-card-hover"
+              >
+                <div className="mb-6 flex items-start justify-between">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <ArrowRight className="h-5 w-5 text-outline transition group-hover:translate-x-1 group-hover:text-primary" />
+                </div>
+                <h3 className="mb-1 text-xl font-semibold text-on-surface">{r.label}</h3>
+                <p className="mb-8 text-sm text-on-surface-variant">{r.meta}</p>
+                <div className="mt-auto border-t border-border pt-4">
+                  <span className="text-sm font-semibold text-primary">{r.cta}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── 4. BROWSE BY TOPIC (BENTO) ───────────── */
+function BrowseBento() {
+  return (
+    <section id="tools" className="bg-surface">
+      <div className="container-page section-y">
+        <div className="mb-12 text-center">
+          <p className="t-eyebrow mb-2 text-primary">Browse by topic</p>
+          <h2 className={H2}>Eight focused areas. Every calculator you&apos;ll need.</h2>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {BENTO_ORDER.map((id) => {
+            const cat = CATEGORIES.find((c) => c.id === id)!;
             const Icon = cat.icon;
-            const previewHrefs = CATEGORY_PREVIEW[cat.id] ?? [];
-            const preview = previewHrefs
-              .map((h) => APP_TILES.find((t) => t.href === h))
+            const count = liveCount(id);
+            const links = CATEGORY_LINKS[id]
+              .map(toolByHref)
               .filter((t): t is NonNullable<typeof t> => Boolean(t));
-            const total = APP_TILES.filter((t) => t.category === cat.id).length;
+            const highlight = id === 'immigration';
 
             return (
               <article
-                key={cat.id}
-                className="group flex flex-col rounded-2xl border border-border bg-surface-container-lowest p-6 transition hover:border-border-strong hover:shadow-sm"
+                key={id}
+                className={
+                  highlight
+                    ? 'flex flex-col rounded-2xl border-2 border-primary bg-primary-soft/40 p-6'
+                    : 'flex flex-col rounded-2xl border border-border bg-surface-container-lowest p-6 transition hover:border-primary'
+                }
               >
-                <div className="flex items-start justify-between">
+                <div className="mb-4 flex items-center justify-between">
                   <span
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg"
-                    style={{ background: `${cat.color}14`, color: cat.color }}
+                    className={
+                      highlight
+                        ? 'rounded bg-primary px-2 py-1 text-xs font-semibold text-surface-container-lowest'
+                        : 'rounded bg-surface-container-high px-2 py-1 text-xs font-semibold text-on-surface-variant'
+                    }
                   >
-                    <Icon className="h-5 w-5" />
+                    {count === 0 ? '0 tools' : `${count} ${count === 1 ? 'tool' : 'tools'}`}
                   </span>
-                  <span className="text-xs font-medium text-on-surface-variant">
-                    {total} tools
-                  </span>
+                  <Icon className="h-5 w-5 text-primary" />
                 </div>
 
-                <h3 className="mt-5 text-base font-semibold text-primary">
+                <h3 className={`mb-1 text-lg font-semibold ${highlight ? 'text-primary' : 'text-on-surface'}`}>
                   {cat.label}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-on-surface-variant">
-                  {cat.description}
-                </p>
+                <p className="mb-4 text-sm text-on-surface-variant">{cat.description}</p>
 
-                <ul className="mt-5 space-y-2 border-t border-border pt-5">
-                  {preview.map((t) => (
-                    <li key={t.href}>
-                      <Link
-                        href={t.href}
-                        className="flex items-center justify-between text-sm text-on-surface transition hover:text-secondary"
-                      >
-                        <span className="truncate">{t.label}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5 flex-none opacity-50" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                {count === 0 ? (
+                  <span className="mt-auto text-xs italic text-on-surface-variant">Coming soon</span>
+                ) : (
+                  <ul className="mt-auto space-y-2">
+                    {links.map((t) => (
+                      <li key={t.href}>
+                        <Link
+                          href={t.href}
+                          className={`text-sm font-semibold text-primary transition hover:text-primary-container ${
+                            highlight ? '' : 'underline decoration-primary/20 underline-offset-2 hover:decoration-primary'
+                          }`}
+                        >
+                          {t.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </article>
             );
           })}
@@ -253,146 +276,67 @@ function Browse() {
   );
 }
 
-/* ───────────── 4. IMMIGRATION SPOTLIGHT ───────────── */
-function Immigration() {
-  return (
-    <section className="relative overflow-hidden border-b border-border bg-primary text-surface">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          background:
-            'radial-gradient(40% 60% at 80% 30%, #34D399 0%, transparent 70%), radial-gradient(50% 70% at 10% 90%, #B8860B 0%, transparent 70%)',
-        }}
-      />
-      <div className="relative container-page section-y">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start lg:gap-14">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-surface/80">
-              <Plane className="h-3.5 w-3.5" />
-              Immigration hub
-            </span>
-            <h2 className="h-2 mt-5 text-surface" style={{ color: 'var(--color-surface)' }}>
-              Every UK visa route,<br />
-              priced in your currency.
-            </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-surface/70">
-              Fees, IHS, dependants, points and settlement clocks — kept current
-              with Home Office guidance and shown in plain English.
-            </p>
+/* ───────────── 5. WHY UKDESK (DARK) ───────────── */
+function WhyUs() {
+  const ACCENT = '#6ffbbe';
+  const items = [
+    { icon: ShieldCheck, title: 'Verified sources',        body: 'Every figure traces back to gov.uk, HMRC, DVLA, ONS or the Bank of England.' },
+    { icon: Ban,         title: 'No upsells, no sign-ups',  body: 'Free forever. No paywall, no email gate, no affiliate steering inside results.' },
+    { icon: BookOpen,    title: 'Plain English first',      body: 'Editorial guides explain the numbers, the rules and where they came from.' },
+  ];
+  const sources = ['GOV.UK', 'HMRC', 'ONS', 'HOME OFFICE', 'DVLA', 'BANK OF ENGLAND'];
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/tools/cost-calculator"
-                className="inline-flex items-center gap-2 rounded-full bg-surface px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-surface/90"
-              >
-                Visa cost calculator
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/eligibility"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-surface transition hover:bg-white/10"
-              >
-                Eligibility quiz
-              </Link>
+  return (
+    <section style={{ background: '#2a313d', color: '#ebf1ff' }}>
+      <div className="container-page section-y">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em]" style={{ color: ACCENT }}>
+              Why UKDesk
+            </p>
+            <h2 className={`${H2} mb-10`} style={{ color: '#ebf1ff' }}>
+              Built like a reference library,<br className="hidden sm:block" /> used like a tool kit.
+            </h2>
+
+            <div className="space-y-8">
+              {items.map((it) => {
+                const Icon = it.icon;
+                return (
+                  <div key={it.title} className="flex gap-5">
+                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10" style={{ color: ACCENT }}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <h4 className="mb-1 text-lg font-semibold" style={{ color: '#ebf1ff' }}>
+                        {it.title}
+                      </h4>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(235,241,255,0.7)' }}>{it.body}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          <ul className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
-            {VISA_ROUTES.map((r) => (
-              <li key={r.href} className="bg-primary">
-                <Link
-                  href={r.href}
-                  className="group flex items-center justify-between gap-4 px-5 py-5 transition hover:bg-white/[0.04]"
-                >
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-surface">
-                      {r.label}
-                    </p>
-                    <p className="mt-1 truncate text-xs text-surface/60">
-                      {r.meta}
-                    </p>
+          <div className="flex justify-center lg:justify-end">
+            <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/5 p-8">
+              <p className="mb-6 text-xs font-bold uppercase tracking-[0.14em]" style={{ color: ACCENT }}>
+                Official data sources
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                {sources.map((s) => (
+                  <div
+                    key={s}
+                    className="flex h-12 items-center justify-center rounded-lg bg-white/10 px-2 text-center text-xs font-bold"
+                    style={{ color: 'rgba(235,241,255,0.9)' }}
+                  >
+                    {s}
                   </div>
-                  <ArrowUpRight className="h-4 w-4 flex-none text-surface/40 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-surface" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ───────────── 5. TRUST ───────────── */
-function Trust() {
-  const items = [
-    {
-      icon: ShieldCheck,
-      title: 'Verified sources',
-      body: 'Every figure traces back to gov.uk, HMRC, DVLA, ONS or the Bank of England.',
-    },
-    {
-      icon: Compass,
-      title: 'No upsells, no sign-ups',
-      body: 'Free forever. No paywall, no email gate, no affiliate steering inside results.',
-    },
-    {
-      icon: BookOpen,
-      title: 'Plain English first',
-      body: 'Editorial guides explain the numbers, the rules and where they came from.',
-    },
-  ];
-
-  return (
-    <section className="border-b border-border bg-surface-container-lowest">
-      <div className="container-page section-y">
-        <SectionHead
-          kicker="Why UKDesk"
-          title="Built like a reference library, used like a tool kit."
-        />
-
-        <div className="mt-12 grid gap-10 sm:grid-cols-3">
-          {items.map((it) => {
-            const Icon = it.icon;
-            return (
-              <div key={it.title}>
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary-soft text-secondary">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 text-lg font-semibold text-primary">
-                  {it.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
-                  {it.body}
-                </p>
+                ))}
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
-
-        <ul className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-8 text-xs font-medium uppercase tracking-wider text-on-surface-variant">
-          <li className="inline-flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
-            gov.uk
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
-            HMRC 2026/27
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
-            ONS
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
-            DVLA / DVSA
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
-            Home Office
-          </li>
-        </ul>
       </div>
     </section>
   );
@@ -401,61 +345,22 @@ function Trust() {
 /* ───────────── 6. CLOSING CTA ───────────── */
 function ClosingCta() {
   return (
-    <section>
-      <div className="container-page section-y">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface-container-lowest p-6 sm:gap-8 sm:p-10 lg:flex-row lg:items-center lg:p-14">
-          <div className="max-w-xl">
-            <h2 className="h-2">
-              Find your next answer in seconds.
-            </h2>
-            <p className="t-body mt-3">
-              Fifty plus UK calculators, all in one place. Free, ad-light and
-              kept current.
-            </p>
-          </div>
+    <section className="bg-surface">
+      <div className="container-page section-y text-center">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="h-display mb-4">Find your next answer in seconds.</h2>
+          <p className="t-lead mx-auto mb-8 max-w-xl">
+            Fifty plus UK calculators, all in one place. Free, ad-light and kept current.
+          </p>
           <Link
             href="/tools"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-surface-container-lowest transition hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-9 py-4 text-sm font-semibold text-surface-container-lowest transition hover:scale-105"
           >
             Open the tool index
-            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
     </section>
   );
 }
-
-/* ───────────── SHARED — SECTION HEAD ───────────── */
-function SectionHead({
-  kicker,
-  title,
-  link,
-}: {
-  kicker: string;
-  title: string;
-  link?: { href: string; label: string };
-}) {
-  return (
-    <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-      <div className="max-w-2xl">
-        <p className="t-eyebrow text-secondary">
-          {kicker}
-        </p>
-        <h2 className="h-2 mt-3">
-          {title}
-        </h2>
-      </div>
-      {link && (
-        <Link
-          href={link.href}
-          className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-primary transition hover:text-secondary"
-        >
-          {link.label}
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      )}
-    </div>
-  );
-}
-

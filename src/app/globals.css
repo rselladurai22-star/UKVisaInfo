@@ -10,49 +10,54 @@
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ════════════════════════════════════════════
-     EDITORIAL PREMIUM PALETTE — May 2026
-     Cream paper + ink black + deep emerald + warm gold
+     WIREFRAME PALETTE — June 2026 revamp
+     Cool white + royal blue + deep emerald
+     primary = blue ACCENT (not heading colour); headings use on-surface.
   ════════════════════════════════════════════ */
 
-  /* Primary — Ink black (headings, primary UI) */
-  --color-primary: #0B0F19;
-  --color-primary-container: #1F2937;
-  --color-primary-soft: #F1F2F4;
-  --color-primary-ink: #000000;
+  /* Primary — Royal blue (links, buttons, accents) */
+  --color-primary: #0037b0;
+  --color-primary-container: #1d4ed8;
+  --color-primary-soft: #dce1ff;          /* primary-fixed — light blue tint */
+  --color-primary-ink: #001551;
 
-  /* Secondary — Deep editorial emerald */
-  --color-secondary: #047857;
-  --color-secondary-soft: #ECFDF5;
-  --color-secondary-strong: #064E3B;
+  /* Secondary — Deep emerald */
+  --color-secondary: #006c49;
+  --color-secondary-soft: #d9f7e8;        /* light mint tint */
+  --color-secondary-strong: #00714d;
 
-  /* Accent — Warm editorial gold */
-  --color-accent: #B8860B;
-  --color-accent-soft: #FBF6E7;
+  /* Accent — Warm tertiary */
+  --color-accent: #623c00;
+  --color-accent-soft: #ffddb8;
 
-  /* Success — Refined emerald (semantic) */
-  --color-success: #047857;
-  --color-success-soft: #ECFDF5;
-  --color-success-strong: #064E3B;
+  /* Success — emerald (semantic) */
+  --color-success: #006c49;
+  --color-success-soft: #d9f7e8;
+  --color-success-strong: #00714d;
 
-  /* Surfaces — Cream paper + pure white card stack */
-  --color-surface: #FAFAF7;
-  --color-surface-container-lowest: #FFFFFF;
-  --color-surface-container-low: #F6F5F0;
-  --color-surface-container: #F1EFE8;
-  --color-surface-container-high: #EBE9E0;
-  --color-surface-container-highest: #E2DFD3;
+  /* Surfaces — cool white + blue-tinted card stack */
+  --color-surface: #f9f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f0f3ff;
+  --color-surface-container: #e7eefe;
+  --color-surface-container-high: #e2e8f8;
+  --color-surface-container-highest: #dce2f3;
+
+  /* Inverse — dark band */
+  --color-inverse-surface: #2a313d;
+  --color-inverse-on-surface: #ebf1ff;
 
   /* Text */
-  --color-on-surface: #0B0F19;
-  --color-on-surface-variant: #475569;
+  --color-on-surface: #151c27;
+  --color-on-surface-variant: #434655;
 
-  /* Borders — warm hairline */
-  --color-outline: #D8D5CA;
-  --color-outline-variant: #ECEAE0;
+  /* Borders */
+  --color-outline: #747686;
+  --color-outline-variant: #c4c5d7;
 
   /* Consistent card border */
-  --color-border: rgba(11, 15, 25, 0.08);
-  --color-border-strong: rgba(11, 15, 25, 0.14);
+  --color-border: rgba(21, 28, 39, 0.08);
+  --color-border-strong: rgba(21, 28, 39, 0.16);
 }
 
 /* ════════════════════════════════════════════
@@ -137,8 +142,8 @@ html.dark body {
     overflow-x: clip;
   }
   body {
-    background: #F8FAFC;
-    color: #0F172A;
+    background: #f9f9ff;
+    color: #151c27;
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv02", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -158,7 +163,7 @@ html.dark body {
     font-family: var(--font-display);
     font-optical-sizing: auto;
     letter-spacing: -0.022em;
-    color: #0B0F19;
+    color: #151c27;
   }
 }
 
@@ -745,10 +750,10 @@ html.dark .glass-card {
 .h-display {
   font-family: var(--font-display);
   font-size: var(--fs-display);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 0.98;
-  color: var(--color-primary);
+  color: var(--color-on-surface);
   text-wrap: balance;
 }
 .h-1 {
@@ -757,7 +762,7 @@ html.dark .glass-card {
   font-weight: 700;
   letter-spacing: -0.028em;
   line-height: 1.05;
-  color: var(--color-primary);
+  color: var(--color-on-surface);
   text-wrap: balance;
 }
 .h-2 {
@@ -766,7 +771,7 @@ html.dark .glass-card {
   font-weight: 700;
   letter-spacing: -0.022em;
   line-height: 1.12;
-  color: var(--color-primary);
+  color: var(--color-on-surface);
   text-wrap: balance;
 }
 .h-3 {
@@ -775,7 +780,7 @@ html.dark .glass-card {
   font-weight: 700;
   letter-spacing: -0.012em;
   line-height: 1.25;
-  color: var(--color-primary);
+  color: var(--color-on-surface);
 }
 .t-lead {
   font-size: var(--fs-lead);
