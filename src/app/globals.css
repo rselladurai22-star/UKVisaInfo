@@ -20,11 +20,31 @@
   --color-primary-container: #1d4ed8;
   --color-primary-soft: #dce1ff;          /* primary-fixed — light blue tint */
   --color-primary-ink: #001551;
+  --color-primary-strong: #1d4ed8;        /* hover/strong primary */
+  --color-on-primary: #ffffff;            /* text on solid primary */
+  --color-on-primary-container: #cad3ff;  /* text on primary-container */
+  --color-primary-fixed: #dce1ff;
+  --color-on-primary-fixed-variant: #0039b5;
 
   /* Secondary — Deep emerald */
   --color-secondary: #006c49;
   --color-secondary-soft: #d9f7e8;        /* light mint tint */
   --color-secondary-strong: #00714d;
+  --color-secondary-container: #6cf8bb;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #00714d;
+
+  /* Tertiary — Warm brown/amber (Material tonal) */
+  --color-tertiary: #623c00;
+  --color-tertiary-container: #825100;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #ffcb8f;
+
+  /* Error — semantic red */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
 
   /* Accent — Warm tertiary */
   --color-accent: #623c00;
@@ -37,6 +57,7 @@
 
   /* Surfaces — cool white + blue-tinted card stack */
   --color-surface: #f9f9ff;
+  --color-surface-bright: #f9f9ff;
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #f0f3ff;
   --color-surface-container: #e7eefe;
@@ -165,6 +186,18 @@ html.dark body {
     letter-spacing: -0.022em;
     color: #151c27;
   }
+}
+
+/* Headings inside a white-text container (dark heroes, image cards) must
+   inherit the container colour — the base rule above otherwise forces them
+   dark, making them merge into the dark background. Unlayered so it wins over
+   @layer base. */
+.text-white h1, .text-white h2, .text-white h3, .text-white h4,
+.text-white\/90 h1, .text-white\/90 h2, .text-white\/90 h3, .text-white\/90 h4,
+.text-on-primary h1, .text-on-primary h2, .text-on-primary h3, .text-on-primary h4,
+.text-on-primary-container h1, .text-on-primary-container h2, .text-on-primary-container h3, .text-on-primary-container h4,
+.text-inverse-on-surface h1, .text-inverse-on-surface h2, .text-inverse-on-surface h3, .text-inverse-on-surface h4 {
+  color: inherit;
 }
 
 /* ════════════════════════════════════════════
