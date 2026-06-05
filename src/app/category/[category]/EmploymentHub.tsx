@@ -89,7 +89,7 @@ export default function EmploymentHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Employment</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Employment & Salary Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -115,7 +115,7 @@ export default function EmploymentHub() {
                 2026/27 Rules
               </span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
               Salary Comparison Tool
             </h2>
             <p className="text-base text-on-primary-container/80 mb-8 max-w-lg leading-relaxed">
@@ -159,11 +159,11 @@ export default function EmploymentHub() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-surface rounded-xl border border-outline-variant/30">
                     <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Monthly Net Pay</p>
-                    <p className="text-xl font-display font-extrabold text-on-surface">£{monthly.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+                    <p className="text-xl font-display font-bold text-on-surface">£{monthly.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
                   </div>
                   <div className="p-4 bg-secondary-container/20 rounded-xl border border-secondary-container/10">
                     <p className="text-[10px] font-bold text-secondary-strong uppercase tracking-wider mb-1">Percentile Rank</p>
-                    <p className="text-xl font-display font-extrabold text-secondary">{percentile}</p>
+                    <p className="text-xl font-display font-bold text-secondary">{percentile}</p>
                   </div>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function EmploymentHub() {
       <section className="container-page pb-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant pb-4 mb-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-extrabold text-on-surface">Employment Directory</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-bold text-on-surface">Employment Directory</h3>
             <p className="text-sm text-on-surface-variant mt-1">Specialized calculation modules for compensation and legal guidelines.</p>
           </div>
           <div className="flex gap-2 shrink-0">

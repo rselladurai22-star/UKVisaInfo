@@ -52,7 +52,7 @@ export default function VehiclesHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Vehicles</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Vehicles & Motoring Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -73,7 +73,7 @@ export default function VehiclesHub() {
             <span className="bg-[#0037b0]/10 text-[#0037b0] px-3 py-1 rounded-full font-bold text-[10px] tracking-wider mb-4 inline-block uppercase border border-[#0037b0]/25">
               DVLA DIRECT SYNC
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
               Instant MOT & Vehicle Check
             </h2>
             <p className="text-base text-on-primary-container/80 mb-8 max-w-lg leading-relaxed">
@@ -114,9 +114,9 @@ export default function VehiclesHub() {
                   <div className="flex justify-between items-center border-b border-outline-variant/40 pb-3">
                     <div>
                       <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider block">Identified Vehicle</span>
-                      <h4 className="font-display font-extrabold text-on-surface text-lg">{vehicleData.makeModel}</h4>
+                      <h4 className="font-display font-bold text-on-surface text-lg">{vehicleData.makeModel}</h4>
                     </div>
-                    <span className="bg-yellow-400 text-black font-mono font-extrabold px-3 py-1.5 rounded-lg border-2 border-black tracking-wider shadow-sm uppercase text-sm">
+                    <span className="bg-yellow-400 text-black font-mono font-bold px-3 py-1.5 rounded-lg border-2 border-black tracking-wider shadow-sm uppercase text-sm">
                       {vehicleData.plate}
                     </span>
                   </div>
@@ -161,7 +161,7 @@ export default function VehiclesHub() {
       <section className="container-page pb-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant pb-4 mb-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-extrabold text-on-surface">Precision Motoring Tools</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-bold text-on-surface">Precision Motoring Tools</h3>
             <p className="text-sm text-on-surface-variant mt-1">Specialized calculation modules for compliance and running costs.</p>
           </div>
           <div className="flex gap-2 shrink-0">

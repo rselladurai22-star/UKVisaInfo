@@ -43,7 +43,7 @@ export default function BusinessHub() {
           <span className="text-primary font-bold">Business</span>
         </nav>
         <div className="mt-6">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
             Business & Self-Employed Hub
           </h1>
           <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">

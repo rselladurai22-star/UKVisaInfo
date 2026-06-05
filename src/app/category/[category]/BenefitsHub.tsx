@@ -37,7 +37,7 @@ export default function BenefitsHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Benefits</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Benefits & Support Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -58,7 +58,7 @@ export default function BenefitsHub() {
             <span className="bg-[#0037b0]/10 text-[#0037b0] px-3 py-1 rounded-full font-bold text-[10px] tracking-wider mb-4 inline-block uppercase border border-[#0037b0]/25">
               FEATURED TOOL
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
               Universal Credit Estimator
             </h2>
             <p className="text-base text-on-primary-container/80 mb-8 max-w-lg leading-relaxed">
@@ -126,7 +126,7 @@ export default function BenefitsHub() {
       <section className="container-page pb-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant pb-4 mb-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-extrabold text-on-surface">Support Directory</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-bold text-on-surface">Support Directory</h3>
             <p className="text-sm text-on-surface-variant mt-1">Specialized calculation modules for complex financial planning.</p>
           </div>
           <div className="flex gap-2 shrink-0">

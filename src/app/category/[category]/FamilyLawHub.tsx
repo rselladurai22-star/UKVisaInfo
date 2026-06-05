@@ -38,7 +38,7 @@ export default function FamilyLawHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Family Law</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Divorce & Family Law Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -54,7 +54,7 @@ export default function FamilyLawHub() {
               <Gavel className="h-4 w-4" />
               <span className="font-bold text-[10px] tracking-wider uppercase">Legal Guidance</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-display font-extrabold tracking-tight mb-4 text-on-surface leading-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4 text-on-surface leading-tight">
               Matrimonial Asset Calculator
             </h2>
             <p className="text-base text-on-surface-variant max-w-xl mb-8 leading-relaxed">
@@ -133,7 +133,7 @@ export default function FamilyLawHub() {
 
       {/* Bento Tool Grid */}
       <section className="container-page pb-12">
-        <h3 className="text-xl sm:text-2xl font-display font-extrabold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
+        <h3 className="text-xl sm:text-2xl font-display font-bold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
           <Scale className="h-6 w-6 text-primary" />
           Specialized Estimators
         </h3>

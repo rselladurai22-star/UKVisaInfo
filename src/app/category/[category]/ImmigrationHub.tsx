@@ -39,7 +39,7 @@ export default function ImmigrationHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Immigration</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Immigration & Visas Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -60,7 +60,7 @@ export default function ImmigrationHub() {
             <span className="bg-[#006c49] text-white px-3 py-1 rounded-full font-bold text-[10px] tracking-wider mb-4 inline-block uppercase">
               GOV.UK DATA INTEGRATED
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
               Visa Eligibility Quiz
             </h2>
             <p className="text-base text-gray-200/90 mb-8 leading-relaxed">
@@ -79,7 +79,7 @@ export default function ImmigrationHub() {
 
       {/* Route Hubs (Bento Layout) */}
       <section className="container-page pb-12">
-        <h3 className="text-xl sm:text-2xl font-display font-extrabold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
+        <h3 className="text-xl sm:text-2xl font-display font-bold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
           <Layers className="h-6 w-6 text-primary" />
           Route Hubs
         </h3>
@@ -204,7 +204,7 @@ export default function ImmigrationHub() {
 
       {/* Precision Tools Section */}
       <section className="container-page pb-12">
-        <h3 className="text-xl sm:text-2xl font-display font-extrabold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
+        <h3 className="text-xl sm:text-2xl font-display font-bold mb-6 flex items-center gap-2 border-b border-outline-variant pb-4">
           <Calculator className="h-6 w-6 text-primary" />
           Precision Tools
         </h3>
@@ -298,7 +298,7 @@ export default function ImmigrationHub() {
 
       {/* Critical Guides Section */}
       <section className="container-page pb-20">
-        <h3 className="text-xl sm:text-2xl font-display font-extrabold mb-6">Critical Guides</h3>
+        <h3 className="text-xl sm:text-2xl font-display font-bold mb-6">Critical Guides</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-surface-container-high/40 border border-outline-variant/50 p-6 rounded-2xl h-[240px] flex flex-col justify-end hover:shadow-md transition-all cursor-pointer">
             <h4 className="text-lg font-display font-bold text-on-surface mb-1">Eligibility Parameters</h4>

@@ -47,7 +47,7 @@ export default function LoansDebtHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Loans & Debt</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Loans, Debt & Credit Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -96,7 +96,7 @@ export default function LoansDebtHub() {
               <div className="bg-primary-soft/30 p-6 rounded-xl border-l-4 border-primary flex flex-col justify-between">
                 <div>
                   <p className="text-xs font-bold text-primary mb-1">Estimated Monthly Payment</p>
-                  <div className="text-3xl font-display font-extrabold text-primary">£{formatNumber(monthlyPayment)}</div>
+                  <div className="text-3xl font-display font-bold text-primary">£{formatNumber(monthlyPayment)}</div>
                   <p className="text-xs text-on-surface-variant mt-3 leading-relaxed">
                     Based on 4.9% APR. You could save <span className="font-bold text-secondary">£1,240</span> over the loan life by consolidating.
                   </p>
@@ -195,7 +195,7 @@ export default function LoansDebtHub() {
               <div className="relative z-10">
                 <h3 className="text-base font-display font-bold mb-4">Credit Health</h3>
                 <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-4xl font-extrabold font-display">742</span>
+                  <span className="text-4xl font-bold font-display">742</span>
                   <span className="text-[10px] font-bold tracking-widest text-primary-soft uppercase">EXCELLENT</span>
                 </div>
                 <ul className="space-y-2 text-xs font-semibold">

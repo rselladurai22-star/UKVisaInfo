@@ -44,7 +44,7 @@ export default function InsuranceHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Insurance</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Insurance Hub
         </h1>
       </section>
@@ -59,7 +59,7 @@ export default function InsuranceHub() {
               </span>
               <span className="text-on-surface-variant text-xs font-medium">Last updated: Oct 2024</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight mb-4">
               Navigate Your Coverage with <span className="text-primary">Precision.</span>
             </h2>
             <p className="text-base sm:text-lg text-on-surface-variant mb-8 max-w-2xl leading-relaxed">

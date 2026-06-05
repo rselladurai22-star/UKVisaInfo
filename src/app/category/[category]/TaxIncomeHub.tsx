@@ -32,7 +32,7 @@ export default function TaxIncomeHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Tax & Income</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Tax & Income
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -85,7 +85,7 @@ export default function TaxIncomeHub() {
           <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="bg-primary-soft/45 text-on-surface p-6 rounded-2xl flex-1 flex flex-col justify-center border border-primary/10">
               <span className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1">Fiscal Year Status</span>
-              <div className="text-3xl font-display font-extrabold leading-tight mb-1">2026/27</div>
+              <div className="text-3xl font-display font-bold leading-tight mb-1">2026/27</div>
               <p className="text-xs text-on-surface-variant leading-relaxed">Personal Allowance: £12,570. Standard tax codes applied.</p>
             </div>
             <div className="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-soft">

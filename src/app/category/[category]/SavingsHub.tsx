@@ -46,7 +46,7 @@ export default function SavingsHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Savings & Pensions</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Pensions, Investing & Savings Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -74,7 +74,7 @@ export default function SavingsHub() {
                 </span>
               </div>
               
-              <h2 className="text-3xl font-display font-extrabold text-on-surface leading-tight">
+              <h2 className="text-3xl font-display font-bold text-on-surface leading-tight">
                 Pension Pot Projection
               </h2>
               <p className="text-sm text-on-surface-variant max-w-xl leading-relaxed">
@@ -125,7 +125,7 @@ export default function SavingsHub() {
 
                 <div className="bg-primary/5 p-6 rounded-xl border border-primary/10 text-center flex flex-col justify-center items-center h-full">
                   <span className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Estimated Pot Size</span>
-                  <div className="text-4xl font-display font-extrabold text-primary mb-2">
+                  <div className="text-4xl font-display font-bold text-primary mb-2">
                     £{potSize.toLocaleString()}
                   </div>
                   <span className="text-[10px] font-bold text-secondary uppercase tracking-wider flex items-center gap-1">
@@ -170,7 +170,7 @@ export default function SavingsHub() {
       <section className="container-page pb-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant pb-4 mb-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-extrabold text-on-surface">Financial Toolkit</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-bold text-on-surface">Financial Toolkit</h3>
             <p className="text-sm text-on-surface-variant mt-1">Specialized calculation modules for compound interest, drawdown strategies, and tax-free accounts.</p>
           </div>
           <div className="flex gap-2 shrink-0">

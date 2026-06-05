@@ -103,7 +103,7 @@ export default function EnergyHub() {
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
           <span className="text-primary font-bold">Energy</span>
         </nav>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-on-surface">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-on-surface">
           Energy & Bills Hub
         </h1>
         <p className="mt-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
@@ -130,7 +130,7 @@ export default function EnergyHub() {
                   Ofgem Data Sync
                 </span>
               </div>
-              <h2 className="text-3xl font-display font-extrabold text-on-surface leading-tight">
+              <h2 className="text-3xl font-display font-bold text-on-surface leading-tight">
                 Energy Bill Comparison
               </h2>
               <p className="text-sm text-on-surface-variant max-w-xl leading-relaxed">
@@ -176,7 +176,7 @@ export default function EnergyHub() {
                 <div className="flex flex-col sm:flex-row items-center justify-between p-4 bg-primary/5 rounded-xl border border-primary/10 gap-4">
                   <div className="text-center sm:text-left">
                     <span className="text-xs font-medium text-on-surface-variant block">Calculated Annual Cost:</span>
-                    <span className="text-3xl font-display font-extrabold text-primary">£{annualBill.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                    <span className="text-3xl font-display font-bold text-primary">£{annualBill.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="text-center sm:text-right">
                     {comparison.status === 'higher' && (
@@ -229,7 +229,7 @@ export default function EnergyHub() {
                     type="number"
                     value={inputValue}
                     onChange={(e) => setInputValue(Number(e.target.value))}
-                    className="w-full bg-transparent border-none outline-none p-0 text-2xl font-display font-extrabold text-white focus:ring-0"
+                    className="w-full bg-transparent border-none outline-none p-0 text-2xl font-display font-bold text-white focus:ring-0"
                   />
                 </div>
 
@@ -257,7 +257,7 @@ export default function EnergyHub() {
                       <option value="btu" className="text-black">BTU</option>
                     </select>
                   </div>
-                  <div className="text-2xl font-display font-extrabold text-white py-0.5">
+                  <div className="text-2xl font-display font-bold text-white py-0.5">
                     {outputValue.toLocaleString()}
                   </div>
                 </div>
@@ -271,7 +271,7 @@ export default function EnergyHub() {
       <section className="container-page pb-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-outline-variant pb-4 mb-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-extrabold text-on-surface">Energy Resource Center</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-bold text-on-surface">Energy Resource Center</h3>
             <p className="text-sm text-on-surface-variant mt-1">Specialized tools for microgeneration, building efficiency, and vehicular calculations.</p>
           </div>
           <div className="flex gap-2 shrink-0">
