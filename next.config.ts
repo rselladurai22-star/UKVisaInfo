@@ -15,6 +15,11 @@ const config: NextConfig = {
         permanent: true,
       },
       {
+        source: '/tools/compare',
+        destination: '/visa-types/compare',
+        permanent: true,
+      },
+      {
         source: '/notice-period-calculator',
         destination: '/redundancy-pay#notice-period',
         permanent: true,

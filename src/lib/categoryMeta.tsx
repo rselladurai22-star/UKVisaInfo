@@ -26,7 +26,7 @@ export const CAT_INDEX: Record<CategoryId, number> = {
 export const VISA_TOOLS: { href: string; title: string; hint: string; icon: IconComponent; accent: string }[] = [
   { href: '/tools/salary-checker',   title: 'Skilled Worker salary checker', hint: 'Your salary vs the visa minimum + going rate, by SOC code', icon: BadgePoundSterling, accent: '#7C3AED' },
   { href: '/tools/sponsor-search',   title: 'Sponsor licence search',        hint: 'Find licensed UK employers by city, sector and rating',     icon: Search,             accent: '#2563EB' },
-  { href: '/tools/compare',          title: 'Visa comparison',               hint: 'Compare any two routes side by side',                       icon: Scale,              accent: '#F59E0B' },
+  { href: '/visa-types/compare',          title: 'Visa comparison',               hint: 'Compare any two routes side by side',                       icon: Scale,              accent: '#F59E0B' },
   { href: '/tools/refusal-analyzer', title: 'Refusal letter analyzer',       hint: 'Plain-English breakdown of each refusal ground',            icon: FileSearch,         accent: '#E11D48' },
 ];
 

@@ -52,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/tools/salary-checker',     prio: 0.85, freq: 'monthly' },
     { p: '/tools/sponsor-search',     prio: 0.85, freq: 'monthly' },
     { p: '/tools/cost-calculator',    prio: 0.85, freq: 'monthly' },
-    { p: '/tools/compare',            prio: 0.8,  freq: 'monthly' },
+    { p: '/visa-types/compare',            prio: 0.8,  freq: 'monthly' },
     { p: '/tools/refusal-analyzer',   prio: 0.85, freq: 'monthly' },
     { p: '/uk-cities',       prio: 0.8,  freq: 'monthly' },
     { p: '/salary',          prio: 0.85, freq: 'monthly' },

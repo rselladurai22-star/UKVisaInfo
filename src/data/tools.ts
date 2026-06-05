@@ -409,7 +409,7 @@ export const SUBCATEGORIES: Record<CategoryId, SubGroup[]> = {
   energy: [],
   immigration: [
     { id: 'routes',      label: 'Routes & fees',      title: 'Visa Routes & Fees',  description: 'Compare every route, total the fees and the health surcharge.', hrefs: ['/visa-types', '/tools/cost-calculator', '/ihs-calculator'] },
-    { id: 'eligibility', label: 'Eligibility',        title: 'Eligibility & Points', description: 'Check the 70-point threshold and your salary against the going rate.', hrefs: ['/skilled-worker-points-check', '/tools/salary-checker', '/tools/compare'] },
+    { id: 'eligibility', label: 'Eligibility',        title: 'Eligibility & Points', description: 'Check the 70-point threshold and your salary against the going rate.', hrefs: ['/skilled-worker-points-check', '/tools/salary-checker', '/visa-types/compare'] },
     { id: 'support',     label: 'Employers & refusals', title: 'Employers & Refusals', description: 'Find a licensed sponsor or decode a refusal letter.', hrefs: ['/tools/sponsor-search', '/tools/refusal-analyzer'] },
     { id: 'local',       label: 'Local lookups',      title: 'Local Lookups',       description: 'Council, MP, NHS and police by postcode.', hrefs: ['/postcode'] },
   ],

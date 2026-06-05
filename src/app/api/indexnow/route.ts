@@ -26,7 +26,7 @@ function buildAllUrls(): string[] {
     '/holiday-pay', '/salary-compare', '/cgt-calculator', '/pension-allowance',
     '/state-pension', '/ulez-check', '/mot-check', '/energy-bill',
     '/tools', '/tools/salary-checker', '/tools/sponsor-search',
-    '/tools/cost-calculator', '/tools/compare', '/tools/refusal-analyzer',
+    '/tools/cost-calculator', '/visa-types/compare', '/tools/refusal-analyzer',
     '/from', '/uk-cities', '/salary',
   ];
   for (const p of static_pages) urls.push(`${SITE}${p}`);

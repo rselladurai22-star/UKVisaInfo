@@ -664,7 +664,7 @@ export default function CostCalculatorAdvanced() {
                   Full cost guide <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link
-                  href="/tools/compare"
+                  href="/visa-types/compare"
                   className="flex items-center justify-center gap-1.5 py-3 rounded-xl text-[12.5px] font-semibold transition-all"
                   style={{
                     background: '#fff',
