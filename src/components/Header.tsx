@@ -33,6 +33,7 @@ export default function Header() {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -45,24 +46,24 @@ export default function Header() {
   }, []);
 
   /* close on route change */
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setNavOpen(false); }, [pathname]);
 
   /* body scroll lock + focus + esc + ⌘K open */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const k = e.key.toLowerCase();
       if ((e.metaKey || e.ctrlKey) && k === 'k') { e.preventDefault(); setOpen((v) => !v); }
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') { setOpen(false); setNavOpen(false); }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open || navOpen ? 'hidden' : '';
     if (open) setTimeout(() => inputRef.current?.focus(), 30);
     return () => { document.body.style.overflow = ''; };
-  }, [open]);
+  }, [open, navOpen]);
 
   /* filter */
   const q = query.trim().toLowerCase();
@@ -167,7 +168,7 @@ export default function Header() {
           </button>
           <button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={() => setNavOpen(true)}
             aria-label="Open menu"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-surface lg:hidden"
           >
@@ -175,6 +176,61 @@ export default function Header() {
           </button>
         </div>
       </header>
+
+      {/* ── Mobile nav menu (same links as desktop header) ─ */}
+      {navOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-[60] bg-primary/40 backdrop-blur-md animate-[fadeIn_120ms_ease-out] lg:hidden"
+          onClick={(e) => { if (e.target === e.currentTarget) setNavOpen(false); }}
+        >
+          <div className="ml-auto flex h-full w-full max-w-xs flex-col bg-surface shadow-[0_30px_80px_-20px_rgba(11,15,25,0.4)] animate-[slideIn_180ms_cubic-bezier(0.22,1,0.36,1)]">
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <span className="font-display text-lg font-bold tracking-tight">
+                <span className="text-on-surface">des-kly</span><span className="text-primary">.info</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setNavOpen(false)}
+                aria-label="Close menu"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-surface-container-low text-primary transition hover:bg-surface-container"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <nav className="flex flex-col gap-1 p-4">
+              {NAV.map((n) => {
+                const active = pathname === n.href || (n.href !== '/' && pathname?.startsWith(n.href));
+                return (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setNavOpen(false)}
+                    className={[
+                      'flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-semibold no-underline transition',
+                      active
+                        ? 'bg-primary-soft text-primary'
+                        : 'text-on-surface hover:bg-surface-container-low hover:text-primary',
+                    ].join(' ')}
+                  >
+                    {n.label}
+                    <ArrowRight className="h-4 w-4 opacity-60" />
+                  </Link>
+                );
+              })}
+            </nav>
+            <button
+              type="button"
+              onClick={() => { setNavOpen(false); setOpen(true); }}
+              className="mx-4 mt-2 inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface-container-lowest px-4 py-3 text-sm font-semibold text-primary transition hover:bg-surface-container-low"
+            >
+              <Search className="h-4 w-4" /> Search tools
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── Command palette overlay ─────────────────────── */}
       {open && (
@@ -363,6 +419,7 @@ export default function Header() {
         @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
         @keyframes popIn  { from { opacity: 0; transform: translateY(8px) scale(0.985) }
                             to   { opacity: 1; transform: translateY(0)   scale(1) } }
+        @keyframes slideIn { from { transform: translateX(100%) } to { transform: translateX(0) } }
       `}</style>
     </>
   );
