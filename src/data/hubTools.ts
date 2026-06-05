@@ -40,7 +40,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       title: 'Mortgages',
       description: 'Monthly payments, switching and how much you can borrow.',
       items: [
-        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · overpayment · remortgage', status: 'soon' },
+        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · amortisation · total interest', status: 'live' },
         { label: 'Mortgage Affordability', href: '/mortgage-affordability', hint: 'Max borrow + stress test', status: 'live' },
       ],
     },
