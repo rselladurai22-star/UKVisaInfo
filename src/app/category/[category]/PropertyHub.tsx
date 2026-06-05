@@ -205,7 +205,7 @@ export default function PropertyHub() {
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           <div className="lg:w-1/2 w-full h-[350px] relative rounded-2xl overflow-hidden shadow-md shrink-0 border border-outline-variant/60">
             <img
-              className="w-full h-full object-cover grayscale opacity-80"
+              className="w-full h-full object-cover"
               alt="Modern residence facade"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEmonUhrt3_kjQFo0nEGj5S29J8KcLhLdo4UXnZnW2oOHy5BssnqatzevF37tMVGbNGw7FNQ8YeXKtsz8Ce_eVGAZfd9TXmx61I9eeaPJI5qged5ilGfNXTJxlIKdxXOUZXf_B2P-yH9EGWgOCX6BoRY_V1YA5Mi_w0w7lXa2nbu02c8qfvHC1qSZjkl8EyHOpWHoJ03G2mK3UoWJYu_fqWr2RGHgA2S_plL6A1xfF2ohFzvABPXbYXCgSS4tSJyT1UOrj6OV1gCg"
             />

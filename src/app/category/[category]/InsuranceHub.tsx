@@ -210,7 +210,7 @@ export default function InsuranceHub() {
             <div className="lg:col-span-2 rounded-2xl p-6 border border-outline-variant bg-surface-container-lowest shadow-soft grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:col-span-1 rounded-xl overflow-hidden h-32 md:h-full relative border border-outline-variant/50">
                 <img
-                  className="w-full h-full object-cover grayscale opacity-80"
+                  className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZGDViQe7u-NPnaEItpS5PIswKzF-73CrB2Oxm1gnwcV_ObwPHapAlzYxTnE2inSRHlWko-HnB0GYmmqQbjqv-6RnCttO0zi5tdqm5C1uL37oDvjVXRuC-ecFjlm1HgZXTAFlWkFo6-oLBaQijq16IXWHLFTdkymkvJu1vLV9A5sEciOddRZjs-AmHWgtkGTOqgloaXakj7bTWJ1Uc8dxrjojFYvjn9XXwymv1zHGfb-3KV28sf1H4NPc1w-PrL0aUh4wrAhb39To"
                   alt="Modern residence facade"
                 />

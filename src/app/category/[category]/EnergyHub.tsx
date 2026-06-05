@@ -365,7 +365,7 @@ export default function EnergyHub() {
             <div className="lg:col-span-4 h-48 relative rounded-2xl overflow-hidden shadow-soft">
               <img
                 alt="Digital Smart Home Grid"
-                className="absolute inset-0 w-full h-full object-cover grayscale opacity-90"
+                className="absolute inset-0 w-full h-full object-cover opacity-90"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7z7jJLxE6sb-hKISEvbtS18IHdcz9pcYakHdvq0e14ELoDDXFznd1hURsLvs1Kx_2Bk5eS_yf-HMwmFKREHByxcVQG5U0aWOZlAmA-Vl2wKYoThu8nrnyCBLMdtfV6j234YjRhuthnO20ckJqCpAskiyEcQml6a5DFYYt-JD_bSIAui0HW-1NZCe0izrDDTtyGofADIu5RuVJg5FdN3ssQT3HKa0_nQ8cHWo5yKyXchL5ABS1C8yypbr20-oTarKxoGXnTBxx-cw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-6 flex flex-col justify-end">

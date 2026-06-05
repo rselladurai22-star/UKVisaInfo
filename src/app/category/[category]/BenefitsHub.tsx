@@ -204,7 +204,7 @@ export default function BenefitsHub() {
             <div className="lg:w-1/3 w-full h-48 relative rounded-xl overflow-hidden shadow-soft">
               <img
                 alt="Precision Calculation"
-                className="w-full h-full object-cover grayscale opacity-80"
+                className="w-full h-full object-cover"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiXN9Dhm-diWKXyU-64Gh96fzLOM1sPPoRuZT6SkN13wTWLEyB2yVwD8S8pMJerMchc6HRyyWOpVYxhbf1d6BISaGa3V2zUsluGvpbmVULQOY079gkWCRjNbr4GP6bzweF-hrhl054bmea-LEDg4PTq3fATmoFhYdzFVyV-OcKkyI614C2xn8HZCAt1OOBKQ79K1sP-h7hTQqtk_4B3IFOp6NWAWy8CE8nQih3_8fKG25kibD60R6-E8OyCRJmkv0F380wEHI7Qa8"
               />
             </div>
