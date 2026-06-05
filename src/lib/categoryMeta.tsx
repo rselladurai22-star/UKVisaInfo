@@ -15,6 +15,8 @@ export const CAT_INDEX: Record<CategoryId, number> = {
   business:    6,
   benefits:    7,
   vehicles:    8,
+  insurance:   4,
+  'loans-debt': 5,
 };
 
 /** Interactive visa tools that aren't in the APP_TILES registry — surfaced in the Immigration hub. */

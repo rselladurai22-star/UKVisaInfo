@@ -27,7 +27,8 @@ import {
 export type IconComponent = typeof Wallet;
 export type CategoryId =
   | 'tax' | 'employment' | 'property' | 'savings'
-  | 'business' | 'immigration' | 'benefits' | 'vehicles';
+  | 'business' | 'immigration' | 'benefits' | 'vehicles'
+  | 'insurance' | 'loans-debt';
 
 export interface Category {
   id: CategoryId;
@@ -85,13 +86,10 @@ const SKY     = '#0EA5E9';
 ───────────────────────────────────────────── */
 export const CATEGORIES: Category[] = [
   { id: 'tax',         label: 'Tax & Income',       icon: Wallet,    color: TEAL,   description: 'Income tax, NI, dividends, CGT and more' },
-  { id: 'employment',  label: 'Employment',          icon: Briefcase, color: BLUE,   description: 'Pay, leave, redundancy, workplace rights' },
   { id: 'property',    label: 'Property',            icon: HomeIcon,  color: GOLD,   description: 'Mortgages, SDLT, rental income and costs' },
-  { id: 'savings',     label: 'Savings & Pensions',  icon: PiggyBank, color: EMERALD,description: 'ISA, pensions, investments and savings goals' },
   { id: 'business',    label: 'Business',            icon: Building2, color: NAVY,   description: 'Self-employed, contractors and Ltd companies' },
-  { id: 'immigration', label: 'Immigration',         icon: Plane,     color: VIOLET, description: 'Visa routes, fees, points and settlement' },
-  { id: 'benefits',    label: 'Benefits',            icon: Users,     color: AMBER,  description: 'Universal credit, childcare, family support' },
-  { id: 'vehicles',    label: 'Vehicles',            icon: Car,       color: ROSE,   description: 'ULEZ, MOT, company car, fuel costs' },
+  { id: 'insurance',   label: 'Insurance',           icon: Shield,    color: BLUE,   description: 'Life cover, health, rebuild costs and more' },
+  { id: 'loans-debt',  label: 'Loans & Debt',        icon: LandmarkIcon, color: EMERALD, description: 'APR comparisons, debt consolidation and credit strategy' },
 ];
 
 /* ─────────────────────────────────────────────
@@ -396,6 +394,8 @@ export const SUBCATEGORIES: Record<CategoryId, SubGroup[]> = {
     { id: 'pension', label: 'Retirement',      title: 'Pensions & Retirement', description: 'State pension forecast and drawdown planning.', hrefs: ['/state-pension', '/pension-drawdown-calculator'] },
   ],
   business: [],
+  insurance: [],
+  'loans-debt': [],
   immigration: [
     { id: 'routes',      label: 'Routes & fees',      title: 'Visa Routes & Fees',  description: 'Compare every route, total the fees and the health surcharge.', hrefs: ['/visa-types', '/tools/cost-calculator', '/ihs-calculator'] },
     { id: 'eligibility', label: 'Eligibility',        title: 'Eligibility & Points', description: 'Check the 70-point threshold and your salary against the going rate.', hrefs: ['/skilled-worker-points-check', '/tools/salary-checker', '/tools/compare'] },
