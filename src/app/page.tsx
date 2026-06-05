@@ -34,7 +34,7 @@ const VISA_ROUTES = [
 
 /* Bento order + one or two sample tool links per category. */
 const BENTO_ORDER: CategoryId[] = [
-  'tax', 'property', 'business', 'insurance', 'loans-debt',
+  'tax', 'property', 'business', 'insurance', 'loans',
 ];
 
 const CATEGORY_LINKS: Record<CategoryId, string[]> = {
@@ -47,7 +47,10 @@ const CATEGORY_LINKS: Record<CategoryId, string[]> = {
   benefits:    ['/childcare-calculator'],
   vehicles:    ['/mot-check'],
   insurance:   [],
-  'loans-debt': [],
+  loans:       [],
+  estate:      [],
+  'family-law': [],
+  energy:      [],
 };
 
 const toolByHref = (href: string) => APP_TILES.find((t) => t.href === href);

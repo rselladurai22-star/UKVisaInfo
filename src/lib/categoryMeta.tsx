@@ -16,7 +16,10 @@ export const CAT_INDEX: Record<CategoryId, number> = {
   benefits:    7,
   vehicles:    8,
   insurance:   4,
-  'loans-debt': 5,
+  loans:       5,
+  estate:      2,
+  'family-law': 4,
+  energy:      8,
 };
 
 /** Interactive visa tools that aren't in the APP_TILES registry — surfaced in the Immigration hub. */

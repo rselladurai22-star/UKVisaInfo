@@ -86,6 +86,23 @@ const config: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      { source: '/property', destination: '/category/property' },
+      { source: '/insurance', destination: '/category/insurance' },
+      { source: '/loans', destination: '/category/loans' },
+      { source: '/immigration', destination: '/category/immigration' },
+      { source: '/savings', destination: '/category/savings' },
+      { source: '/tax', destination: '/category/tax' },
+      { source: '/business', destination: '/category/business' },
+      { source: '/estate', destination: '/category/estate' },
+      { source: '/family-law', destination: '/category/family-law' },
+      { source: '/energy', destination: '/category/energy' },
+      { source: '/employment', destination: '/category/employment' },
+      { source: '/vehicles', destination: '/category/vehicles' },
+      { source: '/benefits', destination: '/category/benefits' },
+    ];
+  },
 };
 
 export default config;

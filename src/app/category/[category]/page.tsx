@@ -38,7 +38,7 @@ export default async function CategoryHub({ params }: RouteParams) {
   if (category === 'tax') return <TaxIncomeHub />;
   if (category === 'property') return <PropertyHub />;
   if (category === 'insurance') return <InsuranceHub />;
-  if (category === 'loans-debt') return <LoansDebtHub />;
+  if (category === 'loans') return <LoansDebtHub />;
 
   notFound();
 }
