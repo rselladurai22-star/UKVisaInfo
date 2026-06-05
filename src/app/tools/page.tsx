@@ -6,13 +6,13 @@ import ToolsClient from './ToolsClient';
 const TOTAL = APP_TILES.length + VISA_TOOLS.length;
 
 export const metadata: Metadata = {
-  title: `All UK Calculators & Tools — ${TOTAL} Free Tools | UKDesk`,
+  title: `All UK Calculators & Tools — ${TOTAL} Free Tools | des-kly.info`,
   description:
-    'Every free UKDesk tool in one place — take-home pay, stamp duty, mortgage, council tax, dividend & capital gains tax, ISAs, pensions, child benefit, visa fees and more. Checked against GOV.UK, HMRC and ONS.',
+    'Every free des-kly.info tool in one place — take-home pay, stamp duty, mortgage, council tax, dividend & capital gains tax, ISAs, pensions, child benefit, visa fees and more. Checked against GOV.UK, HMRC and ONS.',
   alternates: { canonical: '/tools' },
   openGraph: {
-    title: 'All UK Calculators & Tools — UKDesk',
-    description: `${TOTAL} free UKDesk calculators, grouped by topic. No sign-up.`,
+    title: 'All UK Calculators & Tools — des-kly.info',
+    description: `${TOTAL} free des-kly.info calculators, grouped by topic. No sign-up.`,
     url: 'https://ukvisainfo.co.uk/tools',
   },
 };
