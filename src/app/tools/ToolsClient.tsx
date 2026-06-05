@@ -87,7 +87,7 @@ const BENTO_CARDS = [
     count: '9 Tools',
     hubHref: '/immigration',
     tools: [
-      { label: '✅ Skilled Worker', href: '/visa/skilled-worker' },
+      { label: '✅ Skilled Worker', href: '/visa-types/skilled-worker' },
       { label: '✅ IHS Surcharge', href: '/ihs-calculator' },
       { label: 'Indefinite Leave 🆕', href: '/immigration' },
     ],

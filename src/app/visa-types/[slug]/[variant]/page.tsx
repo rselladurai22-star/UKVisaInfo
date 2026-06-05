@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const description = `Complete guide for ${v.label}. ${v.headline}. Eligibility, costs and how to apply. Updated April 2026, sourced from GOV.UK.`;
   return {
     title, description,
-    alternates: { canonical: `/visa/${slug}/${variant}` },
-    openGraph: { title, description, url: `https://ukvisainfo.co.uk/visa/${slug}/${variant}`, type: 'article' },
+    alternates: { canonical: `/visa-types/${slug}/${variant}` },
+    openGraph: { title, description, url: `https://ukvisainfo.co.uk/visa-types/${slug}/${variant}`, type: 'article' },
   };
 }
 
@@ -55,15 +55,15 @@ export default async function VariantPage({ params }: RouteParams) {
     datePublished: '2026-04-08', dateModified: '2026-05-19',
     author: primaryEditorSchema(SITE),
     publisher: { '@type': 'Organization', name: 'UKDesk', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/icon.svg` } },
-    mainEntityOfPage: `${SITE}/visa/${slug}/${variant}`, inLanguage: 'en-GB',
+    mainEntityOfPage: `${SITE}/visa-types/${slug}/${variant}`, inLanguage: 'en-GB',
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
       { '@type': 'ListItem', position: 2, name: 'Visas', item: `${SITE}/visa-types` },
-      { '@type': 'ListItem', position: 3, name: visa.title, item: `${SITE}/visa/${slug}` },
-      { '@type': 'ListItem', position: 4, name: v.label, item: `${SITE}/visa/${slug}/${variant}` },
+      { '@type': 'ListItem', position: 3, name: visa.title, item: `${SITE}/visa-types/${slug}` },
+      { '@type': 'ListItem', position: 4, name: v.label, item: `${SITE}/visa-types/${slug}/${variant}` },
     ],
   };
 
@@ -76,7 +76,7 @@ export default async function VariantPage({ params }: RouteParams) {
         <div className={c.crumb}>
           <Link href="/">Home</Link><span className={c.sep}>›</span>
           <Link href="/visa-types">Visas</Link><span className={c.sep}>›</span>
-          <Link href={`/visa/${slug}`}>{visa.title}</Link><span className={c.sep}>›</span>
+          <Link href={`/visa-types/${slug}`}>{visa.title}</Link><span className={c.sep}>›</span>
           <span>{v.label}</span>
         </div>
 
@@ -118,7 +118,7 @@ export default async function VariantPage({ params }: RouteParams) {
                 <h2 id="other-routes">Other {visa.title} sub-routes</h2>
                 <div className={s.subGrid}>
                   {others.map((o) => (
-                    <Link key={o.id} href={`/visa/${slug}/${o.id}`} className={s.subCard}>
+                    <Link key={o.id} href={`/visa-types/${slug}/${o.id}`} className={s.subCard}>
                       <h3>{o.label}</h3>
                       <p>{o.headline}</p>
                       <span className={s.go}>View <ArrowUpRight size={12} /></span>
@@ -155,7 +155,7 @@ export default async function VariantPage({ params }: RouteParams) {
 
             <div className={s.card}>
               <h4>More</h4>
-              <Link className={s.linkRow} href={`/visa/${slug}`}>Full {visa.title} guide <ChevronLeft size={14} /></Link>
+              <Link className={s.linkRow} href={`/visa-types/${slug}`}>Full {visa.title} guide <ChevronLeft size={14} /></Link>
               <Link className={s.linkRow} href={`/tools/cost-calculator?visa=${slug}`}>Visa cost calculator <ArrowUpRight size={14} /></Link>
               <Link className={s.linkRow} href="/visa-types/visa-switching">Switching guide <ArrowUpRight size={14} /></Link>
             </div>

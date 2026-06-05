@@ -169,7 +169,7 @@ export default function VisaJourneyClient() {
                     <div className="flex-1 text-[12.5px] text-[#52596e]">
                       Processing <strong className="text-[#0A2540]">{visa.processing.outside}</strong> outside the UK · Fee {visa.fee}
                     </div>
-                    <Link href={`/visa/${visa.id}`} className="text-[12px] font-semibold text-[#00C4B4] hover:underline">
+                    <Link href={`/visa-types/${visa.id}`} className="text-[12px] font-semibold text-[#00C4B4] hover:underline">
                       Open guide →
                     </Link>
                   </div>

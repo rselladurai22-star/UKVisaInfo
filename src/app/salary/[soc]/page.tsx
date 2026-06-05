@@ -353,7 +353,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                 </div>
 
                 <Link
-                  href="/visa/skilled-worker"
+                  href="/visa-types/skilled-worker"
                   className="group block rounded-2xl bg-gradient-to-br from-[#00C4B4] to-[#009E91] p-5 text-white relative overflow-hidden"
                 >
                   <div className="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-white/15 blur-2xl pointer-events-none" />

@@ -269,14 +269,14 @@ export default function VisaCompare() {
           {/* CTAs */}
           <div className="mt-8 grid sm:grid-cols-2 gap-3">
             <Link
-              href={`/visa/${a.id}`}
+              href={`/visa-types/${a.id}`}
               className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#18181B] text-white text-sm font-semibold rounded-xl hover:bg-[#4F46E5] transition-colors"
             >
               <span>Full {a.name} guide</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href={`/visa/${b.id}`}
+              href={`/visa-types/${b.id}`}
               className="inline-flex items-center justify-between gap-2 px-5 py-4 bg-[#18181B] text-white text-sm font-semibold rounded-xl hover:bg-[#4F46E5] transition-colors"
             >
               <span>Full {b.name} guide</span>

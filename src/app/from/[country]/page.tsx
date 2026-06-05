@@ -171,7 +171,7 @@ export default async function CountryPage({ params }: RouteParams) {
                     return (
                       <li key={r.slug}>
                         <Link
-                          href={`/visa/${r.slug}`}
+                          href={`/visa-types/${r.slug}`}
                           className="group flex items-center gap-4 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:shadow-[0_8px_24px_rgba(10, 37, 64,0.08)] transition-[border-color,box-shadow] duration-150"
                         >
                           <span className="w-9 h-9 rounded-xl bg-[#0A2540] text-white font-display font-bold text-[13px] flex items-center justify-center flex-shrink-0">

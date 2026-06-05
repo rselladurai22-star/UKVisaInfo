@@ -25,10 +25,10 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const description = `${v.summary} Fee ${v.fee}. IHS ${v.ihs}. Decision in ${v.processing.outside}. Verified ${v.updated}.`;
   return {
     title, description,
-    alternates: { canonical: `/visa/${slug}` },
+    alternates: { canonical: `/visa-types/${slug}` },
     openGraph: {
-      title, description, url: `https://ukvisainfo.co.uk/visa/${slug}`, type: 'article',
-      images: [{ url: `https://ukvisainfo.co.uk/visa/${slug}/opengraph-image`, width: 1200, height: 630, alt: title }],
+      title, description, url: `https://ukvisainfo.co.uk/visa-types/${slug}`, type: 'article',
+      images: [{ url: `https://ukvisainfo.co.uk/visa-types/${slug}/opengraph-image`, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: 'summary_large_image', title, description },
   };
@@ -54,14 +54,14 @@ export default async function VisaPage({ params }: RouteParams) {
     datePublished: '2026-04-08', dateModified: '2026-05-19',
     author: primaryEditorSchema(SITE),
     publisher: { '@type': 'Organization', name: 'UKDesk', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/icon.svg` } },
-    image: `${SITE}/visa/${slug}/opengraph-image`, mainEntityOfPage: `${SITE}/visa/${slug}`, inLanguage: 'en-GB',
+    image: `${SITE}/visa-types/${slug}/opengraph-image`, mainEntityOfPage: `${SITE}/visa-types/${slug}`, inLanguage: 'en-GB',
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
       { '@type': 'ListItem', position: 2, name: 'Visas', item: `${SITE}/visa-types` },
-      { '@type': 'ListItem', position: 3, name: v.title, item: `${SITE}/visa/${slug}` },
+      { '@type': 'ListItem', position: 3, name: v.title, item: `${SITE}/visa-types/${slug}` },
     ],
   };
   const howToJsonLd = {
@@ -136,7 +136,7 @@ export default async function VisaPage({ params }: RouteParams) {
                 <h2 id="sub-routes">Sub-routes</h2>
                 <div className={s.subGrid}>
                   {variants.map((va) => (
-                    <Link key={va.id} href={`/visa/${slug}/${va.id}`} className={s.subCard}>
+                    <Link key={va.id} href={`/visa-types/${slug}/${va.id}`} className={s.subCard}>
                       <h3>{va.label}</h3>
                       <p>{va.headline}</p>
                       <span className={s.go}>View <ArrowUpRight size={12} /></span>
@@ -185,7 +185,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
             <div className={s.card}>
               <h4>Other routes</h4>
-              {related.map(([k, rv]) => (<Link key={k} className={s.linkRow} href={`/visa/${k}`}>{rv.title} <ArrowUpRight size={14} /></Link>))}
+              {related.map(([k, rv]) => (<Link key={k} className={s.linkRow} href={`/visa-types/${k}`}>{rv.title} <ArrowUpRight size={14} /></Link>))}
             </div>
           </aside>
         </div>

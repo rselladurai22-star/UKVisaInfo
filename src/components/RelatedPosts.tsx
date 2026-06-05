@@ -109,7 +109,7 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
           <ul className="grid gap-2 sm:grid-cols-2 mb-3">
             {visas.map((v) => (
               <li key={v.id}>
-                <Link href={`/visa/${v.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
+                <Link href={`/visa-types/${v.id}`} className="group flex items-start gap-3 p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] transition-colors duration-100">
                   <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0">
                     <Briefcase className="w-3.5 h-3.5" />
                   </span>

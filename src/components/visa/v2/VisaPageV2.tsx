@@ -292,7 +292,7 @@ export default function VisaPageV2({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {switchOptions.switches.slice(0, 6).map((s) => (
                   <Link key={s.toSlug + s.toTitle}
-                        href={`/visa/${s.toSlug}`}
+                        href={`/visa-types/${s.toSlug}`}
                         className="group rounded-2xl p-5 flex items-start gap-4 transition-colors"
                         style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
                     <div className="flex-1">

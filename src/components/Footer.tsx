@@ -16,7 +16,7 @@ const COLS: { h: string; links: [string, string][] }[] = [
     h: 'Immigration',
     links: [
       ['/visa-types', 'All visa routes'],
-      ['/visa/skilled-worker', 'Skilled Worker'],
+      ['/visa-types/skilled-worker', 'Skilled Worker'],
       ['/eligibility', 'Eligibility quiz'],
       ['/ihs-calculator', 'IHS calculator'],
     ],

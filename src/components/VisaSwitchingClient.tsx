@@ -195,7 +195,7 @@ export default function VisaSwitchingClient() {
                 const Icon = CATEGORY_ICONS[s.category] ?? Briefcase;
                 const diff  = DIFFICULTY_STYLE[s.difficulty];
                 return (
-                  <Link key={s.toSlug + s.toTitle} href={`/visa/${s.toSlug}`}
+                  <Link key={s.toSlug + s.toTitle} href={`/visa-types/${s.toSlug}`}
                         className="group block rounded-lg bg-white border border-[#E5E7EB] p-5 hover:border-[#18181B] transition-all"
                         style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.05)' }}>
                     <div className="flex items-start gap-3 mb-3">

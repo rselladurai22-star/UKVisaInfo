@@ -125,7 +125,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
           <nav style={{ display:'flex', alignItems:'center', gap:6, fontSize:11.5, color:C.mid, marginBottom:20 }}>
             <Link href="/visa-types" style={{ color:C.mid, textDecoration:'none' }}>UK Visas</Link>
             <ChevronRight size={10} color={C.faint} />
-            <Link href={`/visa/${slug}`} style={{ color:C.mid, textDecoration:'none' }}>{visa.title}</Link>
+            <Link href={`/visa-types/${slug}`} style={{ color:C.mid, textDecoration:'none' }}>{visa.title}</Link>
             <ChevronRight size={10} color={C.faint} />
             <span style={{ color:C.ink2, fontWeight:500 }}>{vr.label}</span>
           </nav>
@@ -177,7 +177,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                                padding:'10px 16px', borderRadius:7, textDecoration:'none' }}>
                   <Calculator size={13} strokeWidth={2} /> Full calculator
                 </Link>
-                <Link href={`/visa/${slug}`}
+                <Link href={`/visa-types/${slug}`}
                       style={{ display:'inline-flex', alignItems:'center', gap:5, color:C.mid,
                                fontSize:13, padding:'10px 4px', textDecoration:'none' }}>
                   <ArrowLeft size={12} /> {visa.title} overview
@@ -813,7 +813,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                 title="Other sub-routes" badge={`${otherVariants.length} more`}>
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px,1fr))', gap:10 }}>
                   {otherVariants.map((o) => (
-                    <Link key={o.id} href={`/visa/${slug}/${o.id}`}
+                    <Link key={o.id} href={`/visa-types/${slug}/${o.id}`}
                       style={{ display:'block', padding:'14px 16px',
                                border:`1px solid ${C.border}`, borderRadius:9,
                                background:C.bg, textDecoration:'none' }}

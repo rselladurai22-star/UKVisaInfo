@@ -20,6 +20,11 @@ const config: NextConfig = {
         permanent: true,
       },
       {
+        source: '/visa/:path*',
+        destination: '/visa-types/:path*',
+        permanent: true,
+      },
+      {
         source: '/notice-period-calculator',
         destination: '/redundancy-pay#notice-period',
         permanent: true,

@@ -31,9 +31,9 @@ function buildAllUrls(): string[] {
   ];
   for (const p of static_pages) urls.push(`${SITE}${p}`);
 
-  for (const v of Object.values(VISA_DETAILS)) urls.push(`${SITE}/visa/${v.id}`);
+  for (const v of Object.values(VISA_DETAILS)) urls.push(`${SITE}/visa-types/${v.id}`);
   for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
-    for (const variant of variants) urls.push(`${SITE}/visa/${slug}/${variant.id}`);
+    for (const variant of variants) urls.push(`${SITE}/visa-types/${slug}/${variant.id}`);
   }
   for (const p of BLOG_POSTS) urls.push(`${SITE}/blog/${p.slug}`);
   for (const c of Object.values(COUNTRIES)) urls.push(`${SITE}/from/${c.code}`);

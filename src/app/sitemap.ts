@@ -95,7 +95,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   /* ── Visa guides ── */
   for (const v of Object.values(VISA_DETAILS)) {
     urls.push({
-      url: `${SITE}/visa/${v.id}`,
+      url: `${SITE}/visa-types/${v.id}`,
       lastModified: TODAY,
       changeFrequency: 'monthly',
       priority: 0.9,
@@ -106,7 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
     for (const variant of variants) {
       urls.push({
-        url: `${SITE}/visa/${slug}/${variant.id}`,
+        url: `${SITE}/visa-types/${slug}/${variant.id}`,
         lastModified: TODAY,
         changeFrequency: 'monthly',
         priority: 0.7,

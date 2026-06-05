@@ -42,7 +42,7 @@ const ROWS: Row[] = [
   {
     id: 'euss', emoji: '🇪🇺', icon: Globe2,
     title: 'EU Settlement Scheme',
-    href: '/visa/euss',
+    href: '/visa-types/euss',
     yearsToIlr: '5 yrs continuous residence',
     applicationFee: 'Free',
     ihsImpact: 'None',
@@ -55,7 +55,7 @@ const ROWS: Row[] = [
   {
     id: 'bno', emoji: '🇭🇰', icon: Flag,
     title: 'British National (Overseas)',
-    href: '/visa/bno',
+    href: '/visa-types/bno',
     yearsToIlr: '5 yrs on BN(O) visa',
     applicationFee: '£285 (5-year) / £206 (2.5-year)',
     ihsImpact: '£5,175 adult / £3,880 child per 5 yrs',
@@ -68,7 +68,7 @@ const ROWS: Row[] = [
   {
     id: 'ancestry', emoji: '🌳', icon: RefreshCw,
     title: 'UK Ancestry',
-    href: '/visa/ancestry',
+    href: '/visa-types/ancestry',
     yearsToIlr: '5 yrs on Ancestry visa',
     applicationFee: '£726',
     ihsImpact: '£5,175 adult / £3,880 child per 5 yrs',
@@ -81,7 +81,7 @@ const ROWS: Row[] = [
   {
     id: 'ilr', emoji: '🏡', icon: HomeIcon,
     title: 'ILR (5-year route)',
-    href: '/visa/ilr',
+    href: '/visa-types/ilr',
     yearsToIlr: '5 yrs on Skilled Worker / Family / etc.',
     applicationFee: '£3,029',
     ihsImpact: 'Paid on prior visa (varies)',
@@ -94,7 +94,7 @@ const ROWS: Row[] = [
   {
     id: 'long-residence', emoji: '📜', icon: HomeIcon,
     title: '10-year Long Residence',
-    href: '/visa/long-residence',
+    href: '/visa-types/long-residence',
     yearsToIlr: '10 yrs continuous lawful residence',
     applicationFee: '£3,226',
     ihsImpact: 'Paid on each prior visa (varies)',
@@ -107,7 +107,7 @@ const ROWS: Row[] = [
   {
     id: 'citizenship', emoji: '👑', icon: Crown,
     title: 'British Citizenship (Naturalisation)',
-    href: '/visa/citizenship',
+    href: '/visa-types/citizenship',
     yearsToIlr: '12 months on ILR (or immediate with British spouse)',
     applicationFee: '£1,839 incl. £130 ceremony',
     ihsImpact: 'None',
@@ -253,7 +253,7 @@ export default function SettlementHub() {
                 return (
                   <Link
                     key={slug}
-                    href={`/visa/${slug}`}
+                    href={`/visa-types/${slug}`}
                     className="group block rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5 md:p-6 hover:border-[#0A2540] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(10, 37, 64,0.08)] transition-[transform,border-color,box-shadow] duration-150"
                   >
                     <div className="flex items-start justify-between gap-3 mb-3">
@@ -313,12 +313,12 @@ export default function SettlementHub() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { q: 'I have BN(O) status from Hong Kong', a: 'British National (Overseas) visa', href: '/visa/bno' },
-                { q: 'I have an EU/EEA/Swiss passport and was in the UK before 2021', a: 'EU Settlement Scheme (free)', href: '/visa/euss' },
-                { q: 'I have a Commonwealth passport AND a UK-born grandparent', a: 'UK Ancestry visa', href: '/visa/ancestry' },
-                { q: 'I\'m on a Skilled Worker / Family / Talent visa about to hit 5 years', a: 'Indefinite Leave to Remain', href: '/visa/ilr' },
-                { q: 'I\'ve been in the UK lawfully for 10+ years but never hit a 5-year route', a: '10-year Long Residence ILR', href: '/visa/long-residence' },
-                { q: 'I\'ve held ILR for 12+ months and want a British passport', a: 'British naturalisation', href: '/visa/citizenship' },
+                { q: 'I have BN(O) status from Hong Kong', a: 'British National (Overseas) visa', href: '/visa-types/bno' },
+                { q: 'I have an EU/EEA/Swiss passport and was in the UK before 2021', a: 'EU Settlement Scheme (free)', href: '/visa-types/euss' },
+                { q: 'I have a Commonwealth passport AND a UK-born grandparent', a: 'UK Ancestry visa', href: '/visa-types/ancestry' },
+                { q: 'I\'m on a Skilled Worker / Family / Talent visa about to hit 5 years', a: 'Indefinite Leave to Remain', href: '/visa-types/ilr' },
+                { q: 'I\'ve been in the UK lawfully for 10+ years but never hit a 5-year route', a: '10-year Long Residence ILR', href: '/visa-types/long-residence' },
+                { q: 'I\'ve held ILR for 12+ months and want a British passport', a: 'British naturalisation', href: '/visa-types/citizenship' },
               ].map((c, i) => (
                 <Link key={i} href={c.href} className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:bg-white transition-colors duration-150">
                   <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0 font-display font-bold text-[13px]">

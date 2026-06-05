@@ -223,7 +223,7 @@ export default function VisaTypes() {
                       {VISA_DETAILS[visa.id] ? (
                         <>
                           <Link
-                            href={`/visa/${visa.id}`}
+                            href={`/visa-types/${visa.id}`}
                             className="flex-1 inline-flex items-center justify-center gap-1.5 text-white font-semibold text-[13px] py-2.5 rounded-xl transition-colors"
                             style={{ background: visa.color }}
                           >

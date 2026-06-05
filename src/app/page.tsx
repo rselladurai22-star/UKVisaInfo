@@ -24,12 +24,12 @@ const STATS = [
 ];
 
 const VISA_ROUTES = [
-  { href: '/visa/skilled-worker',     icon: Briefcase,     label: 'Skilled Worker', meta: 'From £41,700 · sponsored route',            cta: 'Check eligibility & fees' },
-  { href: '/visa/student',            icon: GraduationCap, label: 'Student Visa',   meta: '£558 fee · degree-level study requirements', cta: 'View requirement checklist' },
-  { href: '/visa/family',             icon: Users,         label: 'Family Visa',    meta: '£29,000 income threshold · spouse & partners', cta: 'Calculate income requirement' },
-  { href: '/visa/health-care-worker', icon: HeartPulse,    label: 'Health & Care',  meta: 'Lower application fee · NHS IHS exemption',   cta: 'Verify exemption status' },
-  { href: '/visa/global-talent',      icon: Star,          label: 'Global Talent',  meta: 'Endorsement route · no salary threshold',     cta: 'Find endorsing bodies' },
-  { href: '/visa/graduate',           icon: Award,         label: 'Graduate Visa',  meta: '2 years duration · post-study work',           cta: 'Calculate stay limits' },
+  { href: '/visa-types/skilled-worker',     icon: Briefcase,     label: 'Skilled Worker', meta: 'From £41,700 · sponsored route',            cta: 'Check eligibility & fees' },
+  { href: '/visa-types/student',            icon: GraduationCap, label: 'Student Visa',   meta: '£558 fee · degree-level study requirements', cta: 'View requirement checklist' },
+  { href: '/visa-types/family',             icon: Users,         label: 'Family Visa',    meta: '£29,000 income threshold · spouse & partners', cta: 'Calculate income requirement' },
+  { href: '/visa-types/health-care-worker', icon: HeartPulse,    label: 'Health & Care',  meta: 'Lower application fee · NHS IHS exemption',   cta: 'Verify exemption status' },
+  { href: '/visa-types/global-talent',      icon: Star,          label: 'Global Talent',  meta: 'Endorsement route · no salary threshold',     cta: 'Find endorsing bodies' },
+  { href: '/visa-types/graduate',           icon: Award,         label: 'Graduate Visa',  meta: '2 years duration · post-study work',           cta: 'Calculate stay limits' },
 ];
 
 /* Bento order + one or two sample tool links per category. */
@@ -78,8 +78,8 @@ export default function HomePage() {
 
 /* ───────────── 1. HERO ───────────── */
 const TRENDING = [
-  { label: 'Skilled Worker', href: '/visa/skilled-worker' },
-  { label: 'Student Visa',   href: '/visa/student' },
+  { label: 'Skilled Worker', href: '/visa-types/skilled-worker' },
+  { label: 'Student Visa',   href: '/visa-types/student' },
   { label: 'Visa Fees',      href: '/tools/cost-calculator' },
   { label: 'IHS Calculator', href: '/ihs-calculator' },
 ];

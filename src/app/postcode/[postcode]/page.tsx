@@ -254,7 +254,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
               desc="Find licensed Skilled Worker sponsors in your area."
             />
             <RelatedLink
-              href="/visa/skilled-worker"
+              href="/visa-types/skilled-worker"
               title="Skilled Worker visa guide"
               desc={`Apply from any postcode — fee, salary thresholds and process for ${data.country === 'Northern Ireland' ? 'NI' : data.country}.`}
             />

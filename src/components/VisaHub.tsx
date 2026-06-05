@@ -119,7 +119,7 @@ export default function VisaHub() {
                 {routes.map(([slug, v]) => {
                   const fee = shortFee(v.fee);
                   return (
-                    <Link key={slug} href={`/visa/${slug}`} className={s.relCard} style={cVar(g.c)}>
+                    <Link key={slug} href={`/visa-types/${slug}`} className={s.relCard} style={cVar(g.c)}>
                       <h3>{v.title}</h3>
                       <p>{v.tagline}</p>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '12px 0 0' }}>

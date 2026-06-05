@@ -162,7 +162,7 @@ If all three clear with a margin of at least £500, you're safe. Thin margins ar
 > The salary stage is the single biggest cause of Skilled Worker refusals in 2026. Get this number right before you pay any application fee.
 > — UKDesk editorial team
 
-Our [UK Skilled Worker visa guide](/visa/skilled-worker) covers the full application process, document list and fee breakdown.
+Our [UK Skilled Worker visa guide](/visa-types/skilled-worker) covers the full application process, document list and fee breakdown.
 
 ## Going rates for every major sector — the numbers that actually matter
 
@@ -420,7 +420,7 @@ Monthly living costs in London on top of this: £1,400–£1,800 covering rent (
 - IHS is mandatory — no health insurance substitute works.
 - Maintenance is a proof requirement, not a spending requirement. You can use the same money for tuition after the 28-day window.
 
-See our [full UK Student visa guide](/visa/student) for eligibility, documents and step-by-step application walkthrough, or try the [cost calculator](/costs) to model your specific situation.
+See our [full UK Student visa guide](/visa-types/student) for eligibility, documents and step-by-step application walkthrough, or try the [cost calculator](/costs) to model your specific situation.
 
 ## How to fund UK studies — what actually works
 
@@ -756,7 +756,7 @@ If the sponsored applicant is a child and the other parent is already in the UK 
 4. Get your employer letter dated within 28 days of application submission.
 5. If using savings, screenshot your balance the day after the 6-month window opens and again on application day.
 
-See our [Family visa guide](/visa/family) for the full document list and application walkthrough. If you're unsure whether your income combination qualifies, the Home Office's own Family Life Appendix FM-SE is the definitive text — every refusal reason cites it by paragraph.
+See our [Family visa guide](/visa-types/family) for the full document list and application walkthrough. If you're unsure whether your income combination qualifies, the Home Office's own Family Life Appendix FM-SE is the definitive text — every refusal reason cites it by paragraph.
 
 ## Worked examples — combining income sources
 
@@ -1330,7 +1330,7 @@ Interviews are usually video calls, 30–60 minutes, conducted in English. Prepa
 4. **Check your biometrics appointment calendar** in your country. Some VFS centres have 3-week appointment queues — factor this in.
 5. **Save your GWF reference.** You cannot track without it.
 
-Service standards will almost certainly shift again before 2027. Our individual visa guides ([Skilled Worker](/visa/skilled-worker), [Student](/visa/student), [Family](/visa/family)) are updated as new targets are published.
+Service standards will almost certainly shift again before 2027. Our individual visa guides ([Skilled Worker](/visa-types/skilled-worker), [Student](/visa-types/student), [Family](/visa-types/family)) are updated as new targets are published.
 
 ## Real waiting times by country — 2026 applicant data
 
@@ -1639,7 +1639,7 @@ Without a path forward, you must leave the UK before your Graduate visa expires.
 
 That's it — far fewer documents than Student or Skilled Worker. The Graduate visa is the UK's friendliest route, and most students who qualify should apply.
 
-See our [full Graduate visa guide](/visa/graduate) and [Skilled Worker guide](/visa/skilled-worker) for the switching path, or [eligibility checker](/eligibility) if you're unsure which route fits.
+See our [full Graduate visa guide](/visa-types/graduate) and [Skilled Worker guide](/visa-types/skilled-worker) for the switching path, or [eligibility checker](/eligibility) if you're unsure which route fits.
 
 ## Application timeline — when to apply
 
@@ -1933,7 +1933,7 @@ If you have a firm Skilled Worker offer that meets the threshold and starts soon
 - You can bring dependants (spouse, children under 18) on Skilled Worker — much easier than under Student visa.
 - You can do supplementary work in addition to your sponsored role, capped at 20 hours/week and only in the same broad SOC group or on the Immigration Salary List.
 
-See our [Skilled Worker visa guide](/visa/skilled-worker) for the full salary threshold breakdown by occupation, or our [Graduate visa article](/blog/uk-graduate-visa-2026-no-sponsor-needed) for the alternative path.
+See our [Skilled Worker visa guide](/visa-types/skilled-worker) for the full salary threshold breakdown by occupation, or our [Graduate visa article](/blog/uk-graduate-visa-2026-no-sponsor-needed) for the alternative path.
 
 ## Finding and verifying a sponsor licence — the practical tools
 
@@ -2244,7 +2244,7 @@ The applicants who pass ILR cleanly are the ones who started planning during the
 
 If you're early in your 5-year journey, start the spreadsheet today. If you're approaching ILR, start the document gather 3 months ahead — last-minute scrambles are where things go wrong.
 
-See our [Skilled Worker guide](/visa/skilled-worker) and [Family visa guide](/visa/family) for the route-specific paths, or our [eligibility checker](/eligibility) if you're considering switching to a qualifying route.
+See our [Skilled Worker guide](/visa-types/skilled-worker) and [Family visa guide](/visa-types/family) for the route-specific paths, or our [eligibility checker](/eligibility) if you're considering switching to a qualifying route.
 
 ## Calculating your absences correctly
 
@@ -2558,7 +2558,7 @@ Be wary of unregulated agents charging £500+ for simple reapplications. The Hom
 - Pay the standard fee again (no discount for reapplication)
 - Choose priority service if your travel dates are imminent
 
-See our [Visitor visa guide](/visa/visitor) for the full document list and application walkthrough.
+See our [Visitor visa guide](/visa-types/visitor) for the full document list and application walkthrough.
 
 ## Decoding your refusal letter
 
@@ -2881,7 +2881,7 @@ The Migration Advisory Committee is reviewing the entire Health and Care route i
 
 If you're considering this route, applying in 2026 is likely cheaper and easier than waiting for the next review cycle.
 
-See our [Health visa guide](/visa/health) for the application walkthrough, or our [eligibility checker](/eligibility) to see if you qualify.
+See our [Health visa guide](/visa-types/health) for the application walkthrough, or our [eligibility checker](/eligibility) to see if you qualify.
 
 ## Eligible roles — the complete picture
 
@@ -3181,7 +3181,7 @@ Optimal timing for dependant applications:
 - **Children born in the UK** while parents are on visa get British citizenship only if at least one parent is settled (ILR or British) at the time of birth. Otherwise they get the same status as the parent.
 - **ILR for dependants** is achievable at the same 5-year mark as the main applicant, assuming continuous residence.
 
-See our visa guides for [Skilled Worker](/visa/skilled-worker), [Health & Care](/visa/health), [Family](/visa/family), and [Student](/visa/student) for route-specific dependant detail.
+See our visa guides for [Skilled Worker](/visa-types/skilled-worker), [Health & Care](/visa-types/health), [Family](/visa-types/family), and [Student](/visa-types/student) for route-specific dependant detail.
 
 ## How dependant fees are calculated in 2026
 
@@ -3511,7 +3511,7 @@ Plus Ecctis statement if claiming exemption via foreign degree: £210.
 4. **Book at least 4 weeks before your visa application** to allow time for results and resits if needed.
 5. **Sit the test in person** — there are no remote SELT options (a common misconception).
 
-See our route-specific guides for full English requirements at each stage: [Family visa](/blog/uk-family-visa-minimum-income-2026-what-counts), [Skilled Worker](/visa/skilled-worker), [ILR](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements).
+See our route-specific guides for full English requirements at each stage: [Family visa](/blog/uk-family-visa-minimum-income-2026-what-counts), [Skilled Worker](/visa-types/skilled-worker), [ILR](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements).
 
 ## The SELT test — which to choose and why it matters
 
@@ -3834,7 +3834,7 @@ The rules around transit have shifted multiple times. If your itinerary involves
 | Working short-term | Work visa |
 | Family member of UK national wanting to live | Family visa |
 
-See our [Visitor visa guide](/visa/visitor) if you're a visa national, or our [eligibility checker](/eligibility) if unsure which route applies.
+See our [Visitor visa guide](/visa-types/visitor) if you're a visa national, or our [eligibility checker](/eligibility) if unsure which route applies.
 
 ## Who exactly needs an ETA in 2026
 
@@ -4193,7 +4193,7 @@ Realistic timeline from "I want to do this" to landing in the UK:
 
 Compressing this is risky. Founders who try to do it in under 6 months typically submit weaker plans and decline rates rise.
 
-See our [Innovator Founder visa guide](/visa/innovator-founder) for the full document list, or our [eligibility checker](/eligibility) if you're unsure which route fits.
+See our [Innovator Founder visa guide](/visa-types/innovator-founder) for the full document list, or our [eligibility checker](/eligibility) if you're unsure which route fits.
 
 ## Endorsing body assessment criteria — what they actually look for
 
@@ -4615,7 +4615,7 @@ Before clicking submit:
 > - No individual file over 6MB (Home Office upload limit)
 > - All files in PDF, JPG or PNG format
 
-See our companion article on [the top reasons Visit visas get refused](/blog/uk-visitor-visa-refused-top-reasons-2026) for what to avoid, and our [Visitor visa guide](/visa/visitor) for the application walkthrough.
+See our companion article on [the top reasons Visit visas get refused](/blog/uk-visitor-visa-refused-top-reasons-2026) for what to avoid, and our [Visitor visa guide](/visa-types/visitor) for the application walkthrough.
 
 ## What to write in your cover letter
 
@@ -5254,7 +5254,7 @@ You can apply at any point after you complete 10 years of continuous lawful resi
 5. **Applying without Life in the UK Test booked** — test centres book out 2–6 weeks in advance
 6. **Forgetting passport renewal during the period** — you need every passport you held during the 10 years
 
-See our [ILR guide](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements) for general settlement requirements, or our [Skilled Worker guide](/visa/skilled-worker) if you\'re on a 5-year work route.
+See our [ILR guide](/blog/uk-ilr-indefinite-leave-to-remain-2026-requirements) for general settlement requirements, or our [Skilled Worker guide](/visa-types/skilled-worker) if you\'re on a 5-year work route.
 
 ## What counts as 10 years of continuous lawful residence
 
@@ -5585,7 +5585,7 @@ If you\'re considering ADR for your parents, here\'s the realistic check:
 
 For 90%+ of applicants, the practical answer is repeated long-term visit visas, not ADR. This isn\'t ideal but it\'s the reality of current UK immigration policy.
 
-See our [Family visa guide](/visa/family) for related routes, or our [Visit visa article](/blog/uk-visit-visa-documents-checklist-2026) for long-term visit visa planning.
+See our [Family visa guide](/visa-types/family) for related routes, or our [Visit visa article](/blog/uk-visit-visa-documents-checklist-2026) for long-term visit visa planning.
 
 ## The legal test — what "unable to care for themselves without assistance" actually means
 
