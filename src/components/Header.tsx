@@ -156,26 +156,6 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Search icon (desktop) — opens command palette */}
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Search (Ctrl+K)"
-            className="ml-2 hidden h-9 items-center gap-1.5 rounded-full border border-border bg-surface-container-lowest pl-3 pr-2 text-sm font-medium text-on-surface-variant transition hover:border-primary/20 hover:text-primary lg:inline-flex"
-          >
-            <Search className="h-3.5 w-3.5" />
-            <kbd className="rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-bold text-on-surface-variant">⌘K</kbd>
-          </button>
-
-          {/* CTA */}
-          <Link
-            href="/take-home-pay"
-            className="ml-2 hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-surface no-underline transition hover:bg-primary-container md:inline-flex"
-          >
-            Start free
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-
           {/* Mobile actions */}
           <button
             type="button"
