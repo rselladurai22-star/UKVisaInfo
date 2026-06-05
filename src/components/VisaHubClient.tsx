@@ -277,7 +277,7 @@ export default function VisaHubClient() {
               {/* Switcher label row */}
               <div className="px-5 pt-4 pb-0 flex items-center justify-between gap-3">
                 <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">Browse by category</span>
-                <Link href="/visa-switching"
+                <Link href="/visa-types/visa-switching"
                   className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#6366F1] hover:underline">
                   <ChevronRight className="w-3 h-3" /> Already in UK? Switching guide
                 </Link>

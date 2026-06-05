@@ -157,7 +157,7 @@ export default async function VariantPage({ params }: RouteParams) {
               <h4>More</h4>
               <Link className={s.linkRow} href={`/visa/${slug}`}>Full {visa.title} guide <ChevronLeft size={14} /></Link>
               <Link className={s.linkRow} href={`/tools/cost-calculator?visa=${slug}`}>Visa cost calculator <ArrowUpRight size={14} /></Link>
-              <Link className={s.linkRow} href="/visa-switching">Switching guide <ArrowUpRight size={14} /></Link>
+              <Link className={s.linkRow} href="/visa-types/visa-switching">Switching guide <ArrowUpRight size={14} /></Link>
             </div>
           </aside>
         </div>

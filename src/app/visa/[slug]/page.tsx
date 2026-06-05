@@ -180,7 +180,7 @@ export default async function VisaPage({ params }: RouteParams) {
               <h4>Tools</h4>
               <Link className={s.linkRow} href={`/tools/cost-calculator?visa=${slug}`}>Visa cost calculator <ArrowUpRight size={14} /></Link>
               <Link className={s.linkRow} href="/eligibility">Eligibility quiz <ArrowUpRight size={14} /></Link>
-              <Link className={s.linkRow} href="/visa-switching">Switching guide <ArrowUpRight size={14} /></Link>
+              <Link className={s.linkRow} href="/visa-types/visa-switching">Switching guide <ArrowUpRight size={14} /></Link>
             </div>
 
             <div className={s.card}>

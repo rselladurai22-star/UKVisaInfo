@@ -10,6 +10,11 @@ const config: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/visa-switching',
+        destination: '/visa-types/visa-switching',
+        permanent: true,
+      },
+      {
         source: '/notice-period-calculator',
         destination: '/redundancy-pay#notice-period',
         permanent: true,

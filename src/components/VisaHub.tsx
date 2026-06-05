@@ -37,7 +37,7 @@ const cVar = (c: number): CSSProperties => ({ ['--tctx']: `var(--uk-c${c}-tx)` }
 
 const WAYS = [
   { href: '/eligibility',   Icon: Sparkles, title: 'Not sure which visa?', desc: 'Answer 6 questions — get matched in 60 seconds.', cta: 'Take the quiz', grad: true },
-  { href: '/visa-switching', Icon: RefreshCw, title: 'Already in the UK?', desc: 'See which routes you can switch into without leaving.', cta: 'Switching guide' },
+  { href: '/visa-types/visa-switching', Icon: RefreshCw, title: 'Already in the UK?', desc: 'See which routes you can switch into without leaving.', cta: 'Switching guide' },
   { href: '/tools/compare',  Icon: Scale, title: 'Torn between two?', desc: 'Compare any two routes on cost, time and settlement.', cta: 'Compare routes' },
 ];
 

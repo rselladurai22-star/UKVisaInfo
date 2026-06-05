@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const top = [
     { p: '',                 prio: 1.0,  freq: 'weekly' },
     { p: '/visa-types',      prio: 0.95, freq: 'weekly' },
-    { p: '/visa-switching',  prio: 0.95, freq: 'monthly' },
+    { p: '/visa-types/visa-switching',  prio: 0.95, freq: 'monthly' },
     { p: '/eligibility',     prio: 0.9,  freq: 'monthly' },
     { p: '/costs',           prio: 0.8,  freq: 'monthly' },
     { p: '/blog',            prio: 0.9,  freq: 'weekly' },

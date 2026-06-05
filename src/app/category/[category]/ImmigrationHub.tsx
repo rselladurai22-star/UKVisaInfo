@@ -6,13 +6,7 @@ import {
   ArrowRight,
   Briefcase,
   HeartPulse,
-  GraduationCap,
-  Award,
   Users,
-  Lightbulb,
-  Flag,
-  TrendingUp,
-  Plane,
   Calculator,
   CheckCircle2,
   BadgePoundSterling,
@@ -83,123 +77,33 @@ export default function ImmigrationHub() {
           <Layers className="h-6 w-6 text-primary" />
           Route Hubs
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {/* Featured Skilled Worker Card (Col span 2) */}
-          <div className="col-span-1 md:col-span-2 bg-surface-container-low p-6 rounded-2xl flex flex-col justify-between hover:shadow-md transition-all border border-outline-variant/60 group">
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <span className="p-3 bg-primary/10 rounded-xl text-primary border border-primary-soft/35">
-                  <Briefcase className="h-6 w-6" />
-                </span>
-                <span className="text-[10px] font-bold text-[#747686] uppercase tracking-widest bg-white border border-[#c4c5d7]/50 px-2 py-0.5 rounded">
-                  Official Source
+        {/* Single entry point — full visa route directory lives on the Visa Hub */}
+        <Link
+          href="/visa-types"
+          className="group block bg-surface-container-low p-6 sm:p-8 rounded-2xl border border-outline-variant/60 hover:border-primary hover:shadow-md transition-all"
+        >
+          <div className="flex items-start gap-5">
+            <span className="p-3 bg-primary/10 rounded-xl text-primary border border-primary-soft/35 shrink-0">
+              <Layers className="h-6 w-6" />
+            </span>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-3 mb-2">
+                <h4 className="font-display text-2xl font-bold text-on-surface">Visa Hub</h4>
+                <span className="text-[10px] font-bold text-[#747686] uppercase tracking-widest bg-white border border-[#c4c5d7]/50 px-2 py-0.5 rounded shrink-0">
+                  All Routes
                 </span>
               </div>
-              <h4 className="font-display text-2xl font-bold mb-2">Skilled Worker</h4>
-              <p className="text-sm text-on-surface-variant leading-relaxed max-w-md">
-                The primary route for qualified professionals with a job offer from a licensed sponsor in the UK.
+              <p className="text-sm text-on-surface-variant leading-relaxed max-w-2xl">
+                Every UK visa route in one place — work, study, family, visitor, settlement (ILR) and British
+                citizenship — each with cost, timeline and requirements in plain English.
               </p>
+              <span className="mt-6 inline-flex items-center text-primary font-bold text-sm tracking-wider uppercase group-hover:text-primary-container transition-colors">
+                Explore Visa Hub
+                <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
+              </span>
             </div>
-            <Link
-              href="/visa/skilled-worker"
-              className="mt-8 flex items-center text-primary font-bold text-sm tracking-wider uppercase group-hover:text-primary-container transition-colors"
-            >
-              EXPLORE ROUTE <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
           </div>
-
-          {/* Health & Care */}
-          <RouteCard
-            title="Health & Care"
-            description="Fast-track entry for eligible medical and health professionals."
-            badge="Gov.uk Data"
-            href="/visa/health-care-worker"
-            Icon={HeartPulse}
-            colorClass="text-secondary bg-secondary/10 border-secondary/20"
-          />
-
-          {/* Student */}
-          <RouteCard
-            title="Student"
-            description="For international students enrolled in eligible UK institutions."
-            badge="Gov.uk Data"
-            href="/visa/student"
-            Icon={GraduationCap}
-            colorClass="text-tertiary bg-tertiary/10 border-tertiary/20"
-          />
-
-          {/* Graduate */}
-          <RouteCard
-            title="Graduate"
-            description="2-3 year post-study work visa for UK graduates."
-            href="/visa/graduate"
-            Icon={Award}
-          />
-
-          {/* Family */}
-          <RouteCard
-            title="Family"
-            description="Join a partner, spouse, parent or family member in the UK."
-            href="/visa/family"
-            Icon={Users}
-          />
-
-          {/* Global Talent */}
-          <RouteCard
-            title="Global Talent"
-            description="For leaders and promising talent in science, research, tech or arts."
-            href="/visa/global-talent"
-            Icon={Award}
-          />
-
-          {/* Innovator Founder */}
-          <RouteCard
-            title="Innovator Founder"
-            description="For entrepreneurs starting an innovative business in the UK."
-            href="/visa/innovator-founder"
-            Icon={Lightbulb}
-          />
-
-          {/* Ancestry */}
-          <RouteCard
-            title="Ancestry"
-            description="Commonwealth citizens with at least one UK grandparent."
-            href="/visa/ancestry"
-            Icon={Globe}
-          />
-
-          {/* BNO */}
-          <RouteCard
-            title="BNO"
-            description="British National (Overseas) citizens from Hong Kong."
-            href="/visa/bno"
-            Icon={Flag}
-          />
-
-          {/* Scale-up */}
-          <RouteCard
-            title="Scale-up"
-            description="For individuals with high-skilled job offers at fast-growing companies."
-            href="/visa/scale-up"
-            Icon={TrendingUp}
-          />
-
-          {/* High Potential Individual */}
-          <RouteCard
-            title="High Potential"
-            description="Graduates from prestigious top-tier global universities."
-            href="/visa/high-potential-individual"
-            Icon={Award}
-          />
-
-          {/* Visit */}
-          <RouteCard
-            title="Visit"
-            description="Short-term tourism, family visits, or business transit."
-            href="/visa/visitor"
-            Icon={Plane}
-          />
-        </div>
+        </Link>
       </section>
 
       {/* Precision Tools Section */}
@@ -311,7 +215,7 @@ export default function ImmigrationHub() {
           <div className="bg-surface-container-high/40 border border-outline-variant/50 p-6 rounded-2xl h-[240px] flex flex-col justify-end hover:shadow-md transition-all cursor-pointer">
             <h4 className="text-lg font-display font-bold text-on-surface mb-1">Visa Switching Rules</h4>
             <p className="text-sm text-on-surface-variant mb-4">Conditions for switching visa categories from within the UK.</p>
-            <Link href="/visa-switching" className="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+            <Link href="/visa-types/visa-switching" className="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
               READ GUIDE <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
@@ -360,44 +264,6 @@ export default function ImmigrationHub() {
         </div>
       </section>
     </div>
-  );
-}
-
-interface RouteCardProps {
-  title: string;
-  description: string;
-  badge?: string;
-  href: string;
-  Icon: typeof Briefcase;
-  colorClass?: string;
-}
-
-function RouteCard({ title, description, badge, href, Icon, colorClass }: RouteCardProps) {
-  const bgClass = colorClass || 'text-primary bg-primary/10 border-primary-soft/20';
-
-  return (
-    <Link
-      href={href}
-      className="bg-white p-6 rounded-2xl border border-outline-variant/60 hover:border-primary transition-all flex flex-col justify-between group shadow-sm hover:shadow-soft"
-    >
-      <div>
-        <span className={`p-3 rounded-xl inline-block border ${bgClass} mb-4`}>
-          <Icon className="h-5 w-5" />
-        </span>
-        <h4 className="text-base font-display font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">{title}</h4>
-        <p className="text-xs text-on-surface-variant leading-relaxed mb-4">{description}</p>
-      </div>
-      <div className="flex justify-between items-center mt-auto pt-3 border-t border-outline-variant/10">
-        <span className="text-[10px] font-bold text-primary group-hover:underline flex items-center gap-0.5">
-          EXPLORE <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
-        </span>
-        {badge && (
-          <span className="bg-surface-container-highest text-on-surface-variant text-[9px] font-bold px-2 py-0.5 rounded uppercase">
-            {badge}
-          </span>
-        )}
-      </div>
-    </Link>
   );
 }
 
