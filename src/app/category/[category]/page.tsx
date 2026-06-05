@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { APP_TILES, CATEGORIES } from '../../../data/tools';
+import { APP_TILES, CATEGORIES, type CategoryId } from '../../../data/tools';
+import HubToolIndex from '../../../components/HubToolIndex';
 import BusinessHub from './BusinessHub';
 import TaxIncomeHub from './TaxIncomeHub';
 import PropertyHub from './PropertyHub';
@@ -37,22 +39,32 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   };
 }
 
+const HUBS: Partial<Record<CategoryId, () => ReactNode>> = {
+  business: () => <BusinessHub />,
+  tax: () => <TaxIncomeHub />,
+  property: () => <PropertyHub />,
+  insurance: () => <InsuranceHub />,
+  loans: () => <LoansDebtHub />,
+  immigration: () => <ImmigrationHub />,
+  benefits: () => <BenefitsHub />,
+  'family-law': () => <FamilyLawHub />,
+  employment: () => <EmploymentHub />,
+  energy: () => <EnergyHub />,
+  savings: () => <SavingsHub />,
+  vehicles: () => <VehiclesHub />,
+};
+
 export default async function CategoryHub({ params }: RouteParams) {
   const { category } = await params;
   if (!VALID.has(category)) notFound();
 
-  if (category === 'business') return <BusinessHub />;
-  if (category === 'tax') return <TaxIncomeHub />;
-  if (category === 'property') return <PropertyHub />;
-  if (category === 'insurance') return <InsuranceHub />;
-  if (category === 'loans') return <LoansDebtHub />;
-  if (category === 'immigration') return <ImmigrationHub />;
-  if (category === 'benefits') return <BenefitsHub />;
-  if (category === 'family-law') return <FamilyLawHub />;
-  if (category === 'employment') return <EmploymentHub />;
-  if (category === 'energy') return <EnergyHub />;
-  if (category === 'savings') return <SavingsHub />;
-  if (category === 'vehicles') return <VehiclesHub />;
+  const id = category as CategoryId;
+  const hub = HUBS[id];
 
-  notFound();
+  return (
+    <>
+      {hub ? hub() : null}
+      <HubToolIndex categoryId={id} />
+    </>
+  );
 }
