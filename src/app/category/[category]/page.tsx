@@ -7,6 +7,12 @@ import PropertyHub from './PropertyHub';
 import InsuranceHub from './InsuranceHub';
 import LoansDebtHub from './LoansDebtHub';
 import ImmigrationHub from './ImmigrationHub';
+import BenefitsHub from './BenefitsHub';
+import FamilyLawHub from './FamilyLawHub';
+import EmploymentHub from './EmploymentHub';
+import EnergyHub from './EnergyHub';
+import SavingsHub from './SavingsHub';
+import VehiclesHub from './VehiclesHub';
 
 type RouteParams = { params: Promise<{ category: string }> };
 
@@ -41,6 +47,12 @@ export default async function CategoryHub({ params }: RouteParams) {
   if (category === 'insurance') return <InsuranceHub />;
   if (category === 'loans') return <LoansDebtHub />;
   if (category === 'immigration') return <ImmigrationHub />;
+  if (category === 'benefits') return <BenefitsHub />;
+  if (category === 'family-law') return <FamilyLawHub />;
+  if (category === 'employment') return <EmploymentHub />;
+  if (category === 'energy') return <EnergyHub />;
+  if (category === 'savings') return <SavingsHub />;
+  if (category === 'vehicles') return <VehiclesHub />;
 
   notFound();
 }
