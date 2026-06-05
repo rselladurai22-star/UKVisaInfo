@@ -6,6 +6,7 @@ import TaxIncomeHub from './TaxIncomeHub';
 import PropertyHub from './PropertyHub';
 import InsuranceHub from './InsuranceHub';
 import LoansDebtHub from './LoansDebtHub';
+import ImmigrationHub from './ImmigrationHub';
 
 type RouteParams = { params: Promise<{ category: string }> };
 
@@ -39,6 +40,7 @@ export default async function CategoryHub({ params }: RouteParams) {
   if (category === 'property') return <PropertyHub />;
   if (category === 'insurance') return <InsuranceHub />;
   if (category === 'loans') return <LoansDebtHub />;
+  if (category === 'immigration') return <ImmigrationHub />;
 
   notFound();
 }
