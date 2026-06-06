@@ -38,26 +38,33 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
   property: [
     {
       title: 'Mortgages',
-      description: 'Monthly payments and how much you can borrow.',
+      description: 'Borrowing, repayments and switching deals.',
       items: [
-        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · overpayments · amortisation', status: 'live' },
+        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · amortisation · interest', status: 'live' },
         { label: 'Mortgage Affordability', href: '/mortgage-affordability', hint: 'How much can I borrow? + stress test', status: 'live' },
+        { label: 'Overpayment Calculator', href: '/overpayment-mortgage', hint: 'Interest & years saved', status: 'live' },
+        { label: 'Remortgage Calculator', href: '/remortgage-calculator', hint: 'Saving vs fees · break-even', status: 'live' },
+        { label: 'LTV Calculator', href: '/ltv-calculator', hint: 'Loan-to-value & rate band', status: 'live' },
       ],
     },
     {
       title: 'Buying',
-      description: 'The cost of buying — and whether to buy at all.',
+      description: 'The full cost of buying — and whether to buy at all.',
       items: [
         { label: 'Stamp Duty (SDLT)', href: '/stamp-duty-calculator', hint: '2025/26 rates · FTB · surcharges', status: 'live' },
+        { label: 'House Buying Costs', href: '/house-buying-costs', hint: 'Total cash needed to buy', status: 'live' },
+        { label: 'Deposit Calculator', href: '/deposit-calculator', hint: 'How much & how long to save', status: 'live' },
         { label: 'Buy vs Rent', href: '/buy-vs-rent', hint: 'Net worth over time + break-even', status: 'live' },
       ],
     },
     {
-      title: 'Landlord & Investment',
-      description: 'Yield, tax and gains for buy-to-let.',
+      title: 'Owning & Investing',
+      description: 'Equity, growth, yield and buy-to-let tax.',
       items: [
+        { label: 'Home Equity', href: '/equity-calculator', hint: 'What you own + release', status: 'live' },
+        { label: 'Property Value Growth', href: '/property-value-growth', hint: 'Project value over time', status: 'live' },
         { label: 'Rental Yield', href: '/rental-yield-calculator', hint: 'Gross/net yield · ICR · ROI', status: 'live' },
-        { label: 'Landlord Suite (Buy-to-Let)', href: '/buy-to-let-calculator', hint: 'Yield · Section 24 tax · CGT', status: 'live' },
+        { label: 'Buy-to-Let', href: '/buy-to-let-calculator', hint: 'Section 24 · SPV · ICR', status: 'live' },
       ],
     },
   ],

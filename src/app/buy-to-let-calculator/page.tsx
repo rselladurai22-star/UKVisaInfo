@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LandlordSuite from './LandlordSuite';
+import BuyToLet from './BuyToLet';
 
 export const metadata: Metadata = {
   title: 'Buy-to-Let & Landlord Calculator 2026 — Yield, Section 24 Tax & CGT',
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function BuyToLetPage() {
-  return <LandlordSuite />;
+  return <BuyToLet />;
 }

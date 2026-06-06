@@ -16,7 +16,8 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 /* ── formatting ─────────────────────────────────────────────────── */
 
@@ -47,15 +48,15 @@ export function Panel({
   return (
     <section className={`bg-surface-container-lowest border border-outline-variant rounded-xl shadow-soft ${className}`}>
       {(title || action) && (
-        <header className="flex items-center justify-between gap-3 px-5 py-4 border-b border-outline-variant">
-          <h3 className="flex items-center gap-2 font-display font-bold text-on-surface text-base">
+        <header className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 sm:py-4 border-b border-outline-variant">
+          <h3 className="flex items-center gap-2 font-display font-bold text-on-surface text-sm sm:text-base">
             {icon && <span className="text-primary">{icon}</span>}
             {title}
           </h3>
           {action}
         </header>
       )}
-      <div className="p-5">{children}</div>
+      <div className="p-4 sm:p-5">{children}</div>
     </section>
   );
 }
@@ -544,6 +545,96 @@ function FAQItem({ q, a }: { q: string; a: ReactNode }) {
         </div>
       )}
     </div>
+  );
+}
+
+/* ── page scaffold (mobile-first) ───────────────────────────────── */
+
+export function CalcShell({
+  breadcrumb,
+  title,
+  subtitle,
+  controls,
+  inputs,
+  results,
+  children,
+}: {
+  breadcrumb: { label: string; href?: string }[];
+  title: string;
+  subtitle: ReactNode;
+  controls?: ReactNode;
+  inputs: ReactNode;
+  results: ReactNode;
+  children?: ReactNode;
+}) {
+  return (
+    <div className="bg-surface text-on-surface min-h-screen">
+      <section className="container-page pt-7 sm:pt-10 pb-4 sm:pb-5">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-2 sm:mb-3 flex-wrap">
+          {breadcrumb.map((b, i) => (
+            <span key={b.label} className="flex items-center gap-1.5">
+              {i > 0 && <ChevronRight className="h-3.5 w-3.5 opacity-60" />}
+              {b.href ? <Link href={b.href} className="hover:text-primary">{b.label}</Link> : <span className="text-primary font-bold">{b.label}</span>}
+            </span>
+          ))}
+        </nav>
+        <h1 className="text-[26px] leading-tight sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">{title}</h1>
+        <p className="mt-2.5 sm:mt-3 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">{subtitle}</p>
+        {controls && <div className="mt-4 sm:mt-5">{controls}</div>}
+      </section>
+
+      <section className="container-page pb-10 sm:pb-14 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+        <div className="lg:col-span-5 space-y-4 sm:space-y-5">{inputs}</div>
+        <div className="lg:col-span-7 space-y-4 sm:space-y-5 lg:sticky lg:top-24 self-start">{results}</div>
+      </section>
+
+      {children}
+    </div>
+  );
+}
+
+export function Guide({
+  kicker = 'Complete guide',
+  title,
+  intro,
+  children,
+}: {
+  kicker?: string;
+  title: string;
+  intro: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <article className="container-page pb-20 sm:pb-24 border-t border-outline-variant pt-12 sm:pt-14 max-w-3xl">
+      <div className="mb-8 sm:mb-10">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-secondary">{kicker}</span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-primary mt-1">{title}</h2>
+        <p className="mt-3 text-sm sm:text-base text-on-surface-variant leading-relaxed">{intro}</p>
+      </div>
+      <div className="space-y-10 sm:space-y-12">{children}</div>
+    </article>
+  );
+}
+
+export function GuideSection({ kicker, title, children }: { kicker?: string; title: string; children: ReactNode }) {
+  return (
+    <section>
+      <GuideHeading kicker={kicker}>{title}</GuideHeading>
+      <div className="space-y-4 text-[15px] leading-relaxed text-on-surface-variant">{children}</div>
+    </section>
+  );
+}
+
+export function Mistakes({ items }: { items: [string, string][] }) {
+  return (
+    <ul className="space-y-3 text-[15px] text-on-surface-variant">
+      {items.map(([h, b]) => (
+        <li key={h} className="flex gap-3">
+          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-secondary shrink-0" />
+          <span><strong className="text-on-surface">{h}.</strong> {b}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
