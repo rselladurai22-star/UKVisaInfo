@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Home, AlertTriangle, Stars } from 'lucide-react';
 import {
   gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, Choice, Toggle,
-  BarTrack, GuideHeading, Callout, FAQ, RelatedTools,
+  BarTrack, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
 type Mode = 'simple' | 'advanced' | 'expert';
@@ -51,6 +51,7 @@ function computeSdlt(price: number, buyer: Buyer, nonResident: boolean, replacin
 
 export default function StampDuty() {
   const [mode, setMode] = useState<Mode>('advanced');
+  const [done, setDone] = useState(false);
   const [price, setPrice] = useState(350000);
   const [buyer, setBuyer] = useState<Buyer>('mover');
   const [nonResident, setNonResident] = useState(false);
@@ -129,10 +130,12 @@ export default function StampDuty() {
               <strong>LTT</strong>, which have different bands — this calculator does not cover those.
             </p>
           </Panel>
+          <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
         {/* Results */}
-        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start">
+        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? (<>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <Stat label="Stamp duty payable" value={gbp(r.main.total)} sub={r.main.surcharge > 0 ? `inc. ${pct(r.main.surcharge * 100, 0)} surcharge` : 'standard rates'} tone="dark" big />
             <Stat label="Effective rate" value={pct(r.main.effRate, 2)} sub="of purchase price" />
@@ -205,6 +208,7 @@ export default function StampDuty() {
             Estimates only, not tax advice. Special rules apply to mixed-use property, multiple dwellings, leases,
             shared ownership and companies — confirm with your conveyancer.
           </p>
+          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
         </div>
       </section>
 

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Home, SlidersHorizontal, TrendingDown, Info } from 'lucide-react';
 import {
   gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider, Toggle,
-  Donut, LineChart, BarTrack, GuideHeading, Callout, FAQ, RelatedTools,
+  Donut, LineChart, BarTrack, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
 type Mode = 'simple' | 'advanced' | 'expert';
@@ -56,6 +56,7 @@ const fmtYM = (months: number) => {
 
 export default function MortgageCalculator() {
   const [mode, setMode] = useState<Mode>('advanced');
+  const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(350000);
   const [deposit, setDeposit] = useState(52500); // 15%
@@ -214,10 +215,12 @@ export default function MortgageCalculator() {
               </div>
             </Panel>
           )}
+          <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
         {/* Results (sticky) */}
-        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start">
+        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? (<>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Stat label="Monthly payment" value={gbp(r.payment, 2)} sub={`${r.n} payments`} tone="dark" />
             <Stat label="Loan amount" value={gbp(r.loanBase)} sub={`${pct(r.ltv)} LTV`} />
@@ -348,6 +351,7 @@ export default function MortgageCalculator() {
             Estimates only, not financial advice or a mortgage offer. Lenders apply their own criteria, rounding and
             day-count conventions. Verify figures with a regulated adviser before committing.
           </p>
+          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
         </div>
       </section>
 

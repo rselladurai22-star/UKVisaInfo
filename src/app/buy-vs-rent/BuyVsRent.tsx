@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Home, Building, LineChart as LineIcon } from 'lucide-react';
 import {
   gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider,
-  LineChart, GuideHeading, Callout, FAQ, RelatedTools,
+  LineChart, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
 type Mode = 'simple' | 'advanced' | 'expert';
@@ -14,6 +14,7 @@ const ACCENT = '#bb0027';
 
 export default function BuyVsRent() {
   const [mode, setMode] = useState<Mode>('advanced');
+  const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(300000);
   const [deposit, setDeposit] = useState(45000);
@@ -149,10 +150,12 @@ export default function BuyVsRent() {
               </div>
             </Panel>
           )}
+          <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
         {/* Results */}
-        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start">
+        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? (<>
           <div className={`p-5 rounded-2xl border ${buyingWins ? 'bg-primary text-white border-primary' : 'bg-secondary-soft/40 border-secondary/20'}`}>
             <div className="text-xs uppercase tracking-wider font-bold opacity-80">After {years} years</div>
             <div className="text-2xl sm:text-3xl font-display font-extrabold mt-1">
@@ -195,6 +198,7 @@ export default function BuyVsRent() {
             A model, not a prediction. Results are highly sensitive to house-price growth and investment-return
             assumptions, which no one can know in advance. Treat it as a way to test scenarios, not a forecast.
           </p>
+          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
         </div>
       </section>
 

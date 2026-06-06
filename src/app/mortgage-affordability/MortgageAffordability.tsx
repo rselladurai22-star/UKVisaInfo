@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Users, Wallet, Gauge } from 'lucide-react';
 import {
   gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider, Choice,
-  BarTrack, Donut, GuideHeading, Callout, FAQ, RelatedTools,
+  BarTrack, Donut, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
 type Mode = 'simple' | 'advanced' | 'expert';
@@ -16,6 +16,7 @@ const annuityFactor = (i: number, n: number) => (i === 0 ? n : (1 - Math.pow(1 +
 
 export default function MortgageAffordability() {
   const [mode, setMode] = useState<Mode>('advanced');
+  const [done, setDone] = useState(false);
 
   const [income1, setIncome1] = useState(45000);
   const [income2, setIncome2] = useState(0);
@@ -133,10 +134,12 @@ export default function MortgageAffordability() {
               </div>
             </Panel>
           )}
+          <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
         {/* Results */}
-        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start">
+        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? (<>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <Stat label="Max property price" value={gbp(r.maxPrice)} sub={`${pct(r.depositPctOfPrice)} deposit`} tone="dark" big />
             <Stat label="Max borrowing" value={gbp(r.maxBorrow)} sub={`${pct(r.ltv)} LTV`} />
@@ -204,6 +207,7 @@ export default function MortgageAffordability() {
             An estimate, not a mortgage offer or a guarantee of lending. Each lender scores income, credit history,
             employment type and outgoings differently. A broker can match you to the most generous lender for your profile.
           </p>
+          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
         </div>
       </section>
 

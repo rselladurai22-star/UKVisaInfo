@@ -17,7 +17,7 @@ import {
   type ReactNode,
 } from 'react';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calculator } from 'lucide-react';
 
 /* ── formatting ─────────────────────────────────────────────────── */
 
@@ -558,6 +558,7 @@ export function CalcShell({
   inputs,
   results,
   children,
+  calcLabel = 'Calculate',
 }: {
   breadcrumb: { label: string; href?: string }[];
   title: string;
@@ -566,7 +567,18 @@ export function CalcShell({
   inputs: ReactNode;
   results: ReactNode;
   children?: ReactNode;
+  calcLabel?: string;
 }) {
+  const [done, setDone] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const onCalc = () => {
+    setDone(true);
+    requestAnimationFrame(() => {
+      if (window.innerWidth < 1024) resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
   return (
     <div className="bg-surface text-on-surface min-h-screen">
       <section className="container-page pt-7 sm:pt-10 pb-4 sm:pb-5">
@@ -584,11 +596,42 @@ export function CalcShell({
       </section>
 
       <section className="container-page pb-10 sm:pb-14 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-        <div className="lg:col-span-5 space-y-4 sm:space-y-5">{inputs}</div>
-        <div className="lg:col-span-7 space-y-4 sm:space-y-5 lg:sticky lg:top-24 self-start">{results}</div>
+        <div className="lg:col-span-5 space-y-4 sm:space-y-5">
+          {inputs}
+          <CalcButton done={done} onClick={onCalc} label={calcLabel} />
+        </div>
+        <div ref={resultsRef} className="lg:col-span-7 space-y-4 sm:space-y-5 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? results : <ResultsPlaceholder onClick={onCalc} label={calcLabel} />}
+        </div>
       </section>
 
       {children}
+    </div>
+  );
+}
+
+export function CalcButton({ done, onClick, label = 'Calculate' }: { done: boolean; onClick: () => void; label?: string }) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full inline-flex items-center justify-center gap-2 bg-primary text-white font-bold py-3.5 rounded-xl shadow-soft hover:bg-primary-container active:scale-[0.99] transition-all"
+    >
+      <Calculator className="h-4 w-4" /> {done ? 'Recalculate' : label}
+    </button>
+  );
+}
+
+export function ResultsPlaceholder({ onClick, label = 'Calculate' }: { onClick: () => void; label?: string }) {
+  return (
+    <div className="bg-surface-container-lowest border border-dashed border-outline-variant rounded-xl p-8 sm:p-10 text-center flex flex-col items-center justify-center min-h-[260px]">
+      <div className="w-12 h-12 rounded-2xl bg-primary-soft/30 text-primary flex items-center justify-center mb-4">
+        <Calculator className="h-6 w-6" />
+      </div>
+      <h3 className="font-display font-bold text-on-surface">Your results appear here</h3>
+      <p className="text-sm text-on-surface-variant mt-1 max-w-xs">Enter your details, then press {label} to see the full breakdown.</p>
+      <button onClick={onClick} className="mt-5 inline-flex items-center gap-2 bg-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-primary-container transition-colors">
+        <Calculator className="h-4 w-4" /> {label}
+      </button>
     </div>
   );
 }

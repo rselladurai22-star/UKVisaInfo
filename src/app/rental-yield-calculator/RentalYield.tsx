@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Home, Receipt, Gauge, ShieldCheck } from 'lucide-react';
 import {
   gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, Slider, Choice,
-  Donut, GuideHeading, Callout, FAQ, RelatedTools,
+  Donut, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
 type Mode = 'simple' | 'advanced' | 'expert';
@@ -18,6 +18,7 @@ const STRESS = 0.055;
 
 export default function RentalYield() {
   const [mode, setMode] = useState<Mode>('advanced');
+  const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(220000);
   const [rent, setRent] = useState(1150); // monthly
@@ -145,10 +146,12 @@ export default function RentalYield() {
               </div>
             </Panel>
           )}
+          <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
         {/* Results */}
-        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start">
+        <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24 self-start scroll-mt-20">
+          {done ? (<>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Stat label="Gross yield" value={pct(r.grossYield, 2)} sub="rent ÷ price" tone="dark" />
             <Stat label="Net yield" value={pct(r.netYield, 2)} sub="after costs" tone="accent" />
@@ -213,6 +216,7 @@ export default function RentalYield() {
             Estimates only, not tax or investment advice. Section 24 figures assume an individual landlord on an
             interest-only mortgage and exclude other income, allowances and SPV ownership. Verify with an accountant.
           </p>
+          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
         </div>
       </section>
 
