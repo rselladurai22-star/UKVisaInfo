@@ -38,24 +38,25 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
   property: [
     {
       title: 'Mortgages',
-      description: 'Monthly payments, switching and how much you can borrow.',
+      description: 'Monthly payments and how much you can borrow.',
       items: [
-        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · amortisation · total interest', status: 'live' },
-        { label: 'Mortgage Affordability', href: '/mortgage-affordability', hint: 'Max borrow + stress test', status: 'live' },
+        { label: 'Mortgage Calculator', href: '/mortgage-calculator', hint: 'Repayment · overpayments · amortisation', status: 'live' },
+        { label: 'Mortgage Affordability', href: '/mortgage-affordability', hint: 'How much can I borrow? + stress test', status: 'live' },
       ],
     },
     {
-      title: 'Buying & Owning',
-      description: 'The cost of buying and running a home.',
+      title: 'Buying',
+      description: 'The cost of buying — and whether to buy at all.',
       items: [
-        { label: 'Stamp Duty & Buying Costs', href: '/stamp-duty-calculator', hint: 'SDLT · conveyancing fees', status: 'live' },
-        { label: 'Council Tax Band', href: '/council-tax-band', hint: 'All 8 bands by postcode', status: 'live' },
+        { label: 'Stamp Duty (SDLT)', href: '/stamp-duty-calculator', hint: '2025/26 rates · FTB · surcharges', status: 'live' },
+        { label: 'Buy vs Rent', href: '/buy-vs-rent', hint: 'Net worth over time + break-even', status: 'live' },
       ],
     },
     {
-      title: 'Landlord',
-      description: 'Yield, tax and gains in one buy-to-let workstation.',
+      title: 'Landlord & Investment',
+      description: 'Yield, tax and gains for buy-to-let.',
       items: [
+        { label: 'Rental Yield', href: '/rental-yield-calculator', hint: 'Gross/net yield · ICR · ROI', status: 'live' },
         { label: 'Landlord Suite (Buy-to-Let)', href: '/buy-to-let-calculator', hint: 'Yield · Section 24 tax · CGT', status: 'live' },
       ],
     },

@@ -12,6 +12,7 @@
 
 import {
   useId,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -369,54 +370,120 @@ export function Donut({
   );
 }
 
-/* ── line chart (multi-series) ──────────────────────────────────── */
+/* ── line chart (multi-series, interactive) ─────────────────────── */
+
+export interface ChartSeries {
+  points: number[];
+  color: string;
+  label: string;
+  dashed?: boolean;
+  /** index where the line reaches zero (e.g. mortgage paid off) — gets a marker */
+  payoffIndex?: number;
+}
 
 export function LineChart({
   series,
-  xLabels,
+  labels,
   height = 220,
+  format = (n: number) => gbp(n),
 }: {
-  series: { points: number[]; color: string; label: string; dashed?: boolean }[];
-  xLabels?: string[];
+  series: ChartSeries[];
+  labels?: string[];
   height?: number;
+  format?: (n: number) => string;
 }) {
   const W = 640;
   const H = 220;
   const pad = { l: 8, r: 8, t: 10, b: 18 };
-  const allMax = Math.max(1, ...series.flatMap((s) => s.points));
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState<number | null>(null);
+
   const n = Math.max(...series.map((s) => s.points.length), 1);
+  const allMax = Math.max(1, ...series.flatMap((s) => s.points));
   const x = (i: number) => pad.l + (n <= 1 ? 0 : (i / (n - 1)) * (W - pad.l - pad.r));
   const y = (v: number) => pad.t + (1 - v / allMax) * (H - pad.t - pad.b);
 
+  const onMove = (clientX: number) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    setHover(Math.round(ratio * (n - 1)));
+  };
+
+  const hoverLeftPct = hover === null ? 0 : (hover / Math.max(1, n - 1)) * 100;
+
   return (
     <div>
-      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={height} role="img" aria-label="Time-series chart">
-        {[0.25, 0.5, 0.75].map((g) => (
-          <line key={g} x1={pad.l} x2={W - pad.r} y1={pad.t + g * (H - pad.t - pad.b)} y2={pad.t + g * (H - pad.t - pad.b)} stroke="var(--uk-outline-variant, #c4c6d2)" strokeWidth="1" strokeDasharray="2 4" opacity="0.5" />
-        ))}
-        {series.map((s, si) => {
-          const pts = s.points.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-          return (
-            <polyline
-              key={si}
-              points={pts}
-              fill="none"
-              stroke={s.color}
-              strokeWidth="2.5"
-              strokeDasharray={s.dashed ? '5 4' : undefined}
-              strokeLinejoin="round"
-            />
-          );
-        })}
-      </svg>
-      <div className="flex flex-wrap gap-4 mt-2 text-xs text-on-surface-variant">
+      <div
+        ref={wrapRef}
+        className="relative"
+        onMouseMove={(e) => onMove(e.clientX)}
+        onMouseLeave={() => setHover(null)}
+        onTouchStart={(e) => onMove(e.touches[0].clientX)}
+        onTouchMove={(e) => onMove(e.touches[0].clientX)}
+      >
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={height} preserveAspectRatio="none" role="img" aria-label="Mortgage balance over time">
+          {[0.25, 0.5, 0.75].map((g) => (
+            <line key={g} x1={pad.l} x2={W - pad.r} y1={pad.t + g * (H - pad.t - pad.b)} y2={pad.t + g * (H - pad.t - pad.b)} stroke="var(--uk-outline-variant, #c4c6d2)" strokeWidth="1" strokeDasharray="2 4" opacity="0.5" />
+          ))}
+
+          {/* hover guide line */}
+          {hover !== null && (
+            <line x1={x(hover)} x2={x(hover)} y1={pad.t} y2={H - pad.b} stroke="var(--uk-on-surface-variant, #444651)" strokeWidth="1" opacity="0.35" />
+          )}
+
+          {series.map((s, si) => {
+            const pts = s.points.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+            return (
+              <polyline key={si} points={pts} fill="none" stroke={s.color} strokeWidth="2.5" strokeDasharray={s.dashed ? '6 4' : undefined} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+            );
+          })}
+
+          {/* payoff markers */}
+          {series.map((s, si) =>
+            s.payoffIndex != null && s.payoffIndex < s.points.length ? (
+              <circle key={`p${si}`} cx={x(s.payoffIndex)} cy={y(0)} r="4" fill={s.color} stroke="white" strokeWidth="1.5" />
+            ) : null,
+          )}
+
+          {/* hover dots */}
+          {hover !== null &&
+            series.map((s, si) =>
+              hover < s.points.length ? (
+                <circle key={`h${si}`} cx={x(hover)} cy={y(s.points[hover])} r="3.5" fill={s.color} stroke="white" strokeWidth="1.5" />
+              ) : null,
+            )}
+        </svg>
+
+        {/* tooltip */}
+        {hover !== null && (
+          <div
+            className="pointer-events-none absolute top-0 -translate-x-1/2 z-10"
+            style={{ left: `${hoverLeftPct}%` }}
+          >
+            <div className="rounded-lg bg-primary text-white px-2.5 py-1.5 shadow-lg text-[11px] whitespace-nowrap">
+              <div className="font-bold mb-0.5">{labels?.[hover] ?? `Point ${hover}`}</div>
+              {series.map((s) => (
+                <div key={s.label} className="flex items-center gap-1.5">
+                  <span className="inline-block w-2 h-2 rounded-sm" style={{ background: s.color }} />
+                  <span className="opacity-80">{s.label}:</span>
+                  <span className="font-semibold tabular-nums ml-auto">{format(s.points[hover] ?? 0)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-3 text-xs text-on-surface-variant">
         {series.map((s) => (
           <span key={s.label} className="flex items-center gap-1.5">
-            <span className="inline-block w-3 h-2 rounded-sm" style={{ background: s.color }} />
+            <span className="inline-block w-4 h-2 rounded-sm" style={{ background: s.color, opacity: s.dashed ? 0.7 : 1 }} />
             {s.label}
           </span>
         ))}
-        {xLabels && <span className="ml-auto opacity-70">{xLabels[0]} → {xLabels[xLabels.length - 1]}</span>}
+        <span className="ml-auto opacity-70 hidden sm:inline">Hover the chart for year-by-year values</span>
       </div>
     </div>
   );

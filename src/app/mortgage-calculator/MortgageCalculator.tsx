@@ -46,6 +46,14 @@ function simulate(loan: number, monthlyRate: number, payment: number, extraMonth
 
 const LTV_BANDS = [60, 75, 80, 85, 90, 95];
 
+const fmtYM = (months: number) => {
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  if (y <= 0) return `${m}m`;
+  if (m === 0) return `${y}y`;
+  return `${y}y ${m}m`;
+};
+
 export default function MortgageCalculator() {
   const [mode, setMode] = useState<Mode>('advanced');
 
@@ -94,14 +102,18 @@ export default function MortgageCalculator() {
       return { delta: d, rate: rate + d, payment: pay };
     });
 
+    const overpaying = mode !== 'simple' && (overMonthly > 0 || overLump > 0);
+    const baseBalances = [loan, ...base.yearly.map((y) => y.balance)];
+    const overBalances = [loan, ...over.yearly.map((y) => y.balance)];
+    const chartLabels = baseBalances.map((_, idx) => (idx === 0 ? 'Now' : `Year ${idx}`));
+
     return {
       loan, loanBase, payment, n, totalInterestBase, interestSaved, monthsSaved,
       totalPaid, totalCost, ltv, interestOnly, endLabel, base, over, nextBand, reduceToBand, sens,
+      overpaying, baseBalances, overBalances, chartLabels,
       neverAmortises: i > 0 && payment + overMonthly <= loan * i,
     };
   }, [price, deposit, termYears, rate, fee, capitalise, overMonthly, overLump, mode]);
-
-  const yearsLabels = r.over.yearly.map((y) => `Yr ${y.year}`);
 
   return (
     <div className="bg-surface text-on-surface min-h-screen">
@@ -239,23 +251,38 @@ export default function MortgageCalculator() {
             </div>
           </Panel>
 
-          <Panel title="Balance over time" icon={<TrendingDown className="h-4 w-4" />}
-            action={mode !== 'simple' && (overMonthly > 0 || overLump > 0) ? <span className="text-xs font-semibold text-secondary">with overpayments</span> : undefined}>
+          <Panel title="Balance over time" icon={<TrendingDown className="h-4 w-4" />}>
             <LineChart
               height={200}
-              xLabels={yearsLabels}
+              labels={r.chartLabels}
+              format={(v) => gbp(v)}
               series={[
-                { points: [r.loan, ...r.base.yearly.map((y) => y.balance)], color: PRIMARY, label: 'Balance' },
-                ...(mode !== 'simple' && (overMonthly > 0 || overLump > 0)
-                  ? [{ points: [r.loan, ...r.over.yearly.map((y) => y.balance)], color: ACCENT, label: 'With overpayments', dashed: true }]
+                { points: r.baseBalances, color: PRIMARY, label: 'Standard payments', payoffIndex: r.base.yearly.length },
+                ...(r.overpaying
+                  ? [{ points: r.overBalances, color: ACCENT, label: 'With overpayments', dashed: true, payoffIndex: r.over.yearly.length }]
                   : []),
               ]}
             />
-            {mode !== 'simple' && (overMonthly > 0 || overLump > 0) && (
-              <div className="grid grid-cols-2 gap-3 mt-4">
-                <Stat label="Interest saved" value={gbp(r.interestSaved)} tone="primary" />
-                <Stat label="Time saved" value={`${Math.floor(r.monthsSaved / 12)}y ${r.monthsSaved % 12}m`} tone="primary" />
-              </div>
+
+            {r.overpaying ? (
+              <>
+                <div className="mt-4 p-3 rounded-lg bg-secondary-soft/30 border border-secondary/20 text-sm text-on-surface">
+                  Overpaying clears your mortgage in{' '}
+                  <strong className="text-secondary">{fmtYM(r.over.months)}</strong> instead of{' '}
+                  <strong>{fmtYM(r.base.months)}</strong> — that&apos;s{' '}
+                  <strong className="text-secondary">{fmtYM(r.monthsSaved)} early</strong>.
+                </div>
+                <div className="grid grid-cols-3 gap-3 mt-3">
+                  <Stat label="Interest saved" value={gbp(r.interestSaved)} tone="primary" />
+                  <Stat label="Time saved" value={fmtYM(r.monthsSaved)} tone="primary" />
+                  <Stat label="Paid off" value={r.endLabel} tone="primary" />
+                </div>
+              </>
+            ) : (
+              <p className="mt-3 text-xs text-on-surface-variant">
+                Add a monthly or lump-sum overpayment in Advanced mode to see how much faster you could be
+                mortgage-free.
+              </p>
             )}
           </Panel>
 
