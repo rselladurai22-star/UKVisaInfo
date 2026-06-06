@@ -758,6 +758,8 @@ html.dark .glass-card {
   margin-inline: auto;
   padding-inline: var(--pad-x);
 }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 .container-narrow {
   width: 100%;
   max-width: 56rem;

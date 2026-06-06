@@ -2,514 +2,194 @@
 
 import { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import {
-  ArrowRight,
-  ChevronRight,
-  Search,
-  X,
-  HomeIcon,
-  Shield,
-  LandmarkIcon,
-  Plane,
-  PiggyBank,
-  Wallet,
-  Building2,
-  FileText,
-  Users,
-  Zap,
-  Briefcase,
-  Car,
-  Gift,
-  ShieldCheck,
-  CheckCircle2,
-  RefreshCw,
-  TrendingUp,
-} from 'lucide-react';
-import { APP_TILES, CATEGORIES, type CategoryId } from '../../data/tools';
-import { VISA_TOOLS } from '../../lib/categoryMeta';
+import { ArrowRight, ChevronRight, Search, X, Home } from 'lucide-react';
+import { CATEGORIES, type CategoryId } from '../../data/tools';
+import { HUB_TOOLS, type HubItem } from '../../data/hubTools';
 
-const TOTAL = APP_TILES.length + VISA_TOOLS.length;
+interface FlatTool extends HubItem { category: CategoryId }
 
-function hexToRgba(hex: string, a: number) {
-  const m = hex.replace('#', '');
-  const v = m.length === 3 ? m.split('').map((c) => c + c).join('') : m;
-  const n = parseInt(v, 16);
-  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
-}
+const ALL_TOOLS: FlatTool[] = CATEGORIES.flatMap((c) =>
+  (HUB_TOOLS[c.id] ?? []).flatMap((g) => g.items.map((it) => ({ ...it, category: c.id }))),
+);
+const LIVE_TOTAL = ALL_TOOLS.filter((t) => t.status === 'live').length;
+const liveCount = (id: CategoryId) => ALL_TOOLS.filter((t) => t.category === id && t.status === 'live').length;
 
-const BENTO_CARDS = [
-  {
-    id: 'property',
-    title: 'Mortgages & Property',
-    icon: HomeIcon,
-    color: '#0037b0',
-    count: '18 Tools',
-    hubHref: '/property',
-    tools: [
-      { label: '✅ Stamp Duty (SDLT)', href: '/stamp-duty-calculator' },
-      { label: '✅ Mortgage Affordability', href: '/mortgage-affordability' },
-      { label: 'Buy-to-Let Yield', href: '/rental-yield-calculator' },
-    ],
-  },
-  {
-    id: 'insurance',
-    title: 'Insurance',
-    isNew: true,
-    icon: Shield,
-    color: '#006c49',
-    count: '12 Tools',
-    hubHref: '/insurance',
-    tools: [
-      { label: '✅ Life Cover Premium', href: '/insurance' },
-      { label: '✅ Critical Illness', href: '/insurance' },
-      { label: 'Public Liability 🆕', href: '/insurance' },
-    ],
-  },
-  {
-    id: 'loans',
-    title: 'Loans & Credit',
-    isNew: true,
-    icon: LandmarkIcon,
-    color: '#ba1a1a',
-    count: '15 Tools',
-    hubHref: '/loans',
-    tools: [
-      { label: '✅ Debt Consolidation', href: '/loans' },
-      { label: '✅ Credit Card Interest', href: '/loans' },
-      { label: 'APR Comparison 🆕', href: '/loans' },
-    ],
-  },
-  {
-    id: 'immigration',
-    title: 'Immigration & Visas',
-    icon: Plane,
-    color: '#0037b0',
-    count: '9 Tools',
-    hubHref: '/immigration',
-    tools: [
-      { label: '✅ Skilled Worker', href: '/visa-types/skilled-worker' },
-      { label: '✅ IHS Surcharge', href: '/ihs-calculator' },
-      { label: 'Indefinite Leave 🆕', href: '/immigration' },
-    ],
-  },
-  {
-    id: 'savings',
-    title: 'Pensions & Savings',
-    icon: PiggyBank,
-    color: '#623c00',
-    count: '20 Tools',
-    hubHref: '/savings',
-    tools: [
-      { label: '✅ SIPP Contribution', href: '/savings' },
-      { label: '✅ Compound Interest', href: '/savings' },
-      { label: 'ISA Allowance 🆕', href: '/isa-calculator' },
-    ],
-  },
-  {
-    id: 'tax',
-    title: 'Tax & Income',
-    icon: Wallet,
-    color: '#0037b0',
-    count: '14 Tools',
-    hubHref: '/tax',
-    tools: [
-      { label: '✅ UK Salary Tax', href: '/take-home-pay' },
-      { label: '✅ VAT & Sales Tax', href: '/tax' },
-      { label: 'Self-Assessment 🆕', href: '/self-employed-tax' },
-    ],
-  },
-  {
-    id: 'business',
-    title: 'Business Hub',
-    isNew: true,
-    icon: Building2,
-    color: '#006c49',
-    count: '11 Tools',
-    hubHref: '/business',
-    tools: [
-      { label: '✅ Ltd Co Dividend', href: '/director-dividend' },
-      { label: '✅ IR35 Status', href: '/contractor-ir35' },
-      { label: 'Capital Gains 🆕', href: '/cgt-calculator' },
-    ],
-  },
-  {
-    id: 'estate',
-    title: 'Wills & Probate',
-    isNew: true,
-    icon: FileText,
-    color: '#623c00',
-    count: '7 Tools',
-    hubHref: '/estate',
-    tools: [
-      { label: '✅ Inheritance Tax', href: '/inheritance-tax' },
-      { label: '✅ Intestacy Rules', href: '/estate' },
-      { label: 'Probate Fees 🆕', href: '/estate' },
-    ],
-  },
-  {
-    id: 'family-law',
-    title: 'Divorce & Family',
-    isNew: true,
-    icon: Users,
-    color: '#ba1a1a',
-    count: '8 Tools',
-    hubHref: '/family-law',
-    tools: [
-      { label: '✅ Child Maintenance', href: '/family-law' },
-      { label: '✅ Asset Division', href: '/family-law' },
-      { label: 'Legal Aid 🆕', href: '/family-law' },
-    ],
-  },
-  {
-    id: 'energy',
-    title: 'Energy & Bills',
-    isNew: true,
-    icon: Zap,
-    color: '#006c49',
-    count: '10 Tools',
-    hubHref: '/energy',
-    tools: [
-      { label: '✅ Price Cap Impact', href: '/energy-bill' },
-      { label: '✅ Council Tax', href: '/council-tax-band' },
-      { label: 'Water Rates 🆕', href: '/energy' },
-    ],
-  },
-  {
-    id: 'employment',
-    title: 'Employment Hub',
-    icon: Briefcase,
-    color: '#0037b0',
-    count: '13 Tools',
-    hubHref: '/employment',
-    tools: [
-      { label: '✅ Redundancy Pay', href: '/redundancy-pay' },
-      { label: '✅ Holiday Entitlement', href: '/holiday-pay' },
-      { label: 'Minimum Wage 🆕', href: '/minimum-wage-checker' },
-    ],
-  },
-  {
-    id: 'vehicles',
-    title: 'Vehicles & Motoring',
-    icon: Car,
-    color: '#0037b0',
-    count: '16 Tools',
-    hubHref: '/vehicles',
-    tools: [
-      { label: '✅ MOT & Tax Check', href: '/mot-check' },
-      { label: '✅ Company Car Tax', href: '/vehicles' },
-      { label: 'Fuel Economy 🆕', href: '/vehicles' },
-    ],
-  },
-  {
-    id: 'benefits',
-    title: 'Benefits & Support',
-    icon: Gift,
-    color: '#0037b0',
-    count: '11 Tools',
-    hubHref: '/benefits',
-    tools: [
-      { label: '✅ Universal Credit', href: '/benefits' },
-      { label: '✅ Childcare Costs', href: '/childcare-calculator' },
-      { label: 'PIP Eligibility 🆕', href: '/benefits' },
-    ],
-  },
-];
-
-export default function ToolsIndex() {
+export default function ToolsClient() {
   const [query, setQuery] = useState('');
+  const [active, setActive] = useState<CategoryId | 'all'>('all');
   const q = query.trim().toLowerCase();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Keyboard shortcut CMD+K
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        inputRef.current?.focus();
-      }
+    const h = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); inputRef.current?.focus(); }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
   }, []);
 
-  const filteredTools = useMemo(() => {
-    if (!q) return [];
-    const pool = [
-      ...APP_TILES.map((t) => ({
-        href: t.href,
-        label: t.label,
-        hint: t.hint,
-        icon: t.icon,
-        accent: t.accent,
-        category: t.category,
-      })),
-      ...VISA_TOOLS.map((t) => ({
-        href: t.href,
-        label: t.title,
-        hint: t.hint,
-        icon: t.icon,
-        accent: t.accent,
-        category: 'immigration' as CategoryId,
-      })),
-    ];
-    return pool.filter(
-      (t) =>
-        t.label.toLowerCase().includes(q) ||
-        t.hint.toLowerCase().includes(q)
-    );
-  }, [q]);
+  const results = useMemo(() => {
+    let pool = ALL_TOOLS;
+    if (active !== 'all') pool = pool.filter((t) => t.category === active);
+    if (q) pool = pool.filter((t) => t.label.toLowerCase().includes(q) || t.hint.toLowerCase().includes(q));
+    // live first
+    return [...pool].sort((a, b) => (a.status === b.status ? 0 : a.status === 'live' ? -1 : 1));
+  }, [q, active]);
+
+  const browsing = !q && active === 'all';
 
   return (
-    <main className="min-h-screen bg-[#f9f9ff] text-[#151c27] font-sans pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 py-10">
-        
-        {/* Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 mb-6 text-sm font-semibold uppercase tracking-wider text-[#434655] opacity-80">
-          <Link href="/" className="hover:text-[#0037b0] transition-colors flex items-center gap-1">
-            <HomeIcon className="h-3.5 w-3.5" /> Home
-          </Link>
+    <main className="bg-surface text-on-surface min-h-screen">
+      <div className="container-page pt-7 sm:pt-10 pb-16">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">
+          <Link href="/" className="hover:text-primary flex items-center gap-1"><Home className="h-3.5 w-3.5" /> Home</Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="text-[#0037b0] font-bold">All Tools</span>
+          <span className="text-primary font-bold">All Tools</span>
         </nav>
 
-        {/* Header Section */}
-        <section className="mb-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#151c27]">
-                Browse all calculators
-              </h1>
-              <p className="text-[#434655] text-lg max-w-2xl leading-relaxed">
-                Every free UK calculator and lookup — money, property, visas and more.
-                Verified against GOV.UK, HMRC and ONS.
-              </p>
-            </div>
-            {/* Trust Badge */}
-            <div className="flex items-center gap-4 bg-[#006c49]/5 border border-[#006c49]/20 p-4 rounded-xl shrink-0">
-              <div className="w-10 h-10 rounded-full bg-[#6cf8bb] flex items-center justify-center text-[#00714d]">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="text-[10px] font-bold text-[#00714d] uppercase tracking-widest leading-none mb-1">Trust Protocol</div>
-                <div className="text-sm font-semibold text-[#006c49]">{TOTAL}+ Verified Hubs</div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Header */}
+        <header className="mb-5 sm:mb-7">
+          <h1 className="text-[26px] leading-tight sm:text-4xl font-display font-bold tracking-tight">All UK Calculators</h1>
+          <p className="mt-2 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
+            {LIVE_TOTAL} free calculators across {CATEGORIES.length} categories — money, property, tax and visas.
+            Checked against GOV.UK, HMRC and ONS. No sign-up.
+          </p>
+        </header>
 
-        {/* Search Discovery Center */}
-        <section className="mb-14">
-          <div className="bg-[#f0f3ff]/80 p-8 rounded-2xl border border-[#c4c5d7]/30 shadow-sm">
-            <div className="relative max-w-3xl mx-auto group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[#0037b0] h-6 w-6 group-focus-within:scale-110 transition-transform" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Find a specific tool or calculator..."
-                className="w-full pl-16 pr-24 py-4 rounded-xl border border-[#c4c5d7]/30 shadow-md text-lg focus:ring-4 focus:ring-[#0037b0]/10 focus:border-[#0037b0]/20 outline-none bg-white transition-all placeholder:text-[#747686]/40 text-[#151c27]"
-              />
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-                <kbd className="px-2 py-1 bg-[#f0f3ff] rounded text-[10px] font-mono text-[#747686] border border-[#c4c5d7]/50">CMD</kbd>
-                <kbd className="px-2 py-1 bg-[#f0f3ff] rounded text-[10px] font-mono text-[#747686] border border-[#c4c5d7]/50">K</kbd>
-              </div>
-            </div>
-            <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-              <span className="text-[11px] font-bold text-[#747686] uppercase tracking-widest mr-1">Quick Filter:</span>
-              <button
-                type="button"
-                onClick={() => setQuery('Mortgage')}
-                className="px-3.5 py-1 rounded-full bg-[#0037b0]/5 text-[#0037b0] text-xs font-semibold hover:bg-[#0037b0]/10 transition-colors border border-[#0037b0]/10 animate-fade-in"
-              >
-                Mortgage
-              </button>
-              <button
-                type="button"
-                onClick={() => setQuery('Tax')}
-                className="px-3.5 py-1 rounded-full bg-[#0037b0]/5 text-[#0037b0] text-xs font-semibold hover:bg-[#0037b0]/10 transition-colors border border-[#0037b0]/10 animate-fade-in"
-              >
-                Income Tax
-              </button>
-              <button
-                type="button"
-                onClick={() => setQuery('new')}
-                className="px-3.5 py-1 rounded-full bg-[#0037b0]/5 text-[#0037b0] text-xs font-semibold hover:bg-[#0037b0]/10 transition-colors border border-[#0037b0]/10 animate-fade-in"
-              >
-                New Tools 🆕
-              </button>
-              <button
-                type="button"
-                onClick={() => setQuery('Visa')}
-                className="px-3.5 py-1 rounded-full bg-[#0037b0]/5 text-[#0037b0] text-xs font-semibold hover:bg-[#0037b0]/10 transition-colors border border-[#0037b0]/10 animate-fade-in"
-              >
-                Visas
-              </button>
-            </div>
-          </div>
-        </section>
+        {/* Search */}
+        <div className="relative mb-3">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-on-surface-variant" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search calculators…"
+            className="w-full pl-12 pr-12 py-3 sm:py-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm sm:text-base shadow-soft focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+          />
+          {query ? (
+            <button onClick={() => setQuery('')} aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant">
+              <X className="h-4 w-4" />
+            </button>
+          ) : (
+            <span className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 items-center gap-1 text-[10px] text-on-surface-variant">
+              <kbd className="px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant font-mono">⌘</kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant font-mono">K</kbd>
+            </span>
+          )}
+        </div>
 
-        {/* Tools Results or Bento Grid */}
-        {q ? (
-          <div>
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-[#151c27]">
-                Search Results for &ldquo;{query}&rdquo;
-              </h2>
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                className="text-sm font-semibold text-primary hover:underline flex items-center gap-1"
-              >
-                Clear Search <X className="h-4 w-4" />
-              </button>
-            </div>
-            {filteredTools.length === 0 ? (
-              <div className="rounded-2xl border-2 border-dashed border-[#c4c5d7]/40 bg-white px-8 py-20 text-center shadow-sm max-w-lg mx-auto">
-                <p className="text-base font-semibold text-[#151c27]">No tools match &ldquo;{query}&rdquo;.</p>
-                <button
-                  type="button"
-                  onClick={() => setQuery('')}
-                  className="mt-3 text-sm font-semibold text-[#0037b0] hover:underline"
-                >
-                  Clear search
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredTools.map((tool) => {
-                  const Icon = tool.icon;
-                  const cat = CATEGORIES.find((c) => c.id === tool.category);
-                  return (
-                    <Link
-                      key={tool.href}
-                      href={tool.href}
-                      className="block bg-white p-5 rounded-2xl border border-[#c4c5d7]/20 transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,55,176,0.06)] flex flex-col justify-between group"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
-                          <span
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-xl"
-                            style={{ backgroundColor: `${tool.accent}15`, color: tool.accent }}
-                          >
-                            <Icon className="h-5 w-5" />
-                          </span>
-                          {cat && (
-                            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#f0f3ff] text-[#434655] uppercase tracking-wider">
-                              {cat.label}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-[16px] font-bold text-[#151c27] mb-1 group-hover:text-[#0037b0] transition-colors">{tool.label}</h3>
-                        <p className="text-xs text-[#434655] leading-relaxed mb-4">{tool.hint}</p>
+        {/* Category filter chips */}
+        <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap no-scrollbar">
+          <Chip active={active === 'all'} onClick={() => setActive('all')} label={`All · ${LIVE_TOTAL}`} />
+          {CATEGORIES.map((c) => (
+            <Chip key={c.id} active={active === c.id} onClick={() => setActive(c.id)} label={c.label} count={liveCount(c.id)} color={c.color} />
+          ))}
+        </div>
+
+        {/* Body */}
+        <div className="mt-6">
+          {browsing ? (
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {CATEGORIES.map((c) => {
+                const Icon = c.icon;
+                const live = (HUB_TOOLS[c.id] ?? []).flatMap((g) => g.items).filter((t) => t.status === 'live').slice(0, 4);
+                return (
+                  <div key={c.id} className="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 sm:p-5 shadow-soft flex flex-col">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${c.color}14`, color: c.color }}>
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div className="min-w-0">
+                        <h2 className="text-sm font-display font-bold leading-tight truncate">{c.label}</h2>
+                        <span className="text-[11px] text-on-surface-variant">{liveCount(c.id)} live tools</span>
                       </div>
-                      <div className="flex items-center justify-between pt-3 border-t border-[#c4c5d7]/10 text-[#0037b0] font-bold text-xs mt-auto uppercase tracking-wider group-hover:text-primary transition-colors">
-                        <span>Launch Tool</span>
-                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        ) : (
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {BENTO_CARDS.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.id}
-                  className="bg-white p-6 rounded-2xl border border-[#c4c5d7]/20 flex flex-col h-full transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,55,176,0.06)]"
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${card.color}15`, color: card.color }}
-                    >
-                      <Icon className="h-5.5 w-5.5" />
                     </div>
-                    <h2 className="text-[16px] font-bold text-[#151c27] flex items-center gap-1.5 leading-snug">
-                      {card.title}
-                      {card.isNew && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider" style={{ backgroundColor: `${card.color}15`, color: card.color }}>
-                          NEW
-                        </span>
-                      )}
-                    </h2>
-                  </div>
-                  <ul className="space-y-2 flex-grow mb-6">
-                    {card.tools.map((t, idx) => (
-                      <li key={idx}>
-                        <Link
-                          href={t.href}
-                          className="group flex items-center justify-between text-sm text-[#434655] hover:text-[#0037b0] transition-colors py-0.5 leading-relaxed"
-                        >
-                          <span>{t.label}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#c4c5d7]/10">
-                    <span className="text-[10px] font-bold text-[#747686] uppercase tracking-wider">{card.count}</span>
-                    <Link
-                      href={card.hubHref}
-                      className="py-1.5 px-3.5 rounded-lg font-bold text-[11px] transition-all uppercase tracking-widest flex items-center gap-1"
-                      style={{
-                        backgroundColor: `${card.color}10`,
-                        color: card.color,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = card.color;
-                        e.currentTarget.style.color = '#ffffff';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = `${card.color}10`;
-                        e.currentTarget.style.color = card.color;
-                      }}
-                    >
-                      Hub <ArrowRight className="h-3 w-3" />
+                    <ul className="space-y-1.5 flex-grow mb-4">
+                      {live.map((t) => (
+                        <li key={t.href}>
+                          <Link href={t.href} className="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5">
+                            <span className="h-1 w-1 rounded-full bg-primary/50 shrink-0" /> {t.label}
+                          </Link>
+                        </li>
+                      ))}
+                      {live.length === 0 && <li className="text-xs text-on-surface-variant/70 italic">Coming soon</li>}
+                    </ul>
+                    <Link href={`/category/${c.id}`} className="mt-auto inline-flex items-center justify-between gap-1 text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-lg transition-colors" style={{ background: `${c.color}12`, color: c.color }}>
+                      Open hub <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
+                );
+              })}
+            </section>
+          ) : (
+            <>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-bold text-on-surface-variant">
+                  {results.filter((t) => t.status === 'live').length} live
+                  {results.some((t) => t.status === 'soon') && <span className="opacity-70"> · {results.filter((t) => t.status === 'soon').length} soon</span>}
+                  {q && <> for &ldquo;{query}&rdquo;</>}
+                </h2>
+                {(q || active !== 'all') && (
+                  <button onClick={() => { setQuery(''); setActive('all'); }} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
+                    Reset <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+              {results.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-outline-variant bg-surface-container-lowest px-6 py-16 text-center">
+                  <p className="text-sm font-semibold">No tools match &ldquo;{query}&rdquo;.</p>
+                  <button onClick={() => setQuery('')} className="mt-2 text-sm font-semibold text-primary hover:underline">Clear search</button>
                 </div>
-              );
-            })}
-          </section>
-        )}
-
-        {/* Stats Section */}
-        <section className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-5 bg-[#e2e8f8]/30 rounded-xl border border-[#c4c5d7]/20 flex items-center gap-4 shadow-sm">
-            <TrendingUp className="h-6 w-6 text-[#0037b0]" />
-            <div>
-              <div className="text-2xl font-bold text-[#151c27]">{TOTAL}+</div>
-              <div className="text-[10px] font-bold text-[#747686] uppercase tracking-wider">Active Tools</div>
-            </div>
-          </div>
-          <div className="p-5 bg-[#e2e8f8]/30 rounded-xl border border-[#c4c5d7]/20 flex items-center gap-4 shadow-sm">
-            <RefreshCw className="h-6 w-6 text-[#006c49]" />
-            <div>
-              <div className="text-2xl font-bold text-[#151c27]">Hourly</div>
-              <div className="text-[10px] font-bold text-[#747686] uppercase tracking-wider">Rate Sync</div>
-            </div>
-          </div>
-          <div className="p-5 bg-[#e2e8f8]/30 rounded-xl border border-[#c4c5d7]/20 flex items-center gap-4 shadow-sm">
-            <CheckCircle2 className="h-6 w-6 text-[#623c00]" />
-            <div>
-              <div className="text-2xl font-bold text-[#151c27]">100%</div>
-              <div className="text-[10px] font-bold text-[#747686] uppercase tracking-wider">Logic Verified</div>
-            </div>
-          </div>
-          <div className="p-5 bg-[#e2e8f8]/30 rounded-xl border border-[#c4c5d7]/20 flex items-center gap-4 shadow-sm">
-            <ShieldCheck className="h-6 w-6 text-[#ba1a1a]" />
-            <div>
-              <div className="text-2xl font-bold text-[#151c27]">Secure</div>
-              <div className="text-[10px] font-bold text-[#747686] uppercase tracking-wider">Private Data</div>
-            </div>
-          </div>
-        </section>
-
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  {results.map((t) => <ToolCard key={t.category + t.href + t.label} tool={t} />)}
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </main>
+  );
+}
+
+function Chip({ active, onClick, label, count, color }: { active: boolean; onClick: () => void; label: string; count?: number; color?: string }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+        active ? 'bg-primary text-white border-primary' : 'bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:border-primary/50'
+      }`}
+      style={active && color ? { background: color, borderColor: color } : undefined}
+    >
+      {label}{count != null && <span className={active ? 'opacity-80' : 'opacity-60'}> · {count}</span>}
+    </button>
+  );
+}
+
+function ToolCard({ tool }: { tool: FlatTool }) {
+  const cat = CATEGORIES.find((c) => c.id === tool.category);
+  if (tool.status === 'soon') {
+    return (
+      <div className="bg-surface-container-low/40 border border-dashed border-outline-variant rounded-xl p-4 flex flex-col">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <h3 className="text-sm font-bold text-on-surface-variant">{tool.label}</h3>
+          <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent-soft text-accent shrink-0">Soon</span>
+        </div>
+        <p className="text-xs text-on-surface-variant/80 leading-relaxed">{tool.hint}</p>
+      </div>
+    );
+  }
+  return (
+    <Link href={tool.href} className="group bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col hover:border-primary hover:shadow-md active:scale-[0.99] transition-all">
+      <div className="flex items-start justify-between gap-2 mb-1">
+        <h3 className="text-sm font-bold group-hover:text-primary transition-colors">{tool.label}</h3>
+        {cat && <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant shrink-0">{cat.label.split(' ')[0]}</span>}
+      </div>
+      <p className="text-xs text-on-surface-variant leading-relaxed mb-3">{tool.hint}</p>
+      <span className="mt-auto inline-flex items-center gap-1 text-primary font-bold text-xs">Open <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" /></span>
+    </Link>
   );
 }
