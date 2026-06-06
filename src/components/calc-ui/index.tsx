@@ -124,11 +124,11 @@ export function Stat({
   const valueCls =
     tone === 'dark' ? 'text-white' : tone === 'accent' ? 'text-secondary' : 'text-primary';
   return (
-    <div className={`p-4 rounded-xl border shadow-soft flex flex-col gap-1.5 ${toneCls}`}>
+    <div className={`p-3.5 sm:p-4 rounded-xl border shadow-soft flex flex-col gap-1 sm:gap-1.5 ${toneCls}`}>
       <span className={`text-[10px] font-bold uppercase tracking-wider ${tone === 'dark' ? 'opacity-70' : 'text-on-surface-variant'}`}>
         {label}
       </span>
-      <span className={`font-display font-extrabold tabular-nums leading-tight ${big ? 'text-3xl' : 'text-xl'} ${valueCls}`}>
+      <span className={`font-display font-extrabold tabular-nums leading-tight break-words ${big ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'} ${valueCls}`}>
         {value}
       </span>
       {sub && <span className={`text-[11px] ${tone === 'dark' ? 'opacity-80' : 'text-on-surface-variant'}`}>{sub}</span>}
@@ -329,8 +329,8 @@ export function Donut({
   const C = 2 * Math.PI * R;
   let offset = 0;
   return (
-    <div className="flex items-center gap-5">
-      <svg viewBox="0 0 180 180" width={size} height={size} className="shrink-0 -rotate-90">
+    <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full">
+      <svg viewBox="0 0 180 180" style={{ maxWidth: size }} className="shrink-0 w-32 h-32 sm:w-44 sm:h-44 -rotate-90">
         <circle cx="90" cy="90" r={R} fill="none" stroke="var(--uk-surface-container, #eceef0)" strokeWidth="22" />
         {segments.map((s, i) => {
           const len = (s.value / total) * C;
@@ -351,7 +351,7 @@ export function Donut({
           return el;
         })}
       </svg>
-      <div className="space-y-2">
+      <div className="space-y-2 w-full sm:flex-1">
         {centerValue && (
           <div className="mb-3">
             <div className="text-xs text-on-surface-variant">{centerLabel}</div>
