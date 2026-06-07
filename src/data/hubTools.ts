@@ -144,23 +144,34 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── SAVINGS & PENSIONS (5) — high-CPC retirement keywords ─────────
+  // ── PENSIONS, INVESTING & SAVINGS — high-CPC retirement keywords ──
   savings: [
+    {
+      title: 'Pensions',
+      description: 'Project, draw down and forecast retirement income.',
+      items: [
+        { label: 'Pension Calculator', href: '/pension-calculator', hint: 'Pot at retirement + income', status: 'live' },
+        { label: 'Pension Drawdown', href: '/pension-drawdown-calculator', hint: 'How long will it last?', status: 'live' },
+        { label: 'State Pension', href: '/state-pension', hint: 'Forecast from NI years', status: 'live' },
+        { label: 'Annuity Calculator', href: '/annuity-calculator', hint: 'Pot → guaranteed income', status: 'soon' },
+        { label: 'SIPP Calculator', href: '/sipp-calculator', hint: 'Contributions + tax relief', status: 'soon' },
+      ],
+    },
     {
       title: 'ISAs & Savings',
       description: 'Tax-free saving and growth.',
       items: [
-        { label: 'ISA Calculator', href: '/isa-calculator', hint: 'ISA · Lifetime ISA bonus', status: 'live' },
-        { label: 'Compound Interest', href: '/compound-interest-calculator', hint: 'Growth · savings goal', status: 'soon' },
+        { label: 'Compound Interest', href: '/compound-interest-calculator', hint: 'Savings growth over time', status: 'live' },
+        { label: 'ISA Calculator', href: '/isa-calculator', hint: 'Tax-free growth · £20k', status: 'live' },
+        { label: 'Lifetime ISA', href: '/lifetime-isa-calculator', hint: '25% government bonus', status: 'live' },
+        { label: 'Savings Goal', href: '/savings-goal-calculator', hint: 'How much / how long', status: 'soon' },
       ],
     },
     {
-      title: 'Pensions & Retirement',
-      description: 'Forecast income and plan drawdown.',
+      title: 'Tax',
+      description: 'Make contributions go further.',
       items: [
-        { label: 'State Pension', href: '/state-pension', hint: 'From your NI years', status: 'live' },
-        { label: 'Pension Drawdown', href: '/pension-drawdown-calculator', hint: 'PCLS 25% · pot projection', status: 'live' },
-        { label: 'SIPP & Annuity', href: '/sipp-calculator', hint: 'Self-invested · guaranteed income', status: 'soon' },
+        { label: 'Pension Tax Relief', href: '/pension-tax-relief-calculator', hint: 'Higher-rate relief', status: 'soon' },
       ],
     },
   ],
