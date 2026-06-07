@@ -91,17 +91,34 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── LOANS (5, all planned) — high-CPC credit vertical ─────────────
+  // ── LOANS, DEBT & CREDIT — high-CPC credit vertical ───────────────
   loans: [
     {
-      title: 'Loans, Debt & Credit',
-      description: 'Borrow smarter and clear debt faster.',
+      title: 'Borrowing',
+      description: 'Loans, car finance and the true cost.',
       items: [
-        { label: 'Personal Loan', href: '/personal-loan-calculator', hint: 'Monthly cost · APR · total interest', status: 'soon' },
-        { label: 'Car Finance', href: '/car-finance-calculator', hint: 'PCP vs HP vs loan', status: 'soon' },
-        { label: 'Credit Card Payoff', href: '/credit-card-payoff-calculator', hint: 'Months + interest to clear', status: 'soon' },
-        { label: 'Debt Consolidation', href: '/debt-consolidation-calculator', hint: 'One payment vs many', status: 'soon' },
-        { label: 'Balance Transfer', href: '/balance-transfer-calculator', hint: '0% deal vs fee', status: 'soon' },
+        { label: 'Personal Loan', href: '/personal-loan-calculator', hint: 'Repayment · interest · APR', status: 'live' },
+        { label: 'Car Finance', href: '/car-finance-calculator', hint: 'PCP vs HP vs loan', status: 'live' },
+        { label: 'Loan APR', href: '/loan-apr-calculator', hint: 'True cost of borrowing', status: 'live' },
+        { label: 'Loan Comparison', href: '/loan-comparison-calculator', hint: '2–3 loans side by side', status: 'soon' },
+      ],
+    },
+    {
+      title: 'Debt & Credit',
+      description: 'Clear cards and consolidate faster.',
+      items: [
+        { label: 'Credit Card Payoff', href: '/credit-card-payoff-calculator', hint: 'Months + interest to clear', status: 'live' },
+        { label: 'Debt Consolidation', href: '/debt-consolidation-calculator', hint: 'One payment vs many', status: 'live' },
+        { label: 'Debt Payoff Planner', href: '/debt-payoff-planner', hint: 'Snowball vs avalanche', status: 'live' },
+        { label: 'Balance Transfer', href: '/balance-transfer-calculator', hint: '0% deal vs fee · break-even', status: 'soon' },
+      ],
+    },
+    {
+      title: 'Plan',
+      description: 'Affordability and early repayment.',
+      items: [
+        { label: 'Loan Affordability (DTI)', href: '/loan-affordability-calculator', hint: 'How much can you borrow?', status: 'soon' },
+        { label: 'Early Repayment', href: '/loan-early-repayment-calculator', hint: 'Interest saved + settlement', status: 'soon' },
       ],
     },
   ],
