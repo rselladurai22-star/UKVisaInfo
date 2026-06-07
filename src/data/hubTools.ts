@@ -69,17 +69,24 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── INSURANCE (5, all planned) — top AdSense RPM vertical ──────────
+  // ── INSURANCE — flagship calculators, all live ────────────────────
   insurance: [
     {
-      title: 'Insurance Calculators',
-      description: 'Size the cover you need across life, health and assets.',
+      title: 'Protection',
+      description: 'Cover for your family and income.',
       items: [
-        { label: 'Life & Income Protection', href: '/life-insurance-calculator', hint: 'Cover for debt · income gap', status: 'soon' },
-        { label: 'Car Insurance', href: '/car-insurance-calculator', hint: 'Group + premium estimate', status: 'soon' },
-        { label: 'Home Insurance', href: '/home-insurance-calculator', hint: 'Buildings + contents rebuild', status: 'soon' },
-        { label: 'Health Insurance', href: '/health-insurance-calculator', hint: 'Private medical tiers', status: 'soon' },
-        { label: 'Pet & Travel Insurance', href: '/pet-insurance-calculator', hint: 'Vet cover · trip + medical', status: 'soon' },
+        { label: 'Life Insurance', href: '/life-insurance-calculator', hint: 'How much cover you need (DIME)', status: 'live' },
+        { label: 'Critical Illness', href: '/critical-illness-calculator', hint: 'Lump sum if seriously ill', status: 'live' },
+        { label: 'Income Protection', href: '/income-protection-calculator', hint: 'Replace income if you can’t work', status: 'live' },
+      ],
+    },
+    {
+      title: 'Assets & Travel',
+      description: 'Cover for your car, home and trips.',
+      items: [
+        { label: 'Car Insurance', href: '/car-insurance-calculator', hint: 'Premium estimate + group 1–50', status: 'live' },
+        { label: 'Home Insurance', href: '/home-insurance-calculator', hint: 'Rebuild cost + contents', status: 'live' },
+        { label: 'Travel Insurance', href: '/travel-insurance-calculator', hint: 'Cost + cover limits', status: 'live' },
       ],
     },
   ],
