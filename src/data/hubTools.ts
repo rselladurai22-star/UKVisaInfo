@@ -180,13 +180,13 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
   tax: [
     {
       title: 'Employed Income',
-      description: 'Net pay, NI and salary sacrifice.',
+      description: 'Net pay, NI, payslip checks and one-offs.',
       items: [
         { label: 'Take-home Pay', href: '/take-home-pay', hint: 'Salary after tax, NI & SL', status: 'live' },
         { label: 'National Insurance', href: '/national-insurance-calculator', hint: 'Class 1 / 4 breakdown', status: 'live' },
         { label: 'Salary Sacrifice', href: '/salary-sacrifice-calculator', hint: 'Pension tax & NI saving', status: 'live' },
         { label: 'Bonus Tax', href: '/bonus-tax', hint: 'Tax on a bonus', status: 'live' },
-        { label: 'Tax Code Checker', href: '/tax-code-checker', hint: 'Decode 1257L etc', status: 'soon' },
+        { label: 'Payslip Auditor', href: '/payslip-auditor', hint: 'Check tax & tax code', status: 'live' },
       ],
     },
     {
@@ -200,9 +200,12 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       ],
     },
     {
-      title: 'Capital',
-      description: 'Gains and estate.',
+      title: 'Reliefs & Capital',
+      description: 'Allowances, student loan and gains.',
       items: [
+        { label: 'Marriage Allowance', href: '/marriage-allowance-calculator', hint: 'Transfer £1,260 · save £252', status: 'live' },
+        { label: 'Child Benefit Charge', href: '/child-benefit-trap', hint: 'HICBC £60k–£80k', status: 'live' },
+        { label: 'Student Loan', href: '/student-loan-repayment', hint: '9% repayment by plan', status: 'live' },
         { label: 'Capital Gains Tax', href: '/cgt-calculator', hint: '£3,000 AEA · 18%/24%', status: 'live' },
         { label: 'Inheritance Tax', href: '/inheritance-tax', hint: 'NRB £325k + RNRB £175k', status: 'live', xref: 'Estate' },
       ],
