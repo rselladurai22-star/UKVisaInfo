@@ -176,21 +176,33 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── TAX & INCOME (5, all live) — highest-volume on the site ───────
+  // ── TAX & INCOME — highest-volume on the site ─────────────────────
   tax: [
     {
       title: 'Employed Income',
-      description: 'Net pay and payslip checks.',
+      description: 'Net pay, NI and salary sacrifice.',
       items: [
-        { label: 'Take-home Pay', href: '/take-home-pay', hint: 'PAYE · NI · tax code · sacrifice', status: 'live' },
-        { label: 'Payslip Auditor', href: '/payslip-auditor', hint: 'Spot HMRC + tax-code errors', status: 'live' },
+        { label: 'Take-home Pay', href: '/take-home-pay', hint: 'Salary after tax, NI & SL', status: 'live' },
+        { label: 'National Insurance', href: '/national-insurance-calculator', hint: 'Class 1 / 4 breakdown', status: 'live' },
+        { label: 'Salary Sacrifice', href: '/salary-sacrifice-calculator', hint: 'Pension tax & NI saving', status: 'live' },
+        { label: 'Bonus Tax', href: '/bonus-tax', hint: 'Tax on a bonus', status: 'live' },
+        { label: 'Tax Code Checker', href: '/tax-code-checker', hint: 'Decode 1257L etc', status: 'soon' },
       ],
     },
     {
-      title: 'Self-Employed & Capital',
-      description: 'Contracting, gains and estate.',
+      title: 'Self-Employed & Business',
+      description: 'Sole traders, contractors and directors.',
       items: [
-        { label: 'Self-Employed & Contractor', href: '/self-employed-tax', hint: 'SA · IR35 · director dividend', status: 'live' },
+        { label: 'Self-Employed Tax', href: '/self-employed-tax', hint: 'Self Assessment + Class 4', status: 'live' },
+        { label: 'Contractor & IR35', href: '/contractor-ir35', hint: 'Ltd vs PAYE vs umbrella', status: 'live' },
+        { label: 'Dividend Tax', href: '/director-dividend', hint: 'Salary + dividends', status: 'live' },
+        { label: 'Side-Hustle Tax', href: '/side-hustle-tax-calculator', hint: 'Trading allowance · 2nd job', status: 'soon' },
+      ],
+    },
+    {
+      title: 'Capital',
+      description: 'Gains and estate.',
+      items: [
         { label: 'Capital Gains Tax', href: '/cgt-calculator', hint: '£3,000 AEA · 18%/24%', status: 'live' },
         { label: 'Inheritance Tax', href: '/inheritance-tax', hint: 'NRB £325k + RNRB £175k', status: 'live', xref: 'Estate' },
       ],
