@@ -5,7 +5,7 @@ This guide will help you configure and run the automated indexing script to prom
 ## How it Works
 The Google Indexing API allows site owners to notify Google when pages are added, updated, or removed. Google's crawlers prioritize crawling these pages immediately. 
 
-To prevent unauthorized crawl requests, Google requires authentication using a **Google Cloud Service Account** that has **Owner** permissions for your website in **Google Search Console**.
+To prevent unauthorized crawl requests, Google requires authentication using a **Google Cloud Service Account** that has **Owner** permissions for your website.
 
 ---
 
@@ -19,9 +19,9 @@ To prevent unauthorized crawl requests, Google requires authentication using a *
    - Click **New Project**.
    - Name it (e.g., `UK-Visa-Info-Indexing`) and click **Create**.
 
-3. **Enable the Indexing API:**
-   - Go to [Web Search Indexing API Page](https://console.cloud.google.com/apis/library/indexing.googleapis.com) or search for **Web Search Indexing API** in the top search bar.
-   - Select it and click **Enable**.
+3. **Enable the APIs (Crucial):**
+   - In the top search bar, search for **Web Search Indexing API** and click **Enable**.
+   - In the top search bar, search for **Google Site Verification API** and click **Enable**.
 
 4. **Create a Service Account:**
    - Navigate to **IAM & Admin** > **Service Accounts** in the left sidebar menu.
@@ -43,67 +43,61 @@ To prevent unauthorized crawl requests, Google requires authentication using a *
 
 ---
 
-## 2. Link Service Account to Google Search Console
+## 2. Link Service Account to Google Search Console (Two Methods)
 
-Google needs to verify that this service account is authorized to trigger crawls for your website.
+Because Google Search Console has a known bug that frequently returns "Failed to add user: email not found", we have two methods to verify your Service Account.
 
-1. **Copy the Service Account Email:**
-   - Look inside your downloaded `service-account-key.json` for the `"client_email"` field (it will look like: `indexing-bot@YOUR-PROJECT.iam.gserviceaccount.com`).
-   - Copy this email address.
+### Method A: Standard delegation (If Google has fixed the bug)
+1. Copy the Service Account email address (e.g., `indexing-bot@YOUR-PROJECT.iam.gserviceaccount.com`).
+2. Open [Google Search Console](https://search.google.com/search-console).
+3. Navigate to **Settings** > **Users and permissions** > **Add User**.
+4. Paste the email address, change the permission to **Owner**, and click **Add**.
 
-2. **Open Google Search Console:**
-   - Go to [https://search.google.com/search-console](https://search.google.com/search-console).
-   - Select your website property (e.g., `https://ukvisainfo.co.uk`).
+*If Method A fails with "email not found", use Method B below.*
 
-3. **Add the Service Account as an Owner:**
-   - Click **Settings** in the left sidebar.
-   - Click **Users and permissions**.
-   - Click **Add User** (blue button in top right).
-   - Paste the Service Account email address.
-   - **Crucial:** Change the permission dropdown from *Full* to **Owner**.
-   - Click **Add**.
+### Method B: Programmatic Verification Workaround (Recommended Fix)
+We have created a script that lets the service account verify itself directly using an HTML file.
+
+1. **Enable the Site Verification API** on your Google Cloud project (done in Step 1.3).
+2. **Generate the Verification File:**
+   In your terminal, run the following command:
+   ```bash
+   node scripts/verify-site.mjs --generate
+   ```
+   This will query Google's APIs, fetch your site's custom verification token, and automatically save it in the `public/` directory of your project (e.g. `public/googleXXXXXX.html`).
+
+3. **Deploy the File:**
+   Commit the generated HTML file and push it to GitHub to trigger a Vercel deployment:
+   ```bash
+   git add public/google*.html
+   git commit -m "chore: add verification file for service account"
+   git push origin main
+   ```
+
+4. **Verify Ownership:**
+   Once the Vercel deployment completes (confirm you can visit `https://ukvisainfo.co.uk/googleXXXXXX.html` in your browser), run the verification command to complete the setup:
+   ```bash
+   node scripts/verify-site.mjs --verify
+   ```
 
 ---
 
 ## 3. Run the Indexing Script
 
-Once the credentials file is placed at the root of the project and linked in Search Console, you can trigger indexing from your local machine.
+Once verified, you can trigger indexing for your pages:
 
 ### Run a Dry Run (Simulation)
-Ensure the script fetches your sitemap correctly and parses your credentials without sending actual API requests to Google:
 ```bash
 node scripts/google-index.mjs --dry-run
 ```
 
-### Request Indexing for All Sitemap Pages (Standard)
+### Request Indexing for All Sitemap Pages
 Submits up to 200 URLs (standard Google API daily quota) from the live sitemap:
 ```bash
 node scripts/google-index.mjs
 ```
 
 ### Request Indexing for a Single Specific URL
-If you want to index one specific page immediately:
 ```bash
 node scripts/google-index.mjs --url https://ukvisainfo.co.uk/take-home-pay
 ```
-
-### Request Indexing from a Different Sitemap
-```bash
-node scripts/google-index.mjs --sitemap https://example.com/sitemap.xml
-```
-
-### Submit a Removal Request (URL Deleted)
-If you deleted pages and want Google to remove them from search results:
-```bash
-node scripts/google-index.mjs --action delete
-```
-
----
-
-## Troubleshooting
-
-- **Error: Permission denied (403)**
-  - Double check that the Service Account email address was added as an **Owner** (not just Full/Restricted) in Google Search Console.
-  - Verify that the domain URL in the sitemap matches the Search Console property exactly (including `https://` vs `http://` and `www.` prefixes).
-- **Error: Quota exceeded (429)**
-  - Google's default daily limit is 200 URLs. The script handles this limit automatically, but if you have already run the script today, you will need to wait 24 hours for the quota to reset.
