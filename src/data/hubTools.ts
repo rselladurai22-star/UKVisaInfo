@@ -100,7 +100,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
         { label: 'Personal Loan', href: '/personal-loan-calculator', hint: 'Repayment · interest · APR', status: 'live' },
         { label: 'Car Finance', href: '/car-finance-calculator', hint: 'PCP vs HP vs loan', status: 'live' },
         { label: 'Loan APR', href: '/loan-apr-calculator', hint: 'True cost of borrowing', status: 'live' },
-        { label: 'Loan Comparison', href: '/loan-comparison-calculator', hint: '2–3 loans side by side', status: 'soon' },
+        { label: 'Loan Comparison', href: '/loan-comparison-calculator', hint: '2–3 loans side by side', status: 'live' },
       ],
     },
     {
@@ -110,15 +110,15 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
         { label: 'Credit Card Payoff', href: '/credit-card-payoff-calculator', hint: 'Months + interest to clear', status: 'live' },
         { label: 'Debt Consolidation', href: '/debt-consolidation-calculator', hint: 'One payment vs many', status: 'live' },
         { label: 'Debt Payoff Planner', href: '/debt-payoff-planner', hint: 'Snowball vs avalanche', status: 'live' },
-        { label: 'Balance Transfer', href: '/balance-transfer-calculator', hint: '0% deal vs fee · break-even', status: 'soon' },
+        { label: 'Balance Transfer', href: '/balance-transfer-calculator', hint: '0% deal vs fee · break-even', status: 'live' },
       ],
     },
     {
       title: 'Plan',
       description: 'Affordability and early repayment.',
       items: [
-        { label: 'Loan Affordability (DTI)', href: '/loan-affordability-calculator', hint: 'How much can you borrow?', status: 'soon' },
-        { label: 'Early Repayment', href: '/loan-early-repayment-calculator', hint: 'Interest saved + settlement', status: 'soon' },
+        { label: 'Loan Affordability (DTI)', href: '/loan-affordability-calculator', hint: 'How much can you borrow?', status: 'live' },
+        { label: 'Early Repayment', href: '/loan-early-repayment-calculator', hint: 'Interest saved + settlement', status: 'live' },
       ],
     },
   ],
