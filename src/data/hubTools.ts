@@ -321,7 +321,9 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       title: 'Costs',
       description: 'Road tax, fuel and finance.',
       items: [
-        { label: 'Vehicle Running Costs', href: '/vehicle-tax-calculator', hint: 'VED · fuel · running costs', status: 'soon' },
+        { label: 'Vehicle Tax (VED)', href: '/vehicle-tax-calculator', hint: 'CO2 first-year + standard', status: 'live' },
+        { label: 'Car Running Costs', href: '/car-running-costs', hint: 'Total cost of ownership', status: 'live' },
+        { label: 'Fuel Cost', href: '/fuel-cost-calculator', hint: 'Cost per journey & year', status: 'live' },
         { label: 'Car Finance', href: '/car-finance-calculator', hint: 'PCP vs HP vs loan', status: 'soon', xref: 'Loans' },
       ],
     },
