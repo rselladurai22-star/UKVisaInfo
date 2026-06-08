@@ -3,7 +3,6 @@ import { BLOG_POSTS, BLOG_CATEGORIES, getPostsByCategory } from '../data/blog';
 import { VISA_DETAILS } from '../data/visaDetails';
 import { COUNTRIES } from '../data/countries';
 import { CITIES } from '../data/cities';
-import { NEWS_ITEMS } from '../data/news';
 import { VISA_VARIANTS } from '../data/visaVariants';
 import { CATEGORIES } from '../data/tools';
 
@@ -169,15 +168,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
      the richer /salary-compare and /sponsors landings stay indexed
      and carry the search value. */
 
-  /* ── News items ── */
-  for (const n of NEWS_ITEMS) {
-    urls.push({
-      url: `${SITE}/news/${n.slug}`,
-      lastModified: n.date,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    });
-  }
+  /* ── News items: intentionally excluded ──
+     Short (80–200 word) news posts are noindex to keep the site's
+     content-quality signal high for AdSense, so they're left out of the
+     sitemap to avoid an index/noindex conflict. NEWS_ITEMS still powers
+     the /news index and RSS. */
 
   return urls;
 }

@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     title: `${n.title} — UK Visa News`,
     description: n.summary,
     alternates: { canonical: `/news/${slug}` },
+    // Short news items are kept lightweight; noindex so the thin news section
+    // doesn't dilute the site's content-quality signal (AdSense). Still followed.
+    robots: { index: false, follow: true },
     openGraph: {
       title: n.title, description: n.summary,
       url: `https://ukvisainfo.co.uk/news/${slug}`,

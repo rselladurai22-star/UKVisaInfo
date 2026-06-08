@@ -56,6 +56,348 @@ export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'how-much-tax-on-50000-salary-uk-2025-26',
+    title: 'How Much Tax Will I Pay on £50,000 in 2025/26?',
+    description:
+      'A clear, worked breakdown of the income tax and National Insurance on a £50,000 UK salary in 2025/26 — what lands in your bank each month, and the 40% trap just above it.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 11,
+    category: 'money',
+    tags: ['Income Tax', 'Take-Home Pay', 'National Insurance'],
+    relatedTools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+    ],
+    body: `
+"How much will I actually take home?" is the question every job offer really comes down to, and the answer is never the headline number. A £50,000 salary sounds tidy and round, but by the time HMRC has taken income tax and National Insurance, what reaches your account is noticeably less. Here is exactly where the money goes in 2025/26 — and why £50,000 happens to sit at one of the most awkward spots in the whole tax system.
+
+> [!STAT] £39,520 | Roughly what you keep from £50,000 after tax and NI in 2025/26
+
+> [!KEY] The short version
+> Income tax on £50,000 is **£7,486**, and employee National Insurance is **£2,994**.
+> That leaves about **£39,520 a year**, or **£3,293 a month**, before pension or student loan.
+> Your whole salary sits in the **20% basic-rate band** — you are £270 short of where 40% tax begins.
+> A pension contribution is the single most efficient way to keep more of a pay rise from here.
+
+## Where the £50,000 actually goes
+
+The UK taxes income in slices, not all at once. Two separate deductions come out of an ordinary employee's salary: **income tax**, collected by HMRC, and **National Insurance**, which funds the State Pension and contributory benefits. They use different thresholds, which is why the maths looks fiddlier than it should.
+
+For 2025/26 the numbers that matter are:
+
+| Allowance / threshold | 2025/26 figure |
+|---|---|
+| Personal allowance (tax-free) | £12,570 |
+| Basic rate (20%) up to | £50,270 |
+| Higher rate (40%) from | £50,270 |
+| NI primary threshold | £12,570 |
+| NI upper earnings limit | £50,270 |
+
+Notice that both the basic-rate ceiling and the NI upper limit land on the same number — £50,270. That is not a coincidence; the system is built so the higher-rate band and the lower NI rate begin together. A £50,000 salary slides in just underneath both.
+
+## Step one: income tax
+
+You do not pay tax on the first £12,570 — that is your personal allowance. Everything above it, up to £50,270, is taxed at 20%.
+
+> [!STEPS]
+> 1. **Start with the salary** — £50,000 gross.
+> 2. **Remove the personal allowance** — £50,000 − £12,570 = £37,430 of taxable income.
+> 3. **Apply 20%** — £37,430 × 0.20 = £7,486 of income tax for the year.
+
+Because £37,430 fits comfortably inside the £37,700-wide basic-rate band, none of your income is taxed at 40%. Every extra pound up to £50,270 is still only 20%. That matters for what comes next.
+
+## Step two: National Insurance
+
+National Insurance has its own band. For 2025/26, employees pay **8%** on earnings between £12,570 and £50,270, then just 2% above that. At £50,000 you are entirely inside the 8% band:
+
+> [!STEPS]
+> 1. **Earnings above the NI threshold** — £50,000 − £12,570 = £37,430.
+> 2. **Apply 8%** — £37,430 × 0.08 = £2,994.40 of National Insurance for the year.
+
+Put the two together and HMRC takes £7,486 + £2,994 = **£10,480**, leaving you with **£39,520 a year** — about **£3,293 a month**. Our [take-home pay calculator](/take-home-pay) does this instantly if you want to plug in your own number, but it is worth seeing the slices once so the deductions stop feeling random.
+
+## The 40% trap hiding just above you
+
+Here is the part that surprises people. At £50,000 your **effective** tax rate — total tax and NI divided by salary — is about 21%. But your **marginal** rate, what you lose on the next pound, is about to jump.
+
+Up to £50,270 each extra pound costs you 20% tax plus 8% NI — 28% gone. The moment you cross £50,270, that same pound costs 40% tax plus 2% NI — 42% gone. So a pay rise from £50,000 to £55,000 does not feel like a £5,000 rise; the slice above £50,270 is taxed far harder than everything below it.
+
+> [!WARNING] This is also where Child Benefit starts to bite
+> If you or your partner claim Child Benefit, the High Income Child Benefit Charge begins clawing it back once *adjusted net income* passes £60,000, fully removing it by £80,000. A pay rise into that zone can be startlingly inefficient once lost benefit is counted. See our [Child Benefit trap guide](/child-benefit-trap) for the full picture.
+
+## How to actually keep more of it
+
+You cannot change the tax bands, but you can change the income they are measured against. The cleanest lever is a **pension contribution**.
+
+Say you pay 5% of salary — £2,500 — into a workplace pension by salary sacrifice. Your taxable salary drops to £47,500. You save 20% tax and 8% NI on that £2,500 — about £700 — and your employer often saves their NI too, which good schemes pass back into your pot. You have not lost £2,500 of spending power; you have moved roughly £1,800 of net pay into long-term savings and let HMRC fund the rest. The [pension calculator](/pension-calculator) shows what that compounds to over a career.
+
+The same trick is what rescues people earning just over £50,270 or £100,000 — sacrificing enough salary to drop back under a threshold can be worth far more than the contribution itself.
+
+## What about student loans?
+
+If you are repaying a student loan, that is a third deduction on top. Most recent graduates are on **Plan 2**, which takes 9% of income above £28,470. On £50,000 that is 9% × (£50,000 − £28,470) = about **£1,938 a year**, or £161 a month, dropping your take-home to roughly £37,580. Plan 1, Plan 4 and the postgraduate loan use different thresholds and rates — our [student loan calculator](/student-loan-repayment) handles whichever you are on.
+
+> [!STAT] £3,293 | Monthly take-home on £50,000 — before pension or student loan
+
+## A quick reality check on "£50k"
+
+It is worth remembering what £50,000 buys in 2025. It is comfortably above the UK median full-time salary, but it is also the level at which you stop being a straightforward basic-rate taxpayer and start having to think about thresholds, the 40% band, and benefit tapers. The jump from "I just get paid" to "I need to plan around tax" happens right around here — which is exactly why this salary attracts so many searches.
+
+> [!FAQ]
+> Q: Is £50,000 a higher-rate taxpayer?
+> A: Not quite. Higher-rate tax (40%) starts at £50,270 of taxable income in 2025/26, so a £50,000 salary stays entirely in the 20% basic-rate band. You are £270 of salary away from the higher rate.
+>
+> Q: How much is £50,000 a month after tax?
+> A: About £3,293 a month before any pension or student loan deductions — £39,520 across the year. A 5% pension or a Plan 2 student loan will each reduce that further.
+>
+> Q: Why is my National Insurance different from my income tax?
+> A: They are separate systems with their own thresholds and rates. Income tax uses the £12,570 personal allowance and 20%/40% bands; NI charges 8% between £12,570 and £50,270, then 2%. They only line up at the top of the basic-rate band.
+>
+> Q: Does a pension contribution really save tax at this salary?
+> A: Yes. Contributions made before tax (salary sacrifice or net-pay schemes) reduce the income that tax and NI are charged on, saving roughly 28% on each pound contributed at this level — plus any employer NI saving a good scheme returns to you.
+>
+> Q: What happens to my take-home if I get a £5,000 pay rise?
+> A: The slice above £50,270 is taxed at 40% plus 2% NI, so you keep about 58p in the pound on that part rather than 72p. The rise is still worthwhile, just less than the headline suggests — model it on the [take-home calculator](/take-home-pay).
+
+The figures here are 2025/26 estimates for England, Wales and Northern Ireland; Scotland sets its own income tax bands. Always treat take-home estimates as a guide and check your own payslip and tax code.
+`.trim(),
+  },
+  {
+    slug: 'sole-trader-vs-limited-company-tax-2025-26',
+    title: 'Sole Trader vs Limited Company: Which Leaves You Better Off?',
+    description:
+      'An honest, worked comparison of sole trader versus limited company take-home pay in 2025/26 — the real tax difference at £60,000 profit, and the costs that quietly cancel it out.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 12,
+    category: 'business',
+    tags: ['Sole Trader', 'Limited Company', 'Corporation Tax', 'Self-Employed'],
+    relatedTools: [
+      { href: '/sole-trader-vs-limited', label: 'Sole Trader vs Limited', hint: 'Take-home compared' },
+      { href: '/corporation-tax-calculator', label: 'Corporation Tax', hint: '19% / 25% + marginal' },
+      { href: '/salary-vs-dividend-calculator', label: 'Salary vs Dividend', hint: 'Optimal director split' },
+    ],
+    body: `
+Every freelancer, contractor and small business owner eventually hits the same fork in the road: should you carry on as a sole trader, or set up a limited company? The internet will tell you the company "saves tax," and at certain profit levels that is true. But the saving is smaller than people think, it arrives with strings attached, and below a certain income it disappears entirely once you count the cost of running the company. Here is the honest version, with the numbers worked through.
+
+> [!KEY] The honest summary
+> A limited company can leave you with **more take-home** once profits comfortably clear the personal allowance.
+> At **£60,000 profit** the difference in 2025/26 is roughly **£700 a year** — real, but modest.
+> Accountancy fees of **£1,000–£2,000** can wipe out that saving at lower profits.
+> The decision is rarely just about tax — liability, admin, IR35 and pensions all matter.
+
+## How a sole trader is taxed
+
+As a sole trader, you and the business are legally the same person. There is no corporation tax, no Companies House filing, and your profit is simply your income. You pay **income tax** and **Class 4 National Insurance** through Self Assessment.
+
+For 2025/26 that means, on your profit:
+
+- Income tax: 20% above the £12,570 personal allowance, then 40% above £50,270.
+- Class 4 NI: 6% on profit between £12,570 and £50,270, then 2% above.
+- Class 2 NI is now voluntary for most, though it still protects your State Pension record.
+
+It is gloriously simple. The money is yours the moment it lands, and your admin is one tax return a year.
+
+## How a limited company is taxed
+
+A company is a separate legal person. Its profit belongs to the company until you extract it, and it is taxed twice on the way to your pocket: once as **corporation tax** inside the company, then again as **dividend tax** when you pay yourself.
+
+The classic tax-efficient owner-director takes a small salary up to the personal allowance — £12,570 — and draws the rest as dividends. The salary is a deductible expense that reduces corporation tax, while dividends escape National Insurance entirely and are taxed at lower headline rates (8.75% / 33.75% / 39.35%) after a £500 dividend allowance.
+
+That structure is where the saving comes from. Let us run it.
+
+## The worked example: £60,000 profit
+
+Take a business making £60,000 of profit before the owner pays themselves anything.
+
+**As a sole trader:**
+
+> [!STEPS]
+> 1. **Income tax** — 20% on £37,700 plus 40% on the next £9,730 = £7,540 + £3,892 = £11,432.
+> 2. **Class 4 NI** — 6% on £37,700 plus 2% on £9,730 = £2,262 + £195 = £2,457.
+> 3. **Take-home** — £60,000 − £11,432 − £2,457 = about **£46,111**.
+
+**As a limited company** (salary £12,570 + dividends):
+
+> [!STEPS]
+> 1. **Employer NI on the salary** — 15% on the slice above £5,000 = about £1,136.
+> 2. **Corporation tax** — company profit after salary and employer NI is about £46,295, taxed at 19% = about £8,796.
+> 3. **Dividends drawn** — £46,295 − £8,796 = about £37,499.
+> 4. **Dividend tax** — after the £500 allowance, about £36,999 taxed at 8.75% = about £3,237.
+> 5. **Take-home** — £12,570 salary + £37,499 dividends − £3,237 = about **£46,831**.
+
+So at £60,000 profit the limited company leaves you roughly **£720 better off** — before you have paid for the privilege of running it.
+
+> [!STAT] £720 | Approximate annual tax saving from a limited company at £60,000 profit, 2025/26
+
+## Why that saving is smaller than the headlines suggest
+
+Two things have eaten into the company advantage in recent years. The **dividend allowance** has shrunk to just £500, so almost all your dividends are now taxable. And **employer National Insurance** rose to 15% from April 2025 with the threshold dropping to £5,000, which means even a modest director's salary now triggers a real NI bill. The structure still wins at £60,000, but by hundreds rather than thousands.
+
+> [!WARNING] Accountancy fees can erase the saving
+> A limited company realistically needs an accountant — annual accounts, a corporation tax return, a confirmation statement and payroll all have to be filed correctly. That is commonly £1,000–£2,000 a year. At £60,000 profit, the £720 tax saving does not cover it. The company only pulls clearly ahead once profits are high enough that the saving outgrows the fees.
+
+You can run both scenarios at your own profit level with our [sole trader vs limited calculator](/sole-trader-vs-limited), and fine-tune the director's pay split with the [salary vs dividend tool](/salary-vs-dividend-calculator).
+
+## Where the crossover really sits
+
+As a rough guide:
+
+| Annual profit | Usually better |
+|---|---|
+| Under £30,000 | Sole trader (saving is tiny, admin not worth it) |
+| £30,000–£50,000 | Roughly even — depends on fees and whether you draw it all |
+| £50,000+ | Limited company starts to win clearly |
+| £100,000+ | Limited company, with real planning value |
+
+The company advantage grows with profit, and it grows further if you do **not** need to draw every penny — because you can leave money in the company after corporation tax and pay yourself in a later, lower-income year, smoothing your tax over time. A sole trader cannot do that; their profit is taxed the year it is earned whether they spend it or not.
+
+## It was never only about tax
+
+If you fixate on the £720, you will make a bad decision. The things that often matter more:
+
+- **Limited liability** — a company ring-fences your personal assets if the business fails or is sued. For a sole trader, the buck stops at your house.
+- **Credibility** — some clients, particularly larger ones, will only contract with a limited company.
+- **Admin and privacy** — company accounts and your director details are public at Companies House, and the filing burden is real.
+- **Pensions** — employer pension contributions from a company are a corporation-tax-deductible way to extract profit that often beats both salary and dividends.
+- **IR35** — if you work like an employee through your own company for a single client, the off-payroll rules can strip out most of the tax benefit. Our [IR35 guide](/contractor-ir35) covers when this bites.
+
+## So which should you choose?
+
+If you are testing an idea, earning modestly, or value simplicity above all, **stay a sole trader** — incorporate later when the numbers justify it, which is a routine thing to do. If your profits comfortably clear £50,000, you want limited liability, or you do not need to draw all your income each year, **the company probably wins** — just go in with your eyes open about the admin and fees.
+
+> [!FAQ]
+> Q: At what profit does a limited company become worthwhile?
+> A: There is no fixed line, but the tax saving usually only outweighs accountancy fees once profits are comfortably above £30,000–£40,000, and it becomes clearly worthwhile from around £50,000 upward. Below that, sole trading is simpler and barely costs more.
+>
+> Q: Do I pay tax twice with a limited company?
+> A: In effect, yes — the company pays corporation tax on its profit, then you pay dividend tax when you extract that profit. The salary-plus-dividend structure is designed to keep the combined bill below what a sole trader would pay at higher profits.
+>
+> Q: Can I switch from sole trader to limited later?
+> A: Yes, and many businesses do exactly that once profits grow. You transfer the trade and assets into the new company. There is no need to incorporate on day one.
+>
+> Q: Does the small dividend allowance change the answer?
+> A: It narrows the company's advantage but does not remove it at higher profits. With the allowance down to £500, nearly all dividends are taxable, which is why the saving at £60,000 is hundreds rather than thousands of pounds.
+>
+> Q: What about leaving money in the company?
+> A: A company lets you retain post-tax profit and draw it in a later year — useful if your income varies or you want to stay under a tax threshold. This flexibility is one of the strongest non-headline reasons to incorporate.
+
+Figures are 2025/26 estimates for England, Wales and Northern Ireland and ignore student loans, pension contributions and your personal circumstances. Take tailored advice before changing your business structure.
+`.trim(),
+  },
+  {
+    slug: 'first-time-buyer-stamp-duty-2025-26',
+    title: "First-Time Buyer Stamp Duty in 2025/26: What You'll Really Pay",
+    description:
+      'The 2025/26 first-time buyer stamp duty rules explained with worked examples — the new £300,000 relief threshold, the brutal £500,000 cliff edge, and how to avoid losing the relief.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'property',
+    tags: ['Stamp Duty', 'First-Time Buyer', 'Buying', 'SDLT'],
+    relatedTools: [
+      { href: '/stamp-duty-calculator', label: 'Stamp Duty (SDLT)', hint: '2025/26 rates · FTB · surcharges' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/house-buying-costs', label: 'House Buying Costs', hint: 'Total cash to buy' },
+    ],
+    body: `
+Stamp duty is the tax nobody budgets for until the solicitor asks for it, and for first-time buyers the rules changed for the worse in April 2025. The relief that used to shelter purchases up to £425,000 was cut back, and a hard cliff edge at £500,000 now catches anyone buying a slightly pricier first home. If you are saving for a deposit, knowing exactly where these lines fall can change which homes you even look at. Here is what first-time buyers actually pay in 2025/26.
+
+> [!WARNING] The rules got tighter in April 2025
+> The first-time buyer nil-rate band dropped from £425,000 to **£300,000**, and the maximum price you can claim any relief on fell from £625,000 to **£500,000**. If your first home costs more than £500,000, you get **no first-time buyer relief at all** and pay the standard rates on the whole price.
+
+## What stamp duty is
+
+Stamp Duty Land Tax (SDLT) is a tax on buying property in England and Northern Ireland. (Scotland has its own LBTT and Wales its own LTT, with different thresholds.) It is charged in bands, like income tax — you pay each rate only on the slice of the price that falls in that band, not on the whole purchase.
+
+For most buyers the standard 2025/26 residential rates are:
+
+| Portion of price | Standard rate |
+|---|---|
+| Up to £125,000 | 0% |
+| £125,001 to £250,000 | 2% |
+| £250,001 to £925,000 | 5% |
+| £925,001 to £1.5m | 10% |
+| Above £1.5m | 12% |
+
+First-time buyers get a more generous version of this — but only within limits.
+
+## The first-time buyer relief, in plain terms
+
+If you (and anyone you are buying with) have never owned a home anywhere in the world, and the property costs **£500,000 or less**, you qualify for first-time buyer relief:
+
+- **0% on the first £300,000**
+- **5% on the portion from £300,001 to £500,000**
+
+> [!KEY] The two numbers that decide everything
+> Buy at **£300,000 or under** → you pay **zero** stamp duty.
+> Buy between **£300,001 and £500,000** → you pay 5% only on the slice above £300,000.
+> Buy at **£500,001 or more** → relief vanishes entirely and you pay **standard rates on the whole price**.
+
+## Worked examples
+
+Nothing makes this clearer than real numbers. Here is what three first-time buyers pay.
+
+**A £295,000 flat:** the whole price is under £300,000, so the bill is **£0**. Nothing to pay.
+
+**A £425,000 house:**
+
+> [!STEPS]
+> 1. **First £300,000** — taxed at 0% = £0.
+> 2. **Remaining £125,000** (£300,001 to £425,000) — taxed at 5% = £6,250.
+> 3. **Total stamp duty** — **£6,250**.
+
+**A £510,000 house** — just over the cliff, so no relief:
+
+> [!STEPS]
+> 1. **First £125,000** — 0% = £0.
+> 2. **£125,001 to £250,000** — 2% on £125,000 = £2,500.
+> 3. **£250,001 to £510,000** — 5% on £260,000 = £13,000.
+> 4. **Total stamp duty** — **£15,500**.
+
+> [!STAT] £15,500 | Stamp duty on a £510,000 first home — versus £10,500 at £500,000
+
+## The cliff edge that can cost you thousands
+
+Look closely at that last example. A first-time buyer at exactly £500,000 pays £10,500 (0% on £300k, 5% on £200k). Push the price just £10,000 higher to £510,000 and the bill jumps to £15,500 — a £5,000 increase for £10,000 of house, because you lose the relief on the entire purchase, not just the bit over £500,000.
+
+This makes the £500,000 mark a genuine negotiating line. If a property is listed at £505,000–£520,000 and you are a first-time buyer, getting the price agreed at £500,000 or below is worth far more than the few thousand pounds of headline discount — it can swing the relief back into play. Run any price through our [stamp duty calculator](/stamp-duty-calculator) to see the exact figure before you offer.
+
+## How to keep the relief
+
+A few practical points that trip people up:
+
+- **Everyone buying must be a first-time buyer.** If you buy with a partner who has owned before — even abroad, even years ago — the relief is lost for the whole purchase. This catches a lot of couples.
+- **Inherited property counts.** If you have ever owned a share of a property, including one you inherited, you are not a first-time buyer.
+- **It is the price, not the mortgage, that matters.** The £500,000 test is on the purchase price, regardless of how much you are borrowing.
+- **You normally have 14 days** from completion to file the return and pay, which your solicitor handles — but the money has to be ready, so build it into your savings target.
+
+## Don't forget the rest of the buying costs
+
+Stamp duty is only one line in the bill. A first-time buyer also needs a deposit, solicitor's fees, survey costs, mortgage arrangement fees and moving costs. On a £425,000 purchase the £6,250 of stamp duty might sit alongside £2,000 of legal and survey fees and a 10% deposit of £42,500. Our [house buying costs calculator](/house-buying-costs) totals the cash you actually need on the day, and the [mortgage calculator](/mortgage-calculator) shows what the monthly repayments look like once you are in.
+
+> [!FAQ]
+> Q: Do first-time buyers pay stamp duty in 2025/26?
+> A: Only above £300,000. There is no stamp duty on a first home costing £300,000 or less. Between £300,001 and £500,000 you pay 5% on the portion above £300,000. Above £500,000 you lose the relief and pay standard rates on the whole price.
+>
+> Q: What changed in April 2025?
+> A: The first-time buyer nil-rate band fell from £425,000 to £300,000, and the maximum eligible price dropped from £625,000 to £500,000. Both changes made stamp duty more expensive for first-time buyers of mid-to-higher priced homes.
+>
+> Q: I'm buying with my partner who owned a home before — do we still get relief?
+> A: No. Every buyer must be a first-time buyer for the relief to apply. If one of you has previously owned property anywhere in the world, the purchase is taxed at standard rates.
+>
+> Q: Is stamp duty the same across the UK?
+> A: No. SDLT applies in England and Northern Ireland. Scotland uses Land and Buildings Transaction Tax (LBTT) and Wales uses Land Transaction Tax (LTT), each with its own bands and first-time buyer treatment.
+>
+> Q: Can I add the stamp duty to my mortgage?
+> A: Stamp duty must usually be paid in cash shortly after completion, not borrowed as part of the mortgage. Some buyers increase their loan elsewhere to free up cash, but the tax itself is a separate, upfront cost to budget for.
+
+Figures are 2025/26 estimates for England and Northern Ireland. Always confirm your exact liability with your conveyancer before committing, and treat calculator results as a guide.
+`.trim(),
+  },
+  {
     slug: 'uk-skilled-worker-visa-salary-threshold-2026',
     title: 'UK Skilled Worker Visa Salary Threshold 2026 — Full List by Job',
     description:
