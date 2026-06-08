@@ -56,6 +56,562 @@ export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'universal-credit-taper-explained-2025-26',
+    title: 'Universal Credit and the 55% Taper, Explained With Examples',
+    description:
+      'How Universal Credit really works in 2025/26 — the standard allowance, work allowance and the 55% earnings taper — with plain worked examples showing why work always pays.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 11,
+    category: 'benefits',
+    tags: ['Universal Credit', 'Benefits', 'Work Allowance'],
+    relatedTools: [
+      { href: '/universal-credit-calculator', label: 'Universal Credit', hint: 'Allowance + elements' },
+      { href: '/childcare-calculator', label: 'Childcare Costs', hint: 'Free hours + TFC' },
+      { href: '/council-tax-support-checker', label: 'Council Tax Support', hint: 'Reduction eligibility' },
+    ],
+    body: `
+There is a stubborn myth that being on Universal Credit means you are better off not working, or that earning an extra pound gets that pound snatched straight back. Neither is true, and the misunderstanding costs people real money — turning down shifts or hours that would have left them better off. The reality is a system built specifically so that work always pays, through something called the taper. Here is how it actually works in 2025/26.
+
+> [!KEY] The short version
+> Your maximum Universal Credit is a **standard allowance** plus extra **elements** for children, housing and disability.
+> If you have children or limited capability for work, you get a **work allowance** — earnings you keep in full.
+> Above that, UC drops by **55p for every £1** you earn — not pound for pound.
+> Because the taper is 55%, not 100%, you are **always** better off overall for working more.
+
+## What makes up your Universal Credit
+
+Universal Credit is not a single fixed payment. It is built up from parts, then reduced by your earnings. The starting point is the **standard allowance**, which depends on your age and whether you are single or a couple. For 2025/26, monthly:
+
+| Your situation | Standard allowance (monthly) |
+|---|---|
+| Single, under 25 | £316.98 |
+| Single, 25 or over | £400.14 |
+| Couple, both under 25 | £497.55 |
+| Couple, one 25 or over | £628.10 |
+
+On top of that you may get **elements**:
+
+- A **child element** for each child (subject to the two-child limit for most families).
+- A **housing element** towards rent.
+- An **LCWRA element** if you have limited capability for work and work-related activity.
+- A **childcare element** worth up to 85% of childcare costs.
+- A **carer element** if you care for someone 35+ hours a week.
+
+Add the standard allowance and your elements together and you have your **maximum** Universal Credit — what you would get with no earnings.
+
+## The work allowance and the 55% taper
+
+This is the part people get wrong. If you have children or limited capability for work, you get a **work allowance** — an amount you can earn each month before UC is reduced at all:
+
+- **£411 a month** if you also get help with housing costs.
+- **£684 a month** if you do not.
+
+Earn below your work allowance and your UC is untouched. Earn above it and UC falls by **55p for every extra £1** of take-home pay. It does not vanish; it tapers.
+
+> [!STAT] 55p | How much Universal Credit falls for each extra £1 you earn above the work allowance
+
+## A worked example
+
+Meet a single parent, over 25, with one child and £600 of monthly rent. Their maximum UC is built like this:
+
+> [!STEPS]
+> 1. **Standard allowance** — £400.14.
+> 2. **Child element** — £339.00.
+> 3. **Housing element** — £600.00.
+> 4. **Maximum UC** — about £1,339 a month with no earnings.
+
+Now they take a part-time job paying £800 a month after tax. Because they have a child and get housing help, their work allowance is £411:
+
+> [!STEPS]
+> 1. **Earnings above the work allowance** — £800 − £411 = £389.
+> 2. **Taper reduction** — £389 × 55% = about £214.
+> 3. **UC now paid** — £1,339 − £214 = about £1,125.
+> 4. **Total monthly income** — £1,125 UC + £800 wages = **£1,925**.
+
+Compare that to not working: £1,339 of UC and nothing else. By working, they are about **£586 a month better off**. Every hour worked adds to their income — that is the whole point of the taper. You can run your own household through the [Universal Credit calculator](/universal-credit-calculator) to see your figures.
+
+## The savings trap people forget
+
+UC is means-tested on capital as well as income:
+
+- **Under £6,000** of savings: ignored entirely.
+- **£6,000 to £16,000**: treated as "tariff income" of £4.35 a month for each £250 (or part) above £6,000.
+- **Over £16,000**: no Universal Credit at all.
+
+> [!WARNING] The £16,000 cliff is absolute
+> If your savings or capital exceed £16,000, your claim stops completely — even with a very low income. This catches people who receive an inheritance or a redundancy payment. Some capital, like a working-age pension pot, is disregarded, so check the rules before assuming you are excluded.
+
+## Childcare: the 85% element
+
+If you work and pay for childcare, UC can repay up to **85%** of your costs, capped at roughly £1,015 a month for one child and £1,739 for two or more. The catch is that you usually have to pay the provider first and claim the money back, and report it each month. It cannot be combined with Tax-Free Childcare — you choose one. Our [childcare calculator](/childcare-calculator) compares the two so you pick the better deal.
+
+## Why "better off not working" is a myth
+
+Under the old benefits system, some people genuinely faced losing nearly all extra income to withdrawal rates above 90%. Universal Credit was designed to end that. With a single 55% taper and a work allowance on top, the maths almost always favours working more. There are edge cases — the benefit cap, very high rents, or the loss of passported benefits — but for the typical household, an extra shift means more money in the bank, not less.
+
+> [!FAQ]
+> Q: Will I lose all my Universal Credit if I get a job?
+> A: No. UC reduces gradually as you earn, by 55p per £1 above your work allowance, so you keep a meaningful share of every pound. It only reaches zero once your earnings are high enough to taper the whole award away.
+>
+> Q: What is the work allowance?
+> A: It is the amount you can earn each month before the taper starts, available if you have children or limited capability for work — £411 a month if you get housing support, £684 if you do not.
+>
+> Q: How is Universal Credit paid?
+> A: As a single monthly payment in arrears, covering you and your partner if you have one. Most elements are combined into that one payment.
+>
+> Q: Does the two-child limit affect me?
+> A: For most families, the child element is only paid for the first two children born after 6 April 2017, with limited exceptions. Older children and certain circumstances are treated differently.
+>
+> Q: Can I get Universal Credit with savings?
+> A: Yes, up to £16,000. Savings between £6,000 and £16,000 reduce your award through tariff income; above £16,000 you cannot usually claim at all.
+
+Figures are 2025/26 estimates and simplified — they exclude the benefit cap, deductions and individual circumstances. Use the official gov.uk calculator or a welfare adviser for an exact figure.
+`.trim(),
+  },
+  {
+    slug: 'electric-car-vs-petrol-running-cost-2026',
+    title: 'Is an Electric Car Really Cheaper to Run Than Petrol in 2026?',
+    description:
+      'A straight answer on electric vs petrol running costs in 2026 — home charging versus public, the new EV road tax, insurance and depreciation, with the real cost per mile.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 11,
+    category: 'motoring',
+    tags: ['Electric Cars', 'Running Costs', 'EV', 'Fuel'],
+    relatedTools: [
+      { href: '/ev-charging-cost', label: 'EV Charging Cost', hint: 'Home vs public' },
+      { href: '/fuel-cost-calculator', label: 'Fuel Cost', hint: 'Per journey & year' },
+      { href: '/vehicle-tax-calculator', label: 'Vehicle Tax (VED)', hint: 'CO2 + standard rate' },
+    ],
+    body: `
+"Electric cars are cheaper to run" is one of those claims that is true, false, and complicated all at once — depending entirely on where you charge. Plug in at home overnight and the savings against petrol are enormous. Rely on public rapid chargers and you might save almost nothing. Add in the road tax that EVs now pay from April 2025, plus insurance and depreciation, and the picture deserves an honest look. Here it is for 2026.
+
+> [!KEY] The honest answer
+> Charged **at home on an off-peak tariff**, an EV costs about **2p a mile** versus roughly **14p** for a 45 MPG petrol car.
+> Charged mostly on **public rapids** (60–85p/kWh), the cost can rival petrol.
+> **EVs now pay road tax** (£195 standard) since April 2025 — the exemption is gone.
+> Your **home-versus-public charging split** decides whether you actually save.
+
+## The number that matters: cost per mile
+
+Strip away the noise and running cost comes down to one figure — pence per mile — built from two numbers: how far the car travels per kWh (its efficiency, typically 3 to 4 miles/kWh) and what you pay per kWh.
+
+| Where you charge | Price per kWh | Cost per mile (at 3.5 mi/kWh) |
+|---|---|---|
+| Home, off-peak EV tariff | about 7p | about 2p |
+| Home, standard cap rate | about 27p | about 8p |
+| Public rapid charger | 60–85p | about 20p |
+
+Now compare petrol. A 45 MPG car at £1.40 a litre costs about **14p a mile** in fuel. So a home-charged EV is roughly seven times cheaper per mile, while a public-only EV is actually *dearer* than petrol. The whole argument lives in that table.
+
+## A full-year comparison
+
+Take someone driving 9,000 miles a year who charges 80% at home and 20% on public rapids:
+
+> [!STEPS]
+> 1. **Energy used** — 9,000 ÷ 3.5 = about 2,570 kWh a year.
+> 2. **Home charging** — 80% at 7p = about £144.
+> 3. **Public charging** — 20% at 75p = about £386.
+> 4. **Total charging cost** — about £530 a year.
+
+The equivalent 45 MPG petrol car covering the same 9,000 miles burns roughly £1,270 of fuel. So this driver saves about **£740 a year on energy alone**. Our [EV charging calculator](/ev-charging-cost) lets you set your own split and tariff, and the [fuel cost calculator](/fuel-cost-calculator) does the petrol side.
+
+> [!STAT] £740 | Typical yearly energy saving for a mostly-home-charged EV vs petrol
+
+## The costs people forget
+
+Energy is not the whole story. Three other lines can shift the verdict:
+
+- **Road tax.** Since 1 April 2025, electric cars pay Vehicle Excise Duty — a £10 first-year rate then the £195 standard rate, plus the £425 expensive-car supplement if the list price topped £40,000 (which many EVs do). The free-tax era is over. Check yours on the [vehicle tax calculator](/vehicle-tax-calculator).
+- **Insurance.** EVs can cost more to insure — pricier parts, specialist repairs and higher values. Always quote before assuming savings.
+- **Depreciation.** This is the wild card. EV used values have been volatile, and a car that loses value faster can wipe out years of fuel savings. Buy wisely.
+
+> [!WARNING] No home charger changes everything
+> The entire EV cost advantage assumes cheap home charging. Without off-street parking and a home charger, you depend on public networks at 60–85p/kWh, and the running-cost case largely collapses. Be brutally honest about where you will actually charge before you buy.
+
+## Servicing: a quiet EV win
+
+One area where EVs reliably save is maintenance. No oil changes, no cambelt, no exhaust, far fewer moving parts and regenerative braking that spares the brake pads. Servicing is typically cheaper and less frequent — a genuine, if undramatic, saving that adds up over years of ownership.
+
+## So, cheaper or not?
+
+If you can charge at home on an off-peak tariff and you do average mileage, **yes — clearly cheaper to run**, often by £700+ a year on energy plus servicing savings, even after the new road tax. If you would rely on public rapid charging, the honest answer is **probably not** — you would buy an EV for the driving experience and emissions, not to save money. The deciding factor is not the car. It is the plug you use.
+
+> [!FAQ]
+> Q: How much does it cost to charge an electric car at home?
+> A: On a standard tariff, about 8p a mile; on a dedicated off-peak EV tariff around 7p/kWh, roughly 2p a mile — far cheaper than petrol at about 14p a mile.
+>
+> Q: Do electric cars pay road tax now?
+> A: Yes. From 1 April 2025 EVs pay Vehicle Excise Duty — a £10 first-year rate then £195 standard, plus the expensive-car supplement if the list price was over £40,000.
+>
+> Q: Is public charging really as expensive as petrol?
+> A: It can be. Rapid public chargers often cost 60–85p/kWh, working out around 20p a mile — similar to or more than petrol. Home charging is where EVs save.
+>
+> Q: Are electric cars cheaper to service?
+> A: Generally yes. With no oil, exhaust or cambelt and fewer moving parts, EV servicing is usually cheaper and less frequent than for a petrol car.
+>
+> Q: Will an EV save me money overall?
+> A: If you charge mostly at home on an off-peak tariff, very likely. If you depend on public rapids, probably not — weigh insurance and depreciation alongside energy before deciding.
+
+Figures are 2026 estimates and vary with tariffs, driving style, weather and model. Treat the calculators as a guide and get your own insurance and charging quotes.
+`.trim(),
+  },
+  {
+    slug: 'ofgem-energy-price-cap-explained-2025-26',
+    title: 'How the Ofgem Price Cap Actually Works (And Why Your Bill Differs)',
+    description:
+      'The Ofgem energy price cap explained for 2025/26 — what it really limits, why it is not a cap on your total bill, how standing charges work, and how to cut what you pay.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'energy',
+    tags: ['Energy Bills', 'Price Cap', 'Ofgem'],
+    relatedTools: [
+      { href: '/energy-bill', label: 'Energy Bill', hint: 'Ofgem price cap' },
+      { href: '/solar-panel-roi', label: 'Solar Panel ROI', hint: 'Payback + export' },
+      { href: '/heat-pump-calculator', label: 'Heat Pump', hint: 'Running cost vs gas' },
+    ],
+    body: `
+Every three months the news announces a new energy "price cap" figure, and every three months people misunderstand what it means. They hear "the cap is £1,800" and assume their bill cannot exceed £1,800. It can — easily. The cap does not limit your bill at all. It limits something else entirely, and knowing the difference is the first step to actually controlling what you pay. Here is how it really works in 2025/26.
+
+> [!WARNING] The cap is not a limit on your total bill
+> Ofgem's price cap limits the **unit rate** and the **standing charge** your supplier can charge — not the amount you owe. Use more energy and you pay more, with no ceiling. The "typical bill" figure you see in headlines is just the cap applied to an average household's usage.
+
+## The two parts of every energy bill
+
+For each fuel — gas and electricity — your bill is built from two components:
+
+- **The unit rate**: the price for each kWh of energy you actually use.
+- **The standing charge**: a fixed daily fee just for being connected, whether you use any energy or not.
+
+For the current cap window, the GB-average capped rates are roughly:
+
+| | Unit rate | Standing charge |
+|---|---|---|
+| Electricity | about 27p per kWh | about 54p per day |
+| Gas | about 7p per kWh | about 33p per day |
+
+Multiply your usage by the unit rate, add a year of standing charges, and that is your bill. The cap sets the *rates* in that calculation — not the total. Two homes on the same capped tariff can have wildly different bills because one uses twice the energy.
+
+## Why the headline "typical bill" misleads
+
+When Ofgem quotes a figure like "£1,800 a year," that is the cap applied to its **typical domestic consumption** — about 2,700 kWh of electricity and 11,500 kWh of gas a year. If your home is bigger, colder, or busier, you will use more and pay more. If you are out all day in a small flat, you will pay less. The headline number describes an imaginary average household, not you. Our [energy bill calculator](/energy-bill) lets you put in your own kWh from a recent bill for a figure that actually reflects your home.
+
+> [!STAT] 2,700 / 11,500 | The kWh of electricity / gas Ofgem assumes for its "typical" household
+
+## Standing charges: paying before you use anything
+
+The part that frustrates people most is the standing charge. Across gas and electricity it now adds up to over **£300 a year** before you have switched on a single light. It covers the cost of the networks, meters and various policy costs, and crucially it is the same whether you are away for a month or running everything at once. Low users feel this keenly — a tiny flat used occasionally can still cost hundreds a year in standing charges alone.
+
+## How to actually cut your bill
+
+Because the cap fixes the rates, the only levers left are how much you use and which tariff you are on:
+
+> [!CHECKLIST] Practical ways to lower your bill
+> - Turn the thermostat down by 1°C — heating dominates gas use and this alone can cut around 10% of heating cost.
+> - Draught-proof, and improve loft and cavity-wall insulation where you can.
+> - Submit regular meter readings so you are billed on real usage, not estimates.
+> - Compare any fixed deal's unit rate against the current cap before switching.
+> - Consider time-of-use tariffs if you can shift usage to cheaper overnight hours.
+
+For bigger structural savings, two technologies change the maths entirely. [Solar panels](/solar-panel-roi) cut the electricity you buy from the grid, and a [heat pump](/heat-pump-calculator) can lower heating costs — both worth modelling against your actual usage.
+
+## Should you fix your tariff?
+
+A fixed deal gives certainty and can sometimes beat the cap, but it locks you in and may carry exit fees. The cap, by contrast, moves every quarter — sometimes down, sometimes up. There is no universal right answer: compare the fixed unit rate and standing charge against the current cap, factor in your appetite for certainty, and decide. Do not assume "fixed" automatically means "cheaper."
+
+> [!FAQ]
+> Q: Does the price cap limit my total energy bill?
+> A: No. It caps the unit rate and standing charge your supplier can charge. If you use more energy, you pay more — there is no ceiling on the total amount.
+>
+> Q: How often does the cap change?
+> A: Every quarter. Ofgem announces the next cap a few weeks before each three-month window begins, so rates can shift up or down four times a year.
+>
+> Q: Why is my bill different from the headline figure?
+> A: The headline "typical bill" applies the cap to an average household's usage. Your bill depends on your actual consumption, your region's rates, and your payment method.
+>
+> Q: What is a standing charge and can I avoid it?
+> A: It is a fixed daily fee for being connected to the gas and electricity networks, payable regardless of usage. A few tariffs offer lower or zero standing charges but usually with higher unit rates — worth it only for very low users.
+>
+> Q: Is a fixed tariff cheaper than the cap?
+> A: Sometimes. Compare the fixed unit rate and standing charge against the current cap before committing, and check for exit fees. Fixing buys certainty, not guaranteed savings.
+
+Figures are estimates at GB-average Direct Debit cap rates for the current window. Your real rates vary by region and payment method, and the cap changes every quarter.
+`.trim(),
+  },
+  {
+    slug: 'cost-of-divorce-england-2025',
+    title: 'What Does a Divorce Really Cost in England in 2025?',
+    description:
+      'The real cost of divorce in England in 2025 — the £593 court fee, why you still need a financial order, solicitor fee ranges, and how contested cases run into five figures.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'family',
+    tags: ['Divorce', 'Family Law', 'Costs'],
+    relatedTools: [
+      { href: '/divorce-cost-calculator', label: 'Divorce Cost', hint: 'Court + legal fees' },
+      { href: '/child-maintenance-calculator', label: 'Child Maintenance', hint: 'CMS formula' },
+      { href: '/financial-settlement-calculator', label: 'Financial Settlement', hint: 'Asset split' },
+    ],
+    body: `
+Ask what a divorce costs and you will get answers ranging from "£593" to "tens of thousands." Both can be right, because the divorce itself and sorting out the money are two completely separate things — and it is the second that drives the bill. Since the no-fault rules arrived in 2022, ending the marriage on paper is cheap and straightforward. Deciding who gets what is where the cost lives. Here is the honest breakdown for England in 2025.
+
+> [!KEY] The short version
+> The divorce **court fee is fixed at £593**, the same whether you use a solicitor or not.
+> A straightforward, agreed divorce can be done yourself for little more than that fee.
+> You should still get a **financial order** (£53 court fee plus legal drafting) — without it, claims can resurface years later.
+> **Contested** cases over money or children are where costs run into the thousands, sometimes far more.
+
+## The court fee: a flat £593
+
+The application fee to divorce in England and Wales is **£593**. It is the same whether you apply on your own or jointly, and whether or not a solicitor is involved. If you are on a low income or certain benefits, the Help with Fees scheme may reduce or waive it. That single fee is the only unavoidable cost of the divorce itself.
+
+## The cheapest route: do it yourself
+
+Since the introduction of no-fault divorce, the process is a guided online application with a built-in minimum timeline of about 26 weeks. For a couple who agree, with no complications, there is genuinely nothing stopping you completing it yourselves for just the £593 (plus a few pounds for document copies). No blame, no court hearing, no solicitor required.
+
+## Where the real money goes: the finances
+
+Here is the crucial point that catches people out. **The divorce does not settle your finances.** Ending the marriage and dividing your money, property and pensions are separate legal steps. To make a financial agreement legally binding you need a **financial order** — often a consent order if you agree — which costs a £53 court fee plus whatever a solicitor charges to draft it (commonly a few hundred to a couple of thousand pounds).
+
+> [!WARNING] Skipping the financial order is the biggest mistake
+> If you divorce without a sealed financial order, your ex-spouse can bring a financial claim against you — sometimes years later, even after the divorce is final, and even against money you earn afterwards. A famous case saw a claim succeed more than two decades on. Only a court-sealed order gives you a clean break.
+
+## What solicitors actually cost
+
+Legal fees are the variable that turns a £600 divorce into a £10,000 one:
+
+| Route | Typical cost |
+|---|---|
+| DIY, agreed, no solicitor | £593 court fee only |
+| Solicitor, uncontested | £600–£1,500 |
+| Consent order drafting | £53 court fee + a few hundred to ~£1,500 legal |
+| Contested (money or children disputed) | £3,000–£15,000+ each, sometimes much more |
+
+The jump to the bottom row happens when you cannot agree and the matter heads toward court. Every letter, negotiation and hearing adds cost — to both sides. You can sketch your own likely range with the [divorce cost calculator](/divorce-cost-calculator).
+
+## Mediation: usually far cheaper than fighting
+
+Before most contested financial cases can go to court, you are expected to consider **mediation** — a trained neutral helping you reach agreement. At roughly £500 or so it is dramatically cheaper than litigation, faster, and tends to leave relationships less scorched, which matters enormously if you share children. It does not work for every couple, but where it does, it can save five figures.
+
+## The two things divorce does not include
+
+Two costs sit alongside the divorce and are handled separately:
+
+- **Child maintenance** — worked out by the Child Maintenance Service formula based on the paying parent's income, number of children and shared care. Estimate it with the [child maintenance calculator](/child-maintenance-calculator).
+- **Dividing assets** — the home, savings and pensions, which start from a position of equal sharing and adjust for needs. The [financial settlement calculator](/financial-settlement-calculator) gives a rough starting point, though real outcomes depend on your circumstances.
+
+> [!FAQ]
+> Q: How much is the divorce court fee in 2025?
+> A: It is £593 in England and Wales, regardless of whether you use a solicitor or apply jointly. Fee reductions are available on low incomes through Help with Fees.
+>
+> Q: Can I get divorced without a solicitor?
+> A: Yes. The no-fault process can be completed online yourself, but it is strongly advisable to get legal help with the financial settlement, which the divorce itself does not resolve.
+>
+> Q: Do I really need a financial order if we agree?
+> A: Yes. Only a court-sealed financial order makes your agreement binding and prevents future claims. An informal understanding, however amicable, leaves the door open.
+>
+> Q: Why are some divorces so expensive?
+> A: The divorce itself is cheap. Costs escalate when finances or children are disputed and the matter moves toward court, where legal fees on both sides can reach five figures.
+>
+> Q: How long does a divorce take?
+> A: The no-fault process has a built-in minimum of about 26 weeks (six months) from application to final order. Sorting out the finances can take longer and is handled in parallel.
+
+Figures are 2025 estimates for England and Wales. Scotland and Northern Ireland have separate processes. Solicitor ranges are indicative — always get written quotes.
+`.trim(),
+  },
+  {
+    slug: 'salary-sacrifice-pension-explained-2025-26',
+    title: 'Salary Sacrifice: A Pay Rise the Taxman Helps Fund',
+    description:
+      'How pension salary sacrifice works in 2025/26 — the income tax and National Insurance you save, a worked example, the employer NI bonus, and the traps to avoid.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'money',
+    tags: ['Salary Sacrifice', 'Pensions', 'Take-Home Pay', 'Tax'],
+    relatedTools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+    ],
+    body: `
+Salary sacrifice is one of the few genuinely free wins in personal finance, and most people who could use it do not. The idea sounds counterintuitive — agree to a lower salary — but what you are really doing is rerouting money into your pension before tax and National Insurance can touch it, often with your employer chipping in their saving too. Done right, it turns roughly £100 of "lost" salary into noticeably more than £100 in your pension. Here is exactly how it works in 2025/26.
+
+> [!KEY] The short version
+> You swap part of your **gross salary** for a pension contribution, so it is never taxed as income.
+> You save **income tax and employee National Insurance** on the sacrificed amount.
+> Many employers pass back their **15% employer NI saving** too, boosting your pot further.
+> Your take-home falls by **less** than the amount contributed — the taxman funds the gap.
+
+## What salary sacrifice actually is
+
+In a normal pension, you pay in from your take-home pay and claim some tax back. With **salary sacrifice**, you formally agree to a lower salary, and your employer pays the difference directly into your pension. Because that money never counts as your salary, it is never subject to income tax or National Insurance in the first place. It is the same destination — your pension — reached by a more tax-efficient route.
+
+## The savings, line by line
+
+Say you sacrifice £100 of monthly salary. As a basic-rate taxpayer you would otherwise have paid:
+
+- **20% income tax** on that £100 = £20.
+- **8% employee NI** = £8.
+
+So that £100 of gross salary was only ever going to be £72 in your pocket. Through sacrifice, the full £100 goes into your pension instead. Your take-home drops by just £72, but £100 lands in your pot — an instant uplift before any investment growth.
+
+> [!STAT] £72 | What £100 of pension salary sacrifice actually costs a basic-rate taxpayer in lost take-home
+
+For a higher-rate taxpayer it is even better: 40% tax plus 2% NI means £100 into the pension costs only about £58 of take-home.
+
+## The employer NI bonus
+
+Here is the part that makes salary sacrifice better than an ordinary pension. When you sacrifice salary, your **employer** also saves their National Insurance — 15% in 2025/26 — on the amount. Generous employers pass some or all of that saving into your pension on top. On a £100 sacrifice that is up to another £15, so £115 could land in your pot for your £72 of foregone take-home. Always check your scheme's rules to see whether the employer NI saving is shared.
+
+## A worked example
+
+Take someone earning £45,000 who decides to sacrifice 5% of salary — £2,250 a year — into their pension:
+
+> [!STEPS]
+> 1. **Salary for tax** drops from £45,000 to £42,750.
+> 2. **Tax and NI saved** on the £2,250 — about 20% + 8% = roughly £630.
+> 3. **Net take-home cost** — about £1,620 for the year.
+> 4. **Into the pension** — the full £2,250, plus any shared employer NI saving.
+
+So roughly £1,620 of reduced take-home becomes £2,250+ of retirement savings. Model the long-term effect with the [pension calculator](/pension-calculator), and check the take-home impact on the [take-home pay tool](/take-home-pay).
+
+## The traps to watch
+
+Salary sacrifice is powerful but not for everyone:
+
+> [!WARNING] You cannot sacrifice below the minimum wage
+> Salary sacrifice cannot reduce your effective pay below the National Minimum Wage. If you are a lower earner, your employer may have to limit or refuse the sacrifice. This is the most common reason a scheme cannot be used in full.
+
+Other points to keep in mind:
+
+- A lower headline salary can affect **mortgage borrowing**, life cover based on salary, and statutory payments like maternity pay — though pension contributions are usually viewed favourably by lenders.
+- It only helps if your employer **offers** a salary sacrifice scheme; not all do.
+- Contributions still count toward the **annual allowance** (usually £60,000), so very large sacrifices need checking.
+
+## Why it is the smartest use of a pay rise
+
+If you get a raise and do not need all of it, sacrificing the extra into your pension is often the most efficient thing you can do with it — especially if the rise pushes you over a threshold like £50,270 or £100,000, where each pound is taxed much harder. Sacrificing enough to drop back under the line can be worth far more than the contribution itself. It is the same lever, used deliberately.
+
+> [!FAQ]
+> Q: How does pension salary sacrifice save money?
+> A: You give up part of your gross salary in exchange for an employer pension contribution, so that money is never taxed as income or subject to National Insurance. Your take-home falls by less than the amount contributed.
+>
+> Q: How much does it actually cost me?
+> A: For a basic-rate taxpayer, about £72 of take-home for every £100 into the pension; for a higher-rate taxpayer, around £58 — before any employer NI saving is added.
+>
+> Q: What is the employer NI bonus?
+> A: When you sacrifice salary, your employer saves their 15% National Insurance on it. Many employers add some or all of that saving to your pension, making salary sacrifice more generous than a standard pension contribution.
+>
+> Q: Can everyone use salary sacrifice?
+> A: Only if your employer offers a scheme, and only down to the National Minimum Wage. Lower earners may be limited, and you should check the effect on mortgage applications and statutory pay.
+>
+> Q: Does it affect my State Pension?
+> A: Sacrifice usually keeps you above the level needed to protect your State Pension record, but very large reductions for low earners should be checked, as National Insurance credits depend on earnings.
+
+Figures are 2025/26 estimates for England, Wales and Northern Ireland. Salary sacrifice rules and scheme terms vary by employer — check yours and take advice for large contributions.
+`.trim(),
+  },
+  {
+    slug: 'how-much-mortgage-can-i-borrow-2025-26',
+    title: 'How Much Mortgage Can I Actually Borrow on My Salary?',
+    description:
+      'How much you can borrow for a mortgage in 2025/26 — the income multiple lenders use, affordability and stress tests, how deposit and debts change the figure, with examples.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'property',
+    tags: ['Mortgages', 'Affordability', 'Buying'],
+    relatedTools: [
+      { href: '/mortgage-affordability', label: 'Mortgage Affordability', hint: 'How much can I borrow?' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/deposit-calculator', label: 'Deposit Calculator', hint: 'How much & how long to save' },
+    ],
+    body: `
+Before you fall in love with a house, it pays to know the number that decides everything: how much a lender will actually let you borrow. It is rarely as much as people hope, and it is not a single figure — it flexes with your deposit, your debts and the lender's stress test. Get a realistic estimate first and you save yourself the heartbreak of viewing homes you can never finance. Here is how lenders work it out in 2025/26.
+
+> [!KEY] The short version
+> Most lenders cap borrowing at around **4 to 4.5 times** your annual income.
+> They then run an **affordability and stress test** on your actual outgoings, which can lower that.
+> Existing **debts, credit commitments and childcare** reduce how much you can borrow.
+> A bigger **deposit** unlocks lower rates and sometimes more generous lending.
+
+## The starting point: the income multiple
+
+The headline rule of thumb is the **income multiple**. Most lenders will advance roughly **4 to 4.5 times** your gross annual income, though some go higher for strong applicants or specific schemes. For a single applicant earning £40,000:
+
+> [!STEPS]
+> 1. **At 4x income** — £40,000 × 4 = £160,000.
+> 2. **At 4.5x income** — £40,000 × 4.5 = £180,000.
+> 3. **Joint applicants** combine incomes, so a couple earning £40,000 each could borrow toward £320,000–£360,000.
+
+That gives a ballpark, but it is only the ceiling. The actual offer comes from the affordability assessment.
+
+> [!STAT] 4–4.5x | The income multiple most UK lenders use as a starting point
+
+## The affordability and stress test
+
+Since the mortgage rules tightened after the financial crisis, lenders cannot just multiply your salary and lend. They must check you can afford the repayments — not only at today's rate, but at a higher **stressed** rate, to be sure you could cope if rates rose. They look at your real monthly picture:
+
+- Your take-home pay.
+- Committed outgoings: existing loans, credit cards, car finance, childcare.
+- Living costs and the number of dependants.
+
+If your outgoings are high relative to income, the amount you can borrow falls below the headline multiple. If you are debt-free with low commitments, you may reach or exceed it. Our [mortgage affordability calculator](/mortgage-affordability) applies this logic so you get a realistic figure, not just a multiple.
+
+## How debts shrink your borrowing
+
+This is where would-be buyers get caught out. Every monthly commitment reduces what a lender will offer, often by far more than the payment itself. A £250-a-month car finance deal can cut your maximum mortgage by several thousand pounds, because the lender projects that commitment across the affordability calculation. Clearing or reducing debts before you apply can meaningfully increase what you can borrow.
+
+> [!WARNING] Lenders see your credit commitments
+> Outstanding loans, credit-card balances, car finance, buy-now-pay-later and even a large agreed overdraft all show on your credit file and feed the affordability test. Tidy your finances for three to six months before applying — pay down balances and avoid new credit.
+
+## The deposit changes everything
+
+How much you put down does two things. First, it directly reduces how much you need to borrow. Second, it affects the **loan-to-value (LTV)** — the percentage of the property's value you are borrowing — which drives the interest rate you are offered:
+
+| Deposit | LTV | Typical effect |
+|---|---|---|
+| 5% | 95% | Highest rates, fewer deals |
+| 10% | 90% | Better choice and pricing |
+| 25%+ | 75% or less | Lowest rates, widest choice |
+
+A bigger deposit not only shrinks the loan but cuts the interest rate, lowering your monthly payment and improving affordability — a double benefit. The [deposit calculator](/deposit-calculator) shows how long it takes to save to each LTV band, and the [mortgage calculator](/mortgage-calculator) turns a loan size into a monthly repayment.
+
+## A realistic worked example
+
+A couple earning £35,000 and £30,000 — £65,000 combined — with a £30,000 deposit and no significant debts:
+
+> [!STEPS]
+> 1. **Income multiple** — £65,000 × 4.5 = about £292,500 maximum loan.
+> 2. **Add the deposit** — £292,500 + £30,000 = a property budget around £322,000.
+> 3. **Affordability check** — with no debts and modest outgoings, they likely reach near the top of that range; with a car loan and childcare, expect it to come down.
+
+It is a starting frame, not a promise — only a lender's full assessment (or a mortgage broker) gives a firm figure.
+
+> [!FAQ]
+> Q: How many times my salary can I borrow for a mortgage?
+> A: Typically 4 to 4.5 times your gross annual income, though some lenders offer more for strong applicants or specific schemes. The final amount depends on the affordability assessment.
+>
+> Q: Does my partner's income count?
+> A: Yes. Joint applicants combine incomes, so two earners can usually borrow considerably more than one — subject to the same affordability and stress testing.
+>
+> Q: Why can I borrow less than 4.5x my salary?
+> A: Existing debts, credit commitments, childcare and high living costs reduce affordability. The stress test also checks you could cope with higher interest rates, which can lower the figure.
+>
+> Q: How does my deposit affect borrowing?
+> A: A bigger deposit reduces the loan you need and lowers the loan-to-value, unlocking better interest rates and wider lender choice — which in turn improves affordability.
+>
+> Q: Should I use a mortgage broker?
+> A: A broker can search the whole market, match you to lenders likely to accept you, and often secure better rates — particularly useful if your situation is non-standard.
+
+Figures are 2025/26 estimates and illustrative only. Lending decisions depend on each lender's criteria and a full affordability assessment — treat calculator results as a guide and seek professional mortgage advice.
+`.trim(),
+  },
+  {
     slug: 'how-much-tax-on-50000-salary-uk-2025-26',
     title: 'How Much Tax Will I Pay on £50,000 in 2025/26?',
     description:
