@@ -7,9 +7,15 @@
 import type { CountryCode, CountryConfig } from './types';
 import { UK } from './uk';
 
-/** Final brand + domain. Update both when the domain is locked. */
-export const BRAND = 'UKDesk';
-export const SITE_ORIGIN = 'https://ukvisainfo.co.uk';
+/** Final brand + domain. Tamil உள்ளீடு "Ulleedu" = "input" — fitting for a
+ *  calculator/tools site. `.com` is the geo-neutral primary for multi-country.
+ *  NOTE: the live site still serves from ukvisainfo.co.uk until DNS cutover;
+ *  the full canonical/OG/sitemap/301 rename is a separate pass (see
+ *  MULTICOUNTRY.md) done when ulleedu.com resolves. */
+export const BRAND = 'Ulleedu';
+export const SITE_ORIGIN = 'https://ulleedu.com';
+/** Domain currently serving production until the DNS cutover. */
+export const LIVE_ORIGIN = 'https://ukvisainfo.co.uk';
 
 export const COUNTRIES: Partial<Record<CountryCode, CountryConfig>> = {
   uk: UK,
