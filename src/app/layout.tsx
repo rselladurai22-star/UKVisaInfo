@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import AppShell from '../components/AppShell';
 import AdSenseScript from '../components/AdSenseScript';
+import ConsentInit from '../components/ConsentInit';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import { PRIMARY_EDITOR, primaryEditorSchema } from '../data/editorialTeam';
 import { Inter, Hanken_Grotesk, JetBrains_Mono, Lora } from 'next/font/google';
@@ -184,6 +185,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
+        <ConsentInit />
         <AdSenseScript />
         <GoogleAnalytics />
       </head>
