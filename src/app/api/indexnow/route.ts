@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { BLOG_POSTS } from '../../../data/blog';
+import { BLOG_POSTS, BLOG_CATEGORIES, getPostsByCategory } from '../../../data/blog';
 import { VISA_DETAILS } from '../../../data/visaDetails';
-import { SOC_OCCUPATIONS } from '../../../data/socCodes';
-import { SPONSORS, SPONSOR_SECTORS } from '../../../data/sponsors';
 import { COUNTRIES } from '../../../data/countries';
-import { CITIES } from '../../../data/cities';
-import { NEWS_ITEMS } from '../../../data/news';
 import { VISA_VARIANTS } from '../../../data/visaVariants';
-import { socSlug, slugify } from '../../../lib/slug';
+import { HUB_TOOLS } from '../../../data/hubTools';
 
 const SITE = 'https://ukvisainfo.co.uk';
 const INDEXNOW_KEY = 'f5a5e346b62e95505a77586057fc7ba0';
@@ -16,35 +12,49 @@ const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 // Protect with a deploy secret so this can't be abused publicly
 const SUBMIT_SECRET = process.env.INDEXNOW_SUBMIT_SECRET;
 
+// Only indexable content is submitted. Noindex templated dumps (salary/SOC,
+// sponsors, uk-cities, postcode, news) are deliberately excluded.
 function buildAllUrls(): string[] {
-  const urls: string[] = [];
+  const seen = new Set<string>();
+  const add = (p: string) => {
+    const url = `${SITE}${p}`;
+    if (!seen.has(url)) seen.add(url);
+  };
 
-  const static_pages = [
-    '', '/visa-types', '/eligibility', '/costs', '/blog', '/news', '/settlement',
-    '/postcode', '/take-home-pay', '/stamp-duty-calculator', '/mortgage-affordability',
-    '/council-tax-band', '/cost-of-living-uk', '/vat-calculator', '/tax-code',
-    '/holiday-pay', '/salary-compare', '/cgt-calculator', '/pension-allowance',
-    '/state-pension', '/ulez-check', '/mot-check', '/energy-bill',
-    '/tools', '/tools/salary-checker', '/tools/sponsor-search',
-    '/tools/cost-calculator', '/visa-types/compare', '/tools/refusal-analyzer',
-    '/from', '/uk-cities', '/salary',
-  ];
-  for (const p of static_pages) urls.push(`${SITE}${p}`);
+  // Core content/info pages
+  for (const p of [
+    '', '/visa-types', '/visa-types/compare', '/eligibility', '/settlement', '/costs',
+    '/blog', '/tools', '/cost-of-living-uk', '/about',
+    '/tools/salary-checker', '/tools/sponsor-search', '/tools/cost-calculator', '/tools/refusal-analyzer',
+  ]) add(p);
 
-  for (const v of Object.values(VISA_DETAILS)) urls.push(`${SITE}/visa-types/${v.id}`);
-  for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
-    for (const variant of variants) urls.push(`${SITE}/visa-types/${slug}/${variant.id}`);
+  // Every live calculator/tool (auto from the hub index)
+  for (const groups of Object.values(HUB_TOOLS)) {
+    for (const g of groups) {
+      for (const item of g.items) {
+        if (item.status === 'live' && item.href.startsWith('/')) add(item.href);
+      }
+    }
   }
-  for (const p of BLOG_POSTS) urls.push(`${SITE}/blog/${p.slug}`);
-  for (const c of Object.values(COUNTRIES)) urls.push(`${SITE}/from/${c.code}`);
-  for (const c of Object.values(CITIES)) urls.push(`${SITE}/uk-cities/${c.code}`);
-  for (const o of SOC_OCCUPATIONS) urls.push(`${SITE}/salary/${socSlug(o.code, o.title)}`);
-  for (const s of SPONSOR_SECTORS) urls.push(`${SITE}/sponsors/sector/${slugify(s)}`);
-  const cities = Array.from(new Set(SPONSORS.map((s) => s.city).filter(Boolean)));
-  for (const c of cities) urls.push(`${SITE}/sponsors/city/${slugify(c)}`);
-  for (const n of NEWS_ITEMS) urls.push(`${SITE}/news/${n.slug}`);
 
-  return urls;
+  // Visa guides + variants
+  for (const v of Object.values(VISA_DETAILS)) add(`/visa-types/${v.id}`);
+  for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
+    for (const variant of variants) add(`/visa-types/${slug}/${variant.id}`);
+  }
+
+  // Blog posts + category silos
+  for (const p of BLOG_POSTS) add(`/blog/${p.slug}`);
+  for (const c of BLOG_CATEGORIES) {
+    if (getPostsByCategory(c.id).length > 0) add(`/blog/category/${c.id}`);
+  }
+
+  // Full country guides only (stubs are noindex)
+  for (const c of Object.values(COUNTRIES)) {
+    if (c.status === 'full') add(`/from/${c.code}`);
+  }
+
+  return Array.from(seen);
 }
 
 async function submitBatch(urls: string[]): Promise<{ ok: boolean; status: number; count: number }> {

@@ -5,6 +5,7 @@ import { COUNTRIES } from '../data/countries';
 import { CITIES } from '../data/cities';
 import { VISA_VARIANTS } from '../data/visaVariants';
 import { CATEGORIES } from '../data/tools';
+import { HUB_TOOLS } from '../data/hubTools';
 
 const SITE = 'https://ukvisainfo.co.uk';
 const TODAY = new Date().toISOString().split('T')[0];
@@ -79,6 +80,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: freq as MetadataRoute.Sitemap[number]['changeFrequency'],
       priority: prio,
     });
+  }
+
+  /* ── All live hub tools (auto — every live calculator, deduped) ──
+     Sourced from HUB_TOOLS so the sitemap can't drift behind new pages.
+     Skips 'soon' items and anything already listed above. */
+  const seen = new Set(urls.map((u) => u.url));
+  for (const groups of Object.values(HUB_TOOLS)) {
+    for (const g of groups) {
+      for (const item of g.items) {
+        if (item.status !== 'live' || !item.href.startsWith('/')) continue;
+        const url = `${SITE}${item.href}`;
+        if (seen.has(url)) continue;
+        seen.add(url);
+        urls.push({ url, lastModified: TODAY, changeFrequency: 'monthly', priority: 0.9 });
+      }
+    }
   }
 
   /* ── Category hubs ── */
