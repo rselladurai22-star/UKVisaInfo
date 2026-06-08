@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { BLOG_POSTS } from '../data/blog';
+import { BLOG_POSTS, BLOG_CATEGORIES, getPostsByCategory } from '../data/blog';
 import { VISA_DETAILS } from '../data/visaDetails';
 import { COUNTRIES } from '../data/countries';
 import { CITIES } from '../data/cities';
@@ -121,6 +121,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: p.updated,
       changeFrequency: 'monthly',
       priority: 0.7,
+    });
+  }
+
+  /* ── Blog category silos ── */
+  for (const c of BLOG_CATEGORIES) {
+    if (getPostsByCategory(c.id).length === 0) continue;
+    urls.push({
+      url: `${SITE}/blog/category/${c.id}`,
+      lastModified: TODAY,
+      changeFrequency: 'weekly',
+      priority: 0.6,
     });
   }
 

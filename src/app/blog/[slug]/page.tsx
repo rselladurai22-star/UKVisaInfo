@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, ArrowRight } from 'lucide-react';
-import { BLOG_POSTS, getPost } from '../../../data/blog';
+import { BLOG_POSTS, getPost, postCategory, getCategoryMeta, type BlogCategory, type RelatedTool } from '../../../data/blog';
 import { primaryEditorSchema, PRIMARY_EDITOR } from '../../../data/editorialTeam';
 import RelatedPosts from '../../../components/RelatedPosts';
 import ReadingProgress from '../../../components/blog/ReadingProgress';
@@ -31,6 +31,100 @@ const TAG_COLORS: Record<string, { bg: string; text: string }> = {
 };
 const tagStyle = (tag: string) =>
   TAG_COLORS[tag.toLowerCase().replace(/\s+/g, '-')] ?? { bg: 'rgba(14,20,36,0.07)', text: '#52596e' };
+
+// Category-aware end-of-article CTA + default cross-link tools (cluster model).
+const CATEGORY_CTA: Record<BlogCategory, { kicker: string; heading: string; sub: string; href: string; label: string; tools: RelatedTool[] }> = {
+  visa: {
+    kicker: 'Start here', heading: 'Find the right UK visa route in 60 seconds.',
+    sub: 'Take our free quiz to see which UK visa matches your situation.',
+    href: '/eligibility', label: 'Start eligibility check',
+    tools: [
+      { href: '/tools/cost-calculator', label: 'Visa Cost Calculator', hint: 'Fees · IHS · dependants' },
+      { href: '/ihs-calculator', label: 'IHS Calculator', hint: 'Healthcare surcharge' },
+      { href: '/skilled-worker-points-check', label: 'Skilled Worker Points', hint: 'Points · salary · sponsor' },
+    ],
+  },
+  money: {
+    kicker: 'Try the tool', heading: 'See your real take-home pay.',
+    sub: 'Free UK calculators for tax, National Insurance and net pay — 2025/26.',
+    href: '/take-home-pay', label: 'Open take-home calculator',
+    tools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+    ],
+  },
+  property: {
+    kicker: 'Try the tool', heading: 'Work out what your move really costs.',
+    sub: 'Mortgage, stamp duty and full buying-cost calculators for the UK.',
+    href: '/mortgage-calculator', label: 'Open mortgage calculator',
+    tools: [
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/stamp-duty-calculator', label: 'Stamp Duty (SDLT)', hint: '2025/26 rates · FTB' },
+      { href: '/house-buying-costs', label: 'House Buying Costs', hint: 'Total cash to buy' },
+    ],
+  },
+  business: {
+    kicker: 'Try the tool', heading: 'Run the numbers on your business.',
+    sub: 'VAT, corporation tax and structure calculators for 2025/26.',
+    href: '/corporation-tax-calculator', label: 'Open corporation tax calculator',
+    tools: [
+      { href: '/vat-calculator', label: 'VAT Calculator', hint: 'Add/remove 20% VAT' },
+      { href: '/corporation-tax-calculator', label: 'Corporation Tax', hint: '19% / 25% + marginal' },
+      { href: '/sole-trader-vs-limited', label: 'Sole Trader vs Limited', hint: 'Take-home compared' },
+    ],
+  },
+  benefits: {
+    kicker: 'Try the tool', heading: 'Check what support you can get.',
+    sub: 'Universal Credit, childcare and council-tax support calculators.',
+    href: '/universal-credit-calculator', label: 'Open Universal Credit calculator',
+    tools: [
+      { href: '/universal-credit-calculator', label: 'Universal Credit', hint: 'Allowance + elements' },
+      { href: '/childcare-calculator', label: 'Childcare Costs', hint: 'Free hours + TFC' },
+      { href: '/council-tax-support-checker', label: 'Council Tax Support', hint: 'Reduction eligibility' },
+    ],
+  },
+  family: {
+    kicker: 'Try the tool', heading: 'Estimate the cost of a separation.',
+    sub: 'Divorce, child maintenance and settlement calculators.',
+    href: '/divorce-cost-calculator', label: 'Open divorce cost calculator',
+    tools: [
+      { href: '/divorce-cost-calculator', label: 'Divorce Cost', hint: 'Court + legal fees' },
+      { href: '/child-maintenance-calculator', label: 'Child Maintenance', hint: 'CMS formula' },
+      { href: '/financial-settlement-calculator', label: 'Financial Settlement', hint: 'Asset split' },
+    ],
+  },
+  motoring: {
+    kicker: 'Try the tool', heading: 'Know what your car really costs.',
+    sub: 'Road tax, running costs and fuel calculators for the UK.',
+    href: '/car-running-costs', label: 'Open running-costs calculator',
+    tools: [
+      { href: '/vehicle-tax-calculator', label: 'Vehicle Tax (VED)', hint: 'CO2 + standard rate' },
+      { href: '/car-running-costs', label: 'Car Running Costs', hint: 'Total cost of ownership' },
+      { href: '/fuel-cost-calculator', label: 'Fuel Cost', hint: 'Per journey & year' },
+    ],
+  },
+  energy: {
+    kicker: 'Try the tool', heading: 'Cut your household bills.',
+    sub: 'Energy bill, solar and heat-pump calculators under the price cap.',
+    href: '/energy-bill', label: 'Open energy bill calculator',
+    tools: [
+      { href: '/energy-bill', label: 'Energy Bill', hint: 'Ofgem price cap' },
+      { href: '/solar-panel-roi', label: 'Solar Panel ROI', hint: 'Payback + export' },
+      { href: '/heat-pump-calculator', label: 'Heat Pump', hint: 'Running cost vs gas' },
+    ],
+  },
+  estate: {
+    kicker: 'Try the tool', heading: 'Plan your estate with confidence.',
+    sub: 'Inheritance tax, probate and gift calculators for 2025/26.',
+    href: '/inheritance-tax', label: 'Open inheritance tax calculator',
+    tools: [
+      { href: '/inheritance-tax', label: 'Inheritance Tax', hint: 'NRB £325k + RNRB' },
+      { href: '/estate-value-calculator', label: 'Estate Value', hint: 'Net estate for IHT' },
+      { href: '/gift-iht-calculator', label: 'Gift & 7-Year Rule', hint: 'Taper relief' },
+    ],
+  },
+};
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -79,11 +173,15 @@ export default async function BlogPostPage({ params }: RouteParams) {
   const faqSegs = segments.filter((s) => s.type === 'faq');
   const allFaqs = faqSegs.flatMap((s) => (s.type === 'faq' ? s.items : []));
 
-  const primaryTag = post.tags[0] ?? 'Guide';
   const updatedDays = Math.floor(
     (Date.now() - new Date(post.updated).getTime()) / (1000 * 60 * 60 * 24)
   );
   const isFresh = updatedDays <= 30;
+
+  const category = postCategory(post);
+  const catMeta = getCategoryMeta(category);
+  const cta = CATEGORY_CTA[category];
+  const relatedTools = post.relatedTools && post.relatedTools.length ? post.relatedTools : cta.tools;
 
   // Plain-text projection of the markdown body for Article schema.
   // Strips MD syntax → counts words → trims first 5000 chars for articleBody.
@@ -185,9 +283,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
           {/* Category + freshness pill */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
-            <span className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-[#C9A14A] text-[#0A2540]">
-              {primaryTag}
-            </span>
+            <Link href={`/blog/category/${category}`} className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-[#C9A14A] text-[#0A2540] hover:bg-[#ffd166] transition-colors">
+              {catMeta.label}
+            </Link>
             {isFresh && (
               <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.14] text-[#34d399]">
                 <span className="relative flex w-1.5 h-1.5">
@@ -278,11 +376,29 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
 
               <EmailCapture
-                title="Stay on top of UK visa changes"
-                subtitle="Rule updates, fee changes and route news in a weekly 3-minute brief."
+                title={category === 'visa' ? 'Stay on top of UK visa changes' : 'Stay on top of UK money & rule changes'}
+                subtitle="Rule updates, rate changes and practical guides in a weekly 3-minute brief."
                 cta="Get the brief"
                 source={`blog:${post.slug}`}
               />
+
+              {/* Related calculators — cluster cross-link to high-intent tools */}
+              <div className="mt-12">
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-3">Related calculators</div>
+                <div className="grid sm:grid-cols-3 gap-3">
+                  {relatedTools.map((t) => (
+                    <Link
+                      key={t.href}
+                      href={t.href}
+                      className="group rounded-xl border border-[rgba(14,20,36,0.1)] p-4 hover:border-[#0A2540] transition-colors"
+                      style={{ borderTopColor: catMeta.accent, borderTopWidth: 2 }}
+                    >
+                      <div className="font-semibold text-[#0A2540] text-sm flex items-center gap-1">{t.label}<ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" /></div>
+                      <div className="text-[12px] text-[#52596e] mt-0.5">{t.hint}</div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
 
               {/* Pre-comments ad */}
               <AdUnit slot="8847243325" format="auto" className="my-6" />
@@ -303,19 +419,19 @@ export default async function BlogPostPage({ params }: RouteParams) {
                 <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
                 <div className="relative z-10 max-w-md">
                   <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#C9A14A] mb-4">
-                    Start here
+                    {cta.kicker}
                   </span>
                   <h3 className="font-display text-white text-[1.25rem] md:text-[1.625rem] font-bold leading-tight tracking-[-0.015em]">
-                    Find the right UK visa route in 60 seconds.
+                    {cta.heading}
                   </h3>
                   <p className="mt-3 text-white/55 text-[14.5px] leading-relaxed">
-                    Take our free quiz to see which UK visa matches your situation.
+                    {cta.sub}
                   </p>
                   <Link
-                    href="/eligibility"
+                    href={cta.href}
                     className="mt-6 inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
                   >
-                    Start eligibility check <ArrowRight className="w-4 h-4" />
+                    {cta.label} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -352,9 +468,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
       `}</style>
 
       <StickyMobileCta
-        context="Find your route"
-        label="Take the 60-second quiz"
-        href="/eligibility"
+        context={category === 'visa' ? 'Find your route' : catMeta.label}
+        label={cta.label}
+        href={cta.href}
       />
     </>
   );
