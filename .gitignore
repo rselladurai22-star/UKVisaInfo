@@ -12,3 +12,5 @@ coverage/
 next-env.d.ts
 *.tsbuildinfo
 .claude/
+service-account-key.json
+
