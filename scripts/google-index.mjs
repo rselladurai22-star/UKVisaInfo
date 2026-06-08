@@ -269,7 +269,7 @@ async function main() {
 
   if (urlsToSubmit.length === 0) {
     console.warn(`${colors.yellow}Warning: No URLs found to submit. Exiting.${colors.reset}`);
-    process.exit(0);
+    return;
   }
 
   // 3. Dry Run Check
@@ -280,7 +280,7 @@ async function main() {
     console.log(`URLs that would be submitted (up to limit):`);
     urlsToSubmit.forEach((u, i) => console.log(`  [${i + 1}] ${u}`));
     console.log(`==============================================${colors.reset}\n`);
-    process.exit(0);
+    return;
   }
 
   // 4. Authenticate & Obtain Token
