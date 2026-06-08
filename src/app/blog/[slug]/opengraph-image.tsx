@@ -1,7 +1,10 @@
 import { ImageResponse } from 'next/og';
 import { getPost } from '../../../data/blog';
 
-export const runtime = 'edge';
+// Node.js runtime (not edge): this route imports post data via getPost, which
+// pulls in the full blog content. The edge bundle has a 1 MB limit that the
+// growing blog exceeded; the Node runtime has no such limit.
+export const runtime = 'nodejs';
 export const alt = 'UKDesk — article preview';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
