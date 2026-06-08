@@ -216,12 +216,20 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
   business: [
     {
       title: 'Company Taxes',
-      description: 'VAT, corporation tax and structure choice.',
+      description: 'VAT, corporation tax and rates.',
       items: [
-        { label: 'VAT Calculator', href: '/vat-calculator', hint: 'Add/remove 20% VAT', status: 'soon' },
-        { label: 'Corporation Tax', href: '/corporation-tax-calculator', hint: '19% / 25% + marginal', status: 'soon' },
-        { label: 'Sole Trader vs Limited', href: '/sole-trader-vs-limited', hint: 'Take-home + dividend allowance', status: 'soon' },
-        { label: 'PAYE Employer Cost', href: '/paye-employer-cost', hint: 'True cost of a hire', status: 'soon' },
+        { label: 'VAT Calculator', href: '/vat-calculator', hint: 'Add/remove 20% VAT', status: 'live' },
+        { label: 'Corporation Tax', href: '/corporation-tax-calculator', hint: '19% / 25% + marginal', status: 'live' },
+        { label: 'Business Rates', href: '/business-rates-calculator', hint: 'RV × multiplier + SBRR', status: 'live' },
+      ],
+    },
+    {
+      title: 'Structure & Pay',
+      description: 'Trading structure and director pay.',
+      items: [
+        { label: 'Sole Trader vs Limited', href: '/sole-trader-vs-limited', hint: 'Take-home comparison', status: 'live' },
+        { label: 'Salary vs Dividend', href: '/salary-vs-dividend-calculator', hint: 'Optimal director split', status: 'live' },
+        { label: 'PAYE Employer Cost', href: '/paye-employer-cost', hint: 'True cost of a hire', status: 'live' },
       ],
     },
     {
