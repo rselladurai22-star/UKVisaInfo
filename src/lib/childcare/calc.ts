@@ -70,7 +70,7 @@ export function calculateChildcare(input: CalcInput): CalcResult {
   let freeHours = 0;
   if (ageMonths >= 36) freeHours = FREE_HOURS_UNIVERSAL;           // 3–4: 15 for all
   if (ageMonths >= 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_EXTENDED;  // 30hrs
-  if (ageMonths >= 9 && ageMonths < 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_UNIVERSAL;  // 15hrs 9m–3
+  if (ageMonths >= 9 && ageMonths < 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_EXTENDED;  // 30hrs 9m–3 (from Sept 2025)
 
   const freeHoursAnnual  = freeHours * FREE_WEEKS * rate;
   const afterFreeHours   = Math.max(0, grossAnnual - freeHoursAnnual);
