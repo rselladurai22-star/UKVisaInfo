@@ -56,6 +56,529 @@ export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'inheritance-tax-explained-2025-26',
+    title: 'Inheritance Tax Explained: Will Your Family Actually Pay It?',
+    description:
+      'A plain-English guide to UK inheritance tax in 2025/26 — the £325,000 nil-rate band, the £175,000 residence band, the £1m couple allowance, and the legal ways to reduce it.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 11,
+    category: 'estate',
+    tags: ['Inheritance Tax', 'Estate Planning', 'IHT'],
+    relatedTools: [
+      { href: '/inheritance-tax', label: 'Inheritance Tax', hint: 'NRB £325k + RNRB £175k' },
+      { href: '/estate-value-calculator', label: 'Estate Value', hint: 'Net estate for IHT' },
+      { href: '/gift-iht-calculator', label: 'Gift & 7-Year Rule', hint: 'Taper relief' },
+    ],
+    body: `
+Inheritance tax has a fearsome reputation, yet most estates never pay a penny of it. The fear comes from misunderstanding the allowances — people hear "40%" and panic, without realising how much is sheltered before that rate ever applies. For families that do cross the threshold, though, the bill can be large, and a little planning goes a long way. Here is who actually pays inheritance tax in 2025/26, and what legally reduces it.
+
+> [!KEY] The short version
+> Everyone has a **£325,000 nil-rate band** before any inheritance tax is due.
+> Leaving your home to children or grandchildren adds a **£175,000 residence band**.
+> Married couples and civil partners can combine allowances — up to **£1,000,000**.
+> Anything above the allowances is taxed at **40%** (36% if you leave 10% to charity).
+
+## The allowances that shelter most estates
+
+Inheritance tax (IHT) is charged on the value of everything you leave — property, savings, investments, possessions — minus debts. But it only bites above your tax-free allowances, and these are more generous than most people assume.
+
+| Allowance | 2025/26 amount | Condition |
+|---|---|---|
+| Nil-rate band (NRB) | £325,000 | Everyone |
+| Residence nil-rate band (RNRB) | £175,000 | Leaving your home to direct descendants |
+| Combined, single person | up to £500,000 | Home to children/grandchildren |
+| Combined, couple | up to £1,000,000 | Transferable allowances |
+
+That last row is the key one. When the first spouse or civil partner dies, anything left to the survivor is completely exempt, and their unused allowances transfer. So a surviving spouse can have two nil-rate bands and two residence bands — up to £1,000,000 — before IHT applies. That single fact takes the vast majority of family homes out of the tax. Estimate your own position with the [inheritance tax calculator](/inheritance-tax).
+
+## The residence band and its catch
+
+The £175,000 residence band only applies if you leave your home (or its value) to **direct descendants** — children, grandchildren, stepchildren or adopted children. Leave the house to a sibling or a friend and you lose it. There is also a **taper**: for estates worth more than £2 million, the residence band reduces by £1 for every £2 above that line, disappearing entirely on large estates. Wealthy families therefore cannot rely on it.
+
+> [!STAT] £1,000,000 | The combined allowance available to many married couples before any IHT is due
+
+## What counts toward your estate
+
+To know whether you are near the threshold, add up the open-market value of everything you own and subtract what you owe. Our [estate value calculator](/estate-value-calculator) does this, but the broad picture is:
+
+> [!CHECKLIST] Typically inside the estate
+> - Your home and any other property.
+> - Cash, savings and ISAs (ISAs lose their tax shelter on death).
+> - Investments, shares and bonds.
+> - Cars, jewellery, art and other possessions.
+> - Money owed to you.
+
+Some things usually fall **outside** the estate, which is where planning starts: most **pensions** (though unused pension funds are due to be brought into IHT from April 2027), and **life insurance written in trust**, which pays beneficiaries directly rather than through the estate.
+
+## The legal ways to reduce it
+
+If your estate is heading over the allowances, several long-established reliefs help:
+
+- **Spouse exemption** — leave anything to your spouse or civil partner tax-free, and transfer your allowances.
+- **Gifting** — give money away and survive seven years, and it falls outside your estate entirely. Smaller exemptions (£3,000 a year, wedding gifts, regular gifts from surplus income) are immediate. The [gift calculator](/gift-iht-calculator) shows how the seven-year rule and taper relief work.
+- **Charity** — gifts to charity are exempt, and leaving 10% of your estate to charity cuts the rate on the rest from 40% to 36%.
+- **Life insurance in trust** — a policy written in trust keeps the payout out of your estate, useful for covering an expected bill.
+
+> [!WARNING] A gift with strings attached does not work
+> If you give away your home but keep living in it rent-free, it is a "gift with reservation of benefit" and still counts as yours for IHT. The classic mistake. To remove an asset from your estate you generally have to give it up genuinely and completely.
+
+## The seven-year rule in brief
+
+Most lifetime gifts to individuals are "potentially exempt." Survive seven years from the date of the gift and it is free of IHT. Die within seven years and it counts back toward your estate — though **taper relief** reduces the tax on gifts above the nil-rate band the longer you survived. A common misconception is that taper helps every gift; it only reduces tax that is actually due, so a gift within your nil-rate band gets no benefit from it because there was no tax to taper in the first place.
+
+> [!FAQ]
+> Q: How much can you inherit before paying inheritance tax?
+> A: £325,000 per person tax-free, rising to £500,000 if you leave your home to direct descendants. Married couples and civil partners can combine allowances for up to £1,000,000.
+>
+> Q: What is the inheritance tax rate?
+> A: 40% on the value of the estate above your allowances, reduced to 36% if you leave at least 10% of the net estate to charity.
+>
+> Q: Do I pay inheritance tax on money left by my spouse?
+> A: No. Transfers between UK-domiciled spouses and civil partners are completely exempt, and your partner's unused allowances transfer to you.
+>
+> Q: Are pensions subject to inheritance tax?
+> A: Most pensions currently fall outside the estate, but the government plans to bring unused pension funds into inheritance tax from April 2027.
+>
+> Q: Can gifting reduce inheritance tax?
+> A: Yes. Gifts fall outside your estate if you survive seven years, and several gifts are immediately exempt — including £3,000 a year and regular gifts from surplus income.
+
+Figures are 2025/26 estimates for the UK. Inheritance tax planning is highly personal — take professional advice before acting on gifts, trusts or insurance.
+`.trim(),
+  },
+  {
+    slug: 'isa-vs-pension-where-to-save-2025-26',
+    title: 'ISA or Pension: Where Should You Actually Put Your Money?',
+    description:
+      'ISA versus pension for UK savers in 2025/26 — the £20,000 ISA allowance, the Lifetime ISA bonus, pension tax relief, and how to decide which to use for your goals.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'money',
+    tags: ['ISA', 'Pensions', 'Savings', 'Investing'],
+    relatedTools: [
+      { href: '/isa-calculator', label: 'ISA Calculator', hint: 'Tax-free growth' },
+      { href: '/lifetime-isa-calculator', label: 'Lifetime ISA', hint: '£4k + 25% bonus' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+    ],
+    body: `
+ISA or pension is one of the great personal-finance dilemmas, and the honest answer is "it depends on what the money is for." Both shelter your savings from tax, but they do it at different ends — one tax-free going in, the other tax-free coming out — and the right choice turns on your age, your tax rate and when you will need the money. Here is how to decide in 2025/26 without the jargon.
+
+> [!KEY] The short version
+> You can put **£20,000 a year** into ISAs, and the growth and withdrawals are **tax-free**.
+> Pensions give **tax relief going in** — an instant uplift — but you cannot touch them until age 57+.
+> For retirement, a **pension usually wins** on tax, especially with employer contributions.
+> For flexible, accessible savings, an **ISA wins** because you can withdraw any time.
+
+## How each one is taxed
+
+The fundamental difference is *when* the tax break happens.
+
+- A **pension** gives you tax relief when you pay in. A £100 contribution costs a basic-rate taxpayer £80, a higher-rate taxpayer £60. It grows tax-free, but is taxed as income when you draw it (after a 25% tax-free lump sum) — and you cannot access it until your late fifties.
+- An **ISA** is the mirror image. You pay in from taxed income with no upfront relief, but everything inside grows tax-free and every withdrawal is tax-free, at any age.
+
+So a pension is "tax-free in, taxed out"; an ISA is "taxed in, tax-free out." Which is better depends on your tax rate now versus in retirement, and how soon you need the cash.
+
+## The £20,000 ISA allowance
+
+Every UK adult can shelter **£20,000 a year** across ISAs — cash, stocks and shares, or a mix. There is no tax on the interest, dividends or growth, and no tax when you take money out. For a goal where you might need access — a house deposit, an emergency fund, money for the next decade — the ISA's flexibility is its superpower. Model the tax-free growth with the [ISA calculator](/isa-calculator).
+
+> [!STAT] £20,000 | The annual ISA allowance for 2025/26 — tax-free in and out
+
+## The Lifetime ISA: a 25% government bonus
+
+The **Lifetime ISA (LISA)** deserves special attention because it adds free money. You can pay in up to **£4,000 a year** (which counts within your £20,000 ISA allowance), and the government adds a **25% bonus** — up to £1,000 a year. It is designed for two goals: buying your first home (up to £450,000) or retirement from age 60.
+
+> [!WARNING] The Lifetime ISA has a sharp penalty
+> Withdraw from a LISA for anything other than a first home or after age 60, and you pay a 25% government charge — which is more than the bonus you received, because it is charged on the larger total. The £450,000 property cap has also not risen with house prices, catching buyers in expensive areas. Use a LISA only if you are confident it fits one of its two purposes. The [Lifetime ISA calculator](/lifetime-isa-calculator) shows the bonus and the penalty.
+
+## When the pension clearly wins
+
+For long-term retirement saving, the pension usually beats the ISA on tax — for three reasons:
+
+1. **Employer contributions.** If your workplace pension comes with employer matching, that is free money an ISA cannot replicate. Always capture the full employer match first.
+2. **Higher-rate relief.** A higher-rate taxpayer gets 40% relief going in and may pay only 20% in retirement — a genuine tax arbitrage.
+3. **Salary sacrifice.** Paying in by salary sacrifice saves National Insurance too, often boosted by a shared employer NI saving.
+
+The [pension calculator](/pension-calculator) shows what regular contributions compound to over a working life.
+
+## A simple way to decide
+
+> [!STEPS]
+> 1. **Grab the free money first** — pay enough into your workplace pension to get the full employer match. Nothing beats it.
+> 2. **Build accessible savings** — an emergency fund and shorter-term goals belong in an ISA you can reach any time.
+> 3. **For a first home** — consider a Lifetime ISA for the 25% bonus, if the property cap and rules suit you.
+> 4. **For extra retirement saving** — top up the pension, especially as a higher-rate taxpayer.
+
+It is rarely strictly one or the other. Most people are best served by using both: the pension for locked-away retirement money with the best tax treatment, and the ISA for flexible savings they may need before then.
+
+> [!FAQ]
+> Q: Is an ISA or pension better for retirement?
+> A: For retirement specifically, a pension usually wins on tax — especially with employer contributions and higher-rate relief. An ISA is better for money you may need before your late fifties because you can access it any time.
+>
+> Q: How much can I put in an ISA in 2025/26?
+> A: £20,000 a year across all your ISAs combined, with tax-free growth and tax-free withdrawals.
+>
+> Q: What is the Lifetime ISA bonus?
+> A: The government adds 25% to what you pay in, up to £1,000 a year on a £4,000 contribution, for buying a first home (up to £450,000) or retirement from age 60.
+>
+> Q: Can I have both an ISA and a pension?
+> A: Yes, and most people should. Use the pension for tax-efficient retirement saving and the ISA for flexible, accessible savings — they complement each other.
+>
+> Q: Do I pay tax when I take money out of an ISA?
+> A: No. ISA withdrawals are completely tax-free, at any age. A pension, by contrast, is taxed as income on withdrawal beyond the 25% tax-free lump sum.
+
+Figures are 2025/26 estimates. Investment values can fall as well as rise, and the right mix depends on your circumstances — consider regulated financial advice for big decisions.
+`.trim(),
+  },
+  {
+    slug: 'clear-credit-card-debt-snowball-vs-avalanche',
+    title: 'How to Clear Credit Card Debt Faster: Snowball vs Avalanche',
+    description:
+      'Two proven methods to pay off credit card and loan debt — the snowball and the avalanche — compared with worked numbers, plus how 0% balance transfers speed both up.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'money',
+    tags: ['Debt', 'Credit Cards', 'Budgeting'],
+    relatedTools: [
+      { href: '/debt-payoff-planner', label: 'Debt Payoff Planner', hint: 'Snowball vs avalanche' },
+      { href: '/credit-card-payoff-calculator', label: 'Credit Card Payoff', hint: 'Months + interest' },
+      { href: '/balance-transfer-calculator', label: 'Balance Transfer', hint: '0% deal vs fee' },
+    ],
+    body: `
+If you are juggling more than one debt — a couple of credit cards, an overdraft, maybe a loan — the order you clear them in matters more than most people realise. Two well-known methods, the snowball and the avalanche, tackle the same debts in opposite orders, and each has a genuine case. One saves the most money; the other keeps you motivated enough to finish. Here is how they work and how to choose, with the numbers laid out.
+
+> [!KEY] The short version
+> **Avalanche** — pay off the **highest interest rate** first. Saves the most money overall.
+> **Snowball** — pay off the **smallest balance** first. Builds momentum with quick wins.
+> Either way: pay the **minimum on everything**, then throw all spare cash at one target debt.
+> A **0% balance transfer** can supercharge both by pausing interest entirely.
+
+## The principle both methods share
+
+Whichever you choose, the engine is the same. You make the **minimum payment on every debt** to stay current, then direct every spare pound at one chosen debt until it is gone. When that debt clears, its old payment rolls onto the next target — the payment amount snowballs upward even as the number of debts falls. The methods only differ in **which debt you attack first**.
+
+## The avalanche: cheapest by the numbers
+
+The avalanche targets the debt with the **highest interest rate** first, regardless of its size. Mathematically this is optimal — you are always killing the most expensive debt, so you pay the least interest and clear everything fastest in pure money terms.
+
+Imagine three debts:
+
+| Debt | Balance | APR |
+|---|---|---|
+| Card A | £1,000 | 29.9% |
+| Card B | £3,000 | 22.9% |
+| Overdraft | £1,500 | 39.9% |
+
+The avalanche says: overdraft first (39.9%), then Card A (29.9%), then Card B (22.9%) — because that order minimises the interest you hand over. Over the life of the debt this saves the most. Our [debt payoff planner](/debt-payoff-planner) runs both methods on your actual balances so you can see the difference.
+
+> [!STAT] Highest APR first | The avalanche rule that minimises total interest paid
+
+## The snowball: built for motivation
+
+The snowball ignores interest rates and targets the **smallest balance** first. In the example above that means Card A (£1,000), then the overdraft, then Card B. You clear a whole debt quickly, feel the win, and that momentum keeps many people going where a slow grind would have them give up.
+
+It is not mathematically optimal — you may pay a little more interest — but personal finance is behavioural as much as numerical. A method you actually stick to beats a perfect plan you abandon in month three. For many people the snowball's psychological boost is worth the small extra cost.
+
+## Which should you choose?
+
+> [!STEPS]
+> 1. **If you are disciplined and motivated by saving money** — use the avalanche. It is the cheapest route, full stop.
+> 2. **If you have struggled to stick with debt repayment before** — use the snowball. The quick wins keep you in the game.
+> 3. **If your highest-APR debt is also your smallest** — lucky you; both methods agree, so just start.
+
+There is no wrong answer. The best method is the one you will follow to the end.
+
+## Supercharge either with a 0% balance transfer
+
+Both methods get dramatically faster if you stop the interest. A **0% balance-transfer card** moves expensive debt onto a card charging no interest for a set period, for a one-off fee of typically 1–3%. While the interest is paused, every pound you pay goes to clearing the balance rather than feeding the lender.
+
+> [!WARNING] Clear it before the 0% period ends
+> The risk with a balance transfer is reaching the end of the 0% window with a balance left, when the card reverts to a high APR — often 20% or more. Set a monthly payment that clears the debt inside the deal, keep paying at least the minimum, and avoid spending on the card. The [balance transfer calculator](/balance-transfer-calculator) checks whether the fee is worth the interest you save.
+
+## Don't forget the basics
+
+No repayment method works if more debt keeps arriving. Pause new spending on the cards, build even a small emergency buffer so a surprise bill does not send you back to credit, and if the debt feels unmanageable, free help from StepChange or Citizens Advice is genuinely good and judgement-free. The [credit card payoff calculator](/credit-card-payoff-calculator) shows how long a single card takes to clear at different monthly payments — often a wake-up call that spurs action.
+
+> [!FAQ]
+> Q: Is the snowball or avalanche method better?
+> A: The avalanche saves the most money by targeting the highest interest rate first. The snowball clears small debts first for motivation. Choose the avalanche if you are disciplined, the snowball if you need quick wins to stay on track.
+>
+> Q: Should I pay off my smallest debt or highest-interest debt first?
+> A: Highest-interest first is cheapest (avalanche). Smallest-balance first is more motivating (snowball). Both keep minimum payments on everything else while you focus spare cash on one debt.
+>
+> Q: Do balance transfers actually help?
+> A: Yes, if used well. Pausing interest for a fee of 1–3% lets every payment reduce the balance. The key is clearing the debt before the 0% period ends to avoid the high revert rate.
+>
+> Q: What if I can only afford minimum payments?
+> A: Minimum-only payments clear debt very slowly and cost a lot in interest. Even a small extra amount each month, focused on one debt, makes a big difference — and free debt advice can help if you are stuck.
+>
+> Q: Will paying off debt improve my credit score?
+> A: Generally yes. Reducing balances lowers your credit utilisation, a major scoring factor, and clearing debts reduces your commitments — both help over time.
+
+This is general information, not debt advice. If you are struggling, free regulated help is available from StepChange, National Debtline and Citizens Advice.
+`.trim(),
+  },
+  {
+    slug: 'child-benefit-high-income-charge-2025-26',
+    title: 'Child Benefit and the High Income Charge: Should You Still Claim?',
+    description:
+      'The High Income Child Benefit Charge explained for 2025/26 — the £60,000 to £80,000 taper, how the charge is worked out, and why you should usually claim even if you repay it.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'money',
+    tags: ['Child Benefit', 'Income Tax', 'HICBC'],
+    relatedTools: [
+      { href: '/child-benefit-trap', label: 'Child Benefit Trap', hint: 'High income charge' },
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Reduce adjusted income' },
+    ],
+    body: `
+Child Benefit is paid to anyone bringing up a child, but since 2013 a quirk in the system claws it back from higher earners through the awkwardly named High Income Child Benefit Charge. It catches more families every year, confuses almost everyone, and leads some to opt out when they should not. The thresholds rose in 2024, which helps, but the trap is still real. Here is how it works in 2025/26 and the decision you actually need to make.
+
+> [!KEY] The short version
+> Child Benefit is **£26.05 a week** for the eldest child and **£17.25** for each other child in 2025/26.
+> The charge starts when the **higher earner's adjusted income passes £60,000**, removing it fully by **£80,000**.
+> It is based on the **highest individual income**, not the household total.
+> You should usually **still claim** — even if you repay it — to protect your State Pension and your child's NI number.
+
+## What Child Benefit pays
+
+For 2025/26, Child Benefit is worth **£26.05 a week** (about £1,355 a year) for your eldest or only child, plus **£17.25 a week** (about £897 a year) for each additional child. It is not means-tested at the point of payment — anyone responsible for a child can claim. The clawback happens separately, through the tax system.
+
+## The High Income Child Benefit Charge
+
+If you or your partner has an "adjusted net income" over **£60,000**, you start to repay some of the benefit through a tax charge. It is tapered:
+
+> [!STEPS]
+> 1. **Below £60,000** — no charge; you keep all the Child Benefit.
+> 2. **£60,000 to £80,000** — you repay 1% of the benefit for every £200 of income over £60,000.
+> 3. **£80,000 and above** — the charge equals the full benefit; you effectively repay all of it.
+
+So at £70,000 — halfway through the band — you repay half. At £80,000 you repay it all. The thresholds doubled-ish in April 2024 (they used to start at £50,000), which lifted many families out of the charge, but high earners are still caught. Our [Child Benefit trap calculator](/child-benefit-trap) shows your exact position.
+
+> [!STAT] £60,000–£80,000 | The income band over which Child Benefit is gradually clawed back
+
+## The unfairness everyone notices
+
+The charge is based on the **highest single income**, not the household's combined income. That produces an obvious injustice: a couple each earning £55,000 — £110,000 between them — keep all their Child Benefit, while a single earner on £80,000 loses all of theirs. It is widely criticised and politically awkward, but it is the rule, and it shapes the planning.
+
+## The pension lever
+
+Because the charge keys off **adjusted net income**, pension contributions can rescue it. Pension contributions reduce your adjusted income, so paying enough into a pension to drop below £60,000 — or further down the taper — can restore some or all of your Child Benefit. For a higher earner with children, a pension contribution can therefore deliver income tax relief *and* recovered Child Benefit at the same time, an unusually high effective return. The [pension calculator](/pension-calculator) helps you size it, and the [take-home pay tool](/take-home-pay) shows the income effect.
+
+## Should you still claim?
+
+This is where people make a costly mistake. Faced with repaying the benefit, some families simply do not claim it. That can be wrong for two reasons:
+
+> [!WARNING] Opting out can cost you State Pension years
+> Claiming Child Benefit gives the at-home parent National Insurance credits that count toward their State Pension while they are not working. Opt out entirely and you can quietly lose qualifying years, worth far more over a lifetime than the benefit you avoided repaying. It also triggers your child's National Insurance number automatically.
+
+The usual answer: **claim the benefit, but tick the box to not receive the payments** if your income means you would repay it all. That way you keep the National Insurance protection without the hassle of repaying through Self Assessment. If your income is in the taper or might fall, take the payments and settle the charge through your tax return.
+
+> [!FAQ]
+> Q: At what income do you start losing Child Benefit?
+> A: The High Income Child Benefit Charge begins when the higher earner's adjusted net income passes £60,000, and removes the benefit entirely by £80,000.
+>
+> Q: Is the charge based on household or individual income?
+> A: Individual income — specifically the highest earner's. This is why two parents on £55,000 each keep the benefit while a single earner on £80,000 loses it.
+>
+> Q: How much is Child Benefit in 2025/26?
+> A: £26.05 a week for the eldest child and £17.25 a week for each additional child.
+>
+> Q: Should I stop claiming if I have to repay it?
+> A: Usually not. Claim it but opt out of the payments if you would repay it all — that preserves the National Insurance credits toward your State Pension and your child's NI number.
+>
+> Q: Can a pension contribution help me keep Child Benefit?
+> A: Yes. Pension contributions reduce your adjusted net income, so paying enough to drop below or through the £60,000–£80,000 band can restore some or all of the benefit, on top of the normal tax relief.
+
+Figures are 2025/26 estimates. The charge is settled through Self Assessment; check your own position and consider advice if your income is near the thresholds.
+`.trim(),
+  },
+  {
+    slug: 'buy-vs-rent-uk-2025',
+    title: 'Buy vs Rent in 2025: Does Buying Actually Make Sense?',
+    description:
+      'An even-handed look at buying versus renting in the UK in 2025 — the true costs on each side, the break-even point, and the questions that decide it for your situation.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'property',
+    tags: ['Buy vs Rent', 'Mortgages', 'Property'],
+    relatedTools: [
+      { href: '/buy-vs-rent', label: 'Buy vs Rent', hint: 'Net worth + break-even' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/deposit-calculator', label: 'Deposit Calculator', hint: 'How much & how long' },
+    ],
+    body: `
+"Rent is dead money" is the line every would-be buyer hears, usually from someone who bought twenty years ago. It is also only half true. Buying can build wealth, but it comes with costs that renters never see, and there are situations where renting genuinely leaves you better off. The honest answer is not a slogan — it is a calculation that depends on how long you will stay, what you would do with the money, and what you value. Here is how to think about it in 2025.
+
+> [!KEY] The short version
+> Buying builds equity, but carries costs renters avoid — **stamp duty, maintenance, and transaction fees**.
+> Renting is **flexible and predictable**, with no exposure to maintenance or falling prices.
+> Buying usually wins **the longer you stay** — short stays rarely recover the upfront costs.
+> The deposit you would tie up has an **opportunity cost** worth weighing against ownership.
+
+## The costs nobody mentions when you buy
+
+The headline comparison — mortgage payment versus rent — misses most of the picture. Owning carries costs a renter never pays:
+
+> [!CHECKLIST] Costs that fall only on owners
+> - Stamp duty on purchase (often thousands).
+> - Solicitor, survey and mortgage fees.
+> - Buildings insurance.
+> - Maintenance and repairs — boiler, roof, decorating (budget around 1% of the value a year).
+> - Service charges and ground rent on leasehold flats.
+> - Estate agent fees and stamp duty again when you move on.
+
+These do not make buying a bad idea — but they mean the true cost of owning is well above the mortgage payment, and they are why a short stay rarely pays off.
+
+## Why time is the deciding factor
+
+The big one-off costs of buying — stamp duty and fees on the way in, agent fees on the way out — are spread over however long you own. Stay two years and they swamp any equity you built. Stay fifteen and they fade into insignificance while your mortgage balance shrinks and (usually) the property gains value. This is the **break-even point**: the number of years before buying overtakes renting. Our [buy vs rent calculator](/buy-vs-rent) estimates it for your figures, projecting net worth on each path over time.
+
+> [!STAT] The longer you stay | The single biggest factor tipping the maths toward buying
+
+## The opportunity cost of the deposit
+
+Here is the argument renters rarely get credit for. A house deposit is a large sum of money. If you rent instead and invest that deposit — and any monthly saving where rent is cheaper than ownership costs — that money can grow. A renter who invests the difference is not necessarily worse off than an owner; they are building wealth in a different asset. Whether buying wins depends partly on how house prices perform versus what your investments would have earned. Neither is guaranteed.
+
+## Where renting genuinely wins
+
+Renting is not a failure state. It is the better choice when:
+
+- You might **move within a few years** — for work, relationships or lifestyle.
+- You value **flexibility** and not being tied to one place or one job market.
+- You want **no exposure to maintenance** costs or a falling market.
+- Buying would stretch you so thin you could not save, invest or absorb a shock.
+
+A renter with a stable, growing investment pot and the freedom to move is in a strong position, not a weak one.
+
+## Where buying genuinely wins
+
+Buying tends to win when:
+
+- You will **stay long enough** to clear the upfront costs — often five years or more.
+- You want **stability** and the freedom to make a home your own.
+- Your mortgage payment is **comparable to or below** local rent once you are in.
+- You value the **forced saving** of paying down a mortgage, which many people stick to better than voluntary investing.
+
+> [!WARNING] Don't buy at the limit of affordability
+> Stretching to the absolute maximum the bank will lend leaves no cushion for rate rises, repairs or a change in income. The [mortgage calculator](/mortgage-calculator) shows the repayment, and the [deposit calculator](/deposit-calculator) how long the deposit takes to save — aim to buy comfortably, not at the ceiling.
+
+## So, buy or rent?
+
+There is no universal answer, only the right answer for your circumstances. If you have a stable life, a sufficient deposit, and plan to stay put for years, buying usually builds more wealth and gives you a home that is genuinely yours. If your future is uncertain, your deposit would be better invested, or you simply value flexibility, renting is a perfectly rational — sometimes superior — choice. Run your own numbers before you let a slogan decide.
+
+> [!FAQ]
+> Q: Is it better to buy or rent in 2025?
+> A: It depends mainly on how long you will stay. Buying usually wins over five-plus years because the upfront costs are spread out; for short stays, renting often leaves you better off.
+>
+> Q: Is rent really "dead money"?
+> A: Not entirely. Rent buys you flexibility and freedom from maintenance and market risk. A renter who invests the deposit they would otherwise tie up can build wealth too.
+>
+> Q: What costs do buyers pay that renters don't?
+> A: Stamp duty, legal and survey fees, buildings insurance, ongoing maintenance, and agent fees and stamp duty again when they move. These add well above the mortgage payment.
+>
+> Q: How long do I need to stay for buying to pay off?
+> A: Often around five years or more, depending on prices, costs and rents. The break-even point is exactly what the buy vs rent calculator estimates.
+>
+> Q: Should I buy at the maximum the bank will lend?
+> A: It is wiser not to. Buying below your ceiling leaves room for rate rises, repairs and income changes, and keeps you able to save and invest.
+
+Figures and conclusions are illustrative — outcomes depend on prices, rates and investment returns, none of which are guaranteed. Treat the calculators as a guide.
+`.trim(),
+  },
+  {
+    slug: 'do-i-need-to-register-for-vat-2025-26',
+    title: 'Do I Need to Register for VAT? The £90,000 Threshold Explained',
+    description:
+      'When a UK business must register for VAT in 2025/26 — the £90,000 threshold, voluntary registration, the Flat Rate Scheme, and the traps that catch growing businesses.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'business',
+    tags: ['VAT', 'Self-Employed', 'Small Business'],
+    relatedTools: [
+      { href: '/vat-calculator', label: 'VAT Calculator', hint: 'Add/remove 20% VAT' },
+      { href: '/corporation-tax-calculator', label: 'Corporation Tax', hint: '19% / 25% + marginal' },
+      { href: '/sole-trader-vs-limited', label: 'Sole Trader vs Limited', hint: 'Take-home compared' },
+    ],
+    body: `
+VAT registration is the milestone every growing small business eyes nervously, because it changes how you price, what you charge clients, and how much admin you carry. Register too late and HMRC can hit you with penalties and a backdated bill; register too early and you may add 20% to your prices for no reason. Knowing exactly when you must — and when you might choose to — is essential. Here is the 2025/26 picture in plain terms.
+
+> [!KEY] The short version
+> You **must register** once VAT-taxable turnover passes **£90,000** in any rolling 12 months.
+> It is a **rolling** 12-month test, not your accounting year — watch it continuously.
+> You **can register voluntarily** below the threshold, which sometimes pays.
+> The **Flat Rate Scheme** can simplify VAT for smaller businesses, but check the limited-cost trader trap.
+
+## The £90,000 threshold
+
+You must register for VAT if your **VAT-taxable turnover** exceeds **£90,000** in any rolling 12-month period, or if you expect to cross it within the next 30 days. "VAT-taxable turnover" means your total sales that are not exempt — for most businesses, simply your sales.
+
+> [!WARNING] It is a rolling test, not your tax year
+> The single biggest mistake is checking turnover only at the financial year end. The £90,000 test applies to **any** consecutive 12 months. A strong few months can push you over mid-year, and you must register within 30 days of realising you will exceed it. Miss the deadline and HMRC can charge penalties plus the VAT you should have collected.
+
+Once registered, you charge VAT (usually 20%) on your sales, hand it to HMRC, and reclaim the VAT on your business purchases. The [VAT calculator](/vat-calculator) handles adding and removing VAT from any figure.
+
+## What registration actually changes
+
+Crossing the threshold has real consequences:
+
+- You add **20% to your prices** (or absorb it, cutting your margin) — a big deal if your customers are the public and cannot reclaim VAT.
+- You can **reclaim VAT** on equipment, stock and expenses, which helps if you buy a lot.
+- You take on **quarterly VAT returns** under Making Tax Digital, needing compatible software.
+
+For a business selling to other VAT-registered businesses, registration is often neutral or even helpful — your clients reclaim the VAT you charge, and you reclaim yours. For a business selling to consumers, it can mean a real 20% price rise or margin hit, which is why some deliberately manage turnover near the threshold.
+
+> [!STAT] £90,000 | The rolling-12-month turnover at which VAT registration becomes compulsory
+
+## Voluntary registration: when it pays
+
+You can register **below** £90,000 if you want to. It makes sense when:
+
+- Your customers are mostly **VAT-registered businesses** who reclaim the VAT, so your prices effectively do not rise for them.
+- You spend heavily on **VATable costs** — equipment, stock, software — and want to reclaim that input VAT.
+- You want the **credibility** of looking like an established, larger business.
+
+It is a poorer idea if you sell to consumers and buy little, since you would be adding 20% to your prices with little to reclaim.
+
+## The Flat Rate Scheme and its trap
+
+Smaller registered businesses can use the **Flat Rate Scheme (FRS)** to simplify VAT: you charge 20% as normal but pay HMRC a fixed, lower percentage of your gross turnover, instead of tracking VAT on every purchase. It cuts admin and can leave a small surplus.
+
+> [!WARNING] Beware the limited-cost trader rate
+> If you spend very little on physical goods — typical of consultants and service businesses — you are classed as a "limited cost trader" and must use a high 16.5% flat rate, which is rarely worthwhile. Many people join the FRS expecting their sector's lower rate, only to be caught by this. Check carefully before opting in; the [VAT calculator](/vat-calculator) lets you compare the schemes.
+
+## Deregistration
+
+It works the other way too. If your turnover falls below **£88,000**, you can apply to deregister and stop charging VAT — useful if you scale back. Keeping an eye on the rolling figure cuts both ways.
+
+This sits alongside your other business taxes — see the [corporation tax calculator](/corporation-tax-calculator) for company profits and the [sole trader vs limited comparison](/sole-trader-vs-limited) if you are weighing your structure.
+
+> [!FAQ]
+> Q: When do I have to register for VAT?
+> A: Once your VAT-taxable turnover exceeds £90,000 in any rolling 12-month period, or when you expect to exceed it within the next 30 days. You must register within 30 days of realising you will cross it.
+>
+> Q: Is the threshold based on my tax year?
+> A: No. It is a rolling 12-month test, so you must monitor turnover continuously, not just at your year end. This catches many growing businesses out.
+>
+> Q: Should I register voluntarily below £90,000?
+> A: It can pay if your customers are VAT-registered businesses or you spend heavily on VATable costs you can reclaim. It is usually a poor idea if you sell to consumers and buy little.
+>
+> Q: What is the Flat Rate Scheme?
+> A: A simplified VAT method where you pay HMRC a fixed percentage of gross turnover instead of tracking VAT on every purchase. Watch the 16.5% limited-cost trader rate, which applies if you buy few physical goods.
+>
+> Q: Can I deregister from VAT?
+> A: Yes. If your turnover falls below £88,000 you can apply to deregister and stop charging VAT.
+
+Figures are 2025/26 estimates. VAT rules are detailed and the penalties for getting registration wrong are real — take accountancy advice if you are near the threshold.
+`.trim(),
+  },
+  {
     slug: 'universal-credit-taper-explained-2025-26',
     title: 'Universal Credit and the 55% Taper, Explained With Examples',
     description:
