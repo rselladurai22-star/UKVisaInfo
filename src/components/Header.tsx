@@ -97,7 +97,7 @@ export default function Header() {
       >
         <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-3 px-4 sm:px-6">
           {/* Brand */}
-          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="des-kly.info home">
+          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="UKDesk home">
             <span className="relative inline-flex h-9 w-9 items-center justify-center">
               <svg
                 viewBox="0 0 64 64"
@@ -105,7 +105,7 @@ export default function Header() {
                 height={36}
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
-                aria-label="des-kly.info"
+                aria-label="UKDesk"
                 className="h-9 w-9"
               >
                 <defs>
@@ -132,7 +132,7 @@ export default function Header() {
               </svg>
             </span>
             <span className="hidden font-display text-lg font-bold tracking-tight text-primary sm:inline">
-              <span className="text-on-surface">des-kly</span><span className="text-primary">.info</span>
+              <span className="text-on-surface">UK</span><span className="text-primary">Desk</span>
             </span>
           </Link>
 
@@ -189,7 +189,7 @@ export default function Header() {
           <div className="ml-auto flex h-full w-full max-w-xs flex-col bg-surface shadow-[0_30px_80px_-20px_rgba(11,15,25,0.4)] animate-[slideIn_180ms_cubic-bezier(0.22,1,0.36,1)]">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
               <span className="font-display text-lg font-bold tracking-tight">
-                <span className="text-on-surface">des-kly</span><span className="text-primary">.info</span>
+                <span className="text-on-surface">UK</span><span className="text-primary">Desk</span>
               </span>
               <button
                 type="button"
