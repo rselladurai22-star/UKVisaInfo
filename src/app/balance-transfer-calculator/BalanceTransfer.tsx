@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 // Simulate paying a fixed monthly amount against a balance at a monthly rate
@@ -149,6 +150,7 @@ export default function BalanceTransfer() {
             { q: 'What happens at the end of the 0% period?', a: 'Any remaining balance starts accruing interest at the card\'s standard APR, so aim to clear it before then.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/balance-transfer-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

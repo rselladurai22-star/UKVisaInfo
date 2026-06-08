@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, NumberInput,
   Donut, Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 import { calcEnergyBill, CAP, TDCV } from '../../lib/energy/calc';
 
@@ -125,6 +126,7 @@ export default function EnergyBill() {
             { q: 'Should I fix my tariff?', a: 'A fixed deal gives certainty and can beat the cap, but you may pay an exit fee if you leave early. Compare the fixed unit rate against the current cap.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/energy-bill" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

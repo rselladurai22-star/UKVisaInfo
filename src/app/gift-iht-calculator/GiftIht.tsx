@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const NRB = 325000;
@@ -170,6 +171,7 @@ export default function GiftIht() {
             { q: 'Are wedding gifts really tax-free?', a: 'Yes — up to £5,000 for a child, £2,500 for a grandchild and £1,000 for anyone else, on top of the annual exemption.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/gift-iht-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 // 2025/26 monthly standard allowances
@@ -180,6 +181,7 @@ export default function UniversalCredit() {
             { q: 'Can I get UC with savings?', a: 'Yes up to £16,000, though savings over £6,000 reduce your award through tariff income. Over £16,000 you cannot usually claim.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/universal-credit-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

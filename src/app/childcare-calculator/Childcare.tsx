@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, NumberInput, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 import { calculateChildcare, FREE_WEEKS } from '../../lib/childcare/calc';
 
@@ -140,6 +141,7 @@ export default function Childcare() {
             { q: 'Do free hours cover the whole year?', a: 'Funded hours cover 38 weeks (term time). Many providers let you stretch them across more weeks at fewer hours per week.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/childcare-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

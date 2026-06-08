@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice,
   Donut, Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const PRIMARY = '#0037b0';
@@ -155,6 +156,7 @@ export default function FinancialSettlement() {
             { q: 'Do I need a court order if we agree?', a: 'Yes — a sealed consent order makes the agreement binding and prevents future claims.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/financial-settlement-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

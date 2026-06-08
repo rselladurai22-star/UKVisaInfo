@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const STANDARD_RATE = 195;          // 2025/26 standard annual VED
@@ -153,6 +154,7 @@ export default function VehicleTax() {
             { q: 'What about older cars?', a: 'Cars registered between 2001 and 2017 are taxed purely on CO2 bands, and pre-2001 cars on engine size — different systems from the newer two-part scheme.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/vehicle-tax-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

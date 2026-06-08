@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput, NumberInput,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const GEN_PER_KWP = 900; // kWh/year per kWp, UK average
@@ -124,6 +125,7 @@ export default function SolarRoi() {
             { q: 'Is there VAT on solar panels?', a: 'Residential solar installations currently benefit from 0% VAT in Great Britain, reducing the upfront cost.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/solar-panel-roi" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

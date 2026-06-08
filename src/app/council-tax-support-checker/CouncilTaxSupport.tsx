@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const TAPER = 0.20; // typical working-age CTR taper on excess income
@@ -140,6 +141,7 @@ export default function CouncilTaxSupport() {
             { q: 'How do I apply?', a: 'Through your local council\'s website. You can often claim it at the same time as Universal Credit, but it is a separate application.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/council-tax-support-checker" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

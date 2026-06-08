@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, Choice, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const COURT_FEE = 593;          // divorce application fee, England & Wales
@@ -137,6 +138,7 @@ export default function DivorceCost() {
             { q: 'How long does a divorce take?', a: 'The no-fault process has a built-in minimum of about 26 weeks (six months) from application to final order.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/divorce-cost-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 // CMS 2025 thresholds (gross weekly income)
@@ -174,6 +175,7 @@ export default function ChildMaintenance() {
             { q: 'What if the paying parent is self-employed?', a: 'The CMS uses their gross income from HMRC records; complex or disputed income can be investigated, but it can be harder to assess.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/child-maintenance-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

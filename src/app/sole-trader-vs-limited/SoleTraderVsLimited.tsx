@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import {
   gbp, incomeTax, class4NI, employeeNI, dividendTax,
 } from '../../lib/tax2526';
@@ -168,6 +169,7 @@ export default function SoleTraderVsLimited() {
             { q: 'What about IR35?', a: 'If you work like an employee through your own company for one client, the off-payroll (IR35) rules can remove most of the tax benefit. See our IR35 tools.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/sole-trader-vs-limited" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput, NumberInput,
   Donut, Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const PRIMARY = '#0037b0';
@@ -165,6 +166,7 @@ export default function CorpTax() {
             { q: 'What if my accounting period is not 12 months?', a: 'The thresholds are pro-rated for shorter or longer periods. This calculator assumes a standard 12-month period.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/corporation-tax-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

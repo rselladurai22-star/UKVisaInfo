@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput,
   Donut, Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import {
   gbp, incomeTax, employeeNI, dividendTax,
 } from '../../lib/tax2526';
@@ -164,6 +165,7 @@ export default function SalaryVsDividend() {
             { q: 'Do dividends count for a mortgage?', a: 'Lenders usually accept dividends as income, but often want two to three years of company accounts and SA302s, so very low salaries can complicate borrowing.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/salary-vs-dividend-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

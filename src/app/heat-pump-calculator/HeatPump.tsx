@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, NumberInput,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const BUS_GRANT = 7500; // Boiler Upgrade Scheme
@@ -120,6 +121,7 @@ export default function HeatPump() {
             { q: 'Do heat pumps work in cold weather?', a: 'Yes. They work down to well below freezing, though efficiency falls in very cold spells. Good design and insulation keep performance acceptable.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/heat-pump-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

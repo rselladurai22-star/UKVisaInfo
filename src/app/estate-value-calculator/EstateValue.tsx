@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, Toggle,
   Donut, Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const PRIMARY = '#0037b0';
@@ -178,6 +179,7 @@ export default function EstateValue() {
             { q: 'What rate is inheritance tax?', a: 'IHT is 40% on the value above your allowances, reduced to 36% if you leave at least 10% of the net estate to charity.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/estate-value-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

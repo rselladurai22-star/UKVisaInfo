@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, NumberInput,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const LITRES_PER_GALLON = 4.54609;
@@ -138,6 +139,7 @@ export default function EvCharging() {
             { q: 'How can I charge most cheaply?', a: 'Charge overnight at home on an off-peak EV tariff, and if you have solar panels, use surplus daytime generation to charge for next to nothing.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/ev-charging-cost" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

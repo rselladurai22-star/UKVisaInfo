@@ -5,6 +5,7 @@ import {
   CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const LITRES_PER_GALLON = 4.54609;
@@ -137,6 +138,7 @@ export default function FuelCost() {
             { q: 'Does cruise control save fuel?', a: 'On flat motorways, yes — steady speeds are efficient. On hilly roads it can use more, so judge the terrain.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/fuel-cost-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>

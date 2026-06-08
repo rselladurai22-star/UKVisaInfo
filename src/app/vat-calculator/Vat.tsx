@@ -5,6 +5,7 @@ import {
   pct, CalcShell, Panel, Stat, Field, MoneyInput, NumberInput, Choice, Toggle,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
+import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const RELATED = [
@@ -276,6 +277,7 @@ export default function Vat() {
             { q: 'Are dividends subject to VAT?', a: 'No, dividends are corporate profit distributions and are completely outside the scope of VAT.' },
           ]} />
         </GuideSection>
+        <RelatedGuides calc="/vat-calculator" />
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>
       </Guide>
     </CalcShell>
