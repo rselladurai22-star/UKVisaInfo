@@ -56,6 +56,510 @@ export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'how-much-tax-on-100000-salary-uk-2025-26',
+    title: 'Earning £100,000? Beware the 60% Tax Trap',
+    description:
+      'Why a £100,000 salary triggers a hidden 60% marginal tax rate in 2025/26, how the personal allowance taper works, your real take-home, and how a pension fixes it.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 10,
+    category: 'money',
+    tags: ['Income Tax', 'Take-Home Pay', '60% Tax Trap'],
+    relatedTools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+    ],
+    body: `
+Crossing into six figures feels like a milestone, and it is — but it is also where the UK tax system plays its strangest trick. For a slice of income just above £100,000, the effective tax rate leaps to an eye-watering 60%, higher than anything the additional-rate payers face. It is not a published rate; it is a side effect of how the personal allowance is withdrawn. If you earn near this level, understanding it can be worth thousands. Here is how the 60% trap works in 2025/26.
+
+> [!STAT] 60% | The effective marginal tax rate on income between £100,000 and £125,140
+
+> [!KEY] The short version
+> Above £100,000, your **personal allowance is withdrawn** by £1 for every £2 you earn.
+> That hidden withdrawal creates an effective **60% tax rate** between £100,000 and £125,140.
+> By £125,140 your **entire personal allowance is gone** and you are a full additional-rate payer.
+> A **pension contribution** is the classic way to sidestep the trap — and the relief is huge.
+
+## The personal allowance taper
+
+Most people keep a £12,570 tax-free personal allowance. But once your adjusted income passes **£100,000**, HMRC takes that allowance away — £1 of allowance for every £2 of income over the line. By the time you reach **£125,140**, the whole £12,570 has gone, and every pound of your income is taxed.
+
+Here is why that creates a 60% rate. For each extra £100 you earn above £100,000, you not only pay 40% tax on the £100 itself (£40), you also lose £50 of personal allowance — which means £50 that was tax-free is now taxed at 40% (£20 more). Add the 2% National Insurance, and you lose about £62 of that £100. The band between £100,000 and £125,140 is, in effect, taxed at **60%** before NI, or about 62% with it.
+
+## What you actually take home on £100,000
+
+At exactly £100,000 you still have your full personal allowance, so the maths is more forgiving than just above it:
+
+> [!STEPS]
+> 1. **Income tax** — 20% on £37,700 plus 40% on £49,730 = £7,540 + £19,892 = £27,432.
+> 2. **National Insurance** — 8% to £50,270 plus 2% above = about £4,011.
+> 3. **Take-home** — £100,000 − £27,432 − £4,011 = about **£68,557 a year**, or roughly £5,713 a month.
+
+It is the income *above* £100,000 that gets punished. A pay rise from £100,000 to £110,000 hands you only about £3,800 of the £10,000 — the rest vanishes into the 60% zone. See your own figure on the [take-home pay calculator](/take-home-pay).
+
+## The pension escape hatch
+
+Because the taper is based on **adjusted net income**, a pension contribution is the cleanest way out. Contributions reduce your adjusted income, so paying enough to bring it back to £100,000 restores your personal allowance.
+
+> [!STAT] ~60% | The effective relief on a pension contribution that escapes the trap
+
+Picture someone on £110,000. They contribute £10,000 to their pension, dropping adjusted income to £100,000. They get 40% income tax relief on the contribution *and* recover the personal allowance they were losing — an effective relief of around 60%. In plain terms, a £10,000 pension contribution can cost them only about £4,000 of take-home, with £10,000 (or more, with employer salary-sacrifice NI savings) landing in their pension. There are few better-value moves in the tax system. The [pension calculator](/pension-calculator) shows the long-term effect.
+
+> [!WARNING] Other thresholds bite here too
+> The £100,000 line also removes eligibility for the 30 hours of funded childcare and Tax-Free Childcare. For parents, crossing it can cost thousands in lost childcare support on top of the 60% tax — making a pension contribution to stay under £100,000 even more compelling.
+
+## Why the trap exists
+
+It is not deliberate policy so much as an interaction. The personal allowance withdrawal was introduced to claw back the tax-free amount from high earners, and because it overlaps with the 40% band, it produces the 60% spike. Successive governments have left it in place — partly because it raises revenue quietly, partly because fixing it is politically awkward. For now it is simply a feature of the landscape to plan around.
+
+> [!FAQ]
+> Q: What is the 60% tax trap?
+> A: Between £100,000 and £125,140, the personal allowance is withdrawn by £1 for every £2 earned. Combined with 40% income tax, this produces an effective 60% marginal rate on income in that band.
+>
+> Q: How much do you take home on £100,000?
+> A: About £68,557 a year, or roughly £5,713 a month, before pension or student loan. Income above £100,000 is taxed far more harshly because of the allowance taper.
+>
+> Q: At what income do you lose your personal allowance?
+> A: It starts reducing above £100,000 and is fully gone by £125,140, where you become a full additional-rate taxpayer.
+>
+> Q: How can I avoid the 60% tax trap?
+> A: A pension contribution reduces your adjusted net income. Paying enough to bring it back to £100,000 restores your personal allowance and delivers around 60% effective relief — one of the best-value moves available.
+>
+> Q: Does the trap affect childcare support?
+> A: Yes. Crossing £100,000 also removes the 30 funded childcare hours and Tax-Free Childcare, so parents have an extra reason to keep adjusted income at or below the threshold.
+
+Figures are 2025/26 estimates for England, Wales and Northern Ireland; Scotland sets its own bands. Treat take-home figures as a guide and take advice on large pension contributions.
+`.trim(),
+  },
+  {
+    slug: 'how-much-deposit-to-buy-a-house-uk-2025',
+    title: 'How Much Deposit Do You Really Need to Buy a House?',
+    description:
+      'How much deposit you need for a UK home in 2025 — the 5%, 10% and 25% tiers, how the deposit changes your mortgage rate, and how long it realistically takes to save.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'property',
+    tags: ['Deposit', 'Mortgages', 'First-Time Buyer'],
+    relatedTools: [
+      { href: '/deposit-calculator', label: 'Deposit Calculator', hint: 'How much & how long' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/lifetime-isa-calculator', label: 'Lifetime ISA', hint: '£4k + 25% bonus' },
+    ],
+    body: `
+The deposit is the wall most first-time buyers have to climb, and the figure people quote — "you need 10%" — hides a more useful truth. The minimum to get a mortgage is lower than that, but a bigger deposit unlocks dramatically better rates, which can matter more than the deposit itself. Knowing the tiers, and what each one buys you, helps you decide whether to keep saving or to buy now. Here is the honest picture for 2025.
+
+> [!KEY] The short version
+> The **minimum** deposit for most mortgages is **5%** of the property price.
+> **10%** opens up far more deals and better rates; **25%+** gets you the cheapest rates.
+> A bigger deposit lowers your **loan-to-value (LTV)**, which is what really drives your interest rate.
+> On a £250,000 home, 5% is £12,500, 10% is £25,000 and 25% is £62,500.
+
+## The deposit tiers
+
+Lenders price mortgages by **loan-to-value** — the percentage of the property's value you are borrowing. The less you borrow relative to the price, the lower the risk to the lender, and the better the rate you are offered. Your deposit sets your LTV.
+
+| Deposit | Loan-to-value | What it gets you |
+|---|---|---|
+| 5% | 95% | The minimum — fewer deals, highest rates |
+| 10% | 90% | A solid step up in choice and pricing |
+| 15% | 85% | Noticeably better rates |
+| 25%+ | 75% or less | The cheapest rates lenders offer |
+
+On a £250,000 home that means £12,500 at 5%, £25,000 at 10% and £62,500 at 25%. The [deposit calculator](/deposit-calculator) works out the figure for any price and shows how long it takes to save at your rate.
+
+> [!STAT] 5% | The minimum deposit most lenders require — but rarely the cheapest option
+
+## Why a bigger deposit can beat a bigger salary
+
+Here is the part that surprises people. The jump from a 95% to a 90% mortgage, or 90% to 85%, can cut your interest rate meaningfully — and on a mortgage of a couple of hundred thousand pounds, even a small rate difference changes your monthly payment by a lot. Pushing your deposit over the next LTV threshold (say, from 8% to 10%) can save you more over the mortgage term than the extra deposit cost you. The [mortgage calculator](/mortgage-calculator) lets you compare the monthly payment at different rates so you can see the effect.
+
+## The total cash you actually need
+
+The deposit is not the only upfront cost, and forgetting the rest is a classic mistake:
+
+> [!CHECKLIST] Upfront cash beyond the deposit
+> - Stamp duty (first-time buyers pay nothing up to £300,000, then 5% to £500,000).
+> - Solicitor and conveyancing fees (often £1,000–£2,000).
+> - A survey (£400–£1,500 depending on type).
+> - Mortgage arrangement fees (sometimes added to the loan).
+> - Moving costs and any immediate furnishing.
+
+Budget for the deposit *plus* these, or you will be caught short close to completion.
+
+## How to build the deposit faster
+
+> [!STEPS]
+> 1. **Open a Lifetime ISA** — for a first home up to £450,000, the government adds a 25% bonus on up to £4,000 a year. Free money toward your deposit. Check the rules with the [Lifetime ISA calculator](/lifetime-isa-calculator).
+> 2. **Automate the saving** — a standing order on payday into a separate account removes the temptation to spend it.
+> 3. **Aim for the next LTV threshold**, not a round number — crossing 90% or 85% is where the rate savings kick in.
+> 4. **Clear expensive debt first** — it both improves your mortgage affordability and frees up cash to save.
+
+> [!WARNING] Don't drain every penny into the deposit
+> Putting your entire savings into the deposit leaves nothing for the other buying costs, moving, or the inevitable early repairs and furnishings. Keep a buffer — a slightly smaller deposit with an emergency fund intact is usually wiser than a marginally lower rate and no savings.
+
+> [!FAQ]
+> Q: How much deposit do I need to buy a house in the UK?
+> A: The minimum is usually 5% of the property price, but 10% or more opens up far better mortgage rates. On a £250,000 home that is £12,500 at 5% or £25,000 at 10%.
+>
+> Q: Is a bigger deposit worth it?
+> A: Often yes. A bigger deposit lowers your loan-to-value, which can cut your interest rate enough to save more over the mortgage term than the extra deposit cost you.
+>
+> Q: What is loan-to-value?
+> A: The percentage of the property's price you are borrowing. A £25,000 deposit on a £250,000 home is a 90% loan-to-value. Lower LTV means lower risk to the lender and cheaper rates.
+>
+> Q: Can a Lifetime ISA help with my deposit?
+> A: Yes. For a first home up to £450,000, the government adds a 25% bonus on up to £4,000 a year paid into a Lifetime ISA — a meaningful boost to a deposit.
+>
+> Q: What other costs do I need beyond the deposit?
+> A: Stamp duty (above £300,000 for first-time buyers), legal and survey fees, possible mortgage fees, and moving costs. Budget for these on top of the deposit.
+
+Figures are 2025/26 estimates and illustrative. Rates and lender criteria vary — treat the calculators as a guide and consider mortgage advice.
+`.trim(),
+  },
+  {
+    slug: 'how-much-do-i-need-to-retire-uk-2025',
+    title: 'How Much Do You Actually Need to Retire in the UK?',
+    description:
+      'A realistic look at how big a pension pot you need to retire in the UK — the income targets, the role of the State Pension, the 4% rule, and how to check if you are on track.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 11,
+    category: 'money',
+    tags: ['Pensions', 'Retirement', 'Saving'],
+    relatedTools: [
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+      { href: '/pension-drawdown-calculator', label: 'Pension Drawdown', hint: 'How long will it last?' },
+      { href: '/state-pension', label: 'State Pension', hint: 'Forecast from NI years' },
+    ],
+    body: `
+"How much do I need to retire?" is the question that keeps people up at night, usually answered with an intimidating six- or seven-figure number that bears no relation to their life. The truth is more manageable, because the State Pension does a lot of the heavy lifting, and the number depends entirely on the lifestyle you want. Here is a realistic, jargon-free way to work out your own target for the UK in 2025.
+
+> [!KEY] The short version
+> A common rule of thumb is you need about **two-thirds of your working income** in retirement.
+> The **full State Pension** is about **£11,973 a year** and covers a big chunk of a basic lifestyle.
+> A widely-used guide suggests a pot of roughly **25 times** the annual income you want it to provide.
+> The **earlier you start**, the more compounding does the work for you.
+
+## Start with the income, not the pot
+
+The mistake is fixating on a giant pot. What actually matters is the **annual income** you want in retirement. Industry research (the PLSA retirement living standards) gives useful anchors for a single person:
+
+| Lifestyle | Rough annual income needed |
+|---|---|
+| Minimum (covers basics, little spare) | around £14,000 |
+| Moderate (some comfort, a holiday) | around £31,000 |
+| Comfortable (more freedom and luxuries) | around £43,000 |
+
+Couples need more in total but less each, because many costs are shared. Decide which life you are aiming for, and you have your income target. Everything else flows from that.
+
+## The State Pension does a lot
+
+Here is the reassuring part. The **full new State Pension** is about **£11,973 a year** in 2025/26 (£230.25 a week), paid from State Pension age — currently 66, rising to 67. For a couple who both qualify, that is nearly £24,000 a year of guaranteed, inflation-linked income before they touch a penny of private savings.
+
+That means a single person aiming for a "moderate" £31,000 only needs their private pension to provide about £19,000 a year — not £31,000. Check your own State Pension forecast, which depends on your National Insurance record, with the [State Pension tool](/state-pension).
+
+> [!STAT] £11,973 | The full new State Pension a year in 2025/26 — your guaranteed foundation
+
+## How big a pot for the rest?
+
+To turn a pot into income, a common rule of thumb is the **4% rule** — you can withdraw about 4% of your pot in the first year, rising with inflation, with a reasonable chance it lasts 30 years. Flip that around and you need roughly **25 times** the annual income you want the pot to provide.
+
+> [!STEPS]
+> 1. **Set your income target** — say £31,000 a year (moderate).
+> 2. **Subtract the State Pension** — £31,000 − £11,973 = about £19,000 from your own savings.
+> 3. **Multiply by 25** — £19,000 × 25 = about £475,000 pot needed.
+> 4. **Adjust for reality** — a part-time job, downsizing, or a partner's pension all reduce the figure.
+
+The [pension calculator](/pension-calculator) projects what your contributions will grow to, and the [drawdown calculator](/pension-drawdown-calculator) shows how long a pot lasts at different withdrawal rates.
+
+> [!WARNING] The 4% rule is a guide, not a guarantee
+> The 4% figure is a rule of thumb from historical data, not a promise. Poor early investment returns, living longer than expected, or high inflation can all mean a pot does not last. Many people use a more cautious withdrawal rate or keep some flexibility to spend less in bad years.
+
+## Why starting early matters so much
+
+Compounding rewards time more than amount. Someone who saves a modest sum from their twenties can end up with a bigger pot than someone who saves much more from their forties, simply because the early money had decades to grow. If retirement feels far off, that is exactly why starting now is so powerful — and if it feels close, the levers are saving more, working a little longer, or trimming the income target.
+
+## Don't forget the free money
+
+Before stretching for a giant private pot, make sure you are capturing every employer pension contribution available — it is free money that goes straight into your retirement. Salary sacrifice can boost it further. For many people, maximising workplace contributions gets them most of the way to their target without heroics.
+
+> [!FAQ]
+> Q: How much do I need to retire in the UK?
+> A: It depends on the lifestyle you want. A common rule is about two-thirds of your working income. With the State Pension covering around £12,000 a year, many people need a private pot of a few hundred thousand pounds to top up to a moderate or comfortable income.
+>
+> Q: How much is the State Pension?
+> A: The full new State Pension is about £11,973 a year (£230.25 a week) in 2025/26, paid from State Pension age, provided you have enough National Insurance years.
+>
+> Q: What is the 4% rule?
+> A: A rule of thumb that you can withdraw about 4% of your pension pot in the first year, increasing with inflation, with a reasonable chance it lasts 30 years. It implies needing roughly 25 times your target annual income.
+>
+> Q: How big a pension pot do I need for £30,000 a year?
+> A: After the State Pension covers around £12,000, you need your pot to provide about £18,000–£19,000 a year — roughly £450,000–£475,000 using the 4% rule, less if you have other income.
+>
+> Q: Does starting early really make a difference?
+> A: Hugely. Compounding means money saved in your twenties and thirties grows far more than the same amount saved later, so starting early is the single biggest advantage.
+
+Figures are 2025/26 estimates and rules of thumb, not personal advice. Investment returns are not guaranteed — consider regulated financial advice for retirement planning.
+`.trim(),
+  },
+  {
+    slug: 'how-much-is-car-tax-ved-2025-26',
+    title: 'How Much Is Car Tax in 2025/26? VED Rates Explained',
+    description:
+      'UK car tax (VED) for 2025/26 explained — the £195 standard rate, first-year rates by CO2, the £40,000 expensive-car supplement, and why electric cars now pay too.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'motoring',
+    tags: ['Car Tax', 'VED', 'Road Tax'],
+    relatedTools: [
+      { href: '/vehicle-tax-calculator', label: 'Vehicle Tax (VED)', hint: 'CO2 + standard rate' },
+      { href: '/car-running-costs', label: 'Car Running Costs', hint: 'Total cost of ownership' },
+      { href: '/ev-charging-cost', label: 'EV Charging Cost', hint: 'Home vs public' },
+    ],
+    body: `
+Car tax is one of those costs that quietly changes every year, and 2025/26 brought a big shift: electric cars now pay it too. Whether you are budgeting for a new car or just wondering why your renewal looks different, the system is more logical than it first appears once you separate the one-off first-year charge from the flat rate everyone settles into. Here is how Vehicle Excise Duty works in 2025/26.
+
+> [!KEY] The short version
+> The **standard rate** of car tax is **£195 a year** for most cars from their second year.
+> The **first-year rate** depends on CO2 emissions — from £10 for the cleanest to over £5,000 for the dirtiest.
+> Cars with a list price over **£40,000** pay a **£425 supplement** a year for years two to six.
+> **Electric cars now pay VED** since April 2025 — the exemption is gone.
+
+## The two parts of car tax
+
+For any car registered since April 2017, Vehicle Excise Duty (VED) has two stages:
+
+1. A **first-year rate** based on the car's CO2 emissions — paid once, usually bundled into the on-the-road price by the dealer.
+2. A **standard rate** from year two onward — a flat fee that is the same for almost every car.
+
+For 2025/26 that standard rate is **£195 a year**. Whether your car is a small petrol hatchback or a large diesel, once you are past the first year you pay the same £195 — unless the expensive-car supplement applies. Check yours on the [vehicle tax calculator](/vehicle-tax-calculator).
+
+## The first-year "showroom tax"
+
+The first year is where emissions matter. The dirtier the car, the more you pay up front:
+
+| CO2 (g/km) | First-year rate (petrol) |
+|---|---|
+| 0 (electric) | £10 |
+| 1–50 | £110 |
+| 51–75 | £130 |
+| 76–100 | £270–£350 |
+| 111–150 | £440–£540 |
+| 151–170 | £1,360 |
+| Over 255 | £5,490 |
+
+This is why a high-emission performance car can cost thousands in its first year, while an efficient one costs very little. After that first year, they all drop to the £195 standard rate.
+
+> [!STAT] £195 | The standard annual car tax rate from year two for most vehicles
+
+## The £40,000 expensive-car supplement
+
+Here is the one that catches buyers of premium and electric cars. If a car's **list price when new was over £40,000**, it pays an extra **£425 a year** on top of the standard rate — for five years, from year two to year six. So a £45,000 car effectively pays £195 + £425 = £620 a year during that period.
+
+> [!WARNING] This now hits electric cars too
+> Since April 2025, electric cars pay VED for the first time — a £10 first-year rate, then the £195 standard rate. Crucially, the £40,000 supplement applies to them as well, and many EVs list above £40,000, so a new electric car can face £620 a year in tax during years two to six. The free-tax era for EVs is over.
+
+## Older cars work differently
+
+If your car was registered before April 2017, it sits in a different system. Cars registered between 2001 and 2017 are taxed purely on **CO2 bands** — a low-emission car from that era can still be very cheap or even free to tax. Cars registered before 2001 are taxed on **engine size**. So the rules above apply to newer cars; older ones follow their own, often cheaper, tables.
+
+## Paying and avoiding pitfalls
+
+You can pay annually, every six months or monthly by Direct Debit, though paying monthly costs slightly more overall. Two things to remember: car tax no longer transfers when you buy a used car, so you must tax it before driving away; and if a car is off the road, you must declare a SORN or keep taxing it. Driving untaxed risks fines and clamping, picked up automatically by number-plate cameras. The [car running costs calculator](/car-running-costs) folds tax into the full picture of what a car costs to keep.
+
+> [!FAQ]
+> Q: How much is car tax in 2025/26?
+> A: The standard rate is £195 a year for most cars from year two. The first-year rate varies by CO2 emissions from £10 to over £5,000, and cars over £40,000 pay a £425 supplement in years two to six.
+>
+> Q: Do electric cars pay car tax now?
+> A: Yes. Since 1 April 2025, electric cars pay a £10 first-year rate then the £195 standard rate, plus the £40,000 expensive-car supplement if applicable.
+>
+> Q: What is the expensive-car supplement?
+> A: An extra £425 a year, on top of the standard rate, for cars with a list price over £40,000 when new. It applies from year two to year six.
+>
+> Q: Why is my first-year tax so high?
+> A: The first-year rate is based on CO2 emissions, so higher-emission cars pay much more up front. It drops to the £195 standard rate from the second year.
+>
+> Q: Does car tax transfer when I buy a used car?
+> A: No. The seller's tax is cancelled on sale, so you must tax the car yourself before driving it. There is no longer a paper tax disc — check and tax it online.
+
+Figures are 2025/26 estimates for cars registered from April 2017. Older cars use different tables. Always confirm your exact rate on gov.uk.
+`.trim(),
+  },
+  {
+    slug: 'council-tax-bands-and-reductions-explained-2025-26',
+    title: 'Council Tax Bands and Reductions Explained',
+    description:
+      'How council tax bands work in 2025/26, why your band may be wrong, and every discount and reduction you might be missing — from the single-person discount to full support.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'benefits',
+    tags: ['Council Tax', 'Bills', 'Discounts'],
+    relatedTools: [
+      { href: '/council-tax-band', label: 'Council Tax Bands', hint: 'Band A–H by area' },
+      { href: '/council-tax-support-checker', label: 'Council Tax Support', hint: 'Reduction eligibility' },
+      { href: '/universal-credit-calculator', label: 'Universal Credit', hint: 'Allowance + elements' },
+    ],
+    body: `
+Council tax is one of the biggest household bills, yet most people pay whatever the council asks without ever checking whether their band is right or whether they qualify for a discount. Both can be wrong in your favour. Bands are based on valuations that are now decades old, and a whole menu of reductions goes unclaimed every year. Here is how council tax works in 2025/26 and where the savings hide.
+
+> [!KEY] The short version
+> Your bill depends on your property's **band (A to H)**, set on its **1991 value** in England.
+> Many homes are in the **wrong band** — you can check and challenge it for free.
+> A **single adult** gets a **25% discount**; students and some others are exempt entirely.
+> Low-income households can claim **Council Tax Reduction**, worth up to 100% off.
+
+## How bands work
+
+In England, every home is placed in one of eight bands, **A (lowest) to H (highest)**, based on what it was worth on **1 April 1991** — not today. Wales uses a similar system with a 2003 valuation and nine bands; Scotland has its own. Your council sets a charge for band D, and the other bands are fixed proportions of it: band A pays two-thirds of band D, band H pays twice as much, and so on.
+
+Because the valuations are so old, two near-identical houses can sit in different bands, and plenty of homes were banded hastily back in 1991. You can look up any property's band and compare it with your neighbours' using the [council tax band tool](/council-tax-band).
+
+> [!STAT] 1991 | The year England's council tax bands are still based on
+
+## Could your band be wrong?
+
+This is the check almost nobody does. If similar neighbouring properties are in a lower band than yours, or your home was valued incorrectly in 1991, you may be over-banded — and have been overpaying for years. You can challenge your band with the Valuation Office Agency for free.
+
+> [!WARNING] A band challenge can go either way
+> Challenging your band can result in it being lowered (a refund and lower future bills) — but the VOA can also review and *raise* it, or your neighbours', if it finds the band was too low. Check the evidence carefully before challenging: compare bands and 1991 values of similar local properties first, so you only challenge when the case is strong.
+
+## The discounts you might be missing
+
+A surprising amount of council tax goes uncollected as discounts simply because people do not claim:
+
+> [!CHECKLIST] Common council tax discounts
+> - **Single-person discount** — 25% off if you are the only adult in the home.
+> - **Student homes** — full exemption if everyone is a full-time student.
+> - **Severe mental impairment** — those who qualify are disregarded, sometimes giving 25% or 100% off.
+> - **Annexes and empty properties** — special rules and sometimes discounts apply.
+> - **Disabled band reduction** — a home adapted for a disabled resident can be charged a band lower.
+
+If you live alone and are not getting the 25% single-person discount, you are almost certainly overpaying — claim it directly from your council.
+
+## Council Tax Reduction for low incomes
+
+Separately from discounts, **Council Tax Reduction (CTR)** — sometimes called Council Tax Support — cuts the bill for people on low incomes. Unlike most benefits it is run locally, so the rules vary by council, but it can cover anywhere from a small percentage up to **100%** of the bill. Pension-age claimants follow national rules and the poorest can get 100%; working-age schemes are set by each council and often cap support a little lower. The [Council Tax Support checker](/council-tax-support-checker) estimates what you might get, and if you claim [Universal Credit](/universal-credit-calculator) you can usually apply for CTR alongside it.
+
+> [!FAQ]
+> Q: How are council tax bands worked out?
+> A: In England, by your property's value on 1 April 1991, placing it in a band from A to H. Wales uses a 2003 valuation and Scotland its own system. Your council sets the band D charge and the other bands are fixed proportions of it.
+>
+> Q: Can I get my council tax band lowered?
+> A: Possibly. If similar local properties are in a lower band, you can challenge yours for free with the Valuation Office Agency — but be aware a review could also raise it, so check the evidence first.
+>
+> Q: What discounts can reduce my council tax?
+> A: A 25% single-person discount, full exemption for all-student households, disregards for severe mental impairment, and a disabled band reduction, among others. Many go unclaimed.
+>
+> Q: What is Council Tax Reduction?
+> A: A means-tested reduction for people on low incomes, run by your local council, worth up to 100% of the bill. It is separate from discounts and you must apply for it.
+>
+> Q: Do I get a discount living alone?
+> A: Yes — a 25% single-person discount if you are the only adult in the property. If you are not receiving it, claim it from your council.
+
+Figures and rules are 2025/26 estimates for England unless stated. Bands and support schemes vary by nation and council — check with your local authority.
+`.trim(),
+  },
+  {
+    slug: 'national-insurance-explained-how-much-2025-26',
+    title: 'National Insurance Explained: How Much Do You Actually Pay?',
+    description:
+      'A clear guide to National Insurance in 2025/26 — the 8% employee rate, the thresholds, what self-employed people pay, what it funds, and why it is separate from income tax.',
+    date: '2026-06-08',
+    updated: '2026-06-08',
+    readMinutes: 9,
+    category: 'money',
+    tags: ['National Insurance', 'Take-Home Pay', 'Tax'],
+    relatedTools: [
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/state-pension', label: 'State Pension', hint: 'Built from NI years' },
+    ],
+    body: `
+National Insurance is the deduction on your payslip that most people never question, sitting quietly next to income tax and taking a chunk of every pay packet. It works differently from income tax, funds different things, and matters more than people realise — because it is what builds your State Pension. Here is what you actually pay in 2025/26, and why it is worth understanding rather than ignoring.
+
+> [!KEY] The short version
+> Employees pay **8%** National Insurance on earnings between **£12,570 and £50,270**, then **2%** above.
+> It is **separate from income tax**, with its own thresholds and rates.
+> The **self-employed** pay 6% then 2% Class 4 NI on profits.
+> National Insurance is what **builds your State Pension** record — not just another tax.
+
+## How National Insurance works for employees
+
+If you are employed, you pay **Class 1** National Insurance, deducted automatically before you are paid. For 2025/26:
+
+- You pay **nothing** on the first £12,570 a year (the primary threshold).
+- You pay **8%** on earnings between £12,570 and £50,270.
+- You pay **2%** on everything above £50,270.
+
+So unlike income tax — where the rate *rises* to 40% in the higher band — National Insurance actually *falls* to 2% once you pass £50,270. That is why high earners' marginal rates are a little lower than you might expect at the top. See your own deduction on the [National Insurance calculator](/national-insurance-calculator) or the full picture on the [take-home pay tool](/take-home-pay).
+
+> [!STAT] 8% | The main rate of employee National Insurance in 2025/26, between £12,570 and £50,270
+
+## A quick example
+
+Someone earning £35,000 pays NI only on the slice above £12,570:
+
+> [!STEPS]
+> 1. **Earnings above the threshold** — £35,000 − £12,570 = £22,430.
+> 2. **Apply 8%** — £22,430 × 0.08 = about £1,794 a year.
+> 3. **Monthly** — roughly £150 of National Insurance.
+
+All of it at 8%, because £35,000 is below the £50,270 upper limit where the rate drops to 2%.
+
+## What the self-employed pay
+
+If you work for yourself, you pay **Class 4** National Insurance through Self Assessment on your profits:
+
+- **6%** on profits between £12,570 and £50,270.
+- **2%** on profits above £50,270.
+
+**Class 2** National Insurance, the old flat weekly charge, is now voluntary for most — but paying it (or having enough profit) still builds your State Pension record, which matters (see below). The self-employed rates are slightly lower than the employee 8%, reflecting that they get fewer contributory benefits.
+
+## Why National Insurance is not just another tax
+
+Here is the part that makes NI different from income tax: it is the mechanism that builds your **State Pension**. Each year you pay enough National Insurance (or receive credits) counts as a "qualifying year." You generally need about 35 qualifying years for the full new State Pension, and at least 10 to get anything at all.
+
+> [!WARNING] Gaps in your record can cost you a full State Pension
+> Years spent not working, with low earnings, or abroad can leave gaps that reduce your State Pension. The good news is you often get **NI credits** automatically — for example while claiming Child Benefit or certain other benefits — and you can sometimes pay voluntary contributions to fill gaps. Check your record and forecast with the [State Pension tool](/state-pension); fixing a gap is occasionally one of the best-value things you can do.
+
+## Income tax versus National Insurance
+
+People often lump the two together, but they are genuinely separate systems:
+
+| | Income tax | National Insurance |
+|---|---|---|
+| Tax-free threshold | £12,570 personal allowance | £12,570 primary threshold |
+| Rates | 20% / 40% / 45% (rises) | 8% then 2% (falls) |
+| Applies to | Most income, including savings | Mainly earnings from work |
+| Builds State Pension? | No | Yes |
+
+They only line up neatly at £50,270, where the higher-rate tax band and the lower NI rate both begin.
+
+> [!FAQ]
+> Q: How much National Insurance do I pay?
+> A: As an employee in 2025/26, 8% on earnings between £12,570 and £50,270, then 2% above. The self-employed pay 6% then 2% Class 4 NI on profits.
+>
+> Q: Why does my National Insurance go down at higher earnings?
+> A: Unlike income tax, the NI rate falls from 8% to 2% above £50,270. So the very top of your earnings is charged less NI, not more.
+>
+> Q: Is National Insurance the same as income tax?
+> A: No. They are separate systems with different thresholds and rates, and National Insurance specifically builds your State Pension entitlement, which income tax does not.
+>
+> Q: Do the self-employed pay National Insurance?
+> A: Yes — Class 4 NI at 6% then 2% on profits through Self Assessment. Class 2 is now voluntary for most, but contributing still protects your State Pension record.
+>
+> Q: Why does National Insurance matter for my pension?
+> A: Each qualifying year of NI counts toward the State Pension. You need about 35 years for the full amount, so gaps can reduce it — though credits and voluntary contributions can help fill them.
+
+Figures are 2025/26 estimates for the UK. Treat take-home figures as a guide and check your own National Insurance record on gov.uk.
+`.trim(),
+  },
+  {
     slug: 'inheritance-tax-explained-2025-26',
     title: 'Inheritance Tax Explained: Will Your Family Actually Pay It?',
     description:
