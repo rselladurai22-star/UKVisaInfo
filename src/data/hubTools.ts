@@ -278,9 +278,9 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       description: 'Price cap, solar, heat pumps and EV charging.',
       items: [
         { label: 'Energy Bill', href: '/energy-bill', hint: 'Ofgem cap quarterly', status: 'live' },
-        { label: 'Solar Panel ROI', href: '/solar-panel-roi', hint: 'Payback + export tariff', status: 'soon' },
-        { label: 'Heat Pump', href: '/heat-pump-calculator', hint: 'Air/ground source cost', status: 'soon' },
-        { label: 'EV Charging Cost', href: '/ev-charging-cost', hint: 'Home vs public per mile', status: 'soon' },
+        { label: 'Solar Panel ROI', href: '/solar-panel-roi', hint: 'Payback + export tariff', status: 'live' },
+        { label: 'Heat Pump', href: '/heat-pump-calculator', hint: 'Air source cost vs gas', status: 'live' },
+        { label: 'EV Charging Cost', href: '/ev-charging-cost', hint: 'Home vs public per mile', status: 'live' },
       ],
     },
   ],
