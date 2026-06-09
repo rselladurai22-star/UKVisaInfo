@@ -16,7 +16,6 @@ const liveCount = (id: CategoryId) => CAT_TOOLS(id).filter((t) => t.status === '
 
 export default function ToolsClient() {
   const [query, setQuery] = useState('');
-  const [active, setActive] = useState<CategoryId | 'all'>('all');
   const q = query.trim().toLowerCase();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,19 +27,24 @@ export default function ToolsClient() {
     return () => window.removeEventListener('keydown', h);
   }, []);
 
-  // Categories to render, each with its (optionally filtered) tools.
+  // Compute categories and their tools matching the search query
   const sections = useMemo(() => {
     return CATEGORIES
-      .filter((c) => active === 'all' || c.id === active)
       .map((c) => {
         let items = CAT_TOOLS(c.id);
-        if (q) items = items.filter((t) => t.label.toLowerCase().includes(q) || t.hint.toLowerCase().includes(q));
-        // live first
+        if (q) {
+          items = items.filter(
+            (t) =>
+              t.label.toLowerCase().includes(q) ||
+              t.hint.toLowerCase().includes(q)
+          );
+        }
+        // Live tools first, soon tools second
         items = [...items].sort((a, b) => (a.status === b.status ? 0 : a.status === 'live' ? -1 : 1));
         return { cat: c, items };
       })
       .filter((s) => s.items.length > 0);
-  }, [q, active]);
+  }, [q]);
 
   const shownLive = sections.reduce((n, s) => n + s.items.filter((i) => i.status === 'live').length, 0);
   const shownSoon = sections.reduce((n, s) => n + s.items.filter((i) => i.status === 'soon').length, 0);
@@ -85,50 +89,72 @@ export default function ToolsClient() {
           )}
         </div>
 
-        {/* Category filter chips */}
-        <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap no-scrollbar">
-          <Chip active={active === 'all'} onClick={() => setActive('all')} label="All" count={LIVE_TOTAL} />
-          {CATEGORIES.map((c) => (
-            <Chip key={c.id} active={active === c.id} onClick={() => setActive(c.id)} label={c.label} count={liveCount(c.id)} color={c.color} />
-          ))}
-        </div>
-
         {/* Count / reset */}
-        <div className="flex items-center justify-between mt-5 mb-3">
+        <div className="flex items-center justify-between mt-4 mb-4.5">
           <p className="text-xs font-semibold text-on-surface-variant">
             <span className="text-on-surface">{shownLive}</span> live{shownSoon > 0 && <span className="opacity-70"> · {shownSoon} soon</span>}{q && <> for &ldquo;{query}&rdquo;</>}
           </p>
-          {(q || active !== 'all') && (
-            <button onClick={() => { setQuery(''); setActive('all'); }} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">Reset <X className="h-3.5 w-3.5" /></button>
+          {q && (
+            <button onClick={() => setQuery('')} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">Reset <X className="h-3.5 w-3.5" /></button>
           )}
         </div>
 
-        {/* Sections — every tool listed, grouped by category */}
+        {/* Directory Grid — every tool listed category-wise */}
         {sections.length === 0 ? (
           <div className="rounded-xl border border-dashed border-outline-variant bg-surface-container-lowest px-6 py-16 text-center">
             <p className="text-sm font-semibold">No tools match &ldquo;{query}&rdquo;.</p>
             <button onClick={() => setQuery('')} className="mt-2 text-sm font-semibold text-primary hover:underline">Clear search</button>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {sections.map(({ cat, items }) => {
               const Icon = cat.icon;
               return (
-                <section key={cat.id}>
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <span className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${cat.color}14`, color: cat.color }}>
-                      <Icon className="h-4 w-4" />
+                <div
+                  key={cat.id}
+                  className="rounded-2xl border border-border bg-white p-5 shadow-soft hover:shadow-card hover:border-[#00875A]/60 transition-all duration-300 flex flex-col h-full min-h-[320px]"
+                >
+                  {/* Category Header */}
+                  <div className="flex items-center gap-3 pb-3 border-b border-slate-100 mb-3.5">
+                    <span
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: `${cat.color}14`, color: cat.color }}
+                    >
+                      <Icon className="h-4.5 w-4.5" />
                     </span>
-                    <h2 className="text-sm font-display font-bold">{cat.label}</h2>
-                    <span className="text-[11px] text-on-surface-variant">{items.filter((i) => i.status === 'live').length} live</span>
-                    <Link href={`/category/${cat.id}`} className="ml-auto text-[11px] font-bold uppercase tracking-wider hover:underline flex items-center gap-0.5" style={{ color: cat.color }}>
-                      Hub <ChevronRight className="h-3 w-3" />
+                    <div className="min-w-0 flex-1">
+                      <h2 className="text-[14.5px] font-display font-extrabold text-[#0B2240] truncate leading-tight">
+                        {cat.label}
+                      </h2>
+                      <p className="text-[10.5px] text-on-surface-variant font-medium leading-none mt-0.5">
+                        {items.filter((i) => i.status === 'live').length} live tools
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Category Description */}
+                  <p className="text-[12px] text-on-surface-variant leading-relaxed mb-4">
+                    {cat.description}
+                  </p>
+
+                  {/* Tools List */}
+                  <div className="space-y-1.5 flex-1">
+                    {items.map((t) => (
+                      <CompactTool key={t.href + t.label} tool={t} color={cat.color} />
+                    ))}
+                  </div>
+
+                  {/* Footer link to hub */}
+                  <div className="mt-4 pt-3 border-t border-slate-100/50 flex items-center justify-end">
+                    <Link
+                      href={`/category/${cat.id}`}
+                      className="text-[11px] font-bold uppercase tracking-wider hover:opacity-85 flex items-center gap-0.5 transition-opacity"
+                      style={{ color: cat.color }}
+                    >
+                      Explore Hub <ChevronRight className="h-3 w-3" />
                     </Link>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                    {items.map((t) => <CompactTool key={t.href + t.label} tool={t} color={cat.color} />)}
-                  </div>
-                </section>
+                </div>
               );
             })}
           </div>
@@ -138,27 +164,13 @@ export default function ToolsClient() {
   );
 }
 
-function Chip({ active, onClick, label, count, color }: { active: boolean; onClick: () => void; label: string; count?: number; color?: string }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-        active ? 'text-white border-transparent' : 'bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:border-primary/50'
-      }`}
-      style={active ? { background: color ?? 'var(--color-primary, #00875A)' } : undefined}
-    >
-      {label}{count != null && <span className={active ? 'opacity-80' : 'opacity-60'}> · {count}</span>}
-    </button>
-  );
-}
-
 function CompactTool({ tool, color }: { tool: HubItem; color: string }) {
   if (tool.status === 'soon') {
     return (
-      <div className="group relative rounded-lg border border-dashed border-outline-variant bg-surface-container-low/40 px-3 py-2.5 flex items-center gap-3">
+      <div className="group relative rounded-lg border border-dashed border-outline-variant bg-surface-container-low/30 px-3 py-2 flex items-center gap-3">
         <span className="min-w-0 flex-1">
-          <span className="block text-[13px] font-semibold text-on-surface-variant truncate">{tool.label}</span>
-          <span className="block text-[11px] text-on-surface-variant/70 truncate">{tool.hint}</span>
+          <span className="block text-[12.5px] font-semibold text-on-surface-variant truncate">{tool.label}</span>
+          <span className="block text-[10.5px] text-on-surface-variant/70 truncate">{tool.hint}</span>
         </span>
         <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent-soft text-accent shrink-0">Soon</span>
       </div>
@@ -167,15 +179,15 @@ function CompactTool({ tool, color }: { tool: HubItem; color: string }) {
   return (
     <Link
       href={tool.href}
-      className="group relative rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 flex items-center gap-3 hover:shadow-md active:scale-[0.99] transition-all overflow-hidden"
+      className="group relative rounded-lg border border-border bg-surface-container-lowest px-3 py-2 flex items-center gap-3 hover:border-primary/50 hover:shadow-sm active:scale-[0.99] transition-all overflow-hidden"
     >
       <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: color }} />
       <span className="min-w-0 flex-1">
-        <span className="block text-[13px] font-semibold truncate group-hover:text-primary transition-colors">{tool.label}</span>
-        <span className="block text-[11px] text-on-surface-variant truncate">{tool.hint}</span>
+        <span className="block text-[12.5px] font-semibold truncate group-hover:text-primary transition-colors">{tool.label}</span>
+        <span className="block text-[10.5px] text-on-surface-variant truncate">{tool.hint}</span>
       </span>
       {tool.xref && <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-secondary-soft text-secondary shrink-0">↗</span>}
-      <ArrowUpRight className="h-4 w-4 text-on-surface-variant group-hover:text-primary shrink-0 transition-colors" />
+      <ArrowUpRight className="h-3.5 w-3.5 text-on-surface-variant group-hover:text-primary shrink-0 transition-colors" />
     </Link>
   );
 }
