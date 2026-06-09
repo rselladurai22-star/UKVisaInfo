@@ -4,6 +4,110 @@ import type { BlogPost } from './blog';
 // enough for the build — a single 10k-line file overran the SWC stack).
 export const GUIDE_POSTS: BlogPost[] = [
   {
+    slug: 'uk-salary-after-tax-take-home-table-2025-26',
+    title: 'UK Salary After Tax 2025/26: Full Take-Home Pay Table',
+    description:
+      'See exactly what every UK salary is worth after tax in 2025/26 — a full take-home pay table from £15,000 to £150,000 showing income tax, National Insurance and monthly net pay.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 11,
+    category: 'money',
+    tags: ['Take-Home Pay', 'Income Tax', 'Salary', 'National Insurance'],
+    relatedTools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+    ],
+    body: `
+"What's that actually worth after tax?" is the first question anyone asks about a salary, and the honest answer is never the headline number. Between income tax and National Insurance, a chunk of every pay packet disappears before it reaches you — and how big that chunk is changes as you climb the bands. This page gives you the whole picture in one place: a complete UK take-home pay table for 2025/26, from £15,000 to £150,000, with the monthly figure that actually matters.
+
+> [!KEY] How to use this table
+> Find your **gross salary** in the left column to see your **annual and monthly take-home**.
+> Figures are for **England, Wales and Northern Ireland** in 2025/26 (Scotland differs).
+> They assume **no pension or student loan** — both reduce take-home further.
+> For your exact number with those included, use the [take-home pay calculator](/take-home-pay).
+
+## The full take-home pay table (2025/26)
+
+| Gross salary | Income tax | National Insurance | Take-home (year) | Take-home (month) |
+|---|---|---|---|---|
+| £15,000 | £486 | £194 | £14,320 | £1,193 |
+| £20,000 | £1,486 | £594 | £17,920 | £1,493 |
+| £25,000 | £2,486 | £994 | £21,520 | £1,793 |
+| £30,000 | £3,486 | £1,394 | £25,120 | £2,093 |
+| £35,000 | £4,486 | £1,794 | £28,720 | £2,393 |
+| £40,000 | £5,486 | £2,194 | £32,320 | £2,693 |
+| £45,000 | £6,486 | £2,594 | £35,920 | £2,993 |
+| £50,000 | £7,486 | £2,994 | £39,520 | £3,293 |
+| £55,000 | £9,432 | £3,111 | £42,457 | £3,538 |
+| £60,000 | £11,432 | £3,211 | £45,357 | £3,780 |
+| £65,000 | £13,432 | £3,311 | £48,257 | £4,021 |
+| £70,000 | £15,432 | £3,411 | £51,157 | £4,263 |
+| £75,000 | £17,432 | £3,511 | £54,057 | £4,505 |
+| £80,000 | £19,432 | £3,611 | £56,957 | £4,746 |
+| £90,000 | £23,432 | £3,811 | £62,757 | £5,230 |
+| £100,000 | £27,432 | £4,011 | £68,557 | £5,713 |
+| £125,000 | £42,432 | £4,511 | £78,057 | £6,505 |
+| £150,000 | £53,703 | £5,011 | £91,286 | £7,607 |
+
+## How the deductions work
+
+Two separate taxes come out of an ordinary salary, each with its own thresholds:
+
+- **Income tax** — nothing on the first £12,570 (the personal allowance), then 20% up to £50,270, 40% up to £125,140, and 45% above.
+- **National Insurance** — 8% on earnings between £12,570 and £50,270, then just 2% above.
+
+Because the rates change at set points, your **take-home doesn't rise in a straight line** with your salary. Three thresholds matter most.
+
+## The three salary thresholds that change everything
+
+> [!STAT] £50,270 | Where the 40% higher-rate band begins — the biggest jump in the table
+
+**£50,270 — higher rate begins.** Below this you keep about 72p of each extra pound; above it, only 58p, because the rate jumps from 20% to 40% (NI drops to 2%). You can see the take-home growth slow between £50,000 and £55,000 in the table.
+
+**£100,000 — the 60% trap.** Above £100,000 your personal allowance is withdrawn, creating an effective 60% rate up to £125,140. Notice how little extra take-home £125,000 gives over £100,000 — that's the trap at work. Full detail in our [£100,000 tax trap guide](/blog/how-much-tax-on-100000-salary-uk-2025-26).
+
+**£125,140 — additional rate.** The personal allowance is fully gone and the 45% rate applies to income above this point.
+
+## Salary deep-dives
+
+For a full breakdown at the most-searched salaries, including how to keep more of it:
+
+- [How much tax on £50,000?](/blog/how-much-tax-on-50000-salary-uk-2025-26) — the basic/higher-rate borderline.
+- [How much tax on £60,000?](/blog/how-much-tax-on-60000-salary-uk-2025-26) — your first taste of 40%.
+- [Earning £100,000? The 60% trap](/blog/how-much-tax-on-100000-salary-uk-2025-26) — the worst marginal rate in the system.
+
+## What the table doesn't include
+
+The figures above are the baseline. Your real take-home is usually a bit lower because of:
+
+- **Pension contributions** — money into a workplace pension before tax. It reduces take-home now but is the most efficient way to keep more of a higher salary. See [salary sacrifice](/blog/salary-sacrifice-pension-explained-2025-26).
+- **Student loan** — Plan 2 takes 9% of income above £28,470, which can knock a couple of hundred pounds off the monthly figure.
+- **Scotland** — different income tax bands mean Scottish take-home differs, especially at higher salaries.
+
+> [!WARNING] A pay rise isn't always what it looks like
+> Because of the thresholds, a rise that pushes you over £50,270 or £100,000 is taxed far harder on the part above the line. Always check the *extra take-home*, not the headline rise — the [take-home calculator](/take-home-pay) shows the before-and-after instantly.
+
+> [!FAQ]
+> Q: How much is £30,000 a year after tax?
+> A: About £25,120 a year, or roughly £2,093 a month, in 2025/26 before any pension or student loan.
+>
+> Q: How much is £40,000 after tax?
+> A: About £32,320 a year — around £2,693 a month — before pension or student loan deductions.
+>
+> Q: How much do you take home on £50,000?
+> A: About £39,520 a year, or £3,293 a month. £50,000 sits just below the £50,270 higher-rate threshold.
+>
+> Q: How much is £100,000 after tax?
+> A: About £68,557 a year, or £5,713 a month. Income above £100,000 is taxed especially hard because the personal allowance is withdrawn.
+>
+> Q: Does this table apply to Scotland?
+> A: No. Scotland sets its own income tax bands, so Scottish take-home pay differs — particularly at higher salaries. The figures here are for England, Wales and Northern Ireland.
+
+Figures are 2025/26 estimates and assume no pension or student loan. Treat them as a guide and check your own payslip and tax code, or run your exact salary through the calculator.
+`.trim(),
+  },
+  {
     slug: 'how-much-tax-on-60000-salary-uk-2025-26',
     title: 'How Much Tax Will You Pay on £60,000 in 2025/26?',
     description:

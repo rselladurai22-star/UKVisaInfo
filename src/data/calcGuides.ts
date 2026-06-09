@@ -39,10 +39,11 @@ const G = {
   marriage: { slug: 'marriage-allowance-claim-252-2025-26', title: 'Marriage Allowance: claim £252' },
   cgt: { slug: 'capital-gains-tax-explained-2025-26', title: 'Capital Gains Tax explained' },
   carcost: { slug: 'what-does-a-car-cost-to-run-per-year-2025', title: 'What a car costs to run per year' },
+  salarytable: { slug: 'uk-salary-after-tax-take-home-table-2025-26', title: 'UK salary after tax: full table' },
 } satisfies Record<string, GuideLink>;
 
 export const CALC_GUIDES: Record<string, GuideLink[]> = {
-  '/take-home-pay': [G.tax50k, G.tax60k, G.tax100k, G.sacrifice, G.ni, G.childben],
+  '/take-home-pay': [G.salarytable, G.tax50k, G.tax60k, G.tax100k, G.sacrifice, G.ni],
   '/national-insurance-calculator': [G.ni, G.tax50k, G.tax60k, G.marriage],
   '/marriage-allowance-calculator': [G.marriage],
   '/redundancy-pay': [G.redundancy],
