@@ -14,3 +14,6 @@ next-env.d.ts
 .claude/
 service-account-key.json
 
+
+# local debug scratch scripts
+scratch/
