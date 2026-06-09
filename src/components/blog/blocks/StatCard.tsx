@@ -2,7 +2,7 @@ import { TrendingUp } from 'lucide-react';
 
 export default function StatCard({ value, label }: { value: string; label: string }) {
   return (
-    <figure className="my-10 relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-ink via-[#00287e] to-[#0037b0] p-7 md:p-10 text-white border border-outline-variant/30 shadow-soft">
+    <figure className="my-10 relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-ink via-[#005c3c] to-primary p-7 md:p-10 text-white border border-outline-variant/30 shadow-soft">
       <div
         className="absolute inset-0 opacity-[0.22] pointer-events-none"
         style={{

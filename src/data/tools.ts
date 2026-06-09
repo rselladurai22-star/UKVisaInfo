@@ -85,19 +85,19 @@ const SKY     = '#0EA5E9';
    CATEGORIES
 ───────────────────────────────────────────── */
 export const CATEGORIES: Category[] = [
-  { id: 'property',    label: 'Mortgages & Property',       icon: HomeIcon,     color: '#0037b0', description: 'Mortgages, SDLT, rental income and costs' },
+  { id: 'property',    label: 'Mortgages & Property',       icon: HomeIcon,     color: '#00875A', description: 'Mortgages, SDLT, rental income and costs' },
   { id: 'insurance',   label: 'Insurance',                  icon: Shield,       color: '#006c49', description: 'Life cover, health, rebuild costs and more' },
   { id: 'loans',       label: 'Loans, Debt & Credit',       icon: LandmarkIcon, color: '#ba1a1a', description: 'APR comparisons, debt consolidation and credit strategy' },
-  { id: 'immigration', label: 'Immigration & Visas',        icon: Plane,        color: '#0037b0', description: 'Visa fees, IHS calculator and points check' },
+  { id: 'immigration', label: 'Immigration & Visas',        icon: Plane,        color: '#00875A', description: 'Visa fees, IHS calculator and points check' },
   { id: 'savings',     label: 'Pensions, Investing & Savings', icon: PiggyBank,   color: '#623c00', description: 'State pension, ISAs, compound interest' },
-  { id: 'tax',         label: 'Tax & Income',               icon: Wallet,       color: '#0037b0', description: 'Income tax, NI, dividends, CGT and more' },
+  { id: 'tax',         label: 'Tax & Income',               icon: Wallet,       color: '#00875A', description: 'Income tax, NI, dividends, CGT and more' },
   { id: 'business',    label: 'Business & Self-Employed',   icon: Building2,    color: '#006c49', description: 'Self-employed, contractors and Ltd companies' },
   { id: 'estate',      label: 'Wills, Probate & Inheritance', icon: FileText,    color: '#623c00', description: 'Inheritance tax, probate fees and wills' },
   { id: 'family-law',  label: 'Divorce & Family Law',       icon: Users,        color: '#ba1a1a', description: 'Divorce costs, maintenance and asset split' },
   { id: 'energy',      label: 'Energy & Bills',             icon: Zap,          color: '#006c49', description: 'Energy price cap and solar panel ROI' },
-  { id: 'employment',  label: 'Employment & Salary',        icon: Briefcase,    color: '#0037b0', description: 'Redundancy pay, holiday entitlement and SSP' },
-  { id: 'vehicles',    label: 'Vehicles & Motoring',        icon: Car,          color: '#0037b0', description: 'ULEZ compliance, MOT and vehicle tax' },
-  { id: 'benefits',    label: 'Benefits',                   icon: Gift,         color: '#0037b0', description: 'Universal credit and childcare costs' },
+  { id: 'employment',  label: 'Employment & Salary',        icon: Briefcase,    color: '#00875A', description: 'Redundancy pay, holiday entitlement and SSP' },
+  { id: 'vehicles',    label: 'Vehicles & Motoring',        icon: Car,          color: '#00875A', description: 'ULEZ compliance, MOT and vehicle tax' },
+  { id: 'benefits',    label: 'Benefits',                   icon: Gift,         color: '#00875A', description: 'Universal credit and childcare costs' },
 ];
 
 /* ─────────────────────────────────────────────

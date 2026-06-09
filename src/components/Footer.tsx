@@ -39,21 +39,24 @@ export default function Footer() {
     <footer className="border-t border-border bg-surface-container-low">
       <div className="max-w-[1160px] mx-auto py-10 px-4 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7 sm:px-6 md:py-[54px] md:pb-[36px] md:gap-8">
         <div className="max-w-none md:max-w-96">
-          <Link href="/" className="inline-flex items-center gap-2.5 font-display font-bold text-[20px] tracking-tight text-primary hover:opacity-90 no-underline select-none" aria-label="UKDesk — home">
-            <svg viewBox="0 0 64 64" width={30} height={30} xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden focusable="false">
-              <defs>
-                <linearGradient id="deskly-shield-ft" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stopColor="#4C6BF0" />
-                  <stop offset="1" stopColor="#1E40AF" />
-                </linearGradient>
-              </defs>
-              <path d="M32 3.5 56 12 V31 C56 47 45.5 57.5 32 60.5 18.5 57.5 8 47 8 31 V12 Z" fill="url(#deskly-shield-ft)" />
-              <rect x="17.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-              <rect x="30.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-              <rect x="17.5" y="31" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-              <path d="M31 36.5 l3.5 3.5 L42 32" fill="none" stroke="#22C55E" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span><span className="text-on-surface">UK</span><span className="text-primary">Desk</span></span>
+          <Link href="/" className="inline-flex items-center gap-2.5 font-display font-bold text-[20px] tracking-tight hover:opacity-90 no-underline select-none" aria-label="UKDesk — home">
+            <span className="relative inline-flex h-8 w-8 items-center justify-center transition-transform duration-200 hover:scale-105">
+              <svg
+                viewBox="0 0 64 64"
+                width={32}
+                height={32}
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-hidden
+                focusable="false"
+                className="h-8 w-8"
+              >
+                <path d="M32 8 L54 19 L32 30 L10 19 Z" fill="#0B2240" />
+                <path d="M10 19 L32 30 V52 L10 41 Z" fill="#0037b0" />
+                <path d="M32 30 L54 19 V41 L32 52 Z" fill="#00875A" />
+              </svg>
+            </span>
+            <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
           </Link>
           <p className="text-[13.5px] text-on-surface-variant leading-relaxed mt-3 mb-0">Free UK calculators, visa routes and plain-English explainers — checked against official sources. No sign-up, no clutter.</p>
           <div className="flex items-center gap-2 mt-3.5 text-[13px] font-semibold text-on-surface-variant"><ShieldCheck size={15} className="text-secondary shrink-0" /> Verified against GOV.UK · HMRC · ONS</div>

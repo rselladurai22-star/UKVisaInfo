@@ -10,10 +10,10 @@ import {
 import { FROM_VISAS } from '../data/visaSwitching';
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Work: '#0037b0',
+  Work: '#00875A',
   Study: '#1E3A8A',
   Family: '#9F1239',
-  Settlement: '#0037b0',
+  Settlement: '#00875A',
 };
 
 const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -24,7 +24,7 @@ const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>
 };
 
 const DIFFICULTY_STYLE: Record<string, { bg: string; color: string; label: string }> = {
-  Common:      { bg: '#0037b015', color: '#0037b0', label: 'Common switch' },
+  Common:      { bg: '#00875A15', color: '#00875A', label: 'Common switch' },
   Conditional: { bg: 'rgba(88,81,219,0.12)', color: '#5C4A12', label: 'Conditional' },
   Rare:        { bg: 'rgba(159,18,57,0.10)', color: '#9F1239', label: 'Rare / unusual' },
 };
@@ -52,9 +52,9 @@ export default function VisaSwitchingClient() {
 
           <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase px-3.5 py-1.5 rounded-full mb-6"
                 style={{
-                  background: 'rgba(0,55,176,0.08)',
-                  color: '#0037b0',
-                  border: '1px solid rgba(0,55,176,0.18)',
+                  background: 'rgba(0,135,90,0.08)',
+                  color: '#00875A',
+                  border: '1px solid rgba(0,135,90,0.18)',
                   letterSpacing: '0.18em',
                 }}>
             <Building2 className="w-3 h-3" /> Already in the UK
@@ -69,7 +69,7 @@ export default function VisaSwitchingClient() {
             color: '#0f172a',
             textWrap: 'balance' as React.CSSProperties['textWrap'],
           }}>
-            Visa <span style={{ color: '#0037b0' }}>switching</span> guide
+            Visa <span style={{ color: '#00875A' }}>switching</span> guide
           </h1>
           <p className="mt-6 text-[15px] md:text-[16px] leading-[1.65] max-w-2xl"
              style={{ color: '#3F3F46' }}>
@@ -89,7 +89,7 @@ export default function VisaSwitchingClient() {
             <div className="rounded-lg bg-white border border-[#E5E7EB] p-6"
                  style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
               <div className="flex items-center gap-2 mb-2.5">
-                <span className="w-[3px] h-[14px] rounded-full bg-[#0037b0]" />
+                <span className="w-[3px] h-[14px] rounded-full bg-[#00875A]" />
                 <span className="text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#064E3B]"
                       style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                   Step 1 · Your current visa
@@ -150,7 +150,7 @@ export default function VisaSwitchingClient() {
 
             <Link href="/tools/cost-calculator"
                   className="flex items-center justify-between gap-3 rounded-lg p-5 text-white"
-                  style={{ background: 'linear-gradient(135deg, #0037b0, #064E3B)', boxShadow: '0 8px 30px -8px rgba(0,55,176,0.5)' }}>
+                  style={{ background: 'linear-gradient(135deg, #00875A, #064E3B)', boxShadow: '0 8px 30px -8px rgba(0,135,90,0.5)' }}>
               <div>
                 <div className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-white/85 mb-1">In-UK fees usually higher</div>
                 <div className="text-[16px] font-extrabold leading-tight"
@@ -169,7 +169,7 @@ export default function VisaSwitchingClient() {
           {/* Step 2 header */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="w-[3px] h-[18px] rounded-full bg-[#0037b0]" />
+              <span className="w-[3px] h-[18px] rounded-full bg-[#00875A]" />
               <span className="text-[10.5px] font-extrabold uppercase tracking-[0.18em] text-[#064E3B]"
                     style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                 Step 2 · Where you can switch to
@@ -290,9 +290,9 @@ export default function VisaSwitchingClient() {
           <div className="rounded-lg bg-white border border-[#E5E7EB] overflow-hidden mt-2"
                style={{ boxShadow: '0 2px 12px rgba(26,31,54,0.06)' }}>
             <div className="px-6 py-4 border-b border-[#F3F4F6] flex items-center gap-3"
-                 style={{ background: 'rgba(0,55,176,0.06)' }}>
+                 style={{ background: 'rgba(0,135,90,0.06)' }}>
               <span className="w-9 h-9 rounded-xl flex items-center justify-center text-white"
-                    style={{ background: '#0037b0' }}>
+                    style={{ background: '#00875A' }}>
                 <Building2 className="w-4 h-4" />
               </span>
               <div>
@@ -311,7 +311,7 @@ export default function VisaSwitchingClient() {
                 <li key={i} className="px-6 py-5 md:px-8 md:py-6 flex gap-5">
                   <span aria-hidden
                         className="flex-shrink-0 w-10 h-10 rounded-full text-white text-[14px] font-extrabold flex items-center justify-center"
-                        style={{ background: '#0037b0', boxShadow: '0 4px 14px -4px rgba(0,55,176,0.6)', fontFamily: 'var(--font-grotesk), var(--font-inter), sans-serif' }}>
+                        style={{ background: '#00875A', boxShadow: '0 4px 14px -4px rgba(0,135,90,0.6)', fontFamily: 'var(--font-grotesk), var(--font-inter), sans-serif' }}>
                     {i + 1}
                   </span>
                   <div className="flex-1 min-w-0">
@@ -365,7 +365,7 @@ function KeyFact({
   return (
     <div className="flex items-start gap-3">
       <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(0,55,176,0.12)', color: '#064E3B' }}>
+            style={{ background: 'rgba(0,135,90,0.12)', color: '#064E3B' }}>
         <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
       </span>
       <div className="flex-1 min-w-0">

@@ -16,15 +16,15 @@
   ════════════════════════════════════════════ */
 
   /* Primary — Royal blue (links, buttons, accents) */
-  --color-primary: #0037b0;
-  --color-primary-container: #1d4ed8;
-  --color-primary-soft: #dce1ff;          /* primary-fixed — light blue tint */
-  --color-primary-ink: #001551;
-  --color-primary-strong: #1d4ed8;        /* hover/strong primary */
+  --color-primary: #00875A;
+  --color-primary-container: #006644;
+  --color-primary-soft: #d9f7e8;          /* primary-fixed — light green tint */
+  --color-primary-ink: #00331f;
+  --color-primary-strong: #00704a;        /* hover/strong primary */
   --color-on-primary: #ffffff;            /* text on solid primary */
-  --color-on-primary-container: #cad3ff;  /* text on primary-container */
-  --color-primary-fixed: #dce1ff;
-  --color-on-primary-fixed-variant: #0039b5;
+  --color-on-primary-container: #d9f7e8;  /* text on primary-container */
+  --color-primary-fixed: #d9f7e8;
+  --color-on-primary-fixed-variant: #00875A;
 
   /* Secondary — Deep emerald */
   --color-secondary: #006c49;

@@ -34,7 +34,7 @@ const CORE_HUBS = [
     title: 'Mortgages & Property',
     description: 'Estimate borrowing capacity, stamp duty rates, and landlord rental returns.',
     icon: HomeIcon,
-    accent: 'bg-blue-50 text-blue-800',
+    accent: 'bg-[#00875A]/10 text-[#00875A]',
     ctaLabel: 'Compare Property Tools',
     ctaHref: '/category/property',
     tools: [
@@ -96,7 +96,7 @@ const TRENDING_CHANGES = [
     title: 'Stamp Duty Threshold Rates 2025/26',
     summary: 'First-time buyer relief and rate changes. View the full 2025/26 threshold tables for England.',
     href: '/blog/first-time-buyer-stamp-duty-2025-26',
-    tagColor: 'text-blue-800 bg-blue-50',
+    tagColor: 'text-[#00875A] bg-[#00875A]/10',
   },
   {
     category: 'Immigration & Digital Status',
@@ -802,7 +802,7 @@ function LearnSection() {
             </h4>
             <div className="space-y-4">
               <div className="flex flex-col gap-1">
-                <span className="inline-flex self-start items-center justify-center rounded bg-blue-50 px-2 py-0.5 text-[9px] font-bold text-blue-700 uppercase tracking-wider mb-1.5">
+                <span className="inline-flex self-start items-center justify-center rounded bg-[#00875A]/10 px-2 py-0.5 text-[9px] font-bold text-[#00875A] uppercase tracking-wider mb-1.5">
                   Calculator
                 </span>
                 <Link

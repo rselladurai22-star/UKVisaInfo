@@ -145,7 +145,7 @@ function Chip({ active, onClick, label, count, color }: { active: boolean; onCli
       className={`shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
         active ? 'text-white border-transparent' : 'bg-surface-container-lowest text-on-surface-variant border-outline-variant hover:border-primary/50'
       }`}
-      style={active ? { background: color ?? 'var(--uk-primary, #0037b0)' } : undefined}
+      style={active ? { background: color ?? 'var(--color-primary, #00875A)' } : undefined}
     >
       {label}{count != null && <span className={active ? 'opacity-80' : 'opacity-60'}> · {count}</span>}
     </button>
