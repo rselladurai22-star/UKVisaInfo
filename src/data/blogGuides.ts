@@ -4,6 +4,508 @@ import type { BlogPost } from './blog';
 // enough for the build — a single 10k-line file overran the SWC stack).
 export const GUIDE_POSTS: BlogPost[] = [
   {
+    slug: 'how-much-tax-on-60000-salary-uk-2025-26',
+    title: 'How Much Tax Will You Pay on £60,000 in 2025/26?',
+    description:
+      'A full breakdown of the income tax and National Insurance on a £60,000 UK salary in 2025/26 — your monthly take-home, the 40% band you have entered, and how to claw it back.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 10,
+    category: 'money',
+    tags: ['Income Tax', 'Take-Home Pay', 'Higher Rate'],
+    relatedTools: [
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+    ],
+    body: `
+At £60,000 you have crossed an invisible line in the UK tax system: you are now a higher-rate taxpayer. Part of your salary is taxed at 40%, your National Insurance has dropped to 2% at the top, and if you have children, a benefit clawback may be starting. The headline figure feels comfortable, but the deductions are heavier than at £50,000. Here is exactly what lands in your account on £60,000 in 2025/26.
+
+> [!STAT] £45,357 | Roughly what you keep from £60,000 after tax and NI in 2025/26
+
+> [!KEY] The short version
+> Income tax on £60,000 is **£11,432**, and employee National Insurance is **£3,211**.
+> That leaves about **£45,357 a year**, or **£3,780 a month**, before pension or student loan.
+> You are a **higher-rate taxpayer** — the slice above £50,270 is taxed at 40%.
+> If you claim Child Benefit, the **High Income Charge** starts biting at exactly £60,000.
+
+## Where the £60,000 goes
+
+Your salary is taxed in slices. The first £12,570 is tax-free (the personal allowance), the next chunk at 20%, and everything above £50,270 at 40%.
+
+> [!STEPS]
+> 1. **Personal allowance** — the first £12,570 is tax-free.
+> 2. **Basic rate (20%)** — on the £37,700 between £12,570 and £50,270 = £7,540.
+> 3. **Higher rate (40%)** — on the £9,730 between £50,270 and £60,000 = £3,892.
+> 4. **Total income tax** — £7,540 + £3,892 = £11,432.
+
+## National Insurance
+
+National Insurance works the opposite way to income tax — the rate *falls* at the top. You pay 8% between £12,570 and £50,270, then just 2% above it:
+
+> [!STEPS]
+> 1. **8% band** — 8% of £37,700 (£12,570 to £50,270) = £3,016.
+> 2. **2% band** — 2% of £9,730 (£50,270 to £60,000) = £194.60.
+> 3. **Total National Insurance** — about £3,211.
+
+Put together, HMRC takes £11,432 + £3,211 = **£14,643**, leaving **£45,357 a year** — about **£3,780 a month**. Check your exact figure on the [take-home pay calculator](/take-home-pay).
+
+## You're now a higher-rate taxpayer
+
+This is the headline change from £50,000. Above £50,270, each pound is taxed at 40% income tax plus 2% NI — so you keep 58p of every pound in that band, versus 72p below it. It also unlocks higher-rate relief on pension contributions and Gift Aid, and changes how savings and dividends are taxed (your personal savings allowance drops from £1,000 to £500).
+
+> [!WARNING] The Child Benefit charge starts here
+> £60,000 is exactly where the High Income Child Benefit Charge begins. If you or your partner claim Child Benefit, you start repaying it through the tax system from £60,000, losing it entirely by £80,000. For a parent of two, that can add an effective tax sting on income in this band. See our [Child Benefit charge guide](/child-benefit-trap).
+
+## How to claw some back
+
+The most efficient lever is a pension contribution, because it does two things at £60,000: it saves 40% tax (not just 20%), and it reduces your adjusted income, which can protect Child Benefit.
+
+A £5,000 salary-sacrifice contribution drops your taxable salary to £55,000. You save 40% tax and 2% NI on that £5,000 — about £2,100 — plus any employer NI saving a good scheme returns. So roughly £2,900 of net pay moves £5,000 into your pension, and if you have children, you may recover Child Benefit on top. The [pension calculator](/pension-calculator) shows the long-term growth.
+
+## Student loan, if you have one
+
+A Plan 2 student loan adds 9% on income above £28,470 — about £2,838 a year on £60,000, dropping your monthly take-home by around £237. Plan 1, Plan 4 and postgraduate loans use different thresholds; the [student loan calculator](/student-loan-repayment) handles each.
+
+> [!FAQ]
+> Q: Is £60,000 a higher-rate taxpayer?
+> A: Yes. Higher-rate tax at 40% applies to income above £50,270, so part of a £60,000 salary is taxed at 40%. The first £50,270 is still taxed at lower rates.
+>
+> Q: How much is £60,000 a month after tax?
+> A: About £3,780 a month before any pension or student loan deductions — £45,357 across the year.
+>
+> Q: Why does my National Insurance go down above £50,270?
+> A: Unlike income tax, the NI rate falls from 8% to 2% above £50,270, so the top slice of a £60,000 salary attracts only 2% NI.
+>
+> Q: Does a pension contribution save more tax at £60,000?
+> A: Yes. As a higher-rate taxpayer you get 40% relief, and contributions reduce your adjusted income, which can also restore Child Benefit if you have children.
+>
+> Q: What is the Child Benefit charge at £60,000?
+> A: The High Income Child Benefit Charge starts at £60,000, clawing back Child Benefit gradually until it is fully removed at £80,000 of adjusted net income.
+
+Figures are 2025/26 estimates for England, Wales and Northern Ireland; Scotland sets its own bands. Treat take-home figures as a guide and check your payslip and tax code.
+`.trim(),
+  },
+  {
+    slug: 'how-much-is-stamp-duty-2025-26',
+    title: 'How Much Is Stamp Duty in 2025/26? Rates and Examples',
+    description:
+      'UK stamp duty (SDLT) explained for 2025/26 — the standard bands, worked examples for home movers, and the 5% surcharge that hits second homes and buy-to-let.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'property',
+    tags: ['Stamp Duty', 'SDLT', 'Buying'],
+    relatedTools: [
+      { href: '/stamp-duty-calculator', label: 'Stamp Duty (SDLT)', hint: '2025/26 rates · FTB · surcharges' },
+      { href: '/house-buying-costs', label: 'House Buying Costs', hint: 'Total cash to buy' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+    ],
+    body: `
+Stamp duty is the big upfront cost buyers love to forget, and for anyone who isn't a first-time buyer the bill starts sooner than you'd think. Buying a second home or a rental adds a hefty surcharge on top. Knowing the bands — and where the surcharge kicks in — lets you budget properly and avoid a nasty surprise from your solicitor. Here is how stamp duty works in 2025/26 for England and Northern Ireland.
+
+> [!KEY] The short version
+> Standard stamp duty is charged in **bands** — you pay each rate only on the slice in that band.
+> Nothing is due on the first **£125,000**, then 2%, 5%, 10% and 12% on higher slices.
+> A home mover on a **£300,000** house pays **£5,000**.
+> Second homes and buy-to-let pay a **5% surcharge** on the whole price on top.
+
+## The standard rates
+
+For a main home that isn't your first, Stamp Duty Land Tax (SDLT) is charged in bands. You only pay each rate on the portion of the price within that band:
+
+| Portion of price | Rate |
+|---|---|
+| Up to £125,000 | 0% |
+| £125,001 to £250,000 | 2% |
+| £250,001 to £925,000 | 5% |
+| £925,001 to £1.5m | 10% |
+| Above £1.5m | 12% |
+
+First-time buyers get more generous treatment (nothing up to £300,000) — covered in our [first-time buyer stamp duty guide](/blog/first-time-buyer-stamp-duty-2025-26). Everyone else uses the table above.
+
+## Worked example: a £300,000 home
+
+> [!STEPS]
+> 1. **First £125,000** — 0% = £0.
+> 2. **£125,001 to £250,000** — 2% on £125,000 = £2,500.
+> 3. **£250,001 to £300,000** — 5% on £50,000 = £2,500.
+> 4. **Total stamp duty** — £5,000.
+
+So a typical home mover buying at £300,000 pays £5,000. Run any price through the [stamp duty calculator](/stamp-duty-calculator) to get the exact figure before you offer.
+
+> [!STAT] £5,000 | Stamp duty on a £300,000 home for a non-first-time buyer in 2025/26
+
+## The second-home and buy-to-let surcharge
+
+Here is the one that stings. If you are buying an **additional** property — a second home, a holiday let or a buy-to-let — while keeping another, you pay a **5% surcharge on the entire price**, on top of the standard rates.
+
+> [!WARNING] The surcharge applies to the whole price, not just a slice
+> On a £300,000 second home, the 5% surcharge is £15,000 — added to the £5,000 standard duty for a total of £20,000. The surcharge also catches people who haven't sold their old home before completing on the new one, though you can often reclaim it if you sell the previous main residence within 36 months.
+
+## What about Scotland and Wales?
+
+Stamp duty (SDLT) only applies in England and Northern Ireland. **Scotland** uses Land and Buildings Transaction Tax (LBTT) and **Wales** uses Land Transaction Tax (LTT), each with its own bands and surcharges. If you are buying there, the figures above don't apply — check the relevant national rates.
+
+## Budgeting for it
+
+Stamp duty must be paid within 14 days of completion, and it can't normally be added to your mortgage — it is upfront cash. Alongside the deposit, legal fees and survey, it is a core part of the money you need on the day. The [house buying costs calculator](/house-buying-costs) totals everything so you know the real cash required.
+
+> [!FAQ]
+> Q: How much is stamp duty in 2025/26?
+> A: For a main home that isn't your first, nothing up to £125,000, then 2% to £250,000, 5% to £925,000, 10% to £1.5m and 12% above. A £300,000 home costs £5,000.
+>
+> Q: Do I pay stamp duty on a second home?
+> A: Yes, plus a 5% surcharge on the entire purchase price on top of the standard rates. On a £300,000 second home that is £15,000 extra.
+>
+> Q: Can I reclaim the second-home surcharge?
+> A: Often yes — if you were replacing your main residence but hadn't sold the old one in time, you can usually reclaim the surcharge if you sell within 36 months.
+>
+> Q: Is stamp duty the same across the UK?
+> A: No. SDLT applies in England and Northern Ireland. Scotland uses LBTT and Wales uses LTT, with different bands.
+>
+> Q: When do I pay stamp duty?
+> A: Within 14 days of completion, usually handled by your solicitor. It is an upfront cash cost and cannot normally be added to the mortgage.
+
+Figures are 2025/26 estimates for England and Northern Ireland. Confirm your exact liability with your conveyancer before committing.
+`.trim(),
+  },
+  {
+    slug: 'redundancy-pay-how-much-2025-26',
+    title: 'Redundancy Pay: How Much Are You Entitled To?',
+    description:
+      'How statutory redundancy pay is calculated in 2025/26 — the age-banded formula, the £719 weekly cap, the 20-year limit, the £30,000 tax-free rule, and what else you are owed.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'family',
+    tags: ['Redundancy', 'Employment', 'Statutory Pay'],
+    relatedTools: [
+      { href: '/redundancy-pay', label: 'Redundancy Pay', hint: 'Statutory entitlement' },
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/universal-credit-calculator', label: 'Universal Credit', hint: 'Support if out of work' },
+    ],
+    body: `
+Being made redundant is stressful enough without confusion over what you are owed. The good news is that statutory redundancy pay follows a fixed formula — once you know your age, length of service and weekly pay, the amount is set in law. Many people are also owed notice pay and holiday pay on top, which they forget to claim. Here is exactly how redundancy pay works in 2025/26.
+
+> [!KEY] The short version
+> You need at least **two years' service** to qualify for statutory redundancy pay.
+> The amount is **age-banded**: 0.5, 1 or 1.5 weeks' pay per year of service.
+> A week's pay is **capped at £719**, and only the last **20 years** count.
+> Redundancy pay is **tax-free up to £30,000** — and notice and holiday pay are separate.
+
+## Who qualifies
+
+To get statutory redundancy pay you must be an employee with at least **two years' continuous service**, and your role must be genuinely redundant — the work has stopped or reduced. Contractors, most agency workers and those dismissed for other reasons don't qualify for the statutory payment, though they may have other rights.
+
+## The age-banded formula
+
+For each full year of service, you get a set number of weeks' pay depending on your age during that year:
+
+| Age during the year | Weeks' pay per year |
+|---|---|
+| Under 22 | 0.5 week |
+| 22 to 40 | 1 week |
+| 41 or older | 1.5 weeks |
+
+Two caps apply: only your **last 20 years** of service count, and a week's pay is **capped at £719** (from 6 April 2025), even if you earn more. The [redundancy pay calculator](/redundancy-pay) walks back through your service year by year and totals it.
+
+> [!STAT] £719 | The maximum a week's pay can count as in the statutory redundancy formula
+
+## Worked example
+
+Take someone aged 45 with 12 years' service earning £600 a week. The most recent years fall in the 41+ band (1.5 weeks each) and earlier years in the 22–40 band (1 week each). Their weekly pay of £600 is within the £719 cap. Walking back the 12 years gives a total number of weeks, multiplied by £600 — a four-figure sum, all tax-free as it's well under £30,000.
+
+## The £30,000 tax-free rule
+
+Statutory and most enhanced redundancy pay is **free of income tax and National Insurance up to £30,000**. Anything above that is taxed as earnings through PAYE.
+
+> [!WARNING] Payment in lieu of notice is taxed
+> One catch: payment in lieu of notice (PILON) — money instead of working your notice — is always taxable, even within the £30,000 band. Don't assume your whole package is tax-free; check which parts are genuine redundancy and which are taxable notice or bonus payments.
+
+## What else you're owed
+
+Redundancy pay is not the only money on the table. Separately, you are entitled to:
+
+- **Statutory notice pay** — at least one week per year of service, capped at 12 weeks.
+- **Accrued holiday pay** — any unused holiday must be paid in your final pay.
+- **Any contractual enhanced redundancy** — many employers offer more than the statutory minimum; read your contract and any collective agreement.
+
+If you'll be out of work, check what support you can claim with the [Universal Credit calculator](/universal-credit-calculator) — and remember statutory redundancy doesn't count as earnings for UC.
+
+> [!FAQ]
+> Q: How is statutory redundancy pay calculated?
+> A: By a fixed formula: 0.5, 1 or 1.5 weeks' pay for each full year of service depending on your age that year, with a week's pay capped at £719 and a maximum of 20 years counted.
+>
+> Q: Do I pay tax on redundancy pay?
+> A: Statutory and enhanced redundancy pay is tax-free up to £30,000. Above that it is taxed as income. Payment in lieu of notice is always taxable.
+>
+> Q: How long must I have worked to get redundancy pay?
+> A: At least two years' continuous service with the same employer to qualify for statutory redundancy pay.
+>
+> Q: Is notice pay separate from redundancy pay?
+> A: Yes. Statutory notice pay (one week per year, up to 12) and accrued holiday pay are paid on top of redundancy pay.
+>
+> Q: What if I'm offered more than the statutory amount?
+> A: Many employers offer enhanced redundancy above the statutory minimum. The tax-free £30,000 limit still applies to the redundancy element.
+
+Figures are 2025/26 estimates for Great Britain. Treat them as a guide and seek advice if your situation is complex or you suspect unfair selection.
+`.trim(),
+  },
+  {
+    slug: 'marriage-allowance-claim-252-2025-26',
+    title: 'Marriage Allowance: How to Claim £252 Back (and Backdate It)',
+    description:
+      'The Marriage Allowance explained for 2025/26 — who qualifies, how transferring £1,260 of personal allowance saves a couple up to £252 a year, and how to backdate four years.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 8,
+    category: 'money',
+    tags: ['Marriage Allowance', 'Tax', 'Couples'],
+    relatedTools: [
+      { href: '/marriage-allowance-calculator', label: 'Marriage Allowance', hint: 'Transfer & saving' },
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/national-insurance-calculator', label: 'National Insurance', hint: 'Class 1 / 4 NI' },
+    ],
+    body: `
+Marriage Allowance is one of the simplest tax breaks in the UK and one of the most overlooked — millions of eligible couples never claim it. If one of you earns under the personal allowance and the other is a basic-rate taxpayer, you can shift some unused tax-free allowance between you and pocket up to £252 a year, plus several years of backdated payments. It takes ten minutes to claim. Here is how it works in 2025/26.
+
+> [!KEY] The short version
+> One partner transfers **£1,260** of their unused personal allowance to the other.
+> The receiving partner pays **£252 less tax** a year (20% of £1,260).
+> One of you must be a **non-taxpayer** (income under £12,570), the other a **basic-rate taxpayer**.
+> You can **backdate four years** — a first claim can be worth over **£1,200**.
+
+## How it works
+
+Everyone has a £12,570 personal allowance — income they can earn tax-free. If one partner doesn't use all of theirs (because they earn less than £12,570), Marriage Allowance lets them transfer **£1,260** of it to their spouse or civil partner. The receiving partner then has a bigger tax-free allowance, so they pay 20% less tax on that £1,260 — a saving of **£252 a year**.
+
+> [!STAT] £252 | The annual tax saving from Marriage Allowance in 2025/26
+
+## Who qualifies
+
+You can claim if all of these apply:
+
+> [!CHECKLIST] Eligibility for Marriage Allowance
+> - You are married or in a civil partnership (living together unmarried doesn't count).
+> - One partner is a non-taxpayer — income below the £12,570 personal allowance.
+> - The other partner is a basic-rate taxpayer — income between £12,571 and £50,270.
+> - Neither of you is a higher or additional-rate taxpayer.
+
+The lower earner is the one who applies, transferring allowance to the higher earner. Check the figures with the [Marriage Allowance calculator](/marriage-allowance-calculator).
+
+## The backdating bonus
+
+This is the part that makes a first claim worthwhile. You can **backdate Marriage Allowance by up to four tax years**, provided you were eligible in each. Combined with the current year, a first successful claim can be worth over **£1,200** as a lump sum — real money for a ten-minute form.
+
+> [!WARNING] Tell HMRC if your circumstances change
+> If the lower earner's income rises above the personal allowance, or the higher earner moves into the 40% band, you may no longer qualify and could end up owing tax. Marriage Allowance usually renews automatically each year, so let HMRC know if your situation changes to avoid a surprise bill.
+
+## How to claim
+
+The lower earner applies, free, through the gov.uk Marriage Allowance service (you'll need both partners' National Insurance numbers and a way to verify identity). Once approved, the receiving partner's tax code changes to reflect the bigger allowance, and any backdated amount is paid as a refund or through an adjusted code. There is no need to reapply each year — it carries forward automatically until you cancel or stop qualifying.
+
+> [!FAQ]
+> Q: How much is Marriage Allowance worth?
+> A: Up to £252 a year, by transferring £1,260 of personal allowance from a non-taxpaying partner to a basic-rate taxpayer. Backdating four years can add over £1,000.
+>
+> Q: Who can claim Marriage Allowance?
+> A: Married couples and civil partners where one earns below the £12,570 personal allowance and the other is a basic-rate taxpayer (income £12,571–£50,270).
+>
+> Q: Can I backdate a claim?
+> A: Yes, by up to four tax years if you were eligible, so a first claim can be worth over £1,200 including the current year.
+>
+> Q: Does it renew automatically?
+> A: Yes. Once granted it carries forward each year until you cancel it or stop qualifying, so tell HMRC if your income changes.
+>
+> Q: What if my partner becomes a higher-rate taxpayer?
+> A: You no longer qualify, and continuing to claim could mean owing tax. Notify HMRC so the allowance is cancelled.
+
+Figures are 2025/26 estimates. Claim free through gov.uk — you never need to pay a third party to apply for Marriage Allowance.
+`.trim(),
+  },
+  {
+    slug: 'capital-gains-tax-explained-2025-26',
+    title: 'Capital Gains Tax in 2025/26: What You Pay on Shares and Property',
+    description:
+      'How Capital Gains Tax works in 2025/26 — the shrunken £3,000 allowance, the 18% and 24% rates, what counts as a gain, and the reliefs that legally reduce the bill.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 10,
+    category: 'money',
+    tags: ['Capital Gains Tax', 'Investing', 'Property'],
+    relatedTools: [
+      { href: '/cgt-calculator', label: 'Capital Gains Tax', hint: 'Gains on shares & assets' },
+      { href: '/property-cgt-calculator', label: 'Property CGT', hint: 'Second homes & BTL' },
+      { href: '/isa-calculator', label: 'ISA Calculator', hint: 'Shelter gains tax-free' },
+    ],
+    body: `
+Capital Gains Tax catches more people every year, not because rates have soared but because the tax-free allowance has been slashed — from £12,300 to just £3,000 in three years. Sell shares, a second home or a valuable asset at a profit and you may owe tax that wouldn't have applied a few years ago. The good news is that with planning, much of it is avoidable. Here is how Capital Gains Tax works in 2025/26.
+
+> [!KEY] The short version
+> You pay Capital Gains Tax on the **profit** when you sell an asset, not the whole sale price.
+> The tax-free allowance is just **£3,000** a year — down from £12,300 in 2022/23.
+> Rates are **18%** for basic-rate taxpayers and **24%** for higher-rate, on most assets.
+> ISAs, your main home and transfers between spouses are **exempt** — the key planning tools.
+
+## What is a capital gain?
+
+A capital gain is the **profit** you make when you sell (or give away) an asset for more than you paid. You're taxed on the gain, not the sale price. Sell shares bought for £5,000 for £8,000 and your gain is £3,000 — that's what's potentially taxable, after your allowance.
+
+Common assets that trigger Capital Gains Tax:
+
+- Shares and funds held outside an ISA or pension.
+- A second home, holiday home or buy-to-let property.
+- Business assets and valuable personal possessions worth over £6,000.
+- Cryptoassets.
+
+## The shrinking allowance
+
+Everyone gets a tax-free **annual exempt amount** — gains below it pay no tax. But it has been cut hard:
+
+| Tax year | CGT allowance |
+|---|---|
+| 2022/23 | £12,300 |
+| 2023/24 | £6,000 |
+| 2024/25 onward | £3,000 |
+
+At £3,000, far more sales now produce a taxable gain. The [Capital Gains Tax calculator](/cgt-calculator) works out your bill after the allowance.
+
+> [!STAT] £3,000 | The Capital Gains Tax allowance in 2025/26 — a quarter of what it was in 2022/23
+
+## The rates
+
+Once your gain exceeds the £3,000 allowance, the rate depends on your income tax band:
+
+- **Basic-rate taxpayer** — 18% on the gain (where it fits within your basic-rate band).
+- **Higher or additional-rate taxpayer** — 24%.
+
+Because the gain is added on top of your income to decide the rate, a large gain can be partly taxed at 18% and partly at 24%. Residential property gains use the same 18%/24% rates — the [property CGT calculator](/property-cgt-calculator) handles second homes and buy-to-let, which must be reported and paid within 60 days of completion.
+
+## The legal ways to reduce it
+
+Most Capital Gains Tax is avoidable with planning:
+
+> [!CHECKLIST] Ways to cut a CGT bill
+> - **Use your ISA** — gains inside an ISA are completely tax-free. Hold investments there where possible.
+> - **Use both partners' allowances** — transfer assets to a spouse (exempt) so you use two £3,000 allowances and possibly their lower rate.
+> - **Spread sales across tax years** — realise gains over two years to use two allowances.
+> - **Offset losses** — losses on other assets reduce your taxable gains.
+> - **Main home relief** — your only or main residence is normally exempt from CGT entirely.
+
+> [!WARNING] Property gains have a 60-day deadline
+> If you sell a residential property that isn't your main home and owe CGT, you must report and pay it within 60 days of completion — separate from your normal Self Assessment. Miss it and penalties apply.
+
+## Your main home is exempt
+
+One of the biggest reliefs: **Private Residence Relief** means selling your only or main home is normally free of Capital Gains Tax altogether. It's why CGT mainly affects second properties and investments, not the family home — though letting out part of your home or having long periods of absence can reduce the relief.
+
+> [!FAQ]
+> Q: How much is Capital Gains Tax in 2025/26?
+> A: 18% for basic-rate taxpayers and 24% for higher-rate, on gains above the £3,000 annual allowance. Your main home is normally exempt.
+>
+> Q: What is the CGT allowance for 2025/26?
+> A: £3,000 of gains a year are tax-free — down from £12,300 in 2022/23.
+>
+> Q: Do I pay CGT on my home?
+> A: Normally no. Your only or main residence usually qualifies for Private Residence Relief and is exempt. CGT mainly hits second homes and investments.
+>
+> Q: How do I avoid Capital Gains Tax legally?
+> A: Use ISAs, both spouses' allowances, loss offsetting and spreading sales across tax years. Assets inside an ISA or pension are free of CGT.
+>
+> Q: When do I pay CGT on a property sale?
+> A: For residential property that isn't your main home, you must report and pay within 60 days of completion, separately from Self Assessment.
+
+Figures are 2025/26 estimates for the UK. Capital Gains Tax can be complex — consider advice for large or unusual disposals.
+`.trim(),
+  },
+  {
+    slug: 'what-does-a-car-cost-to-run-per-year-2025',
+    title: 'What Does a Car Really Cost to Run Per Year?',
+    description:
+      'The true annual cost of running a car in the UK — fuel, insurance, tax, servicing and the depreciation most people ignore — with a worked example and the cost per mile.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'motoring',
+    tags: ['Running Costs', 'Car', 'Depreciation'],
+    relatedTools: [
+      { href: '/car-running-costs', label: 'Car Running Costs', hint: 'Total cost of ownership' },
+      { href: '/fuel-cost-calculator', label: 'Fuel Cost', hint: 'Per journey & year' },
+      { href: '/vehicle-tax-calculator', label: 'Vehicle Tax (VED)', hint: 'CO2 + standard rate' },
+    ],
+    body: `
+Ask someone what their car costs and they'll usually quote the fuel. But fuel is rarely the biggest expense — it's the cost you can see, sitting next to ones you can't. Once you add insurance, tax, servicing and the value the car quietly loses every year, the real figure is often double what people assume. Here is what a car actually costs to run in the UK, and where the money really goes.
+
+> [!KEY] The short version
+> Fuel is usually **not** the biggest cost — depreciation often is.
+> A typical car can cost **£3,000–£6,000 a year** all-in, including the value it loses.
+> The five costs are **fuel, insurance, road tax, servicing and depreciation**.
+> Low mileage doesn't mean cheap — insurance, tax and depreciation are mostly fixed.
+
+## The five costs of running a car
+
+Total motoring cost comes from five parts:
+
+- **Fuel** — the visible cost, driven by mileage, MPG and pump price.
+- **Insurance** — a fixed annual cost whether you drive or not.
+- **Road tax (VED)** — usually the £195 standard rate.
+- **Servicing and maintenance** — routine service, MOT, tyres, repairs.
+- **Depreciation** — the value the car loses each year, often the largest cost of all.
+
+The [car running costs calculator](/car-running-costs) pulls these together into one yearly figure and a cost per mile.
+
+## Depreciation: the giant nobody sees
+
+A new car can lose 15–35% of its value in the first year and roughly half over three years. On a £20,000 car that's thousands of pounds a year — more than fuel for most drivers. Because you don't write a cheque for it, depreciation feels invisible, but you pay it the day you sell or trade in. It's the single strongest argument for buying a car that's two to three years old: someone else has already absorbed the steepest drop.
+
+> [!STAT] Depreciation | Often the biggest single cost of owning a newer car — bigger than fuel
+
+## Why low mileage isn't cheap
+
+Here's the counterintuitive part. Insurance, road tax and depreciation are largely **fixed** — you pay them whether you drive 2,000 miles or 20,000. Only fuel and some maintenance scale with mileage. That's why a barely-used second car can still cost over £2,000 a year to keep, and why occasional drivers often save money with car clubs or rental instead of ownership.
+
+## A worked example
+
+Take a £20,000 car driven 9,000 miles a year:
+
+> [!STEPS]
+> 1. **Fuel** — at 45 MPG and £1.40/litre, about £1,270.
+> 2. **Insurance** — say £700.
+> 3. **Road tax** — £195.
+> 4. **Servicing and maintenance** — say £500.
+> 5. **Depreciation** — 12% of £20,000 = £2,400.
+> 6. **Total** — about £5,065 a year, roughly £422 a month, or 56p a mile.
+
+Depreciation alone is nearly half the cost — and fuel, the thing most people focus on, is only a quarter of it.
+
+> [!WARNING] The extras that creep in
+> The figures above don't include parking permits, tolls, congestion and clean-air-zone charges, breakdown cover or finance interest. In cities these can add hundreds of pounds a year, so factor them into your real budget.
+
+## How to cut the cost
+
+Buy a slightly used car to dodge first-year depreciation, shop around hard for insurance every renewal, keep up with servicing to avoid big repairs, drive efficiently, and check whether you genuinely need the car for the mileage you do. The biggest savings come from the purchase decision — a car that holds its value well can cost far less per year than a cheaper one that depreciates fast.
+
+> [!FAQ]
+> Q: What does it cost to run a car per year in the UK?
+> A: Including depreciation, many drivers spend £3,000–£6,000 a year on a typical car doing average mileage, with depreciation often the single biggest cost.
+>
+> Q: Is depreciation really a cost?
+> A: Yes. It's the money you lose when you sell or trade in, and for newer cars it usually exceeds the fuel bill — you just don't pay it visibly each month.
+>
+> Q: Why is fuel not the biggest cost?
+> A: Fuel is visible but often only a quarter of the total. Depreciation, insurance and servicing combined usually cost more.
+>
+> Q: Does driving less make a car much cheaper?
+> A: Only partly. Insurance, tax and depreciation are largely fixed, so a low-mileage car can still cost a lot to keep.
+>
+> Q: How can I reduce my running costs?
+> A: Buy slightly used to avoid first-year depreciation, shop around for insurance, service regularly, drive efficiently and watch city charges.
+
+Figures are 2025/26 estimates and illustrative. Use the running-costs calculator with your own numbers for an accurate figure.
+`.trim(),
+  },
+  {
     slug: 'how-much-tax-on-100000-salary-uk-2025-26',
     title: 'Earning £100,000? Beware the 60% Tax Trap',
     description:

@@ -22,6 +22,14 @@ const TAG_COLORS: Record<string, { bg: string; text: string; accent: string }> =
 };
 const tagStyle = (tag: string) => TAG_COLORS[tag] ?? { bg: 'rgba(14,20,36,0.06)', text: '#52596e', accent: '#9aa3b8' };
 
+// Per-category accent for the card thumbnail (no external images — on-brand,
+// fast, and meaningful colour per topic).
+const CAT_ACCENT: Record<string, string> = {
+  visa: '#00C4B4', money: '#0037b0', property: '#0f766e', business: '#b45309',
+  benefits: '#7c3aed', family: '#bb0027', motoring: '#1d4ed8', energy: '#047857', estate: '#6d28d9',
+};
+const catAccent = (p: BlogPost) => CAT_ACCENT[p.category ?? 'visa'] ?? '#0A2540';
+
 export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
   const sorted = useMemo(() => [...posts].sort((a, b) => b.date.localeCompare(a.date)), [posts]);
 
@@ -194,8 +202,23 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                       href={`/blog/${post.slug}`}
                       className="group flex flex-col bg-white border border-[rgba(14,20,36,0.07)] rounded-2xl overflow-hidden shadow-[0_1px_4px_rgba(10,37,64,0.06)] hover:shadow-[0_8px_32px_rgba(10,37,64,0.12)] hover:-translate-y-1 transition-all duration-200"
                     >
-                      {/* top accent bar */}
-                      <span className="block h-[3px] w-full" style={{ background: `linear-gradient(90deg, ${s.accent}, ${s.accent}88)` }} aria-hidden="true" />
+                      {/* thumbnail banner — category-coloured, no external image */}
+                      <div
+                        className="relative h-32 w-full overflow-hidden flex items-end"
+                        style={{ background: `linear-gradient(135deg, ${catAccent(post)}, ${catAccent(post)}26)` }}
+                        aria-hidden="true"
+                      >
+                        <div
+                          className="absolute inset-0 opacity-20"
+                          style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.55) 1px, transparent 0)', backgroundSize: '15px 15px' }}
+                        />
+                        <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-[0.1em] text-white/85">
+                          {post.readMinutes} min
+                        </span>
+                        <span className="relative px-5 pb-4 font-display font-extrabold text-white text-[1.05rem] leading-tight line-clamp-2 drop-shadow-sm">
+                          {post.title}
+                        </span>
+                      </div>
 
                       <div className="flex flex-col flex-1 p-6 md:p-7">
                         {/* tags */}
