@@ -38,16 +38,16 @@ export default function Checklist({ name, items, slug }: Props) {
   const completedPct = items.length ? Math.round((done.size / items.length) * 100) : 0;
 
   return (
-    <div className="my-10 rounded-3xl border border-[rgba(14,20,36,0.08)] bg-white p-6 md:p-7 shadow-[0_2px_12px_rgba(10, 37, 64,0.05)]">
+    <div className="my-10 rounded-3xl border border-outline-variant bg-surface-container-lowest p-6 md:p-7 shadow-soft">
       {/* header */}
-      <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-[rgba(14,20,36,0.06)]">
+      <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-outline-variant/60">
         <div className="flex items-center gap-2.5">
-          <span className="inline-flex w-9 h-9 rounded-xl bg-[rgba(0, 196, 180,0.08)] items-center justify-center text-[#00C4B4]">
+          <span className="inline-flex w-9 h-9 rounded-xl bg-primary-soft items-center justify-center text-primary">
             <ListChecks className="w-4 h-4" />
           </span>
           <div>
-            <div className="text-[14px] font-bold text-[#0A2540] leading-tight">Your checklist</div>
-            <div className="text-[11.5px] text-[#7a8195] mt-0.5">
+            <div className="text-[14px] font-bold text-on-surface leading-tight">Your checklist</div>
+            <div className="text-[11.5px] text-on-surface-variant/80 mt-0.5">
               {done.size}/{items.length} complete · progress saved locally
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function Checklist({ name, items, slug }: Props) {
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#7a8195] hover:text-[#00C4B4] transition-colors duration-100 px-2.5 py-1.5 rounded-lg hover:bg-[rgba(0, 196, 180,0.06)]"
+            className="inline-flex items-center gap-1 text-[12px] font-semibold text-on-surface-variant hover:text-primary transition-colors duration-100 px-2.5 py-1.5 rounded-lg hover:bg-primary-soft/40"
           >
             <RotateCcw className="w-3 h-3" />
             Reset
@@ -65,9 +65,9 @@ export default function Checklist({ name, items, slug }: Props) {
       </div>
 
       {/* progress bar */}
-      <div className="h-1.5 bg-[#f3f5fb] rounded-full overflow-hidden mb-5">
+      <div className="h-1.5 bg-surface-container rounded-full overflow-hidden mb-5">
         <div
-          className="h-full bg-gradient-to-r from-[#00C4B4] via-[#00C4B4] to-[#C9A14A] rounded-full transition-[width] duration-300 ease-out"
+          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-[width] duration-300 ease-out"
           style={{ width: `${completedPct}%` }}
         />
       </div>
@@ -82,13 +82,13 @@ export default function Checklist({ name, items, slug }: Props) {
                 type="button"
                 onClick={() => toggle(i)}
                 aria-pressed={checked}
-                className="w-full text-left flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-[#f7f9fd] transition-colors duration-100 group"
+                className="w-full text-left flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-container-low/40 transition-colors duration-100 group"
               >
                 <span
                   className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center border-2 transition-[background,border-color,transform] duration-150 ${
                     checked
-                      ? 'bg-[#00C4B4] border-[#00C4B4] scale-100'
-                      : 'border-[#cfd5e0] group-hover:border-[#00C4B4] bg-white'
+                      ? 'bg-primary border-primary scale-100'
+                      : 'border-outline-variant group-hover:border-primary bg-surface-container-lowest'
                   }`}
                 >
                   <Check
@@ -98,7 +98,7 @@ export default function Checklist({ name, items, slug }: Props) {
                 </span>
                 <span
                   className={`flex-1 text-[15px] leading-snug transition-all duration-150 ${
-                    checked ? 'text-[#7a8195] line-through' : 'text-[#1a2240]'
+                    checked ? 'text-on-surface-variant/60 line-through' : 'text-on-surface'
                   }`}
                 >
                   {item}
@@ -110,7 +110,7 @@ export default function Checklist({ name, items, slug }: Props) {
       </ul>
 
       {completedPct === 100 && (
-        <div className="mt-4 text-center text-[13px] font-semibold text-[#10b981]">
+        <div className="mt-4 text-center text-[13px] font-semibold text-success">
           🎉 All set — ready to apply.
         </div>
       )}

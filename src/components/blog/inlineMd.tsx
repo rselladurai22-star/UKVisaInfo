@@ -14,7 +14,7 @@ export function inlineMd(text: string): React.ReactNode[] {
     if (m.index > last) nodes.push(text.slice(last, m.index));
     if (m[1] !== undefined) {
       nodes.push(
-        <strong key={k++} className="font-semibold text-[#1a1f2e]">
+        <strong key={k++} className="font-semibold text-on-surface">
           {m[1]}
         </strong>
       );
@@ -23,7 +23,7 @@ export function inlineMd(text: string): React.ReactNode[] {
         <a
           key={k++}
           href={m[3]}
-          className="text-[#0A2540] font-semibold underline decoration-[#00C4B4] decoration-2 underline-offset-2 hover:bg-[#00C4B4]/10 transition-colors"
+          className="text-primary font-semibold underline decoration-primary/40 decoration-[1.5px] underline-offset-[3px] hover:text-primary-strong transition-colors"
         >
           {m[2]}
         </a>

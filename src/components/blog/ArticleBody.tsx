@@ -100,14 +100,14 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         }
         .article-body p { text-wrap: pretty; }
 
-        /* Unordered list — teal bullet */
+        /* Unordered list — primary bullet */
         .article-body .md-ul { list-style: none; padding-left: 0; }
         .article-body .md-ul > li { position: relative; padding-left: 1.85rem; }
         .article-body .md-ul > li::before {
           content: ''; position: absolute; left: 0.4rem; top: 0.7em;
           width: 7px; height: 7px; border-radius: 9999px;
-          background: #00C4B4;
-          box-shadow: 0 0 0 2px rgba(0,196,180,0.18);
+          background: var(--color-primary);
+          box-shadow: 0 0 0 2px var(--color-primary-soft);
         }
 
         /* Ordered list — numbered badge */
@@ -116,17 +116,17 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         .article-body .md-ol > li::before {
           content: counter(li); position: absolute; left: 0; top: 0.1em;
           width: 1.7rem; height: 1.7rem; border-radius: 5px;
-          background: rgba(0,196,180,0.1);
-          color: #007a72; font-weight: 700; font-size: 0.75rem;
+          background: var(--color-primary-soft);
+          color: var(--color-primary); font-weight: 700; font-size: 0.75rem;
           display: flex; align-items: center; justify-content: center;
-          border: 1px solid rgba(0,196,180,0.25);
+          border: 1px solid var(--color-outline-variant);
           font-family: var(--font-grotesk), sans-serif;
           letter-spacing: 0;
         }
 
         /* Table */
         .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.02); }
-        .article-body table tbody tr:hover { background: rgba(0,196,180,0.04); }
+        .article-body table tbody tr:hover { background: var(--color-surface-container-low); }
 
         /* First paragraph after heading — slightly larger drop-in */
         .article-body h2 + p,
@@ -142,7 +142,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           line-height: 0.85;
           margin-right: 0.1em;
           margin-top: 0.07em;
-          color: #0A2540;
+          color: var(--color-primary);
           font-weight: 700;
         }
       `}</style>
@@ -164,13 +164,13 @@ function MarkdownChunk({ content }: { content: string }) {
           return (
             <h2
               id={id}
-              className="group relative font-display text-[1.25rem] md:text-[1.625rem] font-bold text-[#0A2540] mt-20 mb-5 leading-[1.2] tracking-[-0.018em] scroll-mt-28 pl-5 py-3 rounded-r-2xl"
-              style={{ borderLeft: '3px solid #00C4B4', background: 'linear-gradient(to right, rgba(0,196,180,0.08) 0%, rgba(0,196,180,0.03) 55%, transparent 100%)' }}
+              className="group relative font-display text-[1.25rem] md:text-[1.625rem] font-bold text-on-surface mt-20 mb-5 leading-[1.2] tracking-[-0.018em] scroll-mt-28 pl-5 py-3 rounded-r-2xl"
+              style={{ borderLeft: '3px solid var(--color-primary)', background: 'linear-gradient(to right, var(--color-primary-soft) 0%, rgba(29, 78, 216, 0.03) 55%, transparent 100%)' }}
             >
               <a
                 href={`#${id}`}
                 aria-label="Anchor link"
-                className="absolute -left-8 top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[#00C4B4] hidden md:inline-flex"
+                className="absolute -left-8 top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-primary hidden md:inline-flex"
               >
                 <LinkIcon className="w-4 h-4" />
               </a>
@@ -179,31 +179,31 @@ function MarkdownChunk({ content }: { content: string }) {
           );
         },
         h3: ({ children }) => (
-          <h3 className="font-display text-[1.0625rem] md:text-[1.25rem] font-bold text-[#0A2540] mt-9 mb-3 leading-snug tracking-[-0.01em] pt-5 border-t border-[rgba(10,37,64,0.07)]">
+          <h3 className="font-display text-[1.0625rem] md:text-[1.25rem] font-bold text-on-surface mt-9 mb-3 leading-snug tracking-[-0.01em] pt-5 border-t border-outline-variant/60">
             <span className="inline-flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-md bg-[#0A2540] flex-shrink-0 inline-flex items-center justify-center" aria-hidden="true">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
+              <span className="w-5 h-5 rounded-md bg-primary flex-shrink-0 inline-flex items-center justify-center" aria-hidden="true">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
               </span>
               {children}
             </span>
           </h3>
         ),
         p: ({ children }) => (
-          <p className="text-[#1e2a42] text-[1.0625rem] md:text-[1.125rem] leading-[1.9] mb-7 font-normal tracking-[0.003em]">
+          <p className="text-on-surface/90 text-[1.0625rem] md:text-[1.125rem] leading-[1.9] mb-7 font-normal tracking-[0.003em]">
             {processChildren(children, seen)}
           </p>
         ),
         ul: ({ children }) => <ul className="md-ul my-7 space-y-3">{children}</ul>,
         ol: ({ children }) => <ol className="md-ol my-7 space-y-3">{children}</ol>,
         li: ({ children }) => (
-          <li className="text-[#1e2a42] text-[1.0rem] md:text-[1.0625rem] leading-[1.85] font-normal">
+          <li className="text-on-surface/90 text-[1.05rem] md:text-[1.0625rem] leading-[1.85] font-normal">
             {processChildren(children, seen)}
           </li>
         ),
         a: ({ href, children }) => (
           <a
             href={href}
-            className="text-[#007a72] underline decoration-[#00C4B4]/45 decoration-[1.5px] hover:text-[#005f58] hover:decoration-[#00C4B4] underline-offset-[4px] font-semibold transition-colors duration-100"
+            className="text-primary underline decoration-primary/45 decoration-[1.5px] hover:text-primary-strong hover:decoration-primary underline-offset-[4px] font-semibold transition-colors duration-100"
             style={{ fontFamily: 'inherit' }}
           >
             {children}
@@ -211,9 +211,9 @@ function MarkdownChunk({ content }: { content: string }) {
         ),
         strong: ({ children }) => (
           <strong
-            className="font-bold text-[#0A2540]"
+            className="font-bold text-on-surface"
             style={{
-              background: 'rgba(0,196,180,0.1)',
+              background: 'var(--color-primary-soft)',
               padding: '1px 4px',
               borderRadius: '3px',
               fontFamily: 'inherit',
@@ -221,26 +221,26 @@ function MarkdownChunk({ content }: { content: string }) {
           >{children}</strong>
         ),
         em: ({ children }) => (
-          <em className="italic text-[#2c3a55]" style={{ fontFamily: 'inherit' }}>{children}</em>
+          <em className="italic text-on-surface-variant" style={{ fontFamily: 'inherit' }}>{children}</em>
         ),
         table: ({ children }) => (
-          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-[rgba(14,20,36,0.09)] bg-white shadow-[0_2px_20px_rgba(10,37,64,0.07)]">
+          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-soft">
             <table className="w-full">{children}</table>
           </div>
         ),
         thead: ({ children }) => (
-          <thead className="bg-gradient-to-r from-[#f4f6fb] to-[#eceff7] border-b-2 border-[rgba(14,20,36,0.08)]">{children}</thead>
+          <thead className="bg-surface-container border-b-2 border-outline-variant">{children}</thead>
         ),
         th: ({ children }) => (
           <th
-            className="text-left px-5 py-3.5 font-bold text-[#0A2540] text-[11px] uppercase tracking-[0.1em] whitespace-nowrap"
+            className="text-left px-5 py-3.5 font-bold text-on-surface text-[11px] uppercase tracking-[0.1em] whitespace-nowrap"
             style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
           >
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-5 py-4 border-t border-[rgba(14,20,36,0.05)] text-[#1e2a42] text-[0.9375rem] leading-relaxed">
+          <td className="px-5 py-4 border-t border-outline-variant/40 text-on-surface-variant text-[0.9375rem] leading-relaxed">
             {children}
           </td>
         ),
@@ -249,12 +249,12 @@ function MarkdownChunk({ content }: { content: string }) {
             <div
               className="rounded-r-2xl pl-7 pr-6 py-6"
               style={{
-                borderLeft: '4px solid #0A2540',
-                background: 'linear-gradient(to right, rgba(10,37,64,0.04) 0%, rgba(10,37,64,0.015) 60%, transparent 100%)',
+                borderLeft: '4px solid var(--color-primary)',
+                background: 'linear-gradient(to right, var(--color-surface-container-low) 0%, var(--color-surface-container-lowest) 100%)',
               }}
             >
               <div
-                className="text-[#1a2540] text-[1.1rem] md:text-[1.2rem] leading-[1.8] italic font-medium"
+                className="text-on-surface text-[1.1rem] md:text-[1.2rem] leading-[1.8] italic font-medium"
                 style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
               >
                 {children}
@@ -264,10 +264,8 @@ function MarkdownChunk({ content }: { content: string }) {
         ),
         code: ({ children }) => (
           <code
-            className="text-[#007a72] px-1.5 py-0.5 rounded-md text-[0.875em] font-mono tabular-nums"
+            className="text-primary px-1.5 py-0.5 rounded-md text-[0.875em] font-mono tabular-nums bg-surface-container border border-outline-variant"
             style={{
-              background: 'rgba(0,196,180,0.08)',
-              border: '1px solid rgba(0,196,180,0.2)',
               fontFamily: 'var(--font-jetbrains), ui-monospace, monospace',
             }}
           >
@@ -276,13 +274,13 @@ function MarkdownChunk({ content }: { content: string }) {
         ),
         hr: () => (
           <div className="my-16 flex items-center" aria-hidden="true">
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.12)] to-transparent" />
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-outline-variant/65 to-transparent" />
             <span className="mx-5 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
-              <span className="w-2 h-2 rounded-full bg-[#C9A14A]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="w-2 h-2 rounded-full bg-secondary" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             </span>
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[rgba(14,20,36,0.12)] to-transparent" />
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-outline-variant/65 to-transparent" />
           </div>
         ),
       }}

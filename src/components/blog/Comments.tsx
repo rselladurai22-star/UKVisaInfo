@@ -58,8 +58,8 @@ export default function Comments({ term }: { term: string }) {
   if (!configured) return null;
 
   return (
-    <section className="mt-12 pt-8 border-t border-[rgba(14,20,36,0.08)]">
-      <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-4">
+    <section className="mt-12 pt-8 border-t border-outline-variant/60">
+      <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-on-surface-variant/70 mb-4">
         Discussion
       </div>
       <div ref={ref} className="giscus-container" />

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, ArrowRight, ChevronRight, Home, ArrowUpRight } from 'lucide-react';
 import { BLOG_POSTS, getPost, postCategory, getCategoryMeta, type BlogCategory, type RelatedTool } from '../../../data/blog';
 import { primaryEditorSchema, PRIMARY_EDITOR } from '../../../data/editorialTeam';
 import RelatedPosts from '../../../components/RelatedPosts';
@@ -19,18 +19,6 @@ import { parseSegments } from '../../../components/blog/parseSegments';
 interface RouteParams {
   params: Promise<{ slug: string }>;
 }
-
-const TAG_COLORS: Record<string, { bg: string; text: string }> = {
-  'skilled-worker': { bg: 'rgba(0, 196, 180,0.1)',  text: '#c0112a' },
-  'student':        { bg: 'rgba(10, 37, 64,0.1)',  text: '#1d4ed8' },
-  'family':         { bg: 'rgba(19, 50, 95,0.1)', text: '#6d28d9' },
-  'visitor':        { bg: 'rgba(0, 196, 180,0.1)',  text: '#0e7490' },
-  'costs':          { bg: 'rgba(201, 161, 74,0.1)',  text: '#b45309' },
-  'health':         { bg: 'rgba(0, 168, 154,0.1)',  text: '#047857' },
-  'graduate':       { bg: 'rgba(0, 127, 118,0.1)', text: '#0f766e' },
-};
-const tagStyle = (tag: string) =>
-  TAG_COLORS[tag.toLowerCase().replace(/\s+/g, '-')] ?? { bg: 'rgba(14,20,36,0.07)', text: '#52596e' };
 
 // Category-aware end-of-article CTA + default cross-link tools (cluster model).
 const CATEGORY_CTA: Record<BlogCategory, { kicker: string; heading: string; sub: string; href: string; label: string; tools: RelatedTool[] }> = {
@@ -184,7 +172,6 @@ export default async function BlogPostPage({ params }: RouteParams) {
   const relatedTools = post.relatedTools && post.relatedTools.length ? post.relatedTools : cta.tools;
 
   // Plain-text projection of the markdown body for Article schema.
-  // Strips MD syntax → counts words → trims first 5000 chars for articleBody.
   const plainBody = post.body
     .replace(/```[\s\S]*?```/g, ' ')            // code blocks
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')      // images
@@ -256,49 +243,33 @@ export default async function BlogPostPage({ params }: RouteParams) {
       <ReadingProgress />
 
       {/* ═══════════════════════
-          EDITORIAL HERO
+          EDITORIAL HEADER
       ═══════════════════════ */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-b from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-14 md:pb-20">
-        {/* decorative bg */}
-        <div
-          className="absolute inset-0 opacity-[0.18] pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/15 blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#0A2540]/10 blur-[140px] pointer-events-none" />
+      <header className="bg-surface border-b border-outline-variant/60 pt-[88px] md:pt-[104px] pb-6 sm:pb-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          {/* Back nav / breadcrumbs */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
+            <Link href="/" className="hover:text-primary flex items-center gap-1"><Home className="h-3.5 w-3.5" /> Home</Link>
+            <ChevronRight className="h-3.5 w-3.5 opacity-60" />
+            <Link href="/blog" className="hover:text-primary">Guides</Link>
+            <ChevronRight className="h-3.5 w-3.5 opacity-60" />
+            <span className="text-primary font-bold">Read</span>
+          </nav>
 
-        <div className="relative max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
-          {/* Back nav */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-white/55 hover:text-white text-sm font-medium mb-7 transition-colors duration-100"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            All articles
-          </Link>
-
-          {/* Category + freshness pill */}
-          <div className="flex flex-wrap items-center gap-2 mb-6">
-            <Link href={`/blog/category/${category}`} className="inline-flex items-center text-[10.5px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full bg-[#C9A14A] text-[#0A2540] hover:bg-[#ffd166] transition-colors">
+          {/* Category pill / tag info */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <Link href={`/blog?category=${category}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: catMeta.accent }}>
               {catMeta.label}
             </Link>
             {isFresh && (
-              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.14] text-[#34d399]">
-                <span className="relative flex w-1.5 h-1.5">
-                  <span className="absolute inline-flex w-full h-full rounded-full bg-[#34d399] opacity-65 animate-ping" />
-                  <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#34d399]" />
-                </span>
-                Updated {updatedDays === 0 ? 'today' : `${updatedDays}d ago`}
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-success-soft text-success">
+                Updated
               </span>
             )}
-            {post.tags.slice(1, 3).map((tag) => (
+            {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="text-[10.5px] font-bold uppercase tracking-[0.1em] px-2.5 py-1 rounded-full bg-white/[0.07] text-white/55"
+                className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant"
               >
                 {tag}
               </span>
@@ -306,30 +277,30 @@ export default async function BlogPostPage({ params }: RouteParams) {
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-white text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold leading-[1.08] tracking-[-0.025em]">
+          <h1 className="text-[26px] leading-tight sm:text-4xl font-display font-bold tracking-tight text-on-surface">
             {post.title}
           </h1>
 
-          {/* Deck */}
-          <p className="mt-5 text-white/65 text-[1.0625rem] md:text-[1.125rem] leading-relaxed max-w-2xl">
+          {/* Description */}
+          <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-3xl leading-relaxed">
             {post.description}
           </p>
 
           {/* Meta row */}
-          <div className="mt-8 pt-7 border-t border-white/[0.08] flex flex-wrap items-center gap-x-6 gap-y-2.5 text-white/45 text-[12.5px]">
+          <div className="mt-6 pt-4 border-t border-outline-variant/40 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-on-surface-variant/80 text-[12px] font-medium">
             <span className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5" />
+              <Calendar className="w-3.5 h-3.5 text-on-surface-variant" />
               {new Date(post.date).toLocaleDateString('en-GB', {
                 day: 'numeric', month: 'long', year: 'numeric',
               })}
             </span>
             <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
+              <Clock className="w-3.5 h-3.5 text-on-surface-variant" />
               {post.readMinutes} min read
             </span>
-            <span className="hidden md:flex items-center gap-1.5 ml-auto">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" />
-              By <Link href={PRIMARY_EDITOR.profileUrl} className="text-white/85 hover:underline underline-offset-2">{PRIMARY_EDITOR.name}</Link>
+            <span className="flex items-center gap-1.5 sm:ml-auto">
+              <span className="w-1.5 h-1.5 rounded-full bg-success" />
+              By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors">{PRIMARY_EDITOR.name}</Link>
             </span>
           </div>
         </div>
@@ -338,8 +309,8 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* ═══════════════════════
           3-COLUMN ARTICLE LAYOUT
       ═══════════════════════ */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="bg-surface text-on-surface min-h-screen">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-14">
           <div className="grid grid-cols-12 gap-8 lg:gap-10">
 
             {/* ── LEFT RAIL: TOC ── */}
@@ -349,7 +320,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
             </aside>
 
-            {/* ── CENTER: ARTICLE ── */}
+      {/* ── CENTER: ARTICLE ── */}
             <article className="col-span-12 lg:col-span-7">
               <ArticleBody body={post.body} articleSlug={post.slug} />
 
@@ -357,21 +328,17 @@ export default async function BlogPostPage({ params }: RouteParams) {
               <AdUnit slot="3862206036" format="auto" className="my-8" />
 
               {/* Tags strip */}
-              <div className="mt-12 pt-8 border-t border-[rgba(14,20,36,0.08)]">
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-3">Filed under</div>
+              <div className="mt-12 pt-8 border-t border-outline-variant/60">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-3">Filed under</div>
                 <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => {
-                    const s = tagStyle(tag);
-                    return (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-bold uppercase tracking-[0.08em] px-3 py-1.5 rounded-full"
-                        style={{ background: s.bg, color: s.text }}
-                      >
-                        {tag}
-                      </span>
-                    );
-                  })}
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -384,17 +351,25 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
               {/* Related calculators — cluster cross-link to high-intent tools */}
               <div className="mt-12">
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#9aa3b8] mb-3">Related calculators</div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-3">Related calculators</div>
                 <div className="grid sm:grid-cols-3 gap-3">
                   {relatedTools.map((t) => (
                     <Link
                       key={t.href}
                       href={t.href}
-                      className="group rounded-xl border border-[rgba(14,20,36,0.1)] p-4 hover:border-[#0A2540] transition-colors"
-                      style={{ borderTopColor: catMeta.accent, borderTopWidth: 2 }}
+                      className="group relative rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 flex items-center gap-3 hover:shadow-md active:scale-[0.99] transition-all overflow-hidden"
                     >
-                      <div className="font-semibold text-[#0A2540] text-sm flex items-center gap-1">{t.label}<ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" /></div>
-                      <div className="text-[12px] text-[#52596e] mt-0.5">{t.hint}</div>
+                      {/* Hover left accent line */}
+                      <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: catMeta.accent }} />
+                      <div className="min-w-0 flex-1 pl-1">
+                        <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors truncate">
+                          {t.label}
+                        </div>
+                        <div className="text-[11px] text-on-surface-variant truncate">
+                          {t.hint}
+                        </div>
+                      </div>
+                      <ArrowUpRight className="h-4 w-4 text-on-surface-variant group-hover:text-primary shrink-0 transition-colors" />
                     </Link>
                   ))}
                 </div>
@@ -408,30 +383,22 @@ export default async function BlogPostPage({ params }: RouteParams) {
               <Comments term={post.slug} />
 
               {/* Bottom CTA */}
-              <div className="mt-14 relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-10">
-                <div
-                  className="absolute inset-0 opacity-[0.22] pointer-events-none"
-                  style={{
-                    backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)',
-                    backgroundSize: '18px 18px',
-                  }}
-                />
-                <div className="absolute -right-16 -bottom-16 w-56 h-56 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
-                <div className="relative z-10 max-w-md">
-                  <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#C9A14A] mb-4">
+              <div className="mt-14 relative rounded-lg border border-outline-variant bg-surface-container-low p-6 sm:p-8 overflow-hidden shadow-soft">
+                <div className="relative z-10 max-w-lg">
+                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-primary mb-3">
                     {cta.kicker}
                   </span>
-                  <h3 className="font-display text-white text-[1.25rem] md:text-[1.625rem] font-bold leading-tight tracking-[-0.015em]">
+                  <h3 className="font-display text-on-surface text-lg sm:text-xl font-bold leading-tight">
                     {cta.heading}
                   </h3>
-                  <p className="mt-3 text-white/55 text-[14.5px] leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">
                     {cta.sub}
                   </p>
                   <Link
                     href={cta.href}
-                    className="mt-6 inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm hover:bg-[#ffd166] active:scale-[0.98] transition-[background,transform] duration-150"
+                    className="mt-5 inline-flex items-center gap-1.5 bg-primary text-white font-bold px-4 py-2.5 rounded-lg text-xs hover:bg-primary-strong active:scale-[0.98] transition-all duration-150 shadow-sm"
                   >
-                    {cta.label} <ArrowRight className="w-4 h-4" />
+                    {cta.label} <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -456,7 +423,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           line-height: 0.82;
           font-weight: 800;
           padding: 0.2rem 0.65rem 0 0;
-          color: #00C4B4;
+          color: ${catMeta.accent};
           letter-spacing: -0.03em;
         }
         @media (max-width: 640px) {

@@ -13,36 +13,30 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   return (
     <section className="my-10">
       <div className="flex items-center gap-3 mb-6">
-        <span
-          className="inline-flex w-9 h-9 rounded-xl items-center justify-center text-[#0A2540]"
-          style={{ background: 'rgba(10,37,64,0.07)' }}
-        >
+        <span className="inline-flex w-9 h-9 rounded-xl items-center justify-center text-on-surface bg-surface-container">
           <HelpCircle className="w-4 h-4" />
         </span>
         <h3
-          className="text-[1.1875rem] md:text-[1.3rem] font-bold text-[#0A2540] leading-tight"
+          className="text-[1.1875rem] md:text-[1.3rem] font-bold text-on-surface leading-tight"
           style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
         >
           Frequently asked questions
         </h3>
       </div>
 
-      <ul
-        className="rounded-2xl overflow-hidden"
-        style={{ border: '1px solid rgba(14,20,36,0.09)', boxShadow: '0 2px 12px rgba(10,37,64,0.05)' }}
-      >
+      <ul className="rounded-2xl overflow-hidden border border-outline-variant bg-surface-container-lowest shadow-soft">
         {items.map((it, i) => {
           const open = openIdx === i;
           return (
-            <li key={i} style={{ borderTop: i > 0 ? '1px solid rgba(14,20,36,0.07)' : undefined }}>
+            <li key={i} style={{ borderTop: i > 0 ? '1px solid var(--color-outline-variant)' : undefined }}>
               <button
                 type="button"
                 onClick={() => setOpenIdx(open ? null : i)}
                 aria-expanded={open}
-                className={`w-full flex items-start gap-4 px-5 py-5 md:px-6 text-left group transition-colors duration-150 ${open ? 'bg-[rgba(0,196,180,0.03)]' : 'bg-white hover:bg-[rgba(10,37,64,0.015)]'}`}
+                className={`w-full flex items-start gap-4 px-5 py-5 md:px-6 text-left group transition-colors duration-150 ${open ? 'bg-surface-container-low/50' : 'bg-surface-container-lowest hover:bg-surface-container-low/30'}`}
               >
                 <span
-                  className="flex-1 text-[15.5px] md:text-[16px] font-bold text-[#0A2540] leading-snug pr-3 pt-0.5"
+                  className="flex-1 text-[15.5px] md:text-[16px] font-bold text-on-surface leading-snug pr-3 pt-0.5"
                   style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
                 >
                   {it.q}
@@ -50,8 +44,8 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 <span
                   className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-[transform,background,color] duration-200 ${
                     open
-                      ? 'rotate-45 bg-[#00C4B4] text-white'
-                      : 'bg-[#f1f4fb] text-[#52596e] group-hover:bg-[#00C4B4] group-hover:text-white'
+                      ? 'rotate-45 bg-primary text-white'
+                      : 'bg-surface-container text-on-surface-variant group-hover:bg-primary group-hover:text-white'
                   }`}
                 >
                   <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -66,11 +60,11 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
               >
                 <div className="overflow-hidden">
                   <div
-                    className="px-5 md:px-6 pb-6 pr-12 text-[15.5px] leading-[1.75] text-[#1e2a42]"
+                    className="px-5 md:px-6 pb-6 pr-12 text-[15.5px] leading-[1.75] text-on-surface-variant/90"
                     style={{
                       fontFamily: 'var(--font-lora), Georgia, serif',
-                      borderTop: '1px solid rgba(0,196,180,0.1)',
-                      background: 'rgba(0,196,180,0.02)',
+                      borderTop: '1px solid var(--color-outline-variant)',
+                      background: 'var(--color-surface-container-lowest)',
                       paddingTop: '1.25rem',
                     }}
                   >
@@ -80,12 +74,12 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                         p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
                         strong: ({ children }) => (
                           <strong
-                            className="font-bold text-[#0A2540]"
-                            style={{ background: 'rgba(0,196,180,0.1)', padding: '0 3px', borderRadius: '3px' }}
+                            className="font-bold text-on-surface"
+                            style={{ background: 'var(--color-primary-soft)', padding: '0 3px', borderRadius: '3px' }}
                           >{children}</strong>
                         ),
                         a: ({ href, children }) => (
-                          <a href={href} className="text-[#007a72] underline decoration-[#00C4B4]/40 hover:text-[#00C4B4] font-semibold">{children}</a>
+                          <a href={href} className="text-primary underline decoration-primary/40 hover:text-primary-strong font-semibold">{children}</a>
                         ),
                       }}
                     >

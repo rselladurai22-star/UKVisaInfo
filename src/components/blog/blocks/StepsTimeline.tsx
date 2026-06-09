@@ -9,7 +9,7 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
       {/* connector line behind the badges */}
       <span
         aria-hidden="true"
-        className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-[#00C4B4]/40 via-[#0A2540]/15 to-[#00C4B4]/40"
+        className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-primary/40 via-outline-variant/30 to-primary/40"
       />
 
       {items.map((step, i) => (
@@ -17,16 +17,16 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
           {/* numbered badge */}
           <span
             aria-hidden="true"
-            className="absolute left-0 top-0 w-[32px] h-[32px] rounded-full bg-white border-2 border-[#00C4B4] text-[#00C4B4] font-display font-bold text-[13px] flex items-center justify-center shadow-[0_2px_8px_rgba(0, 196, 180,0.18)]"
+            className="absolute left-0 top-0 w-[32px] h-[32px] rounded-full bg-white border-2 border-primary text-primary font-display font-bold text-[13px] flex items-center justify-center shadow-soft"
           >
             {i + 1}
           </span>
-          <h4 className="font-display text-[1.0625rem] md:text-[1.1875rem] font-bold text-[#0A2540] leading-tight mb-1.5">
+          <h4 className="font-display text-[1.0625rem] md:text-[1.1875rem] font-bold text-on-surface leading-tight mb-1.5">
             {step.title}
           </h4>
           {step.body && (
             <div
-              className="text-[#3d4a5e] text-[15.5px] leading-[1.75]"
+              className="text-on-surface-variant text-[15.5px] leading-[1.75]"
               style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
             >
               <ReactMarkdown
@@ -35,12 +35,12 @@ export default function StepsTimeline({ items }: { items: StepItem[] }) {
                   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
                   strong: ({ children }) => (
                     <strong
-                      className="font-bold text-[#0A2540]"
-                      style={{ background: 'rgba(0,196,180,0.1)', padding: '0 3px', borderRadius: '3px' }}
+                      className="font-bold text-on-surface"
+                      style={{ background: 'var(--color-primary-soft)', padding: '0 3px', borderRadius: '3px' }}
                     >{children}</strong>
                   ),
                   a: ({ href, children }) => (
-                    <a href={href} className="text-[#007a72] underline decoration-[#00C4B4]/40 hover:text-[#005f58] font-semibold">{children}</a>
+                    <a href={href} className="text-primary underline decoration-primary/40 hover:text-primary-strong font-semibold">{children}</a>
                   ),
                 }}
               >

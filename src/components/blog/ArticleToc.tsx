@@ -64,15 +64,15 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
     <nav aria-label="Table of contents" className="text-[13px]">
       {/* header */}
       <div className="flex items-center gap-2 mb-5">
-        <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#0A2540] text-white">
+        <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-surface-container text-primary">
           <List className="w-3 h-3" />
         </span>
-        <span className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#52596e]">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80">
           On this page
         </span>
       </div>
 
-      <ol className="space-y-0 border-l-2 border-[rgba(14,20,36,0.07)]">
+      <ol className="space-y-0 border-l-2 border-outline-variant/60">
         {headings.map((h, idx) => {
           const isActive = activeId === h.id;
           return (
@@ -80,7 +80,7 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
               {/* active indicator bar */}
               <span
                 aria-hidden="true"
-                className="absolute left-[-2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#00C4B4] to-[#C9A14A] origin-top transition-transform duration-200"
+                className="absolute left-[-2px] top-0 bottom-0 w-[2px] bg-primary origin-top transition-transform duration-200"
                 style={{ transform: isActive ? 'scaleY(1)' : 'scaleY(0)' }}
               />
               <a
@@ -88,15 +88,15 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
                 onClick={(e) => handleClick(e, h.id)}
                 className={`flex items-start gap-2.5 py-2 pl-4 pr-2 leading-snug rounded-r-lg transition-all duration-150 ${
                   isActive
-                    ? 'text-[#007a72] font-semibold bg-[rgba(0,196,180,0.05)]'
-                    : 'text-[#8a94aa] hover:text-[#0A2540] hover:bg-[rgba(14,20,36,0.03)]'
+                    ? 'text-primary font-semibold bg-primary-soft/30'
+                    : 'text-on-surface-variant/70 hover:text-primary hover:bg-surface-container/40'
                 }`}
               >
                 <span
                   className={`flex-shrink-0 mt-[3px] w-[18px] h-[18px] rounded-full flex items-center justify-center text-[9px] font-bold transition-all duration-150 ${
                     isActive
-                      ? 'bg-[#00C4B4] text-white'
-                      : 'bg-[rgba(14,20,36,0.06)] text-[#9aa3b8]'
+                      ? 'bg-primary text-white'
+                      : 'bg-surface-container text-on-surface-variant/70'
                   }`}
                   aria-hidden="true"
                 >
@@ -110,8 +110,8 @@ export default function ArticleToc({ headings }: { headings: Heading[] }) {
       </ol>
 
       {/* progress hint */}
-      <div className="mt-5 pt-4 border-t border-[rgba(14,20,36,0.07)]">
-        <p className="text-[11px] text-[#b0b8cc] leading-snug">
+      <div className="mt-5 pt-4 border-t border-outline-variant/60">
+        <p className="text-[11px] text-on-surface-variant/60 leading-snug">
           {headings.length} section{headings.length !== 1 ? 's' : ''} in this guide
         </p>
       </div>
