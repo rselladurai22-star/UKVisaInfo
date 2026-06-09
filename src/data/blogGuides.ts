@@ -4,6 +4,455 @@ import type { BlogPost } from './blog';
 // enough for the build — a single 10k-line file overran the SWC stack).
 export const GUIDE_POSTS: BlogPost[] = [
   {
+    slug: 'stamp-duty-by-price-table-2025-26',
+    title: 'Stamp Duty by House Price: Full 2025/26 Table',
+    description:
+      'A complete stamp duty table for 2025/26 by house price from £150,000 to £1m — what a home mover, first-time buyer and second-home buyer each pay, with the rules explained.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'property',
+    tags: ['Stamp Duty', 'SDLT', 'Buying', 'First-Time Buyer'],
+    relatedTools: [
+      { href: '/stamp-duty-calculator', label: 'Stamp Duty (SDLT)', hint: '2025/26 rates · FTB · surcharges' },
+      { href: '/house-buying-costs', label: 'House Buying Costs', hint: 'Total cash to buy' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+    ],
+    body: `
+Stamp duty is the upfront tax that varies enormously depending on who you are — a first-time buyer, a home mover, or someone buying a second property. The same £400,000 house can cost £5,000, £10,000 or £30,000 in stamp duty depending on your situation. This page lays it all out in one table for 2025/26, so you can see exactly what you'll pay at any price.
+
+> [!KEY] Three buyers, three very different bills
+> A **home mover** pays the standard rates — nothing up to £125,000, then 2% to 5% on higher slices.
+> A **first-time buyer** pays nothing up to £300,000, then 5% to £500,000 (no relief above £500,000).
+> A **second-home or buy-to-let** buyer pays the standard rates **plus a 5% surcharge** on the whole price.
+
+## Stamp duty by house price (2025/26)
+
+| House price | Home mover | First-time buyer | Second home / BTL |
+|---|---|---|---|
+| £150,000 | £500 | £0 | £8,000 |
+| £200,000 | £1,500 | £0 | £11,500 |
+| £250,000 | £2,500 | £0 | £15,000 |
+| £300,000 | £5,000 | £0 | £20,000 |
+| £350,000 | £7,500 | £2,500 | £25,000 |
+| £400,000 | £10,000 | £5,000 | £30,000 |
+| £450,000 | £12,500 | £7,500 | £35,000 |
+| £500,000 | £15,000 | £10,000 | £40,000 |
+| £600,000 | £20,000 | £20,000 | £50,000 |
+| £750,000 | £27,500 | £27,500 | £65,000 |
+| £1,000,000 | £43,750 | £43,750 | £93,750 |
+
+Figures are for England and Northern Ireland. Run any exact price through the [stamp duty calculator](/stamp-duty-calculator).
+
+## How the standard rates work
+
+For a main home that isn't your first, stamp duty is charged in bands — each rate applies only to the slice of the price within it: 0% to £125,000, 2% to £250,000, 5% to £925,000, 10% to £1.5m, then 12%. So a £400,000 home pays £0 + £2,500 + £7,500 = £10,000.
+
+## The first-time buyer advantage — and its cliff
+
+First-time buyers pay nothing up to £300,000 and 5% on the slice from £300,000 to £500,000. Notice in the table that at £600,000 and above, the first-time buyer pays exactly the same as a mover — that's because relief vanishes entirely once the price exceeds £500,000.
+
+> [!WARNING] The £500,000 first-time buyer cliff
+> A first-time buyer at £500,000 pays £10,000; at £510,000 they lose all relief and jump to £15,500. Keeping the agreed price at or below £500,000 can be worth far more than a small headline discount.
+
+## The second-home surcharge
+
+If you're buying an additional property while keeping another, add a **5% surcharge on the entire price** on top of the standard rates. On a £300,000 second home that's £15,000 of surcharge plus £5,000 standard = £20,000. You can often reclaim the surcharge if you were replacing your main home and sell the old one within 36 months.
+
+## Don't forget Scotland and Wales
+
+This table is for England and Northern Ireland (SDLT). Scotland uses LBTT and Wales uses LTT, each with different bands and thresholds, so the figures don't transfer.
+
+> [!FAQ]
+> Q: How much stamp duty on a £300,000 house?
+> A: A home mover pays £5,000, a first-time buyer pays £0, and a second-home buyer pays £20,000 (including the 5% surcharge).
+>
+> Q: How much stamp duty does a first-time buyer pay on £400,000?
+> A: £5,000 — nothing on the first £300,000, then 5% on the £100,000 between £300,000 and £400,000.
+>
+> Q: How much is stamp duty on a second home?
+> A: The standard rates plus a 5% surcharge on the entire price. On a £250,000 second home that's £15,000.
+>
+> Q: At what price do first-time buyers lose stamp duty relief?
+> A: Above £500,000 — then they pay the standard rates on the whole price, the same as a home mover.
+>
+> Q: When do I pay stamp duty?
+> A: Within 14 days of completion, usually handled by your solicitor. It's upfront cash and can't normally be added to the mortgage.
+
+Figures are 2025/26 estimates for England and Northern Ireland. Confirm your exact liability with your conveyancer.
+`.trim(),
+  },
+  {
+    slug: 'how-much-mortgage-can-i-borrow-by-salary-table-2025-26',
+    title: 'How Much Mortgage Can I Borrow? Table by Salary 2025/26',
+    description:
+      'A salary-by-salary mortgage borrowing table for 2025/26 — how much you can borrow at 4 and 4.5 times income, the monthly repayment, and what changes the figure.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'property',
+    tags: ['Mortgages', 'Affordability', 'Buying'],
+    relatedTools: [
+      { href: '/mortgage-affordability', label: 'Mortgage Affordability', hint: 'How much can I borrow?' },
+      { href: '/mortgage-calculator', label: 'Mortgage Calculator', hint: 'Repayment · interest' },
+      { href: '/deposit-calculator', label: 'Deposit Calculator', hint: 'How much & how long' },
+    ],
+    body: `
+Before you start house-hunting, the number that decides everything is how much a lender will let you borrow. Most lenders work from a multiple of your income — usually 4 to 4.5 times — then check you can afford the repayments. This table shows, salary by salary, roughly how much you could borrow in 2025/26 and what the monthly payment looks like.
+
+> [!KEY] The short version
+> Most lenders cap borrowing at around **4 to 4.5 times** your annual income.
+> A **£40,000** earner can typically borrow up to about **£180,000**.
+> **Joint applicants** combine incomes, so two earners borrow far more.
+> The figure falls if you have **debts**; a bigger **deposit** unlocks better rates.
+
+## Mortgage borrowing by salary (2025/26)
+
+| Annual income | At 4× income | At 4.5× income | Monthly payment* |
+|---|---|---|---|
+| £20,000 | £80,000 | £90,000 | £500 |
+| £25,000 | £100,000 | £112,500 | £625 |
+| £30,000 | £120,000 | £135,000 | £750 |
+| £35,000 | £140,000 | £157,500 | £875 |
+| £40,000 | £160,000 | £180,000 | £1,000 |
+| £50,000 | £200,000 | £225,000 | £1,251 |
+| £60,000 | £240,000 | £270,000 | £1,501 |
+| £70,000 | £280,000 | £315,000 | £1,751 |
+| £80,000 | £320,000 | £360,000 | £2,001 |
+| £100,000 | £400,000 | £450,000 | £2,501 |
+
+*Monthly repayment on the 4.5× amount, at 4.5% over 25 years. Try your own figures on the [mortgage calculator](/mortgage-calculator).
+
+## Why it's a range, not a fixed number
+
+The income multiple is only the starting point. Lenders then run an **affordability assessment** — checking your real outgoings against the repayment, and stress-testing it at a higher interest rate. Two people on the same salary can be offered different amounts depending on their commitments.
+
+> [!WARNING] Debts shrink your borrowing fast
+> A £250-a-month car finance deal can cut your maximum mortgage by several thousand pounds, because the lender projects that commitment across the affordability test. Clearing debts before you apply often increases what you can borrow by more than the debt itself. The [mortgage affordability calculator](/mortgage-affordability) factors this in.
+
+## Joint applications
+
+Couples combine incomes, so two people each earning £35,000 could borrow toward £315,000 at 4.5× — far more than either alone. Lenders apply the same affordability and stress testing to the combined figure.
+
+## The deposit matters too
+
+Borrowing is only part of the picture — your deposit sets the property budget and the interest rate. A bigger deposit lowers your loan-to-value, unlocking cheaper rates and sometimes more generous lending. The [deposit calculator](/deposit-calculator) shows how long it takes to save to each tier.
+
+> [!FAQ]
+> Q: How much mortgage can I get on £30,000?
+> A: Typically around £120,000–£135,000 (4 to 4.5 times income), subject to the affordability assessment and your deposit.
+>
+> Q: How much can I borrow on £40,000 a year?
+> A: Usually up to about £180,000 at 4.5 times income, though debts and outgoings can lower it.
+>
+> Q: Can I borrow more than 4.5 times my salary?
+> A: Some lenders offer more for strong applicants or specific schemes, but 4 to 4.5 times is the common range, and affordability still applies.
+>
+> Q: Does my partner's income count?
+> A: Yes. Joint applicants combine incomes, so two earners can usually borrow considerably more than one.
+>
+> Q: Why can I borrow less than the table shows?
+> A: Existing debts, childcare and high outgoings reduce affordability, and the stress test checks you could cope with higher rates.
+
+Figures are 2025/26 estimates and illustrative — actual lending depends on each lender's criteria and a full affordability check.
+`.trim(),
+  },
+  {
+    slug: 'dividend-tax-by-amount-table-2025-26',
+    title: 'Dividend Tax 2025/26: How Much You Pay by Amount',
+    description:
+      'A dividend tax table for 2025/26 — how much tax a company director pays on dividends from £5,000 to £100,000 on top of a small salary, with the rates and £500 allowance explained.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'business',
+    tags: ['Dividends', 'Dividend Tax', 'Limited Company'],
+    relatedTools: [
+      { href: '/salary-vs-dividend-calculator', label: 'Salary vs Dividend', hint: 'Optimal director split' },
+      { href: '/corporation-tax-calculator', label: 'Corporation Tax', hint: '19% / 25% + marginal' },
+      { href: '/sole-trader-vs-limited', label: 'Sole Trader vs Limited', hint: 'Take-home compared' },
+    ],
+    body: `
+If you run a limited company and pay yourself in dividends, the tax can be confusing — it depends on your other income, a shrinking allowance, and three different rates. This table cuts through it: how much tax you'd pay on dividends from £5,000 to £100,000, taken on top of the typical £12,570 director's salary, for 2025/26.
+
+> [!KEY] The short version
+> The first **£500** of dividends is tax-free (the dividend allowance).
+> Above that, dividends are taxed at **8.75%** (basic), **33.75%** (higher) and **39.35%** (additional).
+> The rate depends on your **total income**, not the dividends alone.
+> This table assumes a **£12,570 salary** first, the usual director set-up.
+
+## Dividend tax by amount (on top of a £12,570 salary)
+
+| Dividends drawn | Dividend tax | Net dividends |
+|---|---|---|
+| £5,000 | £394 | £4,606 |
+| £10,000 | £831 | £9,169 |
+| £15,000 | £1,269 | £13,731 |
+| £20,000 | £1,706 | £18,294 |
+| £30,000 | £2,581 | £27,419 |
+| £40,000 | £3,906 | £36,094 |
+| £50,000 | £7,281 | £42,719 |
+| £60,000 | £10,656 | £49,344 |
+| £80,000 | £17,406 | £62,594 |
+| £100,000 | £24,156 | £75,844 |
+
+Run your own salary-and-dividend mix through the [salary vs dividend calculator](/salary-vs-dividend-calculator).
+
+## How dividend tax works
+
+Dividends are paid from company profit *after* corporation tax, then taxed again in your hands — but at lower rates than salary, and with no National Insurance. After the £500 allowance, the rate depends on which income tax band the dividends fall into once stacked on top of your other income:
+
+- **8.75%** while your total income is within the basic-rate band (up to £50,270).
+- **33.75%** in the higher-rate band (£50,270 to £125,140).
+- **39.35%** above £125,140.
+
+That's why the tax in the table jumps sharply once dividends push total income past £50,270 — the rate nearly quadruples on the slice above it.
+
+> [!WARNING] The dividend allowance has been slashed
+> The tax-free dividend allowance is now just £500, down from £5,000 a few years ago. Almost all dividends are now taxable from the first few hundred pounds, so the old "take a bit of dividend tax-free" planning barely applies.
+
+## The two-tax catch
+
+Remember dividends are taxed twice overall: the company pays corporation tax (19%–25%) on the profit first, then you pay dividend tax when you extract it. The [corporation tax calculator](/corporation-tax-calculator) covers the company side, and the [sole trader vs limited comparison](/sole-trader-vs-limited) shows whether the whole structure beats self-employment for you.
+
+> [!FAQ]
+> Q: How much tax do I pay on £30,000 of dividends?
+> A: About £2,581 if taken on top of a £12,570 salary in 2025/26, leaving £27,419 net — most of it taxed at the 8.75% basic rate.
+>
+> Q: What are the dividend tax rates for 2025/26?
+> A: 8.75% (basic), 33.75% (higher) and 39.35% (additional), after a £500 tax-free allowance.
+>
+> Q: Do dividends have National Insurance?
+> A: No. Dividends are free of National Insurance, which is part of why a salary-plus-dividend split is tax-efficient for directors.
+>
+> Q: Why does my dividend tax jump at higher amounts?
+> A: Once your total income passes £50,270, dividends above that are taxed at 33.75% instead of 8.75% — nearly four times the rate.
+>
+> Q: Is the dividend allowance really only £500?
+> A: Yes, for 2025/26. It has fallen from £5,000, so nearly all dividends are now taxable.
+
+Figures are 2025/26 estimates assuming a £12,570 salary and no other income. Take accountancy advice for your own profit-extraction plan.
+`.trim(),
+  },
+  {
+    slug: 'pension-pot-for-retirement-income-table-2025-26',
+    title: 'How Big a Pension Pot Do You Need? Income Table',
+    description:
+      'A pension pot table showing how much you need to save for different retirement incomes in 2025/26 — using the 4% rule and the State Pension, from £5,000 to £40,000 a year.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'money',
+    tags: ['Pensions', 'Retirement', 'Saving'],
+    relatedTools: [
+      { href: '/pension-calculator', label: 'Pension Calculator', hint: 'Pot at retirement' },
+      { href: '/pension-drawdown-calculator', label: 'Pension Drawdown', hint: 'How long will it last?' },
+      { href: '/state-pension', label: 'State Pension', hint: 'Forecast from NI years' },
+    ],
+    body: `
+"How big a pension pot do I need?" sounds like it should have a scary answer, but it's more manageable than the headlines suggest — because the State Pension does a lot of the work. This table shows how large a private pension pot you need to generate different levels of income in retirement, using the widely-used 4% rule, for 2025/26.
+
+> [!KEY] The short version
+> A common rule of thumb: a pot of about **25 times** the annual income you want it to provide.
+> The **full State Pension** adds about **£11,973 a year** on top, for free.
+> So a £30,000 retirement income needs roughly **£450,000** of private pension, not £750,000.
+> Starting early matters more than the amount, thanks to compounding.
+
+## Pension pot needed by income (2025/26)
+
+| Private income wanted (per year) | Pot needed (4% rule) | Total income with full State Pension |
+|---|---|---|
+| £5,000 | £125,000 | £16,973 |
+| £10,000 | £250,000 | £21,973 |
+| £15,000 | £375,000 | £26,973 |
+| £20,000 | £500,000 | £31,973 |
+| £25,000 | £625,000 | £36,973 |
+| £30,000 | £750,000 | £41,973 |
+| £40,000 | £1,000,000 | £51,973 |
+
+The right-hand column adds the full new State Pension (£11,973 a year). Project your own pot with the [pension calculator](/pension-calculator).
+
+## How the table works
+
+The **4% rule** is a rule of thumb: you can withdraw about 4% of your pot in the first year, rising with inflation, with a reasonable chance it lasts 30 years. Flip it around and you need roughly **25 times** the income you want the pot to provide.
+
+Crucially, you don't need the pot to cover your *whole* retirement income — the **State Pension** covers about £11,973 a year first. So to reach a £30,000 total income, your pot only needs to provide about £18,000, not £30,000 — which is why the pot figures are smaller than people fear once the State Pension is counted. Check your State Pension forecast with the [State Pension tool](/state-pension).
+
+> [!WARNING] The 4% rule is a guide, not a guarantee
+> Poor early investment returns, high inflation or simply living longer can mean a pot doesn't last. Many people use a more cautious withdrawal rate, keep some flexibility to spend less in bad years, or use the [drawdown calculator](/pension-drawdown-calculator) to test how long their pot really lasts.
+
+## Why starting early beats saving more
+
+Compounding rewards time. Someone saving modestly from their twenties often ends up with a bigger pot than someone saving much more from their forties, because the early money had decades to grow. If retirement feels distant, that's exactly why starting now is so powerful.
+
+> [!FAQ]
+> Q: How big a pension pot do I need for £20,000 a year?
+> A: About £500,000 of private pension using the 4% rule — which, with the full State Pension, gives a total income of around £32,000 a year.
+>
+> Q: How much pension do I need to retire comfortably?
+> A: A "comfortable" income is often cited around £43,000 a year for a single person; after the State Pension that needs a pot of roughly £775,000, less if you have other income.
+>
+> Q: What is the 4% rule?
+> A: A rule of thumb that you can withdraw about 4% of your pot in the first year, rising with inflation, with a good chance it lasts 30 years — implying a pot of 25 times your target income.
+>
+> Q: Does the State Pension count towards my retirement income?
+> A: Yes. The full new State Pension is about £11,973 a year, reducing how much your private pot needs to provide.
+>
+> Q: Is £250,000 a good pension pot?
+> A: It would provide about £10,000 a year under the 4% rule, or roughly £22,000 with the full State Pension — modest but a solid foundation, especially alongside other savings.
+
+Figures are 2025/26 estimates and rules of thumb, not personal advice. Investment returns aren't guaranteed — consider regulated advice for retirement planning.
+`.trim(),
+  },
+  {
+    slug: 'minimum-wage-annual-salary-by-hours-2025-26',
+    title: 'Minimum Wage as an Annual Salary: Hours Table 2025/26',
+    description:
+      'What the National Living Wage of £12.21 works out to as an annual salary in 2025/26 — a table by hours worked per week, plus the full-time figure and the other age rates.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 8,
+    category: 'money',
+    tags: ['Minimum Wage', 'National Living Wage', 'Salary'],
+    relatedTools: [
+      { href: '/minimum-wage-checker', label: 'Minimum Wage', hint: 'NLW £12.21 · 2025' },
+      { href: '/take-home-pay', label: 'Take-Home Pay', hint: 'Net pay after tax & NI' },
+      { href: '/holiday-pay', label: 'Holiday Pay', hint: '5.6 weeks entitlement' },
+    ],
+    body: `
+The minimum wage is quoted as an hourly rate, but what most people really want to know is what it adds up to over a year — and whether a job paying it is enough to live on. From April 2025 the National Living Wage is £12.21 an hour for workers aged 21 and over. This table turns that into annual pay by the hours you work each week, for 2025/26.
+
+> [!KEY] The short version
+> The **National Living Wage** is **£12.21 an hour** (21 and over) from April 2025.
+> A **full-time** week of 37.5 hours works out to about **£23,810 a year**.
+> Different age groups get lower rates (£10.00 for 18–20, £7.55 under 18 and apprentices).
+> These are **gross** figures — tax and National Insurance reduce take-home above £12,570.
+
+## National Living Wage as annual pay (£12.21/hour)
+
+| Hours per week | Weekly pay | Annual pay (52 weeks) |
+|---|---|---|
+| 16 | £195 | £10,159 |
+| 20 | £244 | £12,698 |
+| 25 | £305 | £15,873 |
+| 30 | £366 | £19,048 |
+| 35 | £427 | £22,222 |
+| 37.5 | £458 | £23,810 |
+| 40 | £488 | £25,397 |
+
+Check whether your pay meets the legal minimum with the [minimum wage checker](/minimum-wage-checker).
+
+## The other age and apprentice rates
+
+The National Living Wage only applies from age 21. Younger workers and apprentices have lower minimums for 2025/26:
+
+| Rate | Hourly | Full-time (37.5 hrs) annual |
+|---|---|---|
+| 21 and over (NLW) | £12.21 | about £23,810 |
+| 18 to 20 | £10.00 | about £19,500 |
+| Under 18 | £7.55 | about £14,723 |
+| Apprentice | £7.55 | about £14,723 |
+
+## Gross versus take-home
+
+The figures above are **gross** pay. Once annual pay passes the £12,570 personal allowance, income tax and National Insurance start to apply. A full-time minimum-wage worker on about £23,810 keeps most of it, but not all — see what's deducted with the [take-home pay calculator](/take-home-pay). Holiday pay is on top: every worker is entitled to 5.6 weeks of paid leave, explained in our [holiday pay guide](/holiday-pay).
+
+> [!WARNING] Some pay doesn't count towards the minimum
+> Tips and service charges don't count towards minimum wage — your basic pay alone must meet it. And unlawful deductions (for uniforms or tools) that take you below the minimum are illegal. If your average pay falls short, you're owed the difference.
+
+> [!FAQ]
+> Q: What is minimum wage as an annual salary in 2025/26?
+> A: At £12.21 an hour, a full-time 37.5-hour week works out to about £23,810 a year gross. A 40-hour week is about £25,397.
+>
+> Q: How much is £12.21 an hour per year?
+> A: It depends on your hours — about £19,048 at 30 hours a week, £22,222 at 35, or £23,810 at 37.5 hours over 52 weeks.
+>
+> Q: What is the minimum wage for under-21s?
+> A: £10.00 an hour for 18–20 year olds and £7.55 for under-18s and apprentices, from April 2025.
+>
+> Q: Is minimum wage before or after tax?
+> A: The £12.21 rate is gross pay. Income tax and National Insurance apply once annual pay passes £12,570, reducing take-home.
+>
+> Q: Do tips count towards minimum wage?
+> A: No. Tips never count; your basic pay alone must meet the legal minimum.
+
+Rates are effective from 1 April 2025. Annual figures assume 52 paid weeks and are gross of tax and National Insurance.
+`.trim(),
+  },
+  {
+    slug: 'isa-investment-growth-table-2025-26',
+    title: 'ISA Growth Table: What Regular Investing Could Become',
+    description:
+      'A stocks and shares ISA growth table showing what investing £50 to £1,000 a month could grow to over 10, 20 and 30 years at 5% — plus how the £20,000 allowance works.',
+    date: '2026-06-09',
+    updated: '2026-06-09',
+    readMinutes: 9,
+    category: 'money',
+    tags: ['ISA', 'Investing', 'Saving', 'Compound Interest'],
+    relatedTools: [
+      { href: '/isa-calculator', label: 'ISA Calculator', hint: 'Tax-free growth' },
+      { href: '/lifetime-isa-calculator', label: 'Lifetime ISA', hint: '£4k + 25% bonus' },
+      { href: '/compound-interest-calculator', label: 'Compound Interest', hint: 'Growth over time' },
+    ],
+    body: `
+A stocks and shares ISA is one of the simplest ways to build wealth in the UK, because everything inside it grows free of tax — no income tax, no Capital Gains Tax, and tax-free withdrawals. The real power, though, is compounding over time. This table shows what investing a regular monthly amount could grow to over 10, 20 and 30 years, for 2025/26.
+
+> [!KEY] The short version
+> You can invest up to **£20,000 a year** across ISAs, with all growth **tax-free**.
+> Investing **£200 a month** could grow to around **£166,000 over 30 years** at 5%.
+> **Time matters most** — the same monthly amount roughly quadruples between 20 and 30 years.
+> Returns aren't guaranteed; investments can fall as well as rise.
+
+## What regular ISA investing could become (5% a year)
+
+| Monthly amount | After 10 years | After 20 years | After 30 years |
+|---|---|---|---|
+| £50 | £7,764 | £20,552 | £41,613 |
+| £100 | £15,528 | £41,103 | £83,226 |
+| £200 | £31,056 | £82,207 | £166,452 |
+| £300 | £46,585 | £123,310 | £249,678 |
+| £500 | £77,641 | £205,517 | £416,129 |
+| £1,000 | £155,282 | £411,034 | £832,259 |
+
+Figures assume 5% annual growth, compounded monthly, and ignore charges and inflation. Model your own plan with the [ISA calculator](/isa-calculator) or the [compound interest calculator](/compound-interest-calculator).
+
+## Why time beats the amount
+
+Look at the £200-a-month row. After 10 years it's about £31,000 — roughly what you paid in plus a bit of growth. But after 30 years it's £166,000, from total contributions of just £72,000. The extra £94,000 is pure compounding: growth earning growth. This is why starting early, even with a small amount, beats waiting until you can afford more.
+
+> [!STAT] £166,452 | What £200 a month could become over 30 years in an ISA at 5%
+
+## The £20,000 allowance
+
+Every UK adult can put up to **£20,000 a year** into ISAs — cash, stocks and shares, or a mix. There's no tax on the interest, dividends or growth, and no tax when you withdraw. For long-term goals, a stocks and shares ISA historically outpaces cash, though it carries investment risk.
+
+> [!WARNING] Returns aren't guaranteed
+> The 5% used here is illustrative. Real stock-market returns vary year to year and can be negative — investments can fall as well as rise. Charges and inflation also eat into the headline figure. Use the table to understand the *power of compounding*, not as a promise of a specific outcome.
+
+## Don't overlook the Lifetime ISA
+
+If you're saving for a first home or retirement and you're under 40, a **Lifetime ISA** adds a 25% government bonus on up to £4,000 a year (within your £20,000 allowance) — free money on top of any growth. The [Lifetime ISA calculator](/lifetime-isa-calculator) shows the bonus and the rules.
+
+> [!FAQ]
+> Q: How much could £100 a month in an ISA grow to?
+> A: At 5% a year, roughly £15,500 over 10 years, £41,000 over 20 years, or £83,000 over 30 years — tax-free.
+>
+> Q: How much can I put in an ISA each year?
+> A: Up to £20,000 across all your ISAs combined in 2025/26, with tax-free growth and withdrawals.
+>
+> Q: Is a stocks and shares ISA better than cash?
+> A: Over the long term it historically grows faster, but it carries investment risk — values can fall. Cash ISAs are safer but usually grow more slowly.
+>
+> Q: Do I pay tax on ISA growth?
+> A: No. Growth, dividends and interest inside an ISA are tax-free, and withdrawals are tax-free at any age.
+>
+> Q: Why does the 30-year figure look so high?
+> A: Compounding. Growth earns its own growth over time, so the longer you invest, the more the total outpaces what you actually paid in.
+
+Figures are illustrative estimates at 5% growth and ignore charges and inflation. Investments can fall as well as rise — consider regulated advice for big decisions.
+`.trim(),
+  },
+  {
     slug: 'uk-salary-after-tax-take-home-table-2025-26',
     title: 'UK Salary After Tax 2025/26: Full Take-Home Pay Table',
     description:
