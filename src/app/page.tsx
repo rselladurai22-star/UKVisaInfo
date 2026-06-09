@@ -216,6 +216,38 @@ const LEARN_GROUPS = [
 export default function HomePage() {
   return (
     <div className="bg-surface text-on-surface min-h-screen">
+      {/* Dynamic inline styles for advanced animations */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes pulseWidth {
+          0%, 100% { width: 62%; }
+          50% { width: 76%; }
+        }
+        @keyframes growHeightTakehome {
+          0% { height: 0%; }
+          100% { height: 75%; }
+        }
+        @keyframes growHeightTax {
+          0% { height: 0%; }
+          100% { height: 20%; }
+        }
+        @keyframes growHeightNI {
+          0% { height: 0%; }
+          100% { height: 5%; }
+        }
+        .animate-pulse-width {
+          animation: pulseWidth 5s ease-in-out infinite;
+        }
+        .animate-grow-takehome {
+          animation: growHeightTakehome 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-grow-tax {
+          animation: growHeightTax 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-grow-ni {
+          animation: growHeightNI 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}} />
+
       {/* 1. HERO - UK LIFE DECISION ENGINE */}
       <HeroSection />
 
@@ -280,7 +312,7 @@ function HeroSection() {
               <span className="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">help with today?</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-on-surface-variant max-w-xl mb-6 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-800 dark:text-slate-100 max-w-xl mb-6 leading-relaxed">
               UKDesk is a secure, independent repository of tools, tax calculators, and visa requirements. No account registration, no paywalls, no marketing.
             </p>
 
@@ -322,14 +354,62 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Premium Visual Mockup */}
+          {/* Right Column: Premium CSS Dashboard Animation (Instead of image) */}
           <div className="lg:col-span-5 hidden lg:block">
-            <div className="relative p-2 rounded-2xl border border-border/80 bg-surface-container/20 shadow-md">
-              <img
-                src="/dashboard_mockup.png"
-                alt="UKDesk Dashboard Mockup"
-                className="rounded-xl shadow-lg border border-border/60 max-w-full h-auto object-cover select-none pointer-events-none hover:scale-[1.03] hover:-rotate-1 transition-all duration-500 ease-out hover:shadow-2xl"
-              />
+            <div className="relative p-6 rounded-2xl border border-white/20 bg-white shadow-2xl backdrop-blur-md overflow-hidden select-none hover:shadow-primary/10 transition-all duration-300 scale-102">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-full bg-red-400" />
+                  <div className="h-3 w-3 rounded-full bg-yellow-400" />
+                  <div className="h-3 w-3 rounded-full bg-green-400" />
+                </div>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live PAYE Calculator</span>
+              </div>
+
+              {/* Body */}
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                    <span>Gross Annual Income</span>
+                    <span className="text-primary font-extrabold">£50,000</span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden relative">
+                    <div className="h-full bg-primary rounded-full animate-pulse-width" style={{ width: '70%' }} />
+                  </div>
+                </div>
+
+                {/* Net Pay Payout */}
+                <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 text-center relative overflow-hidden">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Net Monthly Take-Home</span>
+                  <span className="text-2xl font-extrabold text-slate-900 tracking-tight block transition-all duration-500 hover:scale-105">
+                    £3,254.50
+                  </span>
+                  <span className="text-[10px] text-secondary font-semibold mt-1 inline-block">✓ HMRC 2026/27 Tax Code Applied</span>
+                </div>
+
+                {/* Graphical charts */}
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Salary Breakdown</span>
+                  <div className="flex items-end gap-3 h-20 pt-2 px-4 justify-center">
+                    {/* Bar 1: Take-home */}
+                    <div className="flex flex-col items-center gap-1 flex-1">
+                      <div className="w-full bg-gradient-to-t from-primary to-primary-container rounded-t animate-grow-takehome h-[75%]" />
+                      <span className="text-[9px] font-bold text-slate-500">Take-home</span>
+                    </div>
+                    {/* Bar 2: Income Tax */}
+                    <div className="flex flex-col items-center gap-1 flex-1">
+                      <div className="w-full bg-gradient-to-t from-rose-500 to-rose-600 rounded-t animate-grow-tax h-[20%]" />
+                      <span className="text-[9px] font-bold text-slate-500">Tax</span>
+                    </div>
+                    {/* Bar 3: National Insurance */}
+                    <div className="flex flex-col items-center gap-1 flex-1">
+                      <div className="w-full bg-gradient-to-t from-amber-500 to-amber-600 rounded-t animate-grow-ni h-[5%]" />
+                      <span className="text-[9px] font-bold text-slate-500">NI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -355,14 +435,14 @@ function TrustBarSection() {
             return (
               <div key={idx} className="flex items-start gap-3 px-2 md:first:pl-0 md:last:pr-0">
                 <span className="flex-none p-1.5 bg-primary-soft rounded-lg text-primary">
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4.5 w-4.5" />
                 </span>
                 <div>
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-extrabold text-on-surface tracking-tight leading-none">{s.value}</span>
-                    <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">{s.label}</span>
+                    <span className="text-3xl font-extrabold text-on-surface tracking-tight leading-none">{s.value}</span>
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">{s.label}</span>
                   </div>
-                  <p className="text-[10px] text-outline mt-0.5 font-medium">{s.sub}</p>
+                  <p className="text-xs text-slate-600 mt-0.5 font-medium">{s.sub}</p>
                 </div>
               </div>
             );
@@ -383,7 +463,7 @@ function PopularToolsSection() {
           <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Top-visited UK Calculators
           </h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-sm text-slate-800 leading-relaxed">
             Get instant calculations based on verified government rate tables and rules.
           </p>
         </div>
@@ -395,27 +475,27 @@ function PopularToolsSection() {
               <Link
                 key={pt.href}
                 href={pt.href}
-                className="group flex flex-col rounded-xl border border-border bg-surface-container-lowest p-4 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.1)]"
+                className="group flex flex-col rounded-xl border border-border bg-white p-4 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.1)]"
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${pt.accent}`}>
                     <Icon className="h-4.5 w-4.5" />
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded bg-secondary-soft px-1.5 py-0.5 text-[9px] font-bold text-secondary">
+                  <span className="inline-flex items-center gap-1 rounded bg-secondary-soft px-1.5 py-0.5 text-xs font-bold text-secondary">
                     {pt.badge}
                   </span>
                 </div>
 
-                <h3 className="font-display text-sm font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
+                <h3 className="font-display text-base font-extrabold text-slate-900 mb-1 group-hover:text-primary transition-colors">
                   {pt.label}
                 </h3>
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4 line-clamp-2">
+                <p className="text-[13px] text-slate-700 leading-relaxed mb-4 line-clamp-2">
                   {pt.description}
                 </p>
 
-                <div className="mt-auto border-t border-border/40 pt-2.5 flex items-center justify-between text-[10px] font-semibold text-outline">
+                <div className="mt-auto border-t border-border/40 pt-2.5 flex items-center justify-between text-xs font-semibold text-slate-500">
                   <span>{pt.updated}</span>
-                  <ArrowRight className="h-3 w-3 text-outline/60 group-hover:translate-x-1 group-hover:text-primary transition-all duration-300" />
+                  <ArrowRight className="h-3.5 w-3.5 text-slate-500 group-hover:translate-x-1 group-hover:text-primary transition-all duration-300" />
                 </div>
               </Link>
             );
@@ -440,7 +520,7 @@ function BentoGridSection() {
           <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             UK Life Areas & Tools
           </h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-sm text-slate-800 leading-relaxed">
             All tools grouped cleanly inside uniform, compact cards. Every live path mapped with zero blank spaces.
           </p>
         </div>
@@ -460,24 +540,24 @@ function BentoGridSection() {
             return (
               <article
                 key={id}
-                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]"
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-white p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[290px]"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4.5 w-4.5" />
                     </span>
-                    <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                    <h3 className="font-display text-base font-extrabold text-slate-900 leading-tight">
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[9px] font-bold text-on-surface-variant">
+                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-bold text-slate-700">
                     {count} {count === 1 ? 'tool' : 'tools'}
                   </span>
                 </div>
 
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
+                <p className="text-xs sm:text-[13px] text-slate-800 leading-relaxed mb-3 line-clamp-2">
                   {cat.description}
                 </p>
 
@@ -487,7 +567,7 @@ function BentoGridSection() {
                     <li key={t.href}>
                       <Link
                         href={t.href}
-                        className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5"
+                        className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5"
                       >
                         <span className="truncate mr-2">{t.label}</span>
                         <span className="text-primary/45 group-hover:translate-x-1 group-hover:text-primary transition-all duration-200">→</span>
@@ -500,10 +580,10 @@ function BentoGridSection() {
                 <div className="mt-4 pt-2 border-t border-border/60">
                   <Link
                     href={`/category/${id}`}
-                    className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group"
+                    className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary-strong group"
                   >
                     <span>View all {count} tools</span>
-                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </article>
@@ -518,31 +598,31 @@ function BentoGridSection() {
             return (
               <article
                 key={id}
-                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-amber-500/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(245,158,11,0.12)] h-[280px]"
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-white p-5 transition-all duration-300 hover:border-amber-500/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(245,158,11,0.12)] h-[290px]"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <span className="p-1.5 bg-amber-50 text-amber-700 rounded-lg">
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4.5 w-4.5" />
                     </span>
-                    <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                    <h3 className="font-display text-base font-extrabold text-slate-900 leading-tight">
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded bg-amber-50 px-1.5 py-0.5 text-[8px] font-bold text-amber-700 uppercase tracking-wide">
+                  <span className="rounded bg-amber-50 px-1.5 py-0.5 text-xs font-bold text-amber-700 uppercase tracking-wide">
                     {data.badge}
                   </span>
                 </div>
 
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
+                <p className="text-xs sm:text-[13px] text-slate-800 leading-relaxed mb-3 line-clamp-2">
                   {cat.description}
                 </p>
 
                 {/* Upcoming tools placeholder list */}
                 <ul className="space-y-1.5 flex-1 mt-1">
                   {data.tools.slice(0, 4).map((t, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-xs text-on-surface-variant/75 font-medium py-0.5">
+                    <li key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-600 py-0.5">
                       <span className="h-1 w-1 rounded-full bg-outline/35" />
                       <span className="truncate">{t}</span>
                     </li>
@@ -550,7 +630,7 @@ function BentoGridSection() {
                 </ul>
 
                 {/* Bottom marker */}
-                <div className="mt-4 pt-2.5 border-t border-border/20 text-[9px] text-amber-700 font-bold uppercase tracking-wider">
+                <div className="mt-4 pt-2.5 border-t border-border/20 text-[10px] text-amber-700 font-bold uppercase tracking-wider">
                   Pipeline updates incoming
                 </div>
               </article>
@@ -558,157 +638,157 @@ function BentoGridSection() {
           })}
 
           {/* Card 14: Resources & Guides */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-white p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[290px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
-                  <BookOpen className="h-4 w-4" />
+                  <BookOpen className="h-4.5 w-4.5" />
                 </span>
-                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                <h3 className="font-display text-base font-extrabold text-slate-900 leading-tight">
                   Updates & Guides
                 </h3>
               </div>
-              <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[9px] font-bold text-on-surface-variant">
+              <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs font-bold text-slate-700">
                 Links
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
+            <p className="text-xs sm:text-[13px] text-slate-800 leading-relaxed mb-3 line-clamp-2">
               Browse policy shifts, tax rate tables, and analytical explanations.
             </p>
             <ul className="space-y-1.5 flex-1 mt-1">
               <li>
-                <Link href="/news" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/news" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Policy News Feed</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/blog" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Guides Hub Directory</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/about" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Data Sourcing Info</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/contact" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Editorial Contacts</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2 border-t border-border/60">
-              <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+              <Link href="/blog" className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary-strong group">
                 <span>Open Resource Hub</span>
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 15: Developer & API Services */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-white p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[290px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="h-4.5 w-4.5" />
                 </span>
-                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                <h3 className="font-display text-base font-extrabold text-slate-900 leading-tight">
                   APIs & Developers
                 </h3>
               </div>
-              <span className="rounded bg-primary-soft px-1.5 py-0.5 text-[8px] font-bold text-primary uppercase tracking-wide">
+              <span className="rounded bg-primary-soft px-1.5 py-0.5 text-xs font-bold text-primary uppercase tracking-wide">
                 API
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
+            <p className="text-xs sm:text-[13px] text-slate-800 leading-relaxed mb-3 line-clamp-2">
               Integrate live UK tax tables and ULEZ compliance lookup tools.
             </p>
             <ul className="space-y-1.5 flex-1 mt-1">
               <li>
-                <Link href="/about#api" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/about#api" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>API Documentation</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>GitHub Repository</span>
-                  <ExternalLink className="h-2.5 w-2.5 shrink-0 text-primary/45 group-hover:translate-x-1 transition-all" />
+                  <ExternalLink className="h-3.5 w-3.5 shrink-0 text-primary/45 group-hover:translate-x-1 transition-all" />
                 </a>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/contact" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Request API Access</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/about" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>API Status Indicators</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2 border-t border-border/60">
-              <Link href="/about#api" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+              <Link href="/about#api" className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary-strong group">
                 <span>View API Services</span>
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 16: Integrity & Verification Standard */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-white p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[290px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
-                  <ShieldCheck className="h-4 w-4" />
+                  <ShieldCheck className="h-4.5 w-4.5" />
                 </span>
-                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                <h3 className="font-display text-base font-extrabold text-slate-900 leading-tight">
                   Data Verification
                 </h3>
               </div>
-              <span className="rounded bg-secondary-soft px-1.5 py-0.5 text-[8px] font-bold text-secondary uppercase tracking-wide">
+              <span className="rounded bg-secondary-soft px-1.5 py-0.5 text-xs font-bold text-secondary uppercase tracking-wide">
                 Trust
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
+            <p className="text-xs sm:text-[13px] text-slate-800 leading-relaxed mb-3 line-clamp-2">
               All calculations verified directly against official UK guidelines.
             </p>
             <ul className="space-y-1.5 flex-1 mt-1">
               <li>
-                <Link href="/editorial-policy" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/editorial-policy" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Editorial Guidelines</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/sources" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/sources" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Data Sourcing Guide</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/privacy" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Privacy Policy Links</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                <Link href="/contact" className="group flex items-center justify-between text-[13px] font-bold text-primary hover:text-primary-strong transition-colors py-0.5">
                   <span>Submit Correction Request</span>
                   <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2 border-t border-border/60">
-              <Link href="/sources" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+              <Link href="/sources" className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary hover:text-secondary-strong group">
                 <span>Check Sourcing Rules</span>
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
@@ -728,7 +808,7 @@ function TrendingChangesSection() {
           <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Trending Policy & Rate Changes
           </h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-sm text-slate-800 leading-relaxed">
             Major legislative updates and timeline alterations affecting UK finances and immigration status.
           </p>
         </div>
@@ -738,16 +818,16 @@ function TrendingChangesSection() {
             <Link
               key={item.href}
               href={item.href}
-              className={`group flex flex-col rounded-xl bg-surface-container-lowest p-4 border border-border shadow-sm hover:shadow-lg transition-all duration-300 ${item.accentColor}`}
+              className={`group flex flex-col rounded-xl bg-white p-4 border border-border shadow-sm hover:shadow-lg transition-all duration-300 ${item.accentColor}`}
             >
-              <div className="flex items-center justify-between mb-2 text-[9px] font-bold uppercase tracking-wider text-outline">
+              <div className="flex items-center justify-between mb-2 text-xs font-bold uppercase tracking-wider text-outline">
                 <span>{item.category}</span>
                 <span className="text-primary group-hover:translate-x-0.5 transition-transform">→</span>
               </div>
-              <h3 className="font-display text-sm font-bold text-on-surface group-hover:text-primary transition-colors mb-1">
+              <h3 className="font-display text-base font-extrabold text-slate-900 group-hover:text-primary transition-colors mb-1">
                 {item.title}
               </h3>
-              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+              <p className="text-[13px] text-slate-700 leading-relaxed">
                 {item.summary}
               </p>
             </Link>
@@ -768,7 +848,7 @@ function LearnSection() {
           <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Learn — Goal-Oriented Resources
           </h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-sm text-slate-800 leading-relaxed">
             Solve specific problems using our three-in-one resource bundles, complete with calculators, analytical guides, and official source links.
           </p>
         </div>
@@ -779,57 +859,57 @@ function LearnSection() {
             return (
               <div
                 key={idx}
-                className="flex flex-col bg-surface-container-lowest border border-border rounded-xl p-4 shadow-sm hover:shadow-lg transition-shadow duration-300"
+                className="flex flex-col bg-white border border-border rounded-xl p-4 shadow-sm hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-center gap-2.5 mb-2">
                   <span className="p-1.5 bg-primary-soft text-primary rounded-md">
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-4.5 w-4.5" />
                   </span>
-                  <h3 className="font-display text-sm font-bold text-on-surface">
+                  <h3 className="font-display text-base font-extrabold text-slate-900">
                     {g.title}
                   </h3>
                 </div>
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+                <p className="text-[13px] text-slate-700 leading-relaxed mb-4">
                   {g.description}
                 </p>
 
                 <div className="mt-auto space-y-2.5">
                   <div className="flex items-start gap-2.5">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-blue-50 px-1.5 py-0.5 text-[8px] font-bold text-blue-700 uppercase tracking-wider w-16 text-center">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-blue-50 px-1.5 py-0.5 text-xs font-bold text-blue-700 uppercase tracking-wider w-20 text-center">
                       Calculator
                     </span>
                     <Link
                       href={g.calculator.href}
-                      className="text-xs text-primary font-semibold hover:underline"
+                      className="text-xs sm:text-[13px] text-primary font-bold hover:underline"
                     >
                       {g.calculator.label}
                     </Link>
                   </div>
 
                   <div className="flex items-start gap-2.5">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-purple-50 px-1.5 py-0.5 text-[8px] font-bold text-purple-700 uppercase tracking-wider w-16 text-center">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-purple-50 px-1.5 py-0.5 text-xs font-bold text-purple-700 uppercase tracking-wider w-20 text-center">
                       Guide
                     </span>
                     <Link
                       href={g.guide.href}
-                      className="text-xs text-primary font-semibold hover:underline"
+                      className="text-xs sm:text-[13px] text-primary font-bold hover:underline"
                     >
                       {g.guide.label}
                     </Link>
                   </div>
 
                   <div className="flex items-start gap-2.5">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-slate-100 px-1.5 py-0.5 text-[8px] font-bold text-slate-700 uppercase tracking-wider w-16 text-center">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-700 uppercase tracking-wider w-20 text-center">
                       Official
                     </span>
                     <a
                       href={g.official.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-on-surface-variant font-medium hover:text-primary flex items-center gap-1 group"
+                      className="text-xs sm:text-[13px] text-slate-800 font-bold hover:text-primary flex items-center gap-1 group"
                     >
                       <span className="truncate">{g.official.label}</span>
-                      <ExternalLink className="h-2.5 w-2.5 shrink-0 text-outline/50 group-hover:text-primary" />
+                      <ExternalLink className="h-3 w-3 shrink-0 text-slate-500 group-hover:text-primary" />
                     </a>
                   </div>
                 </div>
@@ -885,7 +965,7 @@ function TimelineSection() {
             <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-3">
               Official UK Updates Timeline
             </h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-4">
+            <p className="text-sm text-slate-800 leading-relaxed mb-4">
               Track policy changes, standard rate updates, and regulatory adjustments as they are verified from administrative logs.
             </p>
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-outline">
@@ -904,18 +984,18 @@ function TimelineSection() {
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 mb-1">
                   <span className="text-xs font-bold text-primary tracking-wide">{ev.time} ({ev.date})</span>
                 </div>
-                <h3 className="font-display text-sm font-bold text-on-surface group-hover:text-primary transition-colors mb-1">
+                <h3 className="font-display text-base font-extrabold text-slate-900 group-hover:text-primary transition-colors mb-1">
                   {ev.title}
                 </h3>
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-2">
+                <p className="text-[13px] text-slate-700 leading-relaxed mb-2">
                   {ev.desc}
                 </p>
                 <Link
                   href={ev.href}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary group-hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-primary group-hover:underline"
                 >
                   View full update note
-                  <ArrowRight className="h-2.5 w-2.5" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             ))}
@@ -935,7 +1015,7 @@ function ClosingCtaSection() {
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight mb-3 text-white">
             Find your next answer in seconds.
           </h2>
-          <p className="text-xs sm:text-sm text-inverse-on-surface/80 max-w-xl mx-auto mb-6 leading-relaxed">
+          <p className="text-sm text-inverse-on-surface/80 max-w-xl mx-auto mb-6 leading-relaxed">
             Compare visa options, model stamp duty fees, or calculate your exact take-home pay. Pure tools, zero noise.
           </p>
           <Link
