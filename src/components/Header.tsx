@@ -91,14 +91,14 @@ export default function Header() {
         className={[
           'sticky top-0 z-50 transition-all duration-150',
           scrolled
-            ? 'bg-surface-container-lowest/95 backdrop-blur supports-[backdrop-filter]:bg-surface-container-lowest/80 border-b border-border shadow-[0_1px_0_rgba(11,15,25,0.04)]'
+            ? 'bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 border-b border-border shadow-[0_1px_0_rgba(11,15,25,0.04)]'
             : 'bg-surface/80 backdrop-blur-sm border-b border-transparent',
         ].join(' ')}
       >
         <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-3 px-4 sm:px-6">
           {/* Brand */}
           <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="UKDesk home">
-            <span className="relative inline-flex h-9 w-9 items-center justify-center">
+            <span className="relative inline-flex h-9 w-9 items-center justify-center transition-transform duration-200 group-hover:scale-105">
               <svg
                 viewBox="0 0 64 64"
                 width={36}
@@ -108,31 +108,13 @@ export default function Header() {
                 aria-label="UKDesk"
                 className="h-9 w-9"
               >
-                <defs>
-                  <linearGradient id="deskly-shield" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#4C6BF0" />
-                    <stop offset="1" stopColor="#1E40AF" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M32 3.5 56 12 V31 C56 47 45.5 57.5 32 60.5 18.5 57.5 8 47 8 31 V12 Z"
-                  fill="url(#deskly-shield)"
-                />
-                <rect x="17.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-                <rect x="30.5" y="18" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-                <rect x="17.5" y="31" width="10" height="10" rx="2.5" fill="#FFFFFF" />
-                <path
-                  d="M31 36.5 l3.5 3.5 L42 32"
-                  fill="none"
-                  stroke="#22C55E"
-                  strokeWidth="4.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M32 8 L54 19 L32 30 L10 19 Z" fill="#0B2240" />
+                <path d="M10 19 L32 30 V52 L10 41 Z" fill="#0037b0" />
+                <path d="M32 30 L54 19 V41 L32 52 Z" fill="#00875A" />
               </svg>
             </span>
-            <span className="hidden font-display text-lg font-bold tracking-tight text-primary sm:inline">
-              <span className="text-on-surface">UK</span><span className="text-primary">Desk</span>
+            <span className="hidden font-display text-lg font-bold tracking-tight sm:inline">
+              <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
             </span>
           </Link>
 
@@ -189,7 +171,7 @@ export default function Header() {
           <div className="ml-auto flex h-full w-full max-w-xs flex-col bg-surface shadow-[0_30px_80px_-20px_rgba(11,15,25,0.4)] animate-[slideIn_180ms_cubic-bezier(0.22,1,0.36,1)]">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
               <span className="font-display text-lg font-bold tracking-tight">
-                <span className="text-on-surface">UK</span><span className="text-primary">Desk</span>
+                <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
               </span>
               <button
                 type="button"

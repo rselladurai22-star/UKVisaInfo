@@ -9,6 +9,7 @@ import {
   ExternalLink, Percent, ShieldCheck
 } from 'lucide-react';
 import { APP_TILES, CATEGORIES, type CategoryId } from '../data/tools';
+import { HUB_TOOLS } from '../data/hubTools';
 
 /* ────────────────────────────────────────────────
    CURATED CONTENT & CONFIG
@@ -73,32 +74,7 @@ const CORE_HUBS = [
   },
 ];
 
-const FUTURE_CATEGORIES: Record<string, { tools: string[]; icon: any }> = {
-  business: {
-    icon: Building2,
-    tools: ['Corporation Tax Calculator', 'PAYE Tax Calculator', 'Invoice Tax Calculator', 'VAT Registration Guide'],
-  },
-  insurance: {
-    icon: Shield,
-    tools: ['Life Cover Calculator', 'Health Insurance Guide', 'Home Rebuild Cost Estimator', 'Car Insurance Guide'],
-  },
-  loans: {
-    icon: LandmarkIcon,
-    tools: ['APR Comparison Calculator', 'Debt Consolidation Tool', 'Credit Strategy Planner', 'Personal Loan Estimator'],
-  },
-  estate: {
-    icon: FileText,
-    tools: ['Probate Fee Estimator', 'Will Writing Cost Compare', 'Power of Attorney Costs', 'Estate Planner'],
-  },
-  'family-law': {
-    icon: Users,
-    tools: ['Divorce Cost Estimate', 'Child Maintenance (CMS)', 'Asset Split Calculator', 'Pre-nup Costs Guide'],
-  },
-  energy: {
-    icon: Zap,
-    tools: ['Solar Panel ROI Calculator', 'Heat Pump vs Boiler', 'Ofgem Energy Cap Estimator', 'Smart Meter Savings'],
-  },
-};
+
 
 const TRENDING_CHANGES = [
   {
@@ -387,7 +363,7 @@ function CoreProductHubsSection() {
             return (
               <div
                 key={idx}
-                className="flex flex-col rounded-xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300"
+                className="flex flex-col rounded-xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1"
               >
                 {/* Header */}
                 <div className="flex items-start gap-4.5 mb-5">
@@ -442,10 +418,6 @@ function CoreProductHubsSection() {
 
 // 4. Directory Grid (All 13 Categories Matrix)
 function DirectoryGridSection() {
-  const activeCategoryIds: CategoryId[] = [
-    'tax', 'property', 'immigration', 'employment', 'savings', 'vehicles', 'benefits'
-  ];
-
   return (
     <section className="bg-white py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
@@ -462,17 +434,25 @@ function DirectoryGridSection() {
         {/* 16-Card Matrix Grid (All col-span-1) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {/* Active Categories */}
-          {activeCategoryIds.map((id) => {
-            const cat = CATEGORIES.find((c) => c.id === id)!;
+          {CATEGORIES.map((cat) => {
+            const id = cat.id;
             const Icon = cat.icon;
-            const categoryTools = APP_TILES.filter((t) => t.category === id);
-            const count = categoryTools.length;
-            const topTools = categoryTools.slice(0, 4);
+            const groups = HUB_TOOLS[id] || [];
+            const allItems = groups.flatMap((g) => g.items);
+            const liveCount = allItems.filter((item) => item.status === 'live').length;
+            
+            // Prioritize live tools first, then soon tools
+            const sortedTools = [...allItems].sort((a, b) => {
+              if (a.status === 'live' && b.status !== 'live') return -1;
+              if (a.status !== 'live' && b.status === 'live') return 1;
+              return 0;
+            });
+            const topTools = sortedTools.slice(0, 4);
 
             return (
               <article
                 key={id}
-                className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md h-[300px]"
+                className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
@@ -484,8 +464,8 @@ function DirectoryGridSection() {
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">
-                    {count}
+                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-600">
+                    {liveCount} tools
                   </span>
                 </div>
 
@@ -495,82 +475,50 @@ function DirectoryGridSection() {
 
                 {/* Directory Tool Rows */}
                 <ul className="space-y-2.5 flex-1 mt-1">
-                  {topTools.map((t) => (
-                    <li key={t.href}>
-                      <Link
-                        href={t.href}
-                        className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5"
-                      >
-                        <span className="truncate mr-2">{t.label}</span>
-                        <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all duration-150">→</span>
-                      </Link>
-                    </li>
-                  ))}
+                  {topTools.map((t) => {
+                    if (t.status === 'live') {
+                      return (
+                        <li key={t.href}>
+                          <Link
+                            href={t.href}
+                            className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5"
+                          >
+                            <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">{t.label}</span>
+                            <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all duration-150">→</span>
+                          </Link>
+                        </li>
+                      );
+                    } else {
+                      return (
+                        <li key={t.href || t.label}>
+                          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-400 py-0.5 cursor-not-allowed select-none">
+                            <span className="truncate mr-2 font-medium text-slate-400">{t.label}</span>
+                            <span className="rounded bg-slate-100/60 border border-slate-200/50 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 uppercase tracking-wide">
+                              Soon
+                            </span>
+                          </div>
+                        </li>
+                      );
+                    }
+                  })}
                 </ul>
 
                 {/* Hub Link */}
                 <div className="mt-4 pt-2.5 border-t border-slate-100">
                   <Link
                     href={`/category/${id}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub"
                   >
-                    <span>View all {count} tools</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    <span>View all {allItems.length} tools</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
                   </Link>
                 </div>
               </article>
             );
           })}
 
-          {/* Future Categories */}
-          {Object.entries(FUTURE_CATEGORIES).map(([id, data]) => {
-            const Icon = data.icon;
-            const cat = CATEGORIES.find((c) => c.id === id)!;
-
-            return (
-              <article
-                key={id}
-                className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md h-[300px] opacity-90"
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="p-1 text-amber-700">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <h3 className="font-display text-sm sm:text-base font-extrabold text-[#0B2240] leading-tight">
-                      {cat.label}
-                    </h3>
-                  </div>
-                  <span className="rounded bg-amber-50 px-2 py-0.5 text-[9px] font-bold text-amber-700 uppercase tracking-wide">
-                    Soon
-                  </span>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
-                  {cat.description}
-                </p>
-
-                {/* Placeholder Bullet List */}
-                <ul className="space-y-2 flex-1 mt-1">
-                  {data.tools.slice(0, 4).map((t, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-500 py-0.5">
-                      <span className="h-1 w-1 rounded-full bg-slate-300" />
-                      <span className="truncate">{t}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Bottom Hub CTA */}
-                <div className="mt-4 pt-2.5 border-t border-slate-100 text-[10px] text-amber-700 font-extrabold uppercase tracking-wider">
-                  Pipeline updates incoming
-                </div>
-              </article>
-            );
-          })}
-
           {/* Card 14: Resource Hub Links */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md h-[300px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
@@ -589,40 +537,40 @@ function DirectoryGridSection() {
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/news" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Policy News Feed</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/news" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Policy News Feed</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Guides Hub Directory</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/blog" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Guides Hub Directory</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Data Sourcing Info</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/about" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Data Sourcing Info</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Editorial Contacts</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Editorial Contacts</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group">
+              <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>Open Resource Hub</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 15: Developer Services */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md h-[300px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
@@ -641,40 +589,40 @@ function DirectoryGridSection() {
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/about#api" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>API Documentation</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/about#api" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">API Documentation</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>GitHub Repository</span>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#00875A] transition-all" />
+                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">GitHub Repository</span>
+                  <ExternalLink className="h-4 w-4 shrink-0 text-slate-300 group-hover/tool:text-[#00875A] transition-all" />
                 </a>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Request API Access</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Request API Access</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>API Status Indicators</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/about" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">API Status Indicators</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/about#api" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group">
+              <Link href="/about#api" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>View API Services</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 16: Trust & Integrity Verification */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md h-[300px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
@@ -693,34 +641,34 @@ function DirectoryGridSection() {
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/editorial-policy" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Editorial Guidelines</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/editorial-policy" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Editorial Guidelines</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/sources" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Data Sourcing Guide</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/sources" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Data Sourcing Guide</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Privacy Policy Links</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/privacy" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Privacy Policy Links</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group flex items-center justify-between text-xs sm:text-sm font-bold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
-                  <span>Submit Correction Request</span>
-                  <span className="text-slate-300 group-hover:text-[#00875A] group-hover:translate-x-0.5 transition-all">→</span>
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                  <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Submit Correction Request</span>
+                  <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/sources" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group">
+              <Link href="/sources" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>Check Sourcing Rules</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
             </div>
           </article>
@@ -750,7 +698,7 @@ function TrendingChangesSection() {
             <Link
               key={idx}
               href={item.href}
-              className="group flex flex-col rounded-xl bg-white p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
+              className="group flex flex-col rounded-xl bg-white p-6 border border-slate-200 shadow-sm hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
                 <span className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${item.tagColor}`}>
@@ -848,7 +796,7 @@ function LearnSection() {
           </div>
 
           {/* Right Block - Tab Actions (Resources Box) */}
-          <div className="lg:col-span-5 flex flex-col justify-center border border-slate-200 rounded-xl bg-white p-8 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300">
+          <div className="lg:col-span-5 flex flex-col justify-center border border-slate-200 rounded-xl bg-white p-8 shadow-sm hover:border-[#00875A]/60 hover:shadow-lg transition-all duration-300">
             <h4 className="text-xs font-black uppercase tracking-wider text-[#0B2240] mb-5 border-b border-slate-100 pb-2.5">
               Available Resources
             </h4>
