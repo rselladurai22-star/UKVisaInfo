@@ -109,32 +109,32 @@ const FUTURE_CATEGORIES: Record<string, { badge: string; tools: string[]; icon: 
   business: {
     badge: 'Launching Soon',
     icon: Building2,
-    tools: ['Corporation Tax Calculator', 'PAYE Tax Calculator', 'Invoice Tax Calculator', 'VAT Registration Guide'],
+    tools: ['Corp Tax Calc', 'PAYE Payroll', 'Invoice Tax', 'VAT Reg Guide'],
   },
   insurance: {
     badge: 'Launching Soon',
     icon: Shield,
-    tools: ['Life Cover Calculator', 'Health Insurance Guide', 'Home Rebuild Cost Estimator'],
+    tools: ['Life Cover', 'Health Cover', 'Rebuild Costs', 'Car Insurance'],
   },
   loans: {
     badge: 'Launching Soon',
     icon: LandmarkIcon,
-    tools: ['APR Comparison Calculator', 'Debt Consolidation Tool', 'Credit Strategy Planner'],
+    tools: ['APR Compare', 'Debt Consolidation', 'Credit Strategy', 'Loan Calculator'],
   },
   estate: {
     badge: 'Launching Soon',
     icon: FileText,
-    tools: ['Probate Fee Estimator', 'Will Writing Cost Compare', 'Power of Attorney Costs'],
+    tools: ['Probate Fees', 'Will Writing', 'Power of Attorney', 'Estate Planner'],
   },
   'family-law': {
     badge: 'Launching Soon',
     icon: Users,
-    tools: ['Divorce Cost Estimate', 'Child Maintenance (CMS)', 'Asset Split Calculator'],
+    tools: ['Divorce Costs', 'CMS Support', 'Asset Split', 'Pre-nup Costs'],
   },
   energy: {
     badge: 'Launching Soon',
     icon: Zap,
-    tools: ['Solar Panel ROI Calculator', 'Heat Pump vs Boiler', 'Ofgem Energy Cap Estimator'],
+    tools: ['Solar ROI', 'Heat Pump ROI', 'Ofgem Cap Calc', 'Smart Meter ROI'],
   },
 };
 
@@ -218,10 +218,6 @@ const LEARN_GROUPS = [
   },
 ];
 
-// Helper to calculate live tool count & top 3 links per active category
-const getCategoryLiveCount = (id: CategoryId) => APP_TILES.filter((t) => t.category === id).length;
-const getCategoryTopTools = (id: CategoryId) => APP_TILES.filter((t) => t.category === id).slice(0, 3);
-
 /* ────────────────────────────────────────────────
    PAGE COMPONENT (Server Component)
    ──────────────────────────────────────────────── */
@@ -237,7 +233,7 @@ export default function HomePage() {
       {/* 3. MOST POPULAR TOOLS */}
       <PopularToolsSection />
 
-      {/* 4. UK LIFE AREAS (BENTO GRID) */}
+      {/* 4. UK LIFE AREAS (COMPACT GRID Matrix) */}
       <BentoGridSection />
 
       {/* 5. TRENDING UK CHANGES */}
@@ -272,62 +268,76 @@ function HeroSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-surface pt-12 pb-10 sm:pt-16 sm:pb-12 lg:pt-20 lg:pb-14 border-b border-border">
+    <section className="relative overflow-hidden bg-surface pt-10 pb-8 sm:pt-14 sm:pb-10 lg:pt-16 lg:pb-12 border-b border-border">
       {/* Visual background accents */}
       <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary-soft to-secondary-soft opacity-40 sm:left-[calc(50%-30rem)] sm:w-[72rem]" />
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary-soft to-secondary-soft opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72rem]" />
       </div>
 
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-secondary-soft px-3 py-1 text-xs font-semibold tracking-[0.05em] uppercase text-secondary">
-            <span className="h-2 w-2 rounded-full bg-secondary animate-pulse" />
-            Verified for Tax Year 2026/27
-          </span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Input Panel */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-secondary-soft px-3 py-1 text-xs font-semibold tracking-[0.05em] uppercase text-secondary">
+              <span className="h-2 w-2 rounded-full bg-secondary animate-pulse" />
+              Verified for Tax Year 2026/27
+            </span>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-on-surface leading-tight mb-6">
-            What do you need <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">help with today?</span>
-          </h1>
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface leading-tight mb-4">
+              What do you need <br />
+              <span className="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">help with today?</span>
+            </h1>
 
-          <p className="text-base sm:text-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">
-            UKDesk is a secure, independent repository of tools, tax calculators, and visa requirements. No account registration, no paywalls, no marketing.
-          </p>
+            <p className="text-sm sm:text-base text-on-surface-variant max-w-xl mb-6 leading-relaxed">
+              UKDesk is a secure, independent repository of tools, tax calculators, and visa requirements. No account registration, no paywalls, no marketing.
+            </p>
 
-          {/* Search Command Center */}
-          <form action="/tools" method="get" className="group relative w-full max-w-2xl mb-8">
-            <div aria-hidden className="absolute inset-0 rounded-xl bg-primary/5 blur-xl transition-all duration-300 group-focus-within:bg-primary/10" />
-            <div className="relative flex items-center rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-5 py-4 shadow-md transition-all duration-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-              <Search className="mr-3 h-5 w-5 flex-none text-primary" />
-              <input
-                type="search"
-                name="q"
-                placeholder="Search 50+ tools, guides, and updates..."
-                className="flex-1 border-none bg-transparent text-base text-on-surface placeholder:text-outline/60 focus:outline-none focus:ring-0"
-              />
-              <kbd className="ml-3 hidden items-center rounded border border-outline-variant/30 bg-surface-container-low px-2 py-0.5 text-xs font-mono text-outline md:inline-flex">
-                ⌘K
-              </kbd>
+            {/* Search Command Center */}
+            <form action="/tools" method="get" className="group relative w-full max-w-xl mb-6">
+              <div aria-hidden className="absolute inset-0 rounded-xl bg-primary/5 blur-xl transition-all duration-300 group-focus-within:bg-primary/10" />
+              <div className="relative flex items-center rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3 shadow-sm transition-all duration-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+                <Search className="mr-2 h-4 w-4 flex-none text-primary" />
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="Search 50+ tools, guides, and updates..."
+                  className="flex-1 border-none bg-transparent text-sm text-on-surface placeholder:text-outline/60 focus:outline-none focus:ring-0 py-0.5"
+                />
+                <kbd className="ml-2 hidden items-center rounded border border-outline-variant/30 bg-surface-container-low px-1.5 py-0.5 text-[10px] font-mono text-outline md:inline-flex">
+                  ⌘K
+                </kbd>
+              </div>
+            </form>
+
+            {/* Quick Triggers */}
+            <div className="flex flex-col items-start gap-2 w-full">
+              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-outline">Quick tools:</span>
+              <div className="flex flex-wrap gap-1.5 max-w-xl">
+                {TRIGGERS.map((t) => {
+                  const Icon = t.icon;
+                  return (
+                    <Link
+                      key={t.href}
+                      href={t.href}
+                      className="flex items-center gap-1 rounded-full border border-outline-variant/30 bg-surface-container-lowest px-3 py-1.5 text-[11px] font-semibold text-primary transition-all duration-150 hover:bg-primary hover:text-white hover:border-primary shadow-sm"
+                    >
+                      <Icon className="h-3 w-3" />
+                      {t.label}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </form>
+          </div>
 
-          {/* Quick Triggers */}
-          <div className="flex flex-col items-center gap-3 w-full">
-            <span className="text-xs font-bold uppercase tracking-[0.1em] text-outline">Quick tools:</span>
-            <div className="flex flex-wrap items-center justify-center gap-2 max-w-2xl">
-              {TRIGGERS.map((t) => {
-                const Icon = t.icon;
-                return (
-                  <Link
-                    key={t.href}
-                    href={t.href}
-                    className="flex items-center gap-1.5 rounded-full border border-outline-variant/40 bg-surface-container-lowest px-4 py-2 text-xs font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-0.5 shadow-sm"
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                    {t.label}
-                  </Link>
-                );
-              })}
+          {/* Right Column: Premium Visual Mockup */}
+          <div className="lg:col-span-5 hidden lg:block">
+            <div className="relative p-2 rounded-2xl border border-border/80 bg-surface-container/20 shadow-md">
+              <img
+                src="/dashboard_mockup.png"
+                alt="UKDesk Dashboard Mockup"
+                className="rounded-xl shadow-lg border border-border/60 max-w-full h-auto object-cover select-none pointer-events-none hover:scale-[1.02] hover:-rotate-1 transition-all duration-500 ease-out"
+              />
             </div>
           </div>
         </div>
@@ -345,22 +355,22 @@ function TrustBarSection() {
   ];
 
   return (
-    <section className="bg-surface-container-low border-b border-border py-6">
+    <section className="bg-surface-container-low border-b border-border py-4">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:divide-x md:divide-border/60">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:divide-x md:divide-border/60">
           {STATS.map((s, idx) => {
             const Icon = s.icon;
             return (
-              <div key={idx} className="flex items-start gap-4 px-2 md:first:pl-0 md:last:pr-0">
-                <span className="flex-none p-2 bg-primary-soft rounded-lg text-primary">
-                  <Icon className="h-5 w-5" />
+              <div key={idx} className="flex items-start gap-3 px-2 md:first:pl-0 md:last:pr-0">
+                <span className="flex-none p-1.5 bg-primary-soft rounded-lg text-primary">
+                  <Icon className="h-4 w-4" />
                 </span>
                 <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-extrabold text-on-surface tracking-tight leading-none">{s.value}</span>
-                    <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{s.label}</span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-xl font-extrabold text-on-surface tracking-tight leading-none">{s.value}</span>
+                    <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">{s.label}</span>
                   </div>
-                  <p className="text-xs text-outline mt-1 font-medium">{s.sub}</p>
+                  <p className="text-[10px] text-outline mt-0.5 font-medium">{s.sub}</p>
                 </div>
               </div>
             );
@@ -374,14 +384,14 @@ function TrustBarSection() {
 // 3. Most Popular Tools
 function PopularToolsSection() {
   return (
-    <section className="bg-surface py-10 sm:py-12 border-b border-border">
+    <section className="bg-surface py-8 sm:py-10 border-b border-border">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="mb-8 max-w-xl">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-2">Most Popular</p>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-3">
+        <div className="mb-6 max-w-xl">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-1">Most Popular</p>
+          <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Top-visited UK Calculators
           </h2>
-          <p className="text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
             Get instant calculations based on verified government rate tables and rules.
           </p>
         </div>
@@ -393,27 +403,27 @@ function PopularToolsSection() {
               <Link
                 key={pt.href}
                 href={pt.href}
-                className="group flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-md"
+                className="group flex flex-col rounded-xl border border-border bg-surface-container-lowest p-4 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-md"
               >
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <span className={`inline-flex h-9 w-9 items-center justify-center rounded-lg ${pt.accent}`}>
-                    <Icon className="h-5 w-5" />
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${pt.accent}`}>
+                    <Icon className="h-4.5 w-4.5" />
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded bg-secondary-soft px-1.5 py-0.5 text-[10px] font-bold text-secondary">
+                  <span className="inline-flex items-center gap-1 rounded bg-secondary-soft px-1.5 py-0.5 text-[9px] font-bold text-secondary">
                     {pt.badge}
                   </span>
                 </div>
 
-                <h3 className="font-display text-base font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">
+                <h3 className="font-display text-sm font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
                   {pt.label}
                 </h3>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4 line-clamp-2">
                   {pt.description}
                 </p>
 
-                <div className="mt-auto border-t border-border/40 pt-3 flex items-center justify-between text-[11px] font-semibold text-outline">
+                <div className="mt-auto border-t border-border/40 pt-2.5 flex items-center justify-between text-[10px] font-semibold text-outline">
                   <span>{pt.updated}</span>
-                  <ArrowRight className="h-3.5 w-3.5 text-outline/60 group-hover:translate-x-1 group-hover:text-primary transition-all" />
+                  <ArrowRight className="h-3 w-3 text-outline/60 group-hover:translate-x-1 group-hover:text-primary transition-all" />
                 </div>
               </Link>
             );
@@ -424,92 +434,69 @@ function PopularToolsSection() {
   );
 }
 
-// 4. Bento Grid (13 Categories)
+// 4. Bento Grid (13 Categories + 3 Resources = 16 Uniform Cards)
 function BentoGridSection() {
-  // Ordered Categories
-  const categoryIds: CategoryId[] = [
+  const activeCategoryIds: CategoryId[] = [
     'tax', 'property', 'immigration', 'employment', 'savings', 'vehicles', 'benefits'
   ];
 
   return (
-    <section className="bg-surface-container-low py-10 sm:py-12 border-b border-border">
+    <section className="bg-surface-container-low py-8 sm:py-10 border-b border-border">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="mb-10 text-center max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-2">Detailed Directory</p>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-3">
-            UK Life Areas
+        <div className="mb-8 text-center max-w-2xl mx-auto">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-1">Detailed Directory</p>
+          <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
+            UK Life Areas & Tools
           </h2>
-          <p className="text-sm text-on-surface-variant leading-relaxed">
-            All 13 financial and regulatory categories structured logically. Launching soon categories display planned tools.
+          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+            All tools grouped cleanly inside uniform, compact cards. Every live path mapped with zero blank spaces.
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {/* 16-Card Uniform Grid (4x4 Matrix) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {/* Active Categories */}
-          {categoryIds.map((id) => {
+          {activeCategoryIds.map((id) => {
             const cat = CATEGORIES.find((c) => c.id === id)!;
             const Icon = cat.icon;
-            const count = getCategoryLiveCount(id);
-            const topLinks = getCategoryTopTools(id);
-
-            // Dynamically assign sizes to tax & property for Bento asymmetry
-            const isLarge = id === 'tax' || id === 'property';
+            const categoryTools = APP_TILES.filter((t) => t.category === id);
+            const count = categoryTools.length;
 
             return (
               <article
                 key={id}
-                className={`flex flex-col rounded-2xl border border-border bg-surface-container-lowest p-6 transition-all duration-300 hover:border-primary hover:shadow-md ${
-                  isLarge ? 'md:col-span-2' : 'col-span-1'
-                }`}
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="p-2 bg-primary-soft text-primary rounded-lg">
-                      <Icon className="h-5 w-5" />
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
+                      <Icon className="h-4 w-4" />
                     </span>
-                    <h3 className="font-display text-lg font-bold text-on-surface leading-tight">
+                    <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[10px] font-bold text-on-surface-variant">
+                  <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[9px] font-bold text-on-surface-variant">
                     {count} {count === 1 ? 'tool' : 'tools'}
                   </span>
                 </div>
 
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
                   {cat.description}
                 </p>
 
-                {topLinks.length > 0 && (
-                  <div className="mt-auto">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-outline mb-2.5 block">Top Tools</span>
-                    <ul className="space-y-2">
-                      {topLinks.map((t) => (
-                        <li key={t.href}>
-                          <Link
-                            href={t.href}
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-container group/item"
-                          >
-                            <span>{t.label}</span>
-                            <ArrowRight className="h-3 w-3 text-primary/60 transition-transform group-hover/item:translate-x-0.5" />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="mt-5 border-t border-border/40 pt-3 flex items-center justify-between text-[10px] text-outline font-medium">
-                  <span>
-                    {id === 'tax' && '2026/27 tax rates verified'}
-                    {id === 'property' && 'Includes 2026 SDLT bands'}
-                    {id === 'immigration' && '8 April 2026 fee table'}
-                    {id === 'employment' && 'April 2026 NMW rates live'}
-                    {id === 'savings' && 'Triple lock updates added'}
-                    {id === 'vehicles' && 'Real-time DVLA lookup'}
-                    {id === 'benefits' && 'Funded childcare hours rules'}
-                  </span>
+                {/* Highly compact 2-column grid containing all live tools */}
+                <div className="grid grid-cols-2 gap-1.5 mt-auto">
+                  {categoryTools.map((t) => (
+                    <Link
+                      key={t.href}
+                      href={t.href}
+                      className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group"
+                    >
+                      <span className="truncate mr-1">{t.label}</span>
+                      <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+                    </Link>
+                  ))}
                 </div>
               </article>
             );
@@ -523,40 +510,154 @@ function BentoGridSection() {
             return (
               <article
                 key={id}
-                className="flex flex-col rounded-2xl border border-border bg-surface-container-lowest p-6 opacity-90 transition-all duration-300 hover:border-amber-600 hover:shadow-sm"
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-amber-600 hover:shadow-sm"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="p-2 bg-amber-50 text-amber-700 rounded-lg">
-                      <Icon className="h-5 w-5" />
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="p-1.5 bg-amber-50 text-amber-700 rounded-lg">
+                      <Icon className="h-4 w-4" />
                     </span>
-                    <h3 className="font-display text-lg font-bold text-on-surface leading-tight">
+                    <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded bg-amber-50 px-1.5 py-0.5 text-[9px] font-bold text-amber-700 uppercase tracking-wide">
-                    {data.badge}
+                  <span className="rounded bg-amber-50 px-1.5 py-0.5 text-[8px] font-bold text-amber-700 uppercase tracking-wide">
+                    Soon
                   </span>
                 </div>
 
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
                   {cat.description}
                 </p>
 
-                <div className="mt-auto">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 mb-2.5 block">Upcoming Tools</span>
-                  <ul className="space-y-1.5">
-                    {data.tools.map((t, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-on-surface-variant/80 font-medium">
-                        <span className="h-1 w-1 rounded-full bg-outline/40" />
-                        <span>{t}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Structured placeholders matching active category links */}
+                <div className="grid grid-cols-2 gap-1.5 mt-auto">
+                  {data.tools.map((t, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-center rounded-lg border border-border/20 bg-surface-container-low/50 px-2 py-1.5 text-[10px] font-medium text-on-surface-variant/75 cursor-default select-none text-center"
+                    >
+                      <span className="truncate">{t}</span>
+                    </div>
+                  ))}
                 </div>
               </article>
             );
           })}
+
+          {/* Card 14: Resources & Guides */}
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
+                  <BookOpen className="h-4 w-4" />
+                </span>
+                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                  Updates & Guides
+                </h3>
+              </div>
+              <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-[9px] font-bold text-on-surface-variant">
+                Links
+              </span>
+            </div>
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+              Browse policy shifts, tax rate tables, and analytical explanations.
+            </p>
+            <div className="grid grid-cols-2 gap-1.5 mt-auto">
+              <Link href="/news" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Policy News</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/blog" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Guides Hub</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/about" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Sourcing Hub</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Contact</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+            </div>
+          </article>
+
+          {/* Card 15: Developer & API Services */}
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
+                  <ExternalLink className="h-4 w-4" />
+                </span>
+                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                  APIs & Developers
+                </h3>
+              </div>
+              <span className="rounded bg-primary-soft px-1.5 py-0.5 text-[8px] font-bold text-primary uppercase tracking-wide">
+                API
+              </span>
+            </div>
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+              Integrate live UK tax tables and ULEZ compliance lookup tools.
+            </p>
+            <div className="grid grid-cols-2 gap-1.5 mt-auto">
+              <Link href="/about#api" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">API Docs</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">GitHub Repo</span>
+                <ExternalLink className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </a>
+              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">API Key</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/about" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Sys Status</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+            </div>
+          </article>
+
+          {/* Card 16: Integrity & Verification Standard */}
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
+                  <ShieldCheck className="h-4 w-4" />
+                </span>
+                <h3 className="font-display text-sm font-bold text-on-surface leading-tight">
+                  Data Verification
+                </h3>
+              </div>
+              <span className="rounded bg-secondary-soft px-1.5 py-0.5 text-[8px] font-bold text-secondary uppercase tracking-wide">
+                Trust
+              </span>
+            </div>
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+              All calculations verified directly against official UK guidelines.
+            </p>
+            <div className="grid grid-cols-2 gap-1.5 mt-auto">
+              <Link href="/editorial-policy" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Editorial</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/sources" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Data Sourcing</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/privacy" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Privacy</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
+                <span className="truncate mr-1">Corrections</span>
+                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+              </Link>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -566,14 +667,14 @@ function BentoGridSection() {
 // 5. Trending Changes
 function TrendingChangesSection() {
   return (
-    <section className="bg-surface py-10 sm:py-12 border-b border-border">
+    <section className="bg-surface py-8 sm:py-10 border-b border-border">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="mb-8 max-w-xl">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-2">Recent & Live</p>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-3">
+        <div className="mb-6 max-w-xl">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-1">Recent & Live</p>
+          <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Trending Policy & Rate Changes
           </h2>
-          <p className="text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
             Major legislative updates and timeline alterations affecting UK finances and immigration status.
           </p>
         </div>
@@ -583,16 +684,16 @@ function TrendingChangesSection() {
             <Link
               key={item.href}
               href={item.href}
-              className={`group flex flex-col rounded-xl bg-surface-container-lowest p-5 border border-border shadow-sm hover:shadow-md transition-all duration-300 ${item.accentColor}`}
+              className={`group flex flex-col rounded-xl bg-surface-container-lowest p-4 border border-border shadow-sm hover:shadow-md transition-all duration-300 ${item.accentColor}`}
             >
-              <div className="flex items-center justify-between mb-3 text-[10px] font-bold uppercase tracking-wider text-outline">
+              <div className="flex items-center justify-between mb-2 text-[9px] font-bold uppercase tracking-wider text-outline">
                 <span>{item.category}</span>
                 <span className="text-primary group-hover:translate-x-0.5 transition-transform">→</span>
               </div>
-              <h3 className="font-display text-sm font-bold text-on-surface group-hover:text-primary transition-colors mb-2">
+              <h3 className="font-display text-sm font-bold text-on-surface group-hover:text-primary transition-colors mb-1">
                 {item.title}
               </h3>
-              <p className="text-xs text-on-surface-variant leading-relaxed">
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
                 {item.summary}
               </p>
             </Link>
@@ -606,41 +707,41 @@ function TrendingChangesSection() {
 // 6. Learn Groupings (3-in-1 resource packs)
 function LearnSection() {
   return (
-    <section className="bg-surface-container-low py-10 sm:py-12 border-b border-border">
+    <section className="bg-surface-container-low py-8 sm:py-10 border-b border-border">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="mb-10 max-w-xl">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-2">Knowledge Library</p>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-3">
+        <div className="mb-8 max-w-xl">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-1">Knowledge Library</p>
+          <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-2">
             Learn — Goal-Oriented Resources
           </h2>
-          <p className="text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
             Solve specific problems using our three-in-one resource bundles, complete with calculators, analytical guides, and official source links.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {LEARN_GROUPS.map((g, idx) => {
             const Icon = g.icon;
             return (
               <div
                 key={idx}
-                className="flex flex-col bg-surface-container-lowest border border-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="flex flex-col bg-surface-container-lowest border border-border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-2.5 mb-2">
                   <span className="p-1.5 bg-primary-soft text-primary rounded-md">
-                    <Icon className="h-4.5 w-4.5" />
+                    <Icon className="h-4 w-4" />
                   </span>
-                  <h3 className="font-display text-base font-bold text-on-surface">
+                  <h3 className="font-display text-sm font-bold text-on-surface">
                     {g.title}
                   </h3>
                 </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
                   {g.description}
                 </p>
 
-                <div className="mt-auto space-y-3">
-                  <div className="flex items-start gap-3">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-blue-50 px-2 py-0.5 text-[9px] font-bold text-blue-700 uppercase tracking-wider w-20">
+                <div className="mt-auto space-y-2.5">
+                  <div className="flex items-start gap-2.5">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-blue-50 px-1.5 py-0.5 text-[8px] font-bold text-blue-700 uppercase tracking-wider w-16 text-center">
                       Calculator
                     </span>
                     <Link
@@ -651,8 +752,8 @@ function LearnSection() {
                     </Link>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-purple-50 px-2 py-0.5 text-[9px] font-bold text-purple-700 uppercase tracking-wider w-20">
+                  <div className="flex items-start gap-2.5">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-purple-50 px-1.5 py-0.5 text-[8px] font-bold text-purple-700 uppercase tracking-wider w-16 text-center">
                       Guide
                     </span>
                     <Link
@@ -663,8 +764,8 @@ function LearnSection() {
                     </Link>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-slate-100 px-2 py-0.5 text-[9px] font-bold text-slate-700 uppercase tracking-wider w-20">
+                  <div className="flex items-start gap-2.5">
+                    <span className="inline-flex shrink-0 items-center justify-center rounded bg-slate-100 px-1.5 py-0.5 text-[8px] font-bold text-slate-700 uppercase tracking-wider w-16 text-center">
                       Official
                     </span>
                     <a
@@ -673,8 +774,8 @@ function LearnSection() {
                       rel="noopener noreferrer"
                       className="text-xs text-on-surface-variant font-medium hover:text-primary flex items-center gap-1 group"
                     >
-                      <span>{g.official.label}</span>
-                      <ExternalLink className="h-2.5 w-2.5 text-outline/50 group-hover:text-primary" />
+                      <span className="truncate">{g.official.label}</span>
+                      <ExternalLink className="h-2.5 w-2.5 shrink-0 text-outline/50 group-hover:text-primary" />
                     </a>
                   </div>
                 </div>
@@ -721,16 +822,16 @@ function TimelineSection() {
   ];
 
   return (
-    <section className="bg-surface py-10 sm:py-12 border-b border-border">
+    <section className="bg-surface py-8 sm:py-10 border-b border-border">
       <div className="container-page px-4 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Section description */}
           <div className="lg:col-span-1 max-w-sm">
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-2">Real-time Stream</p>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-4">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-primary mb-1">Real-time Stream</p>
+            <h2 className="font-display text-2xl font-extrabold text-on-surface tracking-tight mb-3">
               Official UK Updates Timeline
             </h2>
-            <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
+            <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-4">
               Track policy changes, standard rate updates, and regulatory adjustments as they are verified from administrative logs.
             </p>
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-outline">
@@ -740,27 +841,27 @@ function TimelineSection() {
           </div>
 
           {/* Timeline list */}
-          <div className="lg:col-span-2 relative pl-6 border-l-2 border-border/80 space-y-8">
+          <div className="lg:col-span-2 relative pl-6 border-l-2 border-border/80 space-y-6">
             {EVENTS.map((ev, idx) => (
-              <div key={idx} className="relative group">
+              <div key={idx} className="relative group text-left">
                 {/* Timeline node dot */}
-                <div className="absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-surface bg-primary transition-all duration-300 group-hover:scale-125 group-hover:bg-primary-container" />
+                <div className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-primary transition-all duration-300 group-hover:scale-125 group-hover:bg-primary-container" />
 
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 mb-1">
                   <span className="text-xs font-bold text-primary tracking-wide">{ev.time} ({ev.date})</span>
                 </div>
-                <h3 className="font-display text-base font-bold text-on-surface group-hover:text-primary transition-colors mb-1.5">
+                <h3 className="font-display text-sm font-bold text-on-surface group-hover:text-primary transition-colors mb-1">
                   {ev.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-3">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-2">
                   {ev.desc}
                 </p>
                 <Link
                   href={ev.href}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary group-hover:underline"
                 >
                   View full update note
-                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="h-2.5 w-2.5" />
                 </Link>
               </div>
             ))}
@@ -774,21 +875,21 @@ function TimelineSection() {
 // 8. Closing CTA
 function ClosingCtaSection() {
   return (
-    <section className="bg-inverse-surface text-inverse-on-surface py-12">
+    <section className="bg-inverse-surface text-inverse-on-surface py-10">
       <div className="container-page px-4 mx-auto max-w-7xl text-center">
         <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-extrabold tracking-tight mb-4 text-white">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight mb-3 text-white">
             Find your next answer in seconds.
           </h2>
-          <p className="text-base text-inverse-on-surface/80 max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xs sm:text-sm text-inverse-on-surface/80 max-w-xl mx-auto mb-6 leading-relaxed">
             Compare visa options, model stamp duty fees, or calculate your exact take-home pay. Pure tools, zero noise.
           </p>
           <Link
             href="/tools"
-            className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-inverse-surface shadow hover:bg-slate-100 hover:scale-105 active:scale-95 transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-xs font-semibold text-inverse-surface shadow hover:bg-slate-100 hover:scale-105 active:scale-95 transition-all duration-200"
           >
             Open the Tool Index
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
