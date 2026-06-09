@@ -26,7 +26,6 @@ const POPULAR_TOOLS = [
     href: '/take-home-pay',
     label: 'Take-Home Pay',
     badge: 'HMRC verified',
-    badgeType: 'hmrc',
     description: 'Calculate net salary after income tax, National Insurance, student loans, and pensions.',
     updated: 'Tax year 2026/27',
     icon: Wallet,
@@ -36,7 +35,6 @@ const POPULAR_TOOLS = [
     href: '/mortgage-affordability',
     label: 'Mortgage Affordability',
     badge: 'Bank of England verified',
-    badgeType: 'boe',
     description: 'Estimate maximum mortgage borrowing limits based on income multiples and interest stress tests.',
     updated: 'Updated June 2026',
     icon: HomeIcon,
@@ -46,7 +44,6 @@ const POPULAR_TOOLS = [
     href: '/stamp-duty-calculator',
     label: 'Stamp Duty (SDLT)',
     badge: 'HMRC verified',
-    badgeType: 'hmrc',
     description: 'Calculate stamp duty land tax for main homes, first-time buyers, and buy-to-let properties.',
     updated: 'Tax year 2026/27',
     icon: Percent,
@@ -56,7 +53,6 @@ const POPULAR_TOOLS = [
     href: '/council-tax-band',
     label: 'Council Tax Bands',
     badge: 'VOA verified',
-    badgeType: 'voa',
     description: 'Look up council tax bands and see estimated annual bills for any postcode in England.',
     updated: 'Tax year 2026/27',
     icon: Building2,
@@ -66,7 +62,6 @@ const POPULAR_TOOLS = [
     href: '/redundancy-pay',
     label: 'Redundancy Pay',
     badge: 'gov.uk verified',
-    badgeType: 'gov',
     description: 'Find your statutory redundancy entitlement based on age, service, and weekly wages.',
     updated: 'Updated 2026',
     icon: LandmarkIcon,
@@ -76,7 +71,6 @@ const POPULAR_TOOLS = [
     href: '/holiday-pay',
     label: 'Holiday Entitlement',
     badge: 'gov.uk verified',
-    badgeType: 'gov',
     description: 'Calculate statutory holiday days and pay for full-time, part-time, and irregular shift workers.',
     updated: 'Updated 2026',
     icon: Briefcase,
@@ -86,7 +80,6 @@ const POPULAR_TOOLS = [
     href: '/state-pension',
     label: 'State Pension',
     badge: 'DWP verified',
-    badgeType: 'dwp',
     description: 'Estimate your state pension age and forecast payouts based on qualifying NI contribution years.',
     updated: 'Triple Lock 2026/27',
     icon: PiggyBank,
@@ -96,7 +89,6 @@ const POPULAR_TOOLS = [
     href: '/ulez-check',
     label: 'ULEZ compliance',
     badge: 'TfL verified',
-    badgeType: 'tfl',
     description: 'Verify if your petrol or diesel car meets emissions standards for clean air zones.',
     updated: 'Updated 2026',
     icon: Car,
@@ -107,34 +99,34 @@ const POPULAR_TOOLS = [
 // 2. Future Categories (upcoming tools mapped to category IDs)
 const FUTURE_CATEGORIES: Record<string, { badge: string; tools: string[]; icon: any }> = {
   business: {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: Building2,
-    tools: ['Corp Tax Calc', 'PAYE Payroll', 'Invoice Tax', 'VAT Reg Guide'],
+    tools: ['Corporation Tax Calculator', 'PAYE Tax Calculator', 'Invoice Tax Calculator', 'VAT Registration Guide'],
   },
   insurance: {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: Shield,
-    tools: ['Life Cover', 'Health Cover', 'Rebuild Costs', 'Car Insurance'],
+    tools: ['Life Cover Calculator', 'Health Insurance Guide', 'Home Rebuild Cost Estimator', 'Car Insurance Guide'],
   },
   loans: {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: LandmarkIcon,
-    tools: ['APR Compare', 'Debt Consolidation', 'Credit Strategy', 'Loan Calculator'],
+    tools: ['APR Comparison Calculator', 'Debt Consolidation Tool', 'Credit Strategy Planner', 'Personal Loan Estimator'],
   },
   estate: {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: FileText,
-    tools: ['Probate Fees', 'Will Writing', 'Power of Attorney', 'Estate Planner'],
+    tools: ['Probate Fee Estimator', 'Will Writing Cost Compare', 'Power of Attorney Costs', 'Estate Planner'],
   },
   'family-law': {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: Users,
-    tools: ['Divorce Costs', 'CMS Support', 'Asset Split', 'Pre-nup Costs'],
+    tools: ['Divorce Cost Estimate', 'Child Maintenance (CMS)', 'Asset Split Calculator', 'Pre-nup Costs Guide'],
   },
   energy: {
-    badge: 'Launching Soon',
+    badge: 'Soon',
     icon: Zap,
-    tools: ['Solar ROI', 'Heat Pump ROI', 'Ofgem Cap Calc', 'Smart Meter ROI'],
+    tools: ['Solar Panel ROI Calculator', 'Heat Pump vs Boiler', 'Ofgem Energy Cap Estimator', 'Smart Meter Savings'],
   },
 };
 
@@ -295,7 +287,7 @@ function HeroSection() {
             {/* Search Command Center */}
             <form action="/tools" method="get" className="group relative w-full max-w-xl mb-6">
               <div aria-hidden className="absolute inset-0 rounded-xl bg-primary/5 blur-xl transition-all duration-300 group-focus-within:bg-primary/10" />
-              <div className="relative flex items-center rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3 shadow-sm transition-all duration-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+              <div className="relative flex items-center rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3 shadow-sm transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 focus-within:scale-[1.01] focus-within:shadow-[0_0_20px_rgba(0,55,176,0.12)]">
                 <Search className="mr-2 h-4 w-4 flex-none text-primary" />
                 <input
                   type="search"
@@ -319,7 +311,7 @@ function HeroSection() {
                     <Link
                       key={t.href}
                       href={t.href}
-                      className="flex items-center gap-1 rounded-full border border-outline-variant/30 bg-surface-container-lowest px-3 py-1.5 text-[11px] font-semibold text-primary transition-all duration-150 hover:bg-primary hover:text-white hover:border-primary shadow-sm"
+                      className="flex items-center gap-1 rounded-full border border-outline-variant/30 bg-surface-container-lowest px-3 py-1.5 text-[11px] font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-0.5 shadow-sm active:scale-95"
                     >
                       <Icon className="h-3 w-3" />
                       {t.label}
@@ -336,7 +328,7 @@ function HeroSection() {
               <img
                 src="/dashboard_mockup.png"
                 alt="UKDesk Dashboard Mockup"
-                className="rounded-xl shadow-lg border border-border/60 max-w-full h-auto object-cover select-none pointer-events-none hover:scale-[1.02] hover:-rotate-1 transition-all duration-500 ease-out"
+                className="rounded-xl shadow-lg border border-border/60 max-w-full h-auto object-cover select-none pointer-events-none hover:scale-[1.03] hover:-rotate-1 transition-all duration-500 ease-out hover:shadow-2xl"
               />
             </div>
           </div>
@@ -403,7 +395,7 @@ function PopularToolsSection() {
               <Link
                 key={pt.href}
                 href={pt.href}
-                className="group flex flex-col rounded-xl border border-border bg-surface-container-lowest p-4 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-md"
+                className="group flex flex-col rounded-xl border border-border bg-surface-container-lowest p-4 shadow-sm transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.1)]"
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${pt.accent}`}>
@@ -423,7 +415,7 @@ function PopularToolsSection() {
 
                 <div className="mt-auto border-t border-border/40 pt-2.5 flex items-center justify-between text-[10px] font-semibold text-outline">
                   <span>{pt.updated}</span>
-                  <ArrowRight className="h-3 w-3 text-outline/60 group-hover:translate-x-1 group-hover:text-primary transition-all" />
+                  <ArrowRight className="h-3 w-3 text-outline/60 group-hover:translate-x-1 group-hover:text-primary transition-all duration-300" />
                 </div>
               </Link>
             );
@@ -461,12 +453,16 @@ function BentoGridSection() {
             const Icon = cat.icon;
             const categoryTools = APP_TILES.filter((t) => t.category === id);
             const count = categoryTools.length;
+            
+            // Slice to list exactly 4 top tools to keep UI clean and prevent cognitive overload
+            const topTools = categoryTools.slice(0, 4);
 
             return (
               <article
                 key={id}
-                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md"
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]"
               >
+                {/* Header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
@@ -481,22 +477,34 @@ function BentoGridSection() {
                   </span>
                 </div>
 
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
                   {cat.description}
                 </p>
 
-                {/* Highly compact 2-column grid containing all live tools */}
-                <div className="grid grid-cols-2 gap-1.5 mt-auto">
-                  {categoryTools.map((t) => (
-                    <Link
-                      key={t.href}
-                      href={t.href}
-                      className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group"
-                    >
-                      <span className="truncate mr-1">{t.label}</span>
-                      <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-                    </Link>
+                {/* Clean, readable list of exactly 4 top tools */}
+                <ul className="space-y-1.5 flex-1 mt-1">
+                  {topTools.map((t) => (
+                    <li key={t.href}>
+                      <Link
+                        href={t.href}
+                        className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5"
+                      >
+                        <span className="truncate mr-2">{t.label}</span>
+                        <span className="text-primary/45 group-hover:translate-x-1 group-hover:text-primary transition-all duration-200">→</span>
+                      </Link>
+                    </li>
                   ))}
+                </ul>
+
+                {/* Navigate to category hub */}
+                <div className="mt-4 pt-2 border-t border-border/60">
+                  <Link
+                    href={`/category/${id}`}
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group"
+                  >
+                    <span>View all {count} tools</span>
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
                 </div>
               </article>
             );
@@ -510,8 +518,9 @@ function BentoGridSection() {
             return (
               <article
                 key={id}
-                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-amber-600 hover:shadow-sm"
+                className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-amber-500/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(245,158,11,0.12)] h-[280px]"
               >
+                {/* Header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <span className="p-1.5 bg-amber-50 text-amber-700 rounded-lg">
@@ -522,31 +531,34 @@ function BentoGridSection() {
                     </h3>
                   </div>
                   <span className="rounded bg-amber-50 px-1.5 py-0.5 text-[8px] font-bold text-amber-700 uppercase tracking-wide">
-                    Soon
+                    {data.badge}
                   </span>
                 </div>
 
-                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+                <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
                   {cat.description}
                 </p>
 
-                {/* Structured placeholders matching active category links */}
-                <div className="grid grid-cols-2 gap-1.5 mt-auto">
-                  {data.tools.map((t, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center rounded-lg border border-border/20 bg-surface-container-low/50 px-2 py-1.5 text-[10px] font-medium text-on-surface-variant/75 cursor-default select-none text-center"
-                    >
+                {/* Upcoming tools placeholder list */}
+                <ul className="space-y-1.5 flex-1 mt-1">
+                  {data.tools.slice(0, 4).map((t, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-on-surface-variant/75 font-medium py-0.5">
+                      <span className="h-1 w-1 rounded-full bg-outline/35" />
                       <span className="truncate">{t}</span>
-                    </div>
+                    </li>
                   ))}
+                </ul>
+
+                {/* Bottom marker */}
+                <div className="mt-4 pt-2.5 border-t border-border/20 text-[9px] text-amber-700 font-bold uppercase tracking-wider">
+                  Pipeline updates incoming
                 </div>
               </article>
             );
           })}
 
           {/* Card 14: Resources & Guides */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
@@ -560,31 +572,45 @@ function BentoGridSection() {
                 Links
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
               Browse policy shifts, tax rate tables, and analytical explanations.
             </p>
-            <div className="grid grid-cols-2 gap-1.5 mt-auto">
-              <Link href="/news" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Policy News</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/blog" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Guides Hub</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/about" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Sourcing Hub</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Contact</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+            <ul className="space-y-1.5 flex-1 mt-1">
+              <li>
+                <Link href="/news" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Policy News Feed</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Guides Hub Directory</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Data Sourcing Info</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Editorial Contacts</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+            </ul>
+            <div className="mt-4 pt-2 border-t border-border/60">
+              <Link href="/blog" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+                <span>Open Resource Hub</span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 15: Developer & API Services */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
@@ -598,31 +624,45 @@ function BentoGridSection() {
                 API
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
               Integrate live UK tax tables and ULEZ compliance lookup tools.
             </p>
-            <div className="grid grid-cols-2 gap-1.5 mt-auto">
-              <Link href="/about#api" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">API Docs</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">GitHub Repo</span>
-                <ExternalLink className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </a>
-              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">API Key</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/about" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Sys Status</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+            <ul className="space-y-1.5 flex-1 mt-1">
+              <li>
+                <Link href="/about#api" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>API Documentation</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>GitHub Repository</span>
+                  <ExternalLink className="h-2.5 w-2.5 shrink-0 text-primary/45 group-hover:translate-x-1 transition-all" />
+                </a>
+              </li>
+              <li>
+                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Request API Access</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>API Status Indicators</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+            </ul>
+            <div className="mt-4 pt-2 border-t border-border/60">
+              <Link href="/about#api" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+                <span>View API Services</span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
 
           {/* Card 16: Integrity & Verification Standard */}
-          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary hover:shadow-md">
+          <article className="col-span-1 flex flex-col rounded-xl border border-border bg-surface-container-lowest p-5 transition-all duration-300 hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-[0_0_25px_rgba(0,55,176,0.12)] h-[280px]">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2.5">
                 <span className="p-1.5 bg-primary-soft text-primary rounded-lg">
@@ -636,25 +676,39 @@ function BentoGridSection() {
                 Trust
               </span>
             </div>
-            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-4">
+            <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3 line-clamp-2">
               All calculations verified directly against official UK guidelines.
             </p>
-            <div className="grid grid-cols-2 gap-1.5 mt-auto">
-              <Link href="/editorial-policy" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Editorial</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/sources" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Data Sourcing</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/privacy" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Privacy</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
-              </Link>
-              <Link href="/contact" className="flex items-center justify-between rounded-lg border border-border bg-surface-container-low px-2 py-1.5 text-[10px] font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary group">
-                <span className="truncate mr-1">Corrections</span>
-                <ArrowRight className="h-2.5 w-2.5 shrink-0 text-primary/60 group-hover:text-white transition-all" />
+            <ul className="space-y-1.5 flex-1 mt-1">
+              <li>
+                <Link href="/editorial-policy" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Editorial Guidelines</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/sources" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Data Sourcing Guide</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Privacy Policy Links</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="group flex items-center justify-between text-xs font-semibold text-primary hover:text-primary-container transition-colors py-0.5">
+                  <span>Submit Correction Request</span>
+                  <span className="text-primary/45 group-hover:translate-x-1 transition-all">→</span>
+                </Link>
+              </li>
+            </ul>
+            <div className="mt-4 pt-2 border-t border-border/60">
+              <Link href="/sources" className="inline-flex items-center gap-1 text-[11px] font-bold text-secondary hover:text-secondary-strong group">
+                <span>Check Sourcing Rules</span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
           </article>
@@ -684,7 +738,7 @@ function TrendingChangesSection() {
             <Link
               key={item.href}
               href={item.href}
-              className={`group flex flex-col rounded-xl bg-surface-container-lowest p-4 border border-border shadow-sm hover:shadow-md transition-all duration-300 ${item.accentColor}`}
+              className={`group flex flex-col rounded-xl bg-surface-container-lowest p-4 border border-border shadow-sm hover:shadow-lg transition-all duration-300 ${item.accentColor}`}
             >
               <div className="flex items-center justify-between mb-2 text-[9px] font-bold uppercase tracking-wider text-outline">
                 <span>{item.category}</span>
@@ -725,7 +779,7 @@ function LearnSection() {
             return (
               <div
                 key={idx}
-                className="flex flex-col bg-surface-container-lowest border border-border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="flex flex-col bg-surface-container-lowest border border-border rounded-xl p-4 shadow-sm hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-center gap-2.5 mb-2">
                   <span className="p-1.5 bg-primary-soft text-primary rounded-md">
