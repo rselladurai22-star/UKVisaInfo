@@ -452,7 +452,7 @@ function DirectoryGridSection() {
             return (
               <article
                 key={id}
-                className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]"
+                className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-full min-h-[310px]"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
@@ -518,7 +518,7 @@ function DirectoryGridSection() {
           })}
 
           {/* Card 14: Resource Hub Links */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-full min-h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
@@ -570,7 +570,7 @@ function DirectoryGridSection() {
           </article>
 
           {/* Card 15: Developer Services */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-full min-h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
@@ -622,7 +622,7 @@ function DirectoryGridSection() {
           </article>
 
           {/* Card 16: Trust & Integrity Verification */}
-          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-[310px]">
+          <article className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#00875A]/60 hover:shadow-lg hover:-translate-y-1 h-full min-h-[310px]">
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">

@@ -119,7 +119,7 @@ export default function Header() {
           </Link>
 
           {/* Nav (desktop) */}
-          <nav className="ml-auto hidden items-center gap-1 lg:flex">
+          <nav className="mx-auto hidden items-center gap-1.5 lg:flex">
             {NAV.map((n) => {
               const active = pathname === n.href || (n.href !== '/' && pathname?.startsWith(n.href));
               return (
@@ -127,7 +127,7 @@ export default function Header() {
                   key={n.href}
                   href={n.href}
                   className={[
-                    'rounded-full px-3 py-1.5 text-sm font-semibold transition no-underline',
+                    'rounded-full px-3.5 py-1.5 text-sm font-semibold transition no-underline',
                     active
                       ? 'bg-primary-soft text-primary'
                       : 'text-on-surface-variant hover:bg-surface-container-low hover:text-primary',
@@ -139,23 +139,37 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Mobile actions */}
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Search"
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-container-lowest text-primary md:hidden"
-          >
-            <Search className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setNavOpen(true)}
-            aria-label="Open menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-surface lg:hidden"
-          >
-            <Menu className="h-4 w-4" />
-          </button>
+          {/* Actions */}
+          <div className="flex items-center gap-2.5 ml-auto lg:ml-0">
+            {/* Search Pill (desktop) */}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="hidden md:inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-on-surface-variant transition hover:border-[#00875A]/60 hover:bg-slate-50 cursor-pointer shadow-sm hover:shadow-md"
+            >
+              <Search className="h-3.5 w-3.5 text-slate-400" />
+              <span>Search tools</span>
+              <kbd className="rounded bg-surface-container-low px-1.5 py-0.5 text-[9px] font-bold text-slate-400 leading-none">⌘K</kbd>
+            </button>
+
+            {/* Mobile actions */}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Search"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-primary md:hidden cursor-pointer"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setNavOpen(true)}
+              aria-label="Open menu"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-surface lg:hidden cursor-pointer"
+            >
+              <Menu className="h-4.5 w-4.5" />
+            </button>
+          </div>
         </div>
       </header>
 
