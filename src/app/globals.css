@@ -171,6 +171,14 @@ html.dark body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: clip;
+    /* Readable base: 16.5px → 17px, comfortable line-height. Single source of
+       truth for body copy that doesn't set its own size. */
+    font-size: 16.5px;
+    line-height: 1.6;
+    letter-spacing: -0.002em;
+  }
+  @media (min-width: 768px) {
+    body { font-size: 17px; }
   }
   @media (pointer: coarse) {
     button, a { min-height: 44px; }
@@ -180,12 +188,21 @@ html.dark body {
     outline-offset: 3px;
     border-radius: 8px;
   }
+  /* Consistent, readable heading scale (fluid mobile → desktop). Components
+     that set an explicit text-[..] size still win; this gives every semantic
+     heading a sane default so sizing is consistent across the app. */
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-optical-sizing: auto;
     letter-spacing: -0.022em;
     color: #151c27;
+    text-wrap: balance;
   }
+  h1 { font-size: clamp(1.75rem, 1.15rem + 2.6vw, 2.6rem); line-height: 1.12; font-weight: 800; }
+  h2 { font-size: clamp(1.4rem, 1.08rem + 1.5vw, 2rem);     line-height: 1.2;  font-weight: 700; }
+  h3 { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);    line-height: 1.3;  font-weight: 700; }
+  h4 { font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem); line-height: 1.4;  font-weight: 600; }
+  p  { line-height: 1.65; }
 }
 
 /* Headings inside a white-text container (dark heroes, image cards) must

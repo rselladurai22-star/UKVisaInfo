@@ -19,6 +19,13 @@ export default function ToolsClient() {
   const q = query.trim().toLowerCase();
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Pre-fill the search from the ?q= URL param (e.g. the homepage search form
+  // submits to /tools?q=...). Without this the query was lost on navigation.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) setQuery(q);
+  }, []);
+
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); inputRef.current?.focus(); }

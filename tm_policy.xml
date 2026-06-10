@@ -1,0 +1,129 @@
+﻿<policies>
+	<inbound>
+		<base />
+		<set-backend-service base-url="https://sit-esbo.royalmailgroup.net/location-management/v1/locations" />
+		<set-variable name="ActionMode" value="@(context.Request.Url.Query.GetValueOrDefault("actionMode"))" />
+	</inbound>
+	<backend>
+		<base />
+	</backend>
+	<outbound>
+		<base />
+		<choose>
+			<when condition="@((string)context.Variables["ActionMode"] == "CSP")">
+				<find-and-replace from="ADREDPOL" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="REDPOL" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="ADREDCHG" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="REDCHG" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="ADREDSFP" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="REDSFP" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="ADREDPFN" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="REDPFN" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="ADREDSORI" to="SYSMOVETOSTOCK" />
+				<find-and-replace from="REDSORI" to="SYSMOVETOSTOCK" />
+			</when>
+		</choose>
+		<set-variable name="AllowLog" value="{{TaskManagerAPILoggingEnabled}}" />
+		<choose>
+			<when condition="@((string)context.Variables["AllowLog"] == "1")">
+				<send-one-way-request mode="new" timeout="10">
+					<set-url>@{
+            var baseUrlWithSas = "{{StorageAuditSasUrl}}";
+            var qIndex = baseUrlWithSas.IndexOf('?');
+            var baseUrl = qIndex >= 0 ? baseUrlWithSas.Substring(0, qIndex) : baseUrlWithSas; 
+            var sas     = qIndex >= 0 ? baseUrlWithSas.Substring(qIndex + 1) : "";           
+
+            var rawDevice = context.Request.Headers.GetValueOrDefault("X-RMG-DEVICE-ID", "");
+            var device = System.Text.RegularExpressions.Regex.Replace(
+                          string.IsNullOrEmpty(rawDevice) ? "unknown" : rawDevice,
+                          @"[^a-zA-Z0-9\-_]", "_").ToLowerInvariant();
+
+            var dateFolder = DateTime.UtcNow.ToString("yyyy-MM-dd");
+
+            string actionType = null;
+            try {
+              JToken root = null;
+              try {
+                root = context.Response?.Body?.As<JToken>(preserveContent: true);
+              } catch { }
+
+              if (root == null || root.Type == JTokenType.Null) {
+                try { root = context.Request?.Body?.As<JToken>(preserveContent: true); } catch { }
+              }
+
+              if (root != null && root.Type != JTokenType.Null) {
+                var hits = root.SelectTokens("$..actionMode");
+                foreach (var t in hits) {
+                  var s = (string)t;
+                  if (!string.IsNullOrEmpty(s)) { actionType = s; break; }
+                }
+                if (string.IsNullOrEmpty(actionType)) {
+                  hits = root.SelectTokens("$..actionType");
+                  foreach (var t in hits) {
+                    var s = (string)t;
+                    if (!string.IsNullOrEmpty(s)) { actionType = s; break; }
+                  }
+                }
+              }
+            } catch { }
+
+            var safeType = System.Text.RegularExpressions.Regex.Replace(
+                             string.IsNullOrEmpty(actionType) ? "" : actionType,
+                             @"[^a-zA-Z0-9\-_]", "_");
+
+            var reqId = context.RequestId.ToString();
+            var fileBase = string.IsNullOrEmpty(safeType) ? reqId : (reqId + "_" + safeType);
+
+            var blobName = dateFolder + "/" + device + "/" + fileBase + ".json";
+
+            return string.IsNullOrEmpty(sas)
+              ? (baseUrl + "/" + blobName)
+              : (baseUrl + "/" + blobName + "?" + sas);
+          }</set-url>
+					<set-method>PUT</set-method>
+					<set-header name="Content-Type" exists-action="override">
+						<value>application/json</value>
+					</set-header>
+					<set-header name="x-ms-blob-type" exists-action="override">
+						<value>BlockBlob</value>
+					</set-header>
+					<set-header name="x-ms-version" exists-action="override">
+						<value>2021-10-04</value>
+					</set-header>
+					<set-body template="none">@{
+            var responseBody = context.Response?.Body?.As<string>(preserveContent: true);
+            JToken responseToken;
+            try {
+              responseToken = string.IsNullOrEmpty(responseBody) ? JValue.CreateNull() : JToken.Parse(responseBody);
+            } catch {
+              responseToken = responseBody; // non-JSON body
+            }
+
+            var logObject = new JObject(
+              new JProperty("TimestampUtc", DateTime.UtcNow.ToString("o")),
+              new JProperty("Request", new JObject(
+                new JProperty("DeviceId",  context.Request.Headers.GetValueOrDefault("X-RMG-DEVICE-ID","")),
+                new JProperty("UserName",  context.Request.Headers.GetValueOrDefault("X-RMG-USERNAME","")),
+                new JProperty("MessageId", context.RequestId.ToString()),
+                new JProperty("Method",    context.Request?.Method),
+                new JProperty("Url",       context.Request?.Url?.ToString())
+              )),
+              new JProperty("Response", new JObject(
+                new JProperty("StatusCode", context.Response?.StatusCode),
+                new JProperty("Headers", new JObject(
+                  new JProperty("Content-Type", context.Response?.Headers?.GetValueOrDefault("Content-Type",""))
+                )),
+                new JProperty("Body", responseToken)
+              ))
+            );
+
+            return logObject.ToString();
+          }</set-body>
+				</send-one-way-request>
+			</when>
+		</choose>
+	</outbound>
+	<on-error>
+		<base />
+	</on-error>
+</policies>

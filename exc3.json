@@ -1,0 +1,1 @@
+{"tables":[{"name":"PrimaryResult","columns":[{"name":"InnermostMessage","type":"string"},{"name":"ProblemId","type":"string"},{"name":"c","type":"long"}],"rows":[]}]}

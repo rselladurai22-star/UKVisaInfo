@@ -1,0 +1,3 @@
+{
+  "query": "requests | where timestamp > datetime(2026-06-07) | where operation_Name == 'GetAllCollectionJobs' and success == false | summarize cnt=count() by resultCode | order by cnt desc"
+}
