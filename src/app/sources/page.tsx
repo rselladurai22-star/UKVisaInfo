@@ -14,10 +14,38 @@ const HAIR    = 'rgba(11,15,25,0.08)';
 export const metadata: Metadata = {
   title: 'Sources — Every gov.uk, HMRC & ONS Page UKDesk Cites',
   description:
-    'The complete list of official sources UKDesk relies on: HMRC tax rates, ONS statistics, and Parliament data. Every figure traces back here.',
+    'The complete list of official sources UKDesk relies on: gov.uk visa pages, HMRC tax rates, ONS statistics, and Parliament data. Every figure traces back here.',
   alternates: { canonical: '/sources' },
   robots: { index: true, follow: true },
 };
+
+const VISA_SOURCES = [
+  { label: 'Home Office immigration & nationality fees (master table)', href: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026', note: 'Effective 8 April 2026 — the canonical fee table' },
+  { label: 'Skilled Worker visa', href: 'https://www.gov.uk/skilled-worker-visa' },
+  { label: 'Skilled Worker — your job', href: 'https://www.gov.uk/skilled-worker-visa/your-job' },
+  { label: 'Skilled Worker — when you can be paid less', href: 'https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less' },
+  { label: 'Student visa', href: 'https://www.gov.uk/student-visa' },
+  { label: 'Standard Visitor visa', href: 'https://www.gov.uk/standard-visitor' },
+  { label: 'UK family visa', href: 'https://www.gov.uk/uk-family-visa' },
+  { label: 'Health and Care Worker visa', href: 'https://www.gov.uk/health-care-worker-visa' },
+  { label: 'Global Talent visa', href: 'https://www.gov.uk/global-talent' },
+  { label: 'Graduate visa', href: 'https://www.gov.uk/graduate-visa' },
+  { label: 'Innovator Founder visa', href: 'https://www.gov.uk/innovator-founder-visa' },
+  { label: 'Indefinite Leave to Remain (ILR)', href: 'https://www.gov.uk/indefinite-leave-to-remain' },
+  { label: 'British citizenship — apply with ILR', href: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain' },
+  { label: 'EU Settlement Scheme', href: 'https://www.gov.uk/settled-status-eu-citizens-families' },
+  { label: 'British National (Overseas) visa', href: 'https://www.gov.uk/british-national-overseas-bno-visa' },
+  { label: 'Long Residence', href: 'https://www.gov.uk/long-residence' },
+  { label: 'UK Ancestry visa', href: 'https://www.gov.uk/ancestry-visa' },
+  { label: 'Immigration Rules — Part 9 (grounds for refusal)', href: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal' },
+  { label: 'Life in the UK Test', href: 'https://www.gov.uk/life-in-the-uk-test' },
+  { label: 'English language requirements', href: 'https://www.gov.uk/english-language' },
+  { label: 'TB test for visa applicants', href: 'https://www.gov.uk/tb-test-visa' },
+  { label: 'ATAS (Academic Technology Approval Scheme)', href: 'https://www.gov.uk/guidance/academic-technology-approval-scheme' },
+  { label: 'Register of licensed worker sponsors', href: 'https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers' },
+  { label: 'Register of licensed student sponsors', href: 'https://www.gov.uk/government/publications/register-of-licensed-sponsors-students' },
+  { label: 'Good character — nationality policy guidance', href: 'https://www.gov.uk/government/publications/good-character-nationality-policy-guidance' },
+];
 
 const TAX_SOURCES = [
   { label: 'HMRC — income tax rates and allowances', href: 'https://www.gov.uk/government/publications/rates-and-allowances-income-tax' },
@@ -46,7 +74,7 @@ const LOOKUP_SOURCES = [
   { label: 'UK Parliament Members API', href: 'https://members-api.parliament.uk', note: 'Live MP data for every constituency.' },
   { label: 'NHS — Find a GP service', href: 'https://www.nhs.uk/service-search/find-a-gp' },
   { label: 'police.uk — UK crime &amp; policing data', href: 'https://www.police.uk' },
-  { label: 'Companies House — Public Data', href: 'https://www.gov.uk/government/organisations/companies-house' },
+  { label: 'Companies House — Public Data', href: 'https://www.gov.uk/government/organisations/companies-house', note: 'For the UK sponsor licence register.' },
 ];
 
 export default function SourcesPage() {
@@ -67,7 +95,7 @@ export default function SourcesPage() {
         <p className="text-[16.5px] leading-[1.6] mb-12" style={{ color: SLATE }}>
           UKDesk does not invent data. Every fee, threshold, processing time
           and rule on the site traces back to one of the gov.uk, HMRC, ONS or
-          Parliament pages listed below. We re-verify the sources
+          Parliament pages listed below. We re-verify the master fee table
           before publishing any figure.{' '}
           <Link href="/editorial-policy" className="underline font-semibold" style={{ color: INK }}>
             See the editorial policy
@@ -75,6 +103,7 @@ export default function SourcesPage() {
           for the verification workflow.
         </p>
 
+        <Group label="UK visa &amp; immigration (gov.uk)" sources={VISA_SOURCES} />
         <Group label="UK tax &amp; pay (HMRC + gov.uk)"   sources={TAX_SOURCES} />
         <Group label="ONS — statistics &amp; cost-of-living" sources={STAT_SOURCES} />
         <Group label="UK admin lookups"                   sources={LOOKUP_SOURCES} />
@@ -85,9 +114,9 @@ export default function SourcesPage() {
           <p className="text-[13px] leading-[1.65]" style={{ color: '#064E3B' }}>
             Spotted an article on UKDesk where a figure does not link to one of these
             sources?{' '}
-            <a href="mailto:contact@ukdesk.co.uk?subject=Missing%20citation"
+            <a href="mailto:contact@ukvisainfo.co.uk?subject=Missing%20citation"
                className="underline font-semibold" style={{ color: '#064E3B' }}>
-              Email contact@ukdesk.co.uk
+              Email contact@ukvisainfo.co.uk
             </a>
             {' '}— we will add the citation within 48 hours.
           </p>

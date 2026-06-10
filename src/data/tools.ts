@@ -27,7 +27,7 @@ import {
 export type IconComponent = typeof Wallet;
 export type CategoryId =
   | 'tax' | 'employment' | 'property' | 'savings'
-  | 'business' | 'benefits' | 'vehicles'
+  | 'business' | 'immigration' | 'benefits' | 'vehicles'
   | 'insurance' | 'loans' | 'estate' | 'family-law' | 'energy';
 
 export interface Category {
@@ -88,6 +88,7 @@ export const CATEGORIES: Category[] = [
   { id: 'property',    label: 'Mortgages & Property',       icon: HomeIcon,     color: '#00875A', description: 'Mortgages, SDLT, rental income and costs' },
   { id: 'insurance',   label: 'Insurance',                  icon: Shield,       color: '#006c49', description: 'Life cover, health, rebuild costs and more' },
   { id: 'loans',       label: 'Loans, Debt & Credit',       icon: LandmarkIcon, color: '#ba1a1a', description: 'APR comparisons, debt consolidation and credit strategy' },
+  { id: 'immigration', label: 'Immigration & Visas',        icon: Plane,        color: '#00875A', description: 'Visa fees, IHS calculator and points check' },
   { id: 'savings',     label: 'Pensions, Investing & Savings', icon: PiggyBank,   color: '#623c00', description: 'State pension, ISAs, compound interest' },
   { id: 'tax',         label: 'Tax & Income',               icon: Wallet,       color: '#00875A', description: 'Income tax, NI, dividends, CGT and more' },
   { id: 'business',    label: 'Business & Self-Employed',   icon: Building2,    color: '#006c49', description: 'Self-employed, contractors and Ltd companies' },
@@ -146,7 +147,13 @@ export const APP_TILES: AppTile[] = [
 
   // ── BUSINESS & SELF-EMPLOYED (0 live) ───────────────────────────
   // Note: sole trader vs ltd, ir35, and contractor day rate are consolidated under category 'tax'
-  { href: '/postcode',                     label: 'Postcode Lookup',      hint: 'Council, MP, NHS, police, ward',        icon: MapPin,       accent: VIOLET, category: 'property', status: 'live', live: true, kbd: 'L' },
+
+  // ── IMMIGRATION (5 live) ────────────────────────────────────────
+  { href: '/tools/cost-calculator',        label: 'Visa Cost Calculator', hint: 'Fees + IHS + dependants · 8 currencies', icon: Calculator,   accent: VIOLET, category: 'immigration', status: 'new', live: true, featured: true },
+  { href: '/ihs-calculator',               label: 'IHS Surcharge',        hint: '£1,035/yr · students £776/yr',          icon: HeartPulse,   accent: SKY,    category: 'immigration', status: 'new', live: true },
+  { href: '/skilled-worker-points-check',  label: 'Skilled Worker Points',hint: '70-point check · shortage/new entrant', icon: GraduationCap,accent: GOLD,   category: 'immigration', status: 'new', live: true },
+  { href: '/postcode',                     label: 'Postcode Lookup',      hint: 'Council, MP, NHS, police, ward',        icon: MapPin,       accent: VIOLET, category: 'immigration', status: 'live', live: true, kbd: 'L' },
+  { href: '/visa-types',                   label: 'UK Visa Routes',       hint: '14 routes, 2026 fees',                  icon: Plane,        accent: AMBER,  category: 'immigration', status: 'live', live: true, kbd: 'V' },
 
   // ── VEHICLES (2 live) ───────────────────────────────────────────
   { href: '/ulez-check',                   label: 'ULEZ / CAZ',           hint: 'Is your car compliant?',                icon: Car,          accent: VIOLET, category: 'vehicles',   status: 'live', live: true, kbd: 'U' },
@@ -194,7 +201,15 @@ export const SOON_TOOLS: SoonTool[] = [
   { label: 'Crypto Tax Calculator',        hint: 'CGT on disposal · pool cost method',       icon: Coins,        accent: VIOLET, category: 'savings',    href: '/crypto-tax-calculator' },
   { label: 'Gift Aid Calculator',          hint: '25p per £1 · higher-rate reclaim',         icon: Gift,         accent: ROSE,   category: 'savings',    href: '/gift-aid-calculator' },
 
-
+  // Immigration (8)
+  { label: 'Visa Fee Checker',             hint: 'All 2026 Home Office fees in one place',   icon: Plane,        accent: VIOLET, category: 'immigration', href: '/visa-fee-checker' },
+  { label: 'ILR Calculator',               hint: '5-year clock · absences · early entry',    icon: ShieldCheck,  accent: TEAL,   category: 'immigration', href: '/ilr-calculator' },
+  { label: 'Naturalisation Calculator',    hint: '3-yr clock · Life in UK test check',       icon: Flag,         accent: NAVY,   category: 'immigration', href: '/naturalisation-calculator' },
+  { label: 'Absence Calculator',           hint: 'Count days outside UK for ILR / BN(O)',    icon: Calendar,     accent: BLUE,   category: 'immigration', href: '/absence-calculator' },
+  { label: 'Right to Work Checker',        hint: 'BRP / eVisa / BNO date validity',          icon: CheckCircle2, accent: EMERALD,category: 'immigration', href: '/right-to-work-checker' },
+  { label: 'English Test Requirements',    hint: 'SELT provider · CEFR level by route',      icon: BookOpen,     accent: VIOLET, category: 'immigration', href: '/english-test-requirements' },
+  { label: 'Dependant Visa Calculator',    hint: 'Fees + IHS for partner and children',      icon: Users,        accent: TEAL,   category: 'immigration', href: '/dependant-visa-calculator' },
+  { label: 'Visa Processing Times',        hint: 'Current SLAs by route and entry type',     icon: Clock,        accent: BLUE,   category: 'immigration', href: '/visa-processing-times' },
 
   // Vehicles (5)
   { label: 'Car Running Costs',            hint: 'Fuel + insurance + tax + maintenance',     icon: Car,          accent: ROSE,   category: 'vehicles',   href: '/car-running-costs' },
@@ -282,7 +297,15 @@ export const PLANNED_TOOLS: PlannedTool[] = [
   { label: 'Help to Save Calculator',      hint: 'Government 50% bonus scheme',              category: 'savings' },
   { label: 'State Pension Deferral',       hint: 'Extra income from deferring SP',           category: 'savings' },
 
-
+  // Immigration (8)
+  { label: 'Family Visa Income Check',     hint: 'Family route £29k threshold',              category: 'immigration' },
+  { label: 'Graduate Visa Eligibility',    hint: '2-year / 3-year checker',                 category: 'immigration' },
+  { label: 'Global Talent Criteria',       hint: 'Endorsed exception route guide',          category: 'immigration' },
+  { label: 'Innovator Founder Visa',       hint: 'Business plan requirements',              category: 'immigration' },
+  { label: 'Visa Refusal Grounds',         hint: 'Common UK refusal reasons',               category: 'immigration' },
+  { label: 'Fiancée Visa Calculator',      hint: 'Route from outside UK guide',             category: 'immigration' },
+  { label: 'Points-Based System Check',    hint: 'General PBS calculator',                  category: 'immigration' },
+  { label: 'Student Loan at Settlement',   hint: 'Accrued balance at ILR date',             category: 'immigration' },
 
   // Benefits (10)
   { label: 'Tax Credits Checker',          hint: 'Legacy CTC / WTC eligibility',            category: 'benefits' },
@@ -330,10 +353,12 @@ export const PLANNED_TOOLS: PlannedTool[] = [
   { label: 'Water Bill Estimator',         hint: 'Metered vs unmetered comparison',         category: 'property' },
   { label: 'Home Insurance Guide',         hint: 'Buildings + contents cost estimate',      category: 'property' },
 
-  // Travel & International (3)
+  // Travel & International (5)
   { label: 'Foreign Currency Calculator',  hint: 'Mid-market + bank spread comparison',     category: 'tax' },
   { label: 'Customs Duty Calculator',      hint: 'Post-Brexit import duty + VAT',           category: 'tax' },
+  { label: 'Duty-Free Allowances',         hint: 'UK inbound customs allowances',           category: 'immigration' },
   { label: 'Remote Worker Tax Guide',      hint: 'Dual tax treaty implications',            category: 'tax' },
+  { label: 'Digital Nomad Visa Guide',     hint: 'UK options for remote workers',           category: 'immigration' },
 
   // Retirement — extra (2)
   { label: 'SIPP Contribution Planner',    hint: 'Self-invested pension + relief',          category: 'savings' },
@@ -344,7 +369,7 @@ export const PLANNED_TOOLS: PlannedTool[] = [
    SUB-CATEGORIES (hub page grouping)
    Each category hub groups its tools into labelled
    sub-sections. Membership is by href so the same
-   list drives both AppTiles and standalone
+   list drives both AppTiles and the standalone visa
    tools. Any tool not listed falls into a "More" group.
 ───────────────────────────────────────────── */
 export interface SubGroup {
@@ -370,7 +395,7 @@ export const SUBCATEGORIES: Record<CategoryId, SubGroup[]> = {
   property: [
     { id: 'buying',   label: 'Buying & mortgages', title: 'Buying & Mortgages', description: 'Stamp duty, affordability and overpayment savings.', hrefs: ['/stamp-duty-calculator', '/mortgage-affordability', '/overpayment-mortgage'] },
     { id: 'landlord', label: 'Landlord & rental',  title: 'Landlord & Rental',  description: 'Rental income tax, yield and property capital gains.', hrefs: ['/rental-income-tax', '/rental-yield-calculator', '/property-cgt-calculator'] },
-    { id: 'costs',    label: 'Running costs',      title: 'Running Costs',      description: 'Council tax, energy bills and cost of living.', hrefs: ['/council-tax-band', '/energy-bill', '/cost-of-living-uk', '/postcode'] },
+    { id: 'costs',    label: 'Running costs',      title: 'Running Costs',      description: 'Council tax, energy bills and cost of living.', hrefs: ['/council-tax-band', '/energy-bill', '/cost-of-living-uk'] },
   ],
   savings: [
     { id: 'isa',     label: 'Tax-free saving', title: 'ISAs & Savings',        description: 'Grow an ISA or claim the Lifetime ISA bonus.', hrefs: ['/isa-calculator', '/lifetime-isa-calculator'] },
@@ -382,7 +407,12 @@ export const SUBCATEGORIES: Record<CategoryId, SubGroup[]> = {
   estate: [],
   'family-law': [],
   energy: [],
-
+  immigration: [
+    { id: 'routes',      label: 'Routes & fees',      title: 'Visa Routes & Fees',  description: 'Compare every route, total the fees and the health surcharge.', hrefs: ['/visa-types', '/tools/cost-calculator', '/ihs-calculator'] },
+    { id: 'eligibility', label: 'Eligibility',        title: 'Eligibility & Points', description: 'Check the 70-point threshold and your salary against the going rate.', hrefs: ['/skilled-worker-points-check', '/tools/salary-checker', '/visa-types/compare'] },
+    { id: 'support',     label: 'Employers & refusals', title: 'Employers & Refusals', description: 'Find a licensed sponsor or decode a refusal letter.', hrefs: ['/tools/sponsor-search', '/tools/refusal-analyzer'] },
+    { id: 'local',       label: 'Local lookups',      title: 'Local Lookups',       description: 'Council, MP, NHS and police by postcode.', hrefs: ['/postcode'] },
+  ],
   benefits: [
     { id: 'family', label: 'Family support', title: 'Family & Childcare', description: 'Free hours, Tax-Free Childcare and Universal Credit support.', hrefs: ['/childcare-calculator'] },
   ],

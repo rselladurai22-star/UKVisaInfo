@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy — UKDesk',
   description:
-    'Privacy policy for ukdesk.co.uk. How we collect, use and protect your data, including cookies, analytics and advertising.',
+    'Privacy policy for ukvisainfo.co.uk. How we collect, use and protect your data, including cookies, analytics and advertising.',
   alternates: { canonical: '/privacy' },
   robots: { index: true, follow: true },
 };
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         <p>
           This Privacy Policy explains how <strong>UKDesk</strong>{' '}
           (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;), operator of{' '}
-          <strong>ukdesk.co.uk</strong>, collects, uses and protects
+          <strong>ukvisainfo.co.uk</strong>, collects, uses and protects
           information about visitors to this website. We are committed to
           handling your personal data in accordance with the UK General Data
           Protection Regulation (UK GDPR) and the Data Protection Act 2018.
@@ -31,9 +31,9 @@ export default function PrivacyPage() {
         </h2>
         <p>
           UKDesk is an independent information website providing
-          free calculators, tax estimators, and guides on UK tax, property, and motoring costs.
-          We are not affiliated with HMRC, the NHS, the DVLA, or any government body.
-          We are not financial or legal advisers and do not provide financial, tax, or legal advice.
+          guidance on UK immigration routes. We are not affiliated with the UK
+          Home Office, gov.uk, or any official government body. We are not
+          immigration solicitors and do not provide legal advice.
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
@@ -60,8 +60,8 @@ export default function PrivacyPage() {
         </ul>
         <p>
           We do not ask for or collect names, email addresses, phone numbers,
-          or any other personal identifying information through this
-          website. Tools and calculators process your inputs
+          passport details, or any other personal information through this
+          website. Tools such as the eligibility quiz process your inputs
           locally in your browser and do not transmit them to us.
         </p>
 
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
           Because we do not knowingly collect personally identifying
           information, in most cases there is no individual data record to
           access or delete. If you believe we hold data about you, contact us
-          at <strong>privacy@ukdesk.co.uk</strong>.
+          at <strong>privacy@ukvisainfo.co.uk</strong>.
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
@@ -255,7 +255,7 @@ export default function PrivacyPage() {
         </h2>
         <p>
           Questions about this Privacy Policy can be sent to{' '}
-          <strong>privacy@ukdesk.co.uk</strong>.
+          <strong>privacy@ukvisainfo.co.uk</strong>.
         </p>
       </section>
     </div>

@@ -123,7 +123,26 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-
+  // ── IMMIGRATION (5) — high-intent + lead-gen, mostly live ─────────
+  immigration: [
+    {
+      title: 'Plan & Qualify',
+      description: 'Find the right route and check eligibility.',
+      items: [
+        { label: 'All Visa Routes', href: '/visa-types', hint: '14 routes · 2026 fees', status: 'live' },
+        { label: 'Eligibility Quiz', href: '/eligibility', hint: 'Which routes fit you', status: 'live' },
+        { label: 'Skilled Worker Suite', href: '/skilled-worker-points-check', hint: 'Points · salary · sponsor search', status: 'live' },
+      ],
+    },
+    {
+      title: 'Cost & Outcome',
+      description: 'Total the fees and decode decisions.',
+      items: [
+        { label: 'Visa Cost Calculator', href: '/tools/cost-calculator', hint: 'Fees · IHS · dependants', status: 'live' },
+        { label: 'Refusal Analyzer', href: '/tools/refusal-analyzer', hint: 'Decode a refusal letter', status: 'live' },
+      ],
+    },
+  ],
 
   // ── PENSIONS, INVESTING & SAVINGS — high-CPC retirement keywords ──
   savings: [

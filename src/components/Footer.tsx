@@ -13,6 +13,15 @@ const COLS: { h: string; links: [string, string][] }[] = [
     ],
   },
   {
+    h: 'Immigration',
+    links: [
+      ['/visa-types', 'All visa routes'],
+      ['/visa-types/skilled-worker', 'Skilled Worker'],
+      ['/eligibility', 'Eligibility quiz'],
+      ['/ihs-calculator', 'IHS calculator'],
+    ],
+  },
+  {
     h: 'UKDesk',
     links: [
       ['/about', 'About'],
@@ -28,7 +37,7 @@ const COLS: { h: string; links: [string, string][] }[] = [
 export default function Footer() {
   return (
     <footer className="border-t border-border bg-surface-container-low">
-      <div className="max-w-[1160px] mx-auto py-10 px-4 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-7 sm:px-6 md:py-[54px] md:pb-[36px] md:gap-8">
+      <div className="max-w-[1160px] mx-auto py-10 px-4 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7 sm:px-6 md:py-[54px] md:pb-[36px] md:gap-8">
         <div className="max-w-none md:max-w-96">
           <Link href="/" className="inline-flex items-center gap-2.5 font-display font-bold text-[20px] tracking-tight hover:opacity-90 no-underline select-none" aria-label="UKDesk — home">
             <span className="relative inline-flex h-8 w-8 items-center justify-center transition-transform duration-200 hover:scale-105">
@@ -49,7 +58,7 @@ export default function Footer() {
             </span>
             <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
           </Link>
-          <p className="text-[13.5px] text-on-surface-variant leading-relaxed mt-3 mb-0">Free UK calculators, tax estimators and plain-English guides — checked against official sources. No sign-up, no clutter.</p>
+          <p className="text-[13.5px] text-on-surface-variant leading-relaxed mt-3 mb-0">Free UK calculators, visa routes and plain-English explainers — checked against official sources. No sign-up, no clutter.</p>
           <div className="flex items-center gap-2 mt-3.5 text-[13px] font-semibold text-on-surface-variant"><ShieldCheck size={15} className="text-secondary shrink-0" /> Verified against GOV.UK · HMRC · ONS</div>
         </div>
         {COLS.map((col) => (

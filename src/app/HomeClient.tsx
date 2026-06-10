@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import {
-  ArrowRight, Search, Briefcase, Users, BookOpen, X,
+  ArrowRight, Search, Briefcase, Users, BookOpen,
   Wallet, HomeIcon, Shield, LandmarkIcon, Plane,
   PiggyBank, Building2, FileText, Zap, Car, Baby,
   ExternalLink, Percent, ShieldCheck
 } from 'lucide-react';
-import { APP_TILES, CATEGORIES, type CategoryId, SOON_TOOLS } from '../data/tools';
+import { APP_TILES, CATEGORIES, type CategoryId } from '../data/tools';
 import { HUB_TOOLS } from '../data/hubTools';
 
 /* ────────────────────────────────────────────────
@@ -45,17 +45,17 @@ const CORE_HUBS = [
     ],
   },
   {
-    title: 'Motoring & Vehicles',
-    description: 'Check ULEZ compliance, verify MOT status, and calculate car running costs.',
-    icon: Car,
-    accent: 'bg-emerald-50 text-emerald-800',
-    ctaLabel: 'Compare Vehicle Tools',
-    ctaHref: '/category/vehicles',
+    title: 'Immigration & Visas',
+    description: 'Check fees, calculate health surcharges, and audit Skilled Worker points.',
+    icon: Plane,
+    accent: 'bg-purple-50 text-purple-800',
+    ctaLabel: 'Compare Visa Tools',
+    ctaHref: '/category/immigration',
     tools: [
-      { label: 'ULEZ / CAZ Compliance Check', href: '/ulez-check', desc: 'Is your vehicle compliant with clean-air zones?' },
-      { label: 'MOT & Tax Check', href: '/mot-check', desc: 'Validate MOT expiry and road tax status' },
-      { label: 'Car Running Costs', href: '/car-running-costs', desc: 'Total cost of ownership calculator' },
-      { label: 'EV Charging Calculator', href: '/ev-charging-cost', desc: 'Compare electric charging to fuel costs' },
+      { label: 'Visa Cost Calculator', href: '/tools/cost-calculator', desc: 'Total fees + IHS + dependants' },
+      { label: 'IHS Surcharge Calculator', href: '/ihs-calculator', desc: 'Calculate annual healthcare surcharges' },
+      { label: 'Skilled Worker Points Check', href: '/skilled-worker-points-check', desc: 'Check eligibility for 70-point threshold' },
+      { label: 'UK Visa Routes Directory', href: '/visa-types', desc: 'Compare 14 active visa pathways' },
     ],
   },
   {
@@ -78,11 +78,11 @@ const CORE_HUBS = [
 
 const TRENDING_CHANGES = [
   {
-    category: 'Pensions & Savings',
-    title: 'State Pension Increase 2025/26',
-    summary: 'The new State Pension increases to £11,973 a year. Estimate your personal qualifying years and retirement payout.',
-    href: '/state-pension',
-    tagColor: 'text-amber-800 bg-amber-50',
+    category: 'Immigration & Fees',
+    title: 'UK Visa Fee Changes 2026',
+    summary: 'Home Office fee table updates effective April 2026. Indefinite Leave to Remain application fee adjusted to £3,226.',
+    href: '/news/spring-2026-fee-uplift',
+    tagColor: 'text-purple-800 bg-purple-50',
   },
   {
     category: 'Employment & Wages',
@@ -99,11 +99,11 @@ const TRENDING_CHANGES = [
     tagColor: 'text-[#00875A] bg-[#00875A]/10',
   },
   {
-    category: 'Energy & Utility Bills',
-    title: 'Ofgem Energy Price Cap Update',
-    summary: 'New quarterly price caps affect gas and electricity bills. Estimate your home utility costs with our ROI model.',
-    href: '/energy-bill',
-    tagColor: 'text-emerald-800 bg-emerald-50',
+    category: 'Immigration & Digital Status',
+    title: 'eVisa Digital Transition Guidelines',
+    summary: 'Biometric Residence Permits (BRP) sunset guidance. Instructions for linking BRPs to your UKVI account.',
+    href: '/news/evisa-transition-2026',
+    tagColor: 'text-indigo-800 bg-indigo-50',
   },
 ];
 
@@ -123,6 +123,14 @@ const LEARN_GROUPS = [
     calculator: { label: 'Take-Home Pay Calculator', href: '/take-home-pay' },
     guide: { label: 'UK Salary After Tax Table', href: '/blog/uk-salary-after-tax-take-home-table-2025-26' },
     official: { label: 'HMRC Tax Codes (gov.uk)', href: 'https://www.gov.uk/tax-codes' },
+  },
+  {
+    title: 'Immigration & Visas',
+    description: 'Total up application fees, calculate IHS surcharge, and check point targets.',
+    icon: Plane,
+    calculator: { label: 'Visa Cost Calculator', href: '/tools/cost-calculator' },
+    guide: { label: 'Every UK Visa Route Guide', href: '/visa-types' },
+    official: { label: 'Home Office Fee Table (gov.uk)', href: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026' },
   },
   {
     title: 'Benefits & Childcare',
@@ -145,7 +153,7 @@ const LEARN_GROUPS = [
 const FAQS = [
   {
     q: 'How often are the calculators and tax figures updated?',
-    a: 'All tax calculators, National Insurance thresholds, and utility rates are updated weekly. We audit against official publications from HMRC, ONS, and gov.uk to ensure they reflect the active regulations for the 2025/26 and 2026/27 tax years.',
+    a: 'All tax calculators, National Insurance thresholds, and visa application fee figures are updated weekly. We audit against official publications from HMRC, the Home Office, ONS, and gov.uk to ensure they reflect the active regulations for the 2025/26 and 2026/27 tax years.',
   },
   {
     q: 'Is UKDesk affiliated with the UK Government?',
@@ -236,64 +244,13 @@ export default function HomeClient() {
    SUB-COMPONENTS WITH CLIENT STATES
    ──────────────────────────────────────────────── */
 
-const ALL_SEARCHABLE_TOOLS = (() => {
-  const list = [
-    ...APP_TILES.map((t) => ({
-      label: t.label,
-      hint: t.hint,
-      href: t.href,
-      icon: t.icon,
-      category: t.category,
-      status: 'live' as const,
-    })),
-    ...SOON_TOOLS.map((t) => ({
-      label: t.label,
-      hint: t.hint,
-      href: t.href,
-      icon: t.icon,
-      category: t.category,
-      status: 'soon' as const,
-    })),
-  ];
-  const seen = new Set<string>();
-  return list.filter((t) => {
-    if (seen.has(t.href)) return false;
-    seen.add(t.href);
-    return true;
-  });
-})();
-
 // 1. Hero
 function HeroSection() {
-  const [query, setQuery] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const filteredTools = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return ALL_SEARCHABLE_TOOLS.filter(
-      (t) =>
-        t.label.toLowerCase().includes(q) ||
-        t.hint.toLowerCase().includes(q)
-    );
-  }, [query]);
-
   const TRIGGERS = [
     { label: 'Take-home pay', href: '/take-home-pay', icon: Wallet },
     { label: 'Mortgage affordability', href: '/mortgage-affordability', icon: HomeIcon },
     { label: 'Stamp duty (SDLT)', href: '/stamp-duty-calculator', icon: Percent },
-    { label: 'Pension forecast', href: '/state-pension', icon: PiggyBank },
+    { label: 'Immigration & Visas', href: '/visa-types', icon: Plane },
     { label: 'Childcare costs', href: '/childcare-calculator', icon: Baby },
     { label: 'ULEZ check', href: '/ulez-check', icon: Car },
   ];
@@ -311,101 +268,27 @@ function HeroSection() {
         </h1>
 
         <p className="text-base sm:text-lg text-slate-700 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
-          Compare income taxes, evaluate mortgage capacity, check vehicle compliance, and model childcare costs. 100% free, independent, and verified against official databases.
+          Compare income taxes, evaluate mortgage capacity, check visa requirements, and model childcare costs. 100% free, independent, and verified against official databases.
         </p>
 
         {/* Search Command Center */}
-        <div ref={containerRef} className="relative w-full max-w-2xl mx-auto mb-10">
+        <form action="/tools" method="get" className="group relative w-full max-w-2xl mx-auto mb-10">
           <div className="relative flex items-center rounded-full border border-[#d2dcf0] bg-white px-5 py-4 shadow-md transition-all duration-200 focus-within:border-[#00875A] focus-within:ring-2 focus-within:ring-[#00875A]/10">
             <Search className="mr-3 h-5 w-5 flex-none text-[#0B2240]" />
             <input
-              type="text"
-              value={query}
-              onFocus={() => setIsOpen(true)}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setIsOpen(true);
-              }}
-              placeholder="Search take-home pay, stamp duty, tax codes, pensions..."
+              type="search"
+              name="q"
+              placeholder="Search take-home pay, stamp duty, student visa, pensions..."
               className="flex-1 border-none bg-transparent text-base text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-0 py-0.5"
             />
-            {query && (
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery('');
-                  setIsOpen(false);
-                }}
-                className="p-1 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors mr-1"
-                aria-label="Clear search"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            )}
+            <button
+              type="submit"
+              className="bg-[#00875A] hover:bg-[#00704a] text-white font-bold text-sm px-7 py-2.5 rounded-full transition-all active:scale-95 flex items-center gap-1 ml-2 shadow-sm"
+            >
+              <SplitText text="Search" />
+            </button>
           </div>
-
-          {/* Autocomplete suggestions */}
-          {isOpen && query && (
-            <div className="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-50 max-h-[350px] overflow-y-auto text-left">
-              {filteredTools.length > 0 ? (
-                <div className="py-2">
-                  <div className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1">
-                    Search Results ({filteredTools.length})
-                  </div>
-                  {filteredTools.map((t) => {
-                    const Icon = t.icon;
-                    const isLive = t.status === 'live';
-                    return (
-                      <Link
-                        key={t.href}
-                        href={isLive ? t.href : '#'}
-                        onClick={(e) => {
-                          if (!isLive) {
-                            e.preventDefault();
-                          } else {
-                            setIsOpen(false);
-                          }
-                        }}
-                        className={`flex items-center justify-between px-4 py-3 hover:bg-slate-50 transition-colors ${
-                          !isLive ? 'cursor-not-allowed opacity-60' : ''
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span className={`p-1.5 rounded-lg ${isLive ? 'bg-[#00875A]/10 text-[#00875A]' : 'bg-slate-100 text-slate-400'}`}>
-                            <Icon className="h-4.5 w-4.5" />
-                          </span>
-                          <div className="min-w-0">
-                            <span className="block text-sm font-extrabold text-[#0B2240] truncate">
-                              {t.label}
-                            </span>
-                            <span className="block text-xs text-slate-500 truncate">
-                              {t.hint}
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          {isLive ? (
-                            <span className="text-xs font-bold text-[#00875A] flex items-center gap-0.5">
-                              Open <ArrowRight className="h-3 w-3" />
-                            </span>
-                          ) : (
-                            <span className="rounded bg-slate-100 border border-slate-200/50 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 uppercase tracking-wide">
-                              Soon
-                            </span>
-                          )}
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="px-5 py-8 text-center text-sm text-slate-500 font-medium">
-                  No tools match &ldquo;{query}&rdquo;.
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+        </form>
 
         {/* Quick Triggers */}
         <div className="flex flex-col items-center gap-3 w-full">
@@ -469,7 +352,7 @@ function CoreProductHubsSection() {
             Our Core Calculators
           </h2>
           <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
-            Find the right tools to evaluate wages, stamp duty liability, vehicle compliance, and personal savings.
+            Find the right tools to evaluate wages, stamp duty liability, visa applications, and personal savings.
           </p>
         </div>
 
@@ -505,11 +388,11 @@ function CoreProductHubsSection() {
                         href={t.href}
                         className="group flex flex-col justify-start text-left"
                       >
-                        <div className="flex items-center justify-between text-base sm:text-lg font-extrabold text-[#0B2240] hover:text-[#00875A] transition-colors leading-tight">
+                        <div className="flex items-center justify-between text-sm sm:text-base font-extrabold text-[#0B2240] hover:text-[#00875A] transition-colors leading-tight">
                           <span>{t.label}</span>
                           <span className="text-[#00875A] font-normal group-hover:translate-x-1 transition-all duration-150">→</span>
                         </div>
-                        <span className="text-xs sm:text-sm text-slate-500 mt-1 leading-normal font-medium">{t.desc}</span>
+                        <span className="text-xs text-slate-500 mt-1 leading-normal font-medium">{t.desc}</span>
                       </Link>
                     </li>
                   ))}
@@ -575,18 +458,18 @@ function DirectoryGridSection() {
                 <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
                   <div className="flex items-center gap-2">
                     <span className="p-1 text-[#00875A]">
-                      <Icon className="h-5.5 w-5.5" />
+                      <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-display text-base sm:text-lg font-extrabold text-[#0B2240] leading-tight">
+                    <h3 className="font-display text-sm sm:text-base font-extrabold text-[#0B2240] leading-tight">
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-600">
+                  <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-600">
                     {liveCount} tools
                   </span>
                 </div>
 
-                <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2">
+                <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
                   {cat.description}
                 </p>
 
@@ -598,7 +481,7 @@ function DirectoryGridSection() {
                         <li key={t.href}>
                           <Link
                             href={t.href}
-                            className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5"
+                            className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5"
                           >
                             <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">{t.label}</span>
                             <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all duration-150">→</span>
@@ -608,9 +491,9 @@ function DirectoryGridSection() {
                     } else {
                       return (
                         <li key={t.href || t.label}>
-                          <div className="flex items-center justify-between text-sm sm:text-base text-slate-400 py-0.5 cursor-not-allowed select-none">
+                          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-400 py-0.5 cursor-not-allowed select-none">
                             <span className="truncate mr-2 font-medium text-slate-400">{t.label}</span>
-                            <span className="rounded bg-slate-100/60 border border-slate-200/50 px-1.5 py-0.5 text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                            <span className="rounded bg-slate-100/60 border border-slate-200/50 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 uppercase tracking-wide">
                               Soon
                             </span>
                           </div>
@@ -624,7 +507,7 @@ function DirectoryGridSection() {
                 <div className="mt-4 pt-2.5 border-t border-slate-100">
                   <Link
                     href={`/category/${id}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#00875A] hover:text-[#00704a] group/hub"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub"
                   >
                     <span>View all {allItems.length} tools</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
@@ -639,47 +522,47 @@ function DirectoryGridSection() {
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
-                  <BookOpen className="h-5.5 w-5.5" />
+                  <BookOpen className="h-5 w-5" />
                 </span>
-                <h3 className="font-display text-base sm:text-lg font-extrabold text-[#0B2240] leading-tight">
+                <h3 className="font-display text-sm sm:text-base font-extrabold text-[#0B2240] leading-tight">
                   Updates & Guides
                 </h3>
               </div>
-              <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-600">
+              <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-bold text-slate-600">
                 Links
               </span>
             </div>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2">
+            <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
               Browse policy changes, tax rate tables, and analytical explanations.
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/news" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/news" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Policy News Feed</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/blog" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Guides Hub Directory</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/about" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Data Sourcing Info</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Editorial Contacts</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
+              <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>Open Resource Hub</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
@@ -691,47 +574,47 @@ function DirectoryGridSection() {
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
-                  <ExternalLink className="h-5.5 w-5.5" />
+                  <ExternalLink className="h-5 w-5" />
                 </span>
-                <h3 className="font-display text-base sm:text-lg font-extrabold text-[#0B2240] leading-tight">
+                <h3 className="font-display text-sm sm:text-base font-extrabold text-[#0B2240] leading-tight">
                   APIs & Developers
                 </h3>
               </div>
-              <span className="rounded bg-primary-soft px-2 py-0.5 text-xs font-bold text-primary uppercase tracking-wide">
+              <span className="rounded bg-primary-soft px-2 py-0.5 text-[9px] font-bold text-primary uppercase tracking-wide">
                 API
               </span>
             </div>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2">
+            <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
               Integrate live UK tax tables and ULEZ compliance lookup tools.
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/about#api" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/about#api" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">API Documentation</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <a href="https://github.com/rselladurai22-star/UKVisaInfo" target="_blank" rel="noopener noreferrer" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">GitHub Repository</span>
                   <ExternalLink className="h-4 w-4 shrink-0 text-slate-300 group-hover/tool:text-[#00875A] transition-all" />
                 </a>
               </li>
               <li>
-                <Link href="/contact" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Request API Access</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/about" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">API Status Indicators</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/about#api" className="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
+              <Link href="/about#api" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>View API Services</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
@@ -743,47 +626,47 @@ function DirectoryGridSection() {
             <div className="flex items-start justify-between mb-3 border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <span className="p-1 text-[#00875A]">
-                  <ShieldCheck className="h-5.5 w-5.5" />
+                  <ShieldCheck className="h-5 w-5" />
                 </span>
-                <h3 className="font-display text-base sm:text-lg font-extrabold text-[#0B2240] leading-tight">
+                <h3 className="font-display text-sm sm:text-base font-extrabold text-[#0B2240] leading-tight">
                   Data Verification
                 </h3>
               </div>
-              <span className="rounded bg-secondary-soft px-2 py-0.5 text-xs font-bold text-secondary uppercase tracking-wide">
+              <span className="rounded bg-secondary-soft px-2 py-0.5 text-[9px] font-bold text-secondary uppercase tracking-wide">
                 Trust
               </span>
             </div>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2">
+            <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
               All calculations verified directly against official UK guidelines.
             </p>
             <ul className="space-y-2.5 flex-1 mt-1">
               <li>
-                <Link href="/editorial-policy" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/editorial-policy" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Editorial Guidelines</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/sources" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/sources" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Data Sourcing Guide</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/privacy" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Privacy Policy Links</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="group/tool flex items-center justify-between text-sm sm:text-base font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
+                <Link href="/contact" className="group/tool flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2240] hover:text-[#00875A] transition-colors py-0.5">
                   <span className="truncate mr-2 font-semibold text-slate-800 group-hover/tool:text-[#00875A] transition-colors">Submit Correction Request</span>
                   <span className="text-slate-300 group-hover/tool:text-[#00875A] group-hover/tool:translate-x-0.5 transition-all">→</span>
                 </Link>
               </li>
             </ul>
             <div className="mt-4 pt-2.5 border-t border-slate-100">
-              <Link href="/sources" className="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
+              <Link href="/sources" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#00875A] hover:text-[#00704a] group/hub">
                 <span>Check Sourcing Rules</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/hub:translate-x-0.5" />
               </Link>
@@ -806,7 +689,7 @@ function TrendingChangesSection() {
             Trending Policy & Rate Changes
           </h2>
           <p className="text-sm text-slate-700 leading-relaxed font-medium">
-            Major legislative updates and timeline alterations affecting UK finances and household costs.
+            Major legislative updates and timeline alterations affecting UK finances and immigration status.
           </p>
         </div>
 
@@ -972,16 +855,16 @@ function TimelineSection() {
     {
       time: 'Today',
       date: '8 April 2026',
-      title: 'HMRC PAYE Tax Codes Activated',
-      desc: 'HMRC tax codes for the 2026/27 tax year are now active. Check your emergency tax prefixes and code allowances.',
-      href: '/payslip-auditor',
+      title: 'Visa fee increases take effect',
+      desc: 'Home Office fee uplifts go live across major visa classes. Indefinite Leave to Remain (ILR) application fee adjusted to £3,226.',
+      href: '/news/spring-2026-fee-uplift',
     },
     {
       time: '2 weeks ago',
       date: '25 March 2026',
-      title: 'Ofgem Price Cap Rates Adjusted',
-      desc: 'New quarterly price caps for domestic gas and electricity tariffs are now live. Typical household bills adjusted for the spring season.',
-      href: '/energy-bill',
+      title: 'Long Residence ILR rules revised',
+      desc: 'Clarified policies regarding absence allowances for 10-year residency paths. Continuous residency count guidelines now enforce strict 180-day individual calendar caps.',
+      href: '/news/care-worker-route-closed',
     },
     {
       time: '1 month ago',
@@ -1118,7 +1001,7 @@ function ClosingCtaSection() {
             Find your next answer in seconds.
           </h2>
           <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto mb-10 leading-relaxed font-medium">
-            Model stamp duty fees, project pension growth, or calculate your exact take-home pay. Pure tools, zero noise.
+            Compare visa options, model stamp duty fees, or calculate your exact take-home pay. Pure tools, zero noise.
           </p>
           <Link
             href="/tools"

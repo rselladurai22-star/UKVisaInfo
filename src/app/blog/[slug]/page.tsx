@@ -22,6 +22,16 @@ interface RouteParams {
 
 // Category-aware end-of-article CTA + default cross-link tools (cluster model).
 const CATEGORY_CTA: Record<BlogCategory, { kicker: string; heading: string; sub: string; href: string; label: string; tools: RelatedTool[] }> = {
+  visa: {
+    kicker: 'Start here', heading: 'Find the right UK visa route in 60 seconds.',
+    sub: 'Take our free quiz to see which UK visa matches your situation.',
+    href: '/eligibility', label: 'Start eligibility check',
+    tools: [
+      { href: '/tools/cost-calculator', label: 'Visa Cost Calculator', hint: 'Fees · IHS · dependants' },
+      { href: '/ihs-calculator', label: 'IHS Calculator', hint: 'Healthcare surcharge' },
+      { href: '/skilled-worker-points-check', label: 'Skilled Worker Points', hint: 'Points · salary · sponsor' },
+    ],
+  },
   money: {
     kicker: 'Try the tool', heading: 'See your real take-home pay.',
     sub: 'Free UK calculators for tax, National Insurance and net pay — 2025/26.',
@@ -333,7 +343,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               </div>
 
               <EmailCapture
-                title="Stay on top of UK money & rule changes"
+                title={category === 'visa' ? 'Stay on top of UK visa changes' : 'Stay on top of UK money & rule changes'}
                 subtitle="Rule updates, rate changes and practical guides in a weekly 3-minute brief."
                 cta="Get the brief"
                 source={`blog:${post.slug}`}
@@ -425,7 +435,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
       `}</style>
 
       <StickyMobileCta
-        context={catMeta.label}
+        context={category === 'visa' ? 'Find your route' : catMeta.label}
         label={cta.label}
         href={cta.href}
       />

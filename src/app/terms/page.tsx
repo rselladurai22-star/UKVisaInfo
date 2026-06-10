@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Use — UKDesk',
   description:
-    'Terms of use for ukdesk.co.uk. Editorial disclaimer, no financial or legal advice, accuracy and liability terms.',
+    'Terms of use for ukvisainfo.co.uk. Editorial disclaimer, no legal advice, accuracy and liability terms.',
   alternates: { canonical: '/terms' },
   robots: { index: true, follow: true },
 };
@@ -21,7 +21,7 @@ export default function TermsPage() {
           1. Acceptance of terms
         </h2>
         <p>
-          By accessing <strong>ukdesk.co.uk</strong> you agree to be bound
+          By accessing <strong>ukvisainfo.co.uk</strong> you agree to be bound
           by these Terms of Use. If you do not agree, please do not use the
           site.
         </p>
@@ -31,24 +31,26 @@ export default function TermsPage() {
         </h2>
         <p>
           UKDesk is an independent editorial site providing general
-          information, calculators, and estimations on UK tax, property, and motoring costs.
-          We are not affiliated with HMRC, the NHS, the DVLA, or any government body.
+          information on UK immigration routes. We are not the UK Home Office
+          and we are not affiliated with any government body.
         </p>
         <p>
-          <strong>We do not provide financial, legal, or tax advice.</strong> Nothing on this
-          site constitutes financial or legal advice, an offer to enter into an
-          advisory relationship, or representation of any kind. For
-          advice on your specific financial, tax, or legal situation, consult a
-          qualified financial adviser, chartered accountant, or solicitor.
+          <strong>We do not provide legal advice.</strong> Nothing on this
+          site constitutes legal advice, an offer to enter into a
+          solicitor–client relationship, or representation of any kind. For
+          legal advice on your specific immigration situation, consult a
+          qualified UK immigration solicitor regulated by the SRA or an OISC
+          (Office of the Immigration Services Commissioner) registered
+          adviser.
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
           3. Accuracy and currency
         </h2>
         <p>
-          UK tax codes, rules, and allowances change frequently. We make reasonable efforts
+          UK immigration rules change frequently. We make reasonable efforts
           to keep content accurate and up to date, but cannot guarantee that
-          every calculator or article reflects the latest regulations at the time you read it.
+          every article reflects the latest rules at the time you read it.
           Always confirm critical information against the official{' '}
           <a
             href="https://www.gov.uk"
@@ -58,16 +60,16 @@ export default function TermsPage() {
           >
             gov.uk
           </a>{' '}
-          or HMRC source.
+          source.
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
           4. Use of content
         </h2>
         <p>
-          You may read and share links to our calculators and articles. You may not republish
-          our full page content or code on another website without explicit written
-          permission. Short quotations with attribution to ukdesk.co.uk
+          You may read and share links to our articles. You may not republish
+          our full article text on another website without explicit written
+          permission. Short quotations with attribution to ukvisainfo.co.uk
           are permitted.
         </p>
 
@@ -76,7 +78,7 @@ export default function TermsPage() {
         </h2>
         <p>
           We link to external sites including gov.uk and selected third-party
-          services. We are not responsible for the content, accuracy, or
+          services. We are not responsible for the content, accuracy or
           policies of external sites.
         </p>
 
@@ -96,8 +98,9 @@ export default function TermsPage() {
         <p>
           To the maximum extent permitted by law, UKDesk accepts no
           liability for any loss arising from reliance on information
-          published on this site. Financial decisions carry significant
-          consequences; never rely solely on a third-party guide or calculator.
+          published on this site. Visa applications carry significant
+          financial and personal consequences; never rely solely on a
+          third-party guide.
         </p>
 
         <h2 className="text-2xl font-bold text-primary mt-8 mb-3">
@@ -120,7 +123,7 @@ export default function TermsPage() {
         </h2>
         <p>
           Questions about these Terms can be sent to{' '}
-          <strong>contact@ukdesk.co.uk</strong>.
+          <strong>contact@ukvisainfo.co.uk</strong>.
         </p>
       </section>
     </div>
