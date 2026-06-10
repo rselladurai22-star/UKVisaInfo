@@ -19,8 +19,8 @@ interface Props {
 }
 
 export default function EmailCapture({
-  title = 'Weekly UK Visa Brief',
-  subtitle = 'Get rule changes, fee updates and route news in your inbox — every Tuesday.',
+  title = 'Weekly UK Finance Brief',
+  subtitle = 'Get tax changes, personal finance tips and tool updates in your inbox — every Tuesday.',
   cta = 'Subscribe',
   hint = 'Free · No spam · Unsubscribe in one click.',
   source = 'inline',

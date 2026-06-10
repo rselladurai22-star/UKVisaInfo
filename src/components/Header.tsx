@@ -12,7 +12,6 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 
 const NAV: { href: string; label: string }[] = [
   { href: '/tools', label: 'All tools' },
-  { href: '/visa-types', label: 'Visas' },
   { href: '/blog', label: 'Insights' },
   { href: '/about', label: 'About' },
 ];

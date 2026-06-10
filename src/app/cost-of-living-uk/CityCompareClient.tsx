@@ -94,29 +94,6 @@ export default function CityCompareClient() {
         <SectorCard name={right.name} sectors={right.topSectors.slice(0, 4)} />
       </div>
 
-      {/* Browse all */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-[0_4px_24px_-4px_rgba(16,26,54,0.05)]">
-        <h3 className="font-bold text-[#101a36] text-[15px] mb-1" style={{ fontFamily: '"Plus Jakarta Sans", Inter, sans-serif' }}>
-          Browse all city guides
-        </h3>
-        <p className="text-[12.5px] text-[#76777e] mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
-          Full guides with neighbourhoods, top sectors and arrival notes for each city.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {cityList.map((c) => (
-            <Link
-              key={c.code}
-              href={`/uk-cities/${c.code}`}
-              className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[#45464d] hover:text-[#101a36] bg-[#f3f4f5] hover:bg-white border border-[#E5E7EB] hover:border-[#101a36] px-3 py-1.5 rounded-md transition-colors"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              <MapPin className="w-3 h-3" />
-              {c.name}
-              <ArrowRight className="w-3 h-3 opacity-50" />
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

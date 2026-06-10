@@ -1,7 +1,7 @@
 /**
  * Editorial team — the named humans responsible for UKDesk content.
  *
- * For YMYL pages (visa, money, legal) Google's quality raters look for
+ * For YMYL pages (money, property, legal) Google's quality raters look for
  * a clearly named author with disclosed scope and qualifications. We
  * publish what is actually true: a researcher who reads gov.uk pages
  * end-to-end and writes plain-English summaries. We DO NOT claim legal
@@ -42,15 +42,14 @@ export const EDITORS: TeamMember[] = [
     scope:
       'Reads gov.uk, HMRC and ONS source pages, verifies every figure, and writes the plain-English explainers on UKDesk.',
     bio:
-      'UKDesk was founded in 2026 to make UK immigration rules, tax thresholds and council-level lookups understandable without legalese. Every figure on the site is traced back to the cited gov.uk page on the day it is published, and re-verified at each fee uplift. Not a solicitor and not an OISC-regulated adviser — UKDesk is editorial research, not legal advice.',
+      'UKDesk was founded in 2026 to make UK tax thresholds, property finances and council-level lookups understandable without legalese. Every figure on the site is traced back to the cited gov.uk page on the day it is published, and re-verified at each update. UKDesk is editorial research, not financial or legal advice.',
     expertise: [
-      'UK visa routes (Skilled Worker, Student, Family, Health & Care, Talent, Graduate, BN(O), ILR, Citizenship)',
       'UK tax & take-home pay (HMRC PAYE, NI, Self Assessment, IHT, CGT, dividends)',
       'UK property finance (Stamp Duty / SDLT, mortgage affordability, rental yield)',
       'UK administrative lookups (postcode → council / NHS / police / MP, council tax bands)',
     ],
     profileUrl: '/about#ukdesk-editorial',
-    email: 'contact@ukvisainfo.co.uk',
+    email: 'contact@ukdesk.co.uk',
     initials: 'UK',
   },
 ];
@@ -58,7 +57,7 @@ export const EDITORS: TeamMember[] = [
 export const PRIMARY_EDITOR = EDITORS[0];
 
 /** Schema.org Person object for the primary editor — drop into JSON-LD. */
-export function primaryEditorSchema(siteUrl = 'https://ukvisainfo.co.uk') {
+export function primaryEditorSchema(siteUrl = 'https://ukdesk.co.uk') {
   const e = PRIMARY_EDITOR;
   return {
     '@type': 'Person',

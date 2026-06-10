@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BLOG_POSTS, BLOG_CATEGORIES, getPostsByCategory } from '../../../data/blog';
-import { VISA_DETAILS } from '../../../data/visaDetails';
-import { COUNTRIES } from '../../../data/countries';
-import { VISA_VARIANTS } from '../../../data/visaVariants';
 import { HUB_TOOLS } from '../../../data/hubTools';
 
 const SITE = 'https://ukvisainfo.co.uk';
@@ -12,8 +9,7 @@ const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 // Protect with a deploy secret so this can't be abused publicly
 const SUBMIT_SECRET = process.env.INDEXNOW_SUBMIT_SECRET;
 
-// Only indexable content is submitted. Noindex templated dumps (salary/SOC,
-// sponsors, uk-cities, postcode, news) are deliberately excluded.
+// Only indexable content is submitted. Noindex templated dumps are deliberately excluded.
 function buildAllUrls(): string[] {
   const seen = new Set<string>();
   const add = (p: string) => {
@@ -23,9 +19,7 @@ function buildAllUrls(): string[] {
 
   // Core content/info pages
   for (const p of [
-    '', '/visa-types', '/visa-types/compare', '/eligibility', '/settlement', '/costs',
-    '/blog', '/tools', '/cost-of-living-uk', '/about',
-    '/tools/salary-checker', '/tools/sponsor-search', '/tools/cost-calculator', '/tools/refusal-analyzer',
+    '', '/blog', '/tools', '/cost-of-living-uk', '/about',
   ]) add(p);
 
   // Every live calculator/tool (auto from the hub index)
@@ -37,21 +31,10 @@ function buildAllUrls(): string[] {
     }
   }
 
-  // Visa guides + variants
-  for (const v of Object.values(VISA_DETAILS)) add(`/visa-types/${v.id}`);
-  for (const [slug, variants] of Object.entries(VISA_VARIANTS)) {
-    for (const variant of variants) add(`/visa-types/${slug}/${variant.id}`);
-  }
-
   // Blog posts + category silos
   for (const p of BLOG_POSTS) add(`/blog/${p.slug}`);
   for (const c of BLOG_CATEGORIES) {
     if (getPostsByCategory(c.id).length > 0) add(`/blog/category/${c.id}`);
-  }
-
-  // Full country guides only (stubs are noindex)
-  for (const c of Object.values(COUNTRIES)) {
-    if (c.status === 'full') add(`/from/${c.code}`);
   }
 
   return Array.from(seen);

@@ -1,8 +1,8 @@
 // Blog post registry. Each post is an indexable long-form article
-// targeting a specific low-competition UK visa query.
+// targeting a specific low-competition UK desk query.
 
 export type BlogCategory =
-  | 'visa' | 'money' | 'property' | 'business' | 'benefits'
+  | 'money' | 'property' | 'business' | 'benefits'
   | 'family' | 'motoring' | 'energy' | 'estate';
 
 export interface RelatedTool {
@@ -20,7 +20,7 @@ export interface BlogPost {
   readMinutes: number;
   tags: string[];
   body: string; // markdown
-  /** Topic silo. Optional on legacy posts — inferred as 'visa' if absent. */
+  /** Topic silo. Optional on legacy posts — inferred as 'money' if absent. */
   category?: BlogCategory;
   /** Calculators/tools to cross-link from the article (cluster model). */
   relatedTools?: RelatedTool[];
@@ -34,7 +34,6 @@ export interface BlogCategoryMeta {
 }
 
 export const BLOG_CATEGORIES: BlogCategoryMeta[] = [
-  { id: 'visa',     label: 'Visas & Immigration', description: 'UK visa routes, settlement, sponsorship and citizenship.', accent: '#00875A' },
   { id: 'money',    label: 'Money & Tax',         description: 'Income tax, take-home pay, savings, pensions and HMRC.', accent: '#00875A' },
   { id: 'property', label: 'Property & Mortgages', description: 'Buying, mortgages, stamp duty and renting in the UK.', accent: '#00875A' },
   { id: 'business', label: 'Business & Self-Employed', description: 'VAT, corporation tax, sole trader vs limited and more.', accent: '#006c49' },
@@ -48,20 +47,19 @@ export const BLOG_CATEGORIES: BlogCategoryMeta[] = [
 export const getCategoryMeta = (id: BlogCategory): BlogCategoryMeta =>
   BLOG_CATEGORIES.find((c) => c.id === id) ?? BLOG_CATEGORIES[0];
 
-/** Category of a post — explicit field, or 'visa' for legacy visa posts. */
-export const postCategory = (post: BlogPost): BlogCategory => post.category ?? 'visa';
+/** Category of a post — explicit field, or 'money' if absent. */
+export const postCategory = (post: BlogPost): BlogCategory => post.category ?? 'money';
 
 export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
   BLOG_POSTS.filter((p) => postCategory(p) === id);
 
 
 import { GUIDE_POSTS } from './blogGuides';
-import { VISA_POSTS } from './blogVisa';
 
-/** All blog posts, newest multi-category guides first, then visa archive.
- *  Post bodies live in blogGuides.ts / blogVisa.ts to keep each module a
+/** All blog posts, newest multi-category guides first.
+ *  Post bodies live in blogGuides.ts to keep each module a
  *  size the compiler handles; add new posts to blogGuides.ts. */
-export const BLOG_POSTS: BlogPost[] = [...GUIDE_POSTS, ...VISA_POSTS];
+export const BLOG_POSTS: BlogPost[] = [...GUIDE_POSTS];
 
 export function getPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);
