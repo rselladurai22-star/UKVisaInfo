@@ -141,17 +141,6 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2.5 ml-auto lg:ml-0">
-            {/* Search Pill (desktop) */}
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="hidden md:inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-on-surface-variant transition hover:border-[#00875A]/60 hover:bg-slate-50 cursor-pointer shadow-sm hover:shadow-md"
-            >
-              <Search className="h-3.5 w-3.5 text-slate-400" />
-              <span>Search tools</span>
-              <kbd className="rounded bg-surface-container-low px-1.5 py-0.5 text-[9px] font-bold text-slate-400 leading-none">⌘K</kbd>
-            </button>
-
             {/* Mobile actions */}
             <button
               type="button"
