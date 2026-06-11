@@ -183,6 +183,22 @@ html.dark body {
   @media (pointer: coarse) {
     button, a { min-height: 44px; }
   }
+  /* ── Mobile-first guards (June 2026) ──
+     1. iOS Safari auto-zooms the whole page when a focused form control is
+        under 16px — force 16px on phones (must beat inline styles, hence
+        !important).
+     2. html/body use overflow-x: clip, so a too-wide table is CLIPPED and
+        its right columns become unreachable. Make every table its own
+        horizontal scroll container on phones instead. */
+  @media (max-width: 767px) {
+    input, select, textarea { font-size: 16px !important; }
+    table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 3px;

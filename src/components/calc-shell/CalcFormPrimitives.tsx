@@ -81,7 +81,7 @@ export function NumberField({
           border: `1px solid ${Q.border}`,
           borderRadius: 10,
           padding: '0 14px',
-          height: 42,
+          height: 46,
           transition: 'all 0.12s ease',
         }}
         onFocusCapture={(e) => {
@@ -103,7 +103,8 @@ export function NumberField({
           onChange={(e) => onChange(e.target.value)}
           style={{
             flex: 1, minWidth: 0, background: 'transparent', border: 'none', outline: 'none',
-            fontFamily: TEXT, fontSize: 14.5, fontWeight: 600, color: Q.ink,
+            // 16px floor: anything smaller makes iOS Safari zoom the page on focus
+            fontFamily: TEXT, fontSize: 16, fontWeight: 600, color: Q.ink,
             fontVariantNumeric: 'tabular-nums',
             letterSpacing: '-0.005em',
             height: '100%',
@@ -134,8 +135,8 @@ export function SelectField<T extends string>({
             border: `1px solid ${Q.border}`,
             borderRadius: 10,
             padding: '0 36px 0 14px',
-            height: 42,
-            fontFamily: TEXT, fontSize: 14.5, fontWeight: 600, color: Q.ink,
+            height: 46,
+            fontFamily: TEXT, fontSize: 16, fontWeight: 600, color: Q.ink,
             letterSpacing: '-0.005em',
             outline: 'none', cursor: 'pointer',
             appearance: 'none' as const,
@@ -176,7 +177,7 @@ export function ToggleRow<T extends string>({
 }) {
   return (
     <div style={{
-      display: 'inline-flex', gap: 2,
+      display: 'inline-flex', flexWrap: 'wrap', gap: 2, maxWidth: '100%',
       background: '#f1f5f9',
       padding: 3,
       borderRadius: 10,

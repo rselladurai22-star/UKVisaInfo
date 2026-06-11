@@ -73,7 +73,7 @@ export default function Header() {
                 <path d="M32 30 L54 19 V41 L32 52 Z" fill="#00875A" />
               </svg>
             </span>
-            <span className="hidden font-display text-lg font-bold tracking-tight sm:inline">
+            <span className="font-display text-lg font-bold tracking-tight">
               <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
             </span>
           </Link>
