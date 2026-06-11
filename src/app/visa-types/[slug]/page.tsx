@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, ArrowUpRight, ExternalLink, Check, Calculator, FileText, Info } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight, ExternalLink, Check, FileText, Info } from 'lucide-react';
 import { VISA_DETAILS } from '../../../data/visaDetails';
 import { VISA_FAQS } from '../../../data/visaFaqs';
 import { getVariants } from '../../../data/visaVariants';
 import VisaFaq from '../../../components/visa/VisaFaq';
 import EditorByline from '../../../components/EditorByline';
 import { primaryEditorSchema } from '../../../data/editorialTeam';
-import c from '../../../components/calc/calc.module.css';
-import s from '../../../components/visa/visaDetail.module.css';
+import s from '../../../components/visa/visaDetailV3.module.css';
 
 interface RouteParams { params: Promise<{ slug: string }> }
 
@@ -74,34 +73,58 @@ export default async function VisaPage({ params }: RouteParams) {
     mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
   } : null;
 
+  const TOC = [
+    { id: 'eligibility', label: 'Who can apply' },
+    { id: 'apply', label: 'How to apply' },
+    { id: 'documents', label: 'Documents' },
+    ...(v.notes?.length ? [{ id: 'good-to-know', label: 'Good to know' }] : []),
+    ...(variants.length ? [{ id: 'sub-routes', label: 'Sub-routes' }] : []),
+    ...(faqs.length ? [{ id: 'faq', label: 'FAQ' }] : []),
+  ];
+
   return (
-    <div className={c.page}>
+    <div className={s.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
 
-      <div className={c.wrap}>
-        <div className={c.crumb}>
-          <Link href="/">Home</Link><span className={c.sep}>›</span>
-          <Link href="/visa-types">Visas</Link><span className={c.sep}>›</span>
-          <span>{v.title}</span>
-        </div>
+      <div className="container-page">
+        {/* breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 pt-5 text-xs font-medium text-on-surface-variant">
+          <Link href="/" className="hover:text-primary">Home</Link>
+          <span className="opacity-50">›</span>
+          <Link href="/visa-types" className="hover:text-primary">Visas</Link>
+          <span className="opacity-50">›</span>
+          <span className="text-primary font-semibold">{v.title}</span>
+        </nav>
 
-        <div className={c.toolHead}>
-          <span className={c.tag}>{v.category} visa</span>
-          <h1 className={c.h1}>{v.title}</h1>
-          <p className={c.intro}>{v.tagline}</p>
-          <span className={c.trust}><ShieldCheck size={15} /> Sourced from GOV.UK · Updated {v.updated}</span>
-        </div>
+        {/* hero */}
+        <header className={s.hero}>
+          <span className={s.tag}>{v.category} visa</span>
+          <h1 className={s.title}>{v.title}</h1>
+          <p className={s.tagline}>{v.tagline}</p>
+          <span className={s.trust}>
+            <ShieldCheck size={15} /> Sourced from GOV.UK · Updated {v.updated}
+          </span>
+        </header>
+
+        {/* on-page nav — swipes on phones */}
+        <nav aria-label="On this page" className={s.toc}>
+          {TOC.map((t) => (
+            <a key={t.id} href={`#${t.id}`} className={s.tocLink}>{t.label}</a>
+          ))}
+        </nav>
 
         <div className={s.layout}>
           <div className={s.content}>
+            {/* answer-first */}
             <div className={s.answer}>
               <span className={s.answerLbl}>The short answer</span>
               <p>{v.summary}</p>
             </div>
 
+            {/* key facts — swipe on phones, grid on desktop */}
             <div className={s.facts}>
               <div className={s.fact}><b>{shortFee(v.fee)}</b><span>Application fee from</span></div>
               <div className={s.fact}><b>{shortFee(v.ihs)}</b><span>IHS per year</span></div>
@@ -111,12 +134,16 @@ export default async function VisaPage({ params }: RouteParams) {
 
             <h2 id="eligibility">Who can apply</h2>
             <ul className={s.elig}>
-              {v.eligibility.map((e, i) => (<li key={i} className={s.eligItem}><Check size={18} strokeWidth={2.4} />{e}</li>))}
+              {v.eligibility.map((e, i) => (
+                <li key={i} className={s.eligItem}><Check size={18} strokeWidth={2.4} />{e}</li>
+              ))}
             </ul>
 
             <h2 id="apply">How to apply</h2>
             <ol className={s.steps}>
-              {v.steps.map((st, i) => (<li key={i}><b>{st.title}</b><span>{st.desc}</span></li>))}
+              {v.steps.map((st, i) => (
+                <li key={i}><b>{st.title}</b><span>{st.desc}</span></li>
+              ))}
             </ol>
 
             <h2 id="documents">Documents you&rsquo;ll need</h2>
@@ -173,7 +200,9 @@ export default async function VisaPage({ params }: RouteParams) {
             <div className={s.ctaCard}>
               <h4>Ready to apply?</h4>
               <p>Start your application on the official GOV.UK service.</p>
-              <a className={s.ctaBtn} href={v.applyUrl} target="_blank" rel="noopener noreferrer">Apply on GOV.UK <ExternalLink size={13} /></a>
+              <a className={s.ctaBtn} href={v.applyUrl} target="_blank" rel="noopener noreferrer">
+                Apply on GOV.UK <ExternalLink size={13} />
+              </a>
             </div>
 
             <div className={s.card}>
@@ -185,10 +214,23 @@ export default async function VisaPage({ params }: RouteParams) {
 
             <div className={s.card}>
               <h4>Other routes</h4>
-              {related.map(([k, rv]) => (<Link key={k} className={s.linkRow} href={`/visa-types/${k}`}>{rv.title} <ArrowUpRight size={14} /></Link>))}
+              {related.map(([k, rv]) => (
+                <Link key={k} className={s.linkRow} href={`/visa-types/${k}`}>{rv.title} <ArrowUpRight size={14} /></Link>
+              ))}
             </div>
           </aside>
         </div>
+      </div>
+
+      {/* fixed apply bar — phones only */}
+      <div className={s.applyBar}>
+        <div className={s.applyBarFee}>
+          Fee from
+          <b>{shortFee(v.fee)}</b>
+        </div>
+        <a className={s.applyBarBtn} href={v.applyUrl} target="_blank" rel="noopener noreferrer">
+          Apply on GOV.UK <ExternalLink size={14} />
+        </a>
       </div>
     </div>
   );

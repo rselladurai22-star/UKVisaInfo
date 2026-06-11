@@ -1,0 +1,253 @@
+/* ════════════════════════════════════════════════════
+   VISA HUB v3 — mobile-first editorial directory
+   Ink + emerald, fluid type, single column → two columns.
+════════════════════════════════════════════════════ */
+
+.hero {
+  padding: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 36px);
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid rgba(4, 120, 87, 0.18);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 6.5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #0b0f19;
+  margin: 16px 0 0;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+.deck {
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 56ch;
+  margin: 14px 0 0;
+  text-wrap: pretty;
+}
+.trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #047857;
+}
+
+/* ── entry cards (quiz / switching / compare) ── */
+.ways {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: clamp(20px, 3vw, 32px);
+}
+@media (min-width: 640px) {
+  .ways { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+}
+.way {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid rgba(11, 15, 25, 0.09);
+  border-radius: 16px;
+  padding: 16px 18px;
+  text-decoration: none;
+  transition: border-color 160ms, transform 160ms;
+}
+.way:active { transform: scale(0.99); }
+.way:hover { border-color: rgba(4, 120, 87, 0.4); }
+.wayPrimary {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border: none;
+  color: #fff;
+}
+.wayIcon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #ecfdf5;
+  color: #047857;
+}
+.wayPrimary .wayIcon { background: rgba(255, 255, 255, 0.15); color: #fff; }
+.way b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #0b0f19;
+  letter-spacing: -0.01em;
+}
+.wayPrimary b { color: #fff; }
+.way span {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #64748b;
+  margin-top: 2px;
+}
+.wayPrimary span { color: rgba(255, 255, 255, 0.85); }
+.wayArrow { margin-left: auto; flex: 0 0 auto; color: #94a3b8; }
+.wayPrimary .wayArrow { color: rgba(255, 255, 255, 0.8); }
+
+/* ── sticky category nav — horizontal scroll on phones ── */
+.catNav {
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  margin: clamp(20px, 3vw, 32px) calc(-1 * var(--pad-x)) 0;
+  padding: 10px var(--pad-x);
+  background: rgba(249, 249, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(11, 15, 25, 0.07);
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.catNav::-webkit-scrollbar { display: none; }
+.catLink {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  background: #fff;
+  border: 1px solid rgba(11, 15, 25, 0.1);
+  border-radius: 999px;
+  padding: 8px 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.catLink:hover { border-color: rgba(4, 120, 87, 0.45); color: #047857; }
+.catCount { color: #94a3b8; font-variant-numeric: tabular-nums; }
+
+/* ── group sections ── */
+.group {
+  scroll-margin-top: 128px;
+  padding-top: clamp(32px, 5vw, 52px);
+}
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.groupIcon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: #0b0f19;
+  color: #fff;
+}
+.groupHead h2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0b0f19;
+  margin: 0;
+}
+.groupBlurb {
+  font-size: 14px;
+  color: #64748b;
+  margin: 6px 0 16px;
+}
+@media (min-width: 640px) {
+  .groupBlurb { margin-left: 54px; margin-top: 2px; }
+}
+
+/* ── route rows: full-width, readable, thumb-friendly ── */
+.routes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 760px) {
+  .routes { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+.route {
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(11, 15, 25, 0.09);
+  border-radius: 16px;
+  padding: 16px 18px;
+  text-decoration: none;
+  transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+}
+.route:hover {
+  border-color: rgba(4, 120, 87, 0.45);
+  box-shadow: 0 10px 30px -14px rgba(11, 15, 25, 0.18);
+}
+.route:active { transform: scale(0.995); }
+.routeTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.route h3 {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0b0f19;
+  margin: 0;
+  line-height: 1.3;
+}
+.routeArrow { flex: 0 0 auto; color: #cbd5e1; margin-top: 2px; transition: color 160ms, transform 160ms; }
+.route:hover .routeArrow { color: #047857; transform: translate(1px, -1px); }
+.route p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #64748b;
+  margin: 5px 0 0;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid rgba(11, 15, 25, 0.07);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-variant-numeric: tabular-nums;
+}
+.chipFee { color: #047857; background: #ecfdf5; border-color: rgba(4, 120, 87, 0.16); }
+
+.byline { padding: clamp(36px, 6vw, 60px) 0 clamp(40px, 6vw, 64px); }

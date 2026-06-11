@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   ArrowRight, Search, Briefcase, Users, BookOpen,
   Wallet, HomeIcon, Shield, LandmarkIcon, Plane,
@@ -170,6 +171,146 @@ const FAQS = [
 ];
 
 /* ────────────────────────────────────────────────
+   LIVE TYPEAHEAD SEARCH — results render while typing
+   ──────────────────────────────────────────────── */
+const SEARCH_POOL = CATEGORIES.flatMap((c) =>
+  (HUB_TOOLS[c.id] ?? []).flatMap((g) =>
+    g.items
+      .filter((t) => t.status === 'live')
+      .map((t) => ({ label: t.label, hint: t.hint, href: t.href, cat: c.label }))
+  )
+);
+
+function HeroTypeahead() {
+  const router = useRouter();
+  const [q, setQ] = useState('');
+  const [open, setOpen] = useState(false);
+  const [hi, setHi] = useState(0);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  const results = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    if (!s) return [];
+    return SEARCH_POOL.filter(
+      (t) => t.label.toLowerCase().includes(s) || t.hint.toLowerCase().includes(s)
+    ).slice(0, 8);
+  }, [q]);
+
+  useEffect(() => setHi(0), [q]);
+
+  /* close on outside tap */
+  useEffect(() => {
+    const fn = (e: MouseEvent | TouchEvent) => {
+      if (boxRef.current && !boxRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', fn);
+    document.addEventListener('touchstart', fn);
+    return () => {
+      document.removeEventListener('mousedown', fn);
+      document.removeEventListener('touchstart', fn);
+    };
+  }, []);
+
+  const go = (href: string) => {
+    setOpen(false);
+    router.push(href);
+  };
+
+  const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setHi((h) => Math.min(h + 1, results.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setHi((h) => Math.max(h - 1, 0)); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (results[hi]) go(results[hi].href);
+      else if (q.trim()) go(`/tools?q=${encodeURIComponent(q.trim())}`);
+    } else if (e.key === 'Escape') setOpen(false);
+  };
+
+  return (
+    <div ref={boxRef} className="relative w-full max-w-2xl mx-auto mb-10 text-left">
+      <div className="relative flex items-center rounded-full border border-[#d2dcf0] bg-white px-5 py-3.5 shadow-md transition-all duration-200 focus-within:border-[#00875A] focus-within:ring-2 focus-within:ring-[#00875A]/10">
+        <Search className="mr-3 h-5 w-5 flex-none text-[#0B2240]" />
+        <input
+          type="search"
+          role="combobox"
+          aria-expanded={open && results.length > 0}
+          aria-controls="hero-search-results"
+          aria-autocomplete="list"
+          value={q}
+          onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKey}
+          placeholder="Try “take-home pay”, “stamp duty”, “visa fees”…"
+          className="flex-1 min-w-0 border-none bg-transparent text-base text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-0 py-0.5"
+        />
+        {q && (
+          <button
+            type="button"
+            aria-label="Clear search"
+            onClick={() => { setQ(''); setOpen(false); }}
+            className="ml-2 rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
+      {/* Results panel — renders live while typing */}
+      {open && q.trim() && (
+        <div
+          id="hero-search-results"
+          role="listbox"
+          className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl"
+        >
+          {results.length === 0 ? (
+            <p className="px-5 py-4 text-sm text-slate-500">
+              No tools match “{q.trim()}”.{' '}
+              <Link href="/tools" className="font-bold text-[#00875A] hover:underline">Browse all tools</Link>
+            </p>
+          ) : (
+            <>
+              <ul className="max-h-[min(60vh,380px)] overflow-y-auto py-1.5">
+                {results.map((r, idx) => (
+                  <li key={r.href} role="option" aria-selected={idx === hi}>
+                    <button
+                      type="button"
+                      onClick={() => go(r.href)}
+                      onMouseEnter={() => setHi(idx)}
+                      className={`flex w-full items-center justify-between gap-3 px-5 py-3 text-left transition-colors ${
+                        idx === hi ? 'bg-[#00875A]/5' : ''
+                      }`}
+                    >
+                      <span className="min-w-0">
+                        <span className={`block truncate text-sm font-bold ${idx === hi ? 'text-[#00875A]' : 'text-[#0B2240]'}`}>
+                          {r.label}
+                        </span>
+                        <span className="block truncate text-xs text-slate-500">{r.hint}</span>
+                      </span>
+                      <span className="flex shrink-0 items-center gap-2">
+                        <span className="hidden sm:inline-block rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">
+                          {r.cat}
+                        </span>
+                        <ArrowRight className={`h-4 w-4 ${idx === hi ? 'text-[#00875A]' : 'text-slate-300'}`} />
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`/tools?q=${encodeURIComponent(q.trim())}`}
+                className="block border-t border-slate-100 px-5 py-3 text-center text-xs font-extrabold text-[#00875A] hover:bg-[#00875A]/5 transition-colors"
+              >
+                See all results in the tool index →
+              </Link>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
    ANIMATION HELPER COMPONENT (Split staggered text)
    ──────────────────────────────────────────────── */
 function SplitText({ text, delayOffset = 12 }: { text: string; delayOffset?: number }) {
@@ -256,7 +397,7 @@ function HeroSection() {
   ];
 
   return (
-    <section className="bg-white pt-16 pb-12 sm:pt-20 sm:pb-16 border-b border-slate-200">
+    <section className="bg-white pt-10 pb-10 sm:pt-20 sm:pb-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl text-center">
         <span className="mb-5 inline-flex items-center gap-1.5 rounded bg-[#00875A]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#00875A]">
           ✓ Tax Year 2026/27 Rates Active
@@ -271,24 +412,8 @@ function HeroSection() {
           Compare income taxes, evaluate mortgage capacity, check visa requirements, and model childcare costs. 100% free, independent, and verified against official databases.
         </p>
 
-        {/* Search Command Center */}
-        <form action="/tools" method="get" className="group relative w-full max-w-2xl mx-auto mb-10">
-          <div className="relative flex items-center rounded-full border border-[#d2dcf0] bg-white px-5 py-4 shadow-md transition-all duration-200 focus-within:border-[#00875A] focus-within:ring-2 focus-within:ring-[#00875A]/10">
-            <Search className="mr-3 h-5 w-5 flex-none text-[#0B2240]" />
-            <input
-              type="search"
-              name="q"
-              placeholder="Search take-home pay, stamp duty, student visa, pensions..."
-              className="flex-1 border-none bg-transparent text-base text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-0 py-0.5"
-            />
-            <button
-              type="submit"
-              className="bg-[#00875A] hover:bg-[#00704a] text-white font-bold text-sm px-7 py-2.5 rounded-full transition-all active:scale-95 flex items-center gap-1 ml-2 shadow-sm"
-            >
-              <SplitText text="Search" />
-            </button>
-          </div>
-        </form>
+        {/* Live search — results appear while typing */}
+        <HeroTypeahead />
 
         {/* Quick Triggers */}
         <div className="flex flex-col items-center gap-3 w-full">
@@ -344,7 +469,7 @@ function TrustBarSection() {
 // 3. Core Product Hubs (NerdWallet Style)
 function CoreProductHubsSection() {
   return (
-    <section className="bg-surface py-16 border-b border-slate-200">
+    <section className="bg-surface py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
         <div className="mb-12 text-center max-w-xl mx-auto">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#00875A] mb-1.5">UKDesk Essentials</p>
@@ -419,7 +544,7 @@ function CoreProductHubsSection() {
 // 4. Directory Grid (All 13 Categories Matrix)
 function DirectoryGridSection() {
   return (
-    <section className="bg-white py-16 border-b border-slate-200">
+    <section className="bg-white py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
         <div className="mb-12 text-center max-w-2xl mx-auto">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#00875A] mb-1.5">Interactive Index</p>
@@ -681,7 +806,7 @@ function DirectoryGridSection() {
 // 5. Trending Changes
 function TrendingChangesSection() {
   return (
-    <section className="bg-surface py-16 border-b border-slate-200">
+    <section className="bg-surface py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
         <div className="mb-10 max-w-xl">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#00875A] mb-1.5">Recent Updates</p>
@@ -727,7 +852,7 @@ function LearnSection() {
   const ActiveIcon = activeGroup.icon;
 
   return (
-    <section className="bg-white py-16 border-b border-slate-200">
+    <section className="bg-white py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
         <div className="mb-10 text-center max-w-xl mx-auto">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#00875A] mb-1.5">Knowledge Library</p>
@@ -883,7 +1008,7 @@ function TimelineSection() {
   ];
 
   return (
-    <section className="bg-surface py-16 border-b border-slate-200">
+    <section className="bg-surface py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Section description */}
@@ -938,7 +1063,7 @@ function FaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="bg-slate-50 py-16 border-b border-slate-200">
+    <section className="bg-slate-50 py-10 sm:py-16 border-b border-slate-200">
       <div className="container-page px-4 mx-auto max-w-4xl">
         <div className="text-center mb-10">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#00875A] mb-1.5">Common Queries</p>
@@ -994,7 +1119,7 @@ function FaqSection() {
 // 9. Closing CTA
 function ClosingCtaSection() {
   return (
-    <section className="bg-[#0B2240] text-white py-16">
+    <section className="bg-[#0B2240] text-white py-12 sm:py-16">
       <div className="container-page px-4 mx-auto max-w-6xl text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-display text-3xl sm:text-4xl font-black tracking-tight mb-4 text-white leading-tight">
