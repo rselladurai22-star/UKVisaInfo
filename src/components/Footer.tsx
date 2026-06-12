@@ -1,3 +1,8 @@
+/**
+ * Footer v4 — "Ledger" chrome.
+ * Heavy top rule, mono kickers, flat link rows. Single column on phones,
+ * four columns from sm. No cards, no boxes.
+ */
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 
@@ -7,9 +12,9 @@ const COLS: { h: string; links: [string, string][] }[] = [
     links: [
       ['/take-home-pay', 'Take-home pay'],
       ['/stamp-duty-calculator', 'Stamp duty'],
-      ['/mortgage-affordability', 'Mortgage'],
-      ['/council-tax-band', 'Council tax'],
-      ['/tools', 'All 46 tools'],
+      ['/mortgage-affordability', 'Mortgage affordability'],
+      ['/council-tax-band', 'Council tax band'],
+      ['/tools', 'Full tool index'],
     ],
   },
   {
@@ -17,12 +22,13 @@ const COLS: { h: string; links: [string, string][] }[] = [
     links: [
       ['/visa-types', 'All visa routes'],
       ['/visa-types/skilled-worker', 'Skilled Worker'],
+      ['/settlement', 'Settlement & ILR'],
       ['/eligibility', 'Eligibility quiz'],
       ['/ihs-calculator', 'IHS calculator'],
     ],
   },
   {
-    h: 'UKDesk',
+    h: 'Site',
     links: [
       ['/about', 'About'],
       ['/editorial-policy', 'Editorial policy'],
@@ -36,43 +42,56 @@ const COLS: { h: string; links: [string, string][] }[] = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-surface-container-low">
-      <div className="max-w-[1160px] mx-auto py-10 px-4 pb-7 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7 sm:px-6 md:py-[54px] md:pb-[36px] md:gap-8">
-        <div className="max-w-none md:max-w-96">
-          <Link href="/" className="inline-flex items-center gap-2.5 font-display font-bold text-[20px] tracking-tight hover:opacity-90 no-underline select-none" aria-label="UKDesk — home">
-            <span className="relative inline-flex h-8 w-8 items-center justify-center transition-transform duration-200 hover:scale-105">
-              <svg
-                viewBox="0 0 64 64"
-                width={32}
-                height={32}
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-hidden
-                focusable="false"
-                className="h-8 w-8"
-              >
-                <path d="M32 8 L54 19 L32 30 L10 19 Z" fill="#0B2240" />
-                <path d="M10 19 L32 30 V52 L10 41 Z" fill="#0037b0" />
-                <path d="M32 30 L54 19 V41 L32 52 Z" fill="#00875A" />
+    <footer className="border-t-2 border-[#0b0f19] bg-[#fbfbf9]">
+      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 py-10 sm:py-14">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-[1.4fr_1fr_1fr_1fr] sm:gap-8">
+          {/* brand */}
+          <div>
+            <Link href="/" aria-label="UKDesk home" className="inline-flex items-center gap-2.5 no-underline">
+              <svg viewBox="0 0 64 64" width={28} height={28} xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden className="h-7 w-7 shrink-0">
+                <path d="M32 6 L56 18 L32 30 L8 18 Z" fill="#0b0f19" />
+                <path d="M8 18 L32 30 V54 L8 42 Z" fill="#047857" />
+                <path d="M32 30 L56 18 V42 L32 54 Z" fill="#10b981" />
               </svg>
-            </span>
-            <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
-          </Link>
-          <p className="text-[13.5px] text-on-surface-variant leading-relaxed mt-3 mb-0">Free UK calculators, visa routes and plain-English explainers — checked against official sources. No sign-up, no clutter.</p>
-          <div className="flex items-center gap-2 mt-3.5 text-[13px] font-semibold text-on-surface-variant"><ShieldCheck size={15} className="text-secondary shrink-0" /> Verified against GOV.UK · HMRC · ONS</div>
-        </div>
-        {COLS.map((col) => (
-          <div key={col.h} className="flex flex-col">
-            <h4 className="text-[11px] font-bold tracking-wider uppercase text-on-surface-variant mb-3.5">{col.h}</h4>
-            {col.links.map(([href, label]) => (
-              <Link key={href} href={href} className="block text-sm text-on-surface-variant py-1.25 no-underline hover:text-primary transition-colors">{label}</Link>
-            ))}
+              <span className="font-display text-2xl font-extrabold leading-none tracking-[-0.03em] text-[#0b0f19]">
+                ukdesk<span className="text-emerald-600">.</span>
+              </span>
+            </Link>
+            <p className="mt-3 max-w-xs text-[13.5px] leading-relaxed text-slate-600">
+              Free UK calculators, visa routes and plain-English explainers — checked against
+              official sources. No sign-up, no clutter.
+            </p>
+            <p className="mt-4 flex items-center gap-2 text-[12.5px] font-semibold text-emerald-700">
+              <ShieldCheck size={14} className="shrink-0" /> Verified against GOV.UK · HMRC · ONS
+            </p>
           </div>
-        ))}
-      </div>
-      <div className="max-w-[1160px] mx-auto py-[18px] px-4 sm:px-6 border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-1.5 md:gap-2.5 text-[12.5px] text-on-surface-variant">
-        <span>© 2026 UKDesk · Independent &amp; free</span>
-        <span>Information only — not financial or legal advice.</span>
+
+          {/* link columns */}
+          {COLS.map((col) => (
+            <nav key={col.h} aria-label={col.h}>
+              <h4 className="border-b border-[#0b0f19]/10 pb-2 font-mono text-[10.5px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                {col.h}
+              </h4>
+              <ul>
+                {col.links.map(([href, label]) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="block py-[7px] text-sm text-slate-600 no-underline transition-colors hover:text-emerald-700"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-col justify-between gap-1.5 border-t border-[#0b0f19]/10 pt-5 font-mono text-[11.5px] text-slate-500 sm:flex-row sm:items-center">
+          <span>© 2026 ukdesk — independent & free</span>
+          <span>information only · not financial or legal advice</span>
+        </div>
       </div>
     </footer>
   );

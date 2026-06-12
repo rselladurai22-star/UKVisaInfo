@@ -1,31 +1,33 @@
 'use client';
 
+/**
+ * Tools index v4 — "Reference manual".
+ * One continuous index of category panels. Chips don't filter — they
+ * smooth-scroll the matching section under the sticky bar. Search filters
+ * live. Compact rows: maximum tools per screen.
+ */
+
 import { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronRight, Search, X, Home } from 'lucide-react';
+import { ArrowUpRight, Search, X } from 'lucide-react';
 import { CATEGORIES, type CategoryId } from '../../data/tools';
 import { HUB_TOOLS, type HubItem } from '../../data/hubTools';
 
-interface FlatTool extends HubItem { category: CategoryId }
-
 const CAT_TOOLS = (id: CategoryId): HubItem[] => (HUB_TOOLS[id] ?? []).flatMap((g) => g.items);
-const ALL_TOOLS: FlatTool[] = CATEGORIES.flatMap((c) => CAT_TOOLS(c.id).map((it) => ({ ...it, category: c.id })));
-const LIVE_TOTAL = ALL_TOOLS.filter((t) => t.status === 'live').length;
-const TOTAL = ALL_TOOLS.length;
-const liveCount = (id: CategoryId) => CAT_TOOLS(id).filter((t) => t.status === 'live').length;
+const ALL_LIVE = CATEGORIES.reduce((n, c) => n + CAT_TOOLS(c.id).filter((t) => t.status === 'live').length, 0);
 
 export default function ToolsClient() {
   const [query, setQuery] = useState('');
   const q = query.trim().toLowerCase();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Pre-fill the search from the ?q= URL param (e.g. the homepage search form
-  // submits to /tools?q=...). Without this the query was lost on navigation.
+  /* prefill from ?q= (home search hands off here) */
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get('q');
-    if (q) setQuery(q);
+    const v = new URLSearchParams(window.location.search).get('q');
+    if (v) setQuery(v);
   }, []);
 
+  /* ⌘K focuses search */
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); inputRef.current?.focus(); }
@@ -34,19 +36,23 @@ export default function ToolsClient() {
     return () => window.removeEventListener('keydown', h);
   }, []);
 
-  // Compute categories and their tools matching the search query
+  /* chip → glide that section to sit under the sticky bar */
+  const scrollToCat = (id: string) => {
+    const el = document.getElementById(`sec-${id}`);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 142;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  };
+
   const sections = useMemo(() => {
     return CATEGORIES
       .map((c) => {
         let items = CAT_TOOLS(c.id);
         if (q) {
           items = items.filter(
-            (t) =>
-              t.label.toLowerCase().includes(q) ||
-              t.hint.toLowerCase().includes(q)
+            (t) => t.label.toLowerCase().includes(q) || t.hint.toLowerCase().includes(q)
           );
         }
-        // Live tools first, soon tools second
         items = [...items].sort((a, b) => (a.status === b.status ? 0 : a.status === 'live' ? -1 : 1));
         return { cat: c, items };
       })
@@ -54,147 +60,151 @@ export default function ToolsClient() {
   }, [q]);
 
   const shownLive = sections.reduce((n, s) => n + s.items.filter((i) => i.status === 'live').length, 0);
-  const shownSoon = sections.reduce((n, s) => n + s.items.filter((i) => i.status === 'soon').length, 0);
 
   return (
-    <main className="bg-surface text-on-surface min-h-screen">
-      <div className="container-page pt-7 sm:pt-10 pb-16">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">
-          <Link href="/" className="hover:text-primary flex items-center gap-1"><Home className="h-3.5 w-3.5" /> Home</Link>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="text-primary font-bold">All Tools</span>
-        </nav>
+    <main className="bg-[#fbfbf9] text-[#0b0f19] min-h-screen antialiased">
+      <div className="mx-auto w-full max-w-3xl lg:max-w-6xl px-5 sm:px-8">
 
-        {/* Header */}
-        <header className="mb-5">
-          <h1 className="text-[26px] leading-tight sm:text-4xl font-display font-bold tracking-tight">All UK Calculators</h1>
-          <p className="mt-2 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-            {LIVE_TOTAL} live calculators ({TOTAL} planned) across {CATEGORIES.length} categories — money, property,
-            tax and visas. Checked against GOV.UK, HMRC and ONS. No sign-up.
+        {/* masthead */}
+        <header className="pt-7 sm:pt-10 pb-4">
+          <p className="font-mono text-[11px] text-slate-400">
+            <Link href="/" className="hover:text-emerald-700">ukdesk</Link> <span className="text-slate-300">/</span> tools
+          </p>
+          <h1 className="mt-2 font-display text-[clamp(24px,4.5vw,34px)] font-extrabold leading-[1.05] tracking-[-0.028em]">
+            The tool index<span className="text-emerald-600">.</span>
+          </h1>
+          <p className="mt-2 max-w-xl text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-500">
+            {ALL_LIVE} live calculators and checkers across {CATEGORIES.length} areas — verified
+            against GOV.UK, HMRC and ONS. No sign-up.
           </p>
         </header>
 
-        {/* Search */}
-        <div className="relative mb-3">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-on-surface-variant" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search calculators…"
-            className="w-full pl-12 pr-12 py-3 sm:py-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm sm:text-base shadow-soft focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-          />
-          {query ? (
-            <button onClick={() => setQuery('')} aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant"><X className="h-4 w-4" /></button>
-          ) : (
-            <span className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 items-center gap-1 text-[10px] text-on-surface-variant">
-              <kbd className="px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant font-mono">⌘</kbd>
-              <kbd className="px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant font-mono">K</kbd>
-            </span>
-          )}
+        {/* sticky search + jump chips */}
+        <div className="sticky top-[56px] z-20 -mx-5 sm:-mx-8 bg-[#fbfbf9]/95 backdrop-blur px-5 sm:px-8 pt-2.5 pb-2.5 border-b border-[#0b0f19]/[0.07] shadow-[0_6px_16px_-12px_rgba(11,15,25,0.1)]">
+          <div className="flex items-center gap-2.5 rounded-xl border border-[#0b0f19]/10 bg-white px-3.5 py-2 shadow-[0_1px_2px_rgba(11,15,25,0.04)] transition-[border-color,box-shadow] focus-within:border-emerald-500 focus-within:shadow-[0_0_0_4px_rgba(4,120,87,0.08)]">
+            <Search className="h-4 w-4 flex-none text-slate-400" strokeWidth={2.2} />
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Filter the index…"
+              className="w-full min-w-0 border-none bg-transparent text-[15px] font-medium placeholder:text-slate-400 focus:outline-none focus:ring-0"
+            />
+            {query ? (
+              <button onClick={() => setQuery('')} aria-label="Clear" className="flex-none rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-[#0b0f19]">
+                <X className="h-4 w-4" />
+              </button>
+            ) : (
+              <kbd className="hidden sm:block flex-none font-mono text-[10px] text-slate-400 border border-slate-200 bg-slate-50 rounded px-1.5 py-0.5">⌘K</kbd>
+            )}
+          </div>
+
+          <div className="mt-2 flex gap-1.5 overflow-x-auto no-scrollbar lg:flex-wrap lg:overflow-visible">
+            {CATEGORIES.map((c) => {
+              const live = CAT_TOOLS(c.id).filter((t) => t.status === 'live').length;
+              if (!live) return null;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => scrollToCat(c.id)}
+                  className="flex-none rounded-lg bg-white border border-[#0b0f19]/[0.09] px-2.5 py-1 text-[11.5px] font-bold whitespace-nowrap text-slate-600 transition-all hover:border-emerald-600/40 hover:text-emerald-800 active:scale-95"
+                >
+                  {c.label} <span className="font-mono opacity-45">{live}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Count / reset */}
-        <div className="flex items-center justify-between mt-4 mb-4.5">
-          <p className="text-xs font-semibold text-on-surface-variant">
-            <span className="text-on-surface">{shownLive}</span> live{shownSoon > 0 && <span className="opacity-70"> · {shownSoon} soon</span>}{q && <> for &ldquo;{query}&rdquo;</>}
-          </p>
+        {/* result meta */}
+        <p className="pt-3 pb-0.5 font-mono text-[11px] text-slate-400 tabular-nums">
+          {shownLive} live{q && <> · matching “{query.trim()}”</>}
           {q && (
-            <button onClick={() => setQuery('')} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">Reset <X className="h-3.5 w-3.5" /></button>
+            <button onClick={() => setQuery('')} className="ml-3 font-sans font-bold text-emerald-700">
+              reset
+            </button>
           )}
-        </div>
+        </p>
 
-        {/* Directory Grid — every tool listed category-wise */}
         {sections.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-outline-variant bg-surface-container-lowest px-6 py-16 text-center">
-            <p className="text-sm font-semibold">No tools match &ldquo;{query}&rdquo;.</p>
-            <button onClick={() => setQuery('')} className="mt-2 text-sm font-semibold text-primary hover:underline">Clear search</button>
+          <div className="py-16 text-center">
+            <p className="text-sm font-semibold text-slate-500">Nothing matches “{query.trim()}”.</p>
+            <button onClick={() => setQuery('')} className="mt-2 text-sm font-bold text-emerald-700 underline">
+              Clear and show everything
+            </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          <div className="pb-16">
             {sections.map(({ cat, items }) => {
               const Icon = cat.icon;
               return (
-                <div
+                <section
                   key={cat.id}
-                  className="rounded-2xl border border-border bg-white p-5 shadow-soft hover:shadow-card hover:border-[#00875A]/60 transition-all duration-300 flex flex-col h-full min-h-[320px]"
+                  id={`sec-${cat.id}`}
+                  className="mt-4 overflow-hidden rounded-2xl border border-[#0b0f19]/[0.07] bg-white shadow-[0_1px_2px_rgba(11,15,25,0.03)]"
                 >
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 pb-3 border-b border-slate-100 mb-3.5">
+                  {/* tinted header band in the category's own colour */}
+                  <div
+                    className="flex items-center gap-2.5 border-b border-[#0b0f19]/[0.05] px-4 py-2.5"
+                    style={{ background: `linear-gradient(90deg, ${cat.color}10 0%, transparent 65%)` }}
+                  >
                     <span
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: `${cat.color}14`, color: cat.color }}
+                      className="flex h-7 w-7 flex-none items-center justify-center rounded-lg shadow-[0_2px_8px_-3px_rgba(11,15,25,0.3)]"
+                      style={{ background: cat.color, color: '#fff' }}
                     >
-                      <Icon className="h-4.5 w-4.5" />
+                      <Icon className="h-[14px] w-[14px]" />
                     </span>
-                    <div className="min-w-0 flex-1">
-                      <h2 className="text-[14.5px] font-display font-extrabold text-[#0B2240] truncate leading-tight">
-                        {cat.label}
-                      </h2>
-                      <p className="text-[10.5px] text-on-surface-variant font-medium leading-none mt-0.5">
-                        {items.filter((i) => i.status === 'live').length} live tools
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Category Description */}
-                  <p className="text-[12px] text-on-surface-variant leading-relaxed mb-4">
-                    {cat.description}
-                  </p>
-
-                  {/* Tools List */}
-                  <div className="space-y-1.5 flex-1">
-                    {items.map((t) => (
-                      <CompactTool key={t.href + t.label} tool={t} color={cat.color} />
-                    ))}
-                  </div>
-
-                  {/* Footer link to hub */}
-                  <div className="mt-4 pt-3 border-t border-slate-100/50 flex items-center justify-end">
+                    <h2 className="font-display text-[14.5px] font-bold tracking-[-0.01em]">{cat.label}</h2>
+                    <span className="font-mono text-[10.5px] text-slate-400 tabular-nums">
+                      {items.filter((i) => i.status === 'live').length}
+                    </span>
                     <Link
                       href={`/category/${cat.id}`}
-                      className="text-[11px] font-bold uppercase tracking-wider hover:opacity-85 flex items-center gap-0.5 transition-opacity"
-                      style={{ color: cat.color }}
+                      className="ml-auto text-[11.5px] font-bold text-emerald-700 hover:underline whitespace-nowrap"
                     >
-                      Explore Hub <ChevronRight className="h-3 w-3" />
+                      Area guide →
                     </Link>
                   </div>
-                </div>
+
+                  <ul className="px-2.5 py-1.5 lg:columns-2 lg:gap-6">
+                    {items.map((t) =>
+                      t.status === 'live' ? (
+                        <li key={t.href + t.label} className="break-inside-avoid">
+                          <Link
+                            href={t.href}
+                            className="group flex items-center gap-2.5 rounded-lg px-2 py-[5px] transition-colors hover:bg-slate-50 active:bg-emerald-50/60"
+                          >
+                            <span className="min-w-0 flex-1 flex flex-wrap items-baseline gap-x-2">
+                              <span className="text-[13.5px] font-semibold leading-snug group-hover:text-emerald-800">
+                                {t.label}
+                              </span>
+                              <span className="truncate text-[11.5px] text-slate-400">{t.hint}</span>
+                            </span>
+                            <ArrowUpRight className="h-3.5 w-3.5 flex-none text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-emerald-700" />
+                          </Link>
+                        </li>
+                      ) : (
+                        <li key={t.href + t.label} className="break-inside-avoid">
+                          <div className="flex items-center gap-2.5 px-2 py-[5px] select-none">
+                            <span className="min-w-0 flex-1 flex flex-wrap items-baseline gap-x-2">
+                              <span className="text-[13.5px] font-semibold leading-snug text-slate-400">{t.label}</span>
+                              <span className="truncate text-[11.5px] text-slate-300">{t.hint}</span>
+                            </span>
+                            <span className="flex-none rounded border border-slate-200 bg-slate-50 px-1.5 py-px font-mono text-[9px] font-bold uppercase text-slate-400">
+                              soon
+                            </span>
+                          </div>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </section>
               );
             })}
           </div>
         )}
       </div>
     </main>
-  );
-}
-
-function CompactTool({ tool, color }: { tool: HubItem; color: string }) {
-  if (tool.status === 'soon') {
-    return (
-      <div className="group relative rounded-lg border border-dashed border-outline-variant bg-surface-container-low/30 px-3 py-2 flex items-center gap-3">
-        <span className="min-w-0 flex-1">
-          <span className="block text-[12.5px] font-semibold text-on-surface-variant truncate">{tool.label}</span>
-          <span className="block text-[10.5px] text-on-surface-variant/70 truncate">{tool.hint}</span>
-        </span>
-        <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent-soft text-accent shrink-0">Soon</span>
-      </div>
-    );
-  }
-  return (
-    <Link
-      href={tool.href}
-      className="group relative rounded-lg border border-border bg-surface-container-lowest px-3 py-2 flex items-center gap-3 hover:border-primary/50 hover:shadow-sm active:scale-[0.99] transition-all overflow-hidden"
-    >
-      <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: color }} />
-      <span className="min-w-0 flex-1">
-        <span className="block text-[12.5px] font-semibold truncate group-hover:text-primary transition-colors">{tool.label}</span>
-        <span className="block text-[10.5px] text-on-surface-variant truncate">{tool.hint}</span>
-      </span>
-      {tool.xref && <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-secondary-soft text-secondary shrink-0">↗</span>}
-      <ArrowUpRight className="h-3.5 w-3.5 text-on-surface-variant group-hover:text-primary shrink-0 transition-colors" />
-    </Link>
   );
 }

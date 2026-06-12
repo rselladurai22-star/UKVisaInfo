@@ -1,39 +1,55 @@
 'use client';
 
 /**
- * UKDesk Header — slim sticky bar · brand · ghost nav links · mobile menu.
- * Search lives on the homepage hero and the /tools page (not in the header).
+ * Header v4 — "Ledger" chrome.
+ * Flat paper bar, text wordmark, underline-active nav. Mobile menu is a
+ * full-screen paper sheet with numbered rows (no drawer, no pills).
  */
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 
 const NAV: { href: string; label: string }[] = [
-  { href: '/tools', label: 'All tools' },
+  { href: '/tools', label: 'Tools' },
   { href: '/visa-types', label: 'Visas' },
-  { href: '/blog', label: 'Insights' },
+  { href: '/blog', label: 'Guides' },
+  { href: '/news', label: 'Updates' },
   { href: '/about', label: 'About' },
 ];
 
+function Wordmark() {
+  return (
+    <span className="inline-flex items-center gap-2.5">
+      <svg
+        viewBox="0 0 64 64"
+        width={26}
+        height={26}
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-hidden
+        className="h-[26px] w-[26px] shrink-0 drop-shadow-[0_1px_1px_rgba(11,15,25,0.15)]"
+      >
+        <path d="M32 6 L56 18 L32 30 L8 18 Z" fill="#0b0f19" />
+        <path d="M8 18 L32 30 V54 L8 42 Z" fill="#047857" />
+        <path d="M32 30 L56 18 V42 L32 54 Z" fill="#10b981" />
+      </svg>
+      <span className="font-display text-[20px] font-extrabold leading-none tracking-[-0.03em] text-[#0b0f19]">
+        ukdesk<span className="text-emerald-600">.</span>
+      </span>
+    </span>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
-
-  /* scroll-aware shadow */
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 4);
-    fn();
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
 
   /* close on route change */
   useEffect(() => { setNavOpen(false); }, [pathname]);
 
-  /* esc to close + body scroll lock while menu open */
+  /* esc closes; lock scroll while open */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setNavOpen(false); };
     window.addEventListener('keydown', onKey);
@@ -45,126 +61,95 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [navOpen]);
 
+  const isActive = (href: string) =>
+    pathname === href || (href !== '/' && pathname?.startsWith(href));
+
   return (
     <>
-      <header
-        className={[
-          'sticky top-0 z-50 transition-all duration-150',
-          scrolled
-            ? 'bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 border-b border-border shadow-[0_1px_0_rgba(11,15,25,0.04)]'
-            : 'bg-surface/80 backdrop-blur-sm border-b border-transparent',
-        ].join(' ')}
-      >
-        <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-3 px-4 sm:px-6">
-          {/* Brand */}
-          <Link href="/" className="group flex items-center gap-2.5 no-underline" aria-label="UKDesk home">
-            <span className="relative inline-flex h-9 w-9 items-center justify-center transition-transform duration-200 group-hover:scale-105">
-              <svg
-                viewBox="0 0 64 64"
-                width={36}
-                height={36}
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="UKDesk"
-                className="h-9 w-9"
-              >
-                <path d="M32 8 L54 19 L32 30 L10 19 Z" fill="#0B2240" />
-                <path d="M10 19 L32 30 V52 L10 41 Z" fill="#0037b0" />
-                <path d="M32 30 L54 19 V41 L32 52 Z" fill="#00875A" />
-              </svg>
-            </span>
-            <span className="font-display text-lg font-bold tracking-tight">
-              <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
-            </span>
+      <header className="sticky top-0 z-50 border-b border-[#0b0f19]/10 bg-[#fbfbf9]/95 backdrop-blur supports-[backdrop-filter]:bg-[#fbfbf9]/85">
+        <div className="mx-auto flex h-[56px] w-full max-w-6xl items-center px-5 sm:px-8">
+          <Link href="/" aria-label="UKDesk home" className="no-underline">
+            <Wordmark />
           </Link>
 
-          {/* Nav (desktop) */}
-          <nav className="mx-auto hidden items-center gap-1.5 lg:flex">
-            {NAV.map((n) => {
-              const active = pathname === n.href || (n.href !== '/' && pathname?.startsWith(n.href));
-              return (
-                <Link
-                  key={n.href}
-                  href={n.href}
-                  className={[
-                    'rounded-full px-3.5 py-1.5 text-sm font-semibold transition no-underline',
-                    active
-                      ? 'bg-primary-soft text-primary'
-                      : 'text-on-surface-variant hover:bg-surface-container-low hover:text-primary',
-                  ].join(' ')}
-                >
-                  {n.label}
-                </Link>
-              );
-            })}
+          {/* desktop nav — text links, underline = active */}
+          <nav className="ml-auto hidden items-center gap-7 lg:flex">
+            {NAV.map((n) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                className={[
+                  'relative py-[17px] text-sm font-semibold no-underline transition-colors',
+                  isActive(n.href)
+                    ? 'text-[#0b0f19] after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-emerald-600'
+                    : 'text-slate-500 hover:text-[#0b0f19]',
+                ].join(' ')}
+              >
+                {n.label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Mobile menu trigger */}
-          <div className="flex items-center gap-2.5 ml-auto lg:ml-0">
-            <button
-              type="button"
-              onClick={() => setNavOpen(true)}
-              aria-label="Open menu"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-surface lg:hidden cursor-pointer"
-            >
-              <Menu className="h-4.5 w-4.5" />
-            </button>
-          </div>
+          {/* mobile trigger — plain text, generous tap area */}
+          <button
+            type="button"
+            onClick={() => setNavOpen(true)}
+            className="ml-auto -mr-2 px-2 py-2 text-sm font-bold text-[#0b0f19] lg:hidden"
+            aria-label="Open menu"
+          >
+            Menu
+          </button>
         </div>
       </header>
 
-      {/* ── Mobile nav menu ─ */}
+      {/* ── mobile sheet — full-screen paper, numbered rows ── */}
       {navOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-0 z-[60] bg-primary/40 backdrop-blur-md animate-[fadeIn_120ms_ease-out] lg:hidden"
-          onClick={(e) => { if (e.target === e.currentTarget) setNavOpen(false); }}
+          className="fixed inset-0 z-[60] flex flex-col bg-[#fbfbf9] lg:hidden"
         >
-          <div className="ml-auto flex h-full w-full max-w-xs flex-col bg-surface shadow-[0_30px_80px_-20px_rgba(11,15,25,0.4)] animate-[slideIn_180ms_cubic-bezier(0.22,1,0.36,1)]">
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <span className="font-display text-lg font-bold tracking-tight">
-                <span className="text-[#0B2240] font-black tracking-tight text-xl font-display">UK<span className="text-[#00875A]">Desk</span></span>
-              </span>
-              <button
-                type="button"
-                onClick={() => setNavOpen(false)}
-                aria-label="Close menu"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-surface-container-low text-primary transition hover:bg-surface-container"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-            <nav className="flex flex-col gap-1 p-4">
-              {NAV.map((n) => {
-                const active = pathname === n.href || (n.href !== '/' && pathname?.startsWith(n.href));
-                return (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    onClick={() => setNavOpen(false)}
-                    className={[
-                      'flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-semibold no-underline transition',
-                      active
-                        ? 'bg-primary-soft text-primary'
-                        : 'text-on-surface hover:bg-surface-container-low hover:text-primary',
-                    ].join(' ')}
-                  >
-                    {n.label}
-                    <ArrowRight className="h-4 w-4 opacity-60" />
-                  </Link>
-                );
-              })}
-            </nav>
+          <div className="flex h-[56px] flex-none items-center border-b border-[#0b0f19]/10 px-5">
+            <Wordmark />
+            <button
+              type="button"
+              onClick={() => setNavOpen(false)}
+              aria-label="Close menu"
+              className="-mr-2 ml-auto p-2 text-[#0b0f19]"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
+
+          <nav className="flex-1 overflow-y-auto px-5 pt-2 pb-8">
+            {NAV.map((n, i) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                onClick={() => setNavOpen(false)}
+                className={[
+                  'group flex items-baseline gap-4 border-b border-[#0b0f19]/10 py-5 no-underline',
+                  isActive(n.href) ? 'text-emerald-700' : 'text-[#0b0f19]',
+                ].join(' ')}
+              >
+                <span className="font-mono text-xs text-slate-400 tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="font-display text-2xl font-extrabold tracking-[-0.02em]">
+                  {n.label}
+                </span>
+                <ArrowUpRight className="ml-auto h-5 w-5 self-center text-slate-300" />
+              </Link>
+            ))}
+
+            <p className="mt-8 text-xs leading-relaxed text-slate-500">
+              Free UK calculators & guides — verified against GOV.UK, HMRC and ONS.
+              No sign-up, nothing stored.
+            </p>
+          </nav>
         </div>
       )}
-
-      <style jsx global>{`
-        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes slideIn { from { transform: translateX(100%) } to { transform: translateX(0) } }
-      `}</style>
     </>
   );
 }
