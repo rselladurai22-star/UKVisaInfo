@@ -124,26 +124,22 @@ const POUND = (n: number | null) => n === null ? '—' : (n === 0 ? 'Free' : '£
 export default function SettlementHub() {
   return (
     <>
-      {/* Hero */}
-      <header className="relative isolate overflow-hidden bg-gradient-to-br from-[#0A2540] via-[#0e1b3f] to-[#0F2C4B] pt-[100px] md:pt-[120px] pb-12 md:pb-16">
-        <div className="absolute inset-0 opacity-[0.18] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '22px 22px' }} />
-        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-[#00C4B4]/18 blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-[400px] h-[400px] rounded-full bg-[#0A2540]/12 blur-[140px] pointer-events-none" />
-
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#C9A14A]">
+      {/* Hero — v3 light editorial */}
+      <header className="bg-surface border-b border-border">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-12 sm:pb-12">
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-700">
               <Sparkles className="w-3 h-3" /> Settlement compare
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#10b981]/15 border border-[#10b981]/30 text-[#34d399] text-[10.5px] font-bold uppercase tracking-[0.1em]">
-              <ShieldCheck className="w-3 h-3" /> gov.uk verified
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-on-surface-variant">
+              <ShieldCheck className="w-3 h-3 text-emerald-600" /> gov.uk verified
             </span>
           </div>
 
-          <h1 className="font-display text-white text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-bold leading-[1.04] tracking-[-0.025em]">
-            Every UK settlement route<br className="hidden sm:block" /> in one view.
+          <h1 className="font-display text-[#0b0f19] text-[clamp(28px,6vw,46px)] font-extrabold leading-[1.06] tracking-[-0.028em] [text-wrap:balance]">
+            Every UK settlement route in one view.
           </h1>
-          <p className="mt-4 max-w-2xl text-white/65 text-base md:text-[1.0625rem] leading-relaxed">
+          <p className="mt-4 max-w-2xl text-slate-600 text-[clamp(15.5px,1.4vw,18px)] leading-relaxed">
             6 routes to ILR or British citizenship — compared side-by-side on fees, time, English requirement, Life in the UK Test and best-fit profile. Every figure cited from gov.uk.
           </p>
         </div>
@@ -158,7 +154,7 @@ export default function SettlementHub() {
           {/* Comparison table */}
           <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] shadow-[0_2px_12px_rgba(10, 37, 64,0.04)] overflow-hidden">
             <div className="p-6 md:p-7 border-b border-[rgba(14,20,36,0.06)]">
-              <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
+              <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#047857] mb-1.5">
                 01 · Side-by-side
               </div>
               <h2 className="font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0A2540] tracking-[-0.015em]">
@@ -169,7 +165,31 @@ export default function SettlementHub() {
               </p>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* Mobile: stacked route cards (table hidden) */}
+            <div className="md:hidden divide-y divide-[rgba(14,20,36,0.06)]">
+              {ROWS.map((r) => (
+                <Link key={r.id} href={r.href} className="block px-5 py-4 active:bg-emerald-50/40">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[1.4rem] leading-none">{r.emoji}</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-bold text-[#0b0f19] leading-tight">{r.title}</div>
+                      <div className="text-[11.5px] text-[#9aa3b8] mt-0.5">{r.bestFor}</div>
+                    </div>
+                    <span className={`font-display font-bold text-[15px] tabular-nums shrink-0 ${r.totalToIlrSingle === 0 ? 'text-emerald-600' : 'text-[#0b0f19]'}`}>
+                      {POUND(r.totalToIlrSingle)}
+                    </span>
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    <span className="rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] px-2.5 py-1 text-[11px] font-semibold text-[#52596e]">{r.yearsToIlr}</span>
+                    <span className="rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] px-2.5 py-1 text-[11px] font-semibold text-[#52596e]">Fee {r.applicationFee}</span>
+                    <span className="rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] px-2.5 py-1 text-[11px] font-semibold text-[#52596e]">English: {r.english}</span>
+                    <span className="rounded-full bg-[#f7f9fd] border border-[rgba(14,20,36,0.06)] px-2.5 py-1 text-[11px] font-semibold text-[#52596e]">LITUK: {r.litUkTest}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-[13.5px]">
                 <thead>
                   <tr className="bg-[#f7f9fd] text-left">
@@ -204,7 +224,7 @@ export default function SettlementHub() {
                           ? <span className="inline-flex items-center gap-1 text-[12px] text-[#10b981] font-semibold"><XCircle className="w-3.5 h-3.5" /> Not required</span>
                           : r.litUkTest === 'At ILR'
                             ? <span className="inline-flex items-center gap-1 text-[12px] text-[#C9A14A] font-semibold"><Clock className="w-3.5 h-3.5" /> At ILR</span>
-                            : <span className="inline-flex items-center gap-1 text-[12px] text-[#00C4B4] font-semibold"><CheckCircle2 className="w-3.5 h-3.5" /> Required</span>}
+                            : <span className="inline-flex items-center gap-1 text-[12px] text-[#047857] font-semibold"><CheckCircle2 className="w-3.5 h-3.5" /> Required</span>}
                       </td>
                       <td className="px-5 py-4 text-right tabular-nums">
                         <span className={`font-bold ${r.totalToIlrSingle === 0 ? 'text-[#10b981]' : 'text-[#0A2540]'}`}>
@@ -212,7 +232,7 @@ export default function SettlementHub() {
                         </span>
                       </td>
                       <td className="px-5 py-4 text-right">
-                        <Link href={r.href} className="inline-flex items-center gap-1 text-[#00C4B4] font-bold text-[12.5px] hover:gap-2 transition-[gap] duration-100">
+                        <Link href={r.href} className="inline-flex items-center gap-1 text-[#047857] font-bold text-[12.5px] hover:gap-2 transition-[gap] duration-100">
                           Guide <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </td>
@@ -226,7 +246,7 @@ export default function SettlementHub() {
             <div className="px-5 py-3 bg-white border-t border-[rgba(14,20,36,0.06)] text-[11.5px] text-[#7a8195] flex items-center gap-2">
               <ShieldCheck className="w-3 h-3 text-[#10b981]" />
               All figures verified against gov.uk on {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.
-              <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table" target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1 text-[#00C4B4] font-semibold hover:underline">
+              <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table" target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1 text-[#047857] font-semibold hover:underline">
                 Open fee table <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -235,7 +255,7 @@ export default function SettlementHub() {
           {/* Route cards with cost stacks */}
           <section>
             <div className="mb-6">
-              <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
+              <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#047857] mb-1.5">
                 02 · Cost stacks
               </div>
               <h2 className="font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0A2540] tracking-[-0.015em]">
@@ -261,7 +281,7 @@ export default function SettlementHub() {
                         <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8]">
                           {bd.title.replace(' for a single applicant', '').replace(' — single adult', '').replace(' for a single adult', '')}
                         </div>
-                        <div className="mt-1 font-display font-bold text-[16px] text-[#0A2540] group-hover:text-[#00C4B4] transition-colors duration-100 leading-tight">
+                        <div className="mt-1 font-display font-bold text-[16px] text-[#0A2540] group-hover:text-[#047857] transition-colors duration-100 leading-tight">
                           {v?.title ?? slug}
                         </div>
                       </div>
@@ -279,7 +299,7 @@ export default function SettlementHub() {
                           <span className="text-[12px] text-[#52596e] flex-1 truncate">{l.label}</span>
                           <div className="flex-1 max-w-[110px] h-1.5 bg-[#f3f5fb] rounded-full overflow-hidden">
                             <div
-                              className="h-full rounded-full bg-gradient-to-r from-[#00C4B4] to-[#C9A14A] transition-[width] duration-500 ease-out"
+                              className="h-full rounded-full bg-gradient-to-r from-[#047857] to-[#34d399] transition-[width] duration-500 ease-out"
                               style={{ width: bd.total === 0 ? '0%' : `${Math.max(3, (l.amount / max) * 100)}%` }}
                             />
                           </div>
@@ -292,7 +312,7 @@ export default function SettlementHub() {
 
                     <div className="pt-3 border-t border-[rgba(14,20,36,0.06)] flex items-center justify-between text-[11.5px] text-[#7a8195]">
                       <span className="inline-flex items-center gap-1"><ShieldCheck className="w-3 h-3 text-[#10b981]" /> gov.uk verified</span>
-                      <span className="inline-flex items-center gap-1 text-[#00C4B4] font-semibold group-hover:gap-1.5 transition-[gap] duration-100">
+                      <span className="inline-flex items-center gap-1 text-[#047857] font-semibold group-hover:gap-1.5 transition-[gap] duration-100">
                         Open guide <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>
@@ -304,7 +324,7 @@ export default function SettlementHub() {
 
           {/* Decision tree */}
           <section className="rounded-3xl bg-white border border-[rgba(14,20,36,0.07)] p-6 md:p-8 shadow-[0_2px_12px_rgba(10, 37, 64,0.04)]">
-            <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#00C4B4] mb-1.5">
+            <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#047857] mb-1.5">
               03 · Pick your route
             </div>
             <h2 className="font-display text-[1.5rem] md:text-[1.875rem] font-bold text-[#0A2540] tracking-[-0.015em] mb-6">
@@ -321,13 +341,13 @@ export default function SettlementHub() {
                 { q: 'I\'ve held ILR for 12+ months and want a British passport', a: 'British naturalisation', href: '/visa-types/citizenship' },
               ].map((c, i) => (
                 <Link key={i} href={c.href} className="group flex items-start gap-3 p-4 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white hover:border-[#0A2540] hover:bg-white transition-colors duration-150">
-                  <span className="w-8 h-8 rounded-lg bg-[rgba(0, 196, 180,0.08)] text-[#00C4B4] flex items-center justify-center flex-shrink-0 font-display font-bold text-[13px]">
+                  <span className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0 font-display font-bold text-[13px]">
                     {i + 1}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#9aa3b8]">If</div>
                     <div className="text-[13.5px] text-[#1a2240] leading-snug">{c.q}</div>
-                    <div className="mt-2 inline-flex items-center gap-1 text-[12.5px] font-bold text-[#00C4B4] group-hover:gap-2 transition-[gap] duration-100">
+                    <div className="mt-2 inline-flex items-center gap-1 text-[12.5px] font-bold text-[#047857] group-hover:gap-2 transition-[gap] duration-100">
                       → {c.a} <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
@@ -340,13 +360,12 @@ export default function SettlementHub() {
           <section>
             <Link
               href="/tools/cost-calculator"
-              className="group block relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A2540] via-[#0F2C4B] to-[#1c2c63] p-7 md:p-10 text-white"
+              className="group block relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#065f46] to-[#047857] p-7 md:p-10 text-white"
             >
-              <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(201, 161, 74,0.5) 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-              <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full bg-[#00C4B4]/25 blur-3xl pointer-events-none" />
+              <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full bg-emerald-300/25 blur-3xl pointer-events-none" />
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                 <div className="max-w-md">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.08] border border-white/[0.14] text-[#C9A14A] text-[10.5px] font-bold uppercase tracking-[0.1em] mb-3">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.1] border border-white/[0.16] text-emerald-200 text-[10.5px] font-bold uppercase tracking-[0.1em] mb-3">
                     <Calculator className="w-3 h-3" /> Full calculator
                   </span>
                   <h3 className="font-display text-[1.25rem] md:text-[1.5rem] font-bold leading-tight tracking-[-0.015em]">
@@ -356,7 +375,7 @@ export default function SettlementHub() {
                     Pick your route, add dependants, choose priority service — see the total live, with every line cited to gov.uk.
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 bg-[#C9A14A] text-[#0A2540] font-bold px-5 py-3 rounded-xl text-sm group-hover:gap-3 transition-[gap] duration-100">
+                <span className="inline-flex items-center gap-2 bg-white text-[#065f46] font-bold px-5 py-3 rounded-xl text-sm group-hover:gap-3 transition-[gap] duration-100">
                   Open cost calculator <ArrowRight className="w-4 h-4" />
                 </span>
               </div>

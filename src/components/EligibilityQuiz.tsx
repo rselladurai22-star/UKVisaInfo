@@ -176,10 +176,10 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
           {step === 1 && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               <div className="lg:col-span-5 space-y-8">
-                <h1 className="font-display text-5xl font-extrabold tracking-[-0.03em] text-on-surface leading-[1.1]">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-on-surface leading-[1.1]">
                   Check your UK visa eligibility
                 </h1>
-                <p className="text-xl text-on-surface-variant leading-relaxed font-light">
+                <p className="text-base sm:text-xl text-on-surface-variant leading-relaxed font-light">
                   Answer a few questions to find out which visa you might be eligible for and get a personalized roadmap.
                 </p>
                 <div className="p-6 bg-surface-container-low rounded-xl border-l-4 border-secondary/20 shadow-sm">
