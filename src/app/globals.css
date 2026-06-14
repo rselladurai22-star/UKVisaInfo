@@ -192,12 +192,6 @@ html.dark body {
         horizontal scroll container on phones instead. */
   @media (max-width: 767px) {
     input, select, textarea { font-size: 16px !important; }
-    table {
-      display: block;
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
   }
   :focus-visible {
     outline: 2px solid var(--color-primary);

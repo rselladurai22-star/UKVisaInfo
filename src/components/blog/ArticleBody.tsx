@@ -63,7 +63,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
   const segments = parseSegments(body);
 
   return (
-    <div className="article-body max-w-[720px]" style={{ fontFamily: 'var(--font-lora), Georgia, ui-serif, serif' }}>
+    <div className="article-body w-full max-w-[720px]" style={{ fontFamily: 'var(--font-lora), Georgia, ui-serif, serif' }}>
       {segments.map((seg, i) => {
         switch (seg.type) {
           case 'markdown':

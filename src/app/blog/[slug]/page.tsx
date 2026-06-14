@@ -245,7 +245,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* ═══════════════════════
           EDITORIAL HEADER
       ═══════════════════════ */}
-      <header className="bg-surface border-b border-outline-variant/60 pt-[72px] sm:pt-[84px] md:pt-[96px] pb-6 sm:pb-8">
+      <header className="bg-surface border-b border-outline-variant/60 pt-6 sm:pt-8 md:pt-10 pb-5 sm:pb-6">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Back nav / breadcrumbs */}
           <nav aria-label="Breadcrumb" className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
@@ -312,8 +312,8 @@ export default async function BlogPostPage({ params }: RouteParams) {
           3-COLUMN ARTICLE LAYOUT
       ═══════════════════════ */}
       <div className="bg-surface text-on-surface min-h-screen">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-14">
-          <div className="grid grid-cols-12 gap-8 lg:gap-10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 md:py-10">
+          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10">
 
             {/* ── LEFT RAIL: TOC ── */}
             <aside className="hidden lg:block lg:col-span-3">
@@ -323,7 +323,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
             </aside>
 
       {/* ── CENTER: ARTICLE ── */}
-            <article className="col-span-12 lg:col-span-7">
+            <article className="w-full col-span-12 lg:col-span-7">
               <ArticleBody body={post.body} articleSlug={post.slug} />
 
               {/* Mid-article ad — shown after body, before tags */}
@@ -419,19 +419,19 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* Article-specific typography polish */}
       <style>{`
         .article-body > p:first-of-type::first-letter {
-          font-family: var(--font-display, sans-serif);
+          font-family: var(--font-grotesk), sans-serif;
           float: left;
-          font-size: 4.5rem;
-          line-height: 0.82;
+          font-size: 3.2em;
+          line-height: 0.85;
+          margin-right: 0.15em;
+          margin-top: 0.05em;
           font-weight: 800;
-          padding: 0.2rem 0.65rem 0 0;
           color: ${catMeta.accent};
-          letter-spacing: -0.03em;
         }
         @media (max-width: 640px) {
           .article-body > p:first-of-type::first-letter {
-            font-size: 3.5rem;
-            padding: 0.15rem 0.5rem 0 0;
+            font-size: 2.8em;
+            margin-right: 0.12em;
           }
         }
       `}</style>
