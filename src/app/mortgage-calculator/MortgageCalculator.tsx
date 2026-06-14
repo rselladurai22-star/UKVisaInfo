@@ -222,7 +222,7 @@ export default function MortgageCalculator() {
             <p className="text-xs text-on-surface-variant mb-3">
               Lenders test affordability at higher rates. Here&apos;s your monthly payment if rates change at renewal:
             </p>
-            <div className="overflow-hidden rounded-lg border border-outline-variant">
+            <div className="overflow-x-auto rounded-lg border border-outline-variant">
               <table className="w-full text-sm">
                 <tbody>
                   {r.sens.map((s) => (
@@ -424,7 +424,7 @@ function Guide() {
             buy-to-let and high-equity borrowers, because residential lenders must see a credible repayment
             vehicle. The monthly saving is real but the long-term cost is far higher.
           </p>
-          <div className="my-5 overflow-hidden rounded-xl border border-outline-variant">
+          <div className="my-5 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left">
                 <tr>

@@ -67,7 +67,7 @@ export default function CarFinance() {
             <Stat label="Loan / month" value={gbp(r.loan, 0)} sub="own now" />
           </div>
           <Panel title="Full comparison">
-            <div className="overflow-hidden rounded-lg border border-outline-variant">
+            <div className="overflow-x-auto rounded-lg border border-outline-variant">
               <table className="w-full text-sm">
                 <thead className="bg-surface-container-low text-left">
                   <tr><th className="px-3 py-2 font-bold"></th><th className="px-3 py-2 font-bold text-right">Monthly</th><th className="px-3 py-2 font-bold text-right">Total to own</th><th className="px-3 py-2 font-bold text-right">Own it?</th></tr>

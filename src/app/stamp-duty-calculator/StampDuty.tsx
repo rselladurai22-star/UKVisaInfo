@@ -173,7 +173,7 @@ export default function StampDuty() {
             </div>
 
           <Panel title="Rate card — England & NI (from 1 Apr 2025)">
-              <div className="overflow-hidden rounded-lg border border-outline-variant">
+              <div className="overflow-x-auto rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left">
                     <tr><th className="px-3 py-2 font-bold">Band</th><th className="px-3 py-2 font-bold">Standard</th><th className="px-3 py-2 font-bold">Additional</th></tr>
@@ -235,7 +235,7 @@ function StampDutyGuide() {
 
         <section>
           <GuideHeading kicker="The rates">Standard residential bands</GuideHeading>
-          <div className="my-3 overflow-hidden rounded-xl border border-outline-variant">
+          <div className="my-3 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Portion of price</th><th className="px-4 py-3 font-bold">Standard rate</th><th className="px-4 py-3 font-bold">Additional property</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">
@@ -291,7 +291,7 @@ function StampDutyGuide() {
 
         <section>
           <GuideHeading kicker="Worked example">£600,000 home, three buyer types</GuideHeading>
-          <div className="my-3 overflow-hidden rounded-xl border border-outline-variant">
+          <div className="my-3 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Buyer</th><th className="px-4 py-3 font-bold">SDLT</th><th className="px-4 py-3 font-bold">Effective rate</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">

@@ -72,7 +72,7 @@ export default function DebtConsolidation() {
             <Stat label="Interest change" value={`${r.interestDiff >= 0 ? '−' : '+'}${gbp(Math.abs(r.interestDiff))}`} sub={r.interestDiff >= 0 ? 'you save' : 'you pay more'} />
           </div>
           <Panel title="Side by side">
-            <div className="overflow-hidden rounded-lg border border-outline-variant">
+            <div className="overflow-x-auto rounded-lg border border-outline-variant">
               <table className="w-full text-sm">
                 <thead className="bg-surface-container-low text-left"><tr><th className="px-3 py-2 font-bold"></th><th className="px-3 py-2 font-bold text-right">Now</th><th className="px-3 py-2 font-bold text-right">Consolidated</th></tr></thead>
                 <tbody className="divide-y divide-outline-variant/60">

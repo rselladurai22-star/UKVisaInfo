@@ -162,7 +162,7 @@ export default function MortgageAffordability() {
             </Panel>
 
           <Panel title="Income-multiple scenarios">
-              <div className="overflow-hidden rounded-lg border border-outline-variant">
+              <div className="overflow-x-auto rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left">
                     <tr><th className="px-3 py-2 font-bold">Multiple</th><th className="px-3 py-2 font-bold text-right">Borrow</th><th className="px-3 py-2 font-bold text-right">Price</th><th className="px-3 py-2 font-bold text-right">Monthly</th></tr>
@@ -258,7 +258,7 @@ function AffordabilityGuide() {
             Benefits such as Child Benefit and tax credits may be partially counted. Because policies vary widely, two
             lenders can offer very different amounts on identical paperwork — which is where a broker earns their fee.
           </p>
-          <div className="my-5 overflow-hidden rounded-xl border border-outline-variant">
+          <div className="my-5 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Income type</th><th className="px-4 py-3 font-bold">Typical treatment</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">

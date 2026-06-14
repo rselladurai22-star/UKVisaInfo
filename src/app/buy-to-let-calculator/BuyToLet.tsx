@@ -107,7 +107,7 @@ export default function BuyToLet() {
           </Panel>
 
           <Panel title="Personal vs limited company (SPV)">
-              <div className="overflow-hidden rounded-lg border border-outline-variant">
+              <div className="overflow-x-auto rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left"><tr><th className="px-3 py-2 font-bold"></th><th className="px-3 py-2 font-bold text-right">Personal</th><th className="px-3 py-2 font-bold text-right">SPV company</th></tr></thead>
                   <tbody className="divide-y divide-outline-variant/60">

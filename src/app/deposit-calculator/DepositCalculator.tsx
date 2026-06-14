@@ -90,7 +90,7 @@ export default function DepositCalculator() {
         </GuideSection>
         <GuideSection kicker="Targets" title="5%, 10%, 15% or 25%?">
           <p>A 5% deposit gets you on the ladder but at the highest rates and with the most exposure to negative equity if prices dip. 10–15% is the practical sweet spot for most first-time buyers, balancing achievability against rate. 25% (a 75% mortgage) unlocks some of the best deals. Beyond 40% the rate benefit flattens, so it&apos;s rarely worth delaying a purchase just to push the deposit higher.</p>
-          <div className="my-4 overflow-hidden rounded-xl border border-outline-variant">
+          <div className="my-4 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Deposit</th><th className="px-4 py-3 font-bold">LTV</th><th className="px-4 py-3 font-bold">Typical rate access</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">

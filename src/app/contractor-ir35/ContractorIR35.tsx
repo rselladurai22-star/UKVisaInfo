@@ -66,7 +66,7 @@ export default function ContractorIR35() {
             <Stat label="Difference" value={gbp(Math.abs(r.diff))} sub="outside advantage" />
           </div>
           <Panel title="Side by side (annual)">
-            <div className="overflow-hidden rounded-lg border border-outline-variant">
+            <div className="overflow-x-auto rounded-lg border border-outline-variant">
               <table className="w-full text-sm">
                 <thead className="bg-surface-container-low text-left"><tr><th className="px-3 py-2 font-bold"></th><th className="px-3 py-2 font-bold text-right">Outside (Ltd)</th><th className="px-3 py-2 font-bold text-right">Inside / umbrella</th></tr></thead>
                 <tbody className="divide-y divide-outline-variant/60">
