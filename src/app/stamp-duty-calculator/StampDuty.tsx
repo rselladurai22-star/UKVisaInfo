@@ -208,7 +208,7 @@ export default function StampDuty() {
             Estimates only, not tax advice. Special rules apply to mixed-use property, multiple dwellings, leases,
             shared ownership and companies — confirm with your conveyancer.
           </p>
-          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
+          </>) : <ResultsPlaceholder />}
         </div>
       </section>
 

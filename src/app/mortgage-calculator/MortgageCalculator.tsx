@@ -4,11 +4,9 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRight, Home, SlidersHorizontal, TrendingDown, Info } from 'lucide-react';
 import {
-  gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider, Toggle,
+  gbp, pct, Panel, Stat, Field, MoneyInput, NumberInput, Slider, Toggle, AdvancedOptions,
   Donut, LineChart, BarTrack, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
-
-type Mode = 'simple' | 'advanced' | 'expert';
 
 const ACCENT = '#bb0027';
 const PRIMARY = '#0037b0';
@@ -55,7 +53,6 @@ const fmtYM = (months: number) => {
 };
 
 export default function MortgageCalculator() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(350000);
@@ -77,7 +74,7 @@ export default function MortgageCalculator() {
     const payment = i === 0 ? loan / n : (loan * i) / (1 - Math.pow(1 + i, -n));
 
     const base = simulate(loan, i, payment, 0, 0);
-    const over = simulate(loan, i, payment, mode === 'simple' ? 0 : overMonthly, mode === 'simple' ? 0 : overLump);
+    const over = simulate(loan, i, payment, overMonthly, overLump);
 
     const totalInterestBase = base.totalInterest;
     const interestSaved = totalInterestBase - over.totalInterest;
@@ -103,7 +100,7 @@ export default function MortgageCalculator() {
       return { delta: d, rate: rate + d, payment: pay };
     });
 
-    const overpaying = mode !== 'simple' && (overMonthly > 0 || overLump > 0);
+    const overpaying = overMonthly > 0 || overLump > 0;
     const baseBalances = [loan, ...base.yearly.map((y) => y.balance)];
     const overBalances = [loan, ...over.yearly.map((y) => y.balance)];
     const chartLabels = baseBalances.map((_, idx) => (idx === 0 ? 'Now' : `Year ${idx}`));
@@ -114,7 +111,7 @@ export default function MortgageCalculator() {
       overpaying, baseBalances, overBalances, chartLabels,
       neverAmortises: i > 0 && payment + overMonthly <= loan * i,
     };
-  }, [price, deposit, termYears, rate, fee, capitalise, overMonthly, overLump, mode]);
+  }, [price, deposit, termYears, rate, fee, capitalise, overMonthly, overLump]);
 
   return (
     <div className="bg-surface text-on-surface min-h-screen">
@@ -133,18 +130,6 @@ export default function MortgageCalculator() {
           fees, LTV bands and rate rises. Figures use the standard capital-and-interest (annuity) method
           lenders apply, updated for 2025/26.
         </p>
-        <div className="mt-5">
-          <Segmented<Mode>
-            ariaLabel="Detail level"
-            value={mode}
-            onChange={setMode}
-            options={[
-              { value: 'simple', label: 'Simple' },
-              { value: 'advanced', label: 'Advanced' },
-              { value: 'expert', label: 'Expert' },
-            ]}
-          />
-        </div>
       </section>
 
       {/* Calculator */}
@@ -168,35 +153,33 @@ export default function MortgageCalculator() {
                 <Slider value={rate} onChange={setRate} min={0} max={12} step={0.05} />
               </Field>
 
-              {mode !== 'simple' && (
-                <>
-                  <div className="pt-3 border-t border-outline-variant grid grid-cols-2 gap-3">
-                    <Field label="Product / arrangement fee">
-                      <MoneyInput value={fee} onChange={setFee} step={100} />
-                    </Field>
-                    <div className="flex items-end">
-                      <Toggle checked={capitalise} onChange={setCapitalise} label="Add fee to loan" />
-                    </div>
-                  </div>
-                  <div className="pt-3 border-t border-outline-variant grid grid-cols-2 gap-3">
-                    <Field label="Monthly overpayment">
-                      <MoneyInput value={overMonthly} onChange={setOverMonthly} step={50} />
-                    </Field>
-                    <Field label="Annual lump sum">
-                      <MoneyInput value={overLump} onChange={setOverLump} step={500} />
-                    </Field>
-                  </div>
-                  <p className="text-[11px] text-on-surface-variant flex items-start gap-1.5">
-                    <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
-                    Most lenders allow penalty-free overpayments of up to 10% of the balance per year during a fixed deal.
-                  </p>
-                </>
-              )}
             </div>
           </Panel>
 
-          {mode === 'expert' && (
-            <Panel title="Rate sensitivity (stress test)" icon={<SlidersHorizontal className="h-4 w-4" />}>
+          <AdvancedOptions label="Fees & overpayments" hint="Add a product fee and model overpayments to clear the loan sooner">
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Product / arrangement fee">
+                <MoneyInput value={fee} onChange={setFee} step={100} />
+              </Field>
+              <div className="flex items-end">
+                <Toggle checked={capitalise} onChange={setCapitalise} label="Add fee to loan" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Monthly overpayment">
+                <MoneyInput value={overMonthly} onChange={setOverMonthly} step={50} />
+              </Field>
+              <Field label="Annual lump sum">
+                <MoneyInput value={overLump} onChange={setOverLump} step={500} />
+              </Field>
+            </div>
+            <p className="text-[11px] text-on-surface-variant flex items-start gap-1.5">
+              <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+              Most lenders allow penalty-free overpayments of up to 10% of the balance per year during a fixed deal.
+            </p>
+          </AdvancedOptions>
+
+          <Panel title="Rate sensitivity (stress test)" icon={<SlidersHorizontal className="h-4 w-4" />}>
               <p className="text-xs text-on-surface-variant mb-3">
                 Lenders test affordability at higher rates. Here&apos;s your monthly payment if rates change at renewal:
               </p>
@@ -214,7 +197,6 @@ export default function MortgageCalculator() {
                 </table>
               </div>
             </Panel>
-          )}
           <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
@@ -283,15 +265,13 @@ export default function MortgageCalculator() {
               </>
             ) : (
               <p className="mt-3 text-xs text-on-surface-variant">
-                Add a monthly or lump-sum overpayment in Advanced mode to see how much faster you could be
+                Add a monthly or lump-sum overpayment under Advanced options to see how much faster you could be
                 mortgage-free.
               </p>
             )}
           </Panel>
 
-          {mode === 'expert' && (
-            <>
-              <Panel title="LTV band analysis">
+          <Panel title="LTV band analysis">
                 <p className="text-sm text-on-surface-variant mb-3">
                   Lenders price in bands. You&apos;re at <strong className="text-primary">{pct(r.ltv)}</strong> LTV.
                   {r.nextBand
@@ -344,14 +324,12 @@ export default function MortgageCalculator() {
                   </table>
                 </div>
               </Panel>
-            </>
-          )}
 
           <p className="text-[11px] text-on-surface-variant">
             Estimates only, not financial advice or a mortgage offer. Lenders apply their own criteria, rounding and
             day-count conventions. Verify figures with a regulated adviser before committing.
           </p>
-          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
+          </>) : <ResultsPlaceholder />}
         </div>
       </section>
 
@@ -431,7 +409,7 @@ function Guide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Now add a £150/month overpayment from day one. You&apos;d clear the mortgage around 3 years early and
             save roughly £30,000 in interest — a guaranteed, tax-free return equal to your mortgage rate. Use the
-            calculator above in Advanced mode to model your own numbers.
+            calculator above — open Advanced options to model overpayments and fees.
           </p>
         </section>
 

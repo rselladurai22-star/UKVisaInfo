@@ -198,7 +198,7 @@ export default function BuyVsRent() {
             A model, not a prediction. Results are highly sensitive to house-price growth and investment-return
             assumptions, which no one can know in advance. Treat it as a way to test scenarios, not a forecast.
           </p>
-          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
+          </>) : <ResultsPlaceholder />}
         </div>
       </section>
 

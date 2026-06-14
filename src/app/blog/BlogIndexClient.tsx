@@ -103,7 +103,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
       </section>
 
       {/* Tag filter strip */}
-      <div className="sticky top-[60px] md:top-[64px] z-30 bg-surface/90 backdrop-blur border-y border-outline-variant/60">
+      <div className="sticky top-[56px] z-30 bg-surface/90 backdrop-blur border-y border-outline-variant/60">
         <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
           <Filter className="w-4 h-4 text-on-surface-variant flex-shrink-0 ml-2" />
           <Chip
@@ -189,8 +189,8 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                             {featured.description}
                           </p>
                         </div>
-                        <div className="mt-6 pt-4 border-t border-outline-variant/50 flex items-center justify-between text-[13px] text-on-surface-variant/80">
-                          <div className="flex items-center gap-4">
+                        <div className="mt-6 pt-4 border-t border-outline-variant/50 flex flex-col items-start gap-3 text-[13px] text-on-surface-variant/80 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                             <span className="flex items-center gap-1.5">
                               <Calendar className="w-3.5 h-3.5 text-on-surface-variant" /> {formatDate(featured.date)}
                             </span>
@@ -209,7 +209,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                 );
               })()}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {second && (() => {
                   const category = postCategory(second);
                   const catMeta = getCategoryMeta(category);

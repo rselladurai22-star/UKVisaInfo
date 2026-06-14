@@ -216,7 +216,7 @@ export default function RentalYield() {
             Estimates only, not tax or investment advice. Section 24 figures assume an individual landlord on an
             interest-only mortgage and exclude other income, allowances and SPV ownership. Verify with an accountant.
           </p>
-          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
+          </>) : <ResultsPlaceholder />}
         </div>
       </section>
 

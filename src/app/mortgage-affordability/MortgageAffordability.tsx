@@ -207,7 +207,7 @@ export default function MortgageAffordability() {
             An estimate, not a mortgage offer or a guarantee of lending. Each lender scores income, credit history,
             employment type and outgoings differently. A broker can match you to the most generous lender for your profile.
           </p>
-          </>) : <ResultsPlaceholder onClick={() => setDone(true)} />}
+          </>) : <ResultsPlaceholder />}
         </div>
       </section>
 

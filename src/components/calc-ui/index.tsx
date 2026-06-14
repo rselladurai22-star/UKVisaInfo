@@ -17,7 +17,7 @@ import {
   type ReactNode,
 } from 'react';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight, Calculator } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calculator, SlidersHorizontal } from 'lucide-react';
 
 /* ── formatting ─────────────────────────────────────────────────── */
 
@@ -548,6 +548,48 @@ function FAQItem({ q, a }: { q: string; a: ReactNode }) {
   );
 }
 
+/* ── Advanced options disclosure ─────────────────────────────────
+   Replaces Simple/Advanced/Expert mode tabs: mandatory inputs stay
+   visible, optional inputs live behind this collapsible. Everything
+   remains accessible to power users — nothing is hidden behind a mode. */
+export function AdvancedOptions({
+  children,
+  label = 'Advanced options',
+  hint,
+  defaultOpen = false,
+}: {
+  children: ReactNode;
+  label?: string;
+  hint?: string;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  const id = useId();
+  return (
+    <div className="rounded-xl border border-outline-variant overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="w-full flex items-center gap-2.5 px-4 py-3 text-left bg-surface-container-lowest hover:bg-surface-container transition-colors"
+      >
+        <SlidersHorizontal className="h-4 w-4 shrink-0 text-primary" />
+        <span className="flex-1">
+          <span className="block text-sm font-bold text-on-surface">{label}</span>
+          {hint && <span className="block text-[12px] text-on-surface-variant">{hint}</span>}
+        </span>
+        <ChevronDown className={`h-4 w-4 shrink-0 text-on-surface-variant transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div id={id} className="px-4 py-4 border-t border-outline-variant space-y-4">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── page scaffold (mobile-first) ───────────────────────────────── */
 
 export function CalcShell({
@@ -601,7 +643,7 @@ export function CalcShell({
           <CalcButton done={done} onClick={onCalc} label={calcLabel} />
         </div>
         <div ref={resultsRef} className="lg:col-span-7 space-y-4 sm:space-y-5 lg:sticky lg:top-24 self-start scroll-mt-20">
-          {done ? results : <ResultsPlaceholder onClick={onCalc} label={calcLabel} />}
+          {done ? results : <ResultsPlaceholder label={calcLabel} />}
         </div>
       </section>
 
@@ -621,17 +663,14 @@ export function CalcButton({ done, onClick, label = 'Calculate' }: { done: boole
   );
 }
 
-export function ResultsPlaceholder({ onClick, label = 'Calculate' }: { onClick: () => void; label?: string }) {
+export function ResultsPlaceholder({ label = 'Calculate' }: { label?: string }) {
   return (
     <div className="bg-surface-container-lowest border border-dashed border-outline-variant rounded-xl p-8 sm:p-10 text-center flex flex-col items-center justify-center min-h-[260px]">
       <div className="w-12 h-12 rounded-2xl bg-primary-soft/30 text-primary flex items-center justify-center mb-4">
         <Calculator className="h-6 w-6" />
       </div>
       <h3 className="font-display font-bold text-on-surface">Your results appear here</h3>
-      <p className="text-sm text-on-surface-variant mt-1 max-w-xs">Enter your details, then press {label} to see the full breakdown.</p>
-      <button onClick={onClick} className="mt-5 inline-flex items-center gap-2 bg-primary text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-primary-container transition-colors">
-        <Calculator className="h-4 w-4" /> {label}
-      </button>
+      <p className="text-sm text-on-surface-variant mt-1 max-w-xs">Enter your details, then press <span className="font-semibold text-on-surface">{label}</span> to see the full breakdown.</p>
     </div>
   );
 }
