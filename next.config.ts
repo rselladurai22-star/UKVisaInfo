@@ -10,6 +10,13 @@ const config: NextConfig = {
   async redirects() {
     return [
       {
+        // Canonical host: redirect www → apex (avoids duplicate content on two hosts)
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.ukvisainfo.co.uk' }],
+        destination: 'https://ukvisainfo.co.uk/:path*',
+        permanent: true,
+      },
+      {
         source: '/visa-switching',
         destination: '/visa-types/visa-switching',
         permanent: true,
