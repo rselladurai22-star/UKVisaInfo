@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const title = `Living in ${c.name} on a UK Visa — Cost, Jobs & Sponsors 2026`;
   const description = `Move to ${c.name}: monthly cost of living, top hiring sectors, popular neighbourhoods for newcomers, NHS access and sponsor activity.`;
   // Stubs are short data-card pages — keep them browsable but out of search.
-  const isStub = c.status === 'stub';
+  // Conservative: only an explicit 'full' guide is indexable (matches /from).
+  const isStub = c.status !== 'full';
   return {
     title, description,
     alternates: { canonical: `/uk-cities/${city}` },

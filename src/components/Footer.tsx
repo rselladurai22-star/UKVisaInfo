@@ -28,6 +28,16 @@ const COLS: { h: string; links: [string, string][] }[] = [
     ],
   },
   {
+    h: 'Relocation guides',
+    links: [
+      ['/from', 'UK visas by country'],
+      ['/from/india', 'Visa from India'],
+      ['/uk-cities', 'Living in UK cities'],
+      ['/uk-cities/london', 'Living in London'],
+      ['/uk-cities/manchester', 'Living in Manchester'],
+    ],
+  },
+  {
     h: 'Site',
     links: [
       ['/about', 'About'],
@@ -44,7 +54,7 @@ export default function Footer() {
   return (
     <footer className="border-t-2 border-[#0b0f19] bg-[#fbfbf9]">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 py-10 sm:py-14">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-[1.4fr_1fr_1fr_1fr] sm:gap-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* brand */}
           <div>
             <Link href="/" aria-label="UKDesk home" className="inline-flex items-center gap-2.5 no-underline">
