@@ -179,24 +179,6 @@ export default function MortgageCalculator() {
             </p>
           </AdvancedOptions>
 
-          <Panel title="Rate sensitivity (stress test)" icon={<SlidersHorizontal className="h-4 w-4" />}>
-              <p className="text-xs text-on-surface-variant mb-3">
-                Lenders test affordability at higher rates. Here&apos;s your monthly payment if rates change at renewal:
-              </p>
-              <div className="overflow-hidden rounded-lg border border-outline-variant">
-                <table className="w-full text-sm">
-                  <tbody>
-                    {r.sens.map((s) => (
-                      <tr key={s.delta} className={`border-b border-outline-variant/60 last:border-0 ${s.delta === 0 ? 'bg-primary-soft/15' : ''}`}>
-                        <td className="px-3 py-2 text-on-surface-variant">{s.delta === 0 ? 'Current' : `${s.delta > 0 ? '+' : ''}${s.delta}%`}</td>
-                        <td className="px-3 py-2 font-semibold tabular-nums">{pct(s.rate, 2)}</td>
-                        <td className="px-3 py-2 text-right font-bold tabular-nums text-primary">{gbp(s.payment, 2)}/mo</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Panel>
           <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
@@ -233,6 +215,25 @@ export default function MortgageCalculator() {
                 <BarTrack segments={[{ value: r.loan, color: PRIMARY }, { value: r.totalInterestBase, color: ACCENT }]} />
                 <div className="flex justify-between pt-1"><span className="text-on-surface-variant">Total of payments</span><span className="font-bold tabular-nums">{gbp(r.totalPaid)}</span></div>
               </div>
+            </div>
+          </Panel>
+
+          <Panel title="Rate sensitivity (stress test)" icon={<SlidersHorizontal className="h-4 w-4" />}>
+            <p className="text-xs text-on-surface-variant mb-3">
+              Lenders test affordability at higher rates. Here&apos;s your monthly payment if rates change at renewal:
+            </p>
+            <div className="overflow-hidden rounded-lg border border-outline-variant">
+              <table className="w-full text-sm">
+                <tbody>
+                  {r.sens.map((s) => (
+                    <tr key={s.delta} className={`border-b border-outline-variant/60 last:border-0 ${s.delta === 0 ? 'bg-primary-soft/15' : ''}`}>
+                      <td className="px-3 py-2 text-on-surface-variant">{s.delta === 0 ? 'Current' : `${s.delta > 0 ? '+' : ''}${s.delta}%`}</td>
+                      <td className="px-3 py-2 font-semibold tabular-nums">{pct(s.rate, 2)}</td>
+                      <td className="px-3 py-2 text-right font-bold tabular-nums text-primary">{gbp(s.payment, 2)}/mo</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Panel>
 
