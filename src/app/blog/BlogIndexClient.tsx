@@ -104,7 +104,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
   return (
     <main className="bg-surface text-on-surface min-h-screen">
       {/* Page hero */}
-      <section className="relative pt-[88px] md:pt-[104px] pb-10 md:pb-14 bg-surface border-b border-outline-variant/60 overflow-hidden">
+      <section className="relative pt-[72px] sm:pt-[84px] md:pt-[96px] pb-10 md:pb-14 bg-surface border-b border-outline-variant/60 overflow-hidden">
         {/* Soft atmospheric glow elements */}
         <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
         <div className="absolute bottom-5 right-20 w-96 h-96 rounded-full bg-primary/4 blur-[100px] pointer-events-none" />

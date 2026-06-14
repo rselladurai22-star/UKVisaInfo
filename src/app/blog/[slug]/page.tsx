@@ -245,15 +245,15 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* ═══════════════════════
           EDITORIAL HEADER
       ═══════════════════════ */}
-      <header className="bg-surface border-b border-outline-variant/60 pt-[88px] md:pt-[104px] pb-6 sm:pb-8">
+      <header className="bg-surface border-b border-outline-variant/60 pt-[72px] sm:pt-[84px] md:pt-[96px] pb-6 sm:pb-8">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Back nav / breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
-            <Link href="/" className="hover:text-primary flex items-center gap-1"><Home className="h-3.5 w-3.5" /> Home</Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-            <Link href="/blog" className="hover:text-primary">Guides</Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-            <span className="text-primary font-bold">Read</span>
+          <nav aria-label="Breadcrumb" className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
+            <Link href="/" className="hover:text-primary flex items-center gap-1 whitespace-nowrap"><Home className="h-3.5 w-3.5 flex-shrink-0" /> Home</Link>
+            <ChevronRight className="h-3.5 w-3.5 opacity-60 flex-shrink-0" />
+            <Link href="/blog" className="hover:text-primary whitespace-nowrap">Guides</Link>
+            <ChevronRight className="h-3.5 w-3.5 opacity-60 flex-shrink-0" />
+            <span className="text-primary font-bold whitespace-nowrap">Read</span>
           </nav>
 
           {/* Category pill / tag info */}
@@ -298,9 +298,11 @@ export default async function BlogPostPage({ params }: RouteParams) {
               <Clock className="w-3.5 h-3.5 text-on-surface-variant" />
               {post.readMinutes} min read
             </span>
-            <span className="flex items-center gap-1.5 sm:ml-auto">
-              <span className="w-1.5 h-1.5 rounded-full bg-success" />
-              By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors">{PRIMARY_EDITOR.name}</Link>
+            <span className="flex items-center gap-1.5 sm:ml-auto whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
+              <span className="text-on-surface-variant/80">
+                By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors">{PRIMARY_EDITOR.name}</Link>
+              </span>
             </span>
           </div>
         </div>
