@@ -145,6 +145,17 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           color: var(--color-primary);
           font-weight: 700;
         }
+        @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
+          .article-body .lead-para::first-letter {
+            float: none;
+            font-size: inherit;
+            line-height: inherit;
+            margin-top: 0;
+            -webkit-initial-letter: 2;
+            initial-letter: 2;
+            margin-right: 0.22em;
+          }
+        }
       `}</style>
     </div>
   );

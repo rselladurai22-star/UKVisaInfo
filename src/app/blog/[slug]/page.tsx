@@ -300,8 +300,8 @@ export default async function BlogPostPage({ params }: RouteParams) {
             </span>
             <span className="flex items-center gap-1.5 sm:ml-auto whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
-              <span className="text-on-surface-variant/80">
-                By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors">{PRIMARY_EDITOR.name}</Link>
+              <span className="text-on-surface-variant/80 whitespace-nowrap">
+                By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors whitespace-nowrap">{PRIMARY_EDITOR.name}</Link>
               </span>
             </span>
           </div>
@@ -432,6 +432,22 @@ export default async function BlogPostPage({ params }: RouteParams) {
           .article-body > p:first-of-type::first-letter {
             font-size: 2.8em;
             margin-right: 0.12em;
+          }
+        }
+        @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
+          .article-body > p:first-of-type::first-letter {
+            float: none;
+            font-size: inherit;
+            line-height: inherit;
+            margin-top: 0;
+            -webkit-initial-letter: 2;
+            initial-letter: 2;
+            margin-right: 0.22em;
+          }
+          @media (max-width: 640px) {
+            .article-body > p:first-of-type::first-letter {
+              margin-right: 0.18em;
+            }
           }
         }
       `}</style>
