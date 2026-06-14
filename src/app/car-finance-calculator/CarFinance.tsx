@@ -61,7 +61,7 @@ export default function CarFinance() {
       }
       results={
         <>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Stat label="PCP / month" value={gbp(r.pcp, 0)} sub="lowest monthly" tone="dark" />
             <Stat label="HP / month" value={gbp(r.hp, 0)} sub="own at end" tone="accent" />
             <Stat label="Loan / month" value={gbp(r.loan, 0)} sub="own now" />

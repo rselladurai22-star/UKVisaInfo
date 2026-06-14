@@ -71,7 +71,7 @@ export default function DebtPayoffPlanner() {
                     <input value={d.name} onChange={(e) => setDebts((ds) => ds.map((x) => (x.id === d.id ? { ...x, name: e.target.value } : x)))} className="bg-transparent text-sm font-semibold outline-none border-b border-transparent focus:border-primary" />
                     {debts.length > 1 && <button onClick={() => remove(d.id)} aria-label="Remove" className="text-on-surface-variant hover:text-red-600"><Trash2 className="h-4 w-4" /></button>}
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     <Field label="Balance"><MoneyInput value={d.balance} onChange={(v) => update(d.id, 'balance', v)} step={100} /></Field>
                     <Field label="APR %"><MoneyInput value={d.apr} onChange={(v) => update(d.id, 'apr', v)} step={1} /></Field>
                     <Field label="Min /mo"><MoneyInput value={d.min} onChange={(v) => update(d.id, 'min', v)} step={5} /></Field>

@@ -258,7 +258,7 @@ export default function MortgageCalculator() {
                   <strong>{fmtYM(r.base.months)}</strong> — that&apos;s{' '}
                   <strong className="text-secondary">{fmtYM(r.monthsSaved)} early</strong>.
                 </div>
-                <div className="grid grid-cols-3 gap-3 mt-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3">
                   <Stat label="Interest saved" value={gbp(r.interestSaved)} tone="primary" />
                   <Stat label="Time saved" value={fmtYM(r.monthsSaved)} tone="primary" />
                   <Stat label="Paid off" value={r.endLabel} tone="primary" />
