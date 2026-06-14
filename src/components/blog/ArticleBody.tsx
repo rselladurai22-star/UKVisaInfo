@@ -99,6 +99,12 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           text-wrap: balance;
         }
         .article-body p { text-wrap: pretty; }
+        @media (min-width: 640px) {
+          .article-body p {
+            text-align: justify;
+            text-justify: inter-word;
+          }
+        }
 
         /* Unordered list — primary bullet */
         .article-body .md-ul { list-style: none; padding-left: 0; }

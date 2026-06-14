@@ -246,7 +246,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           EDITORIAL HEADER
       ═══════════════════════ */}
       <header className="bg-surface border-b border-outline-variant/60 pt-6 sm:pt-8 md:pt-10 pb-5 sm:pb-6">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Back nav / breadcrumbs */}
           <nav aria-label="Breadcrumb" className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
             <Link href="/" className="hover:text-primary flex items-center gap-1 whitespace-nowrap"><Home className="h-3.5 w-3.5 flex-shrink-0" /> Home</Link>
@@ -312,7 +312,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           3-COLUMN ARTICLE LAYOUT
       ═══════════════════════ */}
       <div className="bg-surface text-on-surface min-h-screen">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 md:py-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-6 md:py-10">
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10">
 
             {/* ── LEFT RAIL: TOC ── */}
