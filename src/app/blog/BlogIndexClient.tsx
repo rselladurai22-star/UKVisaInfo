@@ -309,7 +309,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                               <h2 className="font-display text-on-surface text-lg md:text-[1.4rem] font-bold leading-snug group-hover:text-primary transition-colors mb-2">
                                 {featured.title}
                               </h2>
-                              <p className="text-on-surface-variant text-[13px] md:text-[14px] leading-relaxed line-clamp-2">
+                              <p className="text-on-surface-variant text-[13px] md:text-[14px] leading-relaxed line-clamp-2 text-justify hyphens-auto">
                                 {featured.description}
                               </p>
                             </div>
@@ -372,7 +372,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                             <h3 className="font-display text-on-surface text-[16px] md:text-[18px] font-bold leading-snug flex-1 group-hover:text-primary transition-colors">
                               {second.title}
                             </h3>
-                            <p className="mt-2 text-on-surface-variant text-[13px] leading-relaxed line-clamp-3">
+                            <p className="mt-2 text-on-surface-variant text-[13px] leading-relaxed line-clamp-3 text-justify hyphens-auto">
                               {second.description}
                             </p>
                             <div className="mt-5 pt-3 border-t border-outline-variant/50 flex items-center justify-between text-[13px] text-on-surface-variant/80">
@@ -428,7 +428,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                               {post.title}
                             </h3>
 
-                            <p className="mt-2 text-[12.5px] text-on-surface-variant leading-relaxed line-clamp-2">
+                            <p className="mt-2 text-[12.5px] text-on-surface-variant leading-relaxed line-clamp-2 text-justify hyphens-auto">
                               {post.description}
                             </p>
 

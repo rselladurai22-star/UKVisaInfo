@@ -98,12 +98,13 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           font-family: var(--font-grotesk), ui-sans-serif, sans-serif;
           text-wrap: balance;
         }
-        .article-body p { text-wrap: pretty; }
-        @media (min-width: 640px) {
-          .article-body p {
-            text-align: justify;
-            text-justify: inter-word;
-          }
+        .article-body p {
+          text-wrap: pretty;
+          text-align: justify;
+          text-justify: inter-word;
+          /* hyphenate so justify stays tidy on narrow mobile columns */
+          -webkit-hyphens: auto;
+          hyphens: auto;
         }
 
         /* Unordered list — primary bullet */
