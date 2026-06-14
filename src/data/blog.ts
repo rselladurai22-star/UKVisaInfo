@@ -22,6 +22,9 @@ export interface BlogPost {
   body: string; // markdown
   /** Topic silo. Optional on legacy posts — inferred as 'visa' if absent. */
   category?: BlogCategory;
+  /** Optional thumbnail override (path/URL). Falls back to the category
+   *  image pool, then a generated SVG illustration. */
+  image?: string;
   /** Calculators/tools to cross-link from the article (cluster model). */
   relatedTools?: RelatedTool[];
 }
