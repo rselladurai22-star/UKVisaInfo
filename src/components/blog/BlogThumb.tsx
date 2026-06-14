@@ -24,10 +24,26 @@ function pooledImage(category: string, slug: string): string | null {
   return `/blog/${category}-${(hashStr(slug) % n) + 1}.webp`;
 }
 
+/* Slugs that have custom, individual high-quality thumbnails generated in /public/blog/thumbs/ */
+const CUSTOM_THUMBS = new Set([
+  'uk-skilled-worker-visa-salary-threshold-2026',
+  'brp-vs-evisa-2026-whats-changing',
+  'uk-student-visa-cost-2026-full-breakdown',
+  'uk-family-visa-minimum-income-2026-what-counts',
+  'uk-graduate-visa-2026-no-sponsor-needed',
+  'stamp-duty-by-price-table-2025-26',
+  'how-much-mortgage-can-i-borrow-by-salary-table-2025-26',
+  'dividend-tax-by-amount-table-2025-26',
+  'pension-pot-for-retirement-income-table-2025-26',
+  'uk-salary-after-tax-take-home-table-2025-26',
+  'universal-credit-taper-explained-2025-26',
+  'ofgem-energy-price-cap-explained-2025-26',
+]);
+
 /**
  * Blog card thumbnail. Renders the post's real (AI-generated) image when one
- * is available — an explicit `image` override, otherwise a category pool image
- * chosen by slug. Falls back to a generated SVG illustration if neither exists.
+ * is available — an explicit `image` override, a custom post thumbnail, or a 
+ * category pool image. Falls back to a generated SVG illustration if none exists.
  */
 export default function BlogThumb({
   slug,
@@ -48,7 +64,7 @@ export default function BlogThumb({
   priority?: boolean;
   sizes?: string;
 }) {
-  const src = image ?? pooledImage(category, slug);
+  const src = image ?? (CUSTOM_THUMBS.has(slug) ? `/blog/thumbs/${slug}.jpg` : pooledImage(category, slug));
 
   if (src) {
     return (
