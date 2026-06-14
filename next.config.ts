@@ -85,18 +85,8 @@ const config: NextConfig = {
         permanent: true,
       },
       {
-        source: '/sole-trader-vs-limited',
-        destination: '/director-dividend',
-        permanent: true,
-      },
-      {
         source: '/pension-allowance',
         destination: '/salary-sacrifice-calculator',
-        permanent: true,
-      },
-      {
-        source: '/vat-calculator',
-        destination: '/take-home-pay',
         permanent: true,
       },
     ];

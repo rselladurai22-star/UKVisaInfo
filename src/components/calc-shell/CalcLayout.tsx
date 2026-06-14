@@ -13,7 +13,7 @@ export interface CalcLayoutProps {
   title: string;
   deck: string;
   verified?: string;
-  /** Canonical path for WebApplication JSON-LD. */
+  /** Canonical path (used by callers for metadata/canonical links). */
   url?: string;
   /** The interactive calculator (client component). */
   children: ReactNode;
@@ -32,14 +32,6 @@ export default function CalcLayout({
   url, children, methodology, article, faqs, sidebar, disclaimer,
   editorVerified = 'May 2026', hideByline = false,
 }: CalcLayoutProps) {
-  const jsonLd = url ? {
-    '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: title, description: deck,
-    url: `https://ukvisainfo.co.uk${url}`,
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Web', inLanguage: 'en-GB',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-  } : null;
-
   const main = (
     <div style={{ minWidth: 0 }}>
       {!hideByline && (
@@ -62,7 +54,6 @@ export default function CalcLayout({
 
   return (
     <div className="bg-surface text-on-surface min-h-screen">
-      {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       {faqs && faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
       {/* ───────────── HERO ───────────── */}

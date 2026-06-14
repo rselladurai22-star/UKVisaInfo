@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import StampDuty from './StampDuty';
 import FaqJsonLd from '../../components/calc-shell/FaqJsonLd';
-import { primaryEditorSchema } from '../../data/editorialTeam';
 
 export const metadata: Metadata = {
   title: 'Stamp Duty Calculator 2025/26 — SDLT for England & NI | UKDesk',
@@ -33,20 +32,9 @@ export default function Page() {
       { '@type': 'ListItem', position: 3, name: 'Stamp Duty calculator', item: 'https://ukvisainfo.co.uk/stamp-duty-calculator' },
     ],
   };
-  const webAppJsonLd = {
-    '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'UK Stamp Duty Calculator',
-    url: 'https://ukvisainfo.co.uk/stamp-duty-calculator',
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Any',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    author: primaryEditorSchema('https://ukvisainfo.co.uk'),
-    publisher: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
-  };
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <FaqJsonLd faqs={FAQS} />
       <StampDuty />
     </>

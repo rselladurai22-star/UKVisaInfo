@@ -1,0 +1,25 @@
+# UKDesk (ukvisainfo.co.uk)
+
+> Free UK calculators, visa routes and plain-English explainers, checked against official sources (GOV.UK, HMRC, ONS). No sign-up, no paywall. All figures are estimates, not financial, legal or tax advice.
+
+## Tools
+- [Tool index](https://ukvisainfo.co.uk/tools): All live calculators and checkers
+- [Take-home pay calculator](https://ukvisainfo.co.uk/take-home-pay): Net pay after Income Tax, NI, pension and student loan
+- [Mortgage calculator](https://ukvisainfo.co.uk/mortgage-calculator): Repayments, interest and overpayments
+- [Mortgage affordability](https://ukvisainfo.co.uk/mortgage-affordability): How much you can borrow
+- [Stamp duty (SDLT) calculator](https://ukvisainfo.co.uk/stamp-duty-calculator): England & NI, inc. surcharges
+- [Council tax band](https://ukvisainfo.co.uk/council-tax-band): Band lookup by postcode
+- [VAT calculator](https://ukvisainfo.co.uk/vat-calculator): Add or remove 20% VAT
+- [IHS calculator](https://ukvisainfo.co.uk/ihs-calculator): Immigration Health Surcharge cost
+- [Skilled Worker points check](https://ukvisainfo.co.uk/skilled-worker-points-check): 70-point eligibility
+
+## Guides
+- [Guides & analysis](https://ukvisainfo.co.uk/blog): Plain-English UK visa, money and property guides
+- [UK visa routes](https://ukvisainfo.co.uk/visa-types): Skilled Worker, family, study and more
+- [Settlement & ILR](https://ukvisainfo.co.uk/settlement): Indefinite leave to remain
+
+## About
+- [About UKDesk](https://ukvisainfo.co.uk/about): Who we are
+- [Editorial policy](https://ukvisainfo.co.uk/editorial-policy): How we research and verify
+- [Sources](https://ukvisainfo.co.uk/sources): Official sources we cite
+- [Sitemap](https://ukvisainfo.co.uk/sitemap.xml)

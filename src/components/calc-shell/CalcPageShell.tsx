@@ -89,17 +89,8 @@ export default function CalcPageShell({
   editorVerified = DEFAULT_VERIFIED, hideByline = false, methodology,
   children,
 }: Props) {
-  const jsonLd = url ? {
-    '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: title, description: deck,
-    url: `https://ukvisainfo.co.uk${url}`,
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Web', inLanguage: 'en-GB',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-  } : null;
-
   return (
     <div className="bg-surface text-on-surface min-h-screen" style={{ fontFamily: TEXT }}>
-      {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       {faqs && faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
       {/* ── Hero ─────────────────────────────────────────── */}

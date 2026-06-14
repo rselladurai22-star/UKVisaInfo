@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import RentalYield from './RentalYield';
 import FaqJsonLd from '../../components/calc-shell/FaqJsonLd';
-import { primaryEditorSchema } from '../../data/editorialTeam';
 
 export const metadata: Metadata = {
   title: 'Rental Yield Calculator 2025/26 — Gross & Net Yield, ICR & ROI | UKDesk',
@@ -24,18 +23,8 @@ const FAQS = [
 ];
 
 export default function Page() {
-  const webAppJsonLd = {
-    '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'UK Rental Yield Calculator',
-    url: 'https://ukvisainfo.co.uk/rental-yield-calculator',
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Any',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    author: primaryEditorSchema('https://ukvisainfo.co.uk'),
-    publisher: { '@type': 'Organization', name: 'UKDesk', url: 'https://ukvisainfo.co.uk' },
-  };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <FaqJsonLd faqs={FAQS} />
       <RentalYield />
     </>
