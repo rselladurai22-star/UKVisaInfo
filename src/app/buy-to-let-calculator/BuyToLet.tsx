@@ -2,12 +2,11 @@
 
 import { useMemo, useState } from 'react';
 import {
-  gbp, pct, CalcShell, Panel, Segmented, Stat, Field, MoneyInput, Slider, Choice,
+  gbp, pct, CalcShell, Panel, AdvancedOptions, Stat, Field, MoneyInput, Slider, Choice,
   Guide, GuideSection, Callout, Mistakes, FAQ, RelatedTools,
 } from '../../components/calc-ui';
 import { PROPERTY_RELATED } from '../ltv-calculator/LtvCalculator';
 
-type Mode = 'simple' | 'advanced' | 'expert';
 type Band = 'basic' | 'higher' | 'additional';
 
 const PRIMARY = '#0037b0';
@@ -16,7 +15,6 @@ const BAND_RATE: Record<Band, number> = { basic: 0.2, higher: 0.4, additional: 0
 const STRESS = 0.055;
 
 export default function BuyToLet() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [price, setPrice] = useState(200000);
   const [depositPct, setDepositPct] = useState(25);
   const [rent, setRent] = useState(1100);
@@ -32,7 +30,7 @@ export default function BuyToLet() {
     const loan = price * (1 - depositPct / 100);
     const deposit = price * (depositPct / 100);
     const interest = loan * (rate / 100);
-    const costs = mode === 'simple' ? annualRent * 0.28 : annualRent * (mgmtPct + maintPct + voidPct) / 100 + insurance;
+    const costs = annualRent * (mgmtPct + maintPct + voidPct) / 100 + insurance;
 
     const grossYield = price ? (annualRent / price) * 100 : 0;
     const netYield = price ? ((annualRent - costs) / price) * 100 : 0;
@@ -59,14 +57,13 @@ export default function BuyToLet() {
       personalTax, personalNet, companyTax, companyNet, ctRate, roi,
       icr, icrReq, icrPass: icr >= icrReq, deposit,
     };
-  }, [price, depositPct, rent, rate, mgmtPct, maintPct, voidPct, insurance, band, mode]);
+  }, [price, depositPct, rent, rate, mgmtPct, maintPct, voidPct, insurance, band]);
 
   return (
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Property', href: '/category/property' }, { label: 'Buy-to-Let' }]}
       title="Buy-to-Let Calculator"
       subtitle="Model a buy-to-let end to end: yield, cash flow, the ICR mortgage stress test, the Section 24 tax hit for individuals, and whether a limited company (SPV) would keep more of your profit."
-      controls={<Segmented<Mode> ariaLabel="Detail level" value={mode} onChange={setMode} options={[{ value: 'simple', label: 'Simple' }, { value: 'advanced', label: 'Advanced' }, { value: 'expert', label: 'Expert' }]} />}
       inputs={
         <>
           <Panel title="Property & rent">
@@ -77,23 +74,17 @@ export default function BuyToLet() {
               <Field label={`Mortgage rate — ${pct(rate, 2)}`} hint="Interest-only (typical for BTL)"><Slider value={rate} onChange={setRate} min={0} max={10} step={0.05} /></Field>
             </div>
           </Panel>
-          {mode !== 'simple' && (
-            <Panel title="Costs & tax">
-              <div className="space-y-4">
-                <Field label={`Management — ${mgmtPct}%`}><Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} /></Field>
-                <Field label={`Maintenance — ${maintPct}%`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} /></Field>
-                <Field label={`Voids — ${voidPct}%`}><Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} /></Field>
-                <Field label="Insurance / yr"><MoneyInput value={insurance} onChange={setInsurance} step={50} /></Field>
-                {mode === 'expert' && (
-                  <Field label="Your income tax band">
-                    <Choice<Band> name="band" value={band} onChange={setBand} options={[
-                      { value: 'basic', label: 'Basic (20%)' }, { value: 'higher', label: 'Higher (40%)' }, { value: 'additional', label: 'Additional (45%)' },
-                    ]} />
-                  </Field>
-                )}
-              </div>
-            </Panel>
-          )}
+          <AdvancedOptions label="Costs & tax" hint="Pre-filled with typical figures — adjust to itemise costs and set your tax band">
+            <Field label={`Management — ${mgmtPct}%`}><Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} /></Field>
+            <Field label={`Maintenance — ${maintPct}%`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} /></Field>
+            <Field label={`Voids — ${voidPct}%`}><Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} /></Field>
+            <Field label="Insurance / yr"><MoneyInput value={insurance} onChange={setInsurance} step={50} /></Field>
+            <Field label="Your income tax band">
+              <Choice<Band> name="band" value={band} onChange={setBand} options={[
+                { value: 'basic', label: 'Basic (20%)' }, { value: 'higher', label: 'Higher (40%)' }, { value: 'additional', label: 'Additional (45%)' },
+              ]} />
+            </Field>
+          </AdvancedOptions>
         </>
       }
       results={
@@ -115,8 +106,7 @@ export default function BuyToLet() {
             </div>
           </Panel>
 
-          {mode === 'expert' && (
-            <Panel title="Personal vs limited company (SPV)">
+          <Panel title="Personal vs limited company (SPV)">
               <div className="overflow-hidden rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left"><tr><th className="px-3 py-2 font-bold"></th><th className="px-3 py-2 font-bold text-right">Personal</th><th className="px-3 py-2 font-bold text-right">SPV company</th></tr></thead>
@@ -129,7 +119,6 @@ export default function BuyToLet() {
               </div>
               <p className="mt-2 text-[11px] text-on-surface-variant">SPV figure is profit retained in the company before extracting it (dividends/salary are taxed again). BTL company mortgage rates are usually higher. Take accountancy advice.</p>
             </Panel>
-          )}
 
           <Callout tone={r.personalNet >= 0 ? 'tip' : 'warn'} title={`Personal net profit: ${gbp(r.personalNet)}/yr`}>
             After Section 24 tax of {gbp(r.personalTax)}. Higher-rate landlords keep less because mortgage interest only earns a 20% credit.

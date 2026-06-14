@@ -2,18 +2,16 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Home, Building, LineChart as LineIcon } from 'lucide-react';
+import { ChevronRight, Home, Building } from 'lucide-react';
 import {
-  gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider,
+  gbp, pct, Panel, AdvancedOptions, Stat, Field, MoneyInput, NumberInput, Slider,
   LineChart, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
-type Mode = 'simple' | 'advanced' | 'expert';
 const PRIMARY = '#0037b0';
 const ACCENT = '#bb0027';
 
 export default function BuyVsRent() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(300000);
@@ -104,10 +102,6 @@ export default function BuyVsRent() {
           your <strong>net worth</strong> down each path over time, including house-price growth, the deposit you
           could invest instead, and the costs of buying and selling.
         </p>
-        <div className="mt-5">
-          <Segmented<Mode> ariaLabel="Detail level" value={mode} onChange={setMode}
-            options={[{ value: 'simple', label: 'Simple' }, { value: 'advanced', label: 'Advanced' }, { value: 'expert', label: 'Expert' }]} />
-        </div>
       </section>
 
       <section className="container-page pb-14 grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -131,25 +125,19 @@ export default function BuyVsRent() {
             </div>
           </Panel>
 
-          {mode !== 'simple' && (
-            <Panel title="Assumptions" icon={<LineIcon className="h-4 w-4" />}>
-              <div className="space-y-4">
-                <Field label={`House price growth — ${pct(hpi, 1)}/yr`}><Slider value={hpi} onChange={setHpi} min={-2} max={8} step={0.25} /></Field>
-                <Field label={`Rent growth — ${pct(rentGrowth, 1)}/yr`}><Slider value={rentGrowth} onChange={setRentGrowth} min={0} max={8} step={0.25} /></Field>
-                <Field label={`Investment return (if renting) — ${pct(invReturn, 1)}/yr`} hint="What the renter earns investing the deposit + monthly savings"><Slider value={invReturn} onChange={setInvReturn} min={0} max={10} step={0.25} /></Field>
-                {mode === 'expert' && (
-                  <div className="pt-2 border-t border-outline-variant space-y-4">
-                    <div className="grid grid-cols-2 gap-3">
-                      <Field label={`Buying costs — ${buyCostPct}%`} hint="SDLT + legal + survey"><Slider value={buyCostPct} onChange={setBuyCostPct} min={0} max={10} step={0.5} /></Field>
-                      <Field label={`Selling costs — ${sellCostPct}%`} hint="Agent + legal"><Slider value={sellCostPct} onChange={setSellCostPct} min={0} max={5} step={0.5} /></Field>
-                    </div>
-                    <Field label={`Maintenance — ${maintPct}% of value/yr`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={3} step={0.25} /></Field>
-                    <Field label="Insurance & service charge / yr"><MoneyInput value={ownership} onChange={setOwnership} step={100} /></Field>
-                  </div>
-                )}
+          <AdvancedOptions label="Assumptions" hint="Growth rates and buying/selling costs — pre-filled with typical figures">
+            <Field label={`House price growth — ${pct(hpi, 1)}/yr`}><Slider value={hpi} onChange={setHpi} min={-2} max={8} step={0.25} /></Field>
+            <Field label={`Rent growth — ${pct(rentGrowth, 1)}/yr`}><Slider value={rentGrowth} onChange={setRentGrowth} min={0} max={8} step={0.25} /></Field>
+            <Field label={`Investment return (if renting) — ${pct(invReturn, 1)}/yr`} hint="What the renter earns investing the deposit + monthly savings"><Slider value={invReturn} onChange={setInvReturn} min={0} max={10} step={0.25} /></Field>
+            <div className="pt-2 border-t border-outline-variant space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <Field label={`Buying costs — ${buyCostPct}%`} hint="SDLT + legal + survey"><Slider value={buyCostPct} onChange={setBuyCostPct} min={0} max={10} step={0.5} /></Field>
+                <Field label={`Selling costs — ${sellCostPct}%`} hint="Agent + legal"><Slider value={sellCostPct} onChange={setSellCostPct} min={0} max={5} step={0.5} /></Field>
               </div>
-            </Panel>
-          )}
+              <Field label={`Maintenance — ${maintPct}% of value/yr`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={3} step={0.25} /></Field>
+              <Field label="Insurance & service charge / yr"><MoneyInput value={ownership} onChange={setOwnership} step={100} /></Field>
+            </div>
+          </AdvancedOptions>
           <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 

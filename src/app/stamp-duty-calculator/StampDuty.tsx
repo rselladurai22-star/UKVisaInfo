@@ -4,11 +4,10 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRight, Home, AlertTriangle, Stars } from 'lucide-react';
 import {
-  gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, Choice, Toggle,
+  gbp, pct, Panel, Stat, Field, MoneyInput, Choice, Toggle,
   BarTrack, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
-type Mode = 'simple' | 'advanced' | 'expert';
 type Buyer = 'ftb' | 'mover' | 'additional';
 
 const PRIMARY = '#0037b0';
@@ -50,7 +49,6 @@ function computeSdlt(price: number, buyer: Buyer, nonResident: boolean, replacin
 }
 
 export default function StampDuty() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [done, setDone] = useState(false);
   const [price, setPrice] = useState(350000);
   const [buyer, setBuyer] = useState<Buyer>('mover');
@@ -82,14 +80,6 @@ export default function StampDuty() {
           in force from 1 April 2025. Handles first-time buyer relief, the additional-property surcharge and
           the non-resident surcharge, with a full band-by-band breakdown.
         </p>
-        <div className="mt-5">
-          <Segmented<Mode>
-            ariaLabel="Detail level"
-            value={mode}
-            onChange={setMode}
-            options={[{ value: 'simple', label: 'Simple' }, { value: 'advanced', label: 'Advanced' }, { value: 'expert', label: 'Expert' }]}
-          />
-        </div>
       </section>
 
       <section className="container-page pb-14 grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -113,14 +103,12 @@ export default function StampDuty() {
                 />
               </Field>
 
-              {mode !== 'simple' && (
-                <div className="pt-2 space-y-2">
-                  {buyer === 'additional' && (
-                    <Toggle checked={replacingMain} onChange={setReplacingMain} label="Replacing my main residence (no surcharge)" />
-                  )}
-                  <Toggle checked={nonResident} onChange={setNonResident} label="Non-UK resident (+2% surcharge)" />
-                </div>
-              )}
+              <div className="pt-2 space-y-2">
+                {buyer === 'additional' && (
+                  <Toggle checked={replacingMain} onChange={setReplacingMain} label="Replacing my main residence (no surcharge)" />
+                )}
+                <Toggle checked={nonResident} onChange={setNonResident} label="Non-UK resident (+2% surcharge)" />
+              </div>
             </div>
           </Panel>
 
@@ -165,8 +153,7 @@ export default function StampDuty() {
             )}
           </Panel>
 
-          {mode !== 'simple' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Panel title={<span className="flex items-center gap-2"><Stars className="h-4 w-4 text-secondary" /> First-time buyer</span>}>
                 {r.ftbEligible ? (
                   buyer === 'ftb'
@@ -184,10 +171,8 @@ export default function StampDuty() {
                 </div>
               </Panel>
             </div>
-          )}
 
-          {mode === 'expert' && (
-            <Panel title="Rate card — England & NI (from 1 Apr 2025)">
+          <Panel title="Rate card — England & NI (from 1 Apr 2025)">
               <div className="overflow-hidden rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left">
@@ -202,7 +187,6 @@ export default function StampDuty() {
               </div>
               <p className="mt-2 text-[11px] text-on-surface-variant">First-time buyers: 0% to £300,000, then 5% to £500,000 (no relief above £500,000).</p>
             </Panel>
-          )}
 
           <p className="text-[11px] text-on-surface-variant">
             Estimates only, not tax advice. Special rules apply to mixed-use property, multiple dwellings, leases,

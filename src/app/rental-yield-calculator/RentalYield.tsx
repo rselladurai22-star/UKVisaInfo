@@ -2,13 +2,12 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Home, Receipt, Gauge, ShieldCheck } from 'lucide-react';
+import { ChevronRight, Home, Gauge, ShieldCheck } from 'lucide-react';
 import {
-  gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, Slider, Choice,
+  gbp, pct, Panel, AdvancedOptions, Stat, Field, MoneyInput, Slider, Choice,
   Donut, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
-type Mode = 'simple' | 'advanced' | 'expert';
 type Band = 'basic' | 'higher' | 'additional';
 
 const PRIMARY = '#0037b0';
@@ -17,7 +16,6 @@ const BAND_RATE: Record<Band, number> = { basic: 0.2, higher: 0.4, additional: 0
 const STRESS = 0.055;
 
 export default function RentalYield() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [done, setDone] = useState(false);
 
   const [price, setPrice] = useState(220000);
@@ -40,12 +38,12 @@ export default function RentalYield() {
     const mgmt = annualRent * (mgmtPct / 100);
     const maint = annualRent * (maintPct / 100);
     const voids = annualRent * (voidPct / 100);
-    const opCosts = mode === 'simple' ? annualRent * 0.25 : mgmt + maint + voids + insurance + serviceCharge;
+    const opCosts = mgmt + maint + voids + insurance + serviceCharge;
 
     const grossYield = price ? (annualRent / price) * 100 : 0;
     const netYield = price ? ((annualRent - opCosts) / price) * 100 : 0;
 
-    const cashflowPreTax = annualRent - opCosts - (mode === 'simple' ? 0 : interest);
+    const cashflowPreTax = annualRent - opCosts - interest;
 
     // Section 24: interest not deductible for individuals; 20% credit.
     const taxable = Math.max(0, annualRent - opCosts);
@@ -63,7 +61,7 @@ export default function RentalYield() {
       annualRent, opCosts, mgmt, maint, voids, interest, grossYield, netYield,
       cashflowPreTax, cashflowPostTax, tax, roi, icr, icrRequired, icrPass, deposit,
     };
-  }, [price, rent, depositPct, mortRate, mgmtPct, maintPct, voidPct, insurance, serviceCharge, band, mode]);
+  }, [price, rent, depositPct, mortRate, mgmtPct, maintPct, voidPct, insurance, serviceCharge, band]);
 
   const yieldTone = r.netYield >= 5 ? '#0a7d4f' : r.netYield >= 3.5 ? ACCENT : '#ba1a1a';
 
@@ -83,10 +81,6 @@ export default function RentalYield() {
           buy-to-let passes the lender&apos;s ICR stress test before you commit. Includes the Section 24 tax impact
           for individual landlords.
         </p>
-        <div className="mt-5">
-          <Segmented<Mode> ariaLabel="Detail level" value={mode} onChange={setMode}
-            options={[{ value: 'simple', label: 'Simple' }, { value: 'advanced', label: 'Advanced' }, { value: 'expert', label: 'Expert' }]} />
-        </div>
       </section>
 
       <section className="container-page pb-14 grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -100,52 +94,42 @@ export default function RentalYield() {
               <Field label="Monthly rent">
                 <MoneyInput value={rent} onChange={setRent} step={25} />
               </Field>
-              {mode !== 'simple' && (
-                <>
-                  <Field label={`Deposit — ${depositPct}%`}>
-                    <Slider value={depositPct} onChange={setDepositPct} min={5} max={100} step={1} />
-                  </Field>
-                  <Field label={`Mortgage rate — ${pct(mortRate, 2)}`} hint="Interest-only basis (typical for BTL)">
-                    <Slider value={mortRate} onChange={setMortRate} min={0} max={10} step={0.05} />
-                  </Field>
-                </>
-              )}
+              <Field label={`Deposit — ${depositPct}%`}>
+                <Slider value={depositPct} onChange={setDepositPct} min={5} max={100} step={1} />
+              </Field>
+              <Field label={`Mortgage rate — ${pct(mortRate, 2)}`} hint="Interest-only basis (typical for BTL)">
+                <Slider value={mortRate} onChange={setMortRate} min={0} max={10} step={0.05} />
+              </Field>
             </div>
           </Panel>
 
-          {mode !== 'simple' && (
-            <Panel title="Running costs" icon={<Receipt className="h-4 w-4" />}>
-              <div className="space-y-4">
-                <Field label={`Letting / management — ${mgmtPct}% of rent`}>
-                  <Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} />
-                </Field>
-                <Field label={`Maintenance reserve — ${maintPct}% of rent`}>
-                  <Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} />
-                </Field>
-                <Field label={`Void allowance — ${voidPct}% of rent`} hint="Weeks empty between tenants">
-                  <Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} />
-                </Field>
-                <div className="grid grid-cols-2 gap-3">
-                  <Field label="Insurance / yr">
-                    <MoneyInput value={insurance} onChange={setInsurance} step={50} />
-                  </Field>
-                  <Field label="Service charge / yr">
-                    <MoneyInput value={serviceCharge} onChange={setServiceCharge} step={100} />
-                  </Field>
-                </div>
-                {mode === 'expert' && (
-                  <Field label="Your income tax band">
-                    <Choice<Band> name="band" value={band} onChange={setBand}
-                      options={[
-                        { value: 'basic', label: 'Basic rate (20%)' },
-                        { value: 'higher', label: 'Higher rate (40%)' },
-                        { value: 'additional', label: 'Additional rate (45%)' },
-                      ]} />
-                  </Field>
-                )}
-              </div>
-            </Panel>
-          )}
+          <AdvancedOptions label="Running costs & tax" hint="Pre-filled with typical figures — adjust to itemise costs and set your tax band">
+            <Field label={`Letting / management — ${mgmtPct}% of rent`}>
+              <Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} />
+            </Field>
+            <Field label={`Maintenance reserve — ${maintPct}% of rent`}>
+              <Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} />
+            </Field>
+            <Field label={`Void allowance — ${voidPct}% of rent`} hint="Weeks empty between tenants">
+              <Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} />
+            </Field>
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Insurance / yr">
+                <MoneyInput value={insurance} onChange={setInsurance} step={50} />
+              </Field>
+              <Field label="Service charge / yr">
+                <MoneyInput value={serviceCharge} onChange={setServiceCharge} step={100} />
+              </Field>
+            </div>
+            <Field label="Your income tax band" hint="Used for the Section 24 tax estimate">
+              <Choice<Band> name="band" value={band} onChange={setBand}
+                options={[
+                  { value: 'basic', label: 'Basic rate (20%)' },
+                  { value: 'higher', label: 'Higher rate (40%)' },
+                  { value: 'additional', label: 'Additional rate (45%)' },
+                ]} />
+            </Field>
+          </AdvancedOptions>
           <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
@@ -155,8 +139,8 @@ export default function RentalYield() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <Stat label="Gross yield" value={pct(r.grossYield, 2)} sub="rent ÷ price" tone="dark" />
             <Stat label="Net yield" value={pct(r.netYield, 2)} sub="after costs" tone="accent" />
-            <Stat label="Monthly cash flow" value={gbp((mode === 'expert' ? r.cashflowPostTax : r.cashflowPreTax) / 12, 0)} sub={mode === 'expert' ? 'after tax' : 'before tax'} />
-            {mode !== 'simple' && <Stat label="Cash-on-cash ROI" value={pct(r.roi, 1)} sub="on cash invested" />}
+            <Stat label="Monthly cash flow" value={gbp(r.cashflowPreTax / 12, 0)} sub="before tax" />
+            <Stat label="Cash-on-cash ROI" value={pct(r.roi, 1)} sub="after-tax, on cash invested" />
           </div>
 
           <Panel title="Yield health" icon={<Gauge className="h-4 w-4" />}>
@@ -173,8 +157,7 @@ export default function RentalYield() {
             </p>
           </Panel>
 
-          {mode !== 'simple' && (
-            <Panel title="Where the rent goes">
+          <Panel title="Where the rent goes">
               <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
                 <Donut
                   centerLabel="Annual rent"
@@ -189,17 +172,15 @@ export default function RentalYield() {
                   <Row label="Annual rent" value={gbp(r.annualRent)} bold />
                   <Row label="Less running costs" value={`− ${gbp(r.opCosts)}`} />
                   <Row label="Less mortgage interest" value={`− ${gbp(r.interest)}`} />
-                  {mode === 'expert' && <Row label="Less Section 24 tax" value={`− ${gbp(r.tax)}`} />}
+                  <Row label="Less Section 24 tax" value={`− ${gbp(r.tax)}`} />
                   <div className="pt-2 border-t border-outline-variant">
-                    <Row label="Net cash flow" value={gbp(mode === 'expert' ? r.cashflowPostTax : r.cashflowPreTax)} bold accent />
+                    <Row label="Net cash flow (after tax)" value={gbp(r.cashflowPostTax)} bold accent />
                   </div>
                 </div>
               </div>
             </Panel>
-          )}
 
-          {mode !== 'simple' && (
-            <Panel title="Lender ICR stress test" icon={<ShieldCheck className="h-4 w-4" />}>
+          <Panel title="Lender ICR stress test" icon={<ShieldCheck className="h-4 w-4" />}>
               <div className="flex items-center gap-4">
                 <div className={`px-4 py-3 rounded-xl font-display font-bold text-lg ${r.icrPass ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                   {isFinite(r.icr) ? pct(r.icr, 0) : '—'} ICR
@@ -210,7 +191,6 @@ export default function RentalYield() {
                 </div>
               </div>
             </Panel>
-          )}
 
           <p className="text-[11px] text-on-surface-variant">
             Estimates only, not tax or investment advice. Section 24 figures assume an individual landlord on an

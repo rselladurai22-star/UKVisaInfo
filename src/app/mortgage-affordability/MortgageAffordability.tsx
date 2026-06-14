@@ -2,20 +2,18 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Users, Wallet, Gauge } from 'lucide-react';
+import { ChevronRight, Users, Gauge } from 'lucide-react';
 import {
-  gbp, pct, Panel, Segmented, Stat, Field, MoneyInput, NumberInput, Slider, Choice,
+  gbp, pct, Panel, AdvancedOptions, Stat, Field, MoneyInput, NumberInput, Slider,
   BarTrack, Donut, GuideHeading, Callout, FAQ, RelatedTools, CalcButton, ResultsPlaceholder,
 } from '../../components/calc-ui';
 
-type Mode = 'simple' | 'advanced' | 'expert';
 const PRIMARY = '#0037b0';
 const ACCENT = '#bb0027';
 
 const annuityFactor = (i: number, n: number) => (i === 0 ? n : (1 - Math.pow(1 + i, -n)) / i);
 
 export default function MortgageAffordability() {
-  const [mode, setMode] = useState<Mode>('advanced');
   const [done, setDone] = useState(false);
 
   const [income1, setIncome1] = useState(45000);
@@ -29,16 +27,16 @@ export default function MortgageAffordability() {
   const [multiple, setMultiple] = useState(4.5);
 
   const r = useMemo(() => {
-    const gross = income1 + (mode === 'simple' ? 0 : income2 + otherIncome);
+    const gross = income1 + income2 + otherIncome;
     const n = Math.max(1, Math.round(termYears * 12));
     const i = rate / 100 / 12;
-    const stressRate = (rate + (mode === 'simple' ? 0 : stressUplift)) / 100 / 12;
+    const stressRate = (rate + stressUplift) / 100 / 12;
 
     const ltiCap = gross * multiple;
 
     // Commitments consume borrowing capacity equal to the loan that monthly cost could service.
     const af = annuityFactor(stressRate, n);
-    const commitmentCapacity = mode === 'simple' ? 0 : commitments * af;
+    const commitmentCapacity = commitments * af;
 
     const maxBorrow = Math.max(0, ltiCap - commitmentCapacity);
     const maxPrice = maxBorrow + deposit;
@@ -58,7 +56,7 @@ export default function MortgageAffordability() {
     });
 
     return { gross, maxBorrow, maxPrice, ltv, depositPctOfPrice, monthly, stressMonthly, dti, scenarios, grossMonthly };
-  }, [income1, income2, otherIncome, deposit, commitments, termYears, rate, stressUplift, multiple, mode]);
+  }, [income1, income2, otherIncome, deposit, commitments, termYears, rate, stressUplift, multiple]);
 
   const dtiTone = r.dti <= 35 ? '#0a7d4f' : r.dti <= 45 ? ACCENT : '#ba1a1a';
 
@@ -77,10 +75,6 @@ export default function MortgageAffordability() {
           Estimate your maximum mortgage and property budget the way UK lenders do — income multiples
           tempered by your committed outgoings and an affordability stress test. Updated for 2025/26 lending rules.
         </p>
-        <div className="mt-5">
-          <Segmented<Mode> ariaLabel="Detail level" value={mode} onChange={setMode}
-            options={[{ value: 'simple', label: 'Simple' }, { value: 'advanced', label: 'Advanced' }, { value: 'expert', label: 'Expert' }]} />
-        </div>
       </section>
 
       <section className="container-page pb-14 grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -91,49 +85,37 @@ export default function MortgageAffordability() {
               <Field label="Annual income (applicant 1)" hint="Gross, before tax">
                 <MoneyInput value={income1} onChange={setIncome1} step={1000} />
               </Field>
-              {mode !== 'simple' && (
-                <>
-                  <Field label="Annual income (applicant 2)">
-                    <MoneyInput value={income2} onChange={setIncome2} step={1000} />
-                  </Field>
-                  <Field label="Other annual income" hint="Bonus, commission, benefits (lenders often count part)">
-                    <MoneyInput value={otherIncome} onChange={setOtherIncome} step={500} />
-                  </Field>
-                </>
-              )}
               <Field label="Deposit">
                 <MoneyInput value={deposit} onChange={setDeposit} step={1000} />
               </Field>
             </div>
           </Panel>
 
-          {mode !== 'simple' && (
-            <Panel title="Outgoings & terms" icon={<Wallet className="h-4 w-4" />}>
-              <div className="space-y-4">
-                <Field label="Monthly credit commitments" hint="Loans, car finance, credit cards, childcare">
-                  <MoneyInput value={commitments} onChange={setCommitments} step={50} />
-                </Field>
-                <div className="grid grid-cols-2 gap-3">
-                  <Field label="Term (years)">
-                    <NumberInput value={termYears} onChange={setTermYears} suffix="yrs" />
-                  </Field>
-                  <Field label={`Rate — ${pct(rate, 2)}`}>
-                    <Slider value={rate} onChange={setRate} min={0.5} max={10} step={0.05} />
-                  </Field>
-                </div>
-                {mode === 'expert' && (
-                  <>
-                    <Field label={`Income multiple — ${multiple.toFixed(1)}×`} hint="Most lenders cap at 4.5×; some allow 5–5.5×">
-                      <Slider value={multiple} onChange={setMultiple} min={3.5} max={5.5} step={0.1} />
-                    </Field>
-                    <Field label={`Stress test uplift — +${stressUplift}%`} hint="Lenders test the payment at a higher rate">
-                      <Slider value={stressUplift} onChange={setStressUplift} min={0} max={3} step={0.5} />
-                    </Field>
-                  </>
-                )}
-              </div>
-            </Panel>
-          )}
+          <AdvancedOptions label="Second income, outgoings & terms" hint="Add a joint applicant, commitments and lending assumptions — pre-filled with typical values">
+            <Field label="Annual income (applicant 2)">
+              <MoneyInput value={income2} onChange={setIncome2} step={1000} />
+            </Field>
+            <Field label="Other annual income" hint="Bonus, commission, benefits (lenders often count part)">
+              <MoneyInput value={otherIncome} onChange={setOtherIncome} step={500} />
+            </Field>
+            <Field label="Monthly credit commitments" hint="Loans, car finance, credit cards, childcare">
+              <MoneyInput value={commitments} onChange={setCommitments} step={50} />
+            </Field>
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Term (years)">
+                <NumberInput value={termYears} onChange={setTermYears} suffix="yrs" />
+              </Field>
+              <Field label={`Rate — ${pct(rate, 2)}`}>
+                <Slider value={rate} onChange={setRate} min={0.5} max={10} step={0.05} />
+              </Field>
+            </div>
+            <Field label={`Income multiple — ${multiple.toFixed(1)}×`} hint="Most lenders cap at 4.5×; some allow 5–5.5×">
+              <Slider value={multiple} onChange={setMultiple} min={3.5} max={5.5} step={0.1} />
+            </Field>
+            <Field label={`Stress test uplift — +${stressUplift}%`} hint="Lenders test the payment at a higher rate">
+              <Slider value={stressUplift} onChange={setStressUplift} min={0} max={3} step={0.5} />
+            </Field>
+          </AdvancedOptions>
           <CalcButton done={done} onClick={() => setDone(true)} />
         </div>
 
@@ -165,8 +147,7 @@ export default function MortgageAffordability() {
             </div>
           </Panel>
 
-          {mode !== 'simple' && (
-            <Panel title="Affordability check">
+          <Panel title="Affordability check">
               <div className="flex items-center justify-between mb-2 text-sm">
                 <span className="text-on-surface-variant">Mortgage as % of gross income</span>
                 <span className="font-bold tabular-nums" style={{ color: dtiTone }}>{pct(r.dti)}</span>
@@ -179,10 +160,8 @@ export default function MortgageAffordability() {
                 (rate +{stressUplift}%) is <strong>{gbp(r.stressMonthly, 0)}/mo</strong>.
               </p>
             </Panel>
-          )}
 
-          {mode === 'expert' && (
-            <Panel title="Income-multiple scenarios">
+          <Panel title="Income-multiple scenarios">
               <div className="overflow-hidden rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left">
@@ -201,7 +180,6 @@ export default function MortgageAffordability() {
                 </table>
               </div>
             </Panel>
-          )}
 
           <p className="text-[11px] text-on-surface-variant">
             An estimate, not a mortgage offer or a guarantee of lending. Each lender scores income, credit history,
