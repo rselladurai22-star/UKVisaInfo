@@ -110,7 +110,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
         <div className="absolute bottom-5 right-20 w-96 h-96 rounded-full bg-primary/4 blur-[100px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Left Column: Heading & Search */}
             <div className="lg:col-span-7">
