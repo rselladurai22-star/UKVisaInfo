@@ -135,6 +135,21 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.02); }
         .article-body table tbody tr:hover { background: var(--color-surface-container-low); }
 
+        /* Horizontally-scrollable table: edge shadows that fade in only when
+           there is more to scroll (pure CSS, background-attachment:local).
+           Signals "swipe me" on narrow screens without any JS. */
+        .article-body .md-table-wrap {
+          background:
+            linear-gradient(to right, var(--color-surface-container-lowest) 30%, rgba(255,255,255,0)) left center,
+            linear-gradient(to left, var(--color-surface-container-lowest) 30%, rgba(255,255,255,0)) right center,
+            radial-gradient(farthest-side at 0 50%, rgba(11,15,25,0.16), rgba(11,15,25,0)) left center,
+            radial-gradient(farthest-side at 100% 50%, rgba(11,15,25,0.16), rgba(11,15,25,0)) right center;
+          background-repeat: no-repeat;
+          background-size: 42px 100%, 42px 100%, 16px 100%, 16px 100%;
+          background-attachment: local, local, scroll, scroll;
+          -webkit-overflow-scrolling: touch;
+        }
+
         /* First paragraph after heading — slightly larger drop-in */
         .article-body h2 + p,
         .article-body h3 + p {
@@ -242,8 +257,8 @@ function MarkdownChunk({ content }: { content: string }) {
           <em className="italic text-on-surface-variant" style={{ fontFamily: 'inherit' }}>{children}</em>
         ),
         table: ({ children }) => (
-          <div className="my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-soft">
-            <table className="w-full">{children}</table>
+          <div className="md-table-wrap my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-outline-variant shadow-soft">
+            <table className="w-full min-w-[34rem]">{children}</table>
           </div>
         ),
         thead: ({ children }) => (
@@ -251,14 +266,14 @@ function MarkdownChunk({ content }: { content: string }) {
         ),
         th: ({ children }) => (
           <th
-            className="text-left px-5 py-3.5 font-bold text-on-surface text-[11px] uppercase tracking-[0.1em] whitespace-nowrap"
+            className="text-left px-3 sm:px-5 py-3 sm:py-3.5 font-bold text-on-surface text-[10px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.1em] whitespace-nowrap"
             style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
           >
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-5 py-4 border-t border-outline-variant/40 text-on-surface-variant text-[0.9375rem] leading-relaxed">
+          <td className="px-3 sm:px-5 py-3 sm:py-4 border-t border-outline-variant/40 text-on-surface-variant text-[0.8125rem] sm:text-[0.9375rem] leading-relaxed">
             {children}
           </td>
         ),
