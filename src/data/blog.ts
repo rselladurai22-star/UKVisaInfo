@@ -37,15 +37,15 @@ export interface BlogCategoryMeta {
 }
 
 export const BLOG_CATEGORIES: BlogCategoryMeta[] = [
-  { id: 'visa',     label: 'Visas & Immigration', description: 'UK visa routes, settlement, sponsorship and citizenship.', accent: '#00875A' },
-  { id: 'money',    label: 'Money & Tax',         description: 'Income tax, take-home pay, savings, pensions and HMRC.', accent: '#00875A' },
-  { id: 'property', label: 'Property & Mortgages', description: 'Buying, mortgages, stamp duty and renting in the UK.', accent: '#00875A' },
-  { id: 'business', label: 'Business & Self-Employed', description: 'VAT, corporation tax, sole trader vs limited and more.', accent: '#006c49' },
-  { id: 'benefits', label: 'Benefits & Support',  description: 'Universal Credit, childcare, council tax and disability help.', accent: '#00875A' },
-  { id: 'family',   label: 'Family & Law',        description: 'Divorce, maintenance, wills and family finances.', accent: '#ba1a1a' },
-  { id: 'motoring', label: 'Motoring & Vehicles', description: 'Road tax, running costs, EVs and clean-air zones.', accent: '#00875A' },
-  { id: 'energy',   label: 'Energy & Bills',      description: 'Price cap, solar, heat pumps and cutting household bills.', accent: '#006c49' },
-  { id: 'estate',   label: 'Estate & Inheritance', description: 'Inheritance tax, probate, wills and estate planning.', accent: '#623c00' },
+  { id: 'visa',     label: 'Visas & Immigration', description: 'UK visa routes, settlement, sponsorship and citizenship.', accent: '#4f46e5' },
+  { id: 'money',    label: 'Money & Tax',         description: 'Income tax, take-home pay, savings, pensions and HMRC.', accent: '#2563eb' },
+  { id: 'property', label: 'Property & Mortgages', description: 'Buying, mortgages, stamp duty and renting in the UK.', accent: '#0284c7' },
+  { id: 'business', label: 'Business & Self-Employed', description: 'VAT, corporation tax, sole trader vs limited and more.', accent: '#7c3aed' },
+  { id: 'benefits', label: 'Benefits & Support',  description: 'Universal Credit, childcare, council tax and disability help.', accent: '#3b82f6' },
+  { id: 'family',   label: 'Family & Law',        description: 'Divorce, maintenance, wills and family finances.', accent: '#5b21b6' },
+  { id: 'motoring', label: 'Motoring & Vehicles', description: 'Road tax, running costs, EVs and clean-air zones.', accent: '#0ea5e9' },
+  { id: 'energy',   label: 'Energy & Bills',      description: 'Price cap, solar, heat pumps and cutting household bills.', accent: '#0369a1' },
+  { id: 'estate',   label: 'Estate & Inheritance', description: 'Inheritance tax, probate, wills and estate planning.', accent: '#0e7490' },
 ];
 
 export const getCategoryMeta = (id: BlogCategory): BlogCategoryMeta =>

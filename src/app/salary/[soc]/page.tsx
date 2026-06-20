@@ -120,7 +120,7 @@ export default async function SalaryPage({ params }: RouteParams) {
               </span>
             )}
             {occ.isl && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#10b981]/15 border border-[#10b981]/30 text-[#34d399] text-[10.5px] font-bold uppercase tracking-[0.1em]">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#3b82f6]/15 border border-[#3b82f6]/30 text-[#60a5fa] text-[10.5px] font-bold uppercase tracking-[0.1em]">
                 <CheckCircle2 className="w-3 h-3" /> Immigration Salary List
               </span>
             )}
@@ -142,7 +142,7 @@ export default async function SalaryPage({ params }: RouteParams) {
             ) : (
               <StatCard label="General min" value={`£${THRESHOLDS.general.toLocaleString()}`} sub="2026 floor" />
             )}
-            <StatCard label="Effective floor" value={`£${effectiveThreshold.toLocaleString()}`} sub="actual minimum" accent="#34d399" />
+            <StatCard label="Effective floor" value={`£${effectiveThreshold.toLocaleString()}`} sub="actual minimum" accent="#60a5fa" />
           </div>
         </div>
       </header>
@@ -168,8 +168,8 @@ export default async function SalaryPage({ params }: RouteParams) {
                   <ThresholdRow num={3} label="Hourly floor" value={`£${hourlyFloor.toFixed(2)}/hr`} note="Across 37.5-hour standard week" />
                 </ol>
 
-                <div className="rounded-2xl bg-gradient-to-br from-[#dcfce7] to-white border border-[#bbf7d0] p-5">
-                  <div className="flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#047857] mb-2">
+                <div className="rounded-2xl bg-gradient-to-br from-[#dbeafe] to-white border border-[#bfdbfe] p-5">
+                  <div className="flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#2563eb] mb-2">
                     <TrendingUp className="w-3.5 h-3.5" />
                     Your effective threshold
                   </div>
@@ -177,7 +177,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                     £{effectiveThreshold.toLocaleString()}{' '}
                     <span className="text-[14px] font-medium text-[#52596e]">/year</span>
                   </div>
-                  <p className="mt-2 text-[13px] text-[#047857] leading-snug">
+                  <p className="mt-2 text-[13px] text-[#2563eb] leading-snug">
                     A salary below this will be refused at the salary stage with no appeal on that ground.
                   </p>
                 </div>
@@ -266,7 +266,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                           <div className="text-[11.5px] text-[#7a8195] flex items-center gap-1.5">
                             <span>{s.city}</span>
                             <span className="text-[#cfd5e0]">·</span>
-                            <span className="text-[#10b981] font-semibold">{s.rating}</span>
+                            <span className="text-[#3b82f6] font-semibold">{s.rating}</span>
                           </div>
                         </div>
                       </div>
@@ -446,11 +446,11 @@ function ThresholdRow({ num, label, value, note, highlight }: { num: number; lab
 
 function DiscountCard({ title, value, eligibility, effective }: { title: string; value: string; eligibility: string; effective: string }) {
   return (
-    <div className="rounded-2xl bg-gradient-to-br from-[#dcfce7] to-white border border-[#bbf7d0] p-5">
-      <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#047857] mb-2">{title}</div>
+    <div className="rounded-2xl bg-gradient-to-br from-[#dbeafe] to-white border border-[#bfdbfe] p-5">
+      <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-[#2563eb] mb-2">{title}</div>
       <div className="font-display font-bold text-[1.5rem] text-[#0A2540] tracking-[-0.015em] tabular-nums">{value}</div>
       <p className="mt-2 text-[12.5px] text-[#475569] leading-snug">{eligibility}</p>
-      <div className="mt-3 pt-3 border-t border-[#bbf7d0] text-[11.5px] text-[#047857]">
+      <div className="mt-3 pt-3 border-t border-[#bfdbfe] text-[11.5px] text-[#2563eb]">
         <strong>Effective floor: {effective}</strong>
       </div>
     </div>

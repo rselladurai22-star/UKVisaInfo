@@ -34,8 +34,8 @@ const Q = {
   mid:        '#475569',
   mid2:       '#64748B',
   border:     'rgba(11, 15, 25, 0.08)',
-  accent:     '#047857',
-  accentDk:   '#064E3B',
+  accent:     '#2563eb',
+  accentDk:   '#1e3a8a',
   accentSoft: '#ECFDF5',
 };
 

@@ -54,7 +54,7 @@ export default function UkCitiesIndex() {
                 <p className="text-[12.5px] text-[#52596e] leading-snug line-clamp-3 mb-3">{c.tagline}</p>
                 <div className="flex items-center justify-between pt-3 border-t border-[rgba(14,20,36,0.06)]">
                   <span className="inline-flex items-center gap-1.5 text-[12px] text-[#52596e]">
-                    <Banknote className="w-3.5 h-3.5 text-[#10b981]" />
+                    <Banknote className="w-3.5 h-3.5 text-[#3b82f6]" />
                     <strong className="text-[#0A2540] tabular-nums">£{c.monthlyCost.total}</strong>/mo
                   </span>
                   <span className="inline-flex items-center gap-1 text-[12px] font-bold text-[#00C4B4] group-hover:gap-2 transition-[gap] duration-100">

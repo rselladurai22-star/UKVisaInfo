@@ -9,6 +9,7 @@ import ReadingProgress from '../../../components/blog/ReadingProgress';
 import ArticleToc from '../../../components/blog/ArticleToc';
 import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
+import FlagshipSalary2025 from './FlagshipSalary2025';
 import Comments from '../../../components/blog/Comments';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
@@ -230,6 +231,22 @@ export default async function BlogPostPage({ params }: RouteParams) {
         })),
       }
     : null;
+
+  // ── Flagship bespoke article (built from scratch, no legacy ArticleBody) ──
+  if (slug === 'uk-salary-after-tax-take-home-table-2025-26') {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        {faqJsonLd && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        )}
+        <ReadingProgress />
+        <FlagshipSalary2025 post={post} catMeta={catMeta} relatedTools={relatedTools} />
+        <StickyMobileCta context={catMeta.label} label={cta.label} href={cta.href} />
+      </>
+    );
+  }
 
   return (
     <>

@@ -52,7 +52,7 @@ export default function RefusalAnalyzerClient() {
             Paste your refusal letter and we&apos;ll decode each ground in plain English — severity, what it means, and what to do next.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-white/45 text-[12px]">
-            <span className="flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-[#34d399]" /> Runs in your browser — never sent to a server</span>
+            <span className="flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-[#60a5fa]" /> Runs in your browser — never sent to a server</span>
             <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-[#C9A14A]" /> Based on Home Office decision-letter rules</span>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function RefusalAnalyzerClient() {
 
                 <div className="rounded-2xl bg-white border border-[rgba(14,20,36,0.07)] p-5">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="w-7 h-7 rounded-lg bg-[#dcfce7] text-[#15803d] flex items-center justify-center">
+                    <span className="w-7 h-7 rounded-lg bg-[#dbeafe] text-[#15803d] flex items-center justify-center">
                       <MessageCircle className="w-3.5 h-3.5" />
                     </span>
                     <div>

@@ -111,7 +111,7 @@ export default async function SponsorSectorPage({ params }: RouteParams) {
                           s.rating === 'B'
                             ? 'bg-[#fef3c7] text-[#92400e]'
                             : s.rating === 'A (Premium)'
-                              ? 'bg-[#dcfce7] text-[#047857]'
+                              ? 'bg-[#dbeafe] text-[#2563eb]'
                               : 'bg-[#dbeafe] text-[#1d4ed8]'
                         }`}>{s.rating}</span>
                       </li>

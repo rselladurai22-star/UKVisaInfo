@@ -14,7 +14,7 @@ import { PRIMARY_EDITOR } from '../data/editorialTeam';
 const INK     = '#18181B';
 const CREAM   = '#FAFAFB';
 const PAPER   = '#FFFFFF';
-const EMERALD = '#047857';
+const EMERALD = '#2563eb';
 const GOLD    = '#4F46E5';
 const SLATE   = '#52525B';
 const MUTED   = '#6B7280';

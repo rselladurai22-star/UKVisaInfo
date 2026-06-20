@@ -16,29 +16,29 @@
   ════════════════════════════════════════════ */
 
   /* Primary — Royal blue (links, buttons, accents) */
-  --color-primary: #00875A;
-  --color-primary-container: #006644;
-  --color-primary-soft: #d9f7e8;          /* primary-fixed — light green tint */
-  --color-primary-ink: #00331f;
-  --color-primary-strong: #00704a;        /* hover/strong primary */
+  --color-primary: #2563EB;
+  --color-primary-container: #1d4ed8;
+  --color-primary-soft: #dbeafe;          /* primary-fixed — light blue tint */
+  --color-primary-ink: #1e3a8a;
+  --color-primary-strong: #1d4ed8;        /* hover/strong primary */
   --color-on-primary: #ffffff;            /* text on solid primary */
-  --color-on-primary-container: #d9f7e8;  /* text on primary-container */
-  --color-primary-fixed: #d9f7e8;
-  --color-on-primary-fixed-variant: #00875A;
+  --color-on-primary-container: #dbeafe;  /* text on primary-container */
+  --color-primary-fixed: #dbeafe;
+  --color-on-primary-fixed-variant: #2563EB;
 
-  /* Secondary — Deep emerald */
-  --color-secondary: #006c49;
-  --color-secondary-soft: #d9f7e8;        /* light mint tint */
-  --color-secondary-strong: #00714d;
-  --color-secondary-container: #6cf8bb;
+  /* Secondary — Indigo */
+  --color-secondary: #4f46e5;
+  --color-secondary-soft: #e0e7ff;        /* light indigo tint */
+  --color-secondary-strong: #4338ca;
+  --color-secondary-container: #c7d2fe;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #00714d;
+  --color-on-secondary-container: #3730a3;
 
-  /* Tertiary — Warm brown/amber (Material tonal) */
-  --color-tertiary: #623c00;
-  --color-tertiary-container: #825100;
+  /* Tertiary — Sky (cool accent) */
+  --color-tertiary: #0369a1;
+  --color-tertiary-container: #075985;
   --color-on-tertiary: #ffffff;
-  --color-on-tertiary-container: #ffcb8f;
+  --color-on-tertiary-container: #bae6fd;
 
   /* Error — semantic red */
   --color-error: #ba1a1a;
@@ -46,9 +46,9 @@
   --color-on-error: #ffffff;
   --color-on-error-container: #93000a;
 
-  /* Accent — Warm tertiary */
-  --color-accent: #623c00;
-  --color-accent-soft: #ffddb8;
+  /* Accent — Sky (cool) */
+  --color-accent: #0ea5e9;
+  --color-accent-soft: #e0f2fe;
 
   /* Success — emerald (semantic) */
   --color-success: #006c49;
@@ -94,7 +94,7 @@
   --uk-c2: #D97706; --uk-c2-bg: #FEF3C7; --uk-c2-tx: #92400E;
   --uk-c3: #8B5CF6; --uk-c3-bg: #F3E8FF; --uk-c3-tx: #6D28D9;
   --uk-c4: #0284C7; --uk-c4-bg: #F0F9FF; --uk-c4-tx: #0369A1;
-  --uk-c5: #059669; --uk-c5-bg: #ECFDF5; --uk-c5-tx: #047857;
+  --uk-c5: #059669; --uk-c5-bg: #ECFDF5; --uk-c5-tx: #2563eb;
   --uk-c6: #E11D48; --uk-c6-bg: #FFF1F2; --uk-c6-tx: #BE123C;
   --uk-c7: #DB2777; --uk-c7-bg: #FDF2F8; --uk-c7-tx: #BE185D;
   --uk-c8: #0D9488; --uk-c8-bg: #F0FDFA; --uk-c8-tx: #0F766E;
@@ -125,12 +125,12 @@ html.dark {
   --color-primary-soft: #1F2937;
   --color-primary-ink: #FFFFFF;
 
-  --color-secondary: #34D399;
-  --color-secondary-soft: rgba(4, 120, 87, 0.16);
-  --color-secondary-strong: #6EE7B7;
+  --color-secondary: #818cf8;
+  --color-secondary-soft: rgba(37, 99, 235, 0.16);
+  --color-secondary-strong: #a5b4fc;
 
-  --color-accent: #E4B53B;
-  --color-accent-soft: rgba(184, 134, 11, 0.14);
+  --color-accent: #38bdf8;
+  --color-accent-soft: rgba(14, 165, 233, 0.14);
 
   --color-surface: #0A0E16;
   --color-surface-container-lowest: #0F141E;
@@ -279,7 +279,7 @@ html.dark body {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #047857;
+  color: #2563eb;
 }
 
 .eyebrow-muted {
@@ -347,39 +347,39 @@ html.dark body {
 /* Subtle hero paper — preserves backward compat */
 .hero-paper {
   background:
-    radial-gradient(ellipse at 12% 8%, rgba(4, 120, 87, 0.04) 0px, transparent 55%),
-    radial-gradient(ellipse at 88% 80%, rgba(184, 134, 11, 0.05) 0px, transparent 55%),
+    radial-gradient(ellipse at 12% 8%, rgba(37, 99, 235, 0.04) 0px, transparent 55%),
+    radial-gradient(ellipse at 88% 80%, rgba(14, 165, 233, 0.05) 0px, transparent 55%),
     #FAFAF7;
 }
 
 /* Dark hero — preserves backward compat */
 .hero-dark {
   background:
-    radial-gradient(ellipse at 15% 25%, rgba(4, 120, 87, 0.18) 0px, transparent 55%),
-    radial-gradient(ellipse at 85% 70%, rgba(184, 134, 11, 0.10) 0px, transparent 60%),
+    radial-gradient(ellipse at 15% 25%, rgba(37, 99, 235, 0.18) 0px, transparent 55%),
+    radial-gradient(ellipse at 85% 70%, rgba(14, 165, 233, 0.10) 0px, transparent 60%),
     linear-gradient(165deg, #0B0F19 0%, #111827 60%, #0B0F19 100%);
 }
 
 /* Light tinted hero — preserves backward compat */
 .hero-light {
   background:
-    radial-gradient(ellipse at 10% 0%, rgba(4, 120, 87, 0.05) 0px, transparent 50%),
-    radial-gradient(ellipse at 90% 100%, rgba(184, 134, 11, 0.05) 0px, transparent 50%),
+    radial-gradient(ellipse at 10% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
     #FAFAF7;
 }
 
 /* Backward-compat mesh classes */
 .mesh-bg {
   background:
-    radial-gradient(at 12% 18%, rgba(4, 120, 87, 0.16) 0px, transparent 50%),
-    radial-gradient(at 88% 22%, rgba(184, 134, 11, 0.14) 0px, transparent 50%),
+    radial-gradient(at 12% 18%, rgba(37, 99, 235, 0.16) 0px, transparent 50%),
+    radial-gradient(at 88% 22%, rgba(14, 165, 233, 0.14) 0px, transparent 50%),
     linear-gradient(180deg, #0B0F19 0%, #111827 100%);
 }
 
 .mesh-bg-light {
   background:
-    radial-gradient(at 8% 8%, rgba(4, 120, 87, 0.05) 0px, transparent 45%),
-    radial-gradient(at 92% 12%, rgba(184, 134, 11, 0.05) 0px, transparent 45%),
+    radial-gradient(at 8% 8%, rgba(37, 99, 235, 0.05) 0px, transparent 45%),
+    radial-gradient(at 92% 12%, rgba(14, 165, 233, 0.05) 0px, transparent 45%),
     #F6F5F0;
 }
 
@@ -420,14 +420,14 @@ html.dark body {
 
 .shadow-glow {
   box-shadow:
-    0 0 0 1px rgba(4, 120, 87, 0.22),
-    0 8px 28px -8px rgba(4, 120, 87, 0.30);
+    0 0 0 1px rgba(37, 99, 235, 0.22),
+    0 8px 28px -8px rgba(37, 99, 235, 0.30);
 }
 
 .shadow-aurora {
   box-shadow:
     0 0 0 1px rgba(11, 15, 25, 0.6),
-    0 12px 38px -10px rgba(4, 120, 87, 0.40),
+    0 12px 38px -10px rgba(37, 99, 235, 0.40),
     0 6px 18px -8px rgba(11, 15, 25, 0.30);
 }
 
@@ -438,7 +438,7 @@ html.dark body {
 html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
 
 .hairline-warm {
-  border: 1px solid rgba(184, 134, 11, 0.20);
+  border: 1px solid rgba(14, 165, 233, 0.20);
 }
 
 /* Editorial hairline divider rule */
@@ -466,18 +466,18 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
 
 /* Soft emerald underline (replaces kw-teal) */
 .kw-emerald {
-  background-image: linear-gradient(transparent 62%, rgba(4, 120, 87, 0.22) 62%, rgba(4, 120, 87, 0.22) 92%, transparent 92%);
+  background-image: linear-gradient(transparent 62%, rgba(37, 99, 235, 0.22) 62%, rgba(37, 99, 235, 0.22) 92%, transparent 92%);
   padding: 0 2px;
 }
 
 .kw-gold {
-  background-image: linear-gradient(transparent 62%, rgba(184, 134, 11, 0.28) 62%, rgba(184, 134, 11, 0.28) 92%, transparent 92%);
+  background-image: linear-gradient(transparent 62%, rgba(14, 165, 233, 0.28) 62%, rgba(14, 165, 233, 0.28) 92%, transparent 92%);
   padding: 0 2px;
 }
 
 /* Backward-compat — kw-teal now uses emerald token */
 .kw-teal {
-  background-image: linear-gradient(transparent 62%, rgba(4, 120, 87, 0.22) 62%, rgba(4, 120, 87, 0.22) 92%, transparent 92%);
+  background-image: linear-gradient(transparent 62%, rgba(37, 99, 235, 0.22) 62%, rgba(37, 99, 235, 0.22) 92%, transparent 92%);
   padding: 0 2px;
 }
 
@@ -486,7 +486,7 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
-  color: #047857;
+  color: #2563eb;
   letter-spacing: -0.015em;
 }
 
@@ -523,8 +523,8 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
 
 .uk-hairlines {
   background-image:
-    linear-gradient(115deg, transparent 48.5%, rgba(4, 120, 87, 0.08) 49%, rgba(4, 120, 87, 0.08) 51%, transparent 51.5%),
-    linear-gradient(65deg, transparent 48.5%, rgba(184, 134, 11, 0.08) 49%, rgba(184, 134, 11, 0.08) 51%, transparent 51.5%),
+    linear-gradient(115deg, transparent 48.5%, rgba(37, 99, 235, 0.08) 49%, rgba(37, 99, 235, 0.08) 51%, transparent 51.5%),
+    linear-gradient(65deg, transparent 48.5%, rgba(14, 165, 233, 0.08) 49%, rgba(14, 165, 233, 0.08) 51%, transparent 51.5%),
     linear-gradient(0deg, transparent 49%, rgba(11, 15, 25, 0.05) 49.5%, rgba(11, 15, 25, 0.05) 50.5%, transparent 51%),
     linear-gradient(90deg, transparent 49%, rgba(11, 15, 25, 0.05) 49.5%, rgba(11, 15, 25, 0.05) 50.5%, transparent 51%);
 }
@@ -544,7 +544,7 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
 
 /* Gradient sweep — kept for backward compat, repainted emerald→gold */
 .gradient-text {
-  background: linear-gradient(90deg, #047857 0%, #B8860B 50%, #047857 100%);
+  background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 50%, #2563eb 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -623,7 +623,7 @@ html.dark .hairline { border-color: rgba(255, 255, 255, 0.08); }
 /* Soft focus ring */
 .ring-soft:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.25);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
 
 /* ════════════════════════════════════════════════════════
@@ -902,4 +902,67 @@ html.dark .glass-card {
   .card-flat, .card-flat-interactive {
     transition: none;
   }
+}
+
+/* ════════════════════════════════════════════════════
+   CLEAN SLATE — ultra polish (June 2026)
+   Premium depth, glass chrome, gradient ink, staggered reveal.
+   Scoped utilities consumed by Home + /tools.
+════════════════════════════════════════════════════ */
+
+/* Layered, optically-tuned shadows (crisp 1px edge + soft ambient) */
+.shadow-cs {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px -12px rgba(15, 23, 42, 0.12);
+}
+.shadow-cs-lg {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.07),
+    0 2px 4px rgba(15, 23, 42, 0.04),
+    0 28px 60px -24px rgba(15, 23, 42, 0.30);
+}
+
+/* Frosted chrome for sticky bars */
+.glass-cs {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Cool blue→indigo ink for headline accents */
+.ink-cs {
+  background: linear-gradient(100deg, #2563eb 0%, #4f46e5 55%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fine engineering grid + soft top-right spotlight for hero */
+.cs-canvas {
+  background-image:
+    radial-gradient(60% 70% at 85% -5%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
+    radial-gradient(50% 60% at 5% 10%, rgba(14, 165, 233, 0.07) 0%, transparent 55%),
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  -webkit-mask-image: radial-gradient(95% 100% at 50% 0%, #000 55%, transparent 92%);
+  mask-image: radial-gradient(95% 100% at 50% 0%, #000 55%, transparent 92%);
+}
+
+/* Staggered entrance — opt-in via .cs-rise + --i index */
+@keyframes cs-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cs-rise {
+  animation: cs-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-rise { animation: none; }
 }

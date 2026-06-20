@@ -4,8 +4,8 @@
   "description": "Free UK calculators, lookups and guides — take-home pay, mortgage, stamp duty, postcode, every visa route. Verified against gov.uk, HMRC and ONS.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#06192E",
-  "theme_color": "#0A2540",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
   "lang": "en-GB",
   "categories": ["finance", "education", "government", "lifestyle"],
   "icons": [

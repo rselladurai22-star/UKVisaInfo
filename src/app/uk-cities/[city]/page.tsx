@@ -96,8 +96,8 @@ export default async function CityPage({ params }: RouteParams) {
                   <CostRow icon={ShoppingCart} label="Groceries" value={`£${c.monthlyCost.groceries}`} />
                   <CostRow icon={Zap} label="Utilities + internet" value={`£${c.monthlyCost.utilities}`} />
                 </ul>
-                <div className="rounded-2xl bg-gradient-to-br from-[#dcfce7] to-white border border-[#bbf7d0] p-4 flex items-center justify-between gap-3">
-                  <span className="text-[13.5px] font-bold text-[#047857] uppercase tracking-[0.08em]">Total / month</span>
+                <div className="rounded-2xl bg-gradient-to-br from-[#dbeafe] to-white border border-[#bfdbfe] p-4 flex items-center justify-between gap-3">
+                  <span className="text-[13.5px] font-bold text-[#2563eb] uppercase tracking-[0.08em]">Total / month</span>
                   <span className="font-display font-bold text-[1.625rem] text-[#0A2540] tabular-nums">£{c.monthlyCost.total}</span>
                 </div>
               </Section>
