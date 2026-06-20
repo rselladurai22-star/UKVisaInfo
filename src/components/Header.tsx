@@ -101,7 +101,7 @@ export default function Header() {
     <>
       <header
         className={[
-          'glass-cs sticky top-0 z-50 border-b transition-[box-shadow,border-color] duration-300',
+          'glass-cs relative z-50 border-b transition-[box-shadow,border-color] duration-300',
           scrolled ? 'border-slate-200/80 shadow-[0_6px_24px_-14px_rgba(15,23,42,0.18)]' : 'border-transparent',
         ].join(' ')}
       >

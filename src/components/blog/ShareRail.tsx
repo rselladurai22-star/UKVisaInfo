@@ -1,18 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Link2, Twitter, Linkedin, Printer, Check, ArrowUp } from 'lucide-react';
+import { useState } from 'react';
+import { Link2, Twitter, Linkedin, Facebook, Printer, Check } from 'lucide-react';
 
+/**
+ * Horizontal social share row, shown near the top of every blog post.
+ * Flagship Clean Slate styling.
+ */
 export default function ShareRail({ title }: { title: string }) {
   const [copied, setCopied] = useState(false);
-  const [showTop, setShowTop] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 600);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const url = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -26,63 +22,33 @@ export default function ShareRail({ title }: { title: string }) {
 
   const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
 
   const btn =
-    'group w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary/50 hover:shadow-soft transition-all duration-150';
+    'inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 hover:text-blue-700 hover:border-blue-300 hover:shadow-sm transition-all duration-150';
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-on-surface-variant/70 mb-1">
-        Share
-      </div>
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="mr-1 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Share</span>
 
-      <button
-        type="button"
-        onClick={copyLink}
-        aria-label={copied ? 'Link copied' : 'Copy link'}
-        className={btn}
-      >
-        {copied
-          ? <Check className="w-[15px] h-[15px] text-success" />
-          : <Link2 className="w-[15px] h-[15px]" />}
+      <button type="button" onClick={copyLink} aria-label={copied ? 'Link copied' : 'Copy link'} className={btn}>
+        {copied ? <Check className="h-[15px] w-[15px] text-emerald-600" /> : <Link2 className="h-[15px] w-[15px]" />}
       </button>
 
-      <a
-        href={tweetUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Share on X / Twitter"
-        className={btn}
-      >
-        <Twitter className="w-[15px] h-[15px]" />
+      <a href={tweetUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" className={btn}>
+        <Twitter className="h-[15px] w-[15px]" />
       </a>
 
-      <a
-        href={linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Share on LinkedIn"
-        className={btn}
-      >
-        <Linkedin className="w-[15px] h-[15px]" />
+      <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" className={btn}>
+        <Linkedin className="h-[15px] w-[15px]" />
       </a>
 
-      <button
-        type="button"
-        onClick={() => window.print()}
-        aria-label="Print article"
-        className={btn}
-      >
-        <Printer className="w-[15px] h-[15px]" />
-      </button>
+      <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" className={btn}>
+        <Facebook className="h-[15px] w-[15px]" />
+      </a>
 
-      <button
-        type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        aria-label="Back to top"
-        className={`${btn} transition-opacity duration-200 ${showTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-      >
-        <ArrowUp className="w-[15px] h-[15px]" />
+      <button type="button" onClick={() => window.print()} aria-label="Print article" className={btn}>
+        <Printer className="h-[15px] w-[15px]" />
       </button>
     </div>
   );

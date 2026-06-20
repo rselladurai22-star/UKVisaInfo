@@ -38,6 +38,11 @@ function visasFor(tags: string[]): string[] {
   return [...ids];
 }
 
+const eyebrow = 'font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-blue-600 mb-3';
+const crossCard =
+  'group flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-cs';
+const crossIcon = 'flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-blue-50 text-blue-600';
+
 export default function RelatedPosts({ current }: { current: BlogPost }) {
   /* Related blog posts (top 3 by tag overlap + recency) */
   const relatedPosts = [...BLOG_POSTS]
@@ -66,107 +71,90 @@ export default function RelatedPosts({ current }: { current: BlogPost }) {
   if (relatedPosts.length === 0 && visas.length === 0 && !featuredSoc) return null;
 
   return (
-    <section className="mt-12 pt-8 border-t border-outline-variant/60">
+    <section className="space-y-8">
       {relatedPosts.length > 0 && (
-        <>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-4">
-            Related articles
-          </div>
-          <ul className="grid gap-3 sm:grid-cols-3 mb-8 animate-fade-in">
+        <div>
+          <p className={eyebrow}>Related articles</p>
+          <ul className="space-y-3">
             {relatedPosts.map(({ post }) => {
-              const category = postCategory(post);
-              const catMeta = getCategoryMeta(category);
+              const catMeta = getCategoryMeta(postCategory(post));
               return (
-                <li key={post.slug} className="h-full">
+                <li key={post.slug}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="group relative block h-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 flex flex-col justify-between hover:shadow-md active:scale-[0.99] transition-all overflow-hidden"
+                    className="group relative block overflow-hidden rounded-xl border border-slate-200 bg-white p-3.5 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-cs"
                   >
-                    {/* Hover indicator bar on the left */}
-                    <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: catMeta.accent }} />
-                    <div className="pl-1">
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        {post.tags.slice(0, 2).map((t) => (
-                          <span key={t} className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/30 text-on-surface-variant">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors duration-100 leading-snug mb-2 line-clamp-2">
-                        {post.title}
-                      </div>
+                    <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 transition-opacity group-hover:opacity-100" style={{ background: catMeta.accent }} />
+                    <div className="mb-1.5 flex flex-wrap gap-1.5 pl-1">
+                      {post.tags.slice(0, 2).map((t) => (
+                        <span key={t} className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-500">
+                          {t}
+                        </span>
+                      ))}
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] text-on-surface-variant/80 pl-1 mt-auto pt-2">
-                      <Clock className="w-3.5 h-3.5 text-on-surface-variant" />
-                      {post.readMinutes} min read
-                      <ArrowRight className="w-3.5 h-3.5 ml-auto text-primary opacity-0 group-hover:opacity-100 transition-all duration-100" />
+                    <div className="pl-1 text-[13.5px] font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-700">
+                      {post.title}
+                    </div>
+                    <div className="mt-2 flex items-center gap-1.5 pl-1 text-[11px] text-slate-500">
+                      <Clock className="h-3.5 w-3.5" /> {post.readMinutes} min read
+                      <ArrowRight className="ml-auto h-3.5 w-3.5 text-blue-600 opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
                   </Link>
                 </li>
               );
             })}
           </ul>
-        </>
+        </div>
       )}
 
       {(visas.length > 0 || countries.length > 0 || featuredSoc) && (
-        <>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-4">
-            Related across the site
-          </div>
-          <ul className="grid gap-2 sm:grid-cols-2 mb-3">
+        <div>
+          <p className={eyebrow}>Across the site</p>
+          <ul className="space-y-2">
             {visas.map((v) => (
               <li key={v.id}>
-                <Link href={`/visa-types/${v.id}`} className="group relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:shadow-md hover:border-primary/50 active:scale-[0.99] transition-all duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center flex-shrink-0">
-                    <Briefcase className="w-3.5 h-3.5" />
-                  </span>
+                <Link href={`/visa-types/${v.id}`} className={crossCard}>
+                  <span className={crossIcon}><Briefcase className="h-3.5 w-3.5" /></span>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70">Visa guide</div>
-                    <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors duration-100 truncate">
-                      {v.title}
-                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Visa guide</div>
+                    <div className="truncate text-[13px] font-semibold text-slate-900 group-hover:text-blue-700">{v.title}</div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-on-surface-variant group-hover:text-primary mt-1.5 flex-shrink-0 transition-colors" />
+                  <ArrowRight className="mt-1.5 h-3.5 w-3.5 flex-none text-slate-300 group-hover:text-blue-600" />
                 </Link>
               </li>
             ))}
 
             {countries.map((c) => (
               <li key={c.code}>
-                <Link href={`/from/${c.code}`} className="group relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:shadow-md hover:border-primary/50 active:scale-[0.99] transition-all duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center flex-shrink-0">
-                    <Globe2 className="w-3.5 h-3.5" />
-                  </span>
+                <Link href={`/from/${c.code}`} className={crossCard}>
+                  <span className={crossIcon}><Globe2 className="h-3.5 w-3.5" /></span>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70">Country guide</div>
-                    <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors duration-100 truncate">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Country guide</div>
+                    <div className="truncate text-[13px] font-semibold text-slate-900 group-hover:text-blue-700">
                       UK visa for {c.demonym} <span className="text-lg">{c.flag}</span>
                     </div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-on-surface-variant group-hover:text-primary mt-1.5 flex-shrink-0 transition-colors" />
+                  <ArrowRight className="mt-1.5 h-3.5 w-3.5 flex-none text-slate-300 group-hover:text-blue-600" />
                 </Link>
               </li>
             ))}
 
             {featuredSoc && (
-              <li className="sm:col-span-2">
-                <Link href={`/salary/${socSlug(featuredSoc.code, featuredSoc.title)}`} className="group relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:shadow-md hover:border-primary/50 active:scale-[0.99] transition-all duration-100">
-                  <span className="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center flex-shrink-0">
-                    <Building2 className="w-3.5 h-3.5" />
-                  </span>
+              <li>
+                <Link href={`/salary/${socSlug(featuredSoc.code, featuredSoc.title)}`} className={crossCard}>
+                  <span className={crossIcon}><Building2 className="h-3.5 w-3.5" /></span>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70">Salary page</div>
-                    <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors duration-100 truncate">
-                      {featuredSoc.title} (SOC {featuredSoc.code}) — £{featuredSoc.goingRate.toLocaleString()}
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Salary page</div>
+                    <div className="truncate text-[13px] font-semibold text-slate-900 group-hover:text-blue-700">
+                      {featuredSoc.title} (SOC {featuredSoc.code})
                     </div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-on-surface-variant group-hover:text-primary mt-1.5 flex-shrink-0 transition-colors" />
+                  <ArrowRight className="mt-1.5 h-3.5 w-3.5 flex-none text-slate-300 group-hover:text-blue-600" />
                 </Link>
               </li>
             )}
           </ul>
-        </>
+        </div>
       )}
     </section>
   );
