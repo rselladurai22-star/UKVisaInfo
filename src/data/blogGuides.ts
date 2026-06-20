@@ -2960,6 +2960,35 @@ National Insurance has its own band. For 2025/26, employees pay **8%** on earnin
 
 Put the two together and HMRC takes £7,486 + £2,994 = **£10,480**, leaving you with **£39,520 a year** — about **£3,293 a month**. Our [take-home pay calculator](/take-home-pay) does this instantly if you want to plug in your own number, but it is worth seeing the slices once so the deductions stop feeling random.
 
+## Your £50,000 payslip, line by line
+
+Annual figures are useful for planning, but you live month to month. Spreading the same numbers across twelve payslips shows what actually arrives each payday on a standard 1257L tax code with no pension or student loan.
+
+| Payslip line | Per month | Per year |
+|---|---|---|
+| Gross pay | £4,167 | £50,000 |
+| Income tax (PAYE) | −£624 | −£7,486 |
+| National Insurance | −£250 | −£2,994 |
+| **Net pay** | **£3,293** | **£39,520** |
+
+The single most useful habit at this salary is to check your **tax code** is 1257L. If it reads something else — BR, 0T or D0 — your employer may be over-deducting, sometimes for months. A quick check on the HMRC app catches it early, and any overpayment within the tax year is usually corrected automatically through an updated code.
+
+## The full take-home table around £50,000
+
+Because £50,000 sits right against the higher-rate line, the numbers just above it behave differently from the numbers just below it. This table shows what happens as you climb through the threshold.
+
+| Gross salary | Income tax | National Insurance | Take-home / year | Per month |
+|---|---|---|---|---|
+| £45,000 | £6,486 | £2,594 | £35,920 | £2,993 |
+| £48,000 | £7,086 | £2,834 | £38,080 | £3,173 |
+| **£50,000** | **£7,486** | **£2,994** | **£39,520** | **£3,293** |
+| £50,270 | £7,540 | £3,016 | £39,714 | £3,310 |
+| £52,000 | £8,232 | £3,051 | £40,717 | £3,393 |
+| £55,000 | £9,432 | £3,111 | £42,457 | £3,538 |
+| £60,000 | £11,432 | £3,211 | £45,357 | £3,780 |
+
+Look at the take-home column carefully. Between £45,000 and £50,000 your monthly pay rises by £300. Between £55,000 and £60,000 — the same £5,000 step — it rises by only £242. The difference is the 40% band quietly taking a bigger share of each pound once you pass £50,270.
+
 ## The 40% trap hiding just above you
 
 Here is the part that surprises people. At £50,000 your **effective** tax rate — total tax and NI divided by salary — is about 21%. But your **marginal** rate, what you lose on the next pound, is about to jump.

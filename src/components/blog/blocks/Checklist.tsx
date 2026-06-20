@@ -38,16 +38,16 @@ export default function Checklist({ name, items, slug }: Props) {
   const completedPct = items.length ? Math.round((done.size / items.length) * 100) : 0;
 
   return (
-    <div className="my-10 rounded-3xl border border-outline-variant bg-surface-container-lowest p-6 md:p-7 shadow-soft">
+    <div className="my-10 rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-6 md:p-7 shadow-cs">
       {/* header */}
-      <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-outline-variant/60">
+      <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-2.5">
-          <span className="inline-flex w-9 h-9 rounded-xl bg-primary-soft items-center justify-center text-primary">
+          <span className="inline-flex w-9 h-9 rounded-xl bg-blue-50 items-center justify-center text-blue-600">
             <ListChecks className="w-4 h-4" />
           </span>
           <div>
-            <div className="text-[14px] font-bold text-on-surface leading-tight">Your checklist</div>
-            <div className="text-[11.5px] text-on-surface-variant/80 mt-0.5">
+            <div className="text-[14px] font-bold text-slate-900 leading-tight">Your checklist</div>
+            <div className="text-[11.5px] text-slate-500 mt-0.5">
               {done.size}/{items.length} complete · progress saved locally
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function Checklist({ name, items, slug }: Props) {
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 text-[12px] font-semibold text-on-surface-variant hover:text-primary transition-colors duration-100 px-2.5 py-1.5 rounded-lg hover:bg-primary-soft/40"
+            className="inline-flex items-center gap-1 text-[12px] font-semibold text-slate-500 hover:text-blue-700 transition-colors duration-100 px-2.5 py-1.5 rounded-lg hover:bg-blue-50"
           >
             <RotateCcw className="w-3 h-3" />
             Reset
@@ -65,9 +65,9 @@ export default function Checklist({ name, items, slug }: Props) {
       </div>
 
       {/* progress bar */}
-      <div className="h-1.5 bg-surface-container rounded-full overflow-hidden mb-5">
+      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden mb-5">
         <div
-          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-[width] duration-300 ease-out"
+          className="h-full bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full transition-[width] duration-300 ease-out"
           style={{ width: `${completedPct}%` }}
         />
       </div>
@@ -82,13 +82,13 @@ export default function Checklist({ name, items, slug }: Props) {
                 type="button"
                 onClick={() => toggle(i)}
                 aria-pressed={checked}
-                className="w-full text-left flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-surface-container-low/40 transition-colors duration-100 group"
+                className="w-full text-left flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors duration-100 group"
               >
                 <span
                   className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center border-2 transition-[background,border-color,transform] duration-150 ${
                     checked
-                      ? 'bg-primary border-primary scale-100'
-                      : 'border-outline-variant group-hover:border-primary bg-surface-container-lowest'
+                      ? 'bg-blue-600 border-blue-600 scale-100'
+                      : 'border-slate-300 group-hover:border-blue-500 bg-white'
                   }`}
                 >
                   <Check
@@ -98,7 +98,7 @@ export default function Checklist({ name, items, slug }: Props) {
                 </span>
                 <span
                   className={`flex-1 text-[15px] leading-snug transition-all duration-150 ${
-                    checked ? 'text-on-surface-variant/60 line-through' : 'text-on-surface'
+                    checked ? 'text-slate-400 line-through' : 'text-slate-700'
                   }`}
                 >
                   {item}
@@ -110,7 +110,7 @@ export default function Checklist({ name, items, slug }: Props) {
       </ul>
 
       {completedPct === 100 && (
-        <div className="mt-4 text-center text-[13px] font-semibold text-success">
+        <div className="mt-4 text-center text-[13px] font-semibold text-emerald-600">
           🎉 All set — ready to apply.
         </div>
       )}

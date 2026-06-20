@@ -1,20 +1,17 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock, ArrowRight, ChevronRight, Home, ArrowUpRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, ChevronRight, Home, ArrowUpRight, BadgeCheck } from 'lucide-react';
 import { BLOG_POSTS, getPost, postCategory, getCategoryMeta, type BlogCategory, type RelatedTool } from '../../../data/blog';
 import { primaryEditorSchema, PRIMARY_EDITOR } from '../../../data/editorialTeam';
 import RelatedPosts from '../../../components/RelatedPosts';
 import ReadingProgress from '../../../components/blog/ReadingProgress';
-import ArticleToc from '../../../components/blog/ArticleToc';
-import ShareRail from '../../../components/blog/ShareRail';
 import ArticleBody from '../../../components/blog/ArticleBody';
 import FlagshipSalary2025 from './FlagshipSalary2025';
 import Comments from '../../../components/blog/Comments';
 import EmailCapture from '../../../components/EmailCapture';
 import StickyMobileCta from '../../../components/StickyMobileCta';
 import AdUnit from '../../../components/AdUnit';
-import { extractH2Headings } from '../../../components/blog/slug';
 import { parseSegments } from '../../../components/blog/parseSegments';
 
 interface RouteParams {
@@ -157,7 +154,6 @@ export default async function BlogPostPage({ params }: RouteParams) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  const headings = extractH2Headings(post.body);
   const segments = parseSegments(post.body);
   const faqSegs = segments.filter((s) => s.type === 'faq');
   const allFaqs = faqSegs.flatMap((s) => (s.type === 'faq' ? s.items : []));
@@ -248,6 +244,11 @@ export default async function BlogPostPage({ params }: RouteParams) {
     );
   }
 
+  const dateLabel = new Date(post.date).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+  const verifiedLabel = category === 'visa' ? 'gov.uk-sourced' : 'HMRC-verified · 2025/26';
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
@@ -259,215 +260,124 @@ export default async function BlogPostPage({ params }: RouteParams) {
       {/* Top reading progress bar */}
       <ReadingProgress />
 
-      {/* ═══════════════════════
-          EDITORIAL HEADER
-      ═══════════════════════ */}
-      <header className="bg-surface border-b border-outline-variant/60 pt-6 sm:pt-8 md:pt-10 pb-5 sm:pb-6">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
-          {/* Back nav / breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="flex flex-row flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
-            <Link href="/" className="hover:text-primary flex items-center gap-1 whitespace-nowrap"><Home className="h-3.5 w-3.5 flex-shrink-0" /> Home</Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-60 flex-shrink-0" />
-            <Link href="/blog" className="hover:text-primary whitespace-nowrap">Guides</Link>
-            <ChevronRight className="h-3.5 w-3.5 opacity-60 flex-shrink-0" />
-            <span className="text-primary font-bold whitespace-nowrap">Read</span>
-          </nav>
+      <article className="min-h-screen bg-white text-slate-900 antialiased">
+        {/* ───────── HERO (matches flagship) ───────── */}
+        <header className="relative border-b border-slate-200 bg-white">
+          <div aria-hidden className="cs-canvas pointer-events-none absolute inset-0" />
+          <div className="relative mx-auto w-full max-w-3xl px-5 pb-10 pt-10 sm:px-6 sm:pb-12 sm:pt-14">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-mono text-[12px] text-slate-400">
+              <Link href="/" className="inline-flex items-center gap-1 hover:text-blue-700"><Home className="h-3.5 w-3.5" /> home</Link>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+              <Link href="/blog" className="hover:text-blue-700">guides</Link>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+              <span className="text-slate-600">read</span>
+            </nav>
 
-          {/* Category pill / tag info */}
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <Link href={`/blog?category=${category}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: catMeta.accent }}>
-              {catMeta.label}
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <Link href={`/blog?category=${category}`} className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white hover:opacity-90 transition-opacity" style={{ background: catMeta.accent }}>
+                {catMeta.label}
+              </Link>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-700">
+                <BadgeCheck className="h-3.5 w-3.5" /> {verifiedLabel}
+              </span>
+              {isFresh && (
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+                  Updated
+                </span>
+              )}
+            </div>
+
+            <h1 className="mt-5 font-display text-[clamp(28px,5.2vw,44px)] font-extrabold leading-[1.06] tracking-[-0.035em] text-slate-900 [text-wrap:balance]">
+              {post.title}
+            </h1>
+
+            <p className="mt-4 text-[17px] leading-relaxed text-slate-600">
+              {post.description}
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-200 pt-4 font-mono text-[12px] text-slate-500">
+              <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {dateLabel}</span>
+              <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {post.readMinutes} min read</span>
+              <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> By <Link href={PRIMARY_EDITOR.profileUrl} className="font-sans font-semibold text-slate-700 hover:text-blue-700">{PRIMARY_EDITOR.name}</Link></span>
+            </div>
+          </div>
+        </header>
+
+        {/* ───────── BODY (single column, max-w-3xl) ───────── */}
+        <div className="mx-auto w-full max-w-3xl px-5 pb-20 pt-8 sm:px-6">
+          <ArticleBody body={post.body} articleSlug={post.slug} />
+
+          {/* Mid-article ad */}
+          <AdUnit slot="3862206036" format="auto" className="my-8" />
+
+          {/* Tags strip */}
+          <div className="mt-12 border-t border-slate-200 pt-8">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-3">Filed under</p>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <EmailCapture
+            title={category === 'visa' ? 'Stay on top of UK visa changes' : 'Stay on top of UK money & rule changes'}
+            subtitle="Rule updates, rate changes and practical guides in a weekly 3-minute brief."
+            cta="Get the brief"
+            source={`blog:${post.slug}`}
+          />
+
+          {/* Related calculators — flagship card style */}
+          <div className="mt-12">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600">Keep going</p>
+            <h2 className="mt-2 font-display text-xl font-extrabold tracking-[-0.02em] text-slate-900">Related calculators</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {relatedTools.map((t) => (
+                <Link
+                  key={t.href}
+                  href={t.href}
+                  className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-cs"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[13.5px] font-bold text-slate-900 group-hover:text-blue-700">{t.label}</p>
+                    <p className="truncate text-[11.5px] text-slate-500">{t.hint}</p>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 flex-none text-slate-300 group-hover:text-blue-600" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Pre-comments ad */}
+          <AdUnit slot="8847243325" format="auto" className="my-6" />
+
+          <RelatedPosts current={post} />
+
+          <Comments term={post.slug} />
+
+          {/* Bottom CTA — flagship dark gradient */}
+          <div className="mt-14 overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-blue-900 p-7 text-white shadow-cs-lg sm:p-9">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-blue-300">{cta.kicker}</p>
+            <h3 className="mt-3 font-display text-[clamp(20px,3vw,28px)] font-extrabold leading-tight tracking-[-0.02em]">
+              {cta.heading}
+            </h3>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-slate-300">
+              {cta.sub}
+            </p>
+            <Link
+              href={cta.href}
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-[14px] font-bold text-slate-900 transition-transform hover:-translate-y-0.5"
+            >
+              {cta.label} <ArrowRight className="h-4 w-4" />
             </Link>
-            {isFresh && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-success-soft text-success">
-                Updated
-              </span>
-            )}
-            {post.tags.slice(0, 2).map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-[26px] leading-tight sm:text-4xl font-display font-bold tracking-tight text-on-surface">
-            {post.title}
-          </h1>
-
-          {/* Description */}
-          <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-3xl leading-relaxed">
-            {post.description}
-          </p>
-
-          {/* Meta row */}
-          <div className="mt-6 pt-4 border-t border-outline-variant/40 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-on-surface-variant/80 text-[12px] font-medium">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-on-surface-variant" />
-              {new Date(post.date).toLocaleDateString('en-GB', {
-                day: 'numeric', month: 'long', year: 'numeric',
-              })}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-on-surface-variant" />
-              {post.readMinutes} min read
-            </span>
-            <span className="flex items-center gap-1.5 sm:ml-auto whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
-              <span className="text-on-surface-variant/80 whitespace-nowrap">
-                By <Link href={PRIMARY_EDITOR.profileUrl} className="text-on-surface hover:text-primary font-semibold transition-colors whitespace-nowrap">{PRIMARY_EDITOR.name}</Link>
-              </span>
-            </span>
           </div>
         </div>
-      </header>
-
-      {/* ═══════════════════════
-          3-COLUMN ARTICLE LAYOUT
-      ═══════════════════════ */}
-      <div className="bg-surface text-on-surface min-h-screen">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-6 md:py-10">
-          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-10">
-
-            {/* ── LEFT RAIL: TOC ── */}
-            <aside className="hidden lg:block lg:col-span-3">
-              <div className="sticky top-[110px]">
-                <ArticleToc headings={headings} />
-              </div>
-            </aside>
-
-      {/* ── CENTER: ARTICLE ── */}
-            <article className="w-full col-span-12 lg:col-span-7">
-              <ArticleBody body={post.body} articleSlug={post.slug} />
-
-              {/* Mid-article ad — shown after body, before tags */}
-              <AdUnit slot="3862206036" format="auto" className="my-8" />
-
-              {/* Tags strip */}
-              <div className="mt-12 pt-8 border-t border-outline-variant/60">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-3">Filed under</div>
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <EmailCapture
-                title={category === 'visa' ? 'Stay on top of UK visa changes' : 'Stay on top of UK money & rule changes'}
-                subtitle="Rule updates, rate changes and practical guides in a weekly 3-minute brief."
-                cta="Get the brief"
-                source={`blog:${post.slug}`}
-              />
-
-              {/* Related calculators — cluster cross-link to high-intent tools */}
-              <div className="mt-12">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/70 mb-3">Related calculators</div>
-                <div className="grid sm:grid-cols-3 gap-3">
-                  {relatedTools.map((t) => (
-                    <Link
-                      key={t.href}
-                      href={t.href}
-                      className="group relative rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2.5 flex items-center gap-3 hover:shadow-md active:scale-[0.99] transition-all overflow-hidden"
-                    >
-                      {/* Hover left accent line */}
-                      <span className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: catMeta.accent }} />
-                      <div className="min-w-0 flex-1 pl-1">
-                        <div className="text-[13px] font-semibold text-on-surface group-hover:text-primary transition-colors truncate">
-                          {t.label}
-                        </div>
-                        <div className="text-[11px] text-on-surface-variant truncate">
-                          {t.hint}
-                        </div>
-                      </div>
-                      <ArrowUpRight className="h-4 w-4 text-on-surface-variant group-hover:text-primary shrink-0 transition-colors" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pre-comments ad */}
-              <AdUnit slot="8847243325" format="auto" className="my-6" />
-
-              <RelatedPosts current={post} />
-
-              <Comments term={post.slug} />
-
-              {/* Bottom CTA */}
-              <div className="mt-14 relative rounded-lg border border-outline-variant bg-surface-container-low p-6 sm:p-8 overflow-hidden shadow-soft">
-                <div className="relative z-10 max-w-lg">
-                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-primary mb-3">
-                    {cta.kicker}
-                  </span>
-                  <h3 className="font-display text-on-surface text-lg sm:text-xl font-bold leading-tight">
-                    {cta.heading}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                    {cta.sub}
-                  </p>
-                  <Link
-                    href={cta.href}
-                    className="mt-5 inline-flex items-center gap-1.5 bg-primary text-white font-bold px-4 py-2.5 rounded-lg text-xs hover:bg-primary-strong active:scale-[0.98] transition-all duration-150 shadow-sm"
-                  >
-                    {cta.label} <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            </article>
-
-            {/* ── RIGHT RAIL: SHARE ── */}
-            <aside className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-[110px] space-y-6">
-                <ShareRail title={post.title} />
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
-
-      {/* Article-specific typography polish */}
-      <style>{`
-        .article-body > p:first-of-type::first-letter {
-          font-family: var(--font-grotesk), sans-serif;
-          float: left;
-          font-size: 3.2em;
-          line-height: 0.85;
-          margin-right: 0.15em;
-          margin-top: 0.05em;
-          font-weight: 800;
-          color: ${catMeta.accent};
-        }
-        @media (max-width: 640px) {
-          .article-body > p:first-of-type::first-letter {
-            font-size: 2.8em;
-            margin-right: 0.12em;
-          }
-        }
-        @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
-          .article-body > p:first-of-type::first-letter {
-            float: none;
-            font-size: inherit;
-            line-height: inherit;
-            margin-top: 0;
-            -webkit-initial-letter: 2;
-            initial-letter: 2;
-            margin-right: 0.22em;
-          }
-          @media (max-width: 640px) {
-            .article-body > p:first-of-type::first-letter {
-              margin-right: 0.18em;
-            }
-          }
-        }
-      `}</style>
+      </article>
 
       <StickyMobileCta
         context={category === 'visa' ? 'Find your route' : catMeta.label}

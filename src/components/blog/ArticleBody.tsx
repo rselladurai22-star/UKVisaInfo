@@ -63,7 +63,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
   const segments = parseSegments(body);
 
   return (
-    <div className="article-body w-full max-w-[720px]" style={{ fontFamily: 'var(--font-lora), Georgia, ui-serif, serif' }}>
+    <div className="article-body w-full text-slate-900 antialiased">
       {segments.map((seg, i) => {
         switch (seg.type) {
           case 'markdown':
@@ -89,95 +89,51 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         }
       })}
 
-      {/* Scoped reading-experience polish */}
+      {/* Scoped reading-experience polish — flagship (Clean Slate) typography */}
       <style>{`
-        /* Headings override inherited Lora with Space Grotesk */
         .article-body h2,
         .article-body h3,
         .article-body h4 {
-          font-family: var(--font-grotesk), ui-sans-serif, sans-serif;
+          font-family: var(--font-display), ui-sans-serif, sans-serif;
           text-wrap: balance;
         }
-        .article-body p {
-          text-wrap: pretty;
-          text-align: justify;
-          text-justify: inter-word;
-          /* hyphenate so justify stays tidy on narrow mobile columns */
-          -webkit-hyphens: auto;
-          hyphens: auto;
-        }
+        .article-body p { text-wrap: pretty; }
 
-        /* Unordered list — primary bullet */
+        /* Unordered list — blue dot */
         .article-body .md-ul { list-style: none; padding-left: 0; }
-        .article-body .md-ul > li { position: relative; padding-left: 1.85rem; }
+        .article-body .md-ul > li { position: relative; padding-left: 1.6rem; }
         .article-body .md-ul > li::before {
-          content: ''; position: absolute; left: 0.4rem; top: 0.7em;
-          width: 7px; height: 7px; border-radius: 9999px;
-          background: var(--color-primary);
-          box-shadow: 0 0 0 2px var(--color-primary-soft);
+          content: ''; position: absolute; left: 0.3rem; top: 0.72em;
+          width: 6px; height: 6px; border-radius: 9999px;
+          background: #2563eb;
         }
 
-        /* Ordered list — numbered badge */
+        /* Ordered list — numbered slate badge */
         .article-body .md-ol { list-style: none; counter-reset: li; padding-left: 0; }
-        .article-body .md-ol > li { position: relative; padding-left: 2.5rem; counter-increment: li; min-height: 1.8rem; }
+        .article-body .md-ol > li { position: relative; padding-left: 2.5rem; counter-increment: li; }
         .article-body .md-ol > li::before {
-          content: counter(li); position: absolute; left: 0; top: 0.1em;
-          width: 1.7rem; height: 1.7rem; border-radius: 5px;
-          background: var(--color-primary-soft);
-          color: var(--color-primary); font-weight: 700; font-size: 0.75rem;
+          content: counter(li); position: absolute; left: 0; top: 0.05em;
+          width: 1.7rem; height: 1.7rem; border-radius: 8px;
+          background: #eff6ff; color: #2563eb; font-weight: 800; font-size: 0.78rem;
           display: flex; align-items: center; justify-content: center;
-          border: 1px solid var(--color-outline-variant);
-          font-family: var(--font-grotesk), sans-serif;
-          letter-spacing: 0;
+          border: 1px solid #dbeafe;
+          font-family: var(--font-mono), monospace;
         }
 
-        /* Table */
-        .article-body table tbody tr:nth-child(even) { background: rgba(14,20,36,0.02); }
-        .article-body table tbody tr:hover { background: var(--color-surface-container-low); }
-
-        /* Horizontally-scrollable table: edge shadows that fade in only when
-           there is more to scroll (pure CSS, background-attachment:local).
-           Signals "swipe me" on narrow screens without any JS. */
+        /* Tables — flagship rounded card + blue row hover */
         .article-body .md-table-wrap {
           background:
-            linear-gradient(to right, var(--color-surface-container-lowest) 30%, rgba(255,255,255,0)) left center,
-            linear-gradient(to left, var(--color-surface-container-lowest) 30%, rgba(255,255,255,0)) right center,
-            radial-gradient(farthest-side at 0 50%, rgba(11,15,25,0.16), rgba(11,15,25,0)) left center,
-            radial-gradient(farthest-side at 100% 50%, rgba(11,15,25,0.16), rgba(11,15,25,0)) right center;
+            linear-gradient(to right, #ffffff 30%, rgba(255,255,255,0)) left center,
+            linear-gradient(to left, #ffffff 30%, rgba(255,255,255,0)) right center,
+            radial-gradient(farthest-side at 0 50%, rgba(15,23,42,0.12), rgba(15,23,42,0)) left center,
+            radial-gradient(farthest-side at 100% 50%, rgba(15,23,42,0.12), rgba(15,23,42,0)) right center;
           background-repeat: no-repeat;
           background-size: 42px 100%, 42px 100%, 16px 100%, 16px 100%;
           background-attachment: local, local, scroll, scroll;
           -webkit-overflow-scrolling: touch;
         }
-
-        /* First paragraph after heading — slightly larger drop-in */
-        .article-body h2 + p,
-        .article-body h3 + p {
-          font-size: 1.0625rem;
-        }
-
-        /* Running text first-letter on first p after H2 (editorial feel) */
-        .article-body .lead-para::first-letter {
-          float: left;
-          font-family: var(--font-grotesk), sans-serif;
-          font-size: 3.4em;
-          line-height: 0.85;
-          margin-right: 0.1em;
-          margin-top: 0.07em;
-          color: var(--color-primary);
-          font-weight: 700;
-        }
-        @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
-          .article-body .lead-para::first-letter {
-            float: none;
-            font-size: inherit;
-            line-height: inherit;
-            margin-top: 0;
-            -webkit-initial-letter: 2;
-            initial-letter: 2;
-            margin-right: 0.22em;
-          }
-        }
+        .article-body table tbody tr { transition: background-color .15s ease; }
+        .article-body table tbody tr:hover { background: #eff6ff; }
       `}</style>
     </div>
   );
@@ -197,13 +153,12 @@ function MarkdownChunk({ content }: { content: string }) {
           return (
             <h2
               id={id}
-              className="group relative font-display text-[1.25rem] md:text-[1.625rem] font-bold text-on-surface mt-20 mb-5 leading-[1.2] tracking-[-0.018em] scroll-mt-28 pl-5 py-3 rounded-r-2xl"
-              style={{ borderLeft: '3px solid var(--color-primary)', background: 'linear-gradient(to right, var(--color-primary-soft) 0%, rgba(29, 78, 216, 0.03) 55%, transparent 100%)' }}
+              className="group relative font-display text-[clamp(22px,3.4vw,30px)] font-extrabold leading-tight tracking-[-0.025em] text-slate-900 mt-14 mb-4 scroll-mt-24"
             >
               <a
                 href={`#${id}`}
                 aria-label="Anchor link"
-                className="absolute -left-8 top-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-primary hidden md:inline-flex"
+                className="absolute -left-7 top-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-blue-600 hidden md:inline-flex"
               >
                 <LinkIcon className="w-4 h-4" />
               </a>
@@ -212,110 +167,72 @@ function MarkdownChunk({ content }: { content: string }) {
           );
         },
         h3: ({ children }) => (
-          <h3 className="font-display text-[1.0625rem] md:text-[1.25rem] font-bold text-on-surface mt-9 mb-3 leading-snug tracking-[-0.01em] pt-5 border-t border-outline-variant/60">
-            <span className="inline-flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-md bg-primary flex-shrink-0 inline-flex items-center justify-center" aria-hidden="true">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              </span>
-              {children}
-            </span>
+          <h3 className="font-display text-[1.0625rem] md:text-[1.25rem] font-bold text-slate-900 mt-8 mb-2.5 leading-snug tracking-[-0.01em]">
+            {children}
           </h3>
         ),
+        h4: ({ children }) => (
+          <h4 className="font-display text-[1rem] md:text-[1.0625rem] font-bold text-slate-900 mt-6 mb-2">
+            {children}
+          </h4>
+        ),
         p: ({ children }) => (
-          <p className="text-on-surface/90 text-[1.0625rem] md:text-[1.125rem] leading-[1.9] mb-7 font-normal tracking-[0.003em]">
+          <p className="text-slate-700 text-[16.5px] md:text-[17px] leading-relaxed mb-5">
             {processChildren(children, seen)}
           </p>
         ),
-        ul: ({ children }) => <ul className="md-ul my-7 space-y-3">{children}</ul>,
-        ol: ({ children }) => <ol className="md-ol my-7 space-y-3">{children}</ol>,
+        ul: ({ children }) => <ul className="md-ul my-5 space-y-2.5">{children}</ul>,
+        ol: ({ children }) => <ol className="md-ol my-5 space-y-2.5">{children}</ol>,
         li: ({ children }) => (
-          <li className="text-on-surface/90 text-[1.05rem] md:text-[1.0625rem] leading-[1.85] font-normal">
+          <li className="text-slate-700 text-[16px] md:text-[16.5px] leading-relaxed">
             {processChildren(children, seen)}
           </li>
         ),
         a: ({ href, children }) => (
           <a
             href={href}
-            className="text-primary underline decoration-primary/45 decoration-[1.5px] hover:text-primary-strong hover:decoration-primary underline-offset-[4px] font-semibold transition-colors duration-100"
-            style={{ fontFamily: 'inherit' }}
+            className="text-blue-700 font-semibold underline decoration-blue-300 decoration-[1.5px] underline-offset-[3px] hover:decoration-blue-600 transition-colors"
           >
             {children}
           </a>
         ),
         strong: ({ children }) => (
-          <strong
-            className="font-bold text-on-surface"
-            style={{
-              background: 'var(--color-primary-soft)',
-              padding: '1px 4px',
-              borderRadius: '3px',
-              fontFamily: 'inherit',
-            }}
-          >{children}</strong>
+          <strong className="font-bold text-slate-900">{children}</strong>
         ),
         em: ({ children }) => (
-          <em className="italic text-on-surface-variant" style={{ fontFamily: 'inherit' }}>{children}</em>
+          <em className="italic text-slate-600">{children}</em>
         ),
         table: ({ children }) => (
-          <div className="md-table-wrap my-10 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-outline-variant shadow-soft">
-            <table className="w-full min-w-[34rem]">{children}</table>
+          <div className="md-table-wrap my-8 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-slate-200 shadow-cs">
+            <table className="w-full min-w-[34rem] border-collapse text-[14px]">{children}</table>
           </div>
         ),
         thead: ({ children }) => (
-          <thead className="bg-surface-container border-b-2 border-outline-variant">{children}</thead>
+          <thead className="bg-slate-100 text-left">{children}</thead>
         ),
         th: ({ children }) => (
-          <th
-            className="text-left px-3 sm:px-5 py-3 sm:py-3.5 font-bold text-on-surface text-[10px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.1em] whitespace-nowrap"
-            style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
-          >
+          <th className="text-left px-3 sm:px-4 py-3 font-semibold text-slate-700 text-[11px] sm:text-[12px] uppercase tracking-[0.06em] whitespace-nowrap">
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-3 sm:px-5 py-3 sm:py-4 border-t border-outline-variant/40 text-on-surface-variant text-[0.8125rem] sm:text-[0.9375rem] leading-relaxed">
+          <td className="px-3 sm:px-4 py-2.5 sm:py-3 border-t border-slate-100 text-slate-600 text-[0.8125rem] sm:text-[0.9375rem] leading-relaxed tabular-nums">
             {children}
           </td>
         ),
         blockquote: ({ children }) => (
-          <figure className="my-12 relative">
-            <div
-              className="rounded-r-2xl pl-7 pr-6 py-6"
-              style={{
-                borderLeft: '4px solid var(--color-primary)',
-                background: 'linear-gradient(to right, var(--color-surface-container-low) 0%, var(--color-surface-container-lowest) 100%)',
-              }}
-            >
-              <div
-                className="text-on-surface text-[1.1rem] md:text-[1.2rem] leading-[1.8] italic font-medium"
-                style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
-              >
-                {children}
-              </div>
+          <figure className="my-8 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+            <div className="text-slate-700 text-[16px] leading-relaxed italic">
+              {children}
             </div>
           </figure>
         ),
         code: ({ children }) => (
-          <code
-            className="text-primary px-1.5 py-0.5 rounded-md text-[0.875em] font-mono tabular-nums bg-surface-container border border-outline-variant"
-            style={{
-              fontFamily: 'var(--font-jetbrains), ui-monospace, monospace',
-            }}
-          >
+          <code className="text-blue-700 px-1.5 py-0.5 rounded-md text-[0.875em] font-mono tabular-nums bg-slate-100 border border-slate-200">
             {children}
           </code>
         ),
-        hr: () => (
-          <div className="my-16 flex items-center" aria-hidden="true">
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-outline-variant/65 to-transparent" />
-            <span className="mx-5 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="w-2 h-2 rounded-full bg-secondary" />
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            </span>
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent via-outline-variant/65 to-transparent" />
-          </div>
-        ),
+        hr: () => <hr className="my-12 border-0 border-t border-slate-200" />,
       }}
     >
       {content}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, HelpCircle } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { FaqItem } from '../parseSegments';
@@ -12,44 +12,28 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
 
   return (
     <section className="my-10">
-      <div className="flex items-center gap-3 mb-6">
-        <span className="inline-flex w-9 h-9 rounded-xl items-center justify-center text-on-surface bg-surface-container">
-          <HelpCircle className="w-4 h-4" />
-        </span>
-        <h3
-          className="text-[1.1875rem] md:text-[1.3rem] font-bold text-on-surface leading-tight"
-          style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
-        >
-          Frequently asked questions
-        </h3>
-      </div>
+      <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600">Questions</p>
+      <h2 className="mt-2 mb-5 font-display text-[clamp(22px,3.4vw,30px)] font-extrabold leading-tight tracking-[-0.025em] text-slate-900">
+        Frequently asked questions
+      </h2>
 
-      <ul className="rounded-2xl overflow-hidden border border-outline-variant bg-surface-container-lowest shadow-soft">
+      <ul className="divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-cs">
         {items.map((it, i) => {
           const open = openIdx === i;
           return (
-            <li key={i} style={{ borderTop: i > 0 ? '1px solid var(--color-outline-variant)' : undefined }}>
+            <li key={i}>
               <button
                 type="button"
                 onClick={() => setOpenIdx(open ? null : i)}
                 aria-expanded={open}
-                className={`w-full flex items-start gap-4 px-5 py-5 md:px-6 text-left group transition-colors duration-150 ${open ? 'bg-surface-container-low/50' : 'bg-surface-container-lowest hover:bg-surface-container-low/30'}`}
+                className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left group"
               >
-                <span
-                  className="flex-1 text-[15.5px] md:text-[16px] font-bold text-on-surface leading-snug pr-3 pt-0.5"
-                  style={{ fontFamily: 'var(--font-grotesk), sans-serif' }}
-                >
+                <span className="flex-1 text-[15px] font-semibold text-slate-900 leading-snug">
                   {it.q}
                 </span>
-                <span
-                  className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-[transform,background,color] duration-200 ${
-                    open
-                      ? 'rotate-45 bg-primary text-white'
-                      : 'bg-surface-container text-on-surface-variant group-hover:bg-primary group-hover:text-white'
-                  }`}
-                >
-                  <Plus className="w-4 h-4" strokeWidth={2.5} />
-                </span>
+                <ChevronRight
+                  className={`h-4 w-4 flex-none text-slate-400 transition-transform duration-200 ${open ? 'rotate-90 text-blue-600' : ''}`}
+                />
               </button>
 
               {/* CSS grid trick — animate to natural height */}
@@ -59,27 +43,16 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div
-                    className="px-5 md:px-6 pb-6 pr-12 text-[15.5px] leading-[1.75] text-on-surface-variant/90"
-                    style={{
-                      fontFamily: 'var(--font-lora), Georgia, serif',
-                      borderTop: '1px solid var(--color-outline-variant)',
-                      background: 'var(--color-surface-container-lowest)',
-                      paddingTop: '1.25rem',
-                    }}
-                  >
+                  <div className="px-5 pb-5 text-[14.5px] leading-relaxed text-slate-600">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       components={{
-                        p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                        p: ({ children }) => <p className="mb-2.5 last:mb-0">{children}</p>,
                         strong: ({ children }) => (
-                          <strong
-                            className="font-bold text-on-surface"
-                            style={{ background: 'var(--color-primary-soft)', padding: '0 3px', borderRadius: '3px' }}
-                          >{children}</strong>
+                          <strong className="font-bold text-slate-900">{children}</strong>
                         ),
                         a: ({ href, children }) => (
-                          <a href={href} className="text-primary underline decoration-primary/40 hover:text-primary-strong font-semibold">{children}</a>
+                          <a href={href} className="text-blue-700 underline font-semibold hover:decoration-blue-600">{children}</a>
                         ),
                       }}
                     >

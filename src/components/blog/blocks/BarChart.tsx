@@ -16,10 +16,9 @@ export default function BarChart({ title, items }: { title: string; items: BarDa
   const max = Math.max(...items.map((d) => d.value), 1);
 
   return (
-    <figure className="my-8 rounded-2xl border border-outline-variant bg-surface-container-lowest p-5 md:p-6 shadow-soft">
+    <figure className="my-8 rounded-2xl border border-slate-200 bg-white p-5 md:p-6 shadow-cs">
       {title && (
-        <figcaption className="font-display text-on-surface font-bold text-[1.05rem] mb-5 flex items-center gap-2">
-          <span className="w-1.5 h-4 rounded-full bg-gradient-to-b from-primary to-secondary" />
+        <figcaption className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 mb-5">
           {title}
         </figcaption>
       )}
@@ -29,20 +28,20 @@ export default function BarChart({ title, items }: { title: string; items: BarDa
           return (
             <div key={i}>
               <div className="flex justify-between items-baseline mb-1.5 gap-3">
-                <span className="text-on-surface-variant text-[0.9rem] font-medium leading-snug">{d.label}</span>
-                <span className="font-display text-on-surface font-bold text-[0.95rem] tabular-nums shrink-0">
+                <span className="text-slate-600 text-[0.9rem] font-medium leading-snug">{d.label}</span>
+                <span className="font-display text-slate-900 font-bold text-[0.95rem] tabular-nums shrink-0">
                   {d.display}
                 </span>
               </div>
-              <div className="h-2.5 rounded-full bg-surface-container-low overflow-hidden">
+              <div className="h-2.5 rounded-full bg-slate-100 overflow-hidden">
                 {reduce ? (
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+                    className="h-full rounded-full bg-gradient-to-r from-blue-600 to-indigo-500"
                     style={{ width: pct }}
                   />
                 ) : (
                   <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+                    className="h-full rounded-full bg-gradient-to-r from-blue-600 to-indigo-500"
                     initial={{ width: 0 }}
                     whileInView={{ width: pct }}
                     viewport={{ once: true, margin: '-40px' }}
