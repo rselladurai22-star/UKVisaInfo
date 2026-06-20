@@ -1062,10 +1062,10 @@ Figures are 2025/26 estimates and illustrative. Use the running-costs calculator
     slug: 'how-much-tax-on-100000-salary-uk-2025-26',
     title: 'Earning £100,000? Beware the 60% Tax Trap',
     description:
-      'Why a £100,000 salary triggers a hidden 60% marginal tax rate in 2025/26, how the personal allowance taper works, your real take-home, and how a pension fixes it.',
+      'Why a £100,000 salary triggers a hidden 60% marginal tax rate in 2025/26, how the personal allowance taper works, your real take-home, what counts toward the £100k line, and how a pension fixes it.',
     date: '2026-06-08',
-    updated: '2026-06-08',
-    readMinutes: 10,
+    updated: '2026-06-20',
+    readMinutes: 17,
     category: 'money',
     tags: ['Income Tax', 'Take-Home Pay', '60% Tax Trap'],
     relatedTools: [
@@ -1108,7 +1108,7 @@ To see why the taper creates an effective 60% tax rate, let us look at the mathe
 The 60% figure only covers income tax. When you factor in other mandatory deductions, the cash landing in your bank account shrinks even further:
 
 - **National Insurance (NI):** For earnings above the Upper Earnings Limit (UEL) of £50,270, employee Class 1 NI is charged at 2%. This pushes the marginal deduction rate to **62%**.
-- **Plan 2 Student Loan:** Repayments are 9% on earnings over £27,295. If you are repaying a student loan, your marginal deduction rate in this band rises to **71%**.
+- **Plan 2 Student Loan:** Repayments are 9% on earnings over £28,470 (the 2025/26 threshold). If you are repaying a student loan, your marginal deduction rate in this band rises to **71%**.
 - **Postgraduate Loan:** Repayments are 6% on earnings over £21,000. Adding this to a student loan pushes the marginal rate to **77%**.
 
 In other words, a graduate repaying both undergraduate and postgraduate loans will see just **£23** of every £100 they earn between £100,000 and £125,140, with £77 going directly to HMRC and student loan repayments.
@@ -1232,6 +1232,121 @@ If your employer offers a salary sacrifice car scheme, choosing a zero-emissions
 If you have investments outside of tax-free wrappers (like ISAs), they may generate dividends or interest that push your income over £100,000. If your spouse or civil partner is in a lower tax band, you can transfer these assets to them. 
 - Transfers between spouses are exempt from Capital Gains Tax.
 - The dividends or interest will then be taxed at your spouse's lower rate, and the income will be excluded from your adjusted net income calculation.
+
+---
+
+## What Actually Counts Toward the £100,000 (the Surprises)
+
+Most people assume the £100,000 line is about their salary. It is not. It is about your **adjusted net income**, and several things you might not think of can quietly push you over it without your base pay ever changing.
+
+- **Bonuses and commission.** A £90,000 salary with a £15,000 bonus is a £105,000 income for tax purposes. The bonus does not get a gentler treatment; it stacks straight on top and lands squarely in the 60% band.
+- **Vesting shares (RSUs).** When restricted stock units vest, their value is taxed as employment income in that tax year. A modest salary plus a large vesting event can tip you into the trap in a single month.
+- **Benefits in kind.** A company car, private medical insurance and other perks are added to your taxable income through your P11D. Private medical cover worth £1,500 is £1,500 of extra income for the taper.
+- **Savings interest and dividends.** Interest above your savings allowance and dividends above the £500 dividend allowance both count. In a high-interest environment, a large cash balance outside an ISA can add thousands.
+- **Rental profit.** Net rental income from a property you let is taxable income and forms part of adjusted net income.
+
+> [!TIP] Add it all up before April, not after
+> The trap is triggered by your *total* taxable income for the year, not your headline salary. Project every source in advance so a bonus or a vesting event does not surprise you when it is too late to act.
+
+---
+
+## Bonuses, RSUs and the Power of Timing
+
+Because the tax year runs from 6 April to 5 April, *when* income lands can matter as much as how much it is. A six-figure earner who expects a large bonus has more control than they realise.
+
+The cleanest move is to **sacrifice the bonus into your pension before it is paid**. Many employers allow a bonus sacrifice election, where you tell payroll, ahead of the payment date, to divert some or all of the bonus into your pension. Because the money never hits your payslip as salary, it never enters your adjusted net income, so it sidesteps both the 60% band and the childcare cliff in one step. It also escapes the 2% employee National Insurance, and a good employer will pass on part of the 15% employer National Insurance they save too.
+
+If a sacrifice is not available, the second lever is **spreading income across tax years**. Where you have any say over the timing of a discretionary bonus, a freelance invoice or a share sale, splitting it so that neither year crosses £100,000 can preserve your allowance in both. This will not always be possible with PAYE bonuses, but it is often achievable for the self-employed and for those with vesting schedules they can influence.
+
+> [!STAT] £130,000 | The salary a parent of two would need just to break even after crossing £100,000 with no planning
+
+---
+
+## The Annual Allowance: Don't Sacrifice Into a Brick Wall
+
+Pensions are the escape hatch, but there is a ceiling on how much you can pay in with tax relief, and high earners are the most likely to hit it. This is the **annual allowance**, and for 2025/26 it is **£60,000** (or 100% of your earnings if lower). It counts everything: your contributions, your employer's, and the basic-rate top-up.
+
+For most six-figure earners, £60,000 is plenty of headroom to drop below £100,000. But two rules can shrink it dramatically:
+
+- **The tapered annual allowance.** If your *threshold income* is over £200,000 **and** your *adjusted income* (a broader measure that includes employer contributions) is over £260,000, your £60,000 allowance is reduced by £1 for every £2 of adjusted income above £260,000, down to a floor of £10,000 once adjusted income reaches £360,000. Very high earners therefore have far less room to plan with.
+- **The money purchase annual allowance (MPAA).** If you have already flexibly accessed a defined contribution pension, your allowance for new contributions collapses to just £10,000.
+
+> [!WARNING] Going over the allowance has a real cost
+> Contributions above your annual allowance trigger an annual allowance charge that effectively claws back the tax relief. Before making a large contribution, confirm your available allowance for the year.
+
+The good news is **carry forward**. If you were a member of a registered pension scheme in the previous three tax years and did not use your full allowance, you can carry the unused amount forward and add it to this year's allowance. A higher earner with little recent pension saving can sometimes contribute well over £100,000 in a single year by combining the current allowance with three years of carry forward, wiping out the trap and building a large pot at a fraction of the real cost.
+
+---
+
+## A Real Worked Example: Priya on £118,000
+
+Numbers make the trap concrete. Priya earns a base salary of £110,000 and receives an £8,000 bonus, giving an adjusted net income of £118,000. She has two children in nursery. Here is her position before any planning.
+
+| Item | Amount |
+| :--- | :--- |
+| Gross income | £118,000 |
+| Personal allowance (tapered) | £3,570 |
+| Income tax | £37,892 |
+| Employee National Insurance | £4,371 |
+| Net take-home | £75,737 |
+| Tax-Free Childcare lost | −£4,000 of value |
+| 30-hours funding lost | −£3,705 of value |
+
+Now Priya makes an £18,000 gross pension contribution (a £14,400 payment from her bank, grossed up by basic-rate relief). This brings her adjusted net income to **£100,000**.
+
+- Her full £12,570 personal allowance is restored.
+- She drops out of the 60% band entirely on that slice of income.
+- Both childcare schemes are reinstated, worth roughly £7,700 in tax-free value.
+- After higher-rate relief reclaimed on her tax return, the real out-of-pocket cost of that £18,000 pension pot is close to **£7,200**, before you even count the childcare she just saved.
+
+> [!QUOTE]
+> The £100,000 line is the one place in the tax system where a financial adviser can hand you a four-figure cheque just for filling in a form correctly.
+> — A common refrain among UK accountants
+
+---
+
+## Common Mistakes That Cost Six-Figure Earners
+
+> [!BARS] What you keep from the next £100 earned (by band)
+> Basic rate (£12.6k–£50.3k) :: 72 :: 72p
+> Higher rate (£50.3k–£100k) :: 58 :: 58p
+> The 60% trap (£100k–£125k) :: 38 :: 38p
+> Additional rate (£125k+) :: 53 :: 53p
+
+Even well-paid, financially literate people fall into the same handful of errors around the £100,000 line:
+
+- **Leaving it until March.** Pension and Gift Aid planning has to be done within the tax year. People who realise in April that they crossed the line have already lost the allowance and the childcare for the year just gone.
+- **Forgetting to claim higher-rate relief.** Relief-at-source and SIPP contributions only give you basic-rate relief automatically. The higher-rate portion must be claimed through Self Assessment or a tax-code change, and HMRC will not chase you for it.
+- **Confusing salary with adjusted net income.** Bonuses, benefits in kind, interest and dividends all count. A £95,000 salary can still breach £100,000 once everything is added.
+- **Ignoring the childcare cliff.** The 60% tax is gradual; the childcare loss is a hard edge at £1 over. For parents of young children, the childcare hit is usually the bigger number.
+- **Sacrificing below minimum wage or contractual floors.** Salary sacrifice cannot take your cash pay below the National Minimum Wage, and very large sacrifices can affect mortgage affordability assessments and some statutory pay calculations. Plan the amount deliberately.
+
+---
+
+## Is It Ever Worth Earning Just Over £100,000?
+
+After reading all of this, it is tempting to conclude that you should never let your income tick over £100,000. That is too simple. The trap is a band, not a wall, and it has an exit on the other side.
+
+The painful zone is £100,000 to roughly £126,000 (a little higher for parents, once the childcare losses are counted). Inside it, each extra pound is taxed brutally and, for families with young children, can genuinely leave you worse off. But once you are clearly past that band, the maths normalises: above £125,140 the marginal rate falls back to 47% including National Insurance, which is lower than the 62% you paid on the way through. Someone earning £140,000 is comfortably better off than someone on £100,000, even though the journey between the two was unpleasant.
+
+There are also non-financial reasons not to artificially cap your career. A higher salary lifts your future earning baseline, your bonus potential, your pension contributions and the figure a mortgage lender will work from. Turning down a promotion purely to dodge a tax band is rarely the right long-term call. The smarter approach is to accept the higher role and then use pension contributions to manage the *taxable* part of the income, capturing the career progression while neutralising the worst of the tax.
+
+> [!INFO] The rule of thumb
+> If a pay rise pushes you into the £100k–£126k band and you cannot or do not want to pension away the excess, treat the rise as roughly a third of its headline value. If it takes you well clear of £126,000, it is worth close to its face value again.
+
+---
+
+## If You Cannot or Do Not Want to Use a Pension
+
+The pension escape hatch is powerful, but it locks money away until at least age 55 (rising to 57 from 2028). For some people, that is the wrong trade. If you are saving for a house deposit, building an emergency fund, or simply prefer access to your cash, tying up £15,000 or £20,000 a year may not suit your stage of life.
+
+If a pension is not right for you, your realistic options narrow:
+
+- **Gift Aid** still lowers adjusted net income and supports a cause you care about, though you are giving the money away rather than keeping it.
+- **Restructuring savings and investments** into ISAs, or into a lower-earning partner's name, removes future interest and dividends from your adjusted net income, which helps in later years even if it cannot fix the current one.
+- **Accepting the tax** is sometimes the honest answer. If you have no children in nursery and no appetite to lock money away, paying the 60% on a slice of income may simply be the price of a higher salary, and a higher salary is still more money in your pocket than a lower one.
+
+The key is to make the choice deliberately. The worst outcome is drifting over £100,000 by accident, losing the allowance and the childcare, and only noticing when the tax year has closed and nothing can be done.
 
 ---
 
