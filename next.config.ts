@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { NOINDEX_TOOL_PATHS } from './src/config/noindex';
 
 const config: NextConfig = {
   reactStrictMode: true,
@@ -6,6 +7,15 @@ const config: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
+  },
+  async headers() {
+    // Secondary / duplicative calculators stay live for users but are kept
+    // out of search via X-Robots-Tag, so the indexed surface is dominated by
+    // editorial content + flagship tools (AdSense "low value content" fix).
+    return NOINDEX_TOOL_PATHS.map((source) => ({
+      source,
+      headers: [{ key: 'X-Robots-Tag', value: 'noindex, follow' }],
+    }));
   },
   async redirects() {
     return [

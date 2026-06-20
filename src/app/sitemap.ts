@@ -6,6 +6,7 @@ import { CITIES } from '../data/cities';
 import { VISA_VARIANTS } from '../data/visaVariants';
 import { CATEGORIES } from '../data/tools';
 import { HUB_TOOLS } from '../data/hubTools';
+import { NOINDEX_TOOL_SET } from '../config/noindex';
 
 const SITE = 'https://ukvisainfo.co.uk';
 const TODAY = new Date().toISOString().split('T')[0];
@@ -74,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: '/lifetime-isa-calculator',     prio: 0.90, freq: 'monthly' },
   ];
   for (const { p, prio, freq } of top) {
+    if (NOINDEX_TOOL_SET.has(p)) continue; // noindexed calculators excluded
     urls.push({
       url: `${SITE}${p || ''}`,
       lastModified: TODAY,
@@ -90,6 +92,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const g of groups) {
       for (const item of g.items) {
         if (item.status !== 'live' || !item.href.startsWith('/')) continue;
+        if (NOINDEX_TOOL_SET.has(item.href)) continue; // noindexed calculators excluded
         const url = `${SITE}${item.href}`;
         if (seen.has(url)) continue;
         seen.add(url);
