@@ -1,5 +1,5 @@
 /**
- * UK Salary Sacrifice pension saving calculator — 2025/26.
+ * UK Salary Sacrifice pension saving calculator, 2025/26.
  *
  * Source: gov.uk/salary-sacrifice-and-the-effects-on-paye
  *

@@ -161,7 +161,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                 <KpiTile label="Total cost" value={`£${total.toLocaleString()}`} sub="all-in" tone={C.accent} />
                 <KpiTile label="Decision" value={processingWeeks < 1 ? processingTime : `${processingWeeks}w`} sub={location === 'outside' ? 'from abroad' : 'in-UK switch'} border />
                 <KpiTile label="Duration" value={vr.duration?.split(/[·(]/)[0].trim() ?? `${years}y`} sub="initial leave" border />
-                <KpiTile label="Path to ILR" value={vr.yearsToIlr ? `${vr.yearsToIlr}y` : '—'} sub={vr.yearsToCitizenship ? `+${vr.yearsToCitizenship}y citizen` : 'varies'} border />
+                <KpiTile label="Path to ILR" value={vr.yearsToIlr ? `${vr.yearsToIlr}y` : ', '} sub={vr.yearsToCitizenship ? `+${vr.yearsToCitizenship}y citizen` : 'varies'} border />
               </div>
 
               <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
@@ -185,7 +185,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
               </div>
             </div>
 
-            {/* RIGHT — Quick-summary card */}
+            {/* RIGHT, Quick-summary card */}
             <div style={{ background:C.bg, border:`1px solid ${C.border}`, borderRadius:12,
                           padding:'20px 22px', boxShadow:'0 1px 2px rgba(10,15,31,0.04),0 8px 24px -16px rgba(10,15,31,0.08)' }}>
               <div style={{ fontSize:10, fontWeight:700, color:C.mid2, letterSpacing:'0.14em',
@@ -193,7 +193,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
               {[
                 { k: 'Route', v: vr.label },
                 { k: 'Fee (≤3yr)', v: `£${fees.y3.toLocaleString()}`, mono: true },
-                { k: 'Fee (>3yr)', v: fees.y5 !== fees.y3 ? `£${fees.y5.toLocaleString()}` : '—', mono: true },
+                { k: 'Fee (>3yr)', v: fees.y5 !== fees.y3 ? `£${fees.y5.toLocaleString()}` : ', ', mono: true },
                 { k: 'IHS/yr', v: ihsAdult > 0 ? `£${ihsAdult.toLocaleString()}` : 'Exempt', mono: true },
                 { k: 'Standard', v: visa.processing.outside },
                 ...(isInsideAvailable ? [{ k: 'Switch/extend', v: visa.processing.inside }] : []),
@@ -334,7 +334,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
               <div style={{ marginBottom:16 }}>
                 <div style={{ fontSize:11, fontWeight:700, color:C.accentDk,
                               letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:10 }}>
-                  {vr.label} — specific requirements
+                  {vr.label}, specific requirements
                 </div>
                 <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
                   {vr.eligibilityHighlights.map((line, i) => (
@@ -348,7 +348,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                 </div>
               </div>
 
-              {/* Full visa eligibility — expandable */}
+              {/* Full visa eligibility, expandable */}
               <div style={{ fontSize:11, fontWeight:700, color:C.mid2,
                             letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:10, marginTop:20 }}>
                 All requirements
@@ -412,7 +412,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                             <Info size={12} color={C.accentDk} style={{ marginTop:2, flexShrink:0 }} />
                             <p style={{ fontSize:12.5, lineHeight:1.6, color:C.ink3, margin:0 }}>
                               {conditional
-                                ? 'This requirement has conditional exceptions — check gov.uk for your specific circumstances.'
+                                ? 'This requirement has conditional exceptions, check gov.uk for your specific circumstances.'
                                 : 'This requirement applies to all applicants on this route unless explicitly exempt by gov.uk guidance.'}
                             </p>
                           </div>
@@ -480,7 +480,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                               display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                   <span style={{ fontSize:10, fontWeight:700, color:C.mid2,
                                  letterSpacing:'0.12em', textTransform:'uppercase' }}>
-                    Breakdown — {years}y leave, {extraAdults + extraChildren > 0 ? `${extraAdults+extraChildren} dep, ` : ''}{priority}
+                    Breakdown, {years}y leave, {extraAdults + extraChildren > 0 ? `${extraAdults+extraChildren} dep, ` : ''}{priority}
                   </span>
                   <Link href={`/tools/cost-calculator?visa=${slug}`}
                     style={{ display:'inline-flex', alignItems:'center', gap:5, fontSize:12,
@@ -567,7 +567,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                             marginBottom:16 }}>
                 {[
                   { id:'standard', label:'Standard', icon:Clock,
-                    time: location === 'outside' ? visa.processing.outside : (isInsideAvailable ? visa.processing.inside : 'N/A — apply from outside'),
+                    time: location === 'outside' ? visa.processing.outside : (isInsideAvailable ? visa.processing.inside : 'N/A, apply from outside'),
                     fee:'Included', tone:C.ok, sub:'included in fee' },
                   { id:'priority', label:'Priority', icon:Zap,
                     time:'5 working days', fee:'+£500', tone:C.warn, sub:'most applications' },
@@ -618,7 +618,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                   {[
                     { id:'outside' as Location, label:'Outside UK', icon:Plane, tone:C.accent,
                       time:visa.processing.outside, sub:'Fresh application from abroad' },
-                    { id:'inside' as Location, label:'Inside UK — switch', icon:Globe2, tone:C.ok,
+                    { id:'inside' as Location, label:'Inside UK, switch', icon:Globe2, tone:C.ok,
                       time:visa.processing.inside, sub:'Extend or switch from another visa' },
                   ].map((opt) => (
                     <button key={opt.id} onClick={() => setLocation(opt.id)}
@@ -723,7 +723,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                             background:C.bg2, border:`1px solid ${C.border}`, borderRadius:10 }}>
                 <div style={{ fontSize:11, fontWeight:700, color:C.mid2,
                               letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:12 }}>
-                  Before you click apply — confirm you have:
+                  Before you click apply, confirm you have:
                 </div>
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px,1fr))', gap:8 }}>
                   {[
@@ -758,7 +758,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
                     Apply for {vr.label}
                   </div>
                   <div style={{ fontSize:13, color:'rgba(255,255,255,0.5)', marginBottom:12 }}>
-                    Redirects to gov.uk — no agent, no fees, official Home Office form
+                    Redirects to gov.uk, no agent, no fees, official Home Office form
                   </div>
                   <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
                     <span style={{ fontSize:10.5, fontWeight:600, color:C.ok,
@@ -929,7 +929,7 @@ export default function VariantGuide({ visa, variant: vr, otherVariants, slug }:
         </div>
       </div>
 
-      <StickyMobileCta href={visa.applyUrl} label={`Apply — ${vr.label}`} />
+      <StickyMobileCta href={visa.applyUrl} label={`Apply, ${vr.label}`} />
     </div>
   );
 }

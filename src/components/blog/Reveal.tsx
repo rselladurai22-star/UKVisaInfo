@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
 
 // Subtle fade-up as a rich block scrolls into view. Used only on visual
-// blocks (charts, stat cards, callouts) — never on body prose, so reading
+// blocks (charts, stat cards, callouts), never on body prose, so reading
 // text never waits on an animation. Honours prefers-reduced-motion.
 export default function Reveal({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();

@@ -1,5 +1,5 @@
 /**
- * Stamp Duty Land Tax (SDLT) — England & Northern Ireland.
+ * Stamp Duty Land Tax (SDLT), England & Northern Ireland.
  * Plus LBTT (Scotland) and LTT (Wales) for cross-border comparison.
  *
  * Effective from 1 April 2025. Verified against:
@@ -10,7 +10,7 @@
  * All slab-rate calculations: each band's rate applies ONLY to the
  * portion of the price within that band, not to the whole price.
  * Surcharges (3% additional, 2% non-resident, 15% company-flat) are
- * applied differently — see notes below.
+ * applied differently, see notes below.
  */
 
 export type BuyerType =
@@ -48,56 +48,56 @@ export interface SDLTResult {
 }
 
 /* ─────────────────────────────────────────────
-   ENGLAND & NI — SDLT (post-April 2025)
+   ENGLAND & NI, SDLT (post-April 2025)
 ───────────────────────────────────────────── */
 const SDLT_STANDARD_BANDS = [
   { upTo: 125_000,   rate: 0.00, label: '0% up to £125,000' },
-  { upTo: 250_000,   rate: 0.02, label: '2% on £125,001–£250,000' },
-  { upTo: 925_000,   rate: 0.05, label: '5% on £250,001–£925,000' },
-  { upTo: 1_500_000, rate: 0.10, label: '10% on £925,001–£1.5m' },
+  { upTo: 250_000,   rate: 0.02, label: '2% on £125,001 to £250,000' },
+  { upTo: 925_000,   rate: 0.05, label: '5% on £250,001 to £925,000' },
+  { upTo: 1_500_000, rate: 0.10, label: '10% on £925,001 to £1.5m' },
   { upTo: Infinity,  rate: 0.12, label: '12% above £1.5m' },
 ];
 
 const SDLT_FTB_BANDS = [
   { upTo: 300_000, rate: 0.00, label: 'FTB: 0% up to £300,000' },
-  { upTo: 500_000, rate: 0.05, label: 'FTB: 5% on £300,001–£500,000' },
+  { upTo: 500_000, rate: 0.05, label: 'FTB: 5% on £300,001 to £500,000' },
 ];
 
 const SDLT_MIXED_USE_BANDS = [
   { upTo: 150_000,  rate: 0.00, label: 'Mixed-use: 0% up to £150,000' },
-  { upTo: 250_000,  rate: 0.02, label: 'Mixed-use: 2% on £150,001–£250,000' },
+  { upTo: 250_000,  rate: 0.02, label: 'Mixed-use: 2% on £150,001 to £250,000' },
   { upTo: Infinity, rate: 0.05, label: 'Mixed-use: 5% above £250,000' },
 ];
 
 /* ─────────────────────────────────────────────
-   SCOTLAND — LBTT (Land & Buildings Transaction Tax)
+   SCOTLAND, LBTT (Land & Buildings Transaction Tax)
    Residential rates 2025/26 + 8% ADS surcharge
 ───────────────────────────────────────────── */
 const LBTT_STANDARD_BANDS = [
   { upTo: 145_000,  rate: 0.00, label: '0% up to £145,000' },
-  { upTo: 250_000,  rate: 0.02, label: '2% on £145,001–£250,000' },
-  { upTo: 325_000,  rate: 0.05, label: '5% on £250,001–£325,000' },
-  { upTo: 750_000,  rate: 0.10, label: '10% on £325,001–£750,000' },
+  { upTo: 250_000,  rate: 0.02, label: '2% on £145,001 to £250,000' },
+  { upTo: 325_000,  rate: 0.05, label: '5% on £250,001 to £325,000' },
+  { upTo: 750_000,  rate: 0.10, label: '10% on £325,001 to £750,000' },
   { upTo: Infinity, rate: 0.12, label: '12% above £750,000' },
 ];
 
 const LBTT_FTB_BANDS = [
   { upTo: 175_000,  rate: 0.00, label: 'FTB: 0% up to £175,000' },
-  { upTo: 250_000,  rate: 0.02, label: '2% on £175,001–£250,000' },
-  { upTo: 325_000,  rate: 0.05, label: '5% on £250,001–£325,000' },
-  { upTo: 750_000,  rate: 0.10, label: '10% on £325,001–£750,000' },
+  { upTo: 250_000,  rate: 0.02, label: '2% on £175,001 to £250,000' },
+  { upTo: 325_000,  rate: 0.05, label: '5% on £250,001 to £325,000' },
+  { upTo: 750_000,  rate: 0.10, label: '10% on £325,001 to £750,000' },
   { upTo: Infinity, rate: 0.12, label: '12% above £750,000' },
 ];
 
 /* ─────────────────────────────────────────────
-   WALES — LTT (Land Transaction Tax)
+   WALES, LTT (Land Transaction Tax)
    Residential rates 2025 + 5% higher-rate surcharge
 ───────────────────────────────────────────── */
 const LTT_STANDARD_BANDS = [
   { upTo: 225_000,   rate: 0.00, label: '0% up to £225,000' },
-  { upTo: 400_000,   rate: 0.06, label: '6% on £225,001–£400,000' },
-  { upTo: 750_000,   rate: 0.075, label: '7.5% on £400,001–£750,000' },
-  { upTo: 1_500_000, rate: 0.10, label: '10% on £750,001–£1.5m' },
+  { upTo: 400_000,   rate: 0.06, label: '6% on £225,001 to £400,000' },
+  { upTo: 750_000,   rate: 0.075, label: '7.5% on £400,001 to £750,000' },
+  { upTo: 1_500_000, rate: 0.10, label: '10% on £750,001 to £1.5m' },
   { upTo: Infinity,  rate: 0.12, label: '12% above £1.5m' },
 ];
 
@@ -120,7 +120,7 @@ function applyBands(price: number, bands: { upTo: number; rate: number; label: s
 }
 
 /* ─────────────────────────────────────────────
-   ENGLAND & NI — SDLT
+   ENGLAND & NI, SDLT
 ───────────────────────────────────────────── */
 function calculateSDLTEngland(price: number, buyerType: BuyerType): SDLTResult {
   price = Math.max(0, price);
@@ -134,7 +134,7 @@ function calculateSDLTEngland(price: number, buyerType: BuyerType): SDLTResult {
   if (buyerType === 'company' && price > 500_000) {
     bands = [{ from: 0, to: price, rate: 0.15, taxOn: price, tax: price * 0.15, label: 'Company-bought dwelling: 15% flat' }];
     appliedRules.push('15% flat rate for non-natural persons acquiring dwellings > £500,000 (HMRC anti-avoidance, applies unless a relief is claimed).');
-    warnings.push('Annual Tax on Enveloped Dwellings (ATED) may also apply — separate annual charge.');
+    warnings.push('Annual Tax on Enveloped Dwellings (ATED) may also apply, separate annual charge.');
     return {
       country: 'england',
       taxName: 'SDLT',
@@ -153,7 +153,7 @@ function calculateSDLTEngland(price: number, buyerType: BuyerType): SDLTResult {
   /* Mixed-use property uses commercial-rate bands (no surcharge) */
   if (buyerType === 'mixedUse') {
     bands = applyBands(price, SDLT_MIXED_USE_BANDS);
-    appliedRules.push('Non-residential / mixed-use rates applied — 3% surcharge does NOT apply to mixed-use purchases.');
+    appliedRules.push('Non-residential / mixed-use rates applied, 3% surcharge does NOT apply to mixed-use purchases.');
     const total = bands.reduce((s, b) => s + b.tax, 0);
     return {
       country: 'england',
@@ -176,7 +176,7 @@ function calculateSDLTEngland(price: number, buyerType: BuyerType): SDLTResult {
     appliedRules.push('First-time buyer relief applied (price ≤ £500,000 cap).');
   } else {
     if (buyerType === 'firstTime' && price > 500_000) {
-      appliedRules.push('First-time buyer relief NOT available — purchase price exceeds £500,000 cap. Standard rates applied to the full price.');
+      appliedRules.push('First-time buyer relief NOT available, purchase price exceeds £500,000 cap. Standard rates applied to the full price.');
       warnings.push('Cliff edge: £500,001 costs £10,000 in SDLT; £499,999 costs £9,999.95. Below the cap, FTB relief saves up to £15,000 vs standard rates.');
     }
     bands = applyBands(price, SDLT_STANDARD_BANDS);
@@ -223,7 +223,7 @@ function calculateSDLTEngland(price: number, buyerType: BuyerType): SDLTResult {
 }
 
 /* ─────────────────────────────────────────────
-   SCOTLAND — LBTT
+   SCOTLAND, LBTT
 ───────────────────────────────────────────── */
 function calculateLBTT(price: number, buyerType: BuyerType): SDLTResult {
   price = Math.max(0, price);
@@ -245,7 +245,7 @@ function calculateLBTT(price: number, buyerType: BuyerType): SDLTResult {
 
   let total = bands.reduce((s, b) => s + b.tax, 0);
 
-  /* Additional Dwelling Supplement (ADS) — Scottish equivalent of 3% surcharge.
+  /* Additional Dwelling Supplement (ADS), Scottish equivalent of 3% surcharge.
      Set to 8% from December 2024. */
   if (buyerType === 'additional' || buyerType === 'addNonRes') {
     surchargeAmount = price * 0.08;
@@ -258,11 +258,11 @@ function calculateLBTT(price: number, buyerType: BuyerType): SDLTResult {
     surchargeAmount = price * 0.08;
     surchargeLabel = '+8% Additional Dwelling Supplement (ADS) for company purchase';
     total += surchargeAmount;
-    appliedRules.push('Scottish LBTT does not have a 15% flat company rate — instead, all corporate dwelling purchases above £40,000 attract the 8% ADS on top of standard bands.');
+    appliedRules.push('Scottish LBTT does not have a 15% flat company rate, instead, all corporate dwelling purchases above £40,000 attract the 8% ADS on top of standard bands.');
   }
 
   if (buyerType === 'mixedUse') {
-    warnings.push('LBTT non-residential rates differ — this calculator estimates residential bands. Consult Revenue Scotland for mixed-use commercial transactions.');
+    warnings.push('LBTT non-residential rates differ, this calculator estimates residential bands. Consult Revenue Scotland for mixed-use commercial transactions.');
   }
 
   return {
@@ -281,7 +281,7 @@ function calculateLBTT(price: number, buyerType: BuyerType): SDLTResult {
 }
 
 /* ─────────────────────────────────────────────
-   WALES — LTT
+   WALES, LTT
 ───────────────────────────────────────────── */
 function calculateLTT(price: number, buyerType: BuyerType): SDLTResult {
   price = Math.max(0, price);
@@ -294,7 +294,7 @@ function calculateLTT(price: number, buyerType: BuyerType): SDLTResult {
   let total = bands.reduce((s, b) => s + b.tax, 0);
 
   if (buyerType === 'firstTime') {
-    appliedRules.push('Wales has no separate first-time buyer relief — the £225,000 nil-rate band already covers most first-time buyer purchases without a special relief tier.');
+    appliedRules.push('Wales has no separate first-time buyer relief, the £225,000 nil-rate band already covers most first-time buyer purchases without a special relief tier.');
   }
 
   if (buyerType === 'additional' || buyerType === 'addNonRes' || buyerType === 'company') {
@@ -305,11 +305,11 @@ function calculateLTT(price: number, buyerType: BuyerType): SDLTResult {
   }
 
   if (buyerType === 'nonResident') {
-    appliedRules.push('Wales has no non-UK resident surcharge equivalent — only the higher-rate (additional-property) surcharge applies regardless of buyer residence.');
+    appliedRules.push('Wales has no non-UK resident surcharge equivalent, only the higher-rate (additional-property) surcharge applies regardless of buyer residence.');
   }
 
   if (buyerType === 'mixedUse') {
-    warnings.push('LTT non-residential rates differ — this calculator estimates residential bands. Consult the Welsh Revenue Authority for mixed-use commercial transactions.');
+    warnings.push('LTT non-residential rates differ, this calculator estimates residential bands. Consult the Welsh Revenue Authority for mixed-use commercial transactions.');
   }
 
   return {
@@ -338,7 +338,7 @@ export function calculateSDLT(price: number, buyerType: BuyerType, country: Coun
   }
 }
 
-/** Get all 4 main scenarios at a given price — useful for comparison views. */
+/** Get all 4 main scenarios at a given price, useful for comparison views. */
 export function calculateAllScenarios(price: number, country: Country = 'england'): SDLTResult[] {
   return (['standard', 'firstTime', 'additional', 'nonResident'] as BuyerType[])
     .map((b) => calculateSDLT(price, b, country));
@@ -385,7 +385,7 @@ export function calculateRefund(input: RefundInput): RefundResult {
     reasons.push('You must be UK-resident at the refund claim date.');
     eligible = false;
   }
-  reasons.push('Refund must be claimed within 12 months of selling the previous main home, or within 12 months of the original SDLT return filing date — whichever is later.');
+  reasons.push('Refund must be claimed within 12 months of selling the previous main home, or within 12 months of the original SDLT return filing date, whichever is later.');
 
   return { eligible, refundAmount, reasons, deadlineMonths };
 }
@@ -406,7 +406,7 @@ export const BUYER_DESC: Record<BuyerType, string> = {
   additional:  'You already own a residential property (anywhere in the world) and you\'re buying another. Buy-to-let, holiday home, or second residence.',
   nonResident: 'You\'ve been outside the UK for at least 183 days during the 12 months before completion.',
   addNonRes:   'Both: you already own a residential property AND you\'re non-UK resident. Both surcharges stack.',
-  mixedUse:    'The property has both residential and commercial elements (e.g. shop with flat above). Non-residential / mixed-use rates apply — no 3% surcharge.',
+  mixedUse:    'The property has both residential and commercial elements (e.g. shop with flat above). Non-residential / mixed-use rates apply, no 3% surcharge.',
   company:     'A non-natural person (company, partnership of companies, or collective investment scheme) is buying a single dwelling worth more than £500,000.',
 };
 

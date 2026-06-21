@@ -72,7 +72,7 @@ export default function MortgageAffordability() {
         </nav>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">How Much Can I Borrow?</h1>
         <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-          Estimate your maximum mortgage and property budget the way UK lenders do — income multiples
+          Estimate your maximum mortgage and property budget the way UK lenders do, income multiples
           tempered by your committed outgoings and an affordability stress test. Updated for 2025/26 lending rules.
         </p>
       </section>
@@ -91,7 +91,7 @@ export default function MortgageAffordability() {
             </div>
           </Panel>
 
-          <AdvancedOptions label="Second income, outgoings & terms" hint="Add a joint applicant, commitments and lending assumptions — pre-filled with typical values">
+          <AdvancedOptions label="Second income, outgoings & terms" hint="Add a joint applicant, commitments and lending assumptions, pre-filled with typical values">
             <Field label="Annual income (applicant 2)">
               <MoneyInput value={income2} onChange={setIncome2} step={1000} />
             </Field>
@@ -105,14 +105,14 @@ export default function MortgageAffordability() {
               <Field label="Term (years)">
                 <NumberInput value={termYears} onChange={setTermYears} suffix="yrs" />
               </Field>
-              <Field label={`Rate — ${pct(rate, 2)}`}>
+              <Field label={`Rate, ${pct(rate, 2)}`}>
                 <Slider value={rate} onChange={setRate} min={0.5} max={10} step={0.05} />
               </Field>
             </div>
-            <Field label={`Income multiple — ${multiple.toFixed(1)}×`} hint="Most lenders cap at 4.5×; some allow 5–5.5×">
+            <Field label={`Income multiple, ${multiple.toFixed(1)}×`} hint="Most lenders cap at 4.5×; some allow 5 to 5.5×">
               <Slider value={multiple} onChange={setMultiple} min={3.5} max={5.5} step={0.1} />
             </Field>
-            <Field label={`Stress test uplift — +${stressUplift}%`} hint="Lenders test the payment at a higher rate">
+            <Field label={`Stress test uplift, +${stressUplift}%`} hint="Lenders test the payment at a higher rate">
               <Slider value={stressUplift} onChange={setStressUplift} min={0} max={3} step={0.5} />
             </Field>
           </AdvancedOptions>
@@ -156,7 +156,7 @@ export default function MortgageAffordability() {
                 <div className="h-full rounded-full" style={{ width: `${Math.min(100, r.dti)}%`, background: dtiTone }} />
               </div>
               <p className="mt-2 text-xs text-on-surface-variant">
-                Under 35% is comfortable; 35–45% is typical; above 45% lenders may decline. Your stress-tested payment
+                Under 35% is comfortable; 35 to 45% is typical; above 45% lenders may decline. Your stress-tested payment
                 (rate +{stressUplift}%) is <strong>{gbp(r.stressMonthly, 0)}/mo</strong>.
               </p>
             </Panel>
@@ -204,16 +204,16 @@ function AffordabilityGuide() {
         <h2 className="text-3xl sm:text-4xl font-display font-bold text-primary mt-1">How much can you really borrow?</h2>
         <p className="mt-3 text-on-surface-variant leading-relaxed">
           &quot;Affordability&quot; is the single biggest factor in whether your offer gets accepted. UK lenders no
-          longer just multiply your salary — they model your whole financial life. This guide explains exactly how
+          longer just multiply your salary, they model your whole financial life. This guide explains exactly how
           the assessment works in 2025/26, what moves the number, and how to maximise it.
         </p>
       </div>
 
       <div className="space-y-12">
         <section>
-          <GuideHeading kicker="The basics">Income multiples — the starting point</GuideHeading>
+          <GuideHeading kicker="The basics">Income multiples, the starting point</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
-            Most lenders cap borrowing at a <strong>loan-to-income (LTI) multiple</strong> — typically around
+            Most lenders cap borrowing at a <strong>loan-to-income (LTI) multiple</strong>, typically around
             <strong> 4.5 times</strong> your gross annual income, occasionally 5 to 5.5 times for higher earners,
             professionals or specific schemes. On a £45,000 income, 4.5× gives a £202,500 ceiling. With a joint
             application the incomes are combined, which is why two average salaries often out-borrow one large one.
@@ -252,20 +252,20 @@ function AffordabilityGuide() {
         <section>
           <GuideHeading kicker="Income">What actually counts as income</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
-            Basic salary is counted in full. Variable pay is treated cautiously: many lenders count only 50–100% of
+            Basic salary is counted in full. Variable pay is treated cautiously: many lenders count only 50 to 100% of
             a regular bonus, overtime or commission, and want a track record (often two years). The self-employed are
             usually assessed on the average of the last two to three years&apos; profits or salary-plus-dividends.
             Benefits such as Child Benefit and tax credits may be partially counted. Because policies vary widely, two
-            lenders can offer very different amounts on identical paperwork — which is where a broker earns their fee.
+            lenders can offer very different amounts on identical paperwork, which is where a broker earns their fee.
           </p>
           <div className="my-5 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Income type</th><th className="px-4 py-3 font-bold">Typical treatment</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">
                 <tr><td className="px-4 py-3">Basic salary</td><td className="px-4 py-3">100%</td></tr>
-                <tr><td className="px-4 py-3">Regular bonus / commission</td><td className="px-4 py-3">50–100%, with history</td></tr>
-                <tr><td className="px-4 py-3">Overtime / shift allowance</td><td className="px-4 py-3">50–100%</td></tr>
-                <tr><td className="px-4 py-3">Self-employed profit</td><td className="px-4 py-3">2–3 year average</td></tr>
+                <tr><td className="px-4 py-3">Regular bonus / commission</td><td className="px-4 py-3">50 to 100%, with history</td></tr>
+                <tr><td className="px-4 py-3">Overtime / shift allowance</td><td className="px-4 py-3">50 to 100%</td></tr>
+                <tr><td className="px-4 py-3">Self-employed profit</td><td className="px-4 py-3">2 to 3 year average</td></tr>
                 <tr><td className="px-4 py-3">Benefits (e.g. Child Benefit)</td><td className="px-4 py-3">Often partially counted</td></tr>
               </tbody>
             </table>
@@ -277,7 +277,7 @@ function AffordabilityGuide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Your deposit sets your loan-to-value (LTV), and LTV largely sets your interest rate. The bands matter:
             crossing from 90% to 85%, or 80% to 75%, can unlock a noticeably cheaper rate, which in turn improves
-            affordability. A bigger deposit therefore helps twice — it reduces the loan and lowers the rate on it.
+            affordability. A bigger deposit therefore helps twice, it reduces the loan and lowers the rate on it.
             Below 60% LTV the rate benefit flattens. Don&apos;t forget the deposit isn&apos;t your only upfront cost:
             stamp duty, legal fees and surveys all need separate cash.
           </p>
@@ -290,7 +290,7 @@ function AffordabilityGuide() {
             £315,000 LTI ceiling. With £350/month of car finance and credit commitments, affordability modelling
             trims roughly £55,000 of capacity, bringing the realistic maximum loan to around £260,000. Adding a
             £40,000 deposit gives a property budget near £300,000 at about 87% LTV. Pay off the car finance first and
-            the budget can jump by tens of thousands — the calculator above shows the effect instantly.
+            the budget can jump by tens of thousands, the calculator above shows the effect instantly.
           </p>
         </section>
 
@@ -298,8 +298,8 @@ function AffordabilityGuide() {
           <GuideHeading kicker="Boost it">How to increase what you can borrow</GuideHeading>
           <ul className="space-y-3 text-[15px] text-on-surface-variant">
             {[
-              ['Clear short-term debt', 'Paying off loans and card balances frees up affordability quickly — often more than a small pay rise would.'],
-              ['Extend the term', 'A longer term lowers the monthly payment and can raise the maximum loan — at the cost of more total interest.'],
+              ['Clear short-term debt', 'Paying off loans and card balances frees up affordability quickly, often more than a small pay rise would.'],
+              ['Extend the term', 'A longer term lowers the monthly payment and can raise the maximum loan, at the cost of more total interest.'],
               ['Add a co-applicant', 'A second income (or a joint-borrower-sole-proprietor arrangement) can lift the ceiling substantially.'],
               ['Grow the deposit', 'A larger deposit cuts LTV, unlocks a cheaper rate and improves affordability.'],
               ['Use a broker', 'Lender policies differ enormously on bonuses, self-employment and multiples. A broker finds the most generous fit.'],
@@ -314,7 +314,7 @@ function AffordabilityGuide() {
           <ul className="space-y-3 text-[15px] text-on-surface-variant">
             {[
               ['Confusing a multiple with an offer', 'A 4.5× figure is a ceiling. Affordability, credit and the stress test decide the real number.'],
-              ['Forgetting upfront costs', 'Your deposit, stamp duty, legal fees and survey are separate cash needs — don&apos;t spend it all on the deposit.'],
+              ['Forgetting upfront costs', 'Your deposit, stamp duty, legal fees and survey are separate cash needs, don&apos;t spend it all on the deposit.'],
               ['Applying with avoidable debt', 'Even unused credit-card limits and recent searches can dent affordability. Tidy your file first.'],
               ['Maxing out the budget', 'Borrowing the absolute maximum leaves no room for rate rises or life changes. Build in headroom.'],
             ].map(([h, b]) => (
@@ -326,8 +326,8 @@ function AffordabilityGuide() {
         <section>
           <GuideHeading kicker="FAQ">Frequently asked questions</GuideHeading>
           <FAQ items={[
-            { q: 'How many times my salary can I borrow?', a: 'Around 4.5 times income is the common cap, though some lenders go to 5–5.5× for higher earners or certain professions. The exact figure depends on your outgoings, credit profile and the lender.' },
-            { q: 'Does a joint application let us borrow more?', a: 'Usually yes — most lenders combine both incomes (subject to the same multiple and affordability tests), so two incomes typically support a larger loan than one.' },
+            { q: 'How many times my salary can I borrow?', a: 'Around 4.5 times income is the common cap, though some lenders go to 5 to 5.5× for higher earners or certain professions. The exact figure depends on your outgoings, credit profile and the lender.' },
+            { q: 'Does a joint application let us borrow more?', a: 'Usually yes, most lenders combine both incomes (subject to the same multiple and affordability tests), so two incomes typically support a larger loan than one.' },
             { q: 'Will my student loan reduce how much I can borrow?', a: 'Student-loan repayments reduce your net income and so can slightly lower affordability, but they are treated more leniently than consumer debt because they stop if income falls.' },
             { q: 'Can I get a mortgage if I am self-employed?', a: 'Yes. Lenders typically average your last two to three years of accounts or SA302s. A longer trading history and steady or rising profits help. A broker who specialises in self-employed cases can widen your options.' },
             { q: 'Is this the same as a Decision in Principle?', a: 'No. This is an estimate. A Decision (or Agreement) in Principle is a soft-checked indication from a specific lender, and a full application with documents is the only way to confirm what you can borrow.' },

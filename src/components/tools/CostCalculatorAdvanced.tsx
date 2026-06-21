@@ -19,7 +19,7 @@ interface VisaPreset {
   allowsDependants: boolean; defaultYears: number; notes?: string;
 }
 
-// 8 April 2026 fees — verified against gov.uk.
+// 8 April 2026 fees, verified against gov.uk.
 const VISAS: VisaPreset[] = [
   {
     id: 'skilled-worker', label: 'Skilled Worker', category: 'work',
@@ -81,7 +81,7 @@ const VISAS: VisaPreset[] = [
     notes: '£135 for 6 months. Long-term: £475 (2y) / £848 (5y) / £1,059 (10y).',
   },
   {
-    id: 'ilr', label: 'ILR — Settlement', category: 'settlement',
+    id: 'ilr', label: 'ILR, Settlement', category: 'settlement',
     baseFee: { out3yr: 3226, in3yr: 3226 },
     ihsAdult: 0, ihsChild: 0, superPriorityFee: 1000,
     allowsDependants: true, defaultYears: 1,
@@ -201,14 +201,14 @@ export default function CostCalculatorAdvanced() {
               <Calculator className="w-4 h-4" style={{ color: C.accentDk }} />
             </div>
             <span className="text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: C.mid2 }}>
-              Tool — Visa Cost Calculator
+              Tool, Visa Cost Calculator
             </span>
           </div>
           <h1 style={{ fontSize: 'clamp(28px,3.8vw,44px)', fontWeight: 600, color: C.ink, letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 12 }}>
             UK Visa Cost Calculator
           </h1>
           <p style={{ maxWidth: 560, color: C.mid, fontSize: 15, lineHeight: 1.65, marginBottom: 16 }}>
-            Add up Home Office fees, Immigration Health Surcharge, dependants, and priority services —
+            Add up Home Office fees, Immigration Health Surcharge, dependants, and priority services, 
             then convert to your local currency.
           </p>
           <div className="flex flex-wrap gap-5">
@@ -234,7 +234,7 @@ export default function CostCalculatorAdvanced() {
             {/* ───────────── LEFT: Steps ───────────── */}
             <div className="lg:col-span-7 space-y-4">
 
-              {/* STEP 1 — Visa Type */}
+              {/* STEP 1, Visa Type */}
               <StepCard step={1} title="Choose visa type" desc="Select the route you're applying for">
                 {/* Category tabs */}
                 <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
@@ -307,7 +307,7 @@ export default function CostCalculatorAdvanced() {
                 )}
               </StepCard>
 
-              {/* STEP 2 — Location & Duration */}
+              {/* STEP 2, Location & Duration */}
               <StepCard step={2} title="Location & duration" desc="Where you're applying from and for how long">
                 {/* Location toggle */}
                 <div className="mb-5">
@@ -379,7 +379,7 @@ export default function CostCalculatorAdvanced() {
                 </div>
               </StepCard>
 
-              {/* STEP 3 — Who's Applying (conditional) */}
+              {/* STEP 3, Who's Applying (conditional) */}
               {visa.allowsDependants ? (
                 <StepCard step={3} title="Who's applying" desc="Count everyone including you as the main applicant">
                   <div className="grid sm:grid-cols-3 gap-3">
@@ -427,7 +427,7 @@ export default function CostCalculatorAdvanced() {
                 </StepCard>
               )}
 
-              {/* STEP 4 — Processing speed */}
+              {/* STEP 4, Processing speed */}
               <StepCard step={4} title="Processing speed" desc="How quickly do you need a decision?">
                 <div className="grid grid-cols-3 gap-3">
                   {([
@@ -449,7 +449,7 @@ export default function CostCalculatorAdvanced() {
                       id: 'super' as const,
                       icon: Zap, label: 'Super priority',
                       time: 'Next working day', cost: visa.superPriorityFee ? `+£${visa.superPriorityFee}` : 'N/A',
-                      desc: 'Fastest — decision within 24 hrs',
+                      desc: 'Fastest, decision within 24 hrs',
                       disabled: !visa.superPriorityFee,
                     },
                   ] as const).map(({ id, icon: Icon, label, time, cost, desc, disabled }) => {
@@ -494,7 +494,7 @@ export default function CostCalculatorAdvanced() {
                 </div>
               </StepCard>
 
-              {/* STEP 5 — Currency */}
+              {/* STEP 5, Currency */}
               <StepCard step={5} title="Display currency" desc="Convert to your local currency (indicative rates)">
                 <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                   {(Object.keys(FX) as Currency[]).map((c) => {
@@ -648,7 +648,7 @@ export default function CostCalculatorAdvanced() {
                     className="mt-1 inline-flex items-center gap-1 text-[12px] font-bold hover:underline"
                     style={{ color: '#C9A14A' }}
                   >
-                    Wise — real exchange rate, no markup
+                    Wise, real exchange rate, no markup
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
@@ -716,7 +716,7 @@ export default function CostCalculatorAdvanced() {
           </div>
           <div className="mt-6 px-4 py-4 rounded-xl text-[12.5px] leading-relaxed" style={{ background: C.bg2, color: C.mid, border: `1px solid ${C.border}`, borderRadius: 8 }}>
             <strong className="font-semibold" style={{ color: C.ink }}>Not included in this estimate: </strong>
-            biometrics (£0–£150), translations, English language test, TB test, ATAS clearance, criminal record certificates,
+            biometrics (£0 to £150), translations, English language test, TB test, ATAS clearance, criminal record certificates,
             travel costs. Sponsor fees (CoS, Skills Charge) are paid by your employer.
           </div>
         </div>

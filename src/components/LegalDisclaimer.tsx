@@ -1,5 +1,5 @@
 /**
- * LegalDisclaimer — YMYL disclaimer banner shown above-the-fold on
+ * LegalDisclaimer, YMYL disclaimer banner shown above-the-fold on
  * every visa, settlement and immigration article. Required by Google
  * Search Quality guidelines for Your-Money-or-Your-Life content.
  */
@@ -11,14 +11,14 @@ const INK     = '#0B0F19';
 const SLATE   = '#475569';
 
 interface Props {
-  /** Optional override — defaults to a generic immigration disclaimer. */
+  /** Optional override, defaults to a generic immigration disclaimer. */
   text?: string;
   /** Render as a card (default) or a compact inline strip. */
   variant?: 'card' | 'inline';
 }
 
 export default function LegalDisclaimer({
-  text = 'Not legal advice. UKDesk is independent editorial research — we are not the Home Office, not gov.uk, and not OISC-regulated immigration advisers. For decisions specific to your case, consult a UK immigration solicitor (SRA-regulated) or an OISC adviser.',
+  text = 'Not legal advice. UKDesk is independent editorial research, we are not the Home Office, not gov.uk, and not OISC-regulated immigration advisers. For decisions specific to your case, consult a UK immigration solicitor (SRA-regulated) or an OISC adviser.',
   variant = 'card',
 }: Props) {
   if (variant === 'inline') {
@@ -44,7 +44,7 @@ export default function LegalDisclaimer({
       <div className="flex-1">
         <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] mb-1.5"
            style={{ color: '#92400e' }}>
-          Editorial — not legal advice
+          Editorial, not legal advice
         </p>
         <p className="text-[12.5px] leading-[1.6]" style={{ color: '#5C3D10' }}>
           {text}{' '}

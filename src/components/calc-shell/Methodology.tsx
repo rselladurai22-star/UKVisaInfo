@@ -1,5 +1,5 @@
 /**
- * Methodology — small primitive shown on calculator pages explaining
+ * Methodology, small primitive shown on calculator pages explaining
  * "How we calculate this". Links the relevant gov.uk source, the master
  * /sources page, and the /editorial-policy. Builds E-E-A-T signal for
  * YMYL (Your Money or Your Life) content.

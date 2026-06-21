@@ -1,5 +1,5 @@
 /**
- * HMRC Approved Mileage Allowance Payments (AMAP) calculator — 2025/26.
+ * HMRC Approved Mileage Allowance Payments (AMAP) calculator, 2025/26.
  *
  * Source: gov.uk/expenses-and-benefits-business-travel-mileage
  *

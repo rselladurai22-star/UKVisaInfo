@@ -2,7 +2,7 @@
  * Central noindex list for secondary / duplicative calculator routes.
  *
  * WHY: AdSense flagged the site for "Low value content". The indexed set was
- * dominated by ~90 calculators spread across many niches — to a reviewer that
+ * dominated by ~90 calculators spread across many niches, to a reviewer that
  * reads as a made-for-ads utility farm, even though each page has prose. The
  * fix is to keep only the strongest, most-unique calculators indexed so the
  * site's editorial content (visa guides + blog) and flagship tools dominate
@@ -18,7 +18,7 @@
  * re-requesting an AdSense review.
  */
 export const NOINDEX_TOOL_PATHS: string[] = [
-  // ── Loans, debt & credit (10) — near-identical amortisation math ──
+  // ── Loans, debt & credit (10), near-identical amortisation math ──
   '/personal-loan-calculator',
   '/car-finance-calculator',
   '/loan-apr-calculator',
@@ -30,7 +30,7 @@ export const NOINDEX_TOOL_PATHS: string[] = [
   '/loan-affordability-calculator',
   '/loan-early-repayment-calculator',
 
-  // ── Insurance (6) — rough premium/cover estimators ──
+  // ── Insurance (6), rough premium/cover estimators ──
   '/life-insurance-calculator',
   '/critical-illness-calculator',
   '/income-protection-calculator',
@@ -38,7 +38,7 @@ export const NOINDEX_TOOL_PATHS: string[] = [
   '/home-insurance-calculator',
   '/travel-insurance-calculator',
 
-  // ── Property — secondary to mortgage / affordability / stamp duty (12) ──
+  // ── Property, secondary to mortgage / affordability / stamp duty (12) ──
   '/overpayment-mortgage',
   '/remortgage-calculator',
   '/ltv-calculator',
@@ -52,38 +52,38 @@ export const NOINDEX_TOOL_PATHS: string[] = [
   '/property-cgt-calculator',
   '/rental-income-tax',
 
-  // ── Estate — secondary to inheritance-tax (5) ──
+  // ── Estate, secondary to inheritance-tax (5) ──
   '/gift-iht-calculator',
   '/estate-value-calculator',
   '/probate-fee-calculator',
   '/will-writing-cost',
   '/power-of-attorney-cost',
 
-  // ── Family law (4) — fee/settlement estimators ──
+  // ── Family law (4), fee/settlement estimators ──
   '/divorce-cost-calculator',
   '/financial-settlement-calculator',
   '/child-maintenance-calculator',
   '/spousal-maintenance-calculator',
 
-  // ── Energy — secondary to energy-bill (3) ──
+  // ── Energy, secondary to energy-bill (3) ──
   '/solar-panel-roi',
   '/heat-pump-calculator',
   '/ev-charging-cost',
 
-  // ── Vehicles — secondary to VED / MOT / ULEZ (2) ──
+  // ── Vehicles, secondary to VED / MOT / ULEZ (2) ──
   '/car-running-costs',
   '/fuel-cost-calculator',
 
-  // ── Savings/pension — secondary to pension-calculator (2) ──
+  // ── Savings/pension, secondary to pension-calculator (2) ──
   '/pension-drawdown-calculator',
   '/state-pension',
 
-  // ── Benefits — secondary to universal-credit / childcare (3) ──
+  // ── Benefits, secondary to universal-credit / childcare (3) ──
   '/council-tax-support-checker',
   '/pip-benefit-checker',
   '/carers-allowance-calculator',
 
-  // ── Business — secondary to VAT / corporation-tax (4) ──
+  // ── Business, secondary to VAT / corporation-tax (4) ──
   '/business-rates-calculator',
   '/sole-trader-vs-limited',
   '/salary-vs-dividend-calculator',

@@ -33,7 +33,7 @@ export default function SelfEmployed() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Tax', href: '/category/tax' }, { label: 'Self-Employed Tax' }]}
       title="Self-Employed Tax Calculator"
-      subtitle="Estimate your Self Assessment bill from your annual profit — Income Tax plus Class 4 National Insurance — and see your payments on account, on 2025/26 rates."
+      subtitle="Estimate your Self Assessment bill from your annual profit, Income Tax plus Class 4 National Insurance, and see your payments on account, on 2025/26 rates."
       calcLabel="Estimate my tax"
       inputs={
         <Panel title="Your business">
@@ -73,7 +73,7 @@ export default function SelfEmployed() {
           <Callout tone="warn" title="Budget for payments on account">
             If your bill is over £1,000, HMRC asks for <strong>payments on account</strong>: by 31 January you pay
             this year&apos;s tax <em>plus</em> 50% towards next year, and another 50% by 31 July. The first year can
-            feel like 150% of the bill — set money aside.
+            feel like 150% of the bill, set money aside.
           </Callout>
           <p className="text-[11px] text-on-surface-variant">Estimate on 2025/26 rates. Class 2 NI is now voluntary for most. Excludes other income, the trading allowance and VAT. Verify with an accountant or HMRC.</p>
         </>
@@ -84,14 +84,14 @@ export default function SelfEmployed() {
         intro="If you're a sole trader, you pay Income Tax and Class 4 National Insurance on your profit through Self Assessment. This guide explains the bill, the deadlines, and how to keep it down."
       >
         <GuideSection kicker="The basics" title="What you pay tax on">
-          <p>As a sole trader you&apos;re taxed on your <strong>profit</strong> — income minus allowable business expenses — not your turnover. The same personal allowance and Income Tax bands apply as for employees (£12,570 tax-free, then 20%, 40%, 45%). On top you pay <strong>Class 4 National Insurance</strong> at 6% on profits between £12,570 and £50,270, and 2% above. Class 2 NI is now voluntary for most, though paying it can protect your State Pension if profits are low.</p>
+          <p>As a sole trader you&apos;re taxed on your <strong>profit</strong>, income minus allowable business expenses, not your turnover. The same personal allowance and Income Tax bands apply as for employees (£12,570 tax-free, then 20%, 40%, 45%). On top you pay <strong>Class 4 National Insurance</strong> at 6% on profits between £12,570 and £50,270, and 2% above. Class 2 NI is now voluntary for most, though paying it can protect your State Pension if profits are low.</p>
         </GuideSection>
         <GuideSection kicker="Expenses" title="Cut the bill with allowable expenses">
-          <p>You only pay tax on profit, so claiming every legitimate expense directly reduces it. Common ones include stock and materials, a proportion of home and phone costs, travel, equipment (via capital allowances or the Annual Investment Allowance), professional fees and software. If your turnover is under £1,000 you may use the <strong>trading allowance</strong> instead of expenses. Keep records — HMRC can ask for evidence.</p>
+          <p>You only pay tax on profit, so claiming every legitimate expense directly reduces it. Common ones include stock and materials, a proportion of home and phone costs, travel, equipment (via capital allowances or the Annual Investment Allowance), professional fees and software. If your turnover is under £1,000 you may use the <strong>trading allowance</strong> instead of expenses. Keep records, HMRC can ask for evidence.</p>
         </GuideSection>
         <GuideSection kicker="Payments on account" title="Why the first bill is a shock">
-          <p>If your Self Assessment bill exceeds £1,000, HMRC collects <strong>payments on account</strong> towards the next year. By 31 January you pay the full bill plus 50% in advance, and a further 50% by 31 July. So your first January can be around 150% of the actual tax — budgeting roughly 30% of profit as you earn it avoids a nasty surprise.</p>
-          <Callout tone="tip" title="Save as you earn">Move ~25–30% of every payment you receive into a separate tax pot. Come January you&apos;ll have the money ready and avoid borrowing to pay HMRC.</Callout>
+          <p>If your Self Assessment bill exceeds £1,000, HMRC collects <strong>payments on account</strong> towards the next year. By 31 January you pay the full bill plus 50% in advance, and a further 50% by 31 July. So your first January can be around 150% of the actual tax, budgeting roughly 30% of profit as you earn it avoids a nasty surprise.</p>
+          <Callout tone="tip" title="Save as you earn">Move ~25 to 30% of every payment you receive into a separate tax pot. Come January you&apos;ll have the money ready and avoid borrowing to pay HMRC.</Callout>
         </GuideSection>
         <GuideSection kicker="Deadlines" title="Key Self Assessment dates">
           <p>Register by <strong>5 October</strong> after the tax year you started. File online and pay by <strong>31 January</strong>; the second payment on account is due <strong>31 July</strong>. Missing the filing deadline triggers an automatic £100 penalty, with more added over time, plus interest on late tax. Making Tax Digital for Income Tax is also being phased in for higher-income sole traders.</p>
@@ -99,15 +99,15 @@ export default function SelfEmployed() {
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
             ['Not setting tax aside', 'Spending gross income leaves you short in January. Save ~30% as you go.'],
-            ['Forgetting payments on account', 'The first bill includes 50% towards next year — budget for ~150%.'],
+            ['Forgetting payments on account', 'The first bill includes 50% towards next year, budget for ~150%.'],
             ['Missing allowable expenses', 'Every unclaimed expense is profit you pay tax on. Track them all year.'],
             ['Filing late', 'A £100 penalty applies immediately, even if no tax is due. File on time.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How much tax does a sole trader pay?', a: 'Income Tax at 20/40/45% on profit above the £12,570 allowance, plus Class 4 NI at 6% (£12,570–£50,270) and 2% above. The calculator estimates the total.' },
-            { q: 'Do I still pay Class 2 NI?', a: 'For most it&apos;s now voluntary. Paying it can protect your State Pension and benefit entitlement if your profits are low — worth considering.' },
+            { q: 'How much tax does a sole trader pay?', a: 'Income Tax at 20/40/45% on profit above the £12,570 allowance, plus Class 4 NI at 6% (£12,570 to £50,270) and 2% above. The calculator estimates the total.' },
+            { q: 'Do I still pay Class 2 NI?', a: 'For most it&apos;s now voluntary. Paying it can protect your State Pension and benefit entitlement if your profits are low, worth considering.' },
             { q: 'What are payments on account?', a: 'Advance payments towards next year&apos;s tax, due if your bill is over £1,000. You pay 50% with your January bill and 50% by 31 July.' },
             { q: 'Should I go limited instead?', a: 'A limited company can be more tax-efficient at higher profits via salary and dividends, but adds admin and cost. Compare with the dividend and contractor tools, and take advice.' },
           ]} />

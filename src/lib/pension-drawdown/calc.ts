@@ -5,7 +5,7 @@
  *         gov.uk/pension-lump-sum
  *
  * Models flexible drawdown from a defined contribution (DC) pension:
- *   - 25% Tax-Free Lump Sum (TFLS) — Pension Commencement Lump Sum (PCLS)
+ *   - 25% Tax-Free Lump Sum (TFLS), Pension Commencement Lump Sum (PCLS)
  *     Capped at £268,275 (Lump Sum Allowance from April 2024)
  *   - Remaining 75% enters the drawdown pot
  *   - Withdrawals from drawdown are taxable as income

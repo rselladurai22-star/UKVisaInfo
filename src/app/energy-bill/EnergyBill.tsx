@@ -79,30 +79,30 @@ export default function EnergyBill() {
         <GuideSection kicker="The building blocks" title="Unit rate + standing charge">
           <p>Every energy bill has two parts for each fuel:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Unit rate</strong> — the price per kWh of energy you actually use.</li>
-            <li><strong>Standing charge</strong> — a fixed daily fee just for being connected, regardless of usage.</li>
+            <li><strong>Unit rate</strong>, the price per kWh of energy you actually use.</li>
+            <li><strong>Standing charge</strong>, a fixed daily fee just for being connected, regardless of usage.</li>
           </ul>
           <p>For {CAP.windowLabel}, the GB-average capped rates are about {CAP.electricity.unitPence}p/kWh for electricity and {CAP.gas.unitPence}p/kWh for gas, plus daily standing charges of roughly {CAP.electricity.standingPence}p and {CAP.gas.standingPence}p.</p>
         </GuideSection>
 
         <GuideSection kicker="The cap" title="What the price cap really limits">
-          <p>The Ofgem cap is widely misunderstood. It does <strong>not</strong> cap your total bill — it caps the unit rate and standing charge. If you use more energy, you pay more. The "typical bill" figure Ofgem quotes is just the cap applied to an average household's usage ({TDCV.electricity.toLocaleString()} kWh electricity, {TDCV.gas.toLocaleString()} kWh gas).</p>
+          <p>The Ofgem cap is widely misunderstood. It does <strong>not</strong> cap your total bill, it caps the unit rate and standing charge. If you use more energy, you pay more. The "typical bill" figure Ofgem quotes is just the cap applied to an average household's usage ({TDCV.electricity.toLocaleString()} kWh electricity, {TDCV.gas.toLocaleString()} kWh gas).</p>
           <Callout tone="warn" title="The cap changes every quarter">
             Ofgem resets the cap four times a year. Rates can jump or fall noticeably between quarters, so an estimate is only accurate for the current cap window.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Standing charges" title="The cost you pay even using nothing">
-          <p>Standing charges have risen sharply and are now a meaningful chunk of bills — over £300 a year for a dual-fuel home before you use any energy. They cover network maintenance and policy costs. They're the same whether you're away all month or running everything, which frustrates low users.</p>
+          <p>Standing charges have risen sharply and are now a meaningful chunk of bills, over £300 a year for a dual-fuel home before you use any energy. They cover network maintenance and policy costs. They're the same whether you're away all month or running everything, which frustrates low users.</p>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A typical household">
-          <p>An average home using {TDCV.electricity.toLocaleString()} kWh of electricity and {TDCV.gas.toLocaleString()} kWh of gas pays roughly {gbp(calcEnergyBill({ electricityKwh: TDCV.electricity, gasKwh: TDCV.gas }).totalAnnual)} a year at current capped rates — split between the two fuels, with standing charges adding a fixed amount on top of usage.</p>
+          <p>An average home using {TDCV.electricity.toLocaleString()} kWh of electricity and {TDCV.gas.toLocaleString()} kWh of gas pays roughly {gbp(calcEnergyBill({ electricityKwh: TDCV.electricity, gasKwh: TDCV.gas }).totalAnnual)} a year at current capped rates, split between the two fuels, with standing charges adding a fixed amount on top of usage.</p>
         </GuideSection>
 
         <GuideSection kicker="Cutting bills" title="Where the savings are">
           <ul className="list-disc pl-5 space-y-2">
-            <li>Heating dominates gas use — turning the thermostat down 1°C can save around 10% of heating cost.</li>
+            <li>Heating dominates gas use, turning the thermostat down 1°C can save around 10% of heating cost.</li>
             <li>Draught-proofing, loft and cavity-wall insulation cut waste cheaply.</li>
             <li>Check whether a fixed deal below the cap is available before switching.</li>
             <li>Submit regular meter readings so you're billed on actual, not estimated, usage.</li>
@@ -120,7 +120,7 @@ export default function EnergyBill() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Does the price cap limit my total bill?', a: 'No. It caps the unit rate and standing charge. Use more energy and you pay more — there is no ceiling on the total.' },
+            { q: 'Does the price cap limit my total bill?', a: 'No. It caps the unit rate and standing charge. Use more energy and you pay more, there is no ceiling on the total.' },
             { q: 'How often does the cap change?', a: 'Every quarter. Ofgem announces the next cap a few weeks before each three-month window starts.' },
             { q: 'Why are my rates different from the averages?', a: 'Unit rates and standing charges vary across the 14 GB regions and by payment method (Direct Debit is usually cheapest).' },
             { q: 'Should I fix my tariff?', a: 'A fixed deal gives certainty and can beat the cap, but you may pay an exit fee if you leave early. Compare the fixed unit rate against the current cap.' },

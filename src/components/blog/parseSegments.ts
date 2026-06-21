@@ -30,6 +30,24 @@
  *   > [!QUOTE]
  *   > The hardest part is finding a sponsor licence holder.
  *   > — Sarah, immigration solicitor
+ *
+ *   > [!BARS] Salary comparison      (horizontal bar chart)
+ *   > Nurse :: 37000 :: £37,000
+ *
+ *   > [!LINE] Take-home by salary     (trend line chart)
+ *   > £20k :: 17920 :: £17,920
+ *
+ *   > [!DONUT] Where your £1 goes     (donut / composition chart)
+ *   > Take-home :: 68 :: 68%
+ *
+ *   > [!FLOW] Application stages      (vertical process / flow diagram)
+ *   > Find a sponsor :: Employer holds a licence :: required
+ *   > Get a CoS :: Certificate issued :: 3 months
+ *
+ *   > [!IMAGE] /blog/chart.png | Caption text | 1200x800   (optimized picture)
+ *
+ * Blocks can appear in ANY order and ANY quantity per post — structure and
+ * data vary blog-to-blog; the design of each block stays identical everywhere.
  */
 
 export type Segment =
@@ -41,13 +59,18 @@ export type Segment =
   | { type: 'faq'; items: FaqItem[] }
   | { type: 'quote'; content: string; attribution?: string }
   | { type: 'key'; title: string; items: string[] }
-  | { type: 'bars'; title: string; items: BarItem[] };
+  | { type: 'bars'; title: string; items: BarItem[] }
+  | { type: 'line'; title: string; items: BarItem[] }
+  | { type: 'donut'; title: string; items: BarItem[] }
+  | { type: 'flow'; title: string; items: FlowItem[] }
+  | { type: 'image'; src: string; alt: string; caption?: string; width: number; height: number };
 
 export interface StepItem { title: string; body: string }
 export interface FaqItem  { q: string; a: string }
 export interface BarItem  { label: string; value: number; display: string }
+export interface FlowItem { label: string; detail: string; tag?: string }
 
-const DIRECTIVE = /^>\s*\[!(INFO|WARNING|TIP|NOTE|STAT|STEPS|CHECKLIST|FAQ|QUOTE|KEY|BARS)\](?:\s+(.*))?$/i;
+const DIRECTIVE = /^>\s*\[!(INFO|WARNING|TIP|NOTE|STAT|STEPS|CHECKLIST|FAQ|QUOTE|KEY|BARS|LINE|DONUT|FLOW|IMAGE)\](?:\s+(.*))?$/i;
 
 export function parseSegments(md: string): Segment[] {
   const lines = md.split('\n');
@@ -79,18 +102,26 @@ export function parseSegments(md: string): Segment[] {
 
     // Collect all subsequent blockquote lines (allows internal blank lines)
     const blockLines: string[] = [];
-    if (type !== 'STAT' && type !== 'CHECKLIST' && type !== 'KEY' && type !== 'BARS' && inlineArg) {
+    const TITLE_ARG = new Set(['STAT', 'CHECKLIST', 'KEY', 'BARS', 'LINE', 'DONUT', 'FLOW', 'IMAGE']);
+    if (!TITLE_ARG.has(type) && inlineArg) {
       // For callouts/quotes, the inline content is the first body line.
-      // STAT/CHECKLIST/KEY/BARS treat the inline arg as a value or title instead.
+      // The TITLE_ARG types treat the inline arg as a value/title/source instead.
       blockLines.push(inlineArg);
     }
     i++;
     while (i < lines.length) {
       const next = lines[i];
       if (next.startsWith('>')) {
+        // A new directive line ends this block (adjacent blocks don't merge).
+        if (DIRECTIVE.test(next)) break;
         blockLines.push(next.replace(/^>\s?/, ''));
         i++;
-      } else if (next.trim() === '' && i + 1 < lines.length && lines[i + 1].startsWith('>')) {
+      } else if (
+        next.trim() === '' &&
+        i + 1 < lines.length &&
+        lines[i + 1].startsWith('>') &&
+        !DIRECTIVE.test(lines[i + 1])
+      ) {
         // Blank line *inside* the block — keep as paragraph break
         blockLines.push('');
         i++;
@@ -159,18 +190,50 @@ export function parseSegments(md: string): Segment[] {
 
       case 'BARS': {
         // Each line: "Label :: 49400 :: £49,400"  (display optional)
-        const items: BarItem[] = blockText
+        segments.push({ type: 'bars', title: inlineArg, items: parseBars(blockText) });
+        break;
+      }
+
+      case 'LINE': {
+        // Same row syntax as BARS, rendered as a trend line.
+        segments.push({ type: 'line', title: inlineArg, items: parseBars(blockText) });
+        break;
+      }
+
+      case 'DONUT': {
+        // Same row syntax as BARS, rendered as a donut / composition chart.
+        segments.push({ type: 'donut', title: inlineArg, items: parseBars(blockText) });
+        break;
+      }
+
+      case 'FLOW': {
+        // Each line: "Label :: detail :: tag"  (detail/tag optional)
+        const items: FlowItem[] = blockText
           .split('\n')
           .map((l) => l.trim())
           .filter(Boolean)
           .map((l) => {
             const parts = l.split('::').map((p) => p.trim());
-            const label = parts[0] ?? '';
-            const value = parseFloat((parts[1] ?? '').replace(/[^0-9.]/g, '')) || 0;
-            const display = parts[2] || parts[1] || '';
-            return { label, value, display };
+            return { label: parts[0] ?? '', detail: parts[1] ?? '', tag: parts[2] || undefined };
           });
-        segments.push({ type: 'bars', title: inlineArg, items });
+        segments.push({ type: 'flow', title: inlineArg, items });
+        break;
+      }
+
+      case 'IMAGE': {
+        // "src | caption | 1200x800"  (caption + dimensions optional)
+        const parts = inlineArg.split('|').map((p) => p.trim());
+        const src = parts[0] ?? '';
+        const caption = parts[1] || undefined;
+        const dim = (parts[2] || '').match(/(\d+)\s*[x×]\s*(\d+)/);
+        segments.push({
+          type: 'image',
+          src,
+          alt: caption ?? '',
+          caption,
+          width: dim ? parseInt(dim[1], 10) : 1600,
+          height: dim ? parseInt(dim[2], 10) : 900,
+        });
         break;
       }
 
@@ -193,6 +256,21 @@ export function parseSegments(md: string): Segment[] {
 }
 
 /* ── Helpers ───────────────────────────────────────── */
+
+/** Rows of "Label :: 49400 :: £49,400" (display optional). Shared by BARS/LINE/DONUT. */
+function parseBars(text: string): BarItem[] {
+  return text
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map((l) => {
+      const parts = l.split('::').map((p) => p.trim());
+      const label = parts[0] ?? '';
+      const value = parseFloat((parts[1] ?? '').replace(/[^0-9.]/g, '')) || 0;
+      const display = parts[2] || parts[1] || '';
+      return { label, value, display };
+    });
+}
 
 function parseSteps(text: string): StepItem[] {
   // Match lines like "1. **Title** — body" or "1. Title — body" (em dash, en dash, or hyphen)

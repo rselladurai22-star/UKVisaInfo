@@ -1,5 +1,5 @@
 /**
- * Per-visa numeric fees — 8 April 2026 master gov.uk fee table.
+ * Per-visa numeric fees, 8 April 2026 master gov.uk fee table.
  * Mirror of the constants used in CostCalculatorAdvanced.
  *
  * Used by the V2 visa page to drive the inline CostPanel without
@@ -18,7 +18,7 @@ export interface VisaFee {
   superPriorityFee?: number;
   /** Visa allows dependants on the same application. */
   allowsDependants: boolean;
-  /** Default years on the visa — used for IHS multiplication. */
+  /** Default years on the visa, used for IHS multiplication. */
   defaultYears: number;
 }
 
@@ -40,7 +40,7 @@ export const VISA_FEES: Record<string, VisaFee> = {
 };
 
 /** Slugs that should use the V2 (cheat-sheet) layout.
- *  Full rollout — all 14 visa routes use the scenario-driven layout.
+ *  Full rollout, all 14 visa routes use the scenario-driven layout.
  *  Removing a slug here falls back to the legacy template. */
 const V2_SLUGS = new Set<string>([
   'skilled-worker',

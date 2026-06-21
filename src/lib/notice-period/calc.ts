@@ -23,7 +23,7 @@
 export interface CalcInput {
   yearsOfService: number;
   weeklyGrossPay: number;
-  contractualNoticeWeeks: number;  // from contract — may be longer than statutory
+  contractualNoticeWeeks: number;  // from contract, may be longer than statutory
   paymentType: 'work_notice' | 'pilon' | 'garden_leave';
   taxBand: 'basic' | 'higher' | 'additional';
 }
@@ -59,7 +59,7 @@ export function calculateNoticePeriod(input: CalcInput): CalcResult {
   const taxNote = input.paymentType === 'pilon'
     ? 'PILON is fully taxable (Income Tax + NI) as of April 2018.'
     : input.paymentType === 'garden_leave'
-    ? 'Garden leave: you remain employed and on payroll — normal PAYE applies to regular salary.'
+    ? 'Garden leave: you remain employed and on payroll, normal PAYE applies to regular salary.'
     : 'Working notice: regular PAYE deductions apply throughout the notice period.';
 
   return { statutoryNoticeWeeks: statutory, contractualNoticeWeeks: contractual, effectiveNoticeWeeks: effective, grossPilon, taxOnPilon, netPilon, lastDayIfWorking: `${effective} weeks from today`, taxNote };

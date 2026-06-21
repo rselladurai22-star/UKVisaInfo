@@ -1,14 +1,14 @@
 /**
- * UK Childcare cost calculator — free hours + Tax-Free Childcare + UC support.
+ * UK Childcare cost calculator, free hours + Tax-Free Childcare + UC support.
  *
  * Source: gov.uk/free-childcare-education-eligible-children
  *         gov.uk/tax-free-childcare
  *         gov.uk/universal-credit/what-youll-get (childcare element)
  *
  * Free hours (2025/26):
- *   Age 3–4 (all): 15 free hours/week, 38 weeks/year
- *   Age 3–4 (working parents, each earning ≤£100k): 30 free hours/week, 38 weeks
- *   Age 9m–3 (working parents, each earning ≤£100k): 15 free hours/week, 38 weeks
+ *   Age 3 to 4 (all): 15 free hours/week, 38 weeks/year
+ *   Age 3 to 4 (working parents, each earning ≤£100k): 30 free hours/week, 38 weeks
+ *   Age 9m, 3 (working parents, each earning ≤£100k): 15 free hours/week, 38 weeks
  *
  * Tax-Free Childcare (TFC):
  *   Government pays £2 for every £8 you pay in → 20% top-up
@@ -22,8 +22,8 @@
  * NOTE: TFC and UC childcare are mutually exclusive.
  */
 
-export const FREE_HOURS_UNIVERSAL   = 15;   // age 3–4, all
-export const FREE_HOURS_EXTENDED    = 30;   // age 3–4, working parents
+export const FREE_HOURS_UNIVERSAL   = 15;   // age 3 to 4, all
+export const FREE_HOURS_EXTENDED    = 30;   // age 3 to 4, working parents
 export const FREE_WEEKS             = 38;
 
 export const TFC_GOVT_MAX_YEAR_STD  = 2000;
@@ -35,7 +35,7 @@ export interface CalcInput {
   childAgeMonths: number;
   weeklyHoursNeeded: number;
   hourlyRate: number;          // local provider rate £/hr
-  weeksPerYear: number;        // typically 50–52 for working parents
+  weeksPerYear: number;        // typically 50 to 52 for working parents
   workingParents: boolean;
   bothEarnUnder100k: boolean;
   onUniversalCredit: boolean;
@@ -68,9 +68,9 @@ export function calculateChildcare(input: CalcInput): CalcResult {
 
   // Free hours
   let freeHours = 0;
-  if (ageMonths >= 36) freeHours = FREE_HOURS_UNIVERSAL;           // 3–4: 15 for all
+  if (ageMonths >= 36) freeHours = FREE_HOURS_UNIVERSAL;           // 3 to 4: 15 for all
   if (ageMonths >= 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_EXTENDED;  // 30hrs
-  if (ageMonths >= 9 && ageMonths < 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_EXTENDED;  // 30hrs 9m–3 (from Sept 2025)
+  if (ageMonths >= 9 && ageMonths < 36 && input.workingParents && input.bothEarnUnder100k) freeHours = FREE_HOURS_EXTENDED;  // 30hrs 9m, 3 (from Sept 2025)
 
   const freeHoursAnnual  = freeHours * FREE_WEEKS * rate;
   const afterFreeHours   = Math.max(0, grossAnnual - freeHoursAnnual);

@@ -6,7 +6,7 @@ import { CATEGORIES, type CategoryId } from '../data/tools';
 /**
  * Data-driven category hub: breadcrumb, category header and the full,
  * grouped tool set. Live tools link out; planned tools render as "Soon";
- * cross-referenced tools carry an `xref` tag. This is the entire hub page —
+ * cross-referenced tools carry an `xref` tag. This is the entire hub page, 
  * there are no bespoke per-category components, so links never drift.
  */
 export default function HubToolIndex({ categoryId }: { categoryId: CategoryId }) {

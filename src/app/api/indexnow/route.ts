@@ -81,7 +81,7 @@ export async function GET(req: NextRequest) {
 
   const allUrls = buildAllUrls();
 
-  // IndexNow allows up to 10,000 URLs per call — send in one batch
+  // IndexNow allows up to 10,000 URLs per call, send in one batch
   const BATCH = 10_000;
   const results = [];
   for (let i = 0; i < allUrls.length; i += BATCH) {

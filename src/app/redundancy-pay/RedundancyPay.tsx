@@ -26,7 +26,7 @@ export default function RedundancyPay() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Employment', href: '/category/employment' }, { label: 'Redundancy Pay' }]}
       title="Redundancy Pay Calculator"
-      subtitle="Work out your statutory redundancy entitlement for 2025/26 using the gov.uk age-banded formula — age × years of service × capped weekly pay."
+      subtitle="Work out your statutory redundancy entitlement for 2025/26 using the gov.uk age-banded formula, age × years of service × capped weekly pay."
       calcLabel="Calculate Redundancy Pay"
       inputs={
         <Panel title="Your Details">
@@ -51,7 +51,7 @@ export default function RedundancyPay() {
               <div className="space-y-1.5 text-sm w-full max-h-64 overflow-y-auto">
                 {r.slices.map((s) => (
                   <div key={s.yearOfService} className="flex justify-between">
-                    <span className="text-on-surface-variant">Year {s.yearOfService} (age {s.ageInYear}) — {s.weeksMultiplier} wk</span>
+                    <span className="text-on-surface-variant">Year {s.yearOfService} (age {s.ageInYear}), {s.weeksMultiplier} wk</span>
                     <span className="font-semibold tabular-nums">{gbp(s.amount)}</span>
                   </div>
                 ))}
@@ -84,7 +84,7 @@ export default function RedundancyPay() {
         </GuideSection>
 
         <GuideSection kicker="Eligibility" title="Who qualifies">
-          <p>You need at least <strong>two years' continuous service</strong> with the same employer and must be an employee (not a contractor or most agency workers). You qualify if your role is genuinely redundant — the work has stopped or diminished — not if you're dismissed for conduct or resign.</p>
+          <p>You need at least <strong>two years' continuous service</strong> with the same employer and must be an employee (not a contractor or most agency workers). You qualify if your role is genuinely redundant, the work has stopped or diminished, not if you're dismissed for conduct or resign.</p>
         </GuideSection>
 
         <GuideSection kicker="Tax" title="The £30,000 tax-free limit">
@@ -95,15 +95,15 @@ export default function RedundancyPay() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="Age 45, 12 years' service, £600/week">
-          <p>At 45 with 12 years' service, the most recent years fall in the 41+ band (1.5 weeks each) and earlier years in the 22–40 band (1 week each). Weekly pay of £600 is within the £{WEEKLY_CAP} cap. The calculator walks back year by year, totalling the weeks and multiplying by £600 to give the statutory entitlement — all tax-free as it's well under £30,000.</p>
+          <p>At 45 with 12 years' service, the most recent years fall in the 41+ band (1.5 weeks each) and earlier years in the 22 to 40 band (1 week each). Weekly pay of £600 is within the £{WEEKLY_CAP} cap. The calculator walks back year by year, totalling the weeks and multiplying by £600 to give the statutory entitlement, all tax-free as it's well under £30,000.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common redundancy mistakes">
           <Mistakes items={[
-            ['Confusing redundancy with notice pay', 'They are separate — you get both statutory redundancy and statutory notice pay.'],
+            ['Confusing redundancy with notice pay', 'They are separate, you get both statutory redundancy and statutory notice pay.'],
             ['Forgetting the 20-year cap', 'Service beyond 20 years does not increase statutory redundancy pay.'],
             ['Assuming high earners get full pay', 'Weekly pay is capped at £' + WEEKLY_CAP + ' for the statutory calculation, regardless of actual salary.'],
-            ['Not checking for enhanced terms', 'Many contracts offer enhanced redundancy above the statutory minimum — read your contract and any collective agreement.'],
+            ['Not checking for enhanced terms', 'Many contracts offer enhanced redundancy above the statutory minimum, read your contract and any collective agreement.'],
           ]} />
         </GuideSection>
 
@@ -111,7 +111,7 @@ export default function RedundancyPay() {
           <FAQ items={[
             { q: 'Do I pay tax on redundancy pay?', a: 'Statutory and enhanced redundancy pay is tax-free up to £30,000. Above that it is taxed as income. Notice pay (PILON) is always taxable.' },
             { q: 'What if I have under two years service?', a: 'You are not entitled to statutory redundancy pay, though you may still get contractual redundancy and your notice pay.' },
-            { q: 'Is the weekly pay capped?', a: `Yes — for the statutory calculation a week's pay is capped at £${WEEKLY_CAP} from 6 April 2025, even if you earn more.` },
+            { q: 'Is the weekly pay capped?', a: `Yes, for the statutory calculation a week's pay is capped at £${WEEKLY_CAP} from 6 April 2025, even if you earn more.` },
             { q: 'Does my employer have to consult?', a: 'Yes. Employers must follow a fair process, and collective consultation rules apply when 20 or more roles are at risk.' },
           ]} />
         </GuideSection>

@@ -2,7 +2,7 @@
 //
 // Mirrors the post -> calculator links (BlogPost.relatedTools) so calculators
 // can link back to the guides that explain them (topic-cluster interlinking).
-// Kept as a small standalone literal — does NOT import the large blog.ts — so
+// Kept as a small standalone literal, does NOT import the large blog.ts, so
 // it is safe to use inside client calculator components without bloating the
 // bundle. Keep in sync when adding posts.
 

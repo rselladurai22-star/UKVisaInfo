@@ -1,6 +1,6 @@
 // Locale-aware currency + percent formatting for the multi-country build.
 //
-// Existing UK code uses gbp()/pct() from tax2526.ts — keep those for UK pages.
+// Existing UK code uses gbp()/pct() from tax2526.ts, keep those for UK pages.
 // New country-generic calculators should format via money()/percent() using the
 // active CountryConfig's locale + currency, so the same component works for
 // GBP/USD/CAD/etc without hardcoding the £ sign.

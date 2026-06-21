@@ -47,7 +47,7 @@ export default function HeatPump() {
           <div className="space-y-4">
             <Field label="Annual heat demand (kWh)" hint="A typical home needs ~12,000 kWh of heat a year"><NumberInput value={heatDemand} onChange={setHeatDemand} min={0} step={500} suffix=" kWh" /></Field>
             <Field label="Gas boiler efficiency (%)"><NumberInput value={boilerEff} onChange={setBoilerEff} min={50} step={1} suffix="%" /></Field>
-            <Field label="Heat pump SCOP" hint="Seasonal efficiency — typically 3.0–3.5"><NumberInput value={scop} onChange={setScop} min={1} step={0.1} /></Field>
+            <Field label="Heat pump SCOP" hint="Seasonal efficiency, typically 3.0 to 3.5"><NumberInput value={scop} onChange={setScop} min={1} step={0.1} /></Field>
             <Field label="Gas price (p/kWh)"><NumberInput value={gasPrice} onChange={setGasPrice} min={0} step={0.5} suffix="p" /></Field>
             <Field label="Electricity price (p/kWh)"><NumberInput value={elecPrice} onChange={setElecPrice} min={0} step={1} suffix="p" /></Field>
             <Field label="Heat pump install cost"><NumberInput value={installCost} onChange={setInstallCost} min={0} step={500} suffix=" £" /></Field>
@@ -60,7 +60,7 @@ export default function HeatPump() {
             <Stat label="Heat Pump Running Cost" value={gbp(r.hpCost)} sub="Per year" tone="dark" big />
             <Stat label="Gas Boiler Running Cost" value={gbp(r.gasCost)} sub="Per year" tone="primary" />
             <Stat label="Annual Saving" value={gbp(r.annualSaving)} sub={r.annualSaving >= 0 ? 'Heat pump cheaper' : 'Gas cheaper'} tone="accent" />
-            <Stat label="Payback" value={r.annualSaving > 0 ? `${r.payback.toFixed(1)} yrs` : '—'} sub={`After £${BUS_GRANT.toLocaleString()} grant`} />
+            <Stat label="Payback" value={r.annualSaving > 0 ? `${r.payback.toFixed(1)} yrs` : ', '} sub={`After £${BUS_GRANT.toLocaleString()} grant`} />
           </div>
 
           <Panel title="The numbers">
@@ -86,11 +86,11 @@ export default function HeatPump() {
         intro="Air source heat pumps are central to the UK's plan to decarbonise home heating, and a £7,500 government grant cuts the upfront cost. But whether one saves you money depends on its efficiency and the gap between gas and electricity prices. Here's how the maths works."
       >
         <GuideSection kicker="The principle" title="Efficiency is everything">
-          <p>A gas boiler is about 90% efficient — it turns 1 kWh of gas into roughly 0.9 kWh of heat. A heat pump is different: it moves heat rather than burning fuel, delivering 3 or more units of heat per unit of electricity. That ratio is the <strong>SCOP</strong> (Seasonal Coefficient of Performance), typically 3.0–3.5 for a well-installed system.</p>
+          <p>A gas boiler is about 90% efficient, it turns 1 kWh of gas into roughly 0.9 kWh of heat. A heat pump is different: it moves heat rather than burning fuel, delivering 3 or more units of heat per unit of electricity. That ratio is the <strong>SCOP</strong> (Seasonal Coefficient of Performance), typically 3.0 to 3.5 for a well-installed system.</p>
         </GuideSection>
 
         <GuideSection kicker="The price gap" title="Why running cost is a close call">
-          <p>Electricity costs around four times as much as gas per kWh under the price cap. A heat pump's 3× efficiency advantage roughly offsets — but not always beats — that price gap. The better the SCOP and the smaller the gas-to-electricity price ratio, the more a heat pump saves. A leaky, poorly-insulated home forces the pump to work harder and lowers its real-world SCOP.</p>
+          <p>Electricity costs around four times as much as gas per kWh under the price cap. A heat pump's 3× efficiency advantage roughly offsets, but not always beats, that price gap. The better the SCOP and the smaller the gas-to-electricity price ratio, the more a heat pump saves. A leaky, poorly-insulated home forces the pump to work harder and lowers its real-world SCOP.</p>
           <Callout tone="tip" title="Special tariffs change the picture">
             Heat-pump and time-of-use electricity tariffs can cut the unit rate substantially, often turning a marginal case into a clear saving. Pairing with solar helps too.
           </Callout>
@@ -101,7 +101,7 @@ export default function HeatPump() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A typical home">
-          <p>A home needing 12,000 kWh of heat a year: a 90% gas boiler burns about 13,300 kWh of gas, costing roughly £930 at 7p. A heat pump with a SCOP of 3.2 uses about 3,750 kWh of electricity, costing about £1,010 at 27p — slightly more to run at standard rates. On a heat-pump tariff nearer 15p, the same pump costs about £560, saving around £370 a year.</p>
+          <p>A home needing 12,000 kWh of heat a year: a 90% gas boiler burns about 13,300 kWh of gas, costing roughly £930 at 7p. A heat pump with a SCOP of 3.2 uses about 3,750 kWh of electricity, costing about £1,010 at 27p, slightly more to run at standard rates. On a heat-pump tariff nearer 15p, the same pump costs about £560, saving around £370 a year.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common heat pump mistakes">
@@ -109,15 +109,15 @@ export default function HeatPump() {
             ['Comparing on standard electricity rates', 'Heat-pump tariffs and time-of-use deals materially lower running cost.'],
             ['Skipping insulation', 'A poorly-insulated home cripples the real-world SCOP and inflates bills.'],
             ['Oversizing or undersizing', 'A proper heat-loss survey is essential; the wrong size wastes money or underheats.'],
-            ['Ignoring the grant deadline', 'The Boiler Upgrade Scheme has limited funding windows — check current availability.'],
+            ['Ignoring the grant deadline', 'The Boiler Upgrade Scheme has limited funding windows, check current availability.'],
           ]} />
         </GuideSection>
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'Are heat pumps cheaper to run than gas?', a: 'Sometimes. On standard rates it can be a close call, but with a good SCOP, a heat-pump tariff or solar, they usually win.' },
-            { q: 'How much does a heat pump cost to install?', a: 'Typically £10,000–£15,000 before the £7,500 Boiler Upgrade Scheme grant, which brings the net cost down substantially.' },
-            { q: 'What is SCOP?', a: 'The Seasonal Coefficient of Performance — the average units of heat produced per unit of electricity over a year. Higher is better; 3.2 means 3.2 kWh of heat per kWh of electricity.' },
+            { q: 'How much does a heat pump cost to install?', a: 'Typically £10,000 to £15,000 before the £7,500 Boiler Upgrade Scheme grant, which brings the net cost down substantially.' },
+            { q: 'What is SCOP?', a: 'The Seasonal Coefficient of Performance, the average units of heat produced per unit of electricity over a year. Higher is better; 3.2 means 3.2 kWh of heat per kWh of electricity.' },
             { q: 'Do heat pumps work in cold weather?', a: 'Yes. They work down to well below freezing, though efficiency falls in very cold spells. Good design and insulation keep performance acceptable.' },
           ]} />
         </GuideSection>

@@ -12,7 +12,7 @@ const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 export const metadata: Metadata = {
-  title: 'Sources — Every gov.uk, HMRC & ONS Page UKDesk Cites',
+  title: 'Sources, Every gov.uk, HMRC & ONS Page UKDesk Cites',
   description:
     'The complete list of official sources UKDesk relies on: gov.uk visa pages, HMRC tax rates, ONS statistics, and Parliament data. Every figure traces back here.',
   alternates: { canonical: '/sources' },
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 };
 
 const VISA_SOURCES = [
-  { label: 'Home Office immigration & nationality fees (master table)', href: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026', note: 'Effective 8 April 2026 — the canonical fee table' },
+  { label: 'Home Office immigration & nationality fees (master table)', href: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026', note: 'Effective 8 April 2026, the canonical fee table' },
   { label: 'Skilled Worker visa', href: 'https://www.gov.uk/skilled-worker-visa' },
-  { label: 'Skilled Worker — your job', href: 'https://www.gov.uk/skilled-worker-visa/your-job' },
-  { label: 'Skilled Worker — when you can be paid less', href: 'https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less' },
+  { label: 'Skilled Worker, your job', href: 'https://www.gov.uk/skilled-worker-visa/your-job' },
+  { label: 'Skilled Worker, when you can be paid less', href: 'https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less' },
   { label: 'Student visa', href: 'https://www.gov.uk/student-visa' },
   { label: 'Standard Visitor visa', href: 'https://www.gov.uk/standard-visitor' },
   { label: 'UK family visa', href: 'https://www.gov.uk/uk-family-visa' },
@@ -32,49 +32,49 @@ const VISA_SOURCES = [
   { label: 'Graduate visa', href: 'https://www.gov.uk/graduate-visa' },
   { label: 'Innovator Founder visa', href: 'https://www.gov.uk/innovator-founder-visa' },
   { label: 'Indefinite Leave to Remain (ILR)', href: 'https://www.gov.uk/indefinite-leave-to-remain' },
-  { label: 'British citizenship — apply with ILR', href: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain' },
+  { label: 'British citizenship, apply with ILR', href: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain' },
   { label: 'EU Settlement Scheme', href: 'https://www.gov.uk/settled-status-eu-citizens-families' },
   { label: 'British National (Overseas) visa', href: 'https://www.gov.uk/british-national-overseas-bno-visa' },
   { label: 'Long Residence', href: 'https://www.gov.uk/long-residence' },
   { label: 'UK Ancestry visa', href: 'https://www.gov.uk/ancestry-visa' },
-  { label: 'Immigration Rules — Part 9 (grounds for refusal)', href: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal' },
+  { label: 'Immigration Rules, Part 9 (grounds for refusal)', href: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal' },
   { label: 'Life in the UK Test', href: 'https://www.gov.uk/life-in-the-uk-test' },
   { label: 'English language requirements', href: 'https://www.gov.uk/english-language' },
   { label: 'TB test for visa applicants', href: 'https://www.gov.uk/tb-test-visa' },
   { label: 'ATAS (Academic Technology Approval Scheme)', href: 'https://www.gov.uk/guidance/academic-technology-approval-scheme' },
   { label: 'Register of licensed worker sponsors', href: 'https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers' },
   { label: 'Register of licensed student sponsors', href: 'https://www.gov.uk/government/publications/register-of-licensed-sponsors-students' },
-  { label: 'Good character — nationality policy guidance', href: 'https://www.gov.uk/government/publications/good-character-nationality-policy-guidance' },
+  { label: 'Good character, nationality policy guidance', href: 'https://www.gov.uk/government/publications/good-character-nationality-policy-guidance' },
 ];
 
 const TAX_SOURCES = [
-  { label: 'HMRC — income tax rates and allowances', href: 'https://www.gov.uk/government/publications/rates-and-allowances-income-tax' },
-  { label: 'HMRC — National Insurance rates and thresholds', href: 'https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions' },
-  { label: 'HMRC — Capital Gains Tax', href: 'https://www.gov.uk/capital-gains-tax' },
-  { label: 'HMRC — Inheritance Tax', href: 'https://www.gov.uk/inheritance-tax' },
-  { label: 'HMRC — Stamp Duty Land Tax', href: 'https://www.gov.uk/stamp-duty-land-tax' },
-  { label: 'HMRC — Self Assessment', href: 'https://www.gov.uk/self-assessment-tax-returns' },
-  { label: 'HMRC — Tax codes', href: 'https://www.gov.uk/tax-codes' },
-  { label: 'HMRC — VAT', href: 'https://www.gov.uk/vat-rates' },
-  { label: 'HMRC — Pension allowances', href: 'https://www.gov.uk/tax-on-your-private-pension' },
-  { label: 'HMRC — Marriage Allowance', href: 'https://www.gov.uk/marriage-allowance' },
-  { label: 'GOV.UK — Minimum Wage rates', href: 'https://www.gov.uk/national-minimum-wage-rates' },
-  { label: 'GOV.UK — Statutory Sick Pay', href: 'https://www.gov.uk/statutory-sick-pay' },
-  { label: 'GOV.UK — Holiday entitlement', href: 'https://www.gov.uk/holiday-entitlement-rights' },
+  { label: 'HMRC, income tax rates and allowances', href: 'https://www.gov.uk/government/publications/rates-and-allowances-income-tax' },
+  { label: 'HMRC, National Insurance rates and thresholds', href: 'https://www.gov.uk/government/publications/rates-and-allowances-national-insurance-contributions' },
+  { label: 'HMRC, Capital Gains Tax', href: 'https://www.gov.uk/capital-gains-tax' },
+  { label: 'HMRC, Inheritance Tax', href: 'https://www.gov.uk/inheritance-tax' },
+  { label: 'HMRC, Stamp Duty Land Tax', href: 'https://www.gov.uk/stamp-duty-land-tax' },
+  { label: 'HMRC, Self Assessment', href: 'https://www.gov.uk/self-assessment-tax-returns' },
+  { label: 'HMRC, Tax codes', href: 'https://www.gov.uk/tax-codes' },
+  { label: 'HMRC, VAT', href: 'https://www.gov.uk/vat-rates' },
+  { label: 'HMRC, Pension allowances', href: 'https://www.gov.uk/tax-on-your-private-pension' },
+  { label: 'HMRC, Marriage Allowance', href: 'https://www.gov.uk/marriage-allowance' },
+  { label: 'GOV.UK, Minimum Wage rates', href: 'https://www.gov.uk/national-minimum-wage-rates' },
+  { label: 'GOV.UK, Statutory Sick Pay', href: 'https://www.gov.uk/statutory-sick-pay' },
+  { label: 'GOV.UK, Holiday entitlement', href: 'https://www.gov.uk/holiday-entitlement-rights' },
 ];
 
 const STAT_SOURCES = [
-  { label: 'ONS — Cost of living statistics', href: 'https://www.ons.gov.uk/economy/inflationandpriceindices' },
-  { label: 'ONS — Annual Survey of Hours and Earnings (salary distribution)', href: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/annualsurveyofhoursandearningsashegrosspaybyoccupation4digitsoc2020ashetable14' },
-  { label: 'ONS — UK House Price Index', href: 'https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex' },
+  { label: 'ONS, Cost of living statistics', href: 'https://www.ons.gov.uk/economy/inflationandpriceindices' },
+  { label: 'ONS, Annual Survey of Hours and Earnings (salary distribution)', href: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/annualsurveyofhoursandearningsashegrosspaybyoccupation4digitsoc2020ashetable14' },
+  { label: 'ONS, UK House Price Index', href: 'https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex' },
 ];
 
 const LOOKUP_SOURCES = [
-  { label: 'postcodes.io — UK postcode geo data', href: 'https://postcodes.io', note: 'Open data backed by ONS, OS and the Royal Mail PAF.' },
+  { label: 'postcodes.io, UK postcode geo data', href: 'https://postcodes.io', note: 'Open data backed by ONS, OS and the Royal Mail PAF.' },
   { label: 'UK Parliament Members API', href: 'https://members-api.parliament.uk', note: 'Live MP data for every constituency.' },
-  { label: 'NHS — Find a GP service', href: 'https://www.nhs.uk/service-search/find-a-gp' },
-  { label: 'police.uk — UK crime &amp; policing data', href: 'https://www.police.uk' },
-  { label: 'Companies House — Public Data', href: 'https://www.gov.uk/government/organisations/companies-house', note: 'For the UK sponsor licence register.' },
+  { label: 'NHS, Find a GP service', href: 'https://www.nhs.uk/service-search/find-a-gp' },
+  { label: 'police.uk, UK crime &amp; policing data', href: 'https://www.police.uk' },
+  { label: 'Companies House, Public Data', href: 'https://www.gov.uk/government/organisations/companies-house', note: 'For the UK sponsor licence register.' },
 ];
 
 export default function SourcesPage() {
@@ -105,7 +105,7 @@ export default function SourcesPage() {
 
         <Group label="UK visa &amp; immigration (gov.uk)" sources={VISA_SOURCES} />
         <Group label="UK tax &amp; pay (HMRC + gov.uk)"   sources={TAX_SOURCES} />
-        <Group label="ONS — statistics &amp; cost-of-living" sources={STAT_SOURCES} />
+        <Group label="ONS, statistics &amp; cost-of-living" sources={STAT_SOURCES} />
         <Group label="UK admin lookups"                   sources={LOOKUP_SOURCES} />
 
         <div className="mt-12 rounded-3xl px-5 py-5 flex items-start gap-3"
@@ -118,7 +118,7 @@ export default function SourcesPage() {
                className="underline font-semibold" style={{ color: '#064E3B' }}>
               Email contact@ukvisainfo.co.uk
             </a>
-            {' '}— we will add the citation within 48 hours.
+            {' '}, we will add the citation within 48 hours.
           </p>
         </div>
       </div>

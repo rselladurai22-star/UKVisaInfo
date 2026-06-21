@@ -35,10 +35,10 @@ const FOLLOWUPS: Record<string, { question: string; options: Answer[] }> = {
   work: {
     question: 'Do you have a job offer from a UK sponsor?',
     options: [
-      { label: 'Yes — in healthcare / NHS', value: 'health' },
-      { label: 'Yes — in another eligible role', value: 'skilled' },
-      { label: 'No — but I am a leader in my field', value: 'talent' },
-      { label: 'No — I want to come and look', value: 'hpi' },
+      { label: 'Yes, in healthcare / NHS', value: 'health' },
+      { label: 'Yes, in another eligible role', value: 'skilled' },
+      { label: 'No, but I am a leader in my field', value: 'talent' },
+      { label: 'No, I want to come and look', value: 'hpi' },
     ],
   },
   study: {
@@ -47,7 +47,7 @@ const FOLLOWUPS: Record<string, { question: string; options: Answer[] }> = {
       { label: 'Full-time degree / course (16+)', value: 'student' },
       { label: 'Short course under 6 months', value: 'svvisitor' },
       { label: 'After finishing my UK degree', value: 'graduate' },
-      { label: 'School-age (4–17)', value: 'childstudent' },
+      { label: 'School-age (4 to 17)', value: 'childstudent' },
     ],
   },
   visit: {
@@ -71,7 +71,7 @@ const FOLLOWUPS: Record<string, { question: string; options: Answer[] }> = {
   settle: {
     question: 'On what basis are you settling?',
     options: [
-      { label: 'After 5–10 years on a visa', value: 'ilr' },
+      { label: 'After 5 to 10 years on a visa', value: 'ilr' },
       { label: 'EU / EEA pre-settled → settled', value: 'euss' },
       { label: 'British citizenship (after ILR)', value: 'citizenship' },
     ],
@@ -114,7 +114,7 @@ const OUTCOMES: Record<string, Outcome> = {
   },
   hpi: {
     title: 'High Potential Individual Visa',
-    blurb: 'For recent graduates of a top-50 global university — come to the UK to work, switch jobs, or search.',
+    blurb: 'For recent graduates of a top-50 global university, come to the UK to work, switch jobs, or search.',
     applyUrl: 'https://www.gov.uk/high-potential-individual-visa',
     bullets: ['Degree within last 5 years', 'English B1', '2 years (3 for PhD)'],
   },
@@ -126,7 +126,7 @@ const OUTCOMES: Record<string, Outcome> = {
   },
   childstudent: {
     title: 'Child Student Visa',
-    blurb: 'For 4–17 year olds studying at an independent UK fee-paying school.',
+    blurb: 'For 4 to 17 year olds studying at an independent UK fee-paying school.',
     applyUrl: 'https://www.gov.uk/child-study-visa',
     bullets: ['CAS from licensed school', 'Parental consent', 'Care arrangements confirmed'],
   },
@@ -138,7 +138,7 @@ const OUTCOMES: Record<string, Outcome> = {
   },
   svvisitor: {
     title: 'Standard Visitor Visa (short study)',
-    blurb: 'Courses up to 6 months at an accredited provider — including English-language courses.',
+    blurb: 'Courses up to 6 months at an accredited provider, including English-language courses.',
     applyUrl: 'https://www.gov.uk/standard-visitor',
     bullets: ['Accredited course acceptance letter', 'Funds for stay', 'Return travel proof'],
   },
@@ -265,7 +265,7 @@ export default function ApplyWizard({ open, onClose }: Props) {
                 Find the right visa to apply for
               </h2>
               <p className="text-white/60 mt-2 text-sm md:text-base">
-                Answer a couple of quick questions — we'll send you to the exact GOV.UK page.
+                Answer a couple of quick questions, we'll send you to the exact GOV.UK page.
               </p>
               <div className="flex items-center gap-1.5 mt-5">
                 {(['purpose', 'detail', 'result'] as StepId[]).map((s, i) => (

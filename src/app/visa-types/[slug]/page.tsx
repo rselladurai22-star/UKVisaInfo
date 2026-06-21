@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const { slug } = await params;
   const v = VISA_DETAILS[slug];
   if (!v) return { title: 'Visa not found' };
-  const title = `${v.title} 2026 — Fees, Eligibility & Process`;
+  const title = `${v.title} 2026, Fees, Eligibility & Process`;
   const description = `${v.summary} Fee ${v.fee}. IHS ${v.ihs}. Decision in ${v.processing.outside}. Verified ${v.updated}.`;
   return {
     title, description,
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   };
 }
 
-const shortFee = (f: string) => f.match(/£[\d,]+/)?.[0] ?? '—';
+const shortFee = (f: string) => f.match(/£[\d,]+/)?.[0] ?? ', ';
 const shortDur = (d: string) => d.split(/[·;]/)[0].trim();
 
 export default async function VisaPage({ params }: RouteParams) {
@@ -109,7 +109,7 @@ export default async function VisaPage({ params }: RouteParams) {
           </span>
         </header>
 
-        {/* on-page nav — swipes on phones */}
+        {/* on-page nav, swipes on phones */}
         <nav aria-label="On this page" className={s.toc}>
           {TOC.map((t) => (
             <a key={t.id} href={`#${t.id}`} className={s.tocLink}>{t.label}</a>
@@ -124,7 +124,7 @@ export default async function VisaPage({ params }: RouteParams) {
               <p>{v.summary}</p>
             </div>
 
-            {/* key facts — swipe on phones, grid on desktop */}
+            {/* key facts, swipe on phones, grid on desktop */}
             <div className={s.facts}>
               <div className={s.fact}><b>{shortFee(v.fee)}</b><span>Application fee from</span></div>
               <div className={s.fact}><b>{shortFee(v.ihs)}</b><span>IHS per year</span></div>
@@ -182,7 +182,7 @@ export default async function VisaPage({ params }: RouteParams) {
 
             <div className={s.srcline}>
               <ShieldCheck size={15} />
-              <span>Source: <a href={v.applyUrl} target="_blank" rel="noopener noreferrer">GOV.UK — {v.title}</a> · Last verified {v.updated}</span>
+              <span>Source: <a href={v.applyUrl} target="_blank" rel="noopener noreferrer">GOV.UK, {v.title}</a> · Last verified {v.updated}</span>
             </div>
             <div style={{ marginTop: 24 }}><EditorByline verified={v.updated} prefix="Written & verified by" /></div>
           </div>
@@ -222,7 +222,7 @@ export default async function VisaPage({ params }: RouteParams) {
         </div>
       </div>
 
-      {/* fixed apply bar — phones only */}
+      {/* fixed apply bar, phones only */}
       <div className={s.applyBar}>
         <div className={s.applyBarFee}>
           Fee from

@@ -51,7 +51,7 @@ export default function UniversalCredit() {
     const workAllowance = hasWorkAllowance ? (housing > 0 ? WORK_ALLOWANCE_LOWER : WORK_ALLOWANCE_HIGHER) : 0;
     const earningsReduction = Math.max(0, earnings - workAllowance) * TAPER;
 
-    // Capital: over £16,000 = no UC; £6,000–£16,000 tariff income £4.35 per £250
+    // Capital: over £16,000 = no UC; £6,000 to £16,000 tariff income £4.35 per £250
     let capitalReduction = 0;
     let capitalBlocks = false;
     if (savings > 16000) capitalBlocks = true;
@@ -66,7 +66,7 @@ export default function UniversalCredit() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Benefits', href: '/category/benefits' }, { label: 'Universal Credit' }]}
       title="Universal Credit Calculator"
-      subtitle="Estimate your monthly Universal Credit for 2025/26 — standard allowance plus child, housing and disability elements, less the 55% earnings taper."
+      subtitle="Estimate your monthly Universal Credit for 2025/26, standard allowance plus child, housing and disability elements, less the 55% earnings taper."
       calcLabel="Estimate Universal Credit"
       inputs={
         <div className="space-y-4">
@@ -136,27 +136,27 @@ export default function UniversalCredit() {
         <GuideSection kicker="The structure" title="Standard allowance plus elements">
           <p>Your maximum UC is a <strong>standard allowance</strong> based on your age and whether you're single or a couple, plus extra <strong>elements</strong> for:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Children</strong> — an amount per child, subject to the two-child limit for most families.</li>
-            <li><strong>Housing</strong> — help with rent, up to local limits.</li>
-            <li><strong>Disability</strong> — the LCWRA element if you have limited capability for work.</li>
-            <li><strong>Childcare</strong> — up to 85% of childcare costs (handled separately).</li>
-            <li><strong>Carer</strong> — for those caring 35+ hours a week.</li>
+            <li><strong>Children</strong>, an amount per child, subject to the two-child limit for most families.</li>
+            <li><strong>Housing</strong>, help with rent, up to local limits.</li>
+            <li><strong>Disability</strong>, the LCWRA element if you have limited capability for work.</li>
+            <li><strong>Childcare</strong>, up to 85% of childcare costs (handled separately).</li>
+            <li><strong>Carer</strong>, for those caring 35+ hours a week.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Earnings" title="The 55% taper and work allowance">
-          <p>UC is reduced as you earn, but not pound for pound. If you have children or limited capability for work, you get a <strong>work allowance</strong> — earnings you can keep before any reduction (£411/month if you get housing support, £684 if not). Above that, UC falls by <strong>55p for every £1</strong> of net earnings. This taper means work always leaves you better off overall.</p>
+          <p>UC is reduced as you earn, but not pound for pound. If you have children or limited capability for work, you get a <strong>work allowance</strong>, earnings you can keep before any reduction (£411/month if you get housing support, £684 if not). Above that, UC falls by <strong>55p for every £1</strong> of net earnings. This taper means work always leaves you better off overall.</p>
         </GuideSection>
 
         <GuideSection kicker="Savings" title="The capital rules">
           <p>Savings affect your claim:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li>Under £6,000: ignored.</li>
-            <li>£6,000–£16,000: treated as "tariff income" of £4.35 a month per £250 (or part) above £6,000.</li>
+            <li>£6,000 to £16,000: treated as "tariff income" of £4.35 a month per £250 (or part) above £6,000.</li>
             <li>Over £16,000: no Universal Credit at all.</li>
           </ul>
           <Callout tone="warn" title="The £16,000 cliff">
-            Capital over £16,000 stops your claim entirely, even with a low income. Some capital (like a pension pot for working-age claimants) is disregarded — check the rules.
+            Capital over £16,000 stops your claim entirely, even with a low income. Some capital (like a pension pot for working-age claimants) is disregarded, check the rules.
           </Callout>
         </GuideSection>
 
@@ -167,7 +167,7 @@ export default function UniversalCredit() {
         <GuideSection kicker="Avoid these" title="Common Universal Credit mistakes">
           <Mistakes items={[
             ['Not reporting changes', 'Income, rent, children and savings changes must be reported promptly or you risk overpayments and penalties.'],
-            ['Forgetting the childcare element', 'You can reclaim up to 85% of childcare costs — but you must pay first and claim back, and report it each month.'],
+            ['Forgetting the childcare element', 'You can reclaim up to 85% of childcare costs, but you must pay first and claim back, and report it each month.'],
             ['Assuming work does not pay', 'The 55% taper and work allowance mean you keep a meaningful share of every pound earned.'],
             ['Ignoring the benefit cap', 'A separate overall cap can limit total benefits for some households, especially with high rents.'],
           ]} />

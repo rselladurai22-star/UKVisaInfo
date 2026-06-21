@@ -1,5 +1,5 @@
 /**
- * CalcPageShell v4 — "Quartz" design system
+ * CalcPageShell v4, "Quartz" design system
  * Inspired by Stripe Dashboard / Linear / Vercel docs
  * Light · refined neutrals · one disciplined indigo accent · hairline borders
  */
@@ -31,20 +31,20 @@ interface Props {
   sidebar?: SidebarData;
   related?: { href: string; title: string; desc: string }[];
   educational?: { title: string; body: string }[];
-  /** FAQ entries — emits FAQPage JSON-LD for rich-result eligibility. */
+  /** FAQ entries, emits FAQPage JSON-LD for rich-result eligibility. */
   faqs?: FaqItem[];
   /** Last-verified date for EditorByline (e.g. "May 2026"). Defaults to current month. */
   editorVerified?: string;
-  /** Hide the auto-rendered byline (rare — only for non-YMYL pages). */
+  /** Hide the auto-rendered byline (rare, only for non-YMYL pages). */
   hideByline?: boolean;
-  /** Methodology block — "How we calculate this" with gov.uk source link. */
+  /** Methodology block, "How we calculate this" with gov.uk source link. */
   methodology?: MethodologyData;
   children: React.ReactNode;
 }
 
 const DEFAULT_VERIFIED = 'May 2026';
 
-/* ─── design tokens — Stripe-inspired Quartz palette ────── */
+/* ─── design tokens, Stripe-inspired Quartz palette ────── */
 const Q = {
   bg:        '#f8fafc',
   bgAlt:     '#FAFAFB',
@@ -157,7 +157,7 @@ export default function CalcPageShell({
 
           {/* ── Main column ── */}
           <div style={{ flex: 1, minWidth: 0 }}>
-            {/* Author byline — E-E-A-T signal above every YMYL calc */}
+            {/* Author byline, E-E-A-T signal above every YMYL calc */}
             {!hideByline && (
               <div style={{ marginBottom: 16 }}>
                 <EditorByline verified={editorVerified} />
@@ -177,7 +177,7 @@ export default function CalcPageShell({
               </div>
             </div>
 
-            {/* Methodology — "How we calculate this" with gov.uk source.
+            {/* Methodology, "How we calculate this" with gov.uk source.
                 Falls back to a generic block linking /sources + /editorial-policy
                 so every calc page carries the EEAT signal even before a
                 bespoke methodology is authored. */}
@@ -193,7 +193,7 @@ export default function CalcPageShell({
               />
             )}
 
-            {/* Educational — refined accordion */}
+            {/* Educational, refined accordion */}
             {educational && educational.length > 0 && (
               <section style={{ marginTop: 36 }}>
                 <SectionLabel icon={<Layers size={14} strokeWidth={2.2} />} label="Reference" title="How it works" />
@@ -245,7 +245,7 @@ export default function CalcPageShell({
             )}
           </div>
 
-          {/* ── Sidebar — light cards, hairline borders ── */}
+          {/* ── Sidebar, light cards, hairline borders ── */}
           {sidebar && (
             <aside className="w-full lg:w-[280px] xl:w-[300px] flex-shrink-0">
               <div className="lg:sticky lg:top-[80px]" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

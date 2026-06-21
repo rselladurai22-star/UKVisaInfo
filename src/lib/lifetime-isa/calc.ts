@@ -1,14 +1,14 @@
 /**
- * UK Lifetime ISA (LISA) calculator — 2025/26.
+ * UK Lifetime ISA (LISA) calculator, 2025/26.
  *
  * Source: gov.uk/lifetime-isa
  *
  * Rules:
- *   - Must be 18–39 to open; can contribute until age 50
+ *   - Must be 18 to 39 to open; can contribute until age 50
  *   - Annual contribution limit: £4,000 (counts toward £20k ISA allowance)
  *   - Government bonus: 25% of contributions (max £1,000/year)
  *   - Accessible without penalty:
- *       1. First home purchase (property ≤ £450,000) — after 12 months of first contribution
+ *       1. First home purchase (property ≤ £450,000), after 12 months of first contribution
  *       2. After age 60 (retirement)
  *       3. Terminal illness diagnosis
  *   - Withdrawal penalty (any other reason): 25% of total withdrawal

@@ -409,7 +409,7 @@ export default function SalaryChecker() {
               This tool covers the most-sponsored 100+ SOC 2020 codes. For
               full coverage and definitive thresholds, see Home Office
               Appendix Skilled Occupations. Health & Care visa roles have
-              separate (lower) thresholds — see our <Link href="/blog/uk-health-care-worker-visa-2026-complete-guide" className="text-[#18181B] underline">Health & Care guide</Link>.
+              separate (lower) thresholds, see our <Link href="/blog/uk-health-care-worker-visa-2026-complete-guide" className="text-[#18181B] underline">Health & Care guide</Link>.
             </p>
           </div>
 

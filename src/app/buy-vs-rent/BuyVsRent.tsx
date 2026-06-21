@@ -98,7 +98,7 @@ export default function BuyVsRent() {
         </nav>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">Buy vs Rent Calculator</h1>
         <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-          Should you buy or keep renting? This compares the two fairly — same monthly budget for both — and tracks
+          Should you buy or keep renting? This compares the two fairly, same monthly budget for both, and tracks
           your <strong>net worth</strong> down each path over time, including house-price growth, the deposit you
           could invest instead, and the costs of buying and selling.
         </p>
@@ -114,27 +114,27 @@ export default function BuyVsRent() {
                 <Field label="Deposit" hint={`${pct(price ? (deposit / price) * 100 : 0)} of price`}><MoneyInput value={deposit} onChange={setDeposit} step={1000} /></Field>
                 <Field label="Term (years)"><NumberInput value={termYears} onChange={setTermYears} suffix="yrs" /></Field>
               </div>
-              <Field label={`Mortgage rate — ${pct(rate, 2)}`}><Slider value={rate} onChange={setRate} min={0.5} max={10} step={0.05} /></Field>
+              <Field label={`Mortgage rate, ${pct(rate, 2)}`}><Slider value={rate} onChange={setRate} min={0.5} max={10} step={0.05} /></Field>
             </div>
           </Panel>
 
           <Panel title="Renting & horizon" icon={<Building className="h-4 w-4" />}>
             <div className="space-y-4">
               <Field label="Monthly rent"><MoneyInput value={rent} onChange={setRent} step={25} /></Field>
-              <Field label={`Years to compare — ${years}`}><Slider value={years} onChange={setYears} min={1} max={30} step={1} /></Field>
+              <Field label={`Years to compare, ${years}`}><Slider value={years} onChange={setYears} min={1} max={30} step={1} /></Field>
             </div>
           </Panel>
 
-          <AdvancedOptions label="Assumptions" hint="Growth rates and buying/selling costs — pre-filled with typical figures">
-            <Field label={`House price growth — ${pct(hpi, 1)}/yr`}><Slider value={hpi} onChange={setHpi} min={-2} max={8} step={0.25} /></Field>
-            <Field label={`Rent growth — ${pct(rentGrowth, 1)}/yr`}><Slider value={rentGrowth} onChange={setRentGrowth} min={0} max={8} step={0.25} /></Field>
-            <Field label={`Investment return (if renting) — ${pct(invReturn, 1)}/yr`} hint="What the renter earns investing the deposit + monthly savings"><Slider value={invReturn} onChange={setInvReturn} min={0} max={10} step={0.25} /></Field>
+          <AdvancedOptions label="Assumptions" hint="Growth rates and buying/selling costs, pre-filled with typical figures">
+            <Field label={`House price growth, ${pct(hpi, 1)}/yr`}><Slider value={hpi} onChange={setHpi} min={-2} max={8} step={0.25} /></Field>
+            <Field label={`Rent growth, ${pct(rentGrowth, 1)}/yr`}><Slider value={rentGrowth} onChange={setRentGrowth} min={0} max={8} step={0.25} /></Field>
+            <Field label={`Investment return (if renting), ${pct(invReturn, 1)}/yr`} hint="What the renter earns investing the deposit + monthly savings"><Slider value={invReturn} onChange={setInvReturn} min={0} max={10} step={0.25} /></Field>
             <div className="pt-2 border-t border-outline-variant space-y-4">
               <div className="grid grid-cols-2 gap-3">
-                <Field label={`Buying costs — ${buyCostPct}%`} hint="SDLT + legal + survey"><Slider value={buyCostPct} onChange={setBuyCostPct} min={0} max={10} step={0.5} /></Field>
-                <Field label={`Selling costs — ${sellCostPct}%`} hint="Agent + legal"><Slider value={sellCostPct} onChange={setSellCostPct} min={0} max={5} step={0.5} /></Field>
+                <Field label={`Buying costs, ${buyCostPct}%`} hint="SDLT + legal + survey"><Slider value={buyCostPct} onChange={setBuyCostPct} min={0} max={10} step={0.5} /></Field>
+                <Field label={`Selling costs, ${sellCostPct}%`} hint="Agent + legal"><Slider value={sellCostPct} onChange={setSellCostPct} min={0} max={5} step={0.5} /></Field>
               </div>
-              <Field label={`Maintenance — ${maintPct}% of value/yr`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={3} step={0.25} /></Field>
+              <Field label={`Maintenance, ${maintPct}% of value/yr`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={3} step={0.25} /></Field>
               <Field label="Insurance & service charge / yr"><MoneyInput value={ownership} onChange={setOwnership} step={100} /></Field>
             </div>
           </AdvancedOptions>
@@ -204,7 +204,7 @@ function BuyVsRentGuide() {
         <span className="text-[11px] font-bold uppercase tracking-widest text-secondary">Complete guide</span>
         <h2 className="text-3xl sm:text-4xl font-display font-bold text-primary mt-1">Buy vs rent: the real maths</h2>
         <p className="mt-3 text-on-surface-variant leading-relaxed">
-          &quot;Renting is dead money&quot; is one of the most repeated — and most misleading — lines in UK personal
+          &quot;Renting is dead money&quot; is one of the most repeated, and most misleading, lines in UK personal
           finance. The honest answer depends on house-price growth, investment returns, how long you stay and the
           often-ignored costs of buying and selling. This guide explains how to compare the two fairly.
         </p>
@@ -215,7 +215,7 @@ function BuyVsRentGuide() {
           <GuideHeading kicker="The principle">Why a fair comparison uses net worth, not rent vs mortgage</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Comparing a monthly rent to a monthly mortgage payment is the classic mistake. Part of a mortgage payment
-            buys you equity — it&apos;s saving, not spending — while a renter who pays less each month can invest the
+            buys you equity, it&apos;s saving, not spending, while a renter who pays less each month can invest the
             difference. A fair comparison gives both people the <strong>same monthly housing budget</strong> and asks
             a single question: after X years, who has the greater <strong>net worth</strong>? The buyer&apos;s wealth
             is the equity they&apos;d walk away with if they sold; the renter&apos;s is their investment pot from the
@@ -223,7 +223,7 @@ function BuyVsRentGuide() {
           </p>
           <Callout tone="info" title="The two levers that decide it">
             The result hinges on two unknowables: how fast house prices grow, and what return the renter earns on
-            their investments. Small changes to either flip the answer — which is why the sliders above matter more
+            their investments. Small changes to either flip the answer, which is why the sliders above matter more
             than any single &quot;rule&quot;.
           </Callout>
         </section>
@@ -232,19 +232,19 @@ function BuyVsRentGuide() {
           <GuideHeading kicker="Buying">The costs of owning that nobody mentions</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Buyers focus on the deposit and forget the rest. <strong>Upfront</strong>: stamp duty, legal fees,
-            survey, mortgage arrangement fees and removals — often 3–5% of the price. <strong>Ongoing</strong>:
+            survey, mortgage arrangement fees and removals, often 3 to 5% of the price. <strong>Ongoing</strong>:
             maintenance (budget around 1% of the value a year), buildings insurance, service charges and ground rent
             on leaseholds, and the interest portion of the mortgage, which is itself &quot;dead money&quot; in the
-            same way rent is. <strong>On exit</strong>: estate-agent and legal fees of roughly 1.5–2.5% when you
+            same way rent is. <strong>On exit</strong>: estate-agent and legal fees of roughly 1.5 to 2.5% when you
             sell. These frictions are why buying rarely wins over short horizons.
           </p>
         </section>
 
         <section>
-          <GuideHeading kicker="Renting">The renter&apos;s hidden advantage — and its catch</GuideHeading>
+          <GuideHeading kicker="Renting">The renter&apos;s hidden advantage, and its catch</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             A renter keeps the deposit liquid and can invest it. Over decades, a diversified portfolio has
-            historically returned more than house prices in many periods — so the &quot;opportunity cost&quot; of
+            historically returned more than house prices in many periods, so the &quot;opportunity cost&quot; of
             locking a deposit into bricks is real. The catch is discipline: the maths only works if the renter
             <em> actually invests</em> the deposit and the monthly savings, rather than spending them. Renting also
             offers flexibility (no selling costs to move) but no protection against rising rents, which a fixed
@@ -253,11 +253,11 @@ function BuyVsRentGuide() {
         </section>
 
         <section>
-          <GuideHeading kicker="Leverage">Why buying can win big — the leverage effect</GuideHeading>
+          <GuideHeading kicker="Leverage">Why buying can win big, the leverage effect</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             A mortgage is leverage. With a 15% deposit you control an asset worth roughly 6.7 times your cash, and
             any house-price growth applies to the <strong>whole</strong> value, not just your deposit. If a £300,000
-            home rises 3% a year, that&apos;s £9,000 of growth on a £45,000 deposit — a 20% return on your cash in
+            home rises 3% a year, that&apos;s £9,000 of growth on a £45,000 deposit, a 20% return on your cash in
             year one, before costs. This leverage is what lets buyers overtake renters once enough time has passed
             for growth to outweigh the upfront and selling frictions.
           </p>
@@ -267,8 +267,8 @@ function BuyVsRentGuide() {
           <GuideHeading kicker="Time">The break-even horizon</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Because buying carries heavy upfront and exit costs, it almost always loses over short periods and tends
-            to win over long ones. The <strong>crossover year</strong> — when the buyer&apos;s net worth overtakes
-            the renter&apos;s — is the single most useful output above. As a rough guide, with moderate growth
+            to win over long ones. The <strong>crossover year</strong>, when the buyer&apos;s net worth overtakes
+            the renter&apos;s, is the single most useful output above. As a rough guide, with moderate growth
             assumptions, buying often breaks even somewhere between years 5 and 10; faster house-price growth or
             lower investment returns pull that forward, and the reverse pushes it back. If you expect to move within
             a few years, renting frequently wins on the numbers alone.
@@ -280,7 +280,7 @@ function BuyVsRentGuide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             With a £45,000 deposit, a 4.7% mortgage over 25 years, 3% house-price growth, 3% rent growth and a 5%
             investment return, buying typically falls behind for the first few years while upfront costs drag, then
-            overtakes renting once equity and growth compound — often pulling clearly ahead by year 15. Drop
+            overtakes renting once equity and growth compound, often pulling clearly ahead by year 15. Drop
             house-price growth to 1% or lift investment returns to 7%, and renting can stay ahead the whole time. The
             point isn&apos;t a single answer; it&apos;s to see how sensitive the outcome is to assumptions you
             control.
@@ -292,7 +292,7 @@ function BuyVsRentGuide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Numbers don&apos;t capture everything. Owning brings security of tenure, freedom to decorate and a fixed
             housing cost in retirement; renting brings flexibility, no maintenance liability and no exposure to a
-            single illiquid asset. Many people will pay a financial premium for the certainty of owning — and
+            single illiquid asset. Many people will pay a financial premium for the certainty of owning, and
             that&apos;s a perfectly rational choice. Use the maths to understand the trade-off, not to override what
             matters to you.
           </p>
@@ -303,7 +303,7 @@ function BuyVsRentGuide() {
           <ul className="space-y-3 text-[15px] text-on-surface-variant">
             {[
               ['Comparing rent to the mortgage payment', 'Ignores equity built by the buyer and savings invested by the renter. Compare net worth instead.'],
-              ['Forgetting buying and selling costs', 'Stamp duty, legal fees and agent fees can total 5–7% round-trip and crush short-term buying.'],
+              ['Forgetting buying and selling costs', 'Stamp duty, legal fees and agent fees can total 5 to 7% round-trip and crush short-term buying.'],
               ['Assuming house prices only rise', 'Prices fall in some periods. Test a low- or negative-growth scenario before committing.'],
               ['Not actually investing as a renter', 'The renting case only wins if the deposit and monthly savings are genuinely invested, not spent.'],
               ['Ignoring how long you&apos;ll stay', 'If you might move within a few years, the exit costs of buying usually make renting cheaper.'],
@@ -318,7 +318,7 @@ function BuyVsRentGuide() {
           <FAQ items={[
             { q: 'Is renting really dead money?', a: 'Not necessarily. Rent buys you a place to live with flexibility and no maintenance liability, and a disciplined renter can invest the deposit for a return that sometimes beats house-price growth. The interest portion of a mortgage is "dead" in exactly the same way rent is.' },
             { q: 'How long do I need to stay for buying to pay off?', a: 'It depends on costs and growth, but with moderate assumptions buying often breaks even somewhere between 5 and 10 years. Shorter stays usually favour renting because of the upfront and selling costs.' },
-            { q: 'What house-price growth should I assume?', a: 'No one knows. UK house prices have grown around 3–4% a year on average over the long run, but with long flat or falling periods. Test a range — including 0% and negative — to see how robust your decision is.' },
+            { q: 'What house-price growth should I assume?', a: 'No one knows. UK house prices have grown around 3 to 4% a year on average over the long run, but with long flat or falling periods. Test a range, including 0% and negative, to see how robust your decision is.' },
             { q: 'Does this account for stamp duty?', a: 'Yes, via the buying-costs percentage in Expert mode (a default of around 3% covers SDLT plus legal and survey fees for a typical purchase). Use the dedicated Stamp Duty calculator for an exact figure.' },
             { q: 'What if rents rise faster than expected?', a: 'Faster rent growth favours buying, because a repayment mortgage fixes most of your housing cost while a renter faces rising payments. Increase the rent-growth slider to see the effect.' },
           ]} />

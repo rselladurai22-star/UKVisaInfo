@@ -34,10 +34,10 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>UKDesk — Guides & Updates</title>
+    <title>UKDesk, Guides & Updates</title>
     <link>${SITE}</link>
     <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />
-    <description>Independent UK immigration guidance — visa routes, rules, fees and processing times. Updated for 2026.</description>
+    <description>Independent UK immigration guidance, visa routes, rules, fees and processing times. Updated for 2026.</description>
     <language>en-gb</language>
     <lastBuildDate>${buildDate}</lastBuildDate>
 ${items}

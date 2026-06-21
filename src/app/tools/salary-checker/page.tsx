@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import SalaryChecker from '../../../components/tools/SalaryChecker';
 
-const title = 'UK Skilled Worker Salary Checker 2026 — Check by SOC Code (Free)';
-const description = 'Free tool: check if your job offer meets the UK Skilled Worker visa salary threshold. Search 100+ SOC 2020 occupation codes with 2026 going rates. Instant pass/fail result — no signup needed.';
+const title = 'UK Skilled Worker Salary Checker 2026, Check by SOC Code (Free)';
+const description = 'Free tool: check if your job offer meets the UK Skilled Worker visa salary threshold. Search 100+ SOC 2020 occupation codes with 2026 going rates. Instant pass/fail result, no signup needed.';
 
 export const metadata: Metadata = {
   title,

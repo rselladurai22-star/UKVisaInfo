@@ -1,23 +1,23 @@
 /**
- * UK Skilled Worker visa 70-point eligibility checker — 2024/25.
+ * UK Skilled Worker visa 70-point eligibility checker, 2024/25.
  *
  * Source: gov.uk/skilled-worker-visa/your-job
  *         Home Office Points-Based System guidance
  *
  * Points structure (70 required):
- *   Mandatory (50 pts — all required):
+ *   Mandatory (50 pts, all required):
  *     A: Approved sponsor                        = 20
  *     B: Job at appropriate skill level (RQF 3+) = 20
  *     C: English at B1 level or above            = 10
  *
- *   Tradeable (20 pts — various combos):
+ *   Tradeable (20 pts, various combos):
  *     D: Salary meets general threshold (£38,700) = 20
  *     E: Job in shortage occupation list         = 20 (can combine with F)
  *     F: Salary ≥ £30,960 (going rate ×90%)      = 10  (if E awarded)
  *     G: PhD relevant to job                     = 10
  *     H: PhD in STEM                             = 20
  *     I: New entrant (under 26, student switch,
- *          graduate trainee, or shortage occ.)   = 20 — salary ≥ £23,220 (60% of threshold)
+ *          graduate trainee, or shortage occ.)   = 20, salary ≥ £23,220 (60% of threshold)
  *
  * Salary thresholds (from 4 April 2024):
  *   General:           £38,700/year
@@ -71,7 +71,7 @@ export function calculateSkilledWorkerPoints(input: CalcInput): CalcResult {
   award('B', 'Job at RQF 3+ skill level', 20, input.jobAtRqf3Plus);
   award('C', 'English language (B1+)', 10, input.englishB1Plus);
 
-  // Tradeable — salary vs thresholds
+  // Tradeable, salary vs thresholds
   const newEntrantMinSalary = Math.max(THRESHOLD_NEW_ENTRANT, input.jobGoingRate * 0.70);
   const shortageMinSalary   = Math.max(THRESHOLD_SHORTAGE, input.jobGoingRate * 0.80);
   const goingRateFull       = input.jobGoingRate;
@@ -92,7 +92,7 @@ export function calculateSkilledWorkerPoints(input: CalcInput): CalcResult {
     if (input.isNewEntrant) award('I', 'New entrant route', 20, false);
   }
 
-  // PhD — only if salary points already covered (can't use to compensate salary gap)
+  // PhD, only if salary points already covered (can't use to compensate salary gap)
   if (input.hasPhdStem && !meetsGeneral && !meetsShortage && !meetsNewEntrant) {
     award('H', 'PhD in STEM subject', 20, false);
   } else if (input.hasPhdStem) {

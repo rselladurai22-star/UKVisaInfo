@@ -40,7 +40,7 @@ export default function CarRunningCosts() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Vehicles', href: '/category/vehicles' }, { label: 'Car Running Costs' }]}
       title="Car Running Costs Calculator"
-      subtitle="Add up the true yearly cost of running a car — fuel, insurance, road tax, servicing and depreciation — and see the cost per mile."
+      subtitle="Add up the true yearly cost of running a car, fuel, insurance, road tax, servicing and depreciation, and see the cost per mile."
       calcLabel="Calculate Running Costs"
       inputs={
         <div className="space-y-4">
@@ -61,7 +61,7 @@ export default function CarRunningCosts() {
           <Panel title="Depreciation">
             <div className="space-y-4">
               <Field label="Car value"><MoneyInput value={purchasePrice} onChange={setPurchasePrice} step={1000} /></Field>
-              <Field label="Annual depreciation rate" hint="Typically 10–20% of value a year"><NumberInput value={depreciationPct} onChange={setDepreciationPct} min={0} step={1} suffix="%" /></Field>
+              <Field label="Annual depreciation rate" hint="Typically 10 to 20% of value a year"><NumberInput value={depreciationPct} onChange={setDepreciationPct} min={0} step={1} suffix="%" /></Field>
             </div>
           </Panel>
         </div>
@@ -90,7 +90,7 @@ export default function CarRunningCosts() {
           </Panel>
 
           <Callout tone="tip" title="Depreciation is the hidden giant">
-            Most drivers focus on fuel, but depreciation is usually the biggest cost of owning a newer car — the value it quietly loses each year whether you drive it or not.
+            Most drivers focus on fuel, but depreciation is usually the biggest cost of owning a newer car, the value it quietly loses each year whether you drive it or not.
           </Callout>
 
           <p className="text-[11px] text-on-surface-variant">Estimate only. Excludes finance interest, parking, tolls, breakdown cover and clean-air-zone charges. Depreciation is an estimate based on your chosen rate.</p>
@@ -99,7 +99,7 @@ export default function CarRunningCosts() {
     >
       <Guide
         title="The true cost of running a car"
-        intro="Fuel is the cost drivers notice, but it's rarely the biggest. Once you add insurance, tax, servicing and — above all — depreciation, the real cost of motoring is often double what people assume. This calculator pulls it all together into a yearly figure and a cost per mile."
+        intro="Fuel is the cost drivers notice, but it's rarely the biggest. Once you add insurance, tax, servicing and, above all, depreciation, the real cost of motoring is often double what people assume. This calculator pulls it all together into a yearly figure and a cost per mile."
       >
         <GuideSection kicker="The big five" title="What makes up running costs">
           <ul className="list-disc pl-5 space-y-2">
@@ -107,23 +107,23 @@ export default function CarRunningCosts() {
             <li><strong>Insurance:</strong> a fixed annual cost regardless of mileage.</li>
             <li><strong>Road tax (VED):</strong> usually the £195 standard rate.</li>
             <li><strong>Servicing & maintenance:</strong> routine service, MOT, tyres, repairs.</li>
-            <li><strong>Depreciation:</strong> the value the car loses each year — the largest cost for newer cars.</li>
+            <li><strong>Depreciation:</strong> the value the car loses each year, the largest cost for newer cars.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Depreciation" title="The cost you can't see on a payslip">
-          <p>A new car can lose 15–35% of its value in the first year and around 50–60% over three years. On a £20,000 car, that's thousands of pounds a year — more than fuel for most drivers. Buying a two-to-three-year-old car lets someone else absorb the steepest depreciation, which is why nearly-new cars are often the best value.</p>
+          <p>A new car can lose 15 to 35% of its value in the first year and around 50 to 60% over three years. On a £20,000 car, that's thousands of pounds a year, more than fuel for most drivers. Buying a two-to-three-year-old car lets someone else absorb the steepest depreciation, which is why nearly-new cars are often the best value.</p>
         </GuideSection>
 
         <GuideSection kicker="Fixed vs variable" title="Why low mileage doesn't mean cheap">
-          <p>Insurance, tax and depreciation are largely fixed — you pay them whether you drive 2,000 or 20,000 miles. Only fuel and some maintenance scale with mileage. That's why a barely-used second car can still cost over £2,000 a year to keep, and why car clubs or rental can be cheaper for occasional drivers.</p>
+          <p>Insurance, tax and depreciation are largely fixed, you pay them whether you drive 2,000 or 20,000 miles. Only fuel and some maintenance scale with mileage. That's why a barely-used second car can still cost over £2,000 a year to keep, and why car clubs or rental can be cheaper for occasional drivers.</p>
           <Callout tone="warn" title="Don't forget the extras">
             Parking permits, tolls, congestion and clean-air-zone charges, breakdown cover and finance interest all sit on top of the figures here. In cities they can add hundreds of pounds a year.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A £20,000 car, 9,000 miles a year">
-          <p>At 45 MPG and £1.40 a litre, 9,000 miles costs about £1,270 in fuel. Add £700 insurance, £195 tax and £500 servicing, plus 12% depreciation on £20,000 (£2,400), and the total is roughly £5,065 a year — about £422 a month, or 56p a mile. Depreciation alone is nearly half the cost.</p>
+          <p>At 45 MPG and £1.40 a litre, 9,000 miles costs about £1,270 in fuel. Add £700 insurance, £195 tax and £500 servicing, plus 12% depreciation on £20,000 (£2,400), and the total is roughly £5,065 a year, about £422 a month, or 56p a mile. Depreciation alone is nearly half the cost.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common running-cost mistakes">
@@ -137,10 +137,10 @@ export default function CarRunningCosts() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'What is the average cost of running a car in the UK?', a: 'It varies widely, but including depreciation many drivers spend £3,000–£6,000 a year on a typical car doing average mileage.' },
+            { q: 'What is the average cost of running a car in the UK?', a: 'It varies widely, but including depreciation many drivers spend £3,000 to £6,000 a year on a typical car doing average mileage.' },
             { q: 'Is depreciation a real cost?', a: 'Yes. It is money you lose when you eventually sell or trade in the car, and for newer cars it is usually the single biggest cost.' },
             { q: 'How can I cut running costs?', a: 'Buy a slightly used car to avoid first-year depreciation, shop around for insurance, drive efficiently, and keep up with servicing to avoid big repairs.' },
-            { q: 'Are electric cars cheaper to run?', a: 'Often yes on fuel and servicing, but check insurance, depreciation and — since April 2025 — road tax before assuming overall savings.' },
+            { q: 'Are electric cars cheaper to run?', a: 'Often yes on fuel and servicing, but check insurance, depreciation and, since April 2025, road tax before assuming overall savings.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>

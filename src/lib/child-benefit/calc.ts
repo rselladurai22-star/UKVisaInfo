@@ -18,8 +18,8 @@
 
 import { HICBC_LOWER as HICBC_L, HICBC_UPPER as HICBC_U } from '../constants/tax-2026-27';
 
-export const ELDEST_WEEKLY     = 25.60;   // 2024/25 — verify April 2026
-export const ADDITIONAL_WEEKLY = 16.95;   // 2024/25 — verify April 2026
+export const ELDEST_WEEKLY     = 25.60;   // 2024/25, verify April 2026
+export const ADDITIONAL_WEEKLY = 16.95;   // 2024/25, verify April 2026
 export const HICBC_LOWER       = HICBC_L;
 export const HICBC_UPPER       = HICBC_U;
 
@@ -35,7 +35,7 @@ export interface CalcResult {
   netBenefit: number;
   effectiveRate: number;      // HICBC as % of gross benefit
   isFullyClawedBack: boolean;
-  clawbackPct: number;        // 0–100
+  clawbackPct: number;        // 0 to 100
 }
 
 export function calculateChildBenefit(input: CalcInput): CalcResult {

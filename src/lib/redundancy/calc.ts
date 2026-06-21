@@ -8,7 +8,7 @@
  * - Must have ≥ 2 years' continuous service with the employer.
  * - For each full year of service:
  *     · age < 22  → 0.5 week's pay
- *     · age 22–40 → 1.0 week's pay
+ *     · age 22 to 40 → 1.0 week's pay
  *     · age 41+  → 1.5 weeks' pay
  * - Maximum 20 years of service counted.
  * - Weekly pay is capped (statutory limit, reviewed annually each April).
@@ -30,7 +30,7 @@ export const TAX_FREE_CAP = 30000;
 export interface CalcInput {
   age: number;             // age at end of employment
   yearsService: number;    // complete years (round down)
-  weeklyPay: number;       // gross weekly pay — capped internally
+  weeklyPay: number;       // gross weekly pay, capped internally
 }
 
 export interface YearSlice {

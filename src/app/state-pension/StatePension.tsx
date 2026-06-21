@@ -33,8 +33,8 @@ export default function StatePension() {
       inputs={
         <Panel title="Your NI record">
           <div className="space-y-4">
-            <Field label={`Qualifying years so far — ${yearsNow}`} hint="Check yours on GOV.UK"><Slider value={yearsNow} onChange={setYearsNow} min={0} max={45} /></Field>
-            <Field label={`More years before retirement — ${yearsToAdd}`} hint="Years you'll still work / get credits"><Slider value={yearsToAdd} onChange={setYearsToAdd} min={0} max={45} /></Field>
+            <Field label={`Qualifying years so far, ${yearsNow}`} hint="Check yours on GOV.UK"><Slider value={yearsNow} onChange={setYearsNow} min={0} max={45} /></Field>
+            <Field label={`More years before retirement, ${yearsToAdd}`} hint="Years you'll still work / get credits"><Slider value={yearsToAdd} onChange={setYearsToAdd} min={0} max={45} /></Field>
           </div>
         </Panel>
       }
@@ -47,7 +47,7 @@ export default function StatePension() {
           </div>
           {!r.qualifies && (
             <Callout tone="warn" title="Below the 10-year minimum">
-              With fewer than 10 qualifying years you get no State Pension. You have {r.total} — aim for at least 10,
+              With fewer than 10 qualifying years you get no State Pension. You have {r.total}, aim for at least 10,
               and 35 for the full amount.
             </Callout>
           )}
@@ -80,11 +80,11 @@ export default function StatePension() {
           <p>The new State Pension is paid to people reaching State Pension age on or after 6 April 2016. The full amount is <strong>£230.25 a week</strong> (about £11,973 a year) in 2025/26. What you get depends on your <strong>National Insurance (NI) record</strong>: you typically need <strong>35 qualifying years</strong> for the full amount and at least <strong>10 years</strong> to get anything at all. Each qualifying year adds roughly 1/35th of the full pension.</p>
         </GuideSection>
         <GuideSection kicker="Earning it" title="Qualifying years and NI credits">
-          <p>You build qualifying years by paying NI through work or self-employment, or by receiving <strong>NI credits</strong> — for example while claiming Child Benefit for a child under 12, receiving certain benefits, or caring. Gaps can appear from time abroad, low earnings or career breaks. You can check your record and any gaps on GOV.UK, and often <strong>fill gaps</strong> by paying voluntary Class 3 contributions, which can be excellent value.</p>
-          <Callout tone="tip" title="Filling gaps can pay back fast">A single voluntary year (around £900) can add roughly £330 a year to your pension — recovered in under three years of retirement and paid for life. Check eligibility before deadlines.</Callout>
+          <p>You build qualifying years by paying NI through work or self-employment, or by receiving <strong>NI credits</strong>, for example while claiming Child Benefit for a child under 12, receiving certain benefits, or caring. Gaps can appear from time abroad, low earnings or career breaks. You can check your record and any gaps on GOV.UK, and often <strong>fill gaps</strong> by paying voluntary Class 3 contributions, which can be excellent value.</p>
+          <Callout tone="tip" title="Filling gaps can pay back fast">A single voluntary year (around £900) can add roughly £330 a year to your pension, recovered in under three years of retirement and paid for life. Check eligibility before deadlines.</Callout>
         </GuideSection>
         <GuideSection kicker="When" title="State Pension age">
-          <p>The State Pension age is currently <strong>66</strong>, rising to <strong>67</strong> between 2026 and 2028, and to <strong>68</strong> thereafter. It&apos;s the same for men and women. You don&apos;t have to take it the moment you reach State Pension age — <strong>deferring</strong> increases your eventual payments (currently by about 1% for every 9 weeks deferred, roughly 5.8% a year), which can suit those still working.</p>
+          <p>The State Pension age is currently <strong>66</strong>, rising to <strong>67</strong> between 2026 and 2028, and to <strong>68</strong> thereafter. It&apos;s the same for men and women. You don&apos;t have to take it the moment you reach State Pension age, <strong>deferring</strong> increases your eventual payments (currently by about 1% for every 9 weeks deferred, roughly 5.8% a year), which can suit those still working.</p>
         </GuideSection>
         <GuideSection kicker="In context" title="It's a foundation, not the whole plan">
           <p>The full State Pension is below what most people need for a comfortable retirement, so it works best alongside workplace and personal pensions. The &quot;triple lock&quot; currently raises it each year by the highest of inflation, average earnings growth or 2.5%, helping it keep pace. Use it as the secure base and build private pension savings on top.</p>
@@ -94,14 +94,14 @@ export default function StatePension() {
             ['Assuming you&apos;ll get the full amount', 'Many people have gaps or were contracted out. Check your forecast rather than assuming.'],
             ['Missing NI credits while caring', 'Claim Child Benefit (even if opting out of payment) and carer&apos;s credits to protect your record.'],
             ['Leaving fillable gaps too late', 'Voluntary contributions have deadlines. Review your record well before State Pension age.'],
-            ['Treating it as enough on its own', 'It&apos;s a foundation — build a workplace or personal pension on top.'],
+            ['Treating it as enough on its own', 'It&apos;s a foundation, build a workplace or personal pension on top.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How many years do I need for the full State Pension?', a: 'Usually 35 qualifying NI years for the full new State Pension, and at least 10 years to get any. Each year is worth about 1/35th of the full amount.' },
             { q: 'How much is the full State Pension?', a: '£230.25 a week (about £11,973 a year) in 2025/26 for the new State Pension. It&apos;s paid every four weeks.' },
-            { q: 'Can I increase my State Pension?', a: 'Yes — fill NI gaps with voluntary contributions, claim credits you&apos;re entitled to, or defer taking it to increase the weekly amount.' },
+            { q: 'Can I increase my State Pension?', a: 'Yes, fill NI gaps with voluntary contributions, claim credits you&apos;re entitled to, or defer taking it to increase the weekly amount.' },
             { q: 'What is the State Pension age?', a: 'Currently 66, rising to 67 between 2026 and 2028, then to 68. Check your exact date on GOV.UK.' },
           ]} />
         </GuideSection>

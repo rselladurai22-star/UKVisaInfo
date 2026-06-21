@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import type { ComponentType } from 'react';
 
-/* Deterministic hash from a string — stable across renders/SSR. */
+/* Deterministic hash from a string, stable across renders/SSR. */
 function hashStr(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
@@ -42,7 +42,7 @@ const CUSTOM_THUMBS = new Set([
 
 /**
  * Blog card thumbnail. Renders the post's real (AI-generated) image when one
- * is available — an explicit `image` override, a custom post thumbnail, or a 
+ * is available, an explicit `image` override, a custom post thumbnail, or a 
  * category pool image. Falls back to a generated SVG illustration if none exists.
  */
 export default function BlogThumb({

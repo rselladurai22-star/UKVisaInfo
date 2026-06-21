@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'UKDesk — Free UK Calculators, Lookups & Guides';
+export const alt = 'UKDesk, Free UK Calculators, Lookups & Guides';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -83,7 +83,7 @@ export default function OgImage() {
           color: 'rgba(255,255,255,0.75)', fontSize: 24,
           fontWeight: 400, lineHeight: 1.4, maxWidth: 760, marginBottom: 40,
         }}>
-          Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route — verified against gov.uk, HMRC and ONS.
+          Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route, verified against gov.uk, HMRC and ONS.
         </div>
 
         {/* Trust badges */}

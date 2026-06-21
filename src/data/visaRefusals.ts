@@ -1,5 +1,5 @@
 /**
- * Top-5 refusal reasons per visa route — curated from Home Office decision-letter
+ * Top-5 refusal reasons per visa route, curated from Home Office decision-letter
  * patterns and gov.uk guidance. Each item cites the gov.uk rule it derives from.
  *
  * Pattern: every visa lists the 5 grounds that account for the bulk of
@@ -13,9 +13,9 @@ export interface RefusalReason {
   id: string;
   /** Single short title (≤ 70 chars). */
   title: string;
-  /** One-line cause — what the Home Office found. */
+  /** One-line cause, what the Home Office found. */
   cause: string;
-  /** One-line fix — what to do before applying. */
+  /** One-line fix, what to do before applying. */
   fix: string;
   /** gov.uk URL the rule is taken from. */
   source: string;
@@ -61,7 +61,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'maintenance',
       title: 'Maintenance funds (£1,270) not held for 28 days',
       cause: 'Bank balance dipped below £1,270 during the 28-day window, OR sponsor did not tick the maintenance certification on the CoS.',
-      fix: 'Hold £1,270 in a single account for 28 consecutive days, dated within 31 days of applying — OR ask the sponsor to certify maintenance.',
+      fix: 'Hold £1,270 in a single account for 28 consecutive days, dated within 31 days of applying, OR ask the sponsor to certify maintenance.',
       source: 'https://www.gov.uk/government/publications/points-based-system-appendix-finance',
       sourceLabel: 'gov.uk Appendix Finance',
     },
@@ -114,7 +114,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     {
       id: 'genuine-visitor',
       title: 'Genuine visitor test failed (not satisfied you will leave)',
-      cause: 'Caseworker not satisfied applicant will leave at the end of the visit — weak ties to home country, history of long UK stays.',
+      cause: 'Caseworker not satisfied applicant will leave at the end of the visit, weak ties to home country, history of long UK stays.',
       fix: 'Provide strong home-country ties: employer letter, property, dependants, and a clear, dated travel plan with return flight.',
       source: 'https://www.gov.uk/government/publications/visit-guidance',
       sourceLabel: 'gov.uk Visit visa guidance',
@@ -147,7 +147,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'prior-refusal',
       title: 'Undisclosed prior visa refusal',
       cause: 'Previous UK or other-country visa refusal not declared, or earlier breach of immigration rules not addressed.',
-      fix: 'Declare every refusal honestly with the date, country and reason — non-disclosure is treated as deception (refusal 9.7.1).',
+      fix: 'Declare every refusal honestly with the date, country and reason, non-disclosure is treated as deception (refusal 9.7.1).',
       source: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal',
       sourceLabel: 'Immigration Rules Part 9 grounds for refusal',
     },
@@ -188,7 +188,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     },
     {
       id: 'suitability-grounds',
-      title: 'Suitability — overstay, deception or unpaid NHS debt',
+      title: 'Suitability, overstay, deception or unpaid NHS debt',
       cause: 'Previous overstay, false document on a prior application, or unpaid NHS debt over £500.',
       fix: 'Clear NHS debt and address any prior breach in a covering letter; full disclosure is essential under Part 9 rules.',
       source: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal',
@@ -225,7 +225,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'english-health',
       title: 'English language B1 / OET not at required level',
       cause: 'No B1 evidence (or OET for medical roles), or sponsor did not confirm internal English assessment on the CoS.',
-      fix: 'Book OET / IELTS UKVI at the level required for your role — most clinical roles require higher than B1.',
+      fix: 'Book OET / IELTS UKVI at the level required for your role, most clinical roles require higher than B1.',
       source: 'https://www.gov.uk/health-care-worker-visa/knowledge-of-english',
       sourceLabel: 'gov.uk health-care-worker-visa knowledge-of-english',
     },
@@ -260,7 +260,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'endorsement-expired',
       title: 'Endorsement-to-visa window exceeded',
       cause: 'Visa application submitted more than 3 months after the endorsement decision.',
-      fix: 'Apply for the visa within 3 months of receiving the endorsement letter — set a calendar reminder.',
+      fix: 'Apply for the visa within 3 months of receiving the endorsement letter, set a calendar reminder.',
       source: 'https://www.gov.uk/global-talent/apply',
       sourceLabel: 'gov.uk/global-talent/apply',
     },
@@ -287,7 +287,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'student-leave',
       title: 'Student visa already expired when applied',
       cause: 'Graduate visa application submitted after the Student visa\'s expiry date.',
-      fix: 'Apply before the Student visa expires — the graduation date is not the relevant deadline.',
+      fix: 'Apply before the Student visa expires, the graduation date is not the relevant deadline.',
       source: 'https://www.gov.uk/graduate-visa',
       sourceLabel: 'gov.uk/graduate-visa',
     },
@@ -303,7 +303,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'non-track-record',
       title: 'Course was at a non-track-record sponsor',
       cause: 'Awarding institution is not on the Student-route track-record list at the date of application.',
-      fix: 'Confirm the sponsor\'s track-record status before applying — only HEPs with a track record can sponsor Graduate route.',
+      fix: 'Confirm the sponsor\'s track-record status before applying, only HEPs with a track record can sponsor Graduate route.',
       source: 'https://www.gov.uk/government/publications/register-of-licensed-sponsors-students',
       sourceLabel: 'gov.uk licensed student sponsors',
     },
@@ -319,7 +319,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'previous-grad',
       title: 'Previously held a Graduate or Doctorate Extension visa',
       cause: 'Applicant has already held a Graduate visa or Doctorate Extension Scheme leave (single-grant route).',
-      fix: 'The Graduate route is single-grant — switch to Skilled Worker instead if you need to extend after a previous Graduate visa.',
+      fix: 'The Graduate route is single-grant, switch to Skilled Worker instead if you need to extend after a previous Graduate visa.',
       source: 'https://www.gov.uk/graduate-visa',
       sourceLabel: 'gov.uk/graduate-visa',
     },
@@ -354,7 +354,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'endorsement-3m',
       title: 'Endorsement-to-visa window exceeded',
       cause: 'Visa application submitted more than 3 months after the endorsement letter was issued.',
-      fix: 'Submit the visa application within 3 months of the endorsement letter — start documents in parallel.',
+      fix: 'Submit the visa application within 3 months of the endorsement letter, start documents in parallel.',
       source: 'https://www.gov.uk/innovator-founder-visa/apply',
       sourceLabel: 'gov.uk/innovator-founder-visa/apply',
     },
@@ -373,7 +373,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'absences-180',
       title: 'Absences exceeded 180 days in a rolling 12 months',
       cause: 'More than 180 days outside the UK in any rolling 12-month period across the qualifying 5 years.',
-      fix: 'Spreadsheet every UK departure date and total rolling-12-month absences — apply only when every window is under 180.',
+      fix: 'Spreadsheet every UK departure date and total rolling-12-month absences, apply only when every window is under 180.',
       source: 'https://www.gov.uk/indefinite-leave-to-remain/eligibility',
       sourceLabel: 'gov.uk/indefinite-leave-to-remain/eligibility',
     },
@@ -424,7 +424,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'absences-citizen',
       title: 'Absences exceeded the allowable totals',
       cause: 'More than 450 days absent in 5 years (270 on spouse route), or more than 90 days in the final 12 months.',
-      fix: 'Defer applying until your absence totals fall under the limits — there is no discretion below the threshold.',
+      fix: 'Defer applying until your absence totals fall under the limits, there is no discretion below the threshold.',
       source: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain/check-if-you-can-apply',
       sourceLabel: 'gov.uk/apply-citizenship-indefinite-leave-to-remain',
     },
@@ -432,7 +432,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'litu-citizen',
       title: 'Life in the UK Test or B1 English not evidenced',
       cause: 'LITU pass or B1+ evidence missing; previous ILR pass not re-uploaded with the AN.',
-      fix: 'Re-upload the LITU certificate and English evidence with Form AN — pass certificates do carry across.',
+      fix: 'Re-upload the LITU certificate and English evidence with Form AN, pass certificates do carry across.',
       source: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain/knowledge-of-english-and-life-in-the-uk',
       sourceLabel: 'gov.uk citizenship knowledge-of-english',
     },
@@ -509,7 +509,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     {
       id: 'tb-bno',
       title: 'TB test certificate missing',
-      cause: 'Required TB certificate not uploaded — applies to applicants in Hong Kong and a number of third countries.',
+      cause: 'Required TB certificate not uploaded, applies to applicants in Hong Kong and a number of third countries.',
       fix: 'Book a TB test at an IOM-approved clinic; certificate is valid for 6 months.',
       source: 'https://www.gov.uk/tb-test-visa',
       sourceLabel: 'gov.uk/tb-test-visa',
@@ -532,7 +532,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     },
     {
       id: 'suitability-bno',
-      title: 'Suitability — criminal record or NHS debt',
+      title: 'Suitability, criminal record or NHS debt',
       cause: 'Unspent convictions, deception in a prior application, or unpaid NHS debt over £500.',
       fix: 'Clear NHS debt and disclose every conviction with full dates and outcomes in the application.',
       source: 'https://www.gov.uk/guidance/immigration-rules/immigration-rules-part-9-grounds-for-refusal',
@@ -545,7 +545,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'continuous-broken',
       title: '10 years continuous lawful residence broken',
       cause: 'Single absence over 184 days, total absences over 548 days in 10 years, or a period without valid leave.',
-      fix: 'Build a day-by-day absence ledger from BRPs and passports — apply only if every window is under the limits.',
+      fix: 'Build a day-by-day absence ledger from BRPs and passports, apply only if every window is under the limits.',
       source: 'https://www.gov.uk/long-residence/eligibility',
       sourceLabel: 'gov.uk/long-residence/eligibility',
     },
@@ -553,7 +553,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
       id: 'overstay-28',
       title: 'Past overstay broke continuous residence',
       cause: 'A previous overstay of more than 14 days (post-2012) without a valid reason broke the 10-year clock.',
-      fix: 'Long Residence may no longer apply — consider a Skilled Worker / Family route instead and seek legal advice.',
+      fix: 'Long Residence may no longer apply, consider a Skilled Worker / Family route instead and seek legal advice.',
       source: 'https://www.gov.uk/long-residence',
       sourceLabel: 'gov.uk/long-residence',
     },
@@ -575,7 +575,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     },
     {
       id: 'character-lr',
-      title: 'Good character — criminal record or tax discrepancy',
+      title: 'Good character, criminal record or tax discrepancy',
       cause: 'Unspent convictions, deception, or HMRC records inconsistent with declared salaries on prior visas.',
       fix: 'Reconcile tax records, clear any debt, and disclose every event with dates and evidence.',
       source: 'https://www.gov.uk/government/publications/good-character-nationality-policy-guidance',
@@ -603,7 +603,7 @@ export const VISA_REFUSALS: Record<string, RefusalReason[]> = {
     {
       id: 'intent-work',
       title: 'Intention and ability to work in the UK not shown',
-      cause: 'No CV, no job-search evidence, no funds to support a job search — caseworker not satisfied of intent to work.',
+      cause: 'No CV, no job-search evidence, no funds to support a job search, caseworker not satisfied of intent to work.',
       fix: 'Submit a CV, evidence of UK job applications or offers, and savings supporting a job-search period.',
       source: 'https://www.gov.uk/ancestry-visa/eligibility',
       sourceLabel: 'gov.uk/ancestry-visa/eligibility',

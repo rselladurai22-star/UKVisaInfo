@@ -1,5 +1,5 @@
 /**
- * Visa-route variants — gov.uk-verified sub-routes within each top-level
+ * Visa-route variants, gov.uk-verified sub-routes within each top-level
  * visa category. Each variant carries a self-contained set of fees,
  * eligibility differentiators and citations.
  *
@@ -44,7 +44,7 @@ export interface VisaWithVariants {
 }
 
 /* ─────────────────────────────────────────────
-   SKILLED WORKER — verified 8 April 2026
+   SKILLED WORKER, verified 8 April 2026
    gov.uk/skilled-worker-visa/when-you-can-be-paid-less
 ─────────────────────────────────────────────── */
 export const SKILLED_WORKER_VARIANTS: VisaVariant[] = [
@@ -60,7 +60,7 @@ export const SKILLED_WORKER_VARIANTS: VisaVariant[] = [
     yearsToIlr: 5,
     yearsToCitizenship: 1,
     eligibilityHighlights: [
-      'Standard Skilled Worker — meet £41,700 or the going rate, whichever is higher',
+      'Standard Skilled Worker, meet £41,700 or the going rate, whichever is higher',
       'RQF Level 6 (graduate-level) skill, B2 English, £1,270 maintenance funds',
     ],
     source: 'https://www.gov.uk/skilled-worker-visa/your-job',
@@ -164,7 +164,7 @@ export const SKILLED_WORKER_VARIANTS: VisaVariant[] = [
 ];
 
 /* ─────────────────────────────────────────────
-   BRITISH CITIZENSHIP — verified 8 April 2026
+   BRITISH CITIZENSHIP, verified 8 April 2026
 ─────────────────────────────────────────────── */
 export const CITIZENSHIP_VARIANTS: VisaVariant[] = [
   {
@@ -198,7 +198,7 @@ export const CITIZENSHIP_VARIANTS: VisaVariant[] = [
       'Max 90 days absent in last 12 months · B1 English + LITUK',
     ],
     notes: [
-      'Form AN — same form as standard, with spouse-route declaration.',
+      'Form AN, same form as standard, with spouse-route declaration.',
       'Apply the moment ILR is granted if married 3+ years and resident 3+ years.',
     ],
     source: 'https://www.gov.uk/apply-citizenship-spouse/eligibility-and-fees',
@@ -216,7 +216,7 @@ export const CITIZENSHIP_VARIANTS: VisaVariant[] = [
       'OR child born in UK to parent who later became British/settled',
     ],
     notes: [
-      'Children of British / settled parents born in the UK are usually British automatically — check before paying for MN1.',
+      'Children of British / settled parents born in the UK are usually British automatically, check before paying for MN1.',
       'No ceremony required for under-18s.',
     ],
     source: 'https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026',
@@ -224,16 +224,16 @@ export const CITIZENSHIP_VARIANTS: VisaVariant[] = [
   {
     id: 'descent',
     label: 'British by descent',
-    headline: 'Free · automatic — apply for passport only',
+    headline: 'Free · automatic, apply for passport only',
     feeAmount: 0,
-    fee: 'Free (no application — apply for passport only)',
+    fee: 'Free (no application, apply for passport only)',
     yearsToCitizenship: 0,
     eligibilityHighlights: [
       'At least one parent is a British citizen by birth (not by descent)',
       'Born outside the UK',
     ],
     notes: [
-      'No application or registration needed — you are British automatically.',
+      'No application or registration needed, you are British automatically.',
       'Apply for a British passport directly: £94.50 adult standard.',
       'Cannot pass British citizenship to your own children born outside the UK (no double descent).',
     ],
@@ -242,7 +242,7 @@ export const CITIZENSHIP_VARIANTS: VisaVariant[] = [
 ];
 
 /* ─────────────────────────────────────────────
-   ILR — settlement family with sub-routes
+   ILR, settlement family with sub-routes
 ─────────────────────────────────────────────── */
 export const ILR_VARIANTS: VisaVariant[] = [
   {
@@ -358,7 +358,7 @@ export const ILR_VARIANTS: VisaVariant[] = [
 ];
 
 /* ─────────────────────────────────────────────
-   FAMILY VISA — Appendix FM sub-routes
+   FAMILY VISA, Appendix FM sub-routes
 ─────────────────────────────────────────────── */
 export const FAMILY_VARIANTS: VisaVariant[] = [
   {
@@ -377,7 +377,7 @@ export const FAMILY_VARIANTS: VisaVariant[] = [
       '£29,000 minimum income (gross, sole sponsor) OR £88,500 cash savings',
       'A1 initial → A2 extension → B1 settlement English',
     ],
-    notes: ['Spouse route to citizenship — apply same day as ILR is granted.'],
+    notes: ['Spouse route to citizenship, apply same day as ILR is granted.'],
     source: 'https://www.gov.uk/uk-family-visa/apply-partner-spouse',
   },
   {
@@ -416,9 +416,9 @@ export const FAMILY_VARIANTS: VisaVariant[] = [
     label: 'Adult Dependent Relative',
     headline: '£3,672 · ILR on entry · high bar',
     feeAmount: 3672,
-    fee: '£3,672 (out only — no extension route)',
+    fee: '£3,672 (out only, no extension route)',
     ihsAdult: 1035,
-    duration: 'Settlement on entry — granted indefinite leave',
+    duration: 'Settlement on entry, granted indefinite leave',
     yearsToIlr: 0,
     yearsToCitizenship: 1,
     eligibilityHighlights: [
@@ -427,7 +427,7 @@ export const FAMILY_VARIANTS: VisaVariant[] = [
       'Sponsor must demonstrate ability to maintain and accommodate without public funds',
     ],
     notes: [
-      'Very high evidence threshold — most ADR applications are refused.',
+      'Very high evidence threshold, most ADR applications are refused.',
       'Apply only from outside the UK. No extension; granted ILR immediately if successful.',
     ],
     source: 'https://www.gov.uk/uk-family-visa',
@@ -438,18 +438,18 @@ export const FAMILY_VARIANTS: VisaVariant[] = [
     headline: '£2,064 · 6 months to marry · switch to partner',
     feeAmount: 2064,
     fee: '£2,064 (out)',
-    duration: '6 months — must marry and switch to partner visa',
+    duration: '6 months, must marry and switch to partner visa',
     eligibilityHighlights: [
       'Intending to marry / form civil partnership with a British / settled person',
       'Same £29,000 financial requirement applies',
-      'Cannot work on fiancé(e) visa — switch to partner route after marriage',
+      'Cannot work on fiancé(e) visa, switch to partner route after marriage',
     ],
     source: 'https://www.gov.uk/uk-family-visa',
   },
 ];
 
 /* ─────────────────────────────────────────────
-   VISITOR — visit + ETA + long-term variants
+   VISITOR, visit + ETA + long-term variants
 ─────────────────────────────────────────────── */
 export const VISITOR_VARIANTS: VisaVariant[] = [
   {
@@ -476,13 +476,13 @@ export const VISITOR_VARIANTS: VisaVariant[] = [
     eligibilityHighlights: [
       'Citizens of USA, Canada, Australia, EU/EEA, Switzerland and other visa-exempt nationals',
       'Must apply BEFORE travelling',
-      'Not a visa — does not guarantee entry',
+      'Not a visa, does not guarantee entry',
     ],
     source: 'https://www.gov.uk/get-eta',
   },
   {
     id: 'long-term-2',
-    label: 'Long-term Visitor — 2 years',
+    label: 'Long-term Visitor, 2 years',
     headline: '£475 · multiple visits over 2 years',
     feeAmount: 475,
     fee: '£475',
@@ -496,7 +496,7 @@ export const VISITOR_VARIANTS: VisaVariant[] = [
   },
   {
     id: 'long-term-5',
-    label: 'Long-term Visitor — 5 years',
+    label: 'Long-term Visitor, 5 years',
     headline: '£848 · multiple visits over 5 years',
     feeAmount: 848,
     fee: '£848',
@@ -508,7 +508,7 @@ export const VISITOR_VARIANTS: VisaVariant[] = [
   },
   {
     id: 'long-term-10',
-    label: 'Long-term Visitor — 10 years',
+    label: 'Long-term Visitor, 10 years',
     headline: '£1,059 · multiple visits over 10 years',
     feeAmount: 1059,
     fee: '£1,059',
@@ -528,7 +528,7 @@ export const VISITOR_VARIANTS: VisaVariant[] = [
     duration: 'Up to 6 months',
     eligibilityHighlights: [
       'Coming to UK to marry or form a civil partnership',
-      'Must leave the UK afterwards — cannot switch to family visa on this route',
+      'Must leave the UK afterwards, cannot switch to family visa on this route',
     ],
     notes: ['Switch to fiancé(e) visa BEFORE travelling if you intend to stay in the UK after marriage.'],
     source: 'https://www.gov.uk/marriage-visa',

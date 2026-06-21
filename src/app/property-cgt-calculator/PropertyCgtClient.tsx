@@ -41,14 +41,14 @@ export default function PropertyCgtClient() {
 
       <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
         <ResultBox label="Total gain" value={fmtGBP(r.gain)} muted />
-        <ResultBox label="PPR relief" value={`–${fmtGBP(r.pprRelief)}`} accent="#15803d" sub={`${Math.round(r.pprPct * 100)}% of ownership`} />
+        <ResultBox label="PPR relief" value={`, ${fmtGBP(r.pprRelief)}`} accent="#15803d" sub={`${Math.round(r.pprPct * 100)}% of ownership`} />
         <ResultBox label="Taxable gain" value={fmtGBP(r.taxableGain)} />
         <ResultBox label="Capital Gains Tax" value={fmtGBP(r.totalCgt)} primary />
       </div>
 
       <div className="mt-5 pt-5 border-t border-[#E5E7EB] space-y-2 text-[13px]">
         <Row label="Gain after PPR" value={fmtGBP(r.gainAfterPpr)} />
-        <Row label="Annual Exempt Amount" value={`–${fmtGBP(r.annualExemptAmount)}`} muted />
+        <Row label="Annual Exempt Amount" value={`, ${fmtGBP(r.annualExemptAmount)}`} muted />
         <Row label="Taxable gain" value={fmtGBP(r.taxableGain)} />
         {r.basicRateTax > 0 && <Row label="CGT at 18% (basic rate)" value={fmtGBP(r.basicRateTax)} muted />}
         {r.higherRateTax > 0 && <Row label="CGT at 24% (higher rate)" value={fmtGBP(r.higherRateTax)} muted />}

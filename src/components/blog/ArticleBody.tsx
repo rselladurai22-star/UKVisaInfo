@@ -13,6 +13,10 @@ import FaqAccordion from './blocks/FaqAccordion';
 import PullQuote from './blocks/PullQuote';
 import KeyTakeaways from './blocks/KeyTakeaways';
 import BarChart from './blocks/BarChart';
+import LineChart from './blocks/LineChart';
+import DonutChart from './blocks/DonutChart';
+import FlowDiagram from './blocks/FlowDiagram';
+import Figure from './blocks/Figure';
 import GlossaryTerm from '../GlossaryTerm';
 import { GLOSSARY } from '../../data/glossary';
 
@@ -84,12 +88,20 @@ export default function ArticleBody({ body, articleSlug }: Props) {
             return <Reveal key={i}><KeyTakeaways title={seg.title} items={seg.items} /></Reveal>;
           case 'bars':
             return <Reveal key={i}><BarChart title={seg.title} items={seg.items} /></Reveal>;
+          case 'line':
+            return <Reveal key={i}><LineChart title={seg.title} items={seg.items} /></Reveal>;
+          case 'donut':
+            return <Reveal key={i}><DonutChart title={seg.title} items={seg.items} /></Reveal>;
+          case 'flow':
+            return <Reveal key={i}><FlowDiagram title={seg.title} items={seg.items} /></Reveal>;
+          case 'image':
+            return <Reveal key={i}><Figure src={seg.src} alt={seg.alt} caption={seg.caption} width={seg.width} height={seg.height} /></Reveal>;
           default:
             return null;
         }
       })}
 
-      {/* Scoped reading-experience polish — flagship (Clean Slate) typography */}
+      {/* Scoped reading-experience polish, flagship (Clean Slate) typography */}
       <style>{`
         .article-body h2,
         .article-body h3,
@@ -99,7 +111,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
         }
         .article-body p { text-wrap: pretty; }
 
-        /* Unordered list — blue dot */
+        /* Unordered list, blue dot */
         .article-body .md-ul { list-style: none; padding-left: 0; }
         .article-body .md-ul > li { position: relative; padding-left: 1.6rem; }
         .article-body .md-ul > li::before {
@@ -108,7 +120,7 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           background: #2563eb;
         }
 
-        /* Ordered list — numbered slate badge */
+        /* Ordered list, numbered slate badge */
         .article-body .md-ol { list-style: none; counter-reset: li; padding-left: 0; }
         .article-body .md-ol > li { position: relative; padding-left: 2.5rem; counter-increment: li; }
         .article-body .md-ol > li::before {
@@ -120,20 +132,47 @@ export default function ArticleBody({ body, articleSlug }: Props) {
           font-family: var(--font-mono), monospace;
         }
 
-        /* Tables — flagship rounded card + blue row hover */
+        /* Tables, premium card: layered shadow, sticky-feel header,
+           zebra rows, first-column emphasis, smooth hover + scroll hint */
         .article-body .md-table-wrap {
+          box-shadow:
+            0 1px 2px rgba(15, 23, 42, 0.04),
+            0 12px 28px -16px rgba(15, 23, 42, 0.18);
           background:
             linear-gradient(to right, #ffffff 30%, rgba(255,255,255,0)) left center,
             linear-gradient(to left, #ffffff 30%, rgba(255,255,255,0)) right center,
-            radial-gradient(farthest-side at 0 50%, rgba(15,23,42,0.12), rgba(15,23,42,0)) left center,
-            radial-gradient(farthest-side at 100% 50%, rgba(15,23,42,0.12), rgba(15,23,42,0)) right center;
+            radial-gradient(farthest-side at 0 50%, rgba(15,23,42,0.10), rgba(15,23,42,0)) left center,
+            radial-gradient(farthest-side at 100% 50%, rgba(15,23,42,0.10), rgba(15,23,42,0)) right center;
           background-repeat: no-repeat;
           background-size: 42px 100%, 42px 100%, 16px 100%, 16px 100%;
           background-attachment: local, local, scroll, scroll;
           -webkit-overflow-scrolling: touch;
         }
-        .article-body table tbody tr { transition: background-color .15s ease; }
-        .article-body table tbody tr:hover { background: #eff6ff; }
+        .article-body .md-table { border-spacing: 0; }
+
+        /* Header, soft gradient, hairline accent under it */
+        .article-body .md-table thead th {
+          background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+          border-bottom: 1px solid #e2e8f0;
+          box-shadow: inset 0 -1px 0 rgba(37, 99, 235, 0.16);
+        }
+        .article-body .md-table thead th:first-child { border-top-left-radius: 14px; }
+        .article-body .md-table thead th:last-child  { border-top-right-radius: 14px; }
+
+        /* Body rows, zebra, hairline dividers, smooth hover */
+        .article-body .md-table tbody tr { transition: background-color .15s ease; }
+        .article-body .md-table tbody tr:nth-child(even) { background: #fafbfc; }
+        .article-body .md-table tbody td { border-top: 1px solid #eef2f7; }
+        .article-body .md-table tbody tr:first-child td { border-top: 0; }
+        .article-body .md-table tbody tr:hover { background: #eff6ff; }
+
+        /* First column carries the row label, give it weight */
+        .article-body .md-table tbody td:first-child {
+          font-weight: 600;
+          color: #0f172a;
+        }
+        /* Emphasised (bold) cells, e.g. "Total" rows, read as the key figure */
+        .article-body .md-table tbody td strong { color: #1d4ed8; }
       `}</style>
     </div>
   );
@@ -203,20 +242,18 @@ function MarkdownChunk({ content }: { content: string }) {
           <em className="italic text-slate-600">{children}</em>
         ),
         table: ({ children }) => (
-          <div className="md-table-wrap my-8 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-slate-200 shadow-cs">
-            <table className="w-full min-w-[34rem] border-collapse text-[14px]">{children}</table>
+          <div className="md-table-wrap my-8 -mx-3 sm:mx-0 overflow-x-auto rounded-2xl border border-slate-200/80 bg-white">
+            <table className="md-table w-full min-w-[34rem] border-collapse text-[14px]">{children}</table>
           </div>
         ),
-        thead: ({ children }) => (
-          <thead className="bg-slate-100 text-left">{children}</thead>
-        ),
+        thead: ({ children }) => <thead>{children}</thead>,
         th: ({ children }) => (
-          <th className="text-left px-3 sm:px-4 py-3 font-semibold text-slate-700 text-[11px] sm:text-[12px] uppercase tracking-[0.06em] whitespace-nowrap">
+          <th className="px-4 py-3.5 text-left font-bold text-slate-500 text-[11px] uppercase tracking-[0.08em] whitespace-nowrap">
             {children}
           </th>
         ),
         td: ({ children }) => (
-          <td className="px-3 sm:px-4 py-2.5 sm:py-3 border-t border-slate-100 text-slate-600 text-[0.8125rem] sm:text-[0.9375rem] leading-relaxed tabular-nums">
+          <td className="px-4 py-3 text-slate-600 text-[0.875rem] sm:text-[0.9375rem] leading-relaxed tabular-nums">
             {children}
           </td>
         ),

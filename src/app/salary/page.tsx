@@ -5,7 +5,7 @@ import { SOC_OCCUPATIONS, SOC_GROUPS } from '../../data/socCodes';
 import { socSlug } from '../../lib/slug';
 
 export const metadata: Metadata = {
-  title: 'UK Skilled Worker Salary by SOC Code 2026 — All 270 Occupations',
+  title: 'UK Skilled Worker Salary by SOC Code 2026, All 270 Occupations',
   description: 'Complete index of UK Skilled Worker visa going rates for every SOC 2020 occupation code. Standard rate, hourly equivalent, new-entrant discount and Immigration Salary List status.',
   alternates: { canonical: '/salary' },
 };
@@ -38,7 +38,7 @@ export default function SalaryIndex() {
             <span className="text-white/55">All 270 SOC 2020 codes · 2026 rates.</span>
           </h1>
           <p className="mt-4 max-w-2xl text-white/55 text-base md:text-[1.0625rem] leading-relaxed">
-            Every eligible occupation, its going rate, hourly equivalent and discount tiers — sourced from the Home Office Appendix Skilled Occupations.
+            Every eligible occupation, its going rate, hourly equivalent and discount tiers, sourced from the Home Office Appendix Skilled Occupations.
           </p>
           <div className="mt-7">
             <Link
@@ -80,7 +80,7 @@ export default function SalaryIndex() {
                             {occ.title}
                           </div>
                           <div className="text-[11.5px] text-[#7a8195] tabular-nums mt-0.5">
-                            £{occ.goingRate.toLocaleString()} · £{occ.hourlyGoingRate?.toFixed(2) ?? '—'}/hr
+                            £{occ.goingRate.toLocaleString()} · £{occ.hourlyGoingRate?.toFixed(2) ?? ', '}/hr
                           </div>
                         </div>
                         <ArrowRight className="w-3.5 h-3.5 text-[#cfd5e0] mt-1 flex-shrink-0" />

@@ -13,7 +13,7 @@ const MUTED   = '#6B7280';
 const HAIR    = 'rgba(11,15,25,0.08)';
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy — How UKDesk Researches & Verifies',
+  title: 'Editorial Policy, How UKDesk Researches & Verifies',
   description:
     'How UKDesk produces and verifies content: source-first sourcing from gov.uk / HMRC / ONS, named editor, update cadence, correction policy, and conflict of interest disclosure.',
   alternates: { canonical: '/editorial-policy' },
@@ -39,7 +39,7 @@ export default function EditorialPolicyPage() {
         </h1>
         <p className="text-[16.5px] leading-[1.6] mb-12" style={{ color: SLATE }}>
           Last reviewed 19 May 2026. This policy explains exactly how every figure
-          and every claim on UKDesk is sourced, checked and updated — so you can
+          and every claim on UKDesk is sourced, checked and updated, so you can
           decide how much to trust us.
         </p>
 
@@ -54,7 +54,7 @@ export default function EditorialPolicyPage() {
             </span>
             <div>
               <p className="text-[15.5px] font-semibold" style={{ color: INK }}>
-                {e.name} — {e.role}
+                {e.name}, {e.role}
               </p>
               <p className="mt-1.5 text-[13.5px] leading-[1.6]" style={{ color: SLATE }}>
                 {e.bio}
@@ -69,7 +69,7 @@ export default function EditorialPolicyPage() {
           <p style={p()}>
             UKDesk does not republish anonymous AI-generated content. Every article
             is written by the named editor above, who is personally accountable
-            for accuracy. Corrections can be requested at any time —{' '}
+            for accuracy. Corrections can be requested at any time, {' '}
             <a href={`mailto:${e.email}`} className="underline font-semibold" style={{ color: INK }}>
               {e.email}
             </a>.
@@ -87,7 +87,7 @@ export default function EditorialPolicyPage() {
             <SourceRow href="https://www.gov.uk/government/publications/visa-regulations-revised-table/home-office-immigration-and-nationality-fees-8-april-2026"
                        label="Home Office visa &amp; nationality fee table" sub="UKDesk's primary source for every visa fee on the site." />
             <SourceRow href="https://www.gov.uk/browse/visas-immigration"
-                       label="gov.uk — Visas and Immigration"  sub="Eligibility, document checklists, application steps." />
+                       label="gov.uk, Visas and Immigration"  sub="Eligibility, document checklists, application steps." />
             <SourceRow href="https://www.gov.uk/government/organisations/hm-revenue-customs"
                        label="HM Revenue &amp; Customs (HMRC)"     sub="PAYE rates, NI thresholds, tax codes, SDLT, CGT, IHT." />
             <SourceRow href="https://www.ons.gov.uk/"
@@ -108,21 +108,21 @@ export default function EditorialPolicyPage() {
         <Section icon={CheckCircle2} eyebrow="03" title="How each article is verified">
           <ol className="space-y-4">
             <Step n={1} title="Read the gov.uk source end-to-end">
-              For each visa or rule, the relevant gov.uk pages are read in full —
+              For each visa or rule, the relevant gov.uk pages are read in full, 
               not summarised by an AI. Footnotes and appendices count.
             </Step>
             <Step n={2} title="Cross-check every figure against a second page">
               Headline fees are confirmed against both the visa-route page and the
-              master fee table. Mismatches between gov.uk pages do happen — the
+              master fee table. Mismatches between gov.uk pages do happen, the
               master table is treated as authoritative.
             </Step>
             <Step n={3} title="Compare against the previous published version">
               When a fee changes, we capture the old value, the new value, and the
-              effective date — and update the article&apos;s &ldquo;Last verified&rdquo; line.
+              effective date, and update the article&apos;s &ldquo;Last verified&rdquo; line.
             </Step>
             <Step n={4} title="Write in plain English (not a paraphrase of gov.uk)">
               Articles are rewritten from scratch with the applicant&apos;s decision
-              path in mind — what they need to know to decide if a route fits, in
+              path in mind, what they need to know to decide if a route fits, in
               what order, and what they have to do next.
             </Step>
             <Step n={5} title="Publish with a verification date">
@@ -162,13 +162,13 @@ export default function EditorialPolicyPage() {
         {/* CORRECTIONS */}
         <Section icon={AlertTriangle} eyebrow="05" title="Corrections policy">
           <p style={p()}>
-            If you find an error — outdated figure, broken citation, missing
-            requirement, anything — please email{' '}
+            If you find an error, outdated figure, broken citation, missing
+            requirement, anything, please email{' '}
             <a href={`mailto:${e.email}?subject=Correction`} className="underline font-semibold" style={{ color: INK }}>
               {e.email}
             </a>. Corrections are made within 48 hours of receipt for material
             errors (anything that could affect an application decision) and
-            within 7 days for minor issues. We do not silently edit — every
+            within 7 days for minor issues. We do not silently edit, every
             correction updates the &ldquo;Last verified&rdquo; line and is logged.
           </p>
         </Section>
@@ -187,7 +187,7 @@ export default function EditorialPolicyPage() {
             </Bullet>
             <Bullet>
               <strong style={{ color: INK }}>Affiliate links</strong> to specific
-              services applicants commonly need — English-language test bookings,
+              services applicants commonly need, English-language test bookings,
               international money transfer, document scanning. Affiliate links
               are marked accordingly and the editor only links to services
               personally tried or independently reviewed.
@@ -233,7 +233,7 @@ export default function EditorialPolicyPage() {
               {' · '}
               <a href="mailto:privacy@ukvisainfo.co.uk" className="underline font-semibold" style={{ color: INK }}>privacy@ukvisainfo.co.uk</a>
               {' · '}
-              Responses within 48 hours, Mon–Fri (UK time).
+              Responses within 48 hours, Mon, Fri (UK time).
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 /**
- * UK Self Assessment tax bill estimator — 2025/26.
+ * UK Self Assessment tax bill estimator, 2025/26.
  *
  * Source: gov.uk/self-assessment-tax-returns
  *

@@ -1,11 +1,11 @@
 /**
- * UK Student loan repayment calculator — 2026/27.
+ * UK Student loan repayment calculator, 2026/27.
  *
  * Source: gov.uk/repaying-your-student-loan/what-you-pay
  *         gov.uk/repaying-your-student-loan/when-your-loan-is-written-off
  *
  * Thresholds and rates per Department for Education / Student Loans Company
- * latest published values. Interest treatment is approximate — actual interest
+ * latest published values. Interest treatment is approximate, actual interest
  * is set monthly by SLC based on RPI / Bank rate, this uses a representative
  * mid-year figure for projection only.
  */
@@ -22,10 +22,10 @@ export interface PlanConfig {
   note: string;
 }
 
-/** Source: gov.uk/repaying-your-student-loan/what-you-pay — 2026/27 thresholds */
+/** Source: gov.uk/repaying-your-student-loan/what-you-pay, 2026/27 thresholds */
 export const PLANS: Record<Plan, PlanConfig> = {
   plan1:    { id: 'plan1', label: 'Plan 1 (England/Wales, started before Sep 2012)', threshold: 26065, rate: 0.09, writeOffYears: 25, defaultInterest: 0.0525, note: 'Interest is lower of RPI or Bank of England base rate + 1%.' },
-  plan2:    { id: 'plan2', label: 'Plan 2 (England/Wales, started Sep 2012 – Jul 2023)', threshold: 28470, rate: 0.09, writeOffYears: 30, defaultInterest: 0.0775, note: 'Interest slides from RPI (under threshold) to RPI+3% (£49,130+).' },
+  plan2:    { id: 'plan2', label: 'Plan 2 (England/Wales, started Sep 2012, Jul 2023)', threshold: 28470, rate: 0.09, writeOffYears: 30, defaultInterest: 0.0775, note: 'Interest slides from RPI (under threshold) to RPI+3% (£49,130+).' },
   plan4:    { id: 'plan4', label: 'Plan 4 (Scotland)', threshold: 32745, rate: 0.09, writeOffYears: 30, defaultInterest: 0.0525, note: 'Interest is lower of RPI or Bank of England base rate + 1%.' },
   plan5:    { id: 'plan5', label: 'Plan 5 (England, started Aug 2023 onwards)', threshold: 25000, rate: 0.09, writeOffYears: 40, defaultInterest: 0.044, note: 'Interest is RPI only (no real-rate premium).' },
   postgrad: { id: 'postgrad', label: 'Postgraduate Loan (Master\'s / Doctoral)', threshold: 21000, rate: 0.06, writeOffYears: 30, defaultInterest: 0.0775, note: 'Interest is RPI + 3%.' },

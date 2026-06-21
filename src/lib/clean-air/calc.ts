@@ -2,23 +2,23 @@
  * UK Clean Air Zone & ULEZ vehicle compliance.
  *
  * Compliance rule of thumb (cars and vans):
- *   – Petrol: Euro 4 or newer (typically first registered from Jan 2006)
- *   – Diesel: Euro 6 or newer (typically first registered from Sep 2015)
- *   – Pure electric / hydrogen: always compliant
- *   – Plug-in hybrid: passes if the combustion side meets the petrol/diesel rule
- *   – LPG / bi-fuel: treated as petrol for the test
+ *, Petrol: Euro 4 or newer (typically first registered from Jan 2006)
+ *, Diesel: Euro 6 or newer (typically first registered from Sep 2015)
+ *, Pure electric / hydrogen: always compliant
+ *, Plug-in hybrid: passes if the combustion side meets the petrol/diesel rule
+ *, LPG / bi-fuel: treated as petrol for the test
  *
  * Charges (non-compliant cars/vans, daily):
- *   – London ULEZ (Greater London, 24/7):     £12.50 cars · £12.50 vans
- *   – Birmingham CAZ class D:                  £8.00 cars · £8.00 vans
- *   – Bristol CAZ class D:                     £9.00 cars · £9.00 vans
- *   – Sheffield CAZ class C:                   vans £10, taxis £10 (cars exempt)
- *   – Tyneside CAZ (Newcastle/Gateshead) C:    vans £12.50, taxis £12.50 (cars exempt)
- *   – Bradford CAZ class C:                    vans/taxis/coaches (cars exempt)
- *   – Portsmouth CAZ class B:                  vans/taxis only (cars exempt)
- *   – Bath CAZ class C:                        vans £9 (cars exempt)
- *   – Scottish LEZs (Glasgow, Edinburgh,
- *     Aberdeen, Dundee — all classes incl. cars): £60 / £120 / £240 / £480
+ *, London ULEZ (Greater London, 24/7):     £12.50 cars · £12.50 vans
+ *, Birmingham CAZ class D:                  £8.00 cars · £8.00 vans
+ *, Bristol CAZ class D:                     £9.00 cars · £9.00 vans
+ *, Sheffield CAZ class C:                   vans £10, taxis £10 (cars exempt)
+ *, Tyneside CAZ (Newcastle/Gateshead) C:    vans £12.50, taxis £12.50 (cars exempt)
+ *, Bradford CAZ class C:                    vans/taxis/coaches (cars exempt)
+ *, Portsmouth CAZ class B:                  vans/taxis only (cars exempt)
+ *, Bath CAZ class C:                        vans £9 (cars exempt)
+ *, Scottish LEZs (Glasgow, Edinburgh,
+ *     Aberdeen, Dundee, all classes incl. cars): £60 / £120 / £240 / £480
  *     (penalty doubles on each subsequent same-month entry)
  *
  * Source: Transport for London ULEZ rules; gov.uk/clean-air-zones; relevant
@@ -31,7 +31,7 @@ export type VehicleClass = 'car' | 'van' | 'motorcycle';
 export interface CazInput {
   fuel: FuelType;
   vehicle: VehicleClass;
-  /** First registration date — YYYY format (year only is fine for the test) */
+  /** First registration date, YYYY format (year only is fine for the test) */
   firstRegYear: number;
   euroStandardOverride?: 1 | 2 | 3 | 4 | 5 | 6;
 }
@@ -96,7 +96,7 @@ export function checkCleanAir(input: CazInput): CazResult {
   // Cars are exempt from class B/C zones (Sheffield, Tyneside, Bath, Bradford, Portsmouth)
   if (input.vehicle === 'van' || input.vehicle === 'motorcycle') {
     zones.push(zoneRow('Sheffield CAZ C',   'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 10.0 : 0, 'vans/taxis only'));
-    zones.push(zoneRow('Tyneside CAZ C',    'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 12.5 : 0, 'Newcastle / Gateshead — vans/taxis only'));
+    zones.push(zoneRow('Tyneside CAZ C',    'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 12.5 : 0, 'Newcastle / Gateshead, vans/taxis only'));
     zones.push(zoneRow('Bath CAZ C',        'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 9.0  : 0));
     zones.push(zoneRow('Bradford CAZ C',    'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 9.0  : 0));
     zones.push(zoneRow('Portsmouth CAZ B',  'England', baselineCompliant, !baselineCompliant && input.vehicle === 'van' ? 10.0 : 0));

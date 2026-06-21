@@ -1,11 +1,11 @@
 /**
- * UK take-home pay calculator — tax year 2026/27.
+ * UK take-home pay calculator, tax year 2026/27.
  *
  * Thresholds and rates imported from src/lib/constants/tax-2026-27.ts
- * (single source of truth — updated annually in April).
+ * (single source of truth, updated annually in April).
  *
  * Note: Personal allowance tapers £1 for every £2 over £100k, fully
- * withdrawn by £125,140 — creating the "60% effective tax" trap.
+ * withdrawn by £125,140, creating the "60% effective tax" trap.
  * Scotland uses different income-tax bands (handled via `scotland`
  * input flag).
  */
@@ -29,13 +29,13 @@ export interface CalcInput {
   salary: number;
   /** Personal pension contribution as a percentage of salary (employee, pre-tax) */
   pensionPct: number;
-  /** Salary sacrifice — pre-tax/pre-NI deduction (e.g. cycle/EV scheme) */
+  /** Salary sacrifice, pre-tax/pre-NI deduction (e.g. cycle/EV scheme) */
   salarySacrifice: number;
   /** Student loan repayment plan */
   studentLoan: StudentLoanPlan;
   /** Apply Scottish income tax bands instead of rUK */
   scotland: boolean;
-  /** Age 55+ exempts from class 1 NI on employee earnings only marginally —
+  /** Age 55+ exempts from class 1 NI on employee earnings only marginally, 
    *  we ignore this rare edge for now; default false. */
   overStatePension?: boolean;
   /** Blind person's allowance / married couple's allowance not modelled here. */
@@ -69,7 +69,7 @@ export interface CalcResult {
   effectiveRate: number;
 }
 
-/* All constants imported from ../constants/tax-2026-27 — single source of truth. */
+/* All constants imported from ../constants/tax-2026-27, single source of truth. */
 const SL_PLANS = STUDENT_LOAN_PLANS;
 
 /** Personal allowance after high-income taper. */
@@ -151,7 +151,7 @@ export function calculateTakeHome(input: CalcInput): CalcResult {
   const totalDeductions = it.total + ni.total + sl + pensionContribution + sacrifice;
   const netAnnual = gross - totalDeductions;
 
-  // Marginal rate at current point — sum of rates active in the top slice
+  // Marginal rate at current point, sum of rates active in the top slice
   const lastIt = it.bands[it.bands.length - 1]?.rate ?? 0;
   const lastNi = ni.bands[ni.bands.length - 1]?.rate ?? 0;
   const lastSl = input.studentLoan !== 'none' && taxablePay >= SL_PLANS[input.studentLoan].threshold

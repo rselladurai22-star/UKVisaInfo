@@ -7,7 +7,7 @@
  * Rules (2026):
  * - To qualify the employee must be classed as an employee and earn an
  *   average of at least £125/week (Lower Earnings Limit, 2025/26).
- * - SSP is paid for "qualifying days" — usually the days you'd normally
+ * - SSP is paid for "qualifying days", usually the days you'd normally
  *   work. The first 3 qualifying days are "waiting days" and are NOT paid.
  * - Paid from the 4th qualifying day of sickness, up to a maximum of 28
  *   weeks.
@@ -25,7 +25,7 @@ export const RATES_TAX_YEAR = '2025/26';
 
 export interface CalcInput {
   averageWeeklyEarnings: number;
-  qualifyingDaysPerWeek: number;   // typically 5 for Mon–Fri
+  qualifyingDaysPerWeek: number;   // typically 5 for Mon, Fri
   sickDays: number;                 // total calendar sick days (continuous)
 }
 

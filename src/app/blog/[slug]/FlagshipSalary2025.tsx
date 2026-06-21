@@ -1,17 +1,16 @@
 /**
- * Flagship article — "UK Salary After Tax 2025/26".
+ * Flagship article, "UK Salary After Tax 2025/26".
  * 100% bespoke, magazine-grade layout. Does NOT use the legacy ArticleBody /
  * markdown-block system. Self-contained premium components, Clean Slate Blue.
  */
 
 import Link from 'next/link';
 import {
-  ArrowRight, ArrowUpRight, BadgeCheck, Calendar, CheckCircle2, Clock, Home,
-  ChevronRight, ChevronDown, AlertTriangle, Lightbulb, TrendingUp, Wallet, Calculator,
+  ArrowRight, CheckCircle2, ChevronRight, ChevronDown, AlertTriangle, Lightbulb, TrendingUp, Wallet, Calculator,
   XCircle, ClipboardList, Award, ShieldCheck, Target, Sparkles,
 } from 'lucide-react';
-import type { BlogPost, BlogCategoryMeta, RelatedTool } from '../../../data/blog';
-import { PRIMARY_EDITOR } from '../../../data/editorialTeam';
+import type { BlogPost, BlogCategory, BlogCategoryMeta, RelatedTool } from '../../../data/blog';
+import BlogShell, { type BlogCta } from '../../../components/blog/BlogShell';
 import {
   ScrollRevealManager, ReadingPosition, ArticleTocRail, CountUpStat,
   SalaryExplorer, AnimatedRetentionBars, CompositionChart, MarginalRateChart,
@@ -94,61 +93,32 @@ function Callout({ tone, icon: Icon, title, children }: { tone: 'blue' | 'amber'
   );
 }
 
-export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { post: BlogPost; catMeta: BlogCategoryMeta; relatedTools: RelatedTool[] }) {
-  const date = new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-
+export default function FlagshipSalary2025({ post, category, catMeta, cta, relatedTools }: { post: BlogPost; category: BlogCategory; catMeta: BlogCategoryMeta; cta: BlogCta; relatedTools: RelatedTool[] }) {
   return (
-    <article className="min-h-screen bg-white text-slate-900 antialiased">
-      <FlagshipStyles />
-      <ScrollRevealManager />
-      <ReadingPosition minutes={post.readMinutes} />
-      <StickyCalcCta />
-
-      {/* Active TOC rail — xl screens only, sits in the left gutter */}
-      <div className="fa-toc-wrap">
-        <ArticleTocRail items={TOC_ITEMS} />
-      </div>
-
-      {/* ───────── HERO ───────── */}
-      <header className="relative border-b border-slate-200 bg-white">
-        <div aria-hidden className="cs-canvas pointer-events-none absolute inset-0" />
-        <div aria-hidden className="fa-aurora pointer-events-none absolute inset-0 overflow-hidden" />
-        <div className="relative mx-auto w-full max-w-3xl px-5 pb-10 pt-10 sm:px-6 sm:pb-12 sm:pt-14">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-mono text-[12px] text-slate-400">
-            <Link href="/" className="inline-flex items-center gap-1 hover:text-blue-700"><Home className="h-3.5 w-3.5" /> home</Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-            <Link href="/blog" className="hover:text-blue-700">guides</Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-            <span className="text-slate-600">salary after tax</span>
-          </nav>
-
-          <div className="mt-5 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white" style={{ background: catMeta.accent }}>
-              {catMeta.label}
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-700">
-              <BadgeCheck className="h-3.5 w-3.5" /> HMRC-verified · 2025/26
-            </span>
+    <BlogShell
+      post={post}
+      category={category}
+      catMeta={catMeta}
+      cta={cta}
+      relatedTools={relatedTools}
+      breadcrumbLabel="salary after tax"
+      heroAurora
+      showBottomCta={false}
+      title={<>UK Salary After Tax 2025/26: <span className="ink-cs">the complete take-home pay guide.</span></>}
+      description={<>Here is exactly what every UK salary is worth once income tax and National Insurance have taken their share. You get the full table from {gbp(15000)} to {gbp(150000)}, the three thresholds that quietly reshape your pay, and the practical moves people use to keep more of what they earn.</>}
+      topSlot={
+        <>
+          <FlagshipStyles />
+          <ScrollRevealManager />
+          <ReadingPosition minutes={post.readMinutes} />
+          <StickyCalcCta />
+          {/* Active TOC rail, xl screens only, sits in the left gutter */}
+          <div className="fa-toc-wrap">
+            <ArticleTocRail items={TOC_ITEMS} />
           </div>
-
-          <h1 className="mt-5 font-display text-[clamp(30px,5.5vw,46px)] font-extrabold leading-[1.04] tracking-[-0.035em] text-slate-900 [text-wrap:balance]">
-            UK Salary After Tax 2025/26: <span className="ink-cs">the complete take-home pay guide.</span>
-          </h1>
-
-          <p className="mt-4 text-[17px] leading-relaxed text-slate-600">
-            Here is exactly what every UK salary is worth once income tax and National Insurance have taken their share. You get the full table from {gbp(15000)} to {gbp(150000)}, the three thresholds that quietly reshape your pay, and the practical moves people use to keep more of what they earn.
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-200 pt-4 font-mono text-[12px] text-slate-500">
-            <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {date}</span>
-            <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {post.readMinutes} min read</span>
-            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> By <Link href={PRIMARY_EDITOR.profileUrl} className="font-sans font-semibold text-slate-700 hover:text-blue-700">{PRIMARY_EDITOR.name}</Link></span>
-          </div>
-        </div>
-      </header>
-
-      {/* ───────── BODY ───────── */}
-      <div className="mx-auto w-full max-w-3xl px-5 pb-20 sm:px-6">
+        </>
+      }
+    >
 
         {/* EXECUTIVE SUMMARY */}
         <section className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white shadow-cs">
@@ -199,7 +169,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
           {[
             { icon: Wallet, v: '£2,093', l: 'monthly on £30k' },
             { icon: TrendingUp, v: '72p', l: 'kept per £1 (basic)' },
-            { icon: AlertTriangle, v: '60%', l: 'rate at £100k–£125k' },
+            { icon: AlertTriangle, v: '60%', l: 'rate at £100k, £125k' },
             { icon: ShieldCheck, v: '2028', l: 'thresholds frozen until' },
           ].map((s) => (
             <div key={s.l} className="fa-lift rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/50 px-4 py-4 shadow-cs">
@@ -315,10 +285,10 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
             </thead>
             <tbody>
               {[
-                ['Personal allowance', `£0 – ${gbp(12570)}`, '0%', '0%', '100p'],
-                ['Basic rate', `${gbp(12570)} – ${gbp(50270)}`, '20%', '8%', '72p'],
-                ['Higher rate', `${gbp(50270)} – ${gbp(100000)}`, '40%', '2%', '58p'],
-                ['Allowance taper', `${gbp(100000)} – ${gbp(125140)}`, '60%*', '2%', '38p'],
+                ['Personal allowance', `£0, ${gbp(12570)}`, '0%', '0%', '100p'],
+                ['Basic rate', `${gbp(12570)}, ${gbp(50270)}`, '20%', '8%', '72p'],
+                ['Higher rate', `${gbp(50270)}, ${gbp(100000)}`, '40%', '2%', '58p'],
+                ['Allowance taper', `${gbp(100000)}, ${gbp(125140)}`, '60%*', '2%', '38p'],
                 ['Additional rate', `${gbp(125140)}+`, '45%', '2%', '53p'],
               ].map((r) => (
                 <tr key={r[0]} className="border-t border-slate-100">
@@ -362,7 +332,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
             <tbody className="tabular-nums">
               {[
                 ['Plan 1', 'Pre-2012 (Eng/Wales), NI', gbp(26065), '9%'],
-                ['Plan 2', '2012–2023 (Eng/Wales)', gbp(28470), '9%'],
+                ['Plan 2', '2012 to 2023 (Eng/Wales)', gbp(28470), '9%'],
                 ['Plan 4', 'Scottish borrowers', gbp(32745), '9%'],
                 ['Plan 5', 'From Aug 2023 (England)', gbp(25000), '9%'],
                 ['Postgraduate', "Master's / PhD loans", gbp(21000), '6%'],
@@ -435,7 +405,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
           Visa salary rules use your <strong>gross</strong> pay. This table shows your <strong>net</strong> pay. Use the gross figure to check you meet the immigration threshold, and the net figure to plan your real monthly budget. If you are weighing up a job offer, run it through our <Link href="/skilled-worker-points-check" className="font-semibold text-blue-800 underline">Skilled Worker points check</Link> and the <Link href="/take-home-pay" className="font-semibold text-blue-800 underline">take-home calculator</Link> together.
         </Callout>
         <p className="mt-4 text-[16px] leading-relaxed text-slate-700">
-          One more point that catches people out: most visa holders have &ldquo;no recourse to public funds&rdquo;, so the benefits and tax credits that lift some UK households are not available to you. That makes your take-home pay your entire safety net in the early years, which is all the more reason to know your real monthly number before you accept an offer or sign a tenancy.
+          One more point that catches people out: most visa holders have &ldquo;no recourse to public funds&rdquo; so the benefits and tax credits that lift some UK households are not available to you. That makes your take-home pay your entire safety net in the early years, which is all the more reason to know your real monthly number before you accept an offer or sign a tenancy.
         </p>
 
         {/* EMPLOYEE VS SELF-EMPLOYED */}
@@ -528,7 +498,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {[
             { c: 'United Kingdom', keep: '~72%', note: 'On a typical £40k salary, basic rate plus 8% NI.' },
-            { c: 'Germany & France', keep: '~60–65%', note: 'Higher social contributions take a larger slice.' },
+            { c: 'Germany & France', keep: '~60 to 65%', note: 'Higher social contributions take a larger slice.' },
             { c: 'UAE / Gulf', keep: '~100%', note: 'No personal income tax, though living costs vary.' },
           ].map((r) => (
             <div key={r.c} className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/50 p-5 shadow-cs">
@@ -608,7 +578,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
                 ['Pension salary sacrifice', 'Anyone near a threshold', 'Low', 'Very high', true],
                 ['Marriage Allowance transfer', 'One partner under PA', 'Low', 'Low (£252)', true],
                 ['Gift Aid donations', 'Higher-rate givers', 'Low', 'Medium', true],
-                ['EV via salary sacrifice', '£50k–£125k earners', 'Medium', 'High', true],
+                ['EV via salary sacrifice', '£50k, £125k earners', 'Medium', 'High', true],
                 ['Lump-sum bonus, unplanned', 'Nobody', 'Low', 'Negative', false],
               ].map((r) => (
                 <tr key={r[0] as string} className="border-t border-slate-100">
@@ -761,7 +731,7 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
             ['Find your number', 'Locate your gross salary in the table to get your real monthly take-home baseline.'],
             ['Check your tax code', 'Confirm it reads 1257L on your payslip; query anything else with HMRC immediately.'],
             ['Map your thresholds', 'Note how far you are from £50,270 and £100,000. These are your planning lines.'],
-            ['Model a pension sacrifice', 'Use the take-home calculator to see the before/after of contributing 5–15% pre-tax.'],
+            ['Model a pension sacrifice', 'Use the take-home calculator to see the before/after of contributing 5 to 15% pre-tax.'],
             ['Re-check every April', 'Frozen thresholds mean a yearly review keeps you ahead of fiscal drag.'],
           ].map(([t, d], i) => (
             <li key={t} className="flex gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm">
@@ -788,32 +758,14 @@ export default function FlagshipSalary2025({ post, catMeta, relatedTools }: { po
           </Link>
         </div>
 
-        {/* RELATED TOOLS */}
-        <div className="mt-12">
-          <Eyebrow>Keep going</Eyebrow>
-          <h2 className="mt-2 font-display text-xl font-extrabold tracking-[-0.02em] text-slate-900">Related calculators</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {relatedTools.map((t) => (
-              <Link key={t.href} href={t.href} className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-cs">
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-[13.5px] font-bold text-slate-900 group-hover:text-blue-700">{t.label}</p>
-                  <p className="truncate text-[11.5px] text-slate-500">{t.hint}</p>
-                </div>
-                <ArrowUpRight className="h-4 w-4 flex-none text-slate-300 group-hover:text-blue-600" />
-              </Link>
-            ))}
-          </div>
-        </div>
-
         <p className="mt-10 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-[12.5px] leading-relaxed text-slate-500">
           Figures are 2025/26 estimates for England, Wales and Northern Ireland and assume no pension or student loan. Treat them as a guide and check your own payslip and tax code, or run your exact salary through the calculator. This is information, not financial advice.
         </p>
-      </div>
-    </article>
+    </BlogShell>
   );
 }
 
-/* ── Process flow — gross to net ─────────────────────────── */
+/* ── Process flow, gross to net ─────────────────────────── */
 function ProcessFlow() {
   const steps = [
     { n: 1, label: 'Gross salary', detail: 'Your headline contract figure', tag: null },
@@ -884,7 +836,7 @@ function PensionDecisionTree() {
             </div>
             <div className="my-2 flex justify-center"><ChevronDown className="h-4 w-4 text-slate-400" /></div>
             <div className="rounded-xl border border-emerald-300 bg-white px-4 py-3 text-center">
-              <p className="font-display text-[16px] font-extrabold text-emerald-700">Reclaim 72p–60p per £1</p>
+              <p className="font-display text-[16px] font-extrabold text-emerald-700">Reclaim 72p, 60p per £1</p>
               <p className="text-[12px] text-slate-500">The highest-return move available</p>
             </div>
           </div>
@@ -941,7 +893,7 @@ function FlagshipStyles() {
   return (
     <style>{`
       /* #2 scroll reveal */
-      .fa-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1); }
+      .fa-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1.36,1); }
       .fa-reveal.fa-in { opacity: 1; transform: none; }
 
       /* #11 hover lift */
@@ -953,13 +905,13 @@ function FlagshipStyles() {
       .fa-table tbody tr:hover { background-color: #eff6ff !important; }
 
       /* #13 hero aurora */
-      .fa-aurora::before, .fa-aurora::after {
+      .fa-aurora::before.fa-aurora::after {
         content: ""; position: absolute; border-radius: 9999px; filter: blur(60px); opacity: .5;
       }
       .fa-aurora::before { width: 420px; height: 420px; top: -160px; right: -80px;
-        background: radial-gradient(circle, rgba(59,130,246,.35), transparent 70%); animation: fa-drift 18s ease-in-out infinite; }
+        background: radial-gradient(circle, rgba(59,130,246.35), transparent 70%); animation: fa-drift 18s ease-in-out infinite; }
       .fa-aurora::after { width: 360px; height: 360px; top: -120px; left: -60px;
-        background: radial-gradient(circle, rgba(99,102,241,.28), transparent 70%); animation: fa-drift 22s ease-in-out infinite reverse; }
+        background: radial-gradient(circle, rgba(99,102,241.28), transparent 70%); animation: fa-drift 22s ease-in-out infinite reverse; }
       @keyframes fa-drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,20px) scale(1.08); } }
 
       /* #9 line draw */
@@ -978,25 +930,25 @@ function FlagshipStyles() {
       .fa-range { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 9999px;
         background: linear-gradient(90deg, #2563eb, #6366f1); outline: none; }
       .fa-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px;
-        border-radius: 9999px; background: #fff; border: 3px solid #2563eb; box-shadow: 0 2px 6px rgba(37,99,235,.4);
+        border-radius: 9999px; background: #fff; border: 3px solid #2563eb; box-shadow: 0 2px 6px rgba(37,99,235.4);
         cursor: pointer; transition: transform .12s ease; }
       .fa-range::-webkit-slider-thumb:active { transform: scale(1.15); }
       .fa-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 9999px; background: #fff;
-        border: 3px solid #2563eb; box-shadow: 0 2px 6px rgba(37,99,235,.4); cursor: pointer; }
+        border: 3px solid #2563eb; box-shadow: 0 2px 6px rgba(37,99,235.4); cursor: pointer; }
 
-      /* #1 TOC rail — only when the viewport has room in the left gutter */
+      /* #1 TOC rail, only when the viewport has room in the left gutter */
       .fa-toc-wrap { display: none; }
       @media (min-width: 1280px) {
         .fa-toc-wrap { display: block; position: fixed; top: 120px; left: max(24px, calc((100vw - 768px) / 2 - 220px));
           width: 200px; z-index: 30; }
       }
 
-      /* #15 reduced motion — disable everything, show final state */
+      /* #15 reduced motion, disable everything, show final state */
       @media (prefers-reduced-motion: reduce) {
         .fa-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-        .fa-lift, .fa-table tbody tr { transition: none !important; }
-        .fa-aurora::before, .fa-aurora::after { animation: none !important; }
-        .fa-line-in, .fa-area-in { transition: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; }
+        .fa-lift.fa-table tbody tr { transition: none !important; }
+        .fa-aurora::before.fa-aurora::after { animation: none !important; }
+        .fa-line-in.fa-area-in { transition: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; }
         details.group > *:not(summary) { animation: none !important; }
       }
     `}</style>

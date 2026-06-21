@@ -11,7 +11,7 @@ export type Severity = 'critical' | 'high' | 'medium' | 'low';
 
 export interface RefusalRule {
   id: string;
-  /** Regex(es) — match any one to fire. Case-insensitive. */
+  /** Regex(es), match any one to fire. Case-insensitive. */
   patterns: RegExp[];
   category: string;
   severity: Severity;
@@ -37,7 +37,7 @@ const RULES: RefusalRule[] = [
     title: 'Refusal on grounds of false representation or deception',
     what: 'The Home Office believes documents in your application were false, that you misrepresented a material fact, or that information was withheld.',
     why: 'This is one of the most serious refusal categories. It triggers a 10-year ban on most UK visa categories under the general grounds in Part 9 of the Immigration Rules.',
-    next: 'Do not reapply immediately. Get advice from a UK OISC-regulated immigration solicitor — false representation findings carry long-term consequences and need to be challenged through reconsideration, administrative review, or judicial review depending on the route.',
+    next: 'Do not reapply immediately. Get advice from a UK OISC-regulated immigration solicitor, false representation findings carry long-term consequences and need to be challenged through reconsideration, administrative review, or judicial review depending on the route.',
   },
   {
     id: 'previous-immigration-breach',
@@ -67,7 +67,7 @@ const RULES: RefusalRule[] = [
     title: 'Refusal based on criminal record',
     what: 'A criminal conviction in the UK or abroad is being treated as a disqualifying factor.',
     why: 'Convictions of 12 months or more usually trigger a mandatory refusal under Part 9. Shorter sentences are discretionary but often refused if recent.',
-    next: 'Obtain certified records of the conviction and proof of rehabilitation. Some routes have stricter rules than others — solicitor advice essential.',
+    next: 'Obtain certified records of the conviction and proof of rehabilitation. Some routes have stricter rules than others, solicitor advice essential.',
   },
 
   /* ────────── Skilled Worker route refusals ────────── */
@@ -79,11 +79,11 @@ const RULES: RefusalRule[] = [
       /38,?700/,
       /paragraph\s*sw\s*\d/i,
     ],
-    category: 'Skilled Worker — salary',
+    category: 'Skilled Worker, salary',
     severity: 'high',
     title: 'Salary does not meet the Skilled Worker threshold',
     what: 'Your offered salary failed at least one of the three salary tests (general minimum, going rate, or £15.88/hour).',
-    why: 'Salary stage is the most common Skilled Worker refusal. Only basic gross salary counts — bonuses, commission, overtime and in-kind benefits are excluded.',
+    why: 'Salary stage is the most common Skilled Worker refusal. Only basic gross salary counts, bonuses, commission, overtime and in-kind benefits are excluded.',
     next: 'Ask your sponsor to issue a fresh CoS with a higher basic salary. If your role is on the Immigration Salary List or you qualify as a new entrant, use the lower threshold and re-apply.',
   },
   {
@@ -94,7 +94,7 @@ const RULES: RefusalRule[] = [
       /sponsor(?:ed)?\s+(?:job|role|employment)/i,
       /sponsor\s+licence/i,
     ],
-    category: 'Skilled Worker — sponsorship',
+    category: 'Skilled Worker, sponsorship',
     severity: 'high',
     title: 'Sponsorship issue with the Certificate of Sponsorship',
     what: 'The CoS was withdrawn, expired before you applied, contained mismatched details, or the sponsor\'s licence was revoked.',
@@ -109,7 +109,7 @@ const RULES: RefusalRule[] = [
       /confirmation\s+of\s+acceptance\s+for\s+studies/i,
       /\bcas\b/i,
     ],
-    category: 'Student — CAS issue',
+    category: 'Student, CAS issue',
     severity: 'high',
     title: 'Problem with the Confirmation of Acceptance for Studies',
     what: 'The CAS reference was invalid, expired, or did not match the application details (course, fees, dates).',
@@ -123,7 +123,7 @@ const RULES: RefusalRule[] = [
       /credibility\s+interview/i,
       /not\s+satisfied.{0,20}study/i,
     ],
-    category: 'Student — credibility',
+    category: 'Student, credibility',
     severity: 'high',
     title: 'Genuine student requirement not met',
     what: 'The Home Office is not satisfied that you intend to study in the UK as stated.',
@@ -144,7 +144,7 @@ const RULES: RefusalRule[] = [
     severity: 'high',
     title: 'Financial / maintenance funds requirement not met',
     what: 'Your bank evidence did not show the required amount held for 28 consecutive days, or the source/format did not meet Appendix Finance.',
-    why: 'Maintenance rules are strictly applied. Any dip below the required balance in the 28-day window — even by £1 — triggers refusal. Some bank-statement formats are not accepted.',
+    why: 'Maintenance rules are strictly applied. Any dip below the required balance in the 28-day window, even by £1, triggers refusal. Some bank-statement formats are not accepted.',
     next: 'Hold the required balance for a fresh 28 days and reapply. Use a statement showing every day\'s closing balance, on the bank\'s letterhead, stamped if printed.',
   },
 
@@ -157,11 +157,11 @@ const RULES: RefusalRule[] = [
       /e-?ltrp\.[0-9]+/i,
       /partner\s+route/i,
     ],
-    category: 'Family — income',
+    category: 'Family, income',
     severity: 'high',
     title: 'Family visa minimum income requirement not met',
     what: 'Your sponsor\'s evidence of £29,000 per year (or savings combination) did not meet Appendix FM-SE.',
-    why: 'Family route income rules are technical — 6 months of payslips, P60s, employer letter and bank statements must all line up. Self-employed and dividend income face stricter rules.',
+    why: 'Family route income rules are technical, 6 months of payslips, P60s, employer letter and bank statements must all line up. Self-employed and dividend income face stricter rules.',
     next: 'Re-gather a clean 6-month evidence set. If income is borderline, use the cash savings route (£88,500 in savings replaces the income test).',
   },
   {
@@ -170,7 +170,7 @@ const RULES: RefusalRule[] = [
       /genuine.{0,15}subsisting/i,
       /relationship.{0,30}not\s+(satisfied|genuine|met)/i,
     ],
-    category: 'Family — relationship',
+    category: 'Family, relationship',
     severity: 'high',
     title: 'Genuine and subsisting relationship not accepted',
     what: 'The Home Office is not satisfied that your relationship is genuine, ongoing and intended to be permanent.',
@@ -192,7 +192,7 @@ const RULES: RefusalRule[] = [
     title: 'English language requirement not satisfied',
     what: 'The English certificate provided was not from an approved SELT provider, was below the required CEFR level, or was outside its 2-year validity.',
     why: 'Most UK visas need B1 (Family), B2 (Skilled Worker), or higher. Only specific SELTs (e.g. IELTS for UKVI, PTE Academic UKVI) are accepted.',
-    next: 'Book an approved SELT at the correct CEFR level. Check expiry dates carefully — the test must be valid at the date of application.',
+    next: 'Book an approved SELT at the correct CEFR level. Check expiry dates carefully, the test must be valid at the date of application.',
   },
 
   /* ────────── TB / medical ────────── */
@@ -207,7 +207,7 @@ const RULES: RefusalRule[] = [
     title: 'TB test certificate missing or invalid',
     what: 'TB screening evidence was missing, expired (over 6 months old) or from a non-approved clinic.',
     why: 'Applicants from listed countries staying 6+ months need a valid certificate from an IOM-approved clinic.',
-    next: 'Book at an IOM-approved clinic, attach the new certificate, and reapply. The fee is usually £65–95.',
+    next: 'Book at an IOM-approved clinic, attach the new certificate, and reapply. The fee is usually £65 to 95.',
   },
 
   /* ────────── Visitor / standard visitor ────────── */
@@ -219,9 +219,9 @@ const RULES: RefusalRule[] = [
       /(intention|reasons?)\s+to\s+(leave|return)/i,
       /(family|economic|social)\s+ties/i,
     ],
-    category: 'Visitor — credibility',
+    category: 'Visitor, credibility',
     severity: 'high',
-    title: 'Visitor visa — not a genuine visitor / unlikely to leave',
+    title: 'Visitor visa, not a genuine visitor / unlikely to leave',
     what: 'The Home Office is not satisfied that you will leave the UK at the end of your visit, or that you have strong enough ties to your home country.',
     why: 'Visitor refusals often cite: weak employment evidence, large unexplained deposits, family in the UK, previous overstay or refusals, and unclear travel plans.',
     next: 'Strengthen ties: employment letter, property ownership, business evidence, dependants in home country. Show clear, funded travel itinerary. Address any prior refusals head-on.',
@@ -234,11 +234,11 @@ const RULES: RefusalRule[] = [
       /no\s+right\s+of\s+appeal/i,
       /administrative\s+review/i,
     ],
-    category: 'Procedural — review option',
+    category: 'Procedural, review option',
     severity: 'medium',
     title: 'Administrative review available (not a refusal reason)',
     what: 'The letter mentions you have the right to ask for the decision to be reviewed by another caseworker, usually within 14 or 28 days.',
-    why: 'Administrative review is appropriate when there\'s a clear casework error — e.g. a document you supplied was overlooked or a fact was misread.',
+    why: 'Administrative review is appropriate when there\'s a clear casework error, e.g. a document you supplied was overlooked or a fact was misread.',
     next: 'If your refusal was due to a caseworker error rather than a substantive issue, file admin review with focused, evidenced points. If the issue is substantive (e.g. salary actually below threshold), reapply correctly instead.',
   },
 ];

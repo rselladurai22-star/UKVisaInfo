@@ -38,7 +38,7 @@ export default function VisaSwitchingClient() {
   return (
     <div className="min-h-screen" style={{ background: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
-      {/* HERO — Editorial Premium cream */}
+      {/* HERO, Editorial Premium cream */}
       <section className="relative overflow-hidden pt-[84px] md:pt-[96px] pb-10 md:pb-12"
                style={{ background: '#FFFFFF' }}>
         <div className="relative max-w-[1200px] mx-auto px-5 md:px-8">
@@ -74,7 +74,7 @@ export default function VisaSwitchingClient() {
           <p className="mt-6 text-[15px] md:text-[16px] leading-[1.65] max-w-2xl"
              style={{ color: '#3F3F46' }}>
             Switch from one UK visa to another without leaving the country.
-            Choose your current visa below to see which routes you can move to —
+            Choose your current visa below to see which routes you can move to, 
             with the conditions and step-by-step process for each.
           </p>
         </div>
@@ -183,7 +183,7 @@ export default function VisaSwitchingClient() {
                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
               {from.switches.length > 0
                 ? `Available switches from a ${from.label}. Common routes are routine; conditional routes have extra requirements you must meet.`
-                : `The ${from.label} is a short-stay route. You generally cannot switch into a long-term UK visa from inside the UK — you must leave and apply for entry clearance.`}
+                : `The ${from.label} is a short-stay route. You generally cannot switch into a long-term UK visa from inside the UK, you must leave and apply for entry clearance.`}
             </p>
           </div>
 
@@ -345,7 +345,7 @@ const SWITCH_STEPS = [
   { title: 'Apply before your current visa expires',
     desc: 'You must submit your switch application while you still have valid leave. Submitting late breaks your continuous lawful residence and may affect future settlement.' },
   { title: 'Use the same online GOV.UK application',
-    desc: 'Visit the GOV.UK page for your target visa and select "I\'m applying inside the UK". You stay in the UK throughout — no overseas Visa Application Centre.' },
+    desc: 'Visit the GOV.UK page for your target visa and select "I\'m applying inside the UK". You stay in the UK throughout, no overseas Visa Application Centre.' },
   { title: 'Pay the in-UK fee and IHS upfront',
     desc: 'In-UK fees are usually higher than the outside-UK equivalent. The Immigration Health Surcharge is paid for the full duration in advance.' },
   { title: 'Verify your identity with the UK Immigration: ID Check app',
@@ -353,7 +353,7 @@ const SWITCH_STEPS = [
   { title: 'Continue working / studying under section 3C leave',
     desc: 'If you applied before your old visa expired, your conditions automatically continue while you wait for a decision. This is called section 3C leave.' },
   { title: 'Receive decision as a digital eVisa',
-    desc: 'From 2026 all permissions are issued digitally. You access your eVisa via your UKVI account — no physical BRP card.' },
+    desc: 'From 2026 all permissions are issued digitally. You access your eVisa via your UKVI account, no physical BRP card.' },
 ];
 
 function KeyFact({

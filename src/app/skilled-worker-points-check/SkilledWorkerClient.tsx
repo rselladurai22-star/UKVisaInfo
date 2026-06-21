@@ -38,11 +38,11 @@ export default function SkilledWorkerClient() {
 
       <div className="space-y-1 mb-6 border border-[#E5E7EB] rounded-xl divide-y divide-[#E5E7EB]">
         {[
-          { label: 'A — Approved sponsor', sublabel: 'Employer has a valid sponsor licence', state: hasSponsor, set: setHasSponsor },
-          { label: 'B — Job at RQF 3+ skill level', sublabel: 'Equivalent to A-level or higher', state: rqf3, set: setRqf3 },
-          { label: 'C — English language (B1+)', sublabel: 'Passport / degree / approved test', state: english, set: setEnglish },
+          { label: 'A, Approved sponsor', sublabel: 'Employer has a valid sponsor licence', state: hasSponsor, set: setHasSponsor },
+          { label: 'B, Job at RQF 3+ skill level', sublabel: 'Equivalent to A-level or higher', state: rqf3, set: setRqf3 },
+          { label: 'C, English language (B1+)', sublabel: 'Passport / degree / approved test', state: english, set: setEnglish },
           { label: 'Job on shortage occupation (Immigration Salary List)', sublabel: `Reduces salary threshold to £${THRESHOLD_SHORTAGE.toLocaleString()}`, state: shortage, set: setShortage },
-          { label: 'New entrant route', sublabel: `Under 26, student switch, graduate trainee — threshold £${THRESHOLD_NEW_ENTRANT.toLocaleString()}`, state: newEntrant, set: setNewEntrant },
+          { label: 'New entrant route', sublabel: `Under 26, student switch, graduate trainee, threshold £${THRESHOLD_NEW_ENTRANT.toLocaleString()}`, state: newEntrant, set: setNewEntrant },
           { label: 'PhD in STEM subject (20 pts)', sublabel: 'Relevant to the job', state: phdStem, set: setPhdStem },
         ].map(({ label, sublabel, state, set }) => (
           <label key={label} className="flex items-start gap-2.5 cursor-pointer py-2 px-3 hover:bg-[#f3f4f5] transition-colors">

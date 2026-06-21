@@ -271,9 +271,9 @@ export function SalaryExplorer() {
 export function AnimatedRetentionBars() {
   const bands = [
     { label: 'Up to £12,570', keep: 100, color: '#10b981' },
-    { label: '£12,570 – £50,270', keep: 72, color: '#2563eb' },
-    { label: '£50,270 – £100,000', keep: 58, color: '#6366f1' },
-    { label: '£100,000 – £125,140', keep: 38, color: '#e11d48' },
+    { label: '£12,570 to £50,270', keep: 72, color: '#2563eb' },
+    { label: '£50,270 to £100,000', keep: 58, color: '#6366f1' },
+    { label: '£100,000 to £125,140', keep: 38, color: '#e11d48' },
     { label: '£125,140 +', keep: 53, color: '#7c3aed' },
   ];
   const ref = useRef<HTMLDivElement>(null);
@@ -433,7 +433,7 @@ export function MarginalRateChart() {
         <path d={area} fill="url(#fa-grad)" className={shown ? 'fa-area-in' : 'fa-area'} />
         <path d={line} fill="none" stroke="#2563eb" strokeWidth={2.5} strokeLinejoin="round" className={shown ? 'fa-line-in' : 'fa-line'} pathLength={1} />
       </svg>
-      <p className="mt-1 text-[12px] text-slate-500">The combined income tax + NI rate on each extra pound. Notice the spike to 62% in the £100k–£125k zone.</p>
+      <p className="mt-1 text-[12px] text-slate-500">The combined income tax + NI rate on each extra pound. Notice the spike to 62% in the £100k, £125k zone.</p>
     </figure>
   );
 }

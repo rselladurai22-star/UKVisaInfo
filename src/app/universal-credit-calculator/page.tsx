@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import UniversalCredit from './UniversalCredit';
 
 export const metadata: Metadata = {
-  title: 'Universal Credit Calculator UK 2025/26 — Monthly Award | UKDesk',
+  title: 'Universal Credit Calculator UK 2025/26, Monthly Award | UKDesk',
   description:
     'Free UK Universal Credit calculator for 2025/26. Estimate your monthly award from standard allowance, child, housing and disability elements, less the 55% earnings taper.',
   alternates: { canonical: '/universal-credit-calculator' },

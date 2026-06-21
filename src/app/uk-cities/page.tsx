@@ -4,7 +4,7 @@ import { ArrowRight, MapPin, Banknote } from 'lucide-react';
 import { CITIES } from '../../data/cities';
 
 export const metadata: Metadata = {
-  title: 'UK Cities for Immigrants — Cost of Living, Jobs & Sponsors',
+  title: 'UK Cities for Immigrants, Cost of Living, Jobs & Sponsors',
   description: 'Side-by-side guides to UK cities for visa applicants: monthly cost of living, top hiring sectors, neighbourhoods and local notes.',
   alternates: { canonical: '/uk-cities' },
 };
@@ -30,7 +30,7 @@ export default function UkCitiesIndex() {
             <span className="text-white/55">cost, jobs and sponsor activity by city.</span>
           </h1>
           <p className="mt-4 max-w-2xl text-white/55 text-base leading-relaxed">
-            Practical city briefs for newcomers on a UK visa — monthly cost of living, top hiring sectors and the best neighbourhoods to settle in.
+            Practical city briefs for newcomers on a UK visa, monthly cost of living, top hiring sectors and the best neighbourhoods to settle in.
           </p>
         </div>
       </section>

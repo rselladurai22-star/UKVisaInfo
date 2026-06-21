@@ -38,7 +38,7 @@ export default function Cgt() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Tax', href: '/category/tax' }, { label: 'Capital Gains Tax' }]}
       title="Capital Gains Tax Calculator"
-      subtitle="Estimate the CGT on selling shares, a second property, crypto or other assets for 2025/26 — after the £3,000 annual exempt amount, at 18% and 24% depending on your income."
+      subtitle="Estimate the CGT on selling shares, a second property, crypto or other assets for 2025/26, after the £3,000 annual exempt amount, at 18% and 24% depending on your income."
       calcLabel="Calculate CGT"
       inputs={
         <>
@@ -79,7 +79,7 @@ export default function Cgt() {
           {asset === 'property' && (
             <Callout tone="warn" title="Property: report and pay within 60 days">
               For UK residential property, CGT must be reported and paid within <strong>60 days</strong> of completion
-              via an HMRC property account — separately from your annual Self Assessment.
+              via an HMRC property account, separately from your annual Self Assessment.
             </Callout>
           )}
         </>
@@ -90,17 +90,17 @@ export default function Cgt() {
         intro="CGT is the tax on the profit when you sell an asset that's risen in value. This guide covers the £3,000 allowance, the 18% and 24% rates, what's taxable, and how to reduce the bill."
       >
         <GuideSection kicker="The basics" title="What CGT applies to">
-          <p>Capital Gains Tax is charged on the <strong>gain</strong> — not the total proceeds — when you sell or dispose of an asset that has grown in value. It applies to shares and funds outside an ISA, second homes and buy-to-lets, crypto, business assets and valuable possessions. Your main home is usually exempt under <strong>Private Residence Relief</strong>. Everyone has a <strong>£3,000 annual exempt amount</strong> (2025/26) before any CGT is due.</p>
+          <p>Capital Gains Tax is charged on the <strong>gain</strong>, not the total proceeds, when you sell or dispose of an asset that has grown in value. It applies to shares and funds outside an ISA, second homes and buy-to-lets, crypto, business assets and valuable possessions. Your main home is usually exempt under <strong>Private Residence Relief</strong>. Everyone has a <strong>£3,000 annual exempt amount</strong> (2025/26) before any CGT is due.</p>
         </GuideSection>
         <GuideSection kicker="The rates" title="18% and 24%">
-          <p>Since 30 October 2024, gains are taxed at <strong>18%</strong> within your remaining basic-rate band and <strong>24%</strong> above it — the same rates now apply to property and other assets. Crucially, the gain is stacked on top of your income to decide the split: a higher earner pays mostly 24%, while someone with little other income may pay 18% on much of it. That&apos;s why your income level changes the bill.</p>
+          <p>Since 30 October 2024, gains are taxed at <strong>18%</strong> within your remaining basic-rate band and <strong>24%</strong> above it, the same rates now apply to property and other assets. Crucially, the gain is stacked on top of your income to decide the split: a higher earner pays mostly 24%, while someone with little other income may pay 18% on much of it. That&apos;s why your income level changes the bill.</p>
         </GuideSection>
         <GuideSection kicker="Reduce it" title="Legitimate ways to cut CGT">
           <ul className="space-y-3">
             {[
               ['Use both spouses&apos; allowances', 'Transfers between spouses/civil partners are CGT-free, so you can use two £3,000 allowances and two basic-rate bands.'],
               ['Spread disposals across tax years', 'Selling in two tranches across 5 April uses two annual allowances.'],
-              ['Use your ISA', 'Gains inside an ISA are completely CGT-free — "Bed & ISA" moves holdings into the wrapper.'],
+              ['Use your ISA', 'Gains inside an ISA are completely CGT-free, "Bed & ISA" moves holdings into the wrapper.'],
               ['Offset losses', 'Capital losses reduce gains; report them to carry forward to future years.'],
               ['Claim reliefs', 'Private Residence Relief, Business Asset Disposal Relief (10% up to a lifetime limit) and gift reliefs can apply.'],
             ].map(([h, b]) => (
@@ -109,12 +109,12 @@ export default function Cgt() {
           </ul>
         </GuideSection>
         <GuideSection kicker="Reporting" title="How and when to pay">
-          <p>For most assets, report gains on your <strong>Self Assessment</strong> return and pay by 31 January. For UK <strong>residential property</strong>, there&apos;s a separate rule: report and pay within <strong>60 days</strong> of completion via an HMRC online property account. The annual exempt amount has shrunk sharply in recent years, so more disposals now create a reportable gain — keep records of costs and improvements.</p>
+          <p>For most assets, report gains on your <strong>Self Assessment</strong> return and pay by 31 January. For UK <strong>residential property</strong>, there&apos;s a separate rule: report and pay within <strong>60 days</strong> of completion via an HMRC online property account. The annual exempt amount has shrunk sharply in recent years, so more disposals now create a reportable gain, keep records of costs and improvements.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
             ['Missing the 60-day property deadline', 'Residential property CGT is due within 60 days of completion, not at the end of the tax year.'],
-            ['Forgetting allowable costs', 'Buying/selling costs and capital improvements reduce the gain — keep the paperwork.'],
+            ['Forgetting allowable costs', 'Buying/selling costs and capital improvements reduce the gain, keep the paperwork.'],
             ['Wasting the annual allowance', 'It can&apos;t be carried forward. Use it each year, e.g. via Bed & ISA.'],
             ['Ignoring the spouse exemption', 'Transferring assets to a spouse first can double allowances and use a lower tax band.'],
           ]} />
@@ -122,8 +122,8 @@ export default function Cgt() {
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How much is Capital Gains Tax?', a: '18% within your remaining basic-rate band and 24% above, on gains over the £3,000 annual exempt amount (2025/26). Your other income determines the split.' },
-            { q: 'Do I pay CGT on my home?', a: 'Usually no — your only or main residence is generally exempt under Private Residence Relief, though letting or business use can restrict it.' },
-            { q: 'Is crypto subject to CGT?', a: 'Yes — disposing of crypto (selling, swapping or spending) can create a taxable gain, calculated using pooling rules.' },
+            { q: 'Do I pay CGT on my home?', a: 'Usually no, your only or main residence is generally exempt under Private Residence Relief, though letting or business use can restrict it.' },
+            { q: 'Is crypto subject to CGT?', a: 'Yes, disposing of crypto (selling, swapping or spending) can create a taxable gain, calculated using pooling rules.' },
             { q: 'When do I report a property gain?', a: 'Within 60 days of completion via an HMRC property account, separately from Self Assessment.' },
           ]} />
         </GuideSection>

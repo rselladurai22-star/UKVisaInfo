@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import FuelCost from './FuelCost';
 
 export const metadata: Metadata = {
-  title: 'Fuel Cost Calculator UK 2025/26 — Cost Per Journey & Year | UKDesk',
+  title: 'Fuel Cost Calculator UK 2025/26, Cost Per Journey & Year | UKDesk',
   description:
     'Free UK fuel cost calculator. Work out the petrol or diesel cost of any journey and your annual fuel bill from your car MPG and the current price per litre.',
   alternates: { canonical: '/fuel-cost-calculator' },

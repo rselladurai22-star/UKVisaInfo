@@ -1,5 +1,5 @@
 /**
- * UK Company Car Benefit-in-Kind (BiK) tax calculator — 2025/26.
+ * UK Company Car Benefit-in-Kind (BiK) tax calculator, 2025/26.
  *
  * Source: gov.uk/guidance/company-car-benefit-the-appropriate-percentage
  *

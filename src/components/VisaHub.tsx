@@ -1,5 +1,5 @@
 /**
- * VisaHub v3 — mobile-first editorial directory of every UK visa /
+ * VisaHub v3, mobile-first editorial directory of every UK visa /
  * settlement / citizenship route. Server component, driven by VISA_DETAILS.
  *
  * Layout: hero → three entry cards → sticky scrollable category nav →
@@ -21,7 +21,7 @@ const GROUPS: { id: GroupId; label: string; blurb: string; Icon: typeof Briefcas
   { id: 'work',       label: 'Work & business',          blurb: 'Work for a UK employer or build a business here.', Icon: Briefcase },
   { id: 'study',      label: 'Study',                    blurb: 'Courses, child study and post-study work.',        Icon: GraduationCap },
   { id: 'family',     label: 'Family & partner',         blurb: 'Join or stay with family in the UK.',              Icon: Users },
-  { id: 'visit',      label: 'Visit',                    blurb: 'Short stays — tourism, business or family.',       Icon: Plane },
+  { id: 'visit',      label: 'Visit',                    blurb: 'Short stays, tourism, business or family.',       Icon: Plane },
   { id: 'settlement', label: 'Settlement & citizenship', blurb: 'Indefinite leave to remain and becoming British.', Icon: ShieldCheck },
 ];
 
@@ -38,7 +38,7 @@ function groupOf(slug: string, v: VisaDetail): GroupId {
 const shortFee = (fee: string) => fee.match(/£[\d,]+/)?.[0] ?? null;
 
 const WAYS = [
-  { href: '/eligibility', Icon: Sparkles, title: 'Not sure which visa?', desc: 'Answer 6 questions — matched in 60 seconds.', primary: true },
+  { href: '/eligibility', Icon: Sparkles, title: 'Not sure which visa?', desc: 'Answer 6 questions, matched in 60 seconds.', primary: true },
   { href: '/visa-types/visa-switching', Icon: RefreshCw, title: 'Already in the UK?', desc: 'Routes you can switch into without leaving.' },
   { href: '/visa-types/compare', Icon: Scale, title: 'Torn between two?', desc: 'Compare cost, time and settlement side by side.' },
 ];
@@ -64,7 +64,7 @@ export default function VisaHub() {
           </span>
           <h1 className={s.title}>Every UK visa route, explained.</h1>
           <p className={s.deck}>
-            Work, study, family, visiting, settlement and citizenship — {total} routes, each with
+            Work, study, family, visiting, settlement and citizenship, {total} routes, each with
             the cost, timeline and requirements in plain English.
           </p>
           <span className={s.trust}>
@@ -90,7 +90,7 @@ export default function VisaHub() {
         </header>
       </div>
 
-      {/* sticky category nav — swipes horizontally on phones */}
+      {/* sticky category nav, swipes horizontally on phones */}
       <div className="container-page">
         <nav aria-label="Visa categories" className={s.catNav}>
           {GROUPS.map((g) => {

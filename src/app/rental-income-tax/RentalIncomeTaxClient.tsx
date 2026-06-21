@@ -41,13 +41,13 @@ export default function RentalIncomeTaxClient() {
         <Section title="Property income" eyebrow="Step 1" tone="inputs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <NumberField label="Gross annual rent" prefix="£" value={rent} onChange={setRent} hint="Total rent received per year" />
-            <NumberField label="Mortgage interest paid" prefix="£" value={mortgage} onChange={setMortgage} hint="Interest portion only — capital repayment not allowable" />
+            <NumberField label="Mortgage interest paid" prefix="£" value={mortgage} onChange={setMortgage} hint="Interest portion only, capital repayment not allowable" />
             <NumberField label="Allowable expenses" prefix="£" value={expenses} onChange={setExpenses} hint="Letting agent, insurance, repairs, ground rent (not mortgage capital)" />
             <NumberField label="Other taxable income" prefix="£" value={other} onChange={setOther} hint="Employment + other for tax-band positioning" />
             <div className="sm:col-span-2">
               <CheckboxField label="Use £1,000 Property Allowance instead of actual expenses"
                 checked={useAllowance} onChange={setUseAllowance}
-                hint="Better than expenses only if your actual costs are below £1,000 — replaces them entirely" />
+                hint="Better than expenses only if your actual costs are below £1,000, replaces them entirely" />
             </div>
           </div>
         </Section>
@@ -70,10 +70,10 @@ export default function RentalIncomeTaxClient() {
               { label: 'Gross rental income', value: fmtGBP(r.grossRent), bold: true },
               {
                 label: useAllowance ? 'Less £1,000 Property Allowance' : 'Less allowable expenses',
-                value: `–${fmtGBP(r.allowableDeductions)}`, negative: true,
+                value: `, ${fmtGBP(r.allowableDeductions)}`, negative: true,
               },
               { label: 'Taxable rental profit', value: fmtGBP(r.taxableProfit), bold: true, sub: 'Mortgage interest NOT deducted here' },
-              { label: `Income tax on profit (marginal ${(r.marginalTaxRate * 100).toFixed(0)}%)`, value: `–${fmtGBP(r.taxBeforeCredit)}`, negative: true },
+              { label: `Income tax on profit (marginal ${(r.marginalTaxRate * 100).toFixed(0)}%)`, value: `, ${fmtGBP(r.taxBeforeCredit)}`, negative: true },
               { label: '20% credit for mortgage interest', value: `+${fmtGBP(r.mortgageTaxCredit)}`, positive: true, sub: 'Capped at the basic rate' },
               { label: 'Final tax on rental income', value: fmtGBP(r.finalTaxOnRental), bold: true },
               { label: 'Net rental income (after mortgage + tax + costs)', value: fmtGBP(r.netRentalIncome), bold: true },
@@ -85,21 +85,21 @@ export default function RentalIncomeTaxClient() {
       <div className="mt-6 space-y-2.5">
         {r.marginalTaxRate > 0.2 && parseFloat(mortgage) > 0 && (
           <Tip tone="warn">
-            As a higher-rate taxpayer, you only get a <strong>20% tax credit</strong> on mortgage interest — not full relief. This is the Section 24 sting and is why many landlords moved properties into a Ltd company structure.
+            As a higher-rate taxpayer, you only get a <strong>20% tax credit</strong> on mortgage interest, not full relief. This is the Section 24 sting and is why many landlords moved properties into a Ltd company structure.
           </Tip>
         )}
         {useAllowance && parseFloat(expenses) > 1000 && (
           <Tip tone="warn">
-            Your actual expenses ({fmtGBP(parseFloat(expenses))}) exceed the £1,000 Property Allowance — you&rsquo;d save more tax by claiming actual expenses instead.
+            Your actual expenses ({fmtGBP(parseFloat(expenses))}) exceed the £1,000 Property Allowance, you&rsquo;d save more tax by claiming actual expenses instead.
           </Tip>
         )}
         {r.taxableProfit === 0 && r.grossRent > 0 && (
           <Tip tone="success">
-            Your profit is fully covered by expenses — no rental income tax due. You may still need to register for Self Assessment if rent exceeds £2,500.
+            Your profit is fully covered by expenses, no rental income tax due. You may still need to register for Self Assessment if rent exceeds £2,500.
           </Tip>
         )}
         <Tip tone="info">
-          Furnished Holiday Lets (FHLs) lost their preferential tax treatment from <strong>6 April 2025</strong> — they are now taxed like regular rental property and subject to Section 24.
+          Furnished Holiday Lets (FHLs) lost their preferential tax treatment from <strong>6 April 2025</strong>, they are now taxed like regular rental property and subject to Section 24.
         </Tip>
       </div>
     </CalcCard>

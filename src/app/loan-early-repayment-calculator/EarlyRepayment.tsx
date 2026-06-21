@@ -84,7 +84,7 @@ export default function EarlyRepayment() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Early Repayment' }]}
       title="Loan Early Repayment Calculator"
-      subtitle="See how much interest you'd save by settling your loan early or making a lump-sum overpayment — including the early settlement figure."
+      subtitle="See how much interest you'd save by settling your loan early or making a lump-sum overpayment, including the early settlement figure."
       calcLabel="Calculate Saving"
       inputs={
         <div className="space-y-4">
@@ -130,7 +130,7 @@ export default function EarlyRepayment() {
           </div>
 
           <Callout tone="info" title="The 58-day interest rule">
-            Under the Consumer Credit Act, lenders can charge up to 58 days' extra interest when you settle a regulated loan early — built into the settlement figure above. There's no percentage penalty beyond that for most personal loans.
+            Under the Consumer Credit Act, lenders can charge up to 58 days' extra interest when you settle a regulated loan early, built into the settlement figure above. There's no percentage penalty beyond that for most personal loans.
           </Callout>
 
           <p className="text-[11px] text-on-surface-variant">Estimate assumes a fixed-rate amortising loan. Ask your lender for an official early settlement figure. Some loans (and most mortgages) have different early-repayment charges.</p>
@@ -139,25 +139,25 @@ export default function EarlyRepayment() {
     >
       <Guide
         title="Should you repay your loan early?"
-        intro="Paying off a loan ahead of schedule — or making a lump-sum overpayment — saves interest because you owe money for less time. For most UK personal loans the only catch is up to 58 days' extra interest on early settlement. Here's how the savings work."
+        intro="Paying off a loan ahead of schedule, or making a lump-sum overpayment, saves interest because you owe money for less time. For most UK personal loans the only catch is up to 58 days' extra interest on early settlement. Here's how the savings work."
       >
         <GuideSection kicker="Why it saves" title="Less time owing means less interest">
           <p>Interest is charged on your outstanding balance each month. Clear the debt sooner and there are fewer months of interest to pay. Even a partial overpayment reduces the balance that future interest is calculated on, so every extra pound works harder than the last.</p>
         </GuideSection>
 
         <GuideSection kicker="Settlement" title="The early settlement figure">
-          <p>To pay off a loan in full, you ask the lender for a <strong>settlement figure</strong> — the outstanding balance plus, under the Consumer Credit Act, up to <strong>58 days' interest</strong>. This is the only meaningful charge on most regulated personal loans; there's usually no separate percentage penalty. The settlement figure is almost always less than continuing to pay every remaining instalment.</p>
+          <p>To pay off a loan in full, you ask the lender for a <strong>settlement figure</strong>, the outstanding balance plus, under the Consumer Credit Act, up to <strong>58 days' interest</strong>. This is the only meaningful charge on most regulated personal loans; there's usually no separate percentage penalty. The settlement figure is almost always less than continuing to pay every remaining instalment.</p>
         </GuideSection>
 
         <GuideSection kicker="Overpaying" title="Lump sums and partial repayment">
           <p>You don't have to clear the whole loan. A lump-sum <strong>overpayment</strong> cuts the balance, which either shortens the term or reduces future payments. Because it removes the most heavily-interest-bearing portion of the debt, overpaying early in the loan saves the most.</p>
           <Callout tone="tip" title="Clear the most expensive debt first">
-            If you have spare cash, target the highest-APR debt first — usually credit cards before personal loans before a mortgage. That maximises the interest you save per pound.
+            If you have spare cash, target the highest-APR debt first, usually credit cards before personal loans before a mortgage. That maximises the interest you save per pound.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="Settling a £15,000 loan early">
-          <p>On a £15,000 loan at 7.9% over 60 months, after 18 payments a chunk of the balance remains. Settling now means paying that balance plus up to 58 days' interest — far less than the interest built into the remaining 42 instalments. The difference is your saving.</p>
+          <p>On a £15,000 loan at 7.9% over 60 months, after 18 payments a chunk of the balance remains. Settling now means paying that balance plus up to 58 days' interest, far less than the interest built into the remaining 42 instalments. The difference is your saving.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common early repayment mistakes">

@@ -7,7 +7,7 @@
 import type { CountryCode, CountryConfig } from './types';
 import { UK } from './uk';
 
-/** Final brand + domain. Tamil உள்ளீடு "Ulleedu" = "input" — fitting for a
+/** Final brand + domain. Tamil உள்ளீடு "Ulleedu" = "input", fitting for a
  *  calculator/tools site. `.com` is the geo-neutral primary for multi-country.
  *  NOTE: the live site still serves from ukvisainfo.co.uk until DNS cutover;
  *  the full canonical/OG/sitemap/301 rename is a separate pass (see

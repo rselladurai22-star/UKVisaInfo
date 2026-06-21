@@ -40,7 +40,7 @@ export default function EstateValue() {
     const debts = mortgage + otherDebts + funeral;
     const netEstate = Math.max(0, assets - debts);
 
-    // Allowances (single person here; doubling if widowed not modelled — toggle 'married' transfers spouse exemption only on death between spouses)
+    // Allowances (single person here; doubling if widowed not modelled, toggle 'married' transfers spouse exemption only on death between spouses)
     const mult = married ? 2 : 1; // assume full transferable NRB/RNRB available
     let rnrb = homeToDescendants ? RNRB * mult : 0;
     if (netEstate > RNRB_TAPER_START) {
@@ -58,7 +58,7 @@ export default function EstateValue() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Estate', href: '/category/estate' }, { label: 'Estate Value' }]}
       title="Estate Value Calculator"
-      subtitle="Add up your assets, subtract debts, and see your net estate for 2025/26 — plus an estimate of any inheritance tax due."
+      subtitle="Add up your assets, subtract debts, and see your net estate for 2025/26, plus an estimate of any inheritance tax due."
       calcLabel="Calculate Estate Value"
       inputs={
         <div className="space-y-4">
@@ -109,7 +109,7 @@ export default function EstateValue() {
 
           {r.iht > 0 && (
             <Callout tone="warn" title="Your estate may owe inheritance tax">
-              On current figures roughly <strong>{gbp(r.iht)}</strong> of IHT could be due. Gifting, trusts, charity legacies and pensions can reduce this — see the full inheritance tax calculator.
+              On current figures roughly <strong>{gbp(r.iht)}</strong> of IHT could be due. Gifting, trusts, charity legacies and pensions can reduce this, see the full inheritance tax calculator.
             </Callout>
           )}
 
@@ -124,10 +124,10 @@ export default function EstateValue() {
         <GuideSection kicker="Assets" title="What goes into the estate">
           <p>Add up the open-market value of everything owned at the date of death:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Property — the main home and any others, at market value.</li>
+            <li>Property, the main home and any others, at market value.</li>
             <li>Cash, bank and building society accounts, and savings.</li>
-            <li>Investments — ISAs, shares, bonds and funds (ISAs lose their tax shelter on death).</li>
-            <li>Possessions — cars, jewellery, art, furniture.</li>
+            <li>Investments, ISAs, shares, bonds and funds (ISAs lose their tax shelter on death).</li>
+            <li>Possessions, cars, jewellery, art, furniture.</li>
             <li>Business and agricultural assets (which may qualify for relief).</li>
             <li>Money owed to the deceased.</li>
           </ul>
@@ -140,12 +140,12 @@ export default function EstateValue() {
         <GuideSection kicker="Outside the estate" title="What usually doesn't count">
           <p>Some assets typically fall outside the estate for IHT:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Life insurance written in trust</strong> — pays out directly to beneficiaries, bypassing the estate.</li>
-            <li><strong>Most pensions</strong> — currently outside the estate, though this changes from April 2027 when unused pension funds are due to be brought into IHT.</li>
+            <li><strong>Life insurance written in trust</strong>, pays out directly to beneficiaries, bypassing the estate.</li>
+            <li><strong>Most pensions</strong>, currently outside the estate, though this changes from April 2027 when unused pension funds are due to be brought into IHT.</li>
             <li>Assets held jointly that pass automatically to the survivor (though their value still counts towards the estate total).</li>
           </ul>
           <Callout tone="tip" title="Put life cover in trust">
-            Writing a life insurance policy in trust is free and usually keeps the payout out of your estate — potentially saving 40% IHT on the proceeds.
+            Writing a life insurance policy in trust is free and usually keeps the payout out of your estate, potentially saving 40% IHT on the proceeds.
           </Callout>
         </GuideSection>
 
@@ -165,7 +165,7 @@ export default function EstateValue() {
         <GuideSection kicker="Avoid these" title="Common estate valuation mistakes">
           <Mistakes items={[
             ['Valuing the home too low', 'HMRC can challenge under-valuations; use a proper market valuation, not a guess.'],
-            ['Forgetting gifts in the last 7 years', 'Gifts made within seven years of death can use up the nil-rate band — see the gift calculator.'],
+            ['Forgetting gifts in the last 7 years', 'Gifts made within seven years of death can use up the nil-rate band, see the gift calculator.'],
             ['Assuming pensions are always outside IHT', 'From April 2027 unused pension funds are due to count towards the estate.'],
             ['Ignoring jointly-held assets', 'A share of a jointly-owned property or account still forms part of the estate value.'],
           ]} />

@@ -8,7 +8,7 @@ import { isValidPostcode, normalisePostcode } from '../../lib/postcode/lookup';
 interface Props {
   /** Pre-filled value (when shown on a result page) */
   initial?: string;
-  /** Visual variant — "hero" is large, "compact" is for headers */
+  /** Visual variant, "hero" is large, "compact" is for headers */
   variant?: 'hero' | 'compact';
 }
 

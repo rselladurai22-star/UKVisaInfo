@@ -33,7 +33,7 @@ export default function HolidayPay() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Employment', href: '/category/employment' }, { label: 'Holiday Pay' }]}
       title="Holiday Entitlement & Pay Calculator"
-      subtitle="Work out your statutory holiday for 2025/26 — 5.6 weeks a year for regular workers, or 12.07% of hours for irregular and part-year workers."
+      subtitle="Work out your statutory holiday for 2025/26 to 5.6 weeks a year for regular workers, or 12.07% of hours for irregular and part-year workers."
       calcLabel="Calculate Holiday"
       inputs={
         <Panel title="Your Work Pattern">
@@ -95,17 +95,17 @@ export default function HolidayPay() {
         intro="Almost every UK worker is entitled to 5.6 weeks of paid holiday a year. How that translates into days depends on your working pattern, and irregular-hours workers use a percentage method instead. Here's how to work out what you're owed."
       >
         <GuideSection kicker="The basics" title="5.6 weeks for everyone">
-          <p>The statutory minimum is <strong>5.6 weeks</strong> of paid holiday a year under the Working Time Regulations. For a five-day-a-week worker that's 5.6 × 5 = <strong>28 days</strong>, which is also the legal cap — employers don't have to give more than 28 days statutory, even if you work six or seven days a week. Part-time workers get a pro-rata amount: a three-day-a-week worker gets 5.6 × 3 = 16.8 days.</p>
+          <p>The statutory minimum is <strong>5.6 weeks</strong> of paid holiday a year under the Working Time Regulations. For a five-day-a-week worker that's 5.6 × 5 = <strong>28 days</strong>, which is also the legal cap, employers don't have to give more than 28 days statutory, even if you work six or seven days a week. Part-time workers get a pro-rata amount: a three-day-a-week worker gets 5.6 × 3 = 16.8 days.</p>
         </GuideSection>
 
         <GuideSection kicker="Irregular hours" title="The 12.07% method">
-          <p>Since 1 April 2024, irregular-hours and part-year workers (zero-hours, casual, term-time) accrue holiday at <strong>12.07%</strong> of the hours they work in each pay period. The figure comes from 5.6 weeks ÷ (52 − 5.6 working weeks). Employers can pay this as "rolled-up" holiday pay — an extra 12.07% added to each payslip — clearly itemised.</p>
+          <p>Since 1 April 2024, irregular-hours and part-year workers (zero-hours, casual, term-time) accrue holiday at <strong>12.07%</strong> of the hours they work in each pay period. The figure comes from 5.6 weeks ÷ (52 − 5.6 working weeks). Employers can pay this as "rolled-up" holiday pay, an extra 12.07% added to each payslip, clearly itemised.</p>
         </GuideSection>
 
         <GuideSection kicker="Bank holidays" title="Are bank holidays extra?">
           <p>There's no automatic right to paid time off on bank holidays. Employers can include the eight English bank holidays within your 5.6 weeks, so "28 days including bank holidays" is lawful. Always check your contract to see whether bank holidays are on top of or inside your entitlement.</p>
           <Callout tone="warn" title="Holiday pay must reflect normal pay">
-            Holiday pay should include regular overtime, commission and shift premiums — not just basic pay. Paying only basic salary for holiday can leave you underpaid.
+            Holiday pay should include regular overtime, commission and shift premiums, not just basic pay. Paying only basic salary for holiday can leave you underpaid.
           </Callout>
         </GuideSection>
 
@@ -116,7 +116,7 @@ export default function HolidayPay() {
         <GuideSection kicker="Avoid these" title="Common holiday pay mistakes">
           <Mistakes items={[
             ['Basing holiday pay on basic pay only', 'Regular overtime and commission must be included in holiday pay.'],
-            ['Assuming bank holidays are always extra', 'They can lawfully be counted within your 5.6 weeks — check your contract.'],
+            ['Assuming bank holidays are always extra', 'They can lawfully be counted within your 5.6 weeks, check your contract.'],
             ['Mishandling part-year workers', 'Term-time and zero-hours staff use the 12.07% accrual method, not a flat 12.07% of full-time holiday.'],
             ['Losing holiday at year end', 'You can usually carry over some untaken statutory leave, especially if sickness or family leave stopped you taking it.'],
           ]} />
@@ -124,7 +124,7 @@ export default function HolidayPay() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How many days holiday am I entitled to?', a: 'At least 5.6 weeks a year — 28 days for a five-day worker, pro-rated for part-timers, capped at 28 days statutory.' },
+            { q: 'How many days holiday am I entitled to?', a: 'At least 5.6 weeks a year, 28 days for a five-day worker, pro-rated for part-timers, capped at 28 days statutory.' },
             { q: 'What is the 12.07% rule?', a: 'It is the holiday accrual rate for irregular-hours and part-year workers: 12.07% of the hours worked in each pay period.' },
             { q: 'Can my employer choose when I take holiday?', a: 'Yes, with notice. They can require you to take leave at certain times (such as a Christmas shutdown) or refuse specific dates for business reasons.' },
             { q: 'Do I get paid for unused holiday when I leave?', a: 'Yes. Any accrued but untaken statutory holiday must be paid in your final pay when employment ends.' },

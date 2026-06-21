@@ -5,13 +5,13 @@ import {
 import PostcodeSearch from '../../components/postcode/PostcodeSearch';
 
 export const metadata: Metadata = {
-  title: 'UK Postcode Lookup — Council, MP, NHS, Police, Ward & More',
+  title: 'UK Postcode Lookup, Council, MP, NHS, Police, Ward & More',
   description:
-    'Enter any UK postcode and instantly see your council, MP, parliamentary constituency, NHS region, police force, electoral ward and region — all on one page. Free, no signup.',
+    'Enter any UK postcode and instantly see your council, MP, parliamentary constituency, NHS region, police force, electoral ward and region, all on one page. Free, no signup.',
   alternates: { canonical: '/postcode' },
   openGraph: {
     title: 'UK Postcode Lookup',
-    description: 'Council, MP, NHS, Police, Ward and more — for any UK postcode, on one page.',
+    description: 'Council, MP, NHS, Police, Ward and more, for any UK postcode, on one page.',
     url: 'https://ukvisainfo.co.uk/postcode',
     type: 'website',
   },
@@ -22,7 +22,7 @@ const FEATURES: { icon: typeof Building2; label: string; desc: string }[] = [
   { icon: Vote,        label: 'Your MP',               desc: 'Sitting Member of Parliament + party + when they took office.' },
   { icon: MapPin,      label: 'Constituency & ward',   desc: 'Parliamentary constituency for voting + electoral ward.' },
   { icon: Stethoscope, label: 'NHS region & ICB',      desc: 'Your NHS region and Integrated Care Board.' },
-  { icon: Shield,      label: 'Police force',          desc: 'The force responsible for your area — useful for crime reporting.' },
+  { icon: Shield,      label: 'Police force',          desc: 'The force responsible for your area, useful for crime reporting.' },
   { icon: Globe2,      label: 'Region & country',      desc: 'England / Scotland / Wales / Northern Ireland + statistical region.' },
   { icon: TreePine,    label: 'Geo coordinates',       desc: 'Latitude / longitude for further local lookups.' },
   { icon: Briefcase,   label: 'LSOA / MSOA codes',     desc: 'Statistical area codes used for census + ONS data.' },
@@ -55,7 +55,7 @@ export default function PostcodeLandingPage() {
       />
 
       {/* ════════════════════════════════════════
-          HERO — single big search input
+          HERO, single big search input
       ════════════════════════════════════════ */}
       <header className="relative max-w-3xl mx-auto px-4 md:px-8 pt-[120px] md:pt-[150px] pb-12 md:pb-16 text-center">
         <span
@@ -81,7 +81,7 @@ export default function PostcodeLandingPage() {
           className="mt-5 text-[16px] md:text-[18px] text-[#45464d] leading-[1.55] max-w-2xl mx-auto"
           style={{ fontFamily: 'Inter, sans-serif' }}
         >
-          Council, MP, NHS region, police force, ward, constituency and more — instantly. Free, no signup, works for every UK postcode.
+          Council, MP, NHS region, police force, ward, constituency and more, instantly. Free, no signup, works for every UK postcode.
         </p>
 
         <div className="mt-9 md:mt-10">
@@ -111,7 +111,7 @@ export default function PostcodeLandingPage() {
       </header>
 
       {/* ════════════════════════════════════════
-          WHAT YOU GET — 8 feature cards
+          WHAT YOU GET, 8 feature cards
       ════════════════════════════════════════ */}
       <section className="relative max-w-[1280px] mx-auto px-4 md:px-10 pb-16 md:pb-24">
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
@@ -134,7 +134,7 @@ export default function PostcodeLandingPage() {
             className="mt-3 text-[15px] md:text-[16px] text-[#45464d] leading-[1.55]"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            All sourced from official open data — postcodes.io, UK Parliament Members API and ONS.
+            All sourced from official open data, postcodes.io, UK Parliament Members API and ONS.
           </p>
         </div>
 
@@ -187,7 +187,7 @@ export default function PostcodeLandingPage() {
           >
             We use <strong className="text-[#101a36]">postcodes.io</strong> (open-source) for the core lookup,
             the <strong className="text-[#101a36]">UK Parliament Members API</strong> for current MP details,
-            and ONS region/area codes. Nothing is stored — your postcode never leaves the request.
+            and ONS region/area codes. Nothing is stored, your postcode never leaves the request.
           </p>
         </div>
       </section>

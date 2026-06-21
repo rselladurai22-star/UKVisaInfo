@@ -50,10 +50,10 @@ export function calculateMarriageAllowance(input: CalcInput): CalcResult {
     return { eligible: false, ineligibleReason: `Lower earner income (£${lower.toLocaleString()}) must be below the Personal Allowance (£${PA.toLocaleString()}).`, annualSaving: 0, backdateSaving: 0, totalSaving: 0, yearsBackdated: [] };
   }
   if (higher > BASIC_TOP) {
-    return { eligible: false, ineligibleReason: `Higher earner income (£${higher.toLocaleString()}) is above basic rate — Marriage Allowance not available.`, annualSaving: 0, backdateSaving: 0, totalSaving: 0, yearsBackdated: [] };
+    return { eligible: false, ineligibleReason: `Higher earner income (£${higher.toLocaleString()}) is above basic rate, Marriage Allowance not available.`, annualSaving: 0, backdateSaving: 0, totalSaving: 0, yearsBackdated: [] };
   }
   if (higher <= PA) {
-    return { eligible: false, ineligibleReason: `Higher earner (£${higher.toLocaleString()}) pays no Income Tax — no benefit to transfer to.`, annualSaving: 0, backdateSaving: 0, totalSaving: 0, yearsBackdated: [] };
+    return { eligible: false, ineligibleReason: `Higher earner (£${higher.toLocaleString()}) pays no Income Tax, no benefit to transfer to.`, annualSaving: 0, backdateSaving: 0, totalSaving: 0, yearsBackdated: [] };
   }
 
   const backdateSlice = BACKDATE_YEARS.slice(0, years);

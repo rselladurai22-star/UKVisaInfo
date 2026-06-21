@@ -30,7 +30,7 @@
  *     Payout:   30% recurring on subscription
  *
  *  5. KAPLAN INTERNATIONAL ENGLISH
- *     Sign up:  Through Awin (https://www.awin.com) — search Kaplan
+ *     Sign up:  Through Awin (https://www.awin.com), search Kaplan
  *     Payout:   8% of course fees (avg £80-200 per booking)
  *
  *  6. REMITLY (money transfer, alternative to Wise)
@@ -43,7 +43,7 @@
  *
  * ─────────────────────────────────────────────────────────────────────
  *  Until you sign up, the `url` field points to the public landing
- *  page so links are still legally compliant — they're marked
+ *  page so links are still legally compliant, they're marked
  *  rel="sponsored nofollow" so Google treats them as ads, not endorsements.
  *  You earn £0 from those clicks but you're not breaking any rules.
  * ─────────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     id: 'wise',
     name: 'Wise (formerly TransferWise)',
     blurb:
-      'Moving money for visa fees, IHS, deposits or living costs? Wise charges the real mid-market exchange rate with no markup — typically 5–8× cheaper than high-street banks for international transfers. Free multi-currency account with UK sort code & account number.',
+      'Moving money for visa fees, IHS, deposits or living costs? Wise charges the real mid-market exchange rate with no markup, typically 5 to 8× cheaper than high-street banks for international transfers. Free multi-currency account with UK sort code & account number.',
     cta: 'Open a free Wise account →',
     // TODO: replace with https://wise.prf.hn/click/camref:[YOUR_CAMREF]
     url: 'https://wise.com/gb/?utm_source=ukvisainfo&utm_medium=affiliate',
@@ -82,9 +82,9 @@ export const AFFILIATES: AffiliateOffer[] = [
   },
   {
     id: 'safetywing',
-    name: 'SafetyWing — Visa-eligible health insurance',
+    name: 'SafetyWing, Visa-eligible health insurance',
     blurb:
-      'Health insurance designed for students, remote workers and new arrivals. Meets UK visa health-coverage requirements for some routes, covers you globally from $45/month, and pays out within 5 days. Recurring monthly subscription — cancel anytime.',
+      'Health insurance designed for students, remote workers and new arrivals. Meets UK visa health-coverage requirements for some routes, covers you globally from $45/month, and pays out within 5 days. Recurring monthly subscription, cancel anytime.',
     cta: 'See SafetyWing plans →',
     // TODO: replace with https://safetywing.com/insurance/nomad?referenceID=[YOUR_REF]
     url: 'https://safetywing.com/?referenceID=ukvisainfo',
@@ -100,7 +100,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     id: 'magoosh-ielts',
     name: 'Magoosh IELTS Prep',
     blurb:
-      'IELTS is required for most UK visa routes. Magoosh offers self-paced online prep with score-improvement guarantee — used by 1M+ test-takers and cheaper than classroom courses. Full mock tests, video lessons, and dedicated speaking/writing practice.',
+      'IELTS is required for most UK visa routes. Magoosh offers self-paced online prep with score-improvement guarantee, used by 1M+ test-takers and cheaper than classroom courses. Full mock tests, video lessons, and dedicated speaking/writing practice.',
     cta: 'See Magoosh IELTS plans →',
     // TODO: replace with your Refersion tracking link from magoosh.com/affiliates
     url: 'https://magoosh.com/ielts/?utm_source=ukvisainfo',
@@ -110,7 +110,7 @@ export const AFFILIATES: AffiliateOffer[] = [
   },
   {
     id: 'e2-language',
-    name: 'E2 Language — IELTS / OET / PTE prep',
+    name: 'E2 Language, IELTS / OET / PTE prep',
     blurb:
       'Specialist test prep for UKVI-approved English tests: IELTS Academic, OET (for nurses) and PTE Academic. Live classes, AI scoring on practice essays, and pass guarantee on premium plans.',
     cta: 'Browse E2 Language courses →',
@@ -134,7 +134,7 @@ export const AFFILIATES: AffiliateOffer[] = [
   },
   {
     id: 'remitly',
-    name: 'Remitly — International money transfer',
+    name: 'Remitly, International money transfer',
     blurb:
       'Send money home or receive funds from family in a single business day. Lower fees than banks for one-off transfers, and £0 fee on your first transfer in most corridors. Useful alternative to Wise for cash pickup destinations.',
     cta: 'Send your first transfer →',
@@ -146,9 +146,9 @@ export const AFFILIATES: AffiliateOffer[] = [
   },
   {
     id: 'photoaid',
-    name: 'PhotoAiD — Online passport photos',
+    name: 'PhotoAiD, Online passport photos',
     blurb:
-      'Take your UK biometric photo at home with your phone — PhotoAiD verifies it meets Home Office spec or refunds you. Cheaper than VFS centres and delivers a digital + printable version.',
+      'Take your UK biometric photo at home with your phone, PhotoAiD verifies it meets Home Office spec or refunds you. Cheaper than VFS centres and delivers a digital + printable version.',
     cta: 'Get your photo →',
     // TODO: replace with your partner link from photoaid.com/en/partners
     url: 'https://photoaid.com/en/photo-uk?utm_source=ukvisainfo',

@@ -3,7 +3,7 @@ import EligibilityPage from './EligibilityPage';
 import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
-  title: 'UK Visa Eligibility Checker — Find Your Route in 60 Seconds',
+  title: 'UK Visa Eligibility Checker, Find Your Route in 60 Seconds',
   description:
     'Free interactive quiz to find which UK visa you qualify for. Answer 4 questions about nationality, residence and purpose to get personalised visa recommendations.',
   alternates: { canonical: '/eligibility' },

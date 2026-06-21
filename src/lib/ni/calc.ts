@@ -1,5 +1,5 @@
 /**
- * UK National Insurance calculator — 2026/27.
+ * UK National Insurance calculator, 2026/27.
  *
  * Source: gov.uk/national-insurance-rates-letters
  *         gov.uk/self-employed-national-insurance-rates
@@ -9,14 +9,14 @@
  *  - Main rate 8% between PT and UEL (since 6 April 2024).
  *  - Additional rate 2% above UEL.
  *  - Employee categories A (standard), H (apprentice <25), M (under 21),
- *    V (veteran first year of civilian employment), Z (deferred — already
- *    paying max NI elsewhere), C (state pension age — no employee NI),
+ *    V (veteran first year of civilian employment), Z (deferred, already
+ *    paying max NI elsewhere), C (state pension age, no employee NI),
  *    B (married woman reduced rate, legacy), J (deferred standard).
  *
  * Class 1 (employer):
  *  - Secondary Threshold (ST) £5,000 from 6 April 2025 (was £9,100).
  *  - Rate 15% from 6 April 2025 (was 13.8%).
- *  - Employment Allowance £10,500 from 6 April 2025 (was £5,000) — most
+ *  - Employment Allowance £10,500 from 6 April 2025 (was £5,000), most
  *    eligible employers can offset up to this much employer NI per year.
  *
  * Class 2 (self-employed):
@@ -54,14 +54,14 @@ export const CLASS2_SMALL_PROFITS_THRESHOLD = 6725;
 export type Category = 'A' | 'B' | 'C' | 'H' | 'J' | 'M' | 'V' | 'Z';
 
 export const CATEGORY_LABEL: Record<Category, string> = {
-  A: 'A — Standard adult employee',
-  B: 'B — Married woman reduced rate (legacy)',
-  C: 'C — Over State Pension age (no employee NI)',
-  H: 'H — Apprentice under 25',
-  J: 'J — Deferred (already paying max NI elsewhere)',
-  M: 'M — Employee under 21',
-  V: 'V — Veteran in first year of civilian employment',
-  Z: 'Z — Deferred under 21',
+  A: 'A, Standard adult employee',
+  B: 'B, Married woman reduced rate (legacy)',
+  C: 'C, Over State Pension age (no employee NI)',
+  H: 'H, Apprentice under 25',
+  J: 'J, Deferred (already paying max NI elsewhere)',
+  M: 'M, Employee under 21',
+  V: 'V, Veteran in first year of civilian employment',
+  Z: 'Z, Deferred under 21',
 };
 
 export interface EmployeeInput {
@@ -112,9 +112,9 @@ export function calculateNI(input: CalcInput): CalcResult {
     if (input.category === 'C') {
       return { kind: 'employee', bands: [], total: 0, effectiveRate: 0, note: 'Category C employees (over State Pension age) pay no employee NI.' };
     }
-    /* M, H, Z, V have the same rates as A for employee — the difference is on the employer side. */
+    /* M, H, Z, V have the same rates as A for employee, the difference is on the employer side. */
     const bands = [
-      bandSlice(sal, PT_ANNUAL, UEL_ANNUAL, EMPLOYEE_MAIN_RATE, `${(EMPLOYEE_MAIN_RATE * 100).toFixed(0)}% on £${PT_ANNUAL.toLocaleString()}–£${UEL_ANNUAL.toLocaleString()}`),
+      bandSlice(sal, PT_ANNUAL, UEL_ANNUAL, EMPLOYEE_MAIN_RATE, `${(EMPLOYEE_MAIN_RATE * 100).toFixed(0)}% on £${PT_ANNUAL.toLocaleString()}, £${UEL_ANNUAL.toLocaleString()}`),
       bandSlice(sal, UEL_ANNUAL, Infinity, EMPLOYEE_ADD_RATE, `${(EMPLOYEE_ADD_RATE * 100).toFixed(0)}% above £${UEL_ANNUAL.toLocaleString()}`),
     ].filter((b) => b.amount > 0);
     const total = bands.reduce((s, b) => s + b.ni, 0);
@@ -151,7 +151,7 @@ export function calculateNI(input: CalcInput): CalcResult {
   /* Self-employed */
   const profit = Math.max(0, input.profit);
   const bands = [
-    bandSlice(profit, CLASS4_LOWER, CLASS4_UPPER, CLASS4_MAIN_RATE, `Class 4 · 6% on £${CLASS4_LOWER.toLocaleString()}–£${CLASS4_UPPER.toLocaleString()}`),
+    bandSlice(profit, CLASS4_LOWER, CLASS4_UPPER, CLASS4_MAIN_RATE, `Class 4 · 6% on £${CLASS4_LOWER.toLocaleString()}, £${CLASS4_UPPER.toLocaleString()}`),
     bandSlice(profit, CLASS4_UPPER, Infinity, CLASS4_ADD_RATE, `Class 4 · 2% above £${CLASS4_UPPER.toLocaleString()}`),
   ].filter((b) => b.amount > 0);
   let total = bands.reduce((s, b) => s + b.ni, 0);
@@ -160,7 +160,7 @@ export function calculateNI(input: CalcInput): CalcResult {
     const class2 = CLASS2_WEEKLY * 52;
     bands.push({ label: `Class 2 voluntary · £${CLASS2_WEEKLY.toFixed(2)}/week × 52`, rate: 0, amount: 52, ni: class2 });
     total += class2;
-    note = 'Class 2 NI is voluntary from 6 April 2024 — paying it protects State Pension entitlement for years with low profits.';
+    note = 'Class 2 NI is voluntary from 6 April 2024, paying it protects State Pension entitlement for years with low profits.';
   } else if (profit < CLASS2_SMALL_PROFITS_THRESHOLD) {
     note = `Profits are below the Small Profits Threshold (£${CLASS2_SMALL_PROFITS_THRESHOLD.toLocaleString()}). Consider paying Class 2 voluntarily to keep State Pension years.`;
   }

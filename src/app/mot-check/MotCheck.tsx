@@ -48,7 +48,7 @@ export default function MotCheck() {
           <>
             <div className="grid grid-cols-2 gap-3">
               <Stat label="Plate" value={info.normalised} sub="Valid UK format" tone="dark" big />
-              <Stat label="Registration Era" value={info.era === 'modern' ? 'Current style' : info.era === 'prefix' ? 'Prefix (1983–2001)' : info.era === 'suffix' ? 'Suffix (1963–1983)' : 'Unknown'} sub={info.ageHint ?? ''} tone="primary" />
+              <Stat label="Registration Era" value={info.era === 'modern' ? 'Current style' : info.era === 'prefix' ? 'Prefix (1983 to 2001)' : info.era === 'suffix' ? 'Suffix (1963 to 1983)' : 'Unknown'} sub={info.ageHint ?? ''} tone="primary" />
             </div>
 
             <Panel title="Official gov.uk checks">
@@ -65,19 +65,19 @@ export default function MotCheck() {
             </Panel>
 
             <Callout tone="info" title="We don't store your plate">
-              The plate stays in your browser. Both gov.uk services are free, public and the authoritative source — paid HPI checks build on these same DVLA records.
+              The plate stays in your browser. Both gov.uk services are free, public and the authoritative source, paid HPI checks build on these same DVLA records.
             </Callout>
           </>
         ) : (
           <Callout tone="warn" title="Not a recognised UK plate">
-            That doesn't match a UK plate format. Try the modern style: two letters, two numbers, three letters — for example AB12 CDE.
+            That doesn't match a UK plate format. Try the modern style: two letters, two numbers, three letters, for example AB12 CDE.
           </Callout>
         )
       }
     >
       <Guide
         title="How to check a vehicle's MOT and tax"
-        intro="Before buying a used car — or just to stay road-legal — you can check any UK vehicle's MOT history and tax status free on gov.uk using only the registration plate. This tool validates the plate and links you straight to the official services."
+        intro="Before buying a used car, or just to stay road-legal, you can check any UK vehicle's MOT history and tax status free on gov.uk using only the registration plate. This tool validates the plate and links you straight to the official services."
       >
         <GuideSection kicker="MOT" title="When a car needs an MOT">
           <p>Cars in Great Britain need their first MOT on the third anniversary of registration, then every year after. The MOT checks safety and emissions; driving without a valid one is illegal and invalidates most insurance. The DVSA's free service shows the expiry date and the full history, including past failures and advisories.</p>
@@ -86,7 +86,7 @@ export default function MotCheck() {
         <GuideSection kicker="Tax" title="Vehicle tax and SORN">
           <p>Every vehicle used or kept on a public road must be taxed (VED). The DVLA enquiry service shows whether a vehicle is currently taxed, its tax band and CO2, and whether it's declared off-road under a SORN. Untaxed vehicles risk fines and clamping.</p>
           <Callout tone="warn" title="Tax doesn't transfer when you buy">
-            When you buy a used car, the seller's tax is cancelled — you must tax it before driving away. There's no longer a paper tax disc, so check the status online.
+            When you buy a used car, the seller's tax is cancelled, you must tax it before driving away. There's no longer a paper tax disc, so check the status online.
           </Callout>
         </GuideSection>
 
@@ -95,14 +95,14 @@ export default function MotCheck() {
         </GuideSection>
 
         <GuideSection kicker="Plate formats" title="Reading a UK number plate">
-          <p>The current style (since 2001) is two letters, two numbers, three letters — the two numbers encode the registration period. Earlier prefix (1983–2001) and suffix (1963–1983) plates use a single age letter. The age of the plate is a quick sanity check against a seller's description.</p>
+          <p>The current style (since 2001) is two letters, two numbers, three letters, the two numbers encode the registration period. Earlier prefix (1983 to 2001) and suffix (1963 to 1983) plates use a single age letter. The age of the plate is a quick sanity check against a seller's description.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common checking mistakes">
           <Mistakes items={[
-            ['Assuming tax carries over on purchase', 'Vehicle tax is cancelled on sale — tax it yourself before driving.'],
+            ['Assuming tax carries over on purchase', 'Vehicle tax is cancelled on sale, tax it yourself before driving.'],
             ['Ignoring repeated advisories', 'The same advisory year after year points to a deferred, growing problem.'],
-            ['Not checking mileage consistency', 'MOT records reveal mileage at each test — a drop suggests a clock issue.'],
+            ['Not checking mileage consistency', 'MOT records reveal mileage at each test, a drop suggests a clock issue.'],
             ['Paying for data you can get free', 'MOT history and tax status are free on gov.uk; paid checks add little for basic facts.'],
           ]} />
         </GuideSection>

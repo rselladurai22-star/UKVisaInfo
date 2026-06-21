@@ -56,7 +56,7 @@ export default function ConsentInit() {
 
   return (
     <>
-      {/* 1. Consent Mode v2 defaults — denied until the user opts in. */}
+      {/* 1. Consent Mode v2 defaults, denied until the user opts in. */}
       <script dangerouslySetInnerHTML={{ __html: consentDefault }} />
       {/* 2. Funding Choices certified CMP message loader. */}
       <script

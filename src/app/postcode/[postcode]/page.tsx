@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   if (!data) {
     return { title: `Postcode ${display} not found`, robots: { index: false, follow: true } };
   }
-  const title = `${display} — ${data.council} · ${data.constituency} · UK Postcode Lookup`;
+  const title = `${display}, ${data.council} · ${data.constituency} · UK Postcode Lookup`;
   const description = `${display} is in ${data.council} (${data.country}). Constituency: ${data.constituency}${data.mp ? `, MP ${data.mp}` : ''}. NHS area: ${data.nhsRegion}. Police: ${data.policeForce}.`;
   return {
     title, description,
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/postcode/${normalisePostcode(postcode)}`, type: 'article' },
     // Per-postcode results are user-driven lookup output, not editorial content.
     // We keep them browsable (e.g. for sharing a specific lookup) but hide them
-    // from Google so they cannot dilute the site's quality signal — only the
+    // from Google so they cannot dilute the site's quality signal, only the
     // /postcode landing page is indexed.
     robots: {
       index: false, follow: true,
@@ -93,7 +93,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
 
       <div className="relative max-w-[1100px] mx-auto px-4 md:px-8 pt-[100px] md:pt-[120px] pb-20">
 
-        {/* Top bar — back link + compact search */}
+        {/* Top bar, back link + compact search */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <Link
             href="/postcode"
@@ -108,7 +108,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
           </div>
         </div>
 
-        {/* Hero — the postcode + headline summary */}
+        {/* Hero, the postcode + headline summary */}
         <header className="mb-8 md:mb-10">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span
@@ -146,7 +146,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
           </p>
         </header>
 
-        {/* RESULTS GRID — 6 cards */}
+        {/* RESULTS GRID, 6 cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
 
           {/* COUNCIL */}
@@ -229,7 +229,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
           />
         </div>
 
-        {/* WHAT YOU CAN DO HERE — related calculators */}
+        {/* WHAT YOU CAN DO HERE, related calculators */}
         <section className="mt-12 md:mt-16">
           <p
             className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#76777e] mb-2"
@@ -256,7 +256,7 @@ export default async function PostcodeResultPage({ params }: RouteParams) {
             <RelatedLink
               href="/visa-types/skilled-worker"
               title="Skilled Worker visa guide"
-              desc={`Apply from any postcode — fee, salary thresholds and process for ${data.country === 'Northern Ireland' ? 'NI' : data.country}.`}
+              desc={`Apply from any postcode, fee, salary thresholds and process for ${data.country === 'Northern Ireland' ? 'NI' : data.country}.`}
             />
             <RelatedLink
               href="/visa-types"

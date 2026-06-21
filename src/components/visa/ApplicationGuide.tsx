@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * ApplicationGuide — Editorial Premium application path guide.
+ * ApplicationGuide, Editorial Premium application path guide.
  *
  * Two clean paths with crystal-clear differentiation:
- *   1. Apply from outside UK (entry clearance) — with nationality filter
- *   2. Switch / extend inside UK — different process, different fee, no VAC
+ *   1. Apply from outside UK (entry clearance), with nationality filter
+ *   2. Switch / extend inside UK, different process, different fee, no VAC
  */
 
 import { useMemo, useState } from 'react';
@@ -43,7 +43,7 @@ type PathId = 'outside' | 'inside';
 
 const SWITCHING_FROM_BY_CATEGORY: Record<string, string[]> = {
   Work:   ['Student visa (completed degree)', 'Graduate visa', 'Health & Care Worker', 'Dependant of a worker', 'Most other long-term visas'],
-  Study:  ['Student visa (course change)', 'Tier 4 (Child) Student', 'Some short-term visas — restrictions apply'],
+  Study:  ['Student visa (course change)', 'Tier 4 (Child) Student', 'Some short-term visas, restrictions apply'],
   Family: ['Most long-term visa categories (Skilled Worker, Student, Health & Care, Graduate)', 'Not from Visitor visa'],
   Visit:  [],
 };
@@ -72,12 +72,12 @@ export default function ApplicationGuide({
   const outsideSteps: Step[] = [
     { title: 'Check you can apply', desc: `Confirm you meet every eligibility requirement for the ${title} before you start. The Home Office refuses on the first missed condition, and the application fee is non-refundable.` },
     { title: 'Get your documents ready', desc: 'Gather your passport, financial evidence, English language proof, and any sponsor or course documents listed below. Originals must be available; certified translations are required for non-English documents.' },
-    { title: 'Apply online on GOV.UK', desc: `Start the application on the official GOV.UK page. You'll be asked about your nationality, the route, and the type of visa. Save and return — the application can take 30–60 minutes.` },
+    { title: 'Apply online on GOV.UK', desc: `Start the application on the official GOV.UK page. You'll be asked about your nationality, the route, and the type of visa. Save and return, the application can take 30 to 60 minutes.` },
     { title: 'Pay the fee and IHS', desc: `Pay the application fee (${fee.split('·')[0].trim()}) and the Immigration Health Surcharge (${ihs}) upfront. Both are paid online by card.` },
     { title: 'Book and attend biometrics', desc: nat.tbTest
         ? `Book your appointment at a UK Visa Application Centre in ${nat.vacCities.split(',')[0].trim()}. You'll provide fingerprints and a photo. You'll also need to complete a TB test at a Home Office-approved clinic before this appointment.`
-        : `Book your appointment at a UK Visa Application Centre (${nat.vacCities.split('—')[0].trim()}). You'll provide fingerprints and a photo. No TB test required for your nationality.` },
-    { title: 'Wait for the decision', desc: `Standard processing is ${processing.outside}. You'll be notified by email. From 2026, your visa is issued as a digital eVisa — no physical BRP. Use the UK Immigration: ID Check app to verify your identity online.` },
+        : `Book your appointment at a UK Visa Application Centre (${nat.vacCities.split(', ')[0].trim()}). You'll provide fingerprints and a photo. No TB test required for your nationality.` },
+    { title: 'Wait for the decision', desc: `Standard processing is ${processing.outside}. You'll be notified by email. From 2026, your visa is issued as a digital eVisa, no physical BRP. Use the UK Immigration: ID Check app to verify your identity online.` },
   ];
 
   const insideSteps: Step[] = [
@@ -134,7 +134,7 @@ export default function ApplicationGuide({
           ) : (
             <>This guide is for people already <strong style={{ fontWeight: 700 }}>inside the UK</strong> on another long-term visa
             who want to switch into the {title} without leaving. Identity is verified using the
-            UK Immigration: ID Check app — no overseas VAC visit.</>
+            UK Immigration: ID Check app, no overseas VAC visit.</>
           )}
         </p>
 
@@ -221,9 +221,9 @@ export default function ApplicationGuide({
             <NatRow
               icon={MapPin}
               label="Visa Application Centre"
-              value={nat.vacCities.split(/[,—]/)[0].trim()}
+              value={nat.vacCities.split(/[, ]/)[0].trim()}
               tone={EMERALD}
-              sub={nat.vacCities.includes(',') || nat.vacCities.includes('—')
+              sub={nat.vacCities.includes(',') || nat.vacCities.includes(', ')
                 ? nat.vacCities
                 : 'Book your biometrics here'}
             />

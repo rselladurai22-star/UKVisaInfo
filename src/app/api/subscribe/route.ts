@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
  *   - RESEND_AUDIENCE_ID    (https://resend.com/audiences)
  *
  * Add them to .env.local locally and to your Vercel project settings
- * for production. No code changes required — this route detects them
+ * for production. No code changes required, this route detects them
  * at runtime and forwards subscriptions to Resend.
  *
  * For other providers (ConvertKit / Beehiiv / MailerLite), follow the
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Provider error' }, { status: 502 });
       }
     } else {
-      // No provider configured — log so the operator knows signups are
+      // No provider configured, log so the operator knows signups are
       // arriving but nothing is being persisted yet.
       console.log(`[subscribe] (NO PROVIDER) ${email} source=${source}`);
     }

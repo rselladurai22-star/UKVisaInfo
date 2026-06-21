@@ -67,7 +67,7 @@ export default function SalaryVsDividend() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Business', href: '/category/business' }, { label: 'Salary vs Dividend' }]}
       title="Salary vs Dividend Calculator"
-      subtitle="Find the most tax-efficient director split for 2025/26 — how much to take as salary and how much as dividends from your limited company profit."
+      subtitle="Find the most tax-efficient director split for 2025/26, how much to take as salary and how much as dividends from your limited company profit."
       calcLabel="Find Optimal Split"
       inputs={
         <Panel title="Company Profit">
@@ -117,7 +117,7 @@ export default function SalaryVsDividend() {
     >
       <Guide
         title="Salary vs dividends for company directors (2025/26)"
-        intro="If you own and run a limited company, you choose how to pay yourself: a salary through PAYE, dividends from post-tax profit, or — almost always best — a mix of both. The optimal split balances National Insurance, corporation tax relief and dividend tax."
+        intro="If you own and run a limited company, you choose how to pay yourself: a salary through PAYE, dividends from post-tax profit, or, almost always best, a mix of both. The optimal split balances National Insurance, corporation tax relief and dividend tax."
       >
         <GuideSection kicker="The trade-off" title="Why a mix beats either extreme">
           <p>Salary and dividends are taxed very differently:</p>
@@ -125,20 +125,20 @@ export default function SalaryVsDividend() {
             <li><strong>Salary</strong> is a deductible company expense (it reduces corporation tax) but attracts income tax and both employee and employer National Insurance.</li>
             <li><strong>Dividends</strong> are paid from profit after corporation tax, so they don't reduce the company's tax, but they carry no NI and are taxed at lower rates (8.75% / 33.75% / 39.35%).</li>
           </ul>
-          <p>The classic answer is a small salary plus dividends — enough salary to protect your State Pension record and use reliefs, with the balance as dividends.</p>
+          <p>The classic answer is a small salary plus dividends, enough salary to protect your State Pension record and use reliefs, with the balance as dividends.</p>
         </GuideSection>
 
         <GuideSection kicker="Salary level" title="How much salary should a director take?">
           <p>Two salary levels dominate the debate for 2025/26:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>£5,000 — the secondary threshold:</strong> below this, the company pays no employer NI, but you don't fully use the personal allowance against salary.</li>
-            <li><strong>£12,570 — the personal allowance:</strong> a higher salary means more corporation-tax relief, but the company pays 15% employer NI on pay above £5,000.</li>
+            <li><strong>£5,000, the secondary threshold:</strong> below this, the company pays no employer NI, but you don't fully use the personal allowance against salary.</li>
+            <li><strong>£12,570, the personal allowance:</strong> a higher salary means more corporation-tax relief, but the company pays 15% employer NI on pay above £5,000.</li>
           </ul>
-          <p>For most single-director companies, a £12,570 salary still wins narrowly because corporation tax relief at 19–26.5% outweighs the 15% employer NI. Companies that can claim the Employment Allowance (which a sole director cannot) favour £12,570 even more clearly.</p>
+          <p>For most single-director companies, a £12,570 salary still wins narrowly because corporation tax relief at 19 to 26.5% outweighs the 15% employer NI. Companies that can claim the Employment Allowance (which a sole director cannot) favour £12,570 even more clearly.</p>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="£60,000 profit">
-          <p>With £60,000 profit, paying a £12,570 salary leaves about £45,000 of company profit, taxed at corporation tax, then drawn as dividends. After the £500 dividend allowance, basic-rate dividends are taxed at 8.75% and higher-rate at 33.75%. Running the numbers, the £12,570-salary route typically leaves a few hundred pounds more than the £5,000 route — small but free money once your payroll is set up.</p>
+          <p>With £60,000 profit, paying a £12,570 salary leaves about £45,000 of company profit, taxed at corporation tax, then drawn as dividends. After the £500 dividend allowance, basic-rate dividends are taxed at 8.75% and higher-rate at 33.75%. Running the numbers, the £12,570-salary route typically leaves a few hundred pounds more than the £5,000 route, small but free money once your payroll is set up.</p>
           <Callout tone="tip" title="Protect your State Pension">
             A salary at or above the Lower Earnings Limit (£6,396 for 2025/26) gives you a qualifying year for the State Pension even if no NI is actually due. This is a key reason not to set salary too low.
           </Callout>
@@ -161,7 +161,7 @@ export default function SalaryVsDividend() {
           <FAQ items={[
             { q: 'Is it better to take salary or dividends?', a: 'A small salary plus dividends is almost always most efficient. Pure salary wastes the NI advantage of dividends; pure dividends wastes corporation-tax relief and may miss State Pension credits.' },
             { q: 'What is the dividend allowance for 2025/26?', a: 'The tax-free dividend allowance is £500. Dividends above that are taxed at 8.75%, 33.75% or 39.35% depending on your income tax band.' },
-            { q: 'Can my spouse be a shareholder?', a: 'Yes, and splitting dividends with a lower-earning spouse who genuinely owns shares can reduce the household tax bill — but get advice to avoid settlements-legislation issues.' },
+            { q: 'Can my spouse be a shareholder?', a: 'Yes, and splitting dividends with a lower-earning spouse who genuinely owns shares can reduce the household tax bill, but get advice to avoid settlements-legislation issues.' },
             { q: 'Do dividends count for a mortgage?', a: 'Lenders usually accept dividends as income, but often want two to three years of company accounts and SA302s, so very low salaries can complicate borrowing.' },
           ]} />
         </GuideSection>

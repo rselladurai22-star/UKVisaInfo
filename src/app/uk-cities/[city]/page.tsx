@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const { city } = await params;
   const c = getCity(city);
   if (!c) return { title: 'City guide not found', robots: { index: false, follow: true } };
-  const title = `Living in ${c.name} on a UK Visa — Cost, Jobs & Sponsors 2026`;
+  const title = `Living in ${c.name} on a UK Visa, Cost, Jobs & Sponsors 2026`;
   const description = `Move to ${c.name}: monthly cost of living, top hiring sectors, popular neighbourhoods for newcomers, NHS access and sponsor activity.`;
-  // Stubs are short data-card pages — keep them browsable but out of search.
+  // Stubs are short data-card pages, keep them browsable but out of search.
   // Conservative: only an explicit 'full' guide is indexable (matches /from).
   const isStub = c.status !== 'full';
   return {
@@ -81,7 +81,7 @@ export default async function CityPage({ params }: RouteParams) {
                 <p className="text-[#1a2240] text-[16px] md:text-[17px] leading-[1.7]">{c.intro}</p>
                 {c.status === 'stub' && (
                   <p className="mt-4 text-[12.5px] text-[#92400e] bg-[#fffbeb] border border-[#fde68a] rounded-xl px-3 py-2 leading-snug">
-                    This guide is a quick brief — full breakdown coming soon.
+                    This guide is a quick brief, full breakdown coming soon.
                   </p>
                 )}
               </Section>
@@ -178,7 +178,7 @@ export default async function CityPage({ params }: RouteParams) {
                     <Row label="City" value={c.name} icon={MapPin} />
                     <Row label="Region" value={c.region} icon={Building2} />
                     <Row label="Cost (single)" value={`£${c.monthlyCost.total}/mo`} icon={Banknote} />
-                    <Row label="Top sector" value={c.topSectors[0]?.sector ?? '—'} icon={Briefcase} />
+                    <Row label="Top sector" value={c.topSectors[0]?.sector ?? ', '} icon={Briefcase} />
                   </dl>
                 </div>
 

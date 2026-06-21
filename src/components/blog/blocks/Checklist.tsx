@@ -111,7 +111,7 @@ export default function Checklist({ name, items, slug }: Props) {
 
       {completedPct === 100 && (
         <div className="mt-4 text-center text-[13px] font-semibold text-emerald-600">
-          🎉 All set — ready to apply.
+          🎉 All set, ready to apply.
         </div>
       )}
     </div>

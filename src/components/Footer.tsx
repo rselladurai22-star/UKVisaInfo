@@ -1,5 +1,5 @@
 /**
- * Footer v4 — "Ledger" chrome.
+ * Footer v4, "Ledger" chrome.
  * Heavy top rule, mono kickers, flat link rows. Single column on phones,
  * four columns from sm. No cards, no boxes.
  */
@@ -79,7 +79,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-3 max-w-xs text-[13.5px] leading-relaxed text-slate-600">
-              Free UK calculators, visa routes and plain-English explainers — checked against
+              Free UK calculators, visa routes and plain-English explainers, checked against
               official sources. No sign-up, no clutter.
             </p>
             <p className="mt-4 flex items-center gap-2 text-[12.5px] font-semibold text-blue-700">
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col justify-between gap-1.5 border-t border-slate-200 pt-5 font-mono text-[11.5px] text-slate-500 sm:flex-row sm:items-center">
-          <span>© 2026 ukdesk — independent & free</span>
+          <span>© 2026 ukdesk, independent & free</span>
           <span>information only · not financial or legal advice</span>
         </div>
       </div>

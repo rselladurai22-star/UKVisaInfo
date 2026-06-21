@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import RefusalAnalyzerClient from './RefusalAnalyzerClient';
 
-const title = 'UK Visa Refusal Analyzer — Decode Your Refusal Letter Free (2026)';
-const description = 'Paste your UK visa refusal letter and get a plain-English breakdown of every refusal ground — how serious it is, what it means, and exactly what to do next. Free, private, no signup required.';
+const title = 'UK Visa Refusal Analyzer, Decode Your Refusal Letter Free (2026)';
+const description = 'Paste your UK visa refusal letter and get a plain-English breakdown of every refusal ground, how serious it is, what it means, and exactly what to do next. Free, private, no signup required.';
 
 export const metadata: Metadata = {
   title,

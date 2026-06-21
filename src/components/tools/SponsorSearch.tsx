@@ -333,7 +333,7 @@ export default function SponsorSearch() {
           </h2>
           <p className="text-sm text-[#52525B] leading-relaxed">
             This search covers the complete Home Office Register of Licensed Sponsors as of
-            mid-May 2026 — 126,530 organisations across Skilled Worker, Health and Care,
+            mid-May 2026 to 126,530 organisations across Skilled Worker, Health and Care,
             Scale-up, Senior or Specialist Worker, Graduate Trainee and other work routes.
             Searches are processed server-side so only the matching results are sent to your browser.
           </p>
@@ -369,7 +369,7 @@ export default function SponsorSearch() {
               href="/blog/uk-skilled-worker-sponsor-licence-how-to-find-2026"
               className="inline-flex items-center gap-2 px-5 py-3 bg-[#18181B] text-white text-sm font-semibold rounded-xl hover:bg-[#4F46E5] transition-colors"
             >
-              How to find a sponsor — full guide
+              How to find a sponsor, full guide
             </Link>
             <Link
               href="/tools/salary-checker"

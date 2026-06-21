@@ -1,5 +1,5 @@
 /**
- * UK ISA allowance + compound growth calculator — 2025/26.
+ * UK ISA allowance + compound growth calculator, 2025/26.
  *
  * Source: gov.uk/individual-savings-accounts
  *         gov.uk/lifetime-isa
@@ -12,7 +12,7 @@
  * LISA bonus: 25% government top-up (max £1,000/year) on contributions
  * LISA accessible: first home (≤ £450k) or age 60+; 25% penalty otherwise
  *
- * NOTE: Stocks & Shares ISA growth is illustrative — not guaranteed.
+ * NOTE: Stocks & Shares ISA growth is illustrative, not guaranteed.
  */
 
 export const ISA_ANNUAL_LIMIT  = 20000;

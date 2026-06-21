@@ -62,14 +62,14 @@ export default function GiftIht() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Estate', href: '/category/estate' }, { label: 'Gift & 7-Year Rule' }]}
       title="Gift IHT & 7-Year Rule Calculator"
-      subtitle="See how much inheritance tax could be due on a lifetime gift if you die within seven years — including taper relief — for 2025/26."
+      subtitle="See how much inheritance tax could be due on a lifetime gift if you die within seven years, including taper relief, for 2025/26."
       calcLabel="Calculate Gift Tax"
       inputs={
         <div className="space-y-4">
           <Panel title="The Gift">
             <div className="space-y-4">
               <Field label="Gift amount"><MoneyInput value={gift} onChange={setGift} step={10000} /></Field>
-              <Field label="Years between gift and death" hint="0–7 years">
+              <Field label="Years between gift and death" hint="0 to 7 years">
                 <NumberInput value={years} onChange={setYears} min={0} step={1} suffix=" yrs" />
               </Field>
               <Field label="Other gifts in the 7 years BEFORE this one" hint="Earlier gifts use up the nil-rate band first">
@@ -88,7 +88,7 @@ export default function GiftIht() {
       results={
         <>
           <div className="grid grid-cols-2 gap-3">
-            <Stat label="IHT on the Gift" value={gbp(r.tax)} sub={r.survived ? 'Fully exempt — 7+ years' : `Effective rate ${(r.rate * 100).toFixed(0)}%`} tone="dark" big />
+            <Stat label="IHT on the Gift" value={gbp(r.tax)} sub={r.survived ? 'Fully exempt, 7+ years' : `Effective rate ${(r.rate * 100).toFixed(0)}%`} tone="dark" big />
             <Stat label="Taper Relief Saved" value={gbp(r.reliefAmount)} sub={`${(r.relief * 100).toFixed(0)}% relief`} tone="primary" />
             <Stat label="Taxable Gift" value={gbp(r.taxablePet)} sub="Above available nil-rate band" tone="accent" />
             <Stat label="Covered by NRB" value={gbp(Math.min(r.pet, r.nrbAvailable))} sub="No tax on this part" />
@@ -107,7 +107,7 @@ export default function GiftIht() {
 
           {!r.survived && r.taxablePet === 0 && (
             <Callout tone="tip" title="No tax on this gift">
-              The gift sits within the available nil-rate band, so no IHT is due on it — but it still reduces the nil-rate band available to the rest of your estate.
+              The gift sits within the available nil-rate band, so no IHT is due on it, but it still reduces the nil-rate band available to the rest of your estate.
             </Callout>
           )}
 
@@ -126,11 +126,11 @@ export default function GiftIht() {
         <GuideSection kicker="Taper relief" title="The sliding scale of tax">
           <p>Taper relief reduces the tax on a gift (not the gift's value) based on how long you survived:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>0–3 years: no relief — full 40%.</li>
-            <li>3–4 years: 20% relief — effective 32%.</li>
-            <li>4–5 years: 40% relief — effective 24%.</li>
-            <li>5–6 years: 60% relief — effective 16%.</li>
-            <li>6–7 years: 80% relief — effective 8%.</li>
+            <li>0 to 3 years: no relief, full 40%.</li>
+            <li>3 to 4 years: 20% relief, effective 32%.</li>
+            <li>4 to 5 years: 40% relief, effective 24%.</li>
+            <li>5 to 6 years: 60% relief, effective 16%.</li>
+            <li>6 to 7 years: 80% relief, effective 8%.</li>
             <li>7+ years: fully exempt.</li>
           </ul>
           <Callout tone="warn" title="Taper only helps above the nil-rate band">
@@ -141,16 +141,16 @@ export default function GiftIht() {
         <GuideSection kicker="Exemptions" title="Gifts you can make tax-free">
           <p>Several gifts are exempt regardless of the seven-year rule:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Annual exemption — £3,000</strong> a year, and you can carry forward one unused year.</li>
-            <li><strong>Small gifts — £250</strong> per person per year.</li>
-            <li><strong>Wedding gifts</strong> — up to £5,000 to a child, £2,500 to a grandchild, £1,000 to others.</li>
-            <li><strong>Gifts from surplus income</strong> — regular gifts out of income that don't affect your standard of living.</li>
+            <li><strong>Annual exemption, £3,000</strong> a year, and you can carry forward one unused year.</li>
+            <li><strong>Small gifts, £250</strong> per person per year.</li>
+            <li><strong>Wedding gifts</strong>, up to £5,000 to a child, £2,500 to a grandchild, £1,000 to others.</li>
+            <li><strong>Gifts from surplus income</strong>, regular gifts out of income that don't affect your standard of living.</li>
             <li>Gifts to spouses, civil partners and UK charities are always exempt.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A £200,000 gift, death after 4 years">
-          <p>You gift £200,000 and use this year's £3,000 exemption, leaving a £197,000 PET. You made no earlier gifts, so your full £325,000 nil-rate band is available — the gift is entirely within it. Result: no tax on the gift, even though you died within seven years. However, that £197,000 reduces the nil-rate band available to the rest of your estate to £128,000, so the tax simply lands elsewhere.</p>
+          <p>You gift £200,000 and use this year's £3,000 exemption, leaving a £197,000 PET. You made no earlier gifts, so your full £325,000 nil-rate band is available, the gift is entirely within it. Result: no tax on the gift, even though you died within seven years. However, that £197,000 reduces the nil-rate band available to the rest of your estate to £128,000, so the tax simply lands elsewhere.</p>
           <p>If instead you had already gifted £200,000 before this one, only £125,000 of nil-rate band remains, leaving £72,000 of this gift taxable. At year four, 40% relief applies, giving tax of £72,000 × 24% = £17,280.</p>
         </GuideSection>
 
@@ -168,7 +168,7 @@ export default function GiftIht() {
             { q: 'Who pays the tax on a gift?', a: 'Normally the person who received the gift is liable for any IHT on it if the giver dies within seven years, though it can fall to the estate.' },
             { q: 'Does the 7-year clock reset with each gift?', a: 'Each gift has its own seven-year clock from its own date. Earlier gifts are counted first against the nil-rate band.' },
             { q: 'Can I give my house to my children?', a: 'You can, but if you keep living there without paying market rent it is a "gift with reservation of benefit" and stays in your estate.' },
-            { q: 'Are wedding gifts really tax-free?', a: 'Yes — up to £5,000 for a child, £2,500 for a grandchild and £1,000 for anyone else, on top of the annual exemption.' },
+            { q: 'Are wedding gifts really tax-free?', a: 'Yes, up to £5,000 for a child, £2,500 for a grandchild and £1,000 for anyone else, on top of the annual exemption.' },
           ]} />
         </GuideSection>
         <RelatedGuides calc="/gift-iht-calculator" />

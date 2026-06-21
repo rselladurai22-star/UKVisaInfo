@@ -24,7 +24,7 @@ export interface NewsItem {
 export const NEWS_ITEMS: NewsItem[] = [
   {
     slug: 'spring-2026-fee-uplift',
-    title: '8 April 2026 visa-fee uplift — verified from gov.uk',
+    title: '8 April 2026 visa-fee uplift, verified from gov.uk',
     summary: 'Home Office fee table published 18 March 2026. ILR up 6.5% to £3,226. Skilled Worker, Student, Visitor all up. Child citizenship (MN1) cut to £1,000.',
     date: '2026-04-08',
     category: 'Fees',
@@ -35,7 +35,7 @@ export const NEWS_ITEMS: NewsItem[] = [
 - **Indefinite Leave to Remain** (all categories Set M/O/F): £3,029 → **£3,226** (+6.5%).
 - **Long Residence ILR**: now matches the standard fee at £3,226.
 - **British citizenship (adult, Form AN)**: £1,605 → **£1,709**, plus £130 ceremony fee (unchanged) = **£1,839 total**.
-- **Child citizenship registration (Form MN1)**: £1,214 → **£1,000** — a £214 reduction.
+- **Child citizenship registration (Form MN1)**: £1,214 → **£1,000**, a £214 reduction.
 
 **Main visas**
 
@@ -85,7 +85,7 @@ If you haven't created your UKVI account yet:
 - Switch in-country to other Skilled Worker occupations if they meet the salary and SOC code rules.
 - Apply for the Health & Care visa under nursing or paramedic occupations if qualified.
 
-The route closure does not affect the wider Health & Care visa — nurses, midwives, paramedics and senior healthcare professionals remain eligible.`,
+The route closure does not affect the wider Health & Care visa, nurses, midwives, paramedics and senior healthcare professionals remain eligible.`,
     source: 'https://www.gov.uk/skilled-worker-visa',
     tags: ['Health & Care', 'Skilled Worker'],
   },

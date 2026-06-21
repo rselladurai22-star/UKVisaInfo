@@ -59,7 +59,7 @@ export default function DebtPayoffPlanner() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Debt Payoff Planner' }]}
       title="Debt Payoff Planner"
-      subtitle="Add your debts and a spare monthly amount, and compare the two proven payoff strategies — avalanche (cheapest) and snowball (most motivating) — to see how fast you could be debt-free."
+      subtitle="Add your debts and a spare monthly amount, and compare the two proven payoff strategies, avalanche (cheapest) and snowball (most motivating), to see how fast you could be debt-free."
       calcLabel="Build my plan"
       inputs={
         <>
@@ -81,7 +81,7 @@ export default function DebtPayoffPlanner() {
             </div>
           </Panel>
           <Panel title="Extra you can pay">
-            <Field label={`Spare monthly budget — ${gbp(extra)}`} hint="On top of the minimum payments"><Slider value={extra} onChange={setExtra} min={0} max={1000} step={10} /></Field>
+            <Field label={`Spare monthly budget, ${gbp(extra)}`} hint="On top of the minimum payments"><Slider value={extra} onChange={setExtra} min={0} max={1000} step={10} /></Field>
           </Panel>
         </>
       }
@@ -115,17 +115,17 @@ export default function DebtPayoffPlanner() {
         intro="When you owe on several cards and loans, the order you pay them off changes how much interest you pay and how motivated you stay. This guide explains the snowball and avalanche methods and how to build a plan that works."
       >
         <GuideSection kicker="The principle" title="Minimums everywhere, extra on one">
-          <p>The core of any payoff plan is simple: pay the <strong>minimum on every debt</strong> to stay current, then throw every spare pound at <strong>one target debt</strong>. When that debt clears, its old payment rolls onto the next target — a snowballing effect that accelerates as you go. The only question is which debt to target first, and that&apos;s where the two methods differ.</p>
+          <p>The core of any payoff plan is simple: pay the <strong>minimum on every debt</strong> to stay current, then throw every spare pound at <strong>one target debt</strong>. When that debt clears, its old payment rolls onto the next target, a snowballing effect that accelerates as you go. The only question is which debt to target first, and that&apos;s where the two methods differ.</p>
         </GuideSection>
         <GuideSection kicker="Method 1" title="The avalanche (cheapest)">
-          <p>The <strong>avalanche</strong> method targets the debt with the <strong>highest APR</strong> first, regardless of balance. Mathematically this is the cheapest route — you kill your most expensive interest first, so you pay the least overall and usually clear everything fastest. If you&apos;re disciplined and motivated by saving money, avalanche wins.</p>
+          <p>The <strong>avalanche</strong> method targets the debt with the <strong>highest APR</strong> first, regardless of balance. Mathematically this is the cheapest route, you kill your most expensive interest first, so you pay the least overall and usually clear everything fastest. If you&apos;re disciplined and motivated by saving money, avalanche wins.</p>
         </GuideSection>
         <GuideSection kicker="Method 2" title="The snowball (most motivating)">
-          <p>The <strong>snowball</strong> method targets the <strong>smallest balance</strong> first. You clear individual debts quickly, which delivers early wins and momentum — behavioural research suggests many people stick with it better. It can cost a little more interest than avalanche, but the best plan is the one you actually finish. If you&apos;ve struggled to stay motivated, snowball may be the smarter choice.</p>
+          <p>The <strong>snowball</strong> method targets the <strong>smallest balance</strong> first. You clear individual debts quickly, which delivers early wins and momentum, behavioural research suggests many people stick with it better. It can cost a little more interest than avalanche, but the best plan is the one you actually finish. If you&apos;ve struggled to stay motivated, snowball may be the smarter choice.</p>
           <Callout tone="tip" title="A hybrid works too">Some people clear one tiny balance first for a quick win (snowball), then switch to highest-APR (avalanche). The planner shows both so you can choose.</Callout>
         </GuideSection>
         <GuideSection kicker="Boost it" title="Finding extra to pay">
-          <p>Even a small extra payment dramatically shortens the timeline. Free up cash by cutting subscriptions, switching to 0% balance transfers on expensive cards (so payments clear the balance, not interest), and putting any windfalls straight onto the target debt. Avoid taking on new debt while you repay — and if your debts are unaffordable, get free advice from StepChange, National Debtline or Citizens Advice.</p>
+          <p>Even a small extra payment dramatically shortens the timeline. Free up cash by cutting subscriptions, switching to 0% balance transfers on expensive cards (so payments clear the balance, not interest), and putting any windfalls straight onto the target debt. Avoid taking on new debt while you repay, and if your debts are unaffordable, get free advice from StepChange, National Debtline or Citizens Advice.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
@@ -137,9 +137,9 @@ export default function DebtPayoffPlanner() {
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Snowball or avalanche — which is better?', a: 'Avalanche (highest APR first) costs the least interest. Snowball (smallest balance first) clears debts faster for motivation. Both work; pick the one you&apos;ll stick to.' },
-            { q: 'Should I save or clear debt first?', a: 'Keep a small emergency buffer (e.g. £1,000), then prioritise clearing high-interest debt — its rate almost always beats savings interest. Maintain pension contributions if matched by an employer.' },
-            { q: 'Do balance transfers help a payoff plan?', a: 'Yes — moving expensive card debt to a 0% deal means your payments clear the balance instead of interest, accelerating either method.' },
+            { q: 'Snowball or avalanche, which is better?', a: 'Avalanche (highest APR first) costs the least interest. Snowball (smallest balance first) clears debts faster for motivation. Both work; pick the one you&apos;ll stick to.' },
+            { q: 'Should I save or clear debt first?', a: 'Keep a small emergency buffer (e.g. £1,000), then prioritise clearing high-interest debt, its rate almost always beats savings interest. Maintain pension contributions if matched by an employer.' },
+            { q: 'Do balance transfers help a payoff plan?', a: 'Yes, moving expensive card debt to a 0% deal means your payments clear the balance instead of interest, accelerating either method.' },
             { q: 'What if I can&apos;t afford the minimums?', a: 'Seek free debt advice immediately (StepChange, National Debtline, Citizens Advice). Solutions like a Debt Management Plan may suit better than a payoff plan.' },
           ]} />
         </GuideSection>

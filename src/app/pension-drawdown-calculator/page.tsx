@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PensionDrawdown from './PensionDrawdown';
 
 export const metadata: Metadata = {
-  title: 'Pension Drawdown Calculator 2025/26 — How Long Will It Last? | UKDesk',
+  title: 'Pension Drawdown Calculator 2025/26, How Long Will It Last? | UKDesk',
   description:
     'Free UK pension drawdown calculator. See how long your pot lasts at a chosen yearly income after taking 25% tax-free cash, whether your withdrawal rate is sustainable, and drawdown vs annuity.',
   alternates: { canonical: '/pension-drawdown-calculator' },

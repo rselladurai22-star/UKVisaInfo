@@ -61,7 +61,7 @@ export default function CorpTax() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Business', href: '/category/business' }, { label: 'Corporation Tax' }]}
       title="Corporation Tax Calculator"
-      subtitle="Work out your UK limited company corporation tax for 2025/26 — 19% small profits rate, 25% main rate, and marginal relief in between."
+      subtitle="Work out your UK limited company corporation tax for 2025/26 to 19% small profits rate, 25% main rate, and marginal relief in between."
       calcLabel="Calculate Corporation Tax"
       inputs={
         <Panel title="Company Profit">
@@ -69,7 +69,7 @@ export default function CorpTax() {
             <Field label="Taxable profit (after allowable expenses)" hint="Profit chargeable to corporation tax for the accounting period">
               <MoneyInput value={profit} onChange={setProfit} step={5000} />
             </Field>
-            <Field label="Associated companies" hint="Other companies under common control — they share the £50k/£250k thresholds">
+            <Field label="Associated companies" hint="Other companies under common control, they share the £50k/£250k thresholds">
               <NumberInput value={associated} onChange={setAssociated} min={0} step={1} />
             </Field>
           </div>
@@ -98,7 +98,7 @@ export default function CorpTax() {
           {r.band === 'marginal' && (
             <Callout tone="warn" title="You are in the marginal relief zone">
               Profits between {gbp(r.lower)} and {gbp(r.upper)} are taxed at an effective{' '}
-              <strong>26.5%</strong> on each extra pound — higher than the 25% main rate. Pension
+              <strong>26.5%</strong> on each extra pound, higher than the 25% main rate. Pension
               contributions or timing income can reduce the bite.
             </Callout>
           )}
@@ -109,13 +109,13 @@ export default function CorpTax() {
     >
       <Guide
         title="UK Corporation Tax explained (2025/26)"
-        intro="Every UK limited company pays corporation tax on its profits. Since April 2023 the rate is no longer a flat 19% — it depends on how much profit you make, with a tapering 'marginal relief' band in the middle. Here's how it works."
+        intro="Every UK limited company pays corporation tax on its profits. Since April 2023 the rate is no longer a flat 19%, it depends on how much profit you make, with a tapering 'marginal relief' band in the middle. Here's how it works."
       >
         <GuideSection kicker="The rates" title="Three rates, two thresholds">
           <p>For the 2025/26 financial year there are effectively three outcomes depending on your taxable profit:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Small profits rate — 19%:</strong> applies if your profits are £50,000 or less.</li>
-            <li><strong>Main rate — 25%:</strong> applies if your profits are £250,000 or more.</li>
+            <li><strong>Small profits rate, 19%:</strong> applies if your profits are £50,000 or less.</li>
+            <li><strong>Main rate, 25%:</strong> applies if your profits are £250,000 or more.</li>
             <li><strong>Marginal relief:</strong> between £50,000 and £250,000 you pay the 25% main rate but get a reduction, giving a smooth taper. The effective rate on profit inside this band works out at 26.5% per extra pound.</li>
           </ul>
         </GuideSection>
@@ -139,11 +139,11 @@ export default function CorpTax() {
         </GuideSection>
 
         <GuideSection kicker="Watch out" title="Associated companies share the thresholds">
-          <p>If you control more than one company (or your group does), the £50,000 and £250,000 thresholds are divided by the number of associated companies plus one. Two associated companies means the small profits ceiling drops to £25,000 each and the main-rate floor to £125,000 — pushing more profit into higher tax. This catches people running several limited companies.</p>
+          <p>If you control more than one company (or your group does), the £50,000 and £250,000 thresholds are divided by the number of associated companies plus one. Two associated companies means the small profits ceiling drops to £25,000 each and the main-rate floor to £125,000, pushing more profit into higher tax. This catches people running several limited companies.</p>
         </GuideSection>
 
         <GuideSection kicker="Pay & file" title="Deadlines you cannot miss">
-          <p>Corporation tax is due <strong>9 months and 1 day</strong> after the end of your accounting period — before the company tax return (CT600) deadline, which is 12 months after period end. Large companies (profits over £1.5m) pay in quarterly instalments instead.</p>
+          <p>Corporation tax is due <strong>9 months and 1 day</strong> after the end of your accounting period, before the company tax return (CT600) deadline, which is 12 months after period end. Large companies (profits over £1.5m) pay in quarterly instalments instead.</p>
           <Callout tone="warn" title="Pay before you file">
             Unlike personal tax, the corporation tax payment deadline comes <em>before</em> the filing deadline. Missing it triggers interest from HMRC immediately.
           </Callout>
@@ -152,9 +152,9 @@ export default function CorpTax() {
         <GuideSection kicker="Avoid these" title="Common corporation tax mistakes">
           <Mistakes items={[
             ['Forgetting associated companies', 'Running several limited companies splits your thresholds, quietly raising the effective rate on each one.'],
-            ['Confusing turnover with profit', 'Corporation tax is charged on profit after allowable expenses and capital allowances — not on sales.'],
+            ['Confusing turnover with profit', 'Corporation tax is charged on profit after allowable expenses and capital allowances, not on sales.'],
             ['Missing the payment deadline', 'Tax is due 9 months and 1 day after period end, well before the CT600 filing deadline.'],
-            ['Ignoring marginal relief planning', 'Profits in the £50k–£250k band cost 26.5% at the margin; pension contributions can be more tax-efficient than leaving cash in the company.'],
+            ['Ignoring marginal relief planning', 'Profits in the £50k, £250k band cost 26.5% at the margin; pension contributions can be more tax-efficient than leaving cash in the company.'],
           ]} />
         </GuideSection>
 
@@ -162,7 +162,7 @@ export default function CorpTax() {
           <FAQ items={[
             { q: 'When did the 25% rate start?', a: 'The 25% main rate and marginal relief system began on 1 April 2023, replacing the previous flat 19% rate. They continue for 2025/26.' },
             { q: 'Do I pay corporation tax and dividend tax?', a: 'Yes. The company pays corporation tax on profits, then you personally pay dividend tax when you extract profit as dividends. This is "double taxation" and why salary/dividend planning matters.' },
-            { q: 'Can I reduce my corporation tax bill?', a: 'Legitimately, yes — employer pension contributions, the Annual Investment Allowance on equipment, R&D relief, and claiming all allowable expenses all reduce taxable profit.' },
+            { q: 'Can I reduce my corporation tax bill?', a: 'Legitimately, yes, employer pension contributions, the Annual Investment Allowance on equipment, R&D relief, and claiming all allowable expenses all reduce taxable profit.' },
             { q: 'What if my accounting period is not 12 months?', a: 'The thresholds are pro-rated for shorter or longer periods. This calculator assumes a standard 12-month period.' },
           ]} />
         </GuideSection>

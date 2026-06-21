@@ -1,15 +1,15 @@
 /**
- * UK Dividend tax calculator — 2026/27.
+ * UK Dividend tax calculator, 2026/27.
  *
  * Source: gov.uk/tax-on-dividends
  *
  * Rules:
  * - Personal Allowance (£12,570) applies first to any non-dividend income;
  *   unused PA can cover dividends.
- * - Dividend Allowance of £500 (since 6 April 2024) — taxed at 0%.
+ * - Dividend Allowance of £500 (since 6 April 2024), taxed at 0%.
  * - After PA + DA, dividends are stacked on top of other income and taxed at:
  *     basic     8.75%   (within basic-rate band, up to £50,270)
- *     higher   33.75%   (£50,271 – £125,140)
+ *     higher   33.75%   (£50,271 to £125,140)
  *     additional 39.35% (above £125,140)
  *
  * Note: Personal Allowance tapers £1 for every £2 over £100k.

@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Tools index v5 — "Clean Slate directory".
+ * Tools index v5, "Clean Slate directory".
  * White / slate / blue. Fresh layout: a sticky category rail on the left
  * (desktop) navigates the index; the right column is one continuous run of
  * re-skinned category sections. Search filters live; on mobile the rail
@@ -77,7 +77,7 @@ export default function ToolsClient() {
             The tool index<span className="text-blue-600">.</span>
           </h1>
           <p className="mt-2.5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-[16px]">
-            {ALL_LIVE} live calculators and checkers across {CATEGORIES.length} areas — verified
+            {ALL_LIVE} live calculators and checkers across {CATEGORIES.length} areas, verified
             against GOV.UK, HMRC and ONS. No sign-up.
           </p>
         </header>

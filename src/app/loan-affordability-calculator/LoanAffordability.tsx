@@ -56,7 +56,7 @@ export default function LoanAffordability() {
           </Panel>
           <Panel title="Loan & Target">
             <div className="space-y-4">
-              <Field label="Target debt-to-income (%)" hint="Lenders prefer under 36–43%"><NumberInput value={targetDti} onChange={setTargetDti} min={1} step={1} suffix="%" /></Field>
+              <Field label="Target debt-to-income (%)" hint="Lenders prefer under 36 to 43%"><NumberInput value={targetDti} onChange={setTargetDti} min={1} step={1} suffix="%" /></Field>
               <Field label="Expected APR (%)"><NumberInput value={apr} onChange={setApr} min={0} step={0.1} suffix="%" /></Field>
               <Field label="Loan term (months)"><NumberInput value={months} onChange={setMonths} min={1} step={6} suffix=" mo" /></Field>
             </div>
@@ -87,25 +87,25 @@ export default function LoanAffordability() {
             </Callout>
           )}
 
-          <p className="text-[11px] text-on-surface-variant">Estimate only. Lenders use their own affordability rules, stress tests and credit scoring — this DTI-based figure is a guide, not a guarantee of approval. Borrow only what you can comfortably repay.</p>
+          <p className="text-[11px] text-on-surface-variant">Estimate only. Lenders use their own affordability rules, stress tests and credit scoring, this DTI-based figure is a guide, not a guarantee of approval. Borrow only what you can comfortably repay.</p>
         </>
       }
     >
       <Guide
         title="How much can you afford to borrow?"
-        intro="Before taking a loan, it's worth checking what you can realistically afford — not just what a lender might offer. The debt-to-income ratio (DTI) is the key measure: the share of your income already going on debt. Keep it sensible and borrowing stays manageable."
+        intro="Before taking a loan, it's worth checking what you can realistically afford, not just what a lender might offer. The debt-to-income ratio (DTI) is the key measure: the share of your income already going on debt. Keep it sensible and borrowing stays manageable."
       >
         <GuideSection kicker="The basics" title="What is debt-to-income?">
           <p>Your <strong>debt-to-income ratio</strong> is your total monthly debt payments (including rent or mortgage) divided by your gross monthly income, as a percentage. Lenders use it to judge affordability:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>Under 36%:</strong> generally comfortable.</li>
-            <li><strong>36–43%:</strong> manageable but watched closely.</li>
+            <li><strong>36 to 43%:</strong> manageable but watched closely.</li>
             <li><strong>Over 43%:</strong> many lenders become reluctant to lend more.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="The maths" title="From DTI to a loan amount">
-          <p>Start with your gross monthly income and apply your target DTI to get the maximum you should spend servicing debt. Subtract what you already pay on housing and other debts — what's left is your affordable new monthly payment. Working backwards from that payment, the APR and the term gives the loan size that fits.</p>
+          <p>Start with your gross monthly income and apply your target DTI to get the maximum you should spend servicing debt. Subtract what you already pay on housing and other debts, what's left is your affordable new monthly payment. Working backwards from that payment, the APR and the term gives the loan size that fits.</p>
         </GuideSection>
 
         <GuideSection kicker="Lenders" title="Why approval isn't guaranteed">
@@ -116,7 +116,7 @@ export default function LoanAffordability() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="£35,000 income, modest commitments">
-          <p>On £35,000 gross (£2,917 a month), a 36% DTI target allows about £1,050 of total debt servicing. With £900 rent and £150 of other debt, you're already at the limit — leaving little headroom. Reducing the existing debt, or choosing a longer term, would free up affordable monthly capacity for a new loan.</p>
+          <p>On £35,000 gross (£2,917 a month), a 36% DTI target allows about £1,050 of total debt servicing. With £900 rent and £150 of other debt, you're already at the limit, leaving little headroom. Reducing the existing debt, or choosing a longer term, would free up affordable monthly capacity for a new loan.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common affordability mistakes">

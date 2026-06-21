@@ -41,15 +41,15 @@ export default function PipChecker() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Benefits', href: '/category/benefits' }, { label: 'PIP Checker' }]}
       title="PIP Benefit Checker"
-      subtitle="Estimate your Personal Independence Payment for 2025/26 from your daily living and mobility points — standard and enhanced rates."
+      subtitle="Estimate your Personal Independence Payment for 2025/26 from your daily living and mobility points, standard and enhanced rates."
       calcLabel="Check PIP Entitlement"
       inputs={
         <Panel title="Your Assessment Points">
           <div className="space-y-4">
-            <Field label="Daily living points" hint="8–11 = standard, 12+ = enhanced">
+            <Field label="Daily living points" hint="8 to 11 = standard, 12+ = enhanced">
               <NumberInput value={dlPoints} onChange={setDlPoints} min={0} step={1} suffix=" pts" />
             </Field>
-            <Field label="Mobility points" hint="8–11 = standard, 12+ = enhanced">
+            <Field label="Mobility points" hint="8 to 11 = standard, 12+ = enhanced">
               <NumberInput value={mobPoints} onChange={setMobPoints} min={0} step={1} suffix=" pts" />
             </Field>
             <p className="text-[11px] text-on-surface-variant">Points come from the PIP assessment across 10 daily living and 2 mobility activities. This estimates the award once your points are known.</p>
@@ -61,8 +61,8 @@ export default function PipChecker() {
           <div className="grid grid-cols-2 gap-3">
             <Stat label="Weekly PIP" value={gbp(r.weekly, 2)} sub="Both components" tone="dark" big />
             <Stat label="Per Month" value={gbp(r.monthly)} sub="Paid every 4 weeks" tone="primary" />
-            <Stat label="Daily Living" value={r.dl.rate > 0 ? gbp(r.dl.rate, 2) : '—'} sub={r.dl.level} tone="accent" />
-            <Stat label="Mobility" value={r.mob.rate > 0 ? gbp(r.mob.rate, 2) : '—'} sub={r.mob.level} />
+            <Stat label="Daily Living" value={r.dl.rate > 0 ? gbp(r.dl.rate, 2) : ', '} sub={r.dl.level} tone="accent" />
+            <Stat label="Mobility" value={r.mob.rate > 0 ? gbp(r.mob.rate, 2) : ', '} sub={r.mob.level} />
           </div>
 
           <Panel title="Your award">
@@ -79,33 +79,33 @@ export default function PipChecker() {
             </Callout>
           )}
 
-          <p className="text-[11px] text-on-surface-variant">Estimate for 2025/26. PIP is tax-free and not means-tested. The actual award depends on a DWP health assessment. Reform of PIP eligibility has been proposed — check current rules.</p>
+          <p className="text-[11px] text-on-surface-variant">Estimate for 2025/26. PIP is tax-free and not means-tested. The actual award depends on a DWP health assessment. Reform of PIP eligibility has been proposed, check current rules.</p>
         </>
       }
     >
       <Guide
         title="Personal Independence Payment (PIP) explained"
-        intro="PIP helps with the extra costs of a long-term health condition or disability. It's tax-free, not means-tested, and you can get it whether you work or not. It has two parts — daily living and mobility — each paid at a standard or enhanced rate based on assessment points."
+        intro="PIP helps with the extra costs of a long-term health condition or disability. It's tax-free, not means-tested, and you can get it whether you work or not. It has two parts, daily living and mobility, each paid at a standard or enhanced rate based on assessment points."
       >
         <GuideSection kicker="The two parts" title="Daily living and mobility">
           <p>PIP has two separate components, and you can get one or both:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Daily living</strong> — for help with everyday tasks: standard £{DL_STANDARD.toFixed(2)}/week, enhanced £{DL_ENHANCED.toFixed(2)}/week.</li>
-            <li><strong>Mobility</strong> — for getting around: standard £{MOB_STANDARD.toFixed(2)}/week, enhanced £{MOB_ENHANCED.toFixed(2)}/week.</li>
+            <li><strong>Daily living</strong>, for help with everyday tasks: standard £{DL_STANDARD.toFixed(2)}/week, enhanced £{DL_ENHANCED.toFixed(2)}/week.</li>
+            <li><strong>Mobility</strong>, for getting around: standard £{MOB_STANDARD.toFixed(2)}/week, enhanced £{MOB_ENHANCED.toFixed(2)}/week.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="The points" title="How the rate is decided">
           <p>An assessment scores you across 10 daily living activities and 2 mobility activities, looking at how your condition affects you reliably, repeatedly and safely. For each component:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong>8–11 points</strong> → standard rate.</li>
+            <li><strong>8 to 11 points</strong> → standard rate.</li>
             <li><strong>12 or more points</strong> → enhanced rate.</li>
             <li>Fewer than 8 points → no award for that component.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Key features" title="Tax-free and a passport to more">
-          <p>PIP is not taxed and doesn't reduce other benefits — in fact it can <strong>increase</strong> them. Getting PIP can unlock extra amounts in Universal Credit, a Council Tax reduction, the Blue Badge, and entitle a carer to Carer's Allowance.</p>
+          <p>PIP is not taxed and doesn't reduce other benefits, in fact it can <strong>increase</strong> them. Getting PIP can unlock extra amounts in Universal Credit, a Council Tax reduction, the Blue Badge, and entitle a carer to Carer's Allowance.</p>
           <Callout tone="tip" title="It can passport other help">
             Because PIP can trigger a carer's claim and extra benefit elements, it's worth checking the knock-on entitlements if your PIP is awarded.
           </Callout>
@@ -117,7 +117,7 @@ export default function PipChecker() {
 
         <GuideSection kicker="Avoid these" title="Common PIP mistakes">
           <Mistakes items={[
-            ['Underselling your worst days', 'The assessment considers whether you can do tasks reliably and repeatedly — describe your bad days, not just your best.'],
+            ['Underselling your worst days', 'The assessment considers whether you can do tasks reliably and repeatedly, describe your bad days, not just your best.'],
             ['Missing the reliability test', 'You score points if you cannot do something safely, to an acceptable standard, repeatedly, or in reasonable time.'],
             ['Not gathering evidence', 'Supporting letters from GPs, consultants and carers strengthen a claim significantly.'],
             ['Giving up after refusal', 'Many awards are won at mandatory reconsideration or appeal, so challenge a decision you think is wrong.'],
@@ -126,7 +126,7 @@ export default function PipChecker() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Is PIP means-tested?', a: 'No. PIP is not affected by your income, savings or whether you work — it is based on how your condition affects you.' },
+            { q: 'Is PIP means-tested?', a: 'No. PIP is not affected by your income, savings or whether you work, it is based on how your condition affects you.' },
             { q: 'Is PIP taxable?', a: 'No. PIP is completely tax-free and does not count as income for tax purposes.' },
             { q: 'Can I work and claim PIP?', a: 'Yes. PIP is about the impact of your condition, not your ability to work, so employment does not stop a claim.' },
             { q: 'How is PIP paid?', a: 'Usually every four weeks directly into your bank account, combining both components into one payment.' },

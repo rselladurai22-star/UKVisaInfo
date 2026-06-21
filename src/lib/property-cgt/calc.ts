@@ -1,5 +1,5 @@
 /**
- * UK Property Capital Gains Tax calculator (residential property) — 2025/26.
+ * UK Property Capital Gains Tax calculator (residential property), 2025/26.
  *
  * Source: gov.uk/capital-gains-tax/rates
  *         gov.uk/tax-sell-home  (Private Residence Relief)

@@ -11,7 +11,7 @@ interface RawSponsor {
   g?: string;
 }
 
-// Module-level cache — parsed once per server process, never re-read
+// Module-level cache, parsed once per server process, never re-read
 let cachedData: RawSponsor[] | null = null;
 
 function getSponsors(): RawSponsor[] {

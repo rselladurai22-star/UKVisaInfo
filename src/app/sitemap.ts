@@ -84,7 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  /* ── All live hub tools (auto — every live calculator, deduped) ──
+  /* ── All live hub tools (auto, every live calculator, deduped) ──
      Sourced from HUB_TOOLS so the sitemap can't drift behind new pages.
      Skips 'soon' items and anything already listed above. */
   const seen = new Set(urls.map((u) => u.url));
@@ -183,13 +183,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   /* ── 270 SOC salary pages, sponsor sector / city listings ──
      EXCLUDED from sitemap because each page is a template with data
-     swaps — useful when reached from the tool, but not editorial
+     swaps, useful when reached from the tool, but not editorial
      content Google should index. They carry a `noindex` robots meta;
      the richer /salary-compare and /sponsors landings stay indexed
      and carry the search value. */
 
   /* ── News items: intentionally excluded ──
-     Short (80–200 word) news posts are noindex to keep the site's
+     Short (80 to 200 word) news posts are noindex to keep the site's
      content-quality signal high for AdSense, so they're left out of the
      sitemap to avoid an index/noindex conflict. NEWS_ITEMS still powers
      the /news index and RSS. */

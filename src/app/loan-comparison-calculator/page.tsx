@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LoanComparison from './LoanComparison';
 
 export const metadata: Metadata = {
-  title: 'Loan Comparison Calculator UK 2025/26 — Compare 3 Loans | UKDesk',
+  title: 'Loan Comparison Calculator UK 2025/26, Compare 3 Loans | UKDesk',
   description:
     'Free UK loan comparison calculator. Compare up to three personal loans side by side on monthly repayment, total interest and total cost to find the cheapest.',
   alternates: { canonical: '/loan-comparison-calculator' },

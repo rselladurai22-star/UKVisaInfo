@@ -196,7 +196,7 @@ function Row({ label, icon: Icon, a, b }: { label: string; icon: React.Component
       <td className="py-2.5 text-right text-[#101a36] font-semibold">{gbp(a)}</td>
       <td className="py-2.5 text-right text-[#101a36] font-semibold">{gbp(b)}</td>
       <td className="py-2.5 text-right font-semibold" style={{ color: diff < 0 ? '#15803d' : diff > 0 ? '#D9152B' : '#76777e' }}>
-        {diff === 0 ? '—' : `${diff > 0 ? '+' : '−'}${gbp(Math.abs(diff))}`}
+        {diff === 0 ? ', ' : `${diff > 0 ? '+' : '−'}${gbp(Math.abs(diff))}`}
       </td>
     </tr>
   );

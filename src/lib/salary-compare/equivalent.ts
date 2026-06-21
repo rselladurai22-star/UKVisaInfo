@@ -1,5 +1,5 @@
 /**
- * "Equivalent salary" finder — what would you need to earn in city B to keep
+ * "Equivalent salary" finder, what would you need to earn in city B to keep
  * the same disposable income (take-home minus baseline cost of living) as in
  * city A.
  *

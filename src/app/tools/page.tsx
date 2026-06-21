@@ -9,12 +9,12 @@ const LIVE_TOTAL = CATEGORIES.reduce(
 );
 
 export const metadata: Metadata = {
-  title: `All UK Calculators & Tools — ${LIVE_TOTAL} Free Tools | UKDesk`,
+  title: `All UK Calculators & Tools, ${LIVE_TOTAL} Free Tools | UKDesk`,
   description:
-    'Every free UKDesk calculator in one place — mortgage, stamp duty, take-home pay, council tax, dividends, capital gains, ISAs, pensions, visa fees and more. Checked against GOV.UK, HMRC and ONS. No sign-up.',
+    'Every free UKDesk calculator in one place, mortgage, stamp duty, take-home pay, council tax, dividends, capital gains, ISAs, pensions, visa fees and more. Checked against GOV.UK, HMRC and ONS. No sign-up.',
   alternates: { canonical: '/tools' },
   openGraph: {
-    title: 'All UK Calculators & Tools — UKDesk',
+    title: 'All UK Calculators & Tools, UKDesk',
     description: `${LIVE_TOTAL} free UKDesk calculators, grouped by topic. No sign-up.`,
     url: 'https://ukvisainfo.co.uk/tools',
   },

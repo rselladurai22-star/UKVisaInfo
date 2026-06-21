@@ -9,7 +9,7 @@ import RelatedGuides from '../../components/RelatedGuides';
 import { gbp } from '../../lib/tax2526';
 
 const STANDARD_RATE = 195;          // 2025/26 standard annual VED
-const EXPENSIVE_SUPPLEMENT = 425;   // years 2–6 for list price > £40,000
+const EXPENSIVE_SUPPLEMENT = 425;   // years 2 to 6 for list price > £40,000
 const EXPENSIVE_THRESHOLD = 40000;
 
 type Fuel = 'petrol' | 'diesel' | 'electric';
@@ -61,7 +61,7 @@ export default function VehicleTax() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Vehicles', href: '/category/vehicles' }, { label: 'Vehicle Tax' }]}
       title="Vehicle Tax (VED) Calculator"
-      subtitle="Estimate your UK road tax for 2025/26 — first-year rates by CO2, the £195 standard rate, and the £425 expensive-car supplement for cars over £40,000."
+      subtitle="Estimate your UK road tax for 2025/26, first-year rates by CO2, the £195 standard rate, and the £425 expensive-car supplement for cars over £40,000."
       calcLabel="Calculate Road Tax"
       inputs={
         <Panel title="Your Vehicle">
@@ -96,12 +96,12 @@ export default function VehicleTax() {
             <Stat label={isNew ? 'First-Year Tax' : 'Annual Tax'} value={gbp(r.yearOne)} sub={isNew ? 'Year 1 (showroom tax)' : 'Standard rate'} tone="dark" big />
             <Stat label="Standard Rate" value={gbp(r.standard)} sub={r.expensive ? 'Incl. £425 supplement' : 'From year 2 onwards'} tone="primary" />
             <Stat label="6-Year Cost" value={gbp(r.sixYear)} sub="Typical ownership period" tone="accent" />
-            <Stat label="Expensive Car?" value={r.expensive ? 'Yes' : 'No'} sub={r.expensive ? '£425/yr, years 2–6' : 'Under £40,000'} />
+            <Stat label="Expensive Car?" value={r.expensive ? 'Yes' : 'No'} sub={r.expensive ? '£425/yr, years 2 to 6' : 'Under £40,000'} />
           </div>
 
           {r.expensive && (
             <Callout tone="warn" title="Expensive-car supplement applies">
-              Because the list price is over £40,000, you pay an extra <strong>£{EXPENSIVE_SUPPLEMENT}</strong> a year on top of the standard rate for five years (years 2–6). This now applies to electric cars too.
+              Because the list price is over £40,000, you pay an extra <strong>£{EXPENSIVE_SUPPLEMENT}</strong> a year on top of the standard rate for five years (years 2 to 6). This now applies to electric cars too.
             </Callout>
           )}
           {fuel === 'electric' && (
@@ -110,13 +110,13 @@ export default function VehicleTax() {
             </Callout>
           )}
 
-          <p className="text-[11px] text-on-surface-variant">Estimate for cars registered from April 2025, 2025/26 rates. Cars registered 2001–2017 use CO2 bands; pre-2001 use engine size. Always confirm on gov.uk.</p>
+          <p className="text-[11px] text-on-surface-variant">Estimate for cars registered from April 2025, 2025/26 rates. Cars registered 2001 to 2017 use CO2 bands; pre-2001 use engine size. Always confirm on gov.uk.</p>
         </>
       }
     >
       <Guide
         title="UK vehicle tax (VED) explained for 2025/26"
-        intro="Vehicle Excise Duty — road tax — is what you pay to keep a car on the road. For newer cars it has two parts: a one-off first-year rate based on CO2 emissions, then a flat standard rate. Pricey cars pay an extra supplement. Here's how it all fits together."
+        intro="Vehicle Excise Duty, road tax, is what you pay to keep a car on the road. For newer cars it has two parts: a one-off first-year rate based on CO2 emissions, then a flat standard rate. Pricey cars pay an extra supplement. Here's how it all fits together."
       >
         <GuideSection kicker="First year" title="The showroom tax">
           <p>In the first year, road tax is based on the car's CO2 emissions and can range from £10 for the cleanest cars to over £5,000 for the highest emitters. This "showroom tax" is usually bundled into the on-the-road price by the dealer.</p>
@@ -127,9 +127,9 @@ export default function VehicleTax() {
         </GuideSection>
 
         <GuideSection kicker="Expensive cars" title="The £40,000 supplement">
-          <p>If a car's list price was over <strong>£40,000</strong> when new, you pay an extra <strong>£425</strong> a year on top of the standard rate for five years — from year two to year six. After that it drops back to the standard rate. This is based on the original list price, not what you paid, so it can catch buyers of nearly-new cars.</p>
+          <p>If a car's list price was over <strong>£40,000</strong> when new, you pay an extra <strong>£425</strong> a year on top of the standard rate for five years, from year two to year six. After that it drops back to the standard rate. This is based on the original list price, not what you paid, so it can catch buyers of nearly-new cars.</p>
           <Callout tone="warn" title="EVs lost their exemption">
-            From April 2025 electric cars pay VED for the first time, including the expensive-car supplement if they cost over £40,000 — which many do.
+            From April 2025 electric cars pay VED for the first time, including the expensive-car supplement if they cost over £40,000, which many do.
           </Callout>
         </GuideSection>
 
@@ -148,10 +148,10 @@ export default function VehicleTax() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How much is road tax in 2025/26?', a: 'The standard rate is £195 a year. The first-year rate varies by CO2 from £10 to over £5,000, and cars over £40,000 pay a £425 supplement in years 2–6.' },
+            { q: 'How much is road tax in 2025/26?', a: 'The standard rate is £195 a year. The first-year rate varies by CO2 from £10 to over £5,000, and cars over £40,000 pay a £425 supplement in years 2 to 6.' },
             { q: 'Do electric cars pay road tax now?', a: 'Yes. From 1 April 2025 EVs pay a £10 first-year rate and the £195 standard rate, plus the expensive-car supplement if over £40,000.' },
             { q: 'Can I pay monthly?', a: 'Yes, by Direct Debit, though paying monthly or every six months costs slightly more than paying annually.' },
-            { q: 'What about older cars?', a: 'Cars registered between 2001 and 2017 are taxed purely on CO2 bands, and pre-2001 cars on engine size — different systems from the newer two-part scheme.' },
+            { q: 'What about older cars?', a: 'Cars registered between 2001 and 2017 are taxed purely on CO2 bands, and pre-2001 cars on engine size, different systems from the newer two-part scheme.' },
           ]} />
         </GuideSection>
         <RelatedGuides calc="/vehicle-tax-calculator" />

@@ -44,16 +44,16 @@ export default function TakeHome() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Tax', href: '/category/tax' }, { label: 'Take-home Pay' }]}
       title="Take-Home Pay Calculator"
-      subtitle="See your real net pay after Income Tax, National Insurance, pension and student loan — yearly, monthly and weekly — on 2025/26 rates for England, Wales and NI."
+      subtitle="See your real net pay after Income Tax, National Insurance, pension and student loan, yearly, monthly and weekly, on 2025/26 rates for England, Wales and NI."
       calcLabel="Calculate take-home"
       inputs={
         <Panel title="Your salary">
           <div className="space-y-4">
             <Field label="Gross annual salary"><MoneyInput value={salary} onChange={setSalary} step={1000} /></Field>
-            <Field label={`Pension contribution — ${pensionPct}%`} hint="Salary-sacrifice basis (cuts tax + NI)"><Slider value={pensionPct} onChange={setPensionPct} min={0} max={40} /></Field>
+            <Field label={`Pension contribution, ${pensionPct}%`} hint="Salary-sacrifice basis (cuts tax + NI)"><Slider value={pensionPct} onChange={setPensionPct} min={0} max={40} /></Field>
             <Field label="Student loan plan">
               <Choice<StudentPlan> name="plan" value={plan} onChange={setPlan} options={[
-                { value: 'none', label: 'None' }, { value: 'plan2', label: 'Plan 2 (2012–2023)' }, { value: 'plan1', label: 'Plan 1' }, { value: 'plan5', label: 'Plan 5 (2023+)' }, { value: 'plan4', label: 'Plan 4 (Scotland)' },
+                { value: 'none', label: 'None' }, { value: 'plan2', label: 'Plan 2 (2012 to 2023)' }, { value: 'plan1', label: 'Plan 1' }, { value: 'plan5', label: 'Plan 5 (2023+)' }, { value: 'plan4', label: 'Plan 4 (Scotland)' },
               ]} />
             </Field>
             <Toggle checked={pg} onChange={setPg} label="Also repaying a Postgraduate Loan" />
@@ -98,17 +98,17 @@ export default function TakeHome() {
     >
       <Guide
         title="How your take-home pay is worked out"
-        intro="Your gross salary and your take-home pay can differ by a third or more. This guide explains each deduction — Income Tax, National Insurance, pension and student loan — on 2025/26 rates."
+        intro="Your gross salary and your take-home pay can differ by a third or more. This guide explains each deduction, Income Tax, National Insurance, pension and student loan, on 2025/26 rates."
       >
         <GuideSection kicker="Income tax" title="Allowance and bands (2025/26)">
-          <p>You pay no Income Tax on the first <strong>£12,570</strong> (the personal allowance). Above that, the rest-of-UK rates are <strong>20%</strong> up to £50,270, <strong>40%</strong> to £125,140, and <strong>45%</strong> above. Earn over £100,000 and the allowance tapers away — £1 lost for every £2 — which creates a punishing ~60% effective rate between £100,000 and £125,140. Scotland has its own bands.</p>
+          <p>You pay no Income Tax on the first <strong>£12,570</strong> (the personal allowance). Above that, the rest-of-UK rates are <strong>20%</strong> up to £50,270, <strong>40%</strong> to £125,140, and <strong>45%</strong> above. Earn over £100,000 and the allowance tapers away, £1 lost for every £2, which creates a punishing ~60% effective rate between £100,000 and £125,140. Scotland has its own bands.</p>
         </GuideSection>
         <GuideSection kicker="National Insurance" title="Class 1 employee NI">
           <p>Employees pay Class 1 NI of <strong>8%</strong> on earnings between £12,570 and £50,270, then <strong>2%</strong> above. Unlike Income Tax, NI is generally worked out per pay period, so a one-off bonus can be charged more NI in that month. NI funds the State Pension and certain benefits.</p>
         </GuideSection>
         <GuideSection kicker="Pension" title="Why pension contributions boost take-home efficiency">
-          <p>Pension contributions reduce your taxable pay. Under <strong>salary sacrifice</strong>, you give up salary for an employer pension contribution, cutting both Income Tax <em>and</em> National Insurance — and often the employer adds their NI saving too. It&apos;s one of the most tax-efficient things most employees can do, especially for higher earners and those caught in the 60% trap.</p>
-          <Callout tone="tip" title="Escape the 60% trap">If your income is just over £100,000, a pension contribution that brings it back under reclaims your personal allowance — effectively turning £100 of pension into far more than £100 of value.</Callout>
+          <p>Pension contributions reduce your taxable pay. Under <strong>salary sacrifice</strong>, you give up salary for an employer pension contribution, cutting both Income Tax <em>and</em> National Insurance, and often the employer adds their NI saving too. It&apos;s one of the most tax-efficient things most employees can do, especially for higher earners and those caught in the 60% trap.</p>
+          <Callout tone="tip" title="Escape the 60% trap">If your income is just over £100,000, a pension contribution that brings it back under reclaims your personal allowance, effectively turning £100 of pension into far more than £100 of value.</Callout>
         </GuideSection>
         <GuideSection kicker="Student loan" title="Plan thresholds">
           <p>Student loan repayments are 9% of income above your plan&apos;s threshold (6% for postgraduate loans, payable on top). Thresholds for 2025/26 are roughly: Plan 1 £26,065, Plan 2 £28,470, Plan 4 £32,745 (Scotland), Plan 5 £25,000, Postgraduate £21,000. It&apos;s collected through PAYE like tax.</p>
@@ -116,17 +116,17 @@ export default function TakeHome() {
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
             ['Checking the wrong tax code', 'A wrong code over- or under-taxes you. 1257L is the standard; check yours on your payslip.'],
-            ['Ignoring the 60% band', 'Earning just over £100k can be barely worth it after the allowance taper — pension can fix it.'],
+            ['Ignoring the 60% band', 'Earning just over £100k can be barely worth it after the allowance taper, pension can fix it.'],
             ['Forgetting salary sacrifice saves NI too', 'Sacrifice beats relief-at-source for most because it also cuts National Insurance.'],
-            ['Assuming bonuses are taxed more', 'They aren&apos;t taxed at a higher rate overall — NI timing just makes one payslip look heavier.'],
+            ['Assuming bonuses are taxed more', 'They aren&apos;t taxed at a higher rate overall, NI timing just makes one payslip look heavier.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How much of my salary do I take home?', a: 'It depends on your salary and deductions, but most basic-rate earners keep roughly 70–75% after tax and NI, less if repaying a student loan or contributing to a pension (which goes to your pot).' },
-            { q: 'Is pension deducted before or after tax?', a: 'Under salary sacrifice and net-pay schemes, before tax — reducing your taxable income. Relief-at-source schemes add basic-rate relief to your contribution and higher-rate is claimed back separately.' },
+            { q: 'How much of my salary do I take home?', a: 'It depends on your salary and deductions, but most basic-rate earners keep roughly 70 to 75% after tax and NI, less if repaying a student loan or contributing to a pension (which goes to your pot).' },
+            { q: 'Is pension deducted before or after tax?', a: 'Under salary sacrifice and net-pay schemes, before tax, reducing your taxable income. Relief-at-source schemes add basic-rate relief to your contribution and higher-rate is claimed back separately.' },
             { q: 'Why is my first payslip taxed oddly?', a: 'PAYE spreads your allowance across the year. A new job, wrong code or mid-year start can cause over- or under-taxation that corrects over time or via a refund.' },
-            { q: 'Does this cover Scotland?', a: 'No — Scotland has different income-tax bands and rates. Use a Scottish income tax calculator if you&apos;re a Scottish taxpayer.' },
+            { q: 'Does this cover Scotland?', a: 'No, Scotland has different income-tax bands and rates. Use a Scottish income tax calculator if you&apos;re a Scottish taxpayer.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={TAX_RELATED} /></GuideSection>

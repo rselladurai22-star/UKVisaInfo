@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use — UKDesk',
+  title: 'Terms of Use, UKDesk',
   description:
     'Terms of use for ukvisainfo.co.uk. Editorial disclaimer, no legal advice, accuracy and liability terms.',
   alternates: { canonical: '/terms' },
@@ -27,7 +27,7 @@ export default function TermsPage() {
         </p>
 
         <h2 id="disclaimer" className="text-2xl font-bold text-primary mt-8 mb-3 scroll-mt-32">
-          2. Nature of the website — full editorial disclaimer
+          2. Nature of the website, full editorial disclaimer
         </h2>
         <p>
           UKDesk is an independent editorial site providing general
@@ -37,7 +37,7 @@ export default function TermsPage() {
         <p>
           <strong>We do not provide legal advice.</strong> Nothing on this
           site constitutes legal advice, an offer to enter into a
-          solicitor–client relationship, or representation of any kind. For
+          solicitor, client relationship, or representation of any kind. For
           legal advice on your specific immigration situation, consult a
           qualified UK immigration solicitor regulated by the SRA or an OISC
           (Office of the Immigration Services Commissioner) registered

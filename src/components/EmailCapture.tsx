@@ -4,15 +4,15 @@ import { useState } from 'react';
 import { Mail, Check, AlertCircle, Sparkles } from 'lucide-react';
 
 interface Props {
-  /** Heading line — short */
+  /** Heading line, short */
   title?: string;
-  /** Subline — what they get */
+  /** Subline, what they get */
   subtitle?: string;
   /** Button label */
   cta?: string;
   /** Hint shown below the form */
   hint?: string;
-  /** Optional source tag — sent to the API so you can segment lists */
+  /** Optional source tag, sent to the API so you can segment lists */
   source?: string;
   /** Compact = no surrounding card (use inline within sidebars) */
   compact?: boolean;
@@ -20,7 +20,7 @@ interface Props {
 
 export default function EmailCapture({
   title = 'Weekly UK Visa Brief',
-  subtitle = 'Get rule changes, fee updates and route news in your inbox — every Tuesday.',
+  subtitle = 'Get rule changes, fee updates and route news in your inbox, every Tuesday.',
   cta = 'Subscribe',
   hint = 'Free · No spam · Unsubscribe in one click.',
   source = 'inline',

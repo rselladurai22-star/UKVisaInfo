@@ -1,11 +1,11 @@
 'use client';
 /**
- * CalcFormPrimitives v4 — "Quartz" design system
+ * CalcFormPrimitives v4, "Quartz" design system
  * Stripe/Linear-inspired · light fills · hairline borders · refined indigo accent
  * Inter Tight (display) + Inter (body) · tabular numerics
  */
 
-/* ─── tokens — match CalcPageShell Quartz ─────────────────── */
+/* ─── tokens, match CalcPageShell Quartz ─────────────────── */
 const Q = {
   bg:        '#f8fafc',
   bgAlt:     '#FAFAFB',
@@ -64,7 +64,7 @@ export function Field({ label, children, hint }: { label: string; children: Reac
   );
 }
 
-/* ─── NumberField — Stripe-style light fill with focus ring ─ */
+/* ─── NumberField, Stripe-style light fill with focus ring ─ */
 export function NumberField({
   label, value, onChange, prefix, suffix, step = 'any', hint,
 }: {
@@ -167,7 +167,7 @@ export function SelectField<T extends string>({
   );
 }
 
-/* ─── ToggleRow — segmented control ──────────────────────── */
+/* ─── ToggleRow, segmented control ──────────────────────── */
 export function ToggleRow<T extends string>({
   options, value, onChange,
 }: {
@@ -297,7 +297,7 @@ export function StatGrid({ children, cols = 3 }: { children: React.ReactNode; co
   return <div style={{ display: 'grid', gridTemplateColumns: c, gap: 12 }}>{children}</div>;
 }
 
-/* ─── StatCard — light surface, tonal accents ────────────── */
+/* ─── StatCard, light surface, tonal accents ────────────── */
 export function StatCard({ label, value, sub, tone = 'default', accent }: {
   label: string; value: string; sub?: string;
   tone?: 'default' | 'primary' | 'positive' | 'negative' | 'muted';
@@ -347,7 +347,7 @@ export function StatCard({ label, value, sub, tone = 'default', accent }: {
   );
 }
 
-/* ─── SummaryHero — refined indigo gradient banner ────────── */
+/* ─── SummaryHero, refined indigo gradient banner ────────── */
 export function SummaryHero({ label, value, sub, tone = 'navy', badge }: {
   label: string; value: string; sub?: string;
   tone?: 'navy' | 'teal' | 'red'; badge?: string;
@@ -458,7 +458,7 @@ export function BreakdownTable({ rows, highlightLast }: {
   );
 }
 
-/* ─── ScenarioTabs — card-style selector ────────────────── */
+/* ─── ScenarioTabs, card-style selector ────────────────── */
 export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   options: { value: T; label: string; sub?: string }[];
   value: T;
@@ -508,7 +508,7 @@ export function ScenarioTabs<T extends string>({ options, value, onChange }: {
   );
 }
 
-/* ─── Tip — alert/callout ────────────────────────────────── */
+/* ─── Tip, alert/callout ────────────────────────────────── */
 export function Tip({ children, tone = 'info' }: { children: React.ReactNode; tone?: 'info' | 'warn' | 'success' }) {
   const s = {
     info:    { bg: Q.accentSoft,    border: '#C7D2FE', barClr: Q.accent,   txt: Q.accentDk, icon: 'ⓘ' },

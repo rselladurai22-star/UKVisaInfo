@@ -1,6 +1,6 @@
 import type { CountryConfig } from './types';
 
-// United Kingdom — the launch country. Rates live in src/lib/tax2526.ts and the
+// United Kingdom, the launch country. Rates live in src/lib/tax2526.ts and the
 // per-calculator libs; this config carries locale/brand/enablement only.
 export const UK: CountryConfig = {
   code: 'uk',

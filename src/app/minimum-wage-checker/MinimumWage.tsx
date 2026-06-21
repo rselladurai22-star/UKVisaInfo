@@ -10,7 +10,7 @@ import { calculateMinimumWage, NMW_RATES } from '../../lib/minimum-wage/calc';
 
 const CATEGORY_LABEL: Record<string, string> = {
   nlw: 'National Living Wage (21+)',
-  age18to20: '18–20 rate',
+  age18to20: '18 to 20 rate',
   under18: 'Under-18 rate',
   apprentice: 'Apprentice rate',
 };
@@ -38,7 +38,7 @@ export default function MinimumWage() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Employment', href: '/category/employment' }, { label: 'Minimum Wage' }]}
       title="Minimum Wage Checker"
-      subtitle="Check whether your pay meets the UK National Minimum Wage and National Living Wage rates from 1 April 2025 — and see any shortfall you're owed."
+      subtitle="Check whether your pay meets the UK National Minimum Wage and National Living Wage rates from 1 April 2025, and see any shortfall you're owed."
       calcLabel="Check My Pay"
       inputs={
         <Panel title="Your Pay">
@@ -64,7 +64,7 @@ export default function MinimumWage() {
 
           {!r.compliant ? (
             <Callout tone="warn" title="You appear to be underpaid">
-              Based on these figures you're owed about <strong>{gbp(r.weeklyShortfall)}</strong> a week — roughly <strong>{gbp(r.annualShortfall)}</strong> a year. Underpayment of the minimum wage is illegal; raise it with your employer or report it to HMRC.
+              Based on these figures you're owed about <strong>{gbp(r.weeklyShortfall)}</strong> a week, roughly <strong>{gbp(r.annualShortfall)}</strong> a year. Underpayment of the minimum wage is illegal; raise it with your employer or report it to HMRC.
             </Callout>
           ) : (
             <Callout tone="tip" title="Your pay meets the legal minimum">
@@ -87,22 +87,22 @@ export default function MinimumWage() {
             <li><strong>Under 18: £{NMW_RATES.under18.toFixed(2)}</strong> per hour.</li>
             <li><strong>Apprentice: £{NMW_RATES.apprentice.toFixed(2)}</strong> per hour.</li>
           </ul>
-          <p>The National Living Wage now applies from age 21 (it was 23 until April 2024). The 16–17 and apprentice rates are the same for 2025/26.</p>
+          <p>The National Living Wage now applies from age 21 (it was 23 until April 2024). The 16 to 17 and apprentice rates are the same for 2025/26.</p>
         </GuideSection>
 
         <GuideSection kicker="Apprentices" title="When the apprentice rate applies">
-          <p>The apprentice rate applies if you're <strong>under 19</strong>, or <strong>19 or over but in the first year</strong> of your apprenticeship. Once you turn 19 and complete your first year, you move onto the rate for your age — a common point where employers forget to update pay.</p>
+          <p>The apprentice rate applies if you're <strong>under 19</strong>, or <strong>19 or over but in the first year</strong> of your apprenticeship. Once you turn 19 and complete your first year, you move onto the rate for your age, a common point where employers forget to update pay.</p>
         </GuideSection>
 
         <GuideSection kicker="What counts" title="Pay that does and doesn't count">
           <p>Minimum wage is calculated on your average pay over a reference period. Some things don't count towards it:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>Tips and service charges</strong> do not count towards minimum wage.</li>
-            <li><strong>Deductions</strong> for items required for the job (uniform, tools) can take you below the minimum — which is unlawful.</li>
+            <li><strong>Deductions</strong> for items required for the job (uniform, tools) can take you below the minimum, which is unlawful.</li>
             <li><strong>Accommodation</strong> provided by the employer has a capped daily offset that can count.</li>
           </ul>
           <Callout tone="warn" title="Unpaid working time is a common trap">
-            Time spent on security checks, opening up, training or travel between assignments often counts as working time — if it pushes your average below the minimum, you're being underpaid.
+            Time spent on security checks, opening up, training or travel between assignments often counts as working time, if it pushes your average below the minimum, you're being underpaid.
           </Callout>
         </GuideSection>
 
@@ -112,7 +112,7 @@ export default function MinimumWage() {
 
         <GuideSection kicker="Avoid these" title="Common minimum wage mistakes">
           <Mistakes items={[
-            ['Not updating pay on a birthday', 'Moving age band — especially turning 21 — should trigger a pay rise to the higher rate.'],
+            ['Not updating pay on a birthday', 'Moving age band, especially turning 21, should trigger a pay rise to the higher rate.'],
             ['Counting tips towards the minimum', 'Tips never count; your basic pay alone must meet the minimum wage.'],
             ['Unlawful deductions', 'Charging for uniforms or tools cannot take pay below the legal minimum.'],
             ['Ignoring unpaid working time', 'Pre- and post-shift duties and certain travel are working time and must be paid.'],

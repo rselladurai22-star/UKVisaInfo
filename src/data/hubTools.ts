@@ -1,5 +1,5 @@
 /**
- * Hub Tool Index — curated, revenue-focused listing for every category hub.
+ * Hub Tool Index, curated, revenue-focused listing for every category hub.
  *
  * Source of truth for the "All tools in this hub" section rendered by
  * <HubToolIndex/>.
@@ -7,7 +7,7 @@
  * Curation rules (max 5 per hub):
  *   - Same-mental-model calculators are CLUBBED into one multi-mode page
  *     (modes listed in the hint). One excellent page beats several thin
- *     ones on a no-authority domain — better ranking, fewer to maintain.
+ *     ones on a no-authority domain, better ranking, fewer to maintain.
  *   - Picks are ordered by UK search volume × AdSense CPC × lead-gen value.
  *   - Live tools are kept featured for instant indexed traffic. A clubbed
  *     entry links to its strongest existing page until the combined page
@@ -24,7 +24,7 @@ export interface HubItem {
   href: string;
   hint: string;
   status: 'live' | 'soon';
-  xref?: string; // e.g. 'Tax' — primary home of a cross-referenced tool
+  xref?: string; // e.g. 'Tax', primary home of a cross-referenced tool
 }
 
 export interface HubGroup {
@@ -34,7 +34,7 @@ export interface HubGroup {
 }
 
 export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
-  // ── PROPERTY (5) — head-term volume + highest-CPC lead-gen ─────────
+  // ── PROPERTY (5), head-term volume + highest-CPC lead-gen ─────────
   property: [
     {
       title: 'Mortgages',
@@ -49,7 +49,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
     {
       title: 'Buying',
-      description: 'The full cost of buying — and whether to buy at all.',
+      description: 'The full cost of buying, and whether to buy at all.',
       items: [
         { label: 'Stamp Duty (SDLT)', href: '/stamp-duty-calculator', hint: '2025/26 rates · FTB · surcharges', status: 'live' },
         { label: 'House Buying Costs', href: '/house-buying-costs', hint: 'Total cash needed to buy', status: 'live' },
@@ -69,7 +69,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── INSURANCE — flagship calculators, all live ────────────────────
+  // ── INSURANCE, flagship calculators, all live ────────────────────
   insurance: [
     {
       title: 'Protection',
@@ -84,14 +84,14 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       title: 'Assets & Travel',
       description: 'Cover for your car, home and trips.',
       items: [
-        { label: 'Car Insurance', href: '/car-insurance-calculator', hint: 'Premium estimate + group 1–50', status: 'live' },
+        { label: 'Car Insurance', href: '/car-insurance-calculator', hint: 'Premium estimate + group 1 to 50', status: 'live' },
         { label: 'Home Insurance', href: '/home-insurance-calculator', hint: 'Rebuild cost + contents', status: 'live' },
         { label: 'Travel Insurance', href: '/travel-insurance-calculator', hint: 'Cost + cover limits', status: 'live' },
       ],
     },
   ],
 
-  // ── LOANS, DEBT & CREDIT — high-CPC credit vertical ───────────────
+  // ── LOANS, DEBT & CREDIT, high-CPC credit vertical ───────────────
   loans: [
     {
       title: 'Borrowing',
@@ -100,7 +100,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
         { label: 'Personal Loan', href: '/personal-loan-calculator', hint: 'Repayment · interest · APR', status: 'live' },
         { label: 'Car Finance', href: '/car-finance-calculator', hint: 'PCP vs HP vs loan', status: 'live' },
         { label: 'Loan APR', href: '/loan-apr-calculator', hint: 'True cost of borrowing', status: 'live' },
-        { label: 'Loan Comparison', href: '/loan-comparison-calculator', hint: '2–3 loans side by side', status: 'live' },
+        { label: 'Loan Comparison', href: '/loan-comparison-calculator', hint: '2 to 3 loans side by side', status: 'live' },
       ],
     },
     {
@@ -123,7 +123,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── IMMIGRATION (5) — high-intent + lead-gen, mostly live ─────────
+  // ── IMMIGRATION (5), high-intent + lead-gen, mostly live ─────────
   immigration: [
     {
       title: 'Plan & Qualify',
@@ -144,7 +144,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── PENSIONS, INVESTING & SAVINGS — high-CPC retirement keywords ──
+  // ── PENSIONS, INVESTING & SAVINGS, high-CPC retirement keywords ──
   savings: [
     {
       title: 'Pensions',
@@ -176,7 +176,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── TAX & INCOME — highest-volume on the site ─────────────────────
+  // ── TAX & INCOME, highest-volume on the site ─────────────────────
   tax: [
     {
       title: 'Employed Income',
@@ -204,7 +204,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
       description: 'Allowances, student loan and gains.',
       items: [
         { label: 'Marriage Allowance', href: '/marriage-allowance-calculator', hint: 'Transfer £1,260 · save £252', status: 'live' },
-        { label: 'Child Benefit Charge', href: '/child-benefit-trap', hint: 'HICBC £60k–£80k', status: 'live' },
+        { label: 'Child Benefit Charge', href: '/child-benefit-trap', hint: 'HICBC £60k, £80k', status: 'live' },
         { label: 'Student Loan', href: '/student-loan-repayment', hint: '9% repayment by plan', status: 'live' },
         { label: 'Capital Gains Tax', href: '/cgt-calculator', hint: '£3,000 AEA · 18%/24%', status: 'live' },
         { label: 'Inheritance Tax', href: '/inheritance-tax', hint: 'NRB £325k + RNRB £175k', status: 'live', xref: 'Estate' },
@@ -212,7 +212,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── BUSINESS (5) — Ltd company + cross-link to Tax ────────────────
+  // ── BUSINESS (5), Ltd company + cross-link to Tax ────────────────
   business: [
     {
       title: 'Company Taxes',
@@ -241,7 +241,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── ESTATE (5) — IHT cluster, high-CPC legal keywords ─────────────
+  // ── ESTATE (5), IHT cluster, high-CPC legal keywords ─────────────
   estate: [
     {
       title: 'Inheritance & Probate',
@@ -257,7 +257,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── FAMILY LAW (4) — high-CPC divorce keywords ────────────────────
+  // ── FAMILY LAW (4), high-CPC divorce keywords ────────────────────
   'family-law': [
     {
       title: 'Divorce & Maintenance',
@@ -271,7 +271,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── ENERGY (4) — green-tech, rising search volume ─────────────────
+  // ── ENERGY (4), green-tech, rising search volume ─────────────────
   energy: [
     {
       title: 'Energy & Bills',
@@ -285,7 +285,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── EMPLOYMENT (5, mostly live) — high-volume statutory pay ───────
+  // ── EMPLOYMENT (5, mostly live), high-volume statutory pay ───────
   employment: [
     {
       title: 'Pay & Wages',
@@ -306,7 +306,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── VEHICLES (5) — checks + running costs ─────────────────────────
+  // ── VEHICLES (5), checks + running costs ─────────────────────────
   vehicles: [
     {
       title: 'Compliance & Checks',
@@ -329,7 +329,7 @@ export const HUB_TOOLS: Record<CategoryId, HubGroup[]> = {
     },
   ],
 
-  // ── BENEFITS (5) — childcare + income support ─────────────────────
+  // ── BENEFITS (5), childcare + income support ─────────────────────
   benefits: [
     {
       title: 'Family & Support',

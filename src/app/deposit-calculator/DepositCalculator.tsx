@@ -46,14 +46,14 @@ export default function DepositCalculator() {
           <Panel title="Your target">
             <div className="space-y-4">
               <Field label="Target property price"><MoneyInput value={price} onChange={setPrice} step={5000} /></Field>
-              <Field label={`Deposit target — ${depositPct}%`} hint={`${pct(100 - depositPct)} LTV mortgage`}><Slider value={depositPct} onChange={setDepositPct} min={5} max={40} step={1} /></Field>
+              <Field label={`Deposit target, ${depositPct}%`} hint={`${pct(100 - depositPct)} LTV mortgage`}><Slider value={depositPct} onChange={setDepositPct} min={5} max={40} step={1} /></Field>
             </div>
           </Panel>
           <Panel title="Your saving">
             <div className="space-y-4">
               <Field label="Current savings"><MoneyInput value={savings} onChange={setSavings} step={500} /></Field>
               <Field label="Monthly saving"><MoneyInput value={monthly} onChange={setMonthly} step={50} /></Field>
-              <Field label={`Savings interest — ${pct(interest, 1)}`}><Slider value={interest} onChange={setInterest} min={0} max={8} step={0.1} /></Field>
+              <Field label={`Savings interest, ${pct(interest, 1)}`}><Slider value={interest} onChange={setInterest} min={0} max={8} step={0.1} /></Field>
             </div>
           </Panel>
         </>
@@ -74,7 +74,7 @@ export default function DepositCalculator() {
 
           <Callout tone="info" title="Don't forget the other upfront costs">
             Your deposit isn&apos;t the only cash you need. Budget separately for stamp duty, legal/conveyancing fees,
-            a survey and removals — often several thousand pounds on top. Use the House Buying Costs calculator for the full figure.
+            a survey and removals, often several thousand pounds on top. Use the House Buying Costs calculator for the full figure.
           </Callout>
 
           <p className="text-[11px] text-on-surface-variant">Estimate only. Savings rates and house prices change; revisit as your plans firm up.</p>
@@ -89,7 +89,7 @@ export default function DepositCalculator() {
           <p>Your deposit is the cash you put in; the mortgage covers the rest. The bigger the deposit, the lower your loan-to-value (LTV) and the cheaper your rate. The mainstream minimum is 5% (a 95% mortgage), but rates improve markedly at 10%, 15%, 25% and especially 40%+ deposits. A larger deposit also widens your choice of lenders and improves affordability.</p>
         </GuideSection>
         <GuideSection kicker="Targets" title="5%, 10%, 15% or 25%?">
-          <p>A 5% deposit gets you on the ladder but at the highest rates and with the most exposure to negative equity if prices dip. 10–15% is the practical sweet spot for most first-time buyers, balancing achievability against rate. 25% (a 75% mortgage) unlocks some of the best deals. Beyond 40% the rate benefit flattens, so it&apos;s rarely worth delaying a purchase just to push the deposit higher.</p>
+          <p>A 5% deposit gets you on the ladder but at the highest rates and with the most exposure to negative equity if prices dip. 10 to 15% is the practical sweet spot for most first-time buyers, balancing achievability against rate. 25% (a 75% mortgage) unlocks some of the best deals. Beyond 40% the rate benefit flattens, so it&apos;s rarely worth delaying a purchase just to push the deposit higher.</p>
           <div className="my-4 overflow-x-auto rounded-xl border border-outline-variant">
             <table className="w-full text-sm">
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Deposit</th><th className="px-4 py-3 font-bold">LTV</th><th className="px-4 py-3 font-bold">Typical rate access</th></tr></thead>
@@ -104,15 +104,15 @@ export default function DepositCalculator() {
           </div>
         </GuideSection>
         <GuideSection kicker="Boosters" title="LISA, gifted deposits and schemes">
-          <p>A <strong>Lifetime ISA</strong> adds a 25% government bonus on up to £4,000 a year (£1,000 free annually) toward a first home up to £450,000 — one of the most powerful deposit boosters available. A <strong>gifted deposit</strong> from family is widely accepted if accompanied by a letter confirming it&apos;s a gift, not a loan. Shared ownership and other schemes can lower the cash needed, at the cost of rent on the share you don&apos;t own.</p>
-          <Callout tone="tip" title="Use a LISA early">Because the bonus is paid on contributions, opening and feeding a Lifetime ISA sooner captures more free money — but remember withdrawals for anything other than a first home (or after 60) carry a penalty.</Callout>
+          <p>A <strong>Lifetime ISA</strong> adds a 25% government bonus on up to £4,000 a year (£1,000 free annually) toward a first home up to £450,000, one of the most powerful deposit boosters available. A <strong>gifted deposit</strong> from family is widely accepted if accompanied by a letter confirming it&apos;s a gift, not a loan. Shared ownership and other schemes can lower the cash needed, at the cost of rent on the share you don&apos;t own.</p>
+          <Callout tone="tip" title="Use a LISA early">Because the bonus is paid on contributions, opening and feeding a Lifetime ISA sooner captures more free money, but remember withdrawals for anything other than a first home (or after 60) carry a penalty.</Callout>
         </GuideSection>
         <GuideSection kicker="Get there faster" title="Where to keep your deposit">
-          <p>While you save, your deposit should work — but safely. Easy-access and fixed-rate savings, cash ISAs and Lifetime ISAs all suit short horizons because the capital is protected. Avoid putting a deposit you&apos;ll need within a few years into the stock market, where a downturn could hit just as you&apos;re ready to buy. The calculator above lets you see how your interest rate and monthly contribution change the timeline.</p>
+          <p>While you save, your deposit should work, but safely. Easy-access and fixed-rate savings, cash ISAs and Lifetime ISAs all suit short horizons because the capital is protected. Avoid putting a deposit you&apos;ll need within a few years into the stock market, where a downturn could hit just as you&apos;re ready to buy. The calculator above lets you see how your interest rate and monthly contribution change the timeline.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
-            ['Saving only for the deposit', 'Stamp duty, legal fees, survey and moving costs need separate cash — don&apos;t arrive at completion short.'],
+            ['Saving only for the deposit', 'Stamp duty, legal fees, survey and moving costs need separate cash, don&apos;t arrive at completion short.'],
             ['Ignoring the LISA bonus', 'For eligible first-time buyers, the 25% bonus is effectively a free uplift to your deposit.'],
             ['Draining your emergency fund', 'Keep a cash buffer after completion for moving-in costs and the unexpected.'],
             ['Chasing 40% when 25% is enough', 'Beyond a 75% mortgage the rate gains shrink; buying sooner may beat saving longer.'],

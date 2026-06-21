@@ -5,19 +5,19 @@
  * charges vary by region (14 regions) and payment method (Direct Debit
  * cheapest, Standard Credit higher, Prepayment in between since 2024 alignment).
  *
- * This calc uses GB-average rates for "Direct Debit, dual-fuel" — adjust
+ * This calc uses GB-average rates for "Direct Debit, dual-fuel", adjust
  * RATES below each quarter when Ofgem publishes the new cap.
  *
  * Most recent values shown are for the cap window starting 1 April 2025
  * (announced 25 Feb 2025 by Ofgem). When the next quarter is published,
  * update CAP.electricity and CAP.gas in place; nothing else needs touching.
  *
- * Source: Ofgem – "Default tariff cap level: changes to algebra and methodology";
+ * Source: Ofgem, "Default tariff cap level: changes to algebra and methodology";
  * https://www.ofgem.gov.uk/energy-policy-and-regulation/policy-and-regulatory-programmes/default-tariff-cap.
  */
 
 export interface EnergyCap {
-  windowLabel: string;     // human-readable, e.g. "1 April – 30 June 2025"
+  windowLabel: string;     // human-readable, e.g. "1 April, 30 June 2025"
   electricity: {
     unitPence: number;     // p / kWh
     standingPence: number; // p / day
@@ -29,12 +29,12 @@ export interface EnergyCap {
 }
 
 export const CAP: EnergyCap = {
-  windowLabel: '1 April – 30 June 2025',
+  windowLabel: '1 April, 30 June 2025',
   electricity: { unitPence: 27.03, standingPence: 53.80 },
   gas:         { unitPence:  6.99, standingPence: 32.67 },
 };
 
-/** Ofgem's "typical domestic consumption value" — published annually. */
+/** Ofgem's "typical domestic consumption value", published annually. */
 export const TDCV = {
   electricity: 2_700,   // kWh/year, single rate
   gas:        11_500,   // kWh/year, medium gas-heated home

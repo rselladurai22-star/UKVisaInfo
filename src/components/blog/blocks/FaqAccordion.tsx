@@ -36,7 +36,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 />
               </button>
 
-              {/* CSS grid trick — animate to natural height */}
+              {/* CSS grid trick, animate to natural height */}
               <div
                 className={`grid transition-[grid-template-rows] duration-250 ease-out ${
                   open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'

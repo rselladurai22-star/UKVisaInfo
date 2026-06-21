@@ -15,7 +15,7 @@ function uniqueCities() {
   return Array.from(new Set(SPONSORS.map((s) => s.city).filter(Boolean)));
 }
 
-// ISR — noindexed filtered listings, rendered on-demand and cached.
+// ISR, noindexed filtered listings, rendered on-demand and cached.
 export const dynamicParams = true;
 export const revalidate = 86400;
 
@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const real = uniqueCities().find((c) => slugify(c) === city);
   if (!real) return { title: 'City not found' };
   const sponsors = SPONSORS.filter((s) => s.city === real);
-  const title = `${real} UK Sponsor Licence Holders — Skilled Worker 2026`;
+  const title = `${real} UK Sponsor Licence Holders, Skilled Worker 2026`;
   const description = `${sponsors.length} Skilled Worker visa sponsor licence holders based in ${real}. Browse by sector and licence rating.`;
   return {
     title, description,
     alternates: { canonical: `/sponsors/city/${city}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/sponsors/city/${city}`, type: 'article' },
-    // City-filtered sponsor listing — data display, not editorial. Hidden
+    // City-filtered sponsor listing, data display, not editorial. Hidden
     // from search; the /sponsors landing remains indexed.
     robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
   };

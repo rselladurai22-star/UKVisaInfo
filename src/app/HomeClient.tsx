@@ -1,12 +1,12 @@
 'use client';
 
 /**
- * Home v6 — "Clean Slate".
+ * Home v6, "Clean Slate".
  * A crisp white / slate / blue product surface. Fresh composition:
- *   1. Split hero — headline + command search on the left, a live "popular
+ *   1. Split hero, headline + command search on the left, a live "popular
  *      tools" console panel on the right.
- *   2. Trust strip — three plain facts, hairline-separated.
- *   3. Directory grid — one uniform card per area, monochrome blue, three
+ *   2. Trust strip, three plain facts, hairline-separated.
+ *   3. Directory grid, one uniform card per area, monochrome blue, three
  *      top tools each, sharp 12px corners.
  *   4. Quiet closing band.
  * Mobile-first single column → 2 cols (md) → 3 cols (lg).
@@ -52,7 +52,7 @@ const POPULAR = [
 ];
 
 /* ────────────────────────────────────────────────
-   COMMAND SEARCH — boxed, results while typing
+   COMMAND SEARCH, boxed, results while typing
    ──────────────────────────────────────────────── */
 function CommandSearch({ autoFocusHint = false }: { autoFocusHint?: boolean }) {
   const router = useRouter();
@@ -109,7 +109,7 @@ function CommandSearch({ autoFocusHint = false }: { autoFocusHint?: boolean }) {
           onChange={(e) => { setQ(e.target.value); setOpen(true); }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKey}
-          placeholder="Search 50+ tools — pay, stamp duty, visa fees…"
+          placeholder="Search 50+ tools, pay, stamp duty, visa fees…"
           className="w-full min-w-0 border-none bg-transparent text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-0"
         />
         {q ? (
@@ -187,7 +187,7 @@ export default function HomeClient() {
         <div aria-hidden className="cs-canvas pointer-events-none absolute inset-0" />
 
         <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-14 sm:px-8 sm:pb-24 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          {/* left — message + search */}
+          {/* left, message + search */}
           <div className="max-w-xl">
             <span className="cs-rise glass-cs inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-blue-700 shadow-cs ring-1 ring-blue-600/10" style={{ ['--i' as string]: 0 }}>
               <span className="relative flex h-2 w-2">
@@ -198,7 +198,7 @@ export default function HomeClient() {
             </span>
 
             <h1 className="cs-rise mt-6 font-display text-[clamp(34px,6.2vw,60px)] font-extrabold leading-[1.0] tracking-[-0.04em] text-slate-900 [text-wrap:balance]" style={{ ['--i' as string]: 1 }}>
-              Every UK money, property &amp; visa decision — <span className="ink-cs">worked out clearly.</span>
+              Every UK money, property &amp; visa decision, <span className="ink-cs">worked out clearly.</span>
             </h1>
 
             <p className="cs-rise mt-5 max-w-md text-[16px] leading-relaxed text-slate-600 sm:text-[17.5px]" style={{ ['--i' as string]: 2 }}>
@@ -215,7 +215,7 @@ export default function HomeClient() {
             </p>
           </div>
 
-          {/* right — popular tools console */}
+          {/* right, popular tools console */}
           <div className="cs-rise relative" style={{ ['--i' as string]: 3 }}>
             {/* soft halo behind the panel */}
             <div aria-hidden className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] bg-[radial-gradient(60%_60%_at_50%_30%,rgba(37,99,235,0.12),transparent_70%)] blur-xl" />
@@ -266,7 +266,7 @@ export default function HomeClient() {
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-px overflow-hidden bg-slate-200 sm:grid-cols-3">
           {[
             { icon: Landmark, k: 'Sourced from gov.uk', v: 'Every rate, fee and threshold traced to HMRC, ONS or the Home Office.' },
-            { icon: Lock, k: 'Nothing stored', v: 'Calculations run entirely in your browser — no account, no tracking by tool.' },
+            { icon: Lock, k: 'Nothing stored', v: 'Calculations run entirely in your browser, no account, no tracking by tool.' },
             { icon: RefreshCw, k: 'Checked weekly', v: 'Figures re-audited against official publications as they change.' },
           ].map((f) => (
             <div key={f.k} className="flex gap-3.5 bg-slate-50 px-5 py-6 sm:px-7">
@@ -376,7 +376,7 @@ export default function HomeClient() {
           <p className="max-w-2xl text-[13.5px] leading-relaxed text-slate-500">
             <span className="font-bold text-slate-900">Independent &amp; private.</span> UKDesk is not
             affiliated with HMRC or the Home Office. Rates are audited weekly against official
-            publications, and every calculation runs in your browser — nothing is stored.
+            publications, and every calculation runs in your browser, nothing is stored.
           </p>
           <div className="mt-4 flex flex-none gap-5 sm:mt-0">
             <Link href="/sources" className="text-[13px] font-bold text-blue-700 hover:underline">Sources</Link>

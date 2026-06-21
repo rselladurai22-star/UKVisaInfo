@@ -13,7 +13,7 @@ import StickyMobileCta from '../../../components/StickyMobileCta';
 
 interface RouteParams { params: Promise<{ soc: string }> }
 
-// ISR — 271 SOC routes are noindexed and only reached from /tools/salary-checker.
+// ISR, 271 SOC routes are noindexed and only reached from /tools/salary-checker.
 // Rendering all of them at build exhausts the Node heap, so we render on-demand
 // and cache for 24h. SEO is unaffected (these pages carry robots:noindex).
 export const dynamicParams = true;
@@ -29,10 +29,10 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const occ = code ? SOC_OCCUPATIONS.find((o) => o.code === code) : null;
   if (!occ) return { title: 'Occupation not found', robots: { index: false, follow: true } };
 
-  const title = `${occ.title} — UK Skilled Worker Salary 2026 (SOC ${occ.code})`;
+  const title = `${occ.title}, UK Skilled Worker Salary 2026 (SOC ${occ.code})`;
   const description =
     `${occ.title} (SOC ${occ.code}) UK Skilled Worker visa going rate 2026: ` +
-    `£${occ.goingRate.toLocaleString()} standard, £${occ.hourlyGoingRate?.toFixed(2) ?? '—'}/hour. ` +
+    `£${occ.goingRate.toLocaleString()} standard, £${occ.hourlyGoingRate?.toFixed(2) ?? ', '}/hour. ` +
     `${occ.lowerGoingRate ? `New-entrant rate £${occ.lowerGoingRate.toLocaleString()}. ` : ''}` +
     `Verified against Home Office Appendix Skilled Occupations.`;
 
@@ -82,7 +82,7 @@ export default async function SalaryPage({ params }: RouteParams) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${occ.title} — UK Skilled Worker Salary Threshold 2026`,
+    headline: `${occ.title}, UK Skilled Worker Salary Threshold 2026`,
     description: `SOC ${occ.code} occupation going rate and Skilled Worker visa thresholds for 2026.`,
     datePublished: '2026-04-01', dateModified: '2026-05-18',
     author: { '@type': 'Organization', name: 'UKDesk' },
@@ -136,7 +136,7 @@ export default async function SalaryPage({ params }: RouteParams) {
           {/* Big stat row */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
             <StatCard label="Going rate" value={`£${occ.goingRate.toLocaleString()}`} sub="standard" accent="#C9A14A" />
-            <StatCard label="Per hour" value={`£${occ.hourlyGoingRate?.toFixed(2) ?? '—'}`} sub="at 37.5h/week" />
+            <StatCard label="Per hour" value={`£${occ.hourlyGoingRate?.toFixed(2) ?? ', '}`} sub="at 37.5h/week" />
             {occ.lowerGoingRate ? (
               <StatCard label="New-entrant" value={`£${occ.lowerGoingRate.toLocaleString()}`} sub="discounted rate" />
             ) : (
@@ -202,7 +202,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                       <DiscountCard
                         title="Immigration Salary List"
                         value={`£${THRESHOLDS.islGeneral.toLocaleString()}`}
-                        eligibility="SOC code is currently on the ISL — 20% discount on the general minimum."
+                        eligibility="SOC code is currently on the ISL, 20% discount on the general minimum."
                         effective={`£${Math.max(THRESHOLDS.islGeneral, occ.lowerGoingRate ?? occ.goingRate).toLocaleString()}`}
                       />
                     )}
@@ -218,7 +218,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                     </span>
                     <div className="text-[14px] text-[#7f1d1d] leading-relaxed">
                       <strong className="text-[#991b1b]">This route is closed to new overseas applicants in 2026.</strong>
-                      {' '}You cannot apply from outside the UK. In-country switches may still be possible — see the
+                      {' '}You cannot apply from outside the UK. In-country switches may still be possible, see the
                       Home Office published guidance for the latest position.
                     </div>
                   </div>
@@ -229,9 +229,9 @@ export default async function SalaryPage({ params }: RouteParams) {
                 <ol className="space-y-3 mb-5">
                   {[
                     `Confirm your offer letter shows a basic gross salary of at least £${effectiveThreshold.toLocaleString()}.`,
-                    'Subtract bonuses, overtime, commission, in-kind benefits and pension contributions — none of these count.',
+                    'Subtract bonuses, overtime, commission, in-kind benefits and pension contributions, none of these count.',
                     `Check the hourly equivalent: divide annual basic by your contracted weekly hours × 52. Must be £${hourlyFloor.toFixed(2)} or higher.`,
-                    'If you qualify for the new-entrant or ISL discount, apply it — they stack with each other to give the lowest floor.',
+                    'If you qualify for the new-entrant or ISL discount, apply it, they stack with each other to give the lowest floor.',
                     'Build in a £500+ margin: Home Office caseworkers round down, not up.',
                   ].map((step, i) => (
                     <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl border border-[rgba(14,20,36,0.06)] bg-white">
@@ -253,7 +253,7 @@ export default async function SalaryPage({ params }: RouteParams) {
               {relatedSponsors.length > 0 && (
                 <Section eyebrow="05 · Sponsors" title={`Top ${sectorBucket} sponsors`}>
                   <p className="text-[#52596e] text-[14.5px] leading-relaxed mb-5">
-                    A sample of A-rated licence holders in the {sectorBucket.toLowerCase()} sector — likely sponsors for {occ.title.toLowerCase()} roles.
+                    A sample of A-rated licence holders in the {sectorBucket.toLowerCase()} sector, likely sponsors for {occ.title.toLowerCase()} roles.
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {relatedSponsors.map((s) => (
@@ -319,7 +319,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                       Need to check another role?
                     </h3>
                     <p className="mt-2 text-white/55 text-[13.5px] leading-relaxed">
-                      Search the full Skilled Worker salary checker — all 270 SOC codes with going rates, hourly equivalents and discount tiers.
+                      Search the full Skilled Worker salary checker, all 270 SOC codes with going rates, hourly equivalents and discount tiers.
                     </p>
                   </div>
                   <Link
@@ -343,7 +343,7 @@ export default async function SalaryPage({ params }: RouteParams) {
                     <Row label="SOC code" value={occ.code} icon={Briefcase} />
                     <Row label="Sector" value={occ.group} icon={Building2} />
                     <Row label="Going rate" value={`£${occ.goingRate.toLocaleString()}`} icon={Banknote} />
-                    <Row label="Hourly rate" value={`£${occ.hourlyGoingRate?.toFixed(2) ?? '—'}`} icon={Clock} />
+                    <Row label="Hourly rate" value={`£${occ.hourlyGoingRate?.toFixed(2) ?? ', '}`} icon={Clock} />
                     {occ.lowerGoingRate ? (
                       <Row label="New-entrant" value={`£${occ.lowerGoingRate.toLocaleString()}`} icon={TrendingUp} />
                     ) : null}

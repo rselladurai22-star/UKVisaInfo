@@ -44,7 +44,7 @@ export default function EmployerCost() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Business', href: '/category/business' }, { label: 'Employer Cost' }]}
       title="Employer Cost Calculator"
-      subtitle="See the true cost of a hire in 2025/26 — gross salary plus employer National Insurance (15%) and minimum auto-enrolment pension contributions."
+      subtitle="See the true cost of a hire in 2025/26, gross salary plus employer National Insurance (15%) and minimum auto-enrolment pension contributions."
       calcLabel="Calculate True Cost"
       inputs={
         <Panel title="The Role">
@@ -89,9 +89,9 @@ export default function EmployerCost() {
     >
       <Guide
         title="The true cost of an employee (2025/26)"
-        intro="A salary is only part of what an employee costs you. On top of gross pay, an employer pays National Insurance, a minimum workplace pension, and often benefits and overheads. Budgeting on salary alone routinely understates the real cost by 15–20%."
+        intro="A salary is only part of what an employee costs you. On top of gross pay, an employer pays National Insurance, a minimum workplace pension, and often benefits and overheads. Budgeting on salary alone routinely understates the real cost by 15 to 20%."
       >
-        <GuideSection kicker="Employer NI" title="Secondary Class 1 National Insurance — 15%">
+        <GuideSection kicker="Employer NI" title="Secondary Class 1 National Insurance, 15%">
           <p>From 6 April 2025 employer (secondary) National Insurance is charged at <strong>15%</strong> on earnings above the secondary threshold of <strong>£5,000</strong> a year. That threshold dropped sharply from £9,100, and the rate rose from 13.8%, so employing staff costs noticeably more in 2025/26 than before.</p>
           <pre className="bg-surface-container p-3 rounded-lg text-xs font-mono tabular-nums text-on-surface">
             Employer NI = (Salary − £5,000) × 15%
@@ -103,7 +103,7 @@ export default function EmployerCost() {
         </GuideSection>
 
         <GuideSection kicker="Relief" title="The Employment Allowance">
-          <p>Eligible employers can claim the <strong>Employment Allowance</strong>, which reduces their annual employer NI bill by up to <strong>£10,500</strong> in 2025/26. However, a limited company whose only employee is also a director generally cannot claim it — a common trap for one-person companies.</p>
+          <p>Eligible employers can claim the <strong>Employment Allowance</strong>, which reduces their annual employer NI bill by up to <strong>£10,500</strong> in 2025/26. However, a limited company whose only employee is also a director generally cannot claim it, a common trap for one-person companies.</p>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="Hiring on £35,000">
@@ -112,14 +112,14 @@ export default function EmployerCost() {
             <li>Employer NI: (£35,000 − £5,000) × 15% = <strong>£4,500</strong>.</li>
             <li>Qualifying earnings: £35,000 − £6,240 = £28,760.</li>
             <li>Employer pension: £28,760 × 3% = <strong>£862.80</strong>.</li>
-            <li>True cost: £35,000 + £4,500 + £863 = <strong>£40,363</strong> — about 15.3% on top of salary.</li>
+            <li>True cost: £35,000 + £4,500 + £863 = <strong>£40,363</strong>, about 15.3% on top of salary.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Don't forget" title="The costs this calculator excludes">
-          <p>Beyond pay, NI and pension, budget for: recruitment fees, equipment and software, training, holiday and sick cover, Class 1A NI on taxable benefits, employer's liability insurance, and office space. A useful rule of thumb is that the fully-loaded cost of an employee is 20–30% above their gross salary.</p>
+          <p>Beyond pay, NI and pension, budget for: recruitment fees, equipment and software, training, holiday and sick cover, Class 1A NI on taxable benefits, employer's liability insurance, and office space. A useful rule of thumb is that the fully-loaded cost of an employee is 20 to 30% above their gross salary.</p>
           <Callout tone="warn" title="Benefits attract their own NI">
-            Taxable benefits like a company car or private medical cover trigger Class 1A employer NI at 15% on the benefit value — an extra cost on top of the figures above.
+            Taxable benefits like a company car or private medical cover trigger Class 1A employer NI at 15% on the benefit value, an extra cost on top of the figures above.
           </Callout>
         </GuideSection>
 
@@ -137,7 +137,7 @@ export default function EmployerCost() {
             { q: 'What is the secondary threshold?', a: 'It is the salary level above which employers start paying NI on an employee. For 2025/26 it is £5,000 a year.' },
             { q: 'Do I pay employer NI on pension contributions?', a: 'No. Employer pension contributions are not subject to employer NI, which is part of why salary sacrifice into pensions is tax-efficient.' },
             { q: 'Is the apprenticeship levy included?', a: 'No. The 0.5% apprenticeship levy only applies to employers with an annual pay bill over £3 million, so it is excluded here.' },
-            { q: 'How much should I budget above salary?', a: 'As a planning rule, allow 20–30% on top of gross salary once you include NI, pension, benefits, equipment and overheads.' },
+            { q: 'How much should I budget above salary?', a: 'As a planning rule, allow 20 to 30% on top of gross salary once you include NI, pension, benefits, equipment and overheads.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>

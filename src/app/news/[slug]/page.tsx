@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const n = getNewsItem(slug);
   if (!n) return { title: 'News update not found' };
   return {
-    title: `${n.title} — UK Visa News`,
+    title: `${n.title}, UK Visa News`,
     description: n.summary,
     alternates: { canonical: `/news/${slug}` },
     // Short news items are kept lightweight; noindex so the thin news section

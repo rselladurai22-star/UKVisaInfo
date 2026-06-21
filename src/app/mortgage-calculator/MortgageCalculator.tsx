@@ -126,7 +126,7 @@ export default function MortgageCalculator() {
         </nav>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">UK Mortgage Repayment Calculator</h1>
         <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-          Work out your monthly repayment, total interest and payoff date — then model overpayments,
+          Work out your monthly repayment, total interest and payoff date, then model overpayments,
           fees, LTV bands and rate rises. Figures use the standard capital-and-interest (annuity) method
           lenders apply, updated for 2025/26.
         </p>
@@ -149,7 +149,7 @@ export default function MortgageCalculator() {
                   <NumberInput value={termYears} onChange={setTermYears} suffix="yrs" />
                 </Field>
               </div>
-              <Field label={`Interest rate — ${pct(rate, 2)}`}>
+              <Field label={`Interest rate, ${pct(rate, 2)}`}>
                 <Slider value={rate} onChange={setRate} min={0} max={12} step={0.05} />
               </Field>
 
@@ -255,7 +255,7 @@ export default function MortgageCalculator() {
                 <div className="mt-4 p-3 rounded-lg bg-secondary-soft/30 border border-secondary/20 text-sm text-on-surface">
                   Overpaying clears your mortgage in{' '}
                   <strong className="text-secondary">{fmtYM(r.over.months)}</strong> instead of{' '}
-                  <strong>{fmtYM(r.base.months)}</strong> — that&apos;s{' '}
+                  <strong>{fmtYM(r.base.months)}</strong>, that&apos;s{' '}
                   <strong className="text-secondary">{fmtYM(r.monthsSaved)} early</strong>.
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3">
@@ -277,7 +277,7 @@ export default function MortgageCalculator() {
                   Lenders price in bands. You&apos;re at <strong className="text-primary">{pct(r.ltv)}</strong> LTV.
                   {r.nextBand
                     ? <> Overpay <strong className="text-secondary">{gbp(Math.max(0, r.reduceToBand))}</strong> to reach the {r.nextBand}% band and unlock a cheaper rate on the whole balance.</>
-                    : <> You&apos;re already in the lowest mainstream band — further equity gives little rate benefit.</>}
+                    : <> You&apos;re already in the lowest mainstream band, further equity gives little rate benefit.</>}
                 </p>
                 <div className="flex gap-1">
                   {LTV_BANDS.map((b) => (
@@ -351,7 +351,7 @@ function Guide() {
         <span className="text-[11px] font-bold uppercase tracking-widest text-secondary">Complete guide</span>
         <h2 className="text-3xl sm:text-4xl font-display font-bold text-primary mt-1">How UK mortgage repayments really work</h2>
         <p className="mt-3 text-on-surface-variant leading-relaxed">
-          A repayment mortgage looks simple — borrow a sum, pay it back monthly — but the maths underneath
+          A repayment mortgage looks simple, borrow a sum, pay it back monthly, but the maths underneath
           decides how much of your money becomes the bank&apos;s and how much becomes your equity. This guide
           explains the mechanics, the levers you control, and the costly traps, all for the UK 2025/26 market.
         </p>
@@ -374,13 +374,13 @@ function Guide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Each month the lender charges interest on the <strong>outstanding</strong> balance only. Because that
             balance is highest at the start, early payments are mostly interest and barely dent the capital. As
-            the balance falls, the interest slice shrinks and the capital slice grows — an accelerating curve
+            the balance falls, the interest slice shrinks and the capital slice grows, an accelerating curve
             sometimes called the &quot;amortisation S-curve&quot;.
           </p>
           <Callout tone="tip" title="The crossover point">
             On a typical 25-year mortgage, the point where more of each payment goes to capital than to interest
-            doesn&apos;t arrive until roughly year 12–14. This is exactly why overpayments made early are so
-            powerful — they remove capital that would otherwise accrue interest for two more decades.
+            doesn&apos;t arrive until roughly year 12 to 14. This is exactly why overpayments made early are so
+            powerful, they remove capital that would otherwise accrue interest for two more decades.
           </Callout>
         </section>
 
@@ -389,7 +389,7 @@ function Guide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Take a £350,000 home with a £52,500 deposit (15%), leaving a £297,500 loan at 4.7% over 25 years
             (300 payments). The monthly payment works out at about <strong>£1,686</strong>. Over the full term
-            you repay roughly <strong>£505,800</strong> — meaning around <strong>£208,300 of interest</strong>
+            you repay roughly <strong>£505,800</strong>, meaning around <strong>£208,300 of interest</strong>
             on top of the capital. In year one, roughly £13,800 of your £20,200 in payments is interest; only
             about £6,400 reduces the balance.
           </p>
@@ -409,8 +409,8 @@ function Guide() {
           </div>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Now add a £150/month overpayment from day one. You&apos;d clear the mortgage around 3 years early and
-            save roughly £30,000 in interest — a guaranteed, tax-free return equal to your mortgage rate. Use the
-            calculator above — open Advanced options to model overpayments and fees.
+            save roughly £30,000 in interest, a guaranteed, tax-free return equal to your mortgage rate. Use the
+            calculator above, open Advanced options to model overpayments and fees.
           </p>
         </section>
 
@@ -444,17 +444,17 @@ function Guide() {
         </section>
 
         <section>
-          <GuideHeading kicker="Rates">Fixed, tracker and SVR — and why swap rates matter</GuideHeading>
+          <GuideHeading kicker="Rates">Fixed, tracker and SVR, and why swap rates matter</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             A <strong>fixed rate</strong> locks your rate for a set period (commonly 2 or 5 years). A
             <strong> tracker</strong> follows the Bank of England base rate plus a margin, so payments move with
             policy decisions. The <strong>standard variable rate (SVR)</strong> is the lender&apos;s default rate
-            you roll onto when a deal ends — almost always the most expensive option, so remortgaging before then
+            you roll onto when a deal ends, almost always the most expensive option, so remortgaging before then
             usually pays.
           </p>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Crucially, fixed rates are <em>not</em> priced off the base rate. They&apos;re priced off
-            <strong> swap rates</strong> — the wholesale cost banks pay to swap floating interest for fixed over a
+            <strong> swap rates</strong>, the wholesale cost banks pay to swap floating interest for fixed over a
             given term. Swaps reflect the market&apos;s expectations of <em>future</em> inflation and rates, which
             is why fixed mortgage deals can get cheaper or dearer even when the base rate hasn&apos;t moved.
           </p>
@@ -474,7 +474,7 @@ function Guide() {
           <GuideHeading kicker="Equity">LTV bands and the cliff-edge effect</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Loan-to-value (LTV) is your loan as a percentage of the property value. Lenders price risk in discrete
-            bands — typically 95%, 90%, 85%, 80%, 75% and 60%. These are <strong>cliff-edges</strong>, not smooth
+            bands, typically 95%, 90%, 85%, 80%, 75% and 60%. These are <strong>cliff-edges</strong>, not smooth
             gradients: dropping from 80.1% to 79.9% can unlock a materially cheaper rate on the <em>entire</em>
             loan. A modest overpayment or a higher valuation that tips you into the next band down can produce an
             effective first-year return well into double digits. Below ~60% LTV the rate benefit largely flattens,
@@ -488,8 +488,8 @@ function Guide() {
             Overpaying is mathematically equivalent to earning a <strong>guaranteed, tax-free return</strong> equal
             to your mortgage rate. At 4.7%, a higher-rate taxpayer would need to earn about 7.8% gross in a taxable
             account to match it. The trade-offs are liquidity (equity is hard to access) and early repayment
-            charges — most fixed deals allow penalty-free overpayments of up to 10% of the balance per year, and
-            exceeding that triggers an ERC (often 1–5% of the amount). Where expected after-tax investment returns
+            charges, most fixed deals allow penalty-free overpayments of up to 10% of the balance per year, and
+            exceeding that triggers an ERC (often 1 to 5% of the amount). Where expected after-tax investment returns
             beat the mortgage rate, tax-advantaged wrappers such as ISAs and pensions can win instead.
           </p>
           <Callout tone="warn" title="Check your ERC first">
@@ -501,8 +501,8 @@ function Guide() {
         <section>
           <GuideHeading kicker="True cost">Fees, and the cost of the whole purchase</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
-            The headline rate isn&apos;t the full picture. Product/arrangement fees (often £999–£1,499), valuation
-            and booking fees all add up — and if you <strong>add the fee to the loan</strong> rather than paying it
+            The headline rate isn&apos;t the full picture. Product/arrangement fees (often £999 to £1,499), valuation
+            and booking fees all add up, and if you <strong>add the fee to the loan</strong> rather than paying it
             upfront, you pay interest on it for the whole term. A lower rate with a big fee can be worse than a
             slightly higher rate with no fee on a smaller loan. Beyond the mortgage itself, budget for stamp duty,
             conveyancing, surveys and removals. Use the related tools below to total the real cost of buying.
@@ -512,9 +512,9 @@ function Guide() {
         <section>
           <GuideHeading kicker="Affordability">How lenders decide what you can borrow</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
-            Most UK lenders cap borrowing at around <strong>4.5 times income</strong> (sometimes 5–5.5× for higher
+            Most UK lenders cap borrowing at around <strong>4.5 times income</strong> (sometimes 5 to 5.5× for higher
             earners or specific schemes), then <strong>stress-test</strong> the payment at a notably higher rate to
-            check you could still cope if rates rose. They also assess committed outgoings — childcare, loans, car
+            check you could still cope if rates rose. They also assess committed outgoings, childcare, loans, car
             finance and credit-card balances all reduce the maximum. That&apos;s why two people on the same salary
             can be offered very different amounts. To size your own ceiling, use the dedicated affordability tool.
           </p>
@@ -543,7 +543,7 @@ function Guide() {
           <FAQ
             items={[
               { q: 'Is this calculator accurate to the penny?', a: 'It uses the standard annuity formula lenders apply, but real offers differ slightly due to daily-interest vs monthly-interest conventions, rounding, and the exact date of completion. Treat the output as a close estimate, not an offer.' },
-              { q: 'Should I pick a 2-year or 5-year fix?', a: 'A 5-year fix gives certainty for longer and avoids remortgage fees sooner, but you may miss out if rates fall. A 2-year fix is cheaper to exit if you expect rates to drop or your circumstances to change. There is no universally right answer — it depends on your view of rates and your need for stability.' },
+              { q: 'Should I pick a 2-year or 5-year fix?', a: 'A 5-year fix gives certainty for longer and avoids remortgage fees sooner, but you may miss out if rates fall. A 2-year fix is cheaper to exit if you expect rates to drop or your circumstances to change. There is no universally right answer, it depends on your view of rates and your need for stability.' },
               { q: 'Does overpaying reduce my monthly payment or my term?', a: 'By default, overpaying keeps the payment the same and shortens the term (saving the most interest). Some lenders let you instead "recalculate" to lower the monthly payment over the original term. Ask which your lender applies.' },
               { q: 'What is a good interest rate right now?', a: 'Rates change constantly and depend heavily on your LTV, credit profile and the deal length. As a rule, the lower your LTV the better the rate. Always compare current whole-of-market deals rather than relying on a fixed figure.' },
               { q: 'Can I get a mortgage on interest-only?', a: 'For residential purchases, lenders require a credible repayment strategy and usually a low LTV. Interest-only is far more common for buy-to-let, where rent covers the interest and the property may be sold to repay capital.' },

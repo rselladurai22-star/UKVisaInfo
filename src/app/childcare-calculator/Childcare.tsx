@@ -97,47 +97,47 @@ export default function Childcare() {
     >
       <Guide
         title="UK childcare support explained (2025/26)"
-        intro="Childcare is one of the biggest costs for working families, but several government schemes can cut the bill dramatically: funded free hours, Tax-Free Childcare and the Universal Credit childcare element. Knowing which you qualify for — and which combine — makes a big difference."
+        intro="Childcare is one of the biggest costs for working families, but several government schemes can cut the bill dramatically: funded free hours, Tax-Free Childcare and the Universal Credit childcare element. Knowing which you qualify for, and which combine, makes a big difference."
       >
         <GuideSection kicker="Free hours" title="Funded early-years hours">
           <p>In England, funded childcare hours have expanded significantly:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>15 hours</strong> for all 3–4 year olds, regardless of income.</li>
-            <li><strong>30 hours</strong> for 3–4 year olds of working parents.</li>
+            <li><strong>15 hours</strong> for all 3 to 4 year olds, regardless of income.</li>
+            <li><strong>30 hours</strong> for 3 to 4 year olds of working parents.</li>
             <li><strong>30 hours</strong> for children from <strong>9 months</strong> of working parents, following the September 2025 expansion.</li>
           </ul>
           <p>Funded hours cover {FREE_WEEKS} weeks a year (term time). You can "stretch" them over more weeks at fewer hours per week if your provider allows.</p>
         </GuideSection>
 
         <GuideSection kicker="Tax-Free Childcare" title="The 20% top-up">
-          <p><strong>Tax-Free Childcare (TFC)</strong> gives you £2 for every £8 you pay in, up to £2,000 a year per child (£4,000 if disabled). Both parents must generally work and each earn under £100,000. You pay into an online account and the government tops it up — effectively a 20% discount on childcare costs.</p>
+          <p><strong>Tax-Free Childcare (TFC)</strong> gives you £2 for every £8 you pay in, up to £2,000 a year per child (£4,000 if disabled). Both parents must generally work and each earn under £100,000. You pay into an online account and the government tops it up, effectively a 20% discount on childcare costs.</p>
         </GuideSection>
 
         <GuideSection kicker="Universal Credit" title="The 85% childcare element">
-          <p>If you're on <strong>Universal Credit</strong> and working, you can claim back up to <strong>85%</strong> of childcare costs, capped at around £1,015 a month for one child and £1,739 for two or more. This is far more generous than TFC for lower earners — but you cannot have both.</p>
+          <p>If you're on <strong>Universal Credit</strong> and working, you can claim back up to <strong>85%</strong> of childcare costs, capped at around £1,015 a month for one child and £1,739 for two or more. This is far more generous than TFC for lower earners, but you cannot have both.</p>
           <Callout tone="warn" title="The £100,000 cliff edge">
-            If either parent's adjusted income tips over £100,000, you lose both the 30 funded hours and Tax-Free Childcare entirely — a cliff edge worth thousands. Pension contributions can bring income back under the line.
+            If either parent's adjusted income tips over £100,000, you lose both the 30 funded hours and Tax-Free Childcare entirely, a cliff edge worth thousands. Pension contributions can bring income back under the line.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A two-year-old, 40 hours a week">
-          <p>A two-year-old of working parents under £100k needing 40 hours a week at £7/hour costs about £14,280 a year gross (51 weeks). With 30 funded hours over 38 weeks saving roughly £7,980, and Tax-Free Childcare giving 20% off the remainder, the net cost falls substantially — often by more than half once both schemes are applied.</p>
+          <p>A two-year-old of working parents under £100k needing 40 hours a week at £7/hour costs about £14,280 a year gross (51 weeks). With 30 funded hours over 38 weeks saving roughly £7,980, and Tax-Free Childcare giving 20% off the remainder, the net cost falls substantially, often by more than half once both schemes are applied.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common childcare cost mistakes">
           <Mistakes items={[
             ['Trying to combine TFC and UC', 'You must choose one; they cannot be claimed together.'],
             ['Missing the 9-month expansion', 'From September 2025 funded 30 hours start at 9 months for eligible working parents.'],
-            ['Falling off the £100,000 cliff', 'Crossing £100k income removes funded hours and TFC entirely — model pension contributions to stay under.'],
+            ['Falling off the £100,000 cliff', 'Crossing £100k income removes funded hours and TFC entirely, model pension contributions to stay under.'],
             ['Forgetting to reconfirm eligibility', 'You must reconfirm TFC and funded-hours eligibility every three months or risk losing it.'],
           ]} />
         </GuideSection>
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Can I get 30 free hours from 9 months?', a: 'Yes — since September 2025 eligible working parents can access 30 funded hours from when their child is 9 months old.' },
-            { q: 'Is Tax-Free Childcare worth it?', a: 'For working parents not on Universal Credit, yes — it gives a 20% top-up worth up to £2,000 per child per year.' },
-            { q: 'TFC or Universal Credit — which is better?', a: 'UC repays up to 85% of costs and usually wins for lower earners, while TFC suits higher earners not on UC. You cannot use both.' },
+            { q: 'Can I get 30 free hours from 9 months?', a: 'Yes, since September 2025 eligible working parents can access 30 funded hours from when their child is 9 months old.' },
+            { q: 'Is Tax-Free Childcare worth it?', a: 'For working parents not on Universal Credit, yes, it gives a 20% top-up worth up to £2,000 per child per year.' },
+            { q: 'TFC or Universal Credit, which is better?', a: 'UC repays up to 85% of costs and usually wins for lower earners, while TFC suits higher earners not on UC. You cannot use both.' },
             { q: 'Do free hours cover the whole year?', a: 'Funded hours cover 38 weeks (term time). Many providers let you stretch them across more weeks at fewer hours per week.' },
           ]} />
         </GuideSection>

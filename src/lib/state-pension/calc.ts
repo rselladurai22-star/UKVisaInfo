@@ -2,16 +2,16 @@
  * UK State Pension forecaster (new State Pension, post-2016 system).
  *
  * Headline: 35 qualifying NI years for the full new State Pension.
- *   – 2025/26 full new State Pension:        £230.25/week (Triple Lock, +4.1% from £221.20)
- *   – Minimum to qualify at all:             10 years
- *   – Pro-rata between 10 and 35:            (years / 35) × full
+ *, 2025/26 full new State Pension:        £230.25/week (Triple Lock, +4.1% from £221.20)
+ *, Minimum to qualify at all:             10 years
+ *, Pro-rata between 10 and 35:            (years / 35) × full
  *
  * Voluntary Class 3 NIC (to fill gaps): £17.45/week in 2024/25 ≈ £907/year per
  * qualifying year added. Buying one extra year therefore costs ~£907 and
- * adds about (1/35) × £230.25 × 52 ≈ £342/year of pension — break-even in
+ * adds about (1/35) × £230.25 × 52 ≈ £342/year of pension, break-even in
  * roughly 2 years 8 months of receipt.
  *
- * Sources: gov.uk – "The new State Pension"; DWP State Pension rates 2025/26.
+ * Sources: gov.uk, "The new State Pension"; DWP State Pension rates 2025/26.
  *
  * NOTE: 2026/27 figures published April 2026; refresh values when next
  * year's rate is announced.

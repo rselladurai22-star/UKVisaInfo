@@ -4,12 +4,12 @@ import { Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const ITEMS = [
-  'April 2026 — Skilled Worker minimum salary rises to £41,700',
-  'May 2025 White Paper — English language requirement B2 for new applicants',
+  'April 2026, Skilled Worker minimum salary rises to £41,700',
+  'May 2025 White Paper, English language requirement B2 for new applicants',
   'Graduate Visa reduced to 18 months (3 years for PhD)',
   'Care Worker route (SOC 6135/6136) closed to new overseas recruits from 22 July 2025',
-  'All visas issued as eVisas from 2026 — no more physical BRP cards',
-  'ETA scheme rollout complete — £16 Electronic Travel Authorisation for visa-exempt nationals',
+  'All visas issued as eVisas from 2026, no more physical BRP cards',
+  'ETA scheme rollout complete, £16 Electronic Travel Authorisation for visa-exempt nationals',
 ];
 
 export default function NewsTicker() {

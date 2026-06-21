@@ -41,7 +41,7 @@ export default function CostCalculator() {
   };
 
   const emailEstimate = () => {
-    const subject = encodeURIComponent(`UK Visa Cost Estimate — ${visaType}`);
+    const subject = encodeURIComponent(`UK Visa Cost Estimate, ${visaType}`);
     const body = encodeURIComponent(
       `Visa: ${visaType}\nLocation: ${location}\nDuration: ${isVisitor ? 'N/A' : years + ' years'}\nService: ${priority}\n\n` +
       `Application Fee: £${applicationFee}\nIHS: £${ihsFee}\nPriority: £${priorityFee}\nTotal: £${total}`

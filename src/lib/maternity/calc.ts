@@ -13,7 +13,7 @@
  *
  * SPP (Statutory Paternity Pay):
  *  - Up to 2 weeks (taken as one block of 2, or two blocks of 1, within 52
- *    weeks of birth — rule change April 2024).
+ *    weeks of birth, rule change April 2024).
  *  - Weekly rate: lower of (90% AWE, SPP_STATUTORY_RATE).
  *
  * Rates are reviewed annually in April.
@@ -85,9 +85,9 @@ export function calculateMaternity(input: CalcInput): CalcResult {
   const phase1Rate = awe * 0.9;
   const phase2Rate = Math.min(awe * 0.9, SMP_STATUTORY_RATE);
   const phases: PhaseRow[] = [
-    { label: 'Weeks 1–6 · 90% of AWE',            weeks: 6,  weeklyRate: phase1Rate, total: phase1Rate * 6 },
-    { label: 'Weeks 7–39 · lower of 90% / statutory', weeks: 33, weeklyRate: phase2Rate, total: phase2Rate * 33 },
-    { label: 'Weeks 40–52 · unpaid (statutory leave)', weeks: 13, weeklyRate: 0, total: 0 },
+    { label: 'Weeks 1 to 6 · 90% of AWE',            weeks: 6,  weeklyRate: phase1Rate, total: phase1Rate * 6 },
+    { label: 'Weeks 7 to 39 · lower of 90% / statutory', weeks: 33, weeklyRate: phase2Rate, total: phase2Rate * 33 },
+    { label: 'Weeks 40 to 52 · unpaid (statutory leave)', weeks: 13, weeklyRate: 0, total: 0 },
   ];
 
   return {

@@ -49,10 +49,10 @@ export default function RefusalAnalyzerClient() {
             UK Visa Refusal Analyzer
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-white/65 text-base md:text-[1.0625rem] leading-relaxed">
-            Paste your refusal letter and we&apos;ll decode each ground in plain English — severity, what it means, and what to do next.
+            Paste your refusal letter and we&apos;ll decode each ground in plain English, severity, what it means, and what to do next.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-white/45 text-[12px]">
-            <span className="flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-[#60a5fa]" /> Runs in your browser — never sent to a server</span>
+            <span className="flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-[#60a5fa]" /> Runs in your browser, never sent to a server</span>
             <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-[#C9A14A]" /> Based on Home Office decision-letter rules</span>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function RefusalAnalyzerClient() {
                     Paste the refusal letter text below
                   </h2>
                   <p className="mt-2 text-[13px] text-[#7a8195] leading-relaxed">
-                    Copy and paste the main body — especially the &ldquo;Reasons for Refusal&rdquo; section. Personal details like your name and reference number can be left in or stripped.
+                    Copy and paste the main body, especially the &ldquo;Reasons for Refusal&rdquo; section. Personal details like your name and reference number can be left in or stripped.
                   </p>
                 </div>
 
@@ -177,7 +177,7 @@ export default function RefusalAnalyzerClient() {
                   <ol className="space-y-3">
                     {[
                       { t: 'Paste the letter', d: 'Copy the body of your refusal letter into the box above. Personal details aren&apos;t needed.' },
-                      { t: 'We scan for known patterns', d: 'The text is matched against Home Office paragraph numbers and decision-letter wording, all in your browser — nothing is uploaded.' },
+                      { t: 'We scan for known patterns', d: 'The text is matched against Home Office paragraph numbers and decision-letter wording, all in your browser, nothing is uploaded.' },
                       { t: 'You get a plain-English breakdown', d: 'Each ground is categorised by severity (critical / high / medium) with what it means and what to do next.' },
                     ].map((s, i) => (
                       <li key={i} className="flex gap-3 items-start p-3.5 rounded-xl bg-white border border-[rgba(14,20,36,0.05)]">

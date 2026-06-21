@@ -1,19 +1,19 @@
 /**
- * UK Pension Annual Allowance — 2026/27.
+ * UK Pension Annual Allowance, 2026/27.
  *
- *   – Standard AA:                 £60,000
- *   – Money Purchase AA (MPAA):    £10,000  (if you've flexibly accessed DC pot)
- *   – Tapered AA (high earners):
+ *, Standard AA:                 £60,000
+ *, Money Purchase AA (MPAA):    £10,000  (if you've flexibly accessed DC pot)
+ *, Tapered AA (high earners):
  *       Applies only if BOTH:
  *         • Threshold income > £200,000
  *         • Adjusted income  > £260,000
  *       Reduce AA by £1 for every £2 of adjusted income over £260,000,
  *       to a minimum of £10,000 (so fully tapered at adjusted £360,000).
  *
- *   – Carry-forward: up to 3 prior years of unused AA can be used,
+ *, Carry-forward: up to 3 prior years of unused AA can be used,
  *     in order from oldest to newest.
  *
- * Sources: HMRC PTM055000, gov.uk – "Tax on your private pension contributions".
+ * Sources: HMRC PTM055000, gov.uk, "Tax on your private pension contributions".
  */
 
 const STD_AA = 60_000;
@@ -27,7 +27,7 @@ export interface PaaInput {
   thresholdIncome: number;       // for taper gate
   mpaaTriggered: boolean;        // has the person flexibly accessed a DC pot?
   carryForward?: number;         // optional unused AA from prior 3 tax years
-  plannedContribution?: number;  // optional — how much will you contribute this year?
+  plannedContribution?: number;  // optional, how much will you contribute this year?
 }
 
 export interface PaaResult {
@@ -59,7 +59,7 @@ export function calcPensionAllowance(input: PaaInput): PaaResult {
   const mpaaApplies = input.mpaaTriggered;
   if (mpaaApplies) {
     // MPAA caps DC contributions at £10k for the year and BLOCKS carry-forward on the MPAA.
-    // (Defined-benefit accrual can still use a residual AA — out of scope for v1.)
+    // (Defined-benefit accrual can still use a residual AA, out of scope for v1.)
     thisYearAa = Math.min(thisYearAa, MPAA);
   }
 

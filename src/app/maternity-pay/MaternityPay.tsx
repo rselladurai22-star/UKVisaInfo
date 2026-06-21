@@ -29,7 +29,7 @@ export default function MaternityPay() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Employment', href: '/category/employment' }, { label: 'Maternity & Paternity Pay' }]}
       title="Maternity & Paternity Pay Calculator"
-      subtitle="Estimate Statutory Maternity Pay (SMP) or Statutory Paternity Pay (SPP) for 2025/26 — 90% of pay then £187.18 a week."
+      subtitle="Estimate Statutory Maternity Pay (SMP) or Statutory Paternity Pay (SPP) for 2025/26 to 90% of pay then £187.18 a week."
       calcLabel="Calculate Statutory Pay"
       inputs={
         <Panel title="Your Details">
@@ -120,7 +120,7 @@ export default function MaternityPay() {
             <li>Give the correct notice and, for SMP, provide a MATB1 certificate.</li>
           </ul>
           <Callout tone="tip" title="Maternity Allowance is a backup">
-            If you don't qualify for SMP — for example you're self-employed or recently changed jobs — you may still get Maternity Allowance from the DWP, worth up to £{SMP_STATUTORY_RATE.toFixed(2)} a week.
+            If you don't qualify for SMP, for example you're self-employed or recently changed jobs, you may still get Maternity Allowance from the DWP, worth up to £{SMP_STATUTORY_RATE.toFixed(2)} a week.
           </Callout>
         </GuideSection>
 
@@ -131,7 +131,7 @@ export default function MaternityPay() {
         <GuideSection kicker="Avoid these" title="Common statutory pay mistakes">
           <Mistakes items={[
             ['Thinking SMP is tax-free', 'It is taxable and subject to NI like normal pay, so budget for a lower net figure.'],
-            ['Missing the qualifying week', 'Continuous service is tested at the 15th week before the due date — late starters can miss out.'],
+            ['Missing the qualifying week', 'Continuous service is tested at the 15th week before the due date, late starters can miss out.'],
             ['Overlooking enhanced schemes', 'Many employers top up SMP with occupational maternity pay; check your contract.'],
             ['Forgetting shared parental leave', 'Parents can convert most maternity leave into shared parental leave, splitting it between them.'],
           ]} />

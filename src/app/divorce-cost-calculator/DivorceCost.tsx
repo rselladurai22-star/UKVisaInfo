@@ -47,7 +47,7 @@ export default function DivorceCost() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Family Law', href: '/category/family-law' }, { label: 'Divorce Cost' }]}
       title="Divorce Cost Calculator"
-      subtitle="Estimate the cost of divorce in England & Wales — the £593 court fee plus solicitor and financial-order costs, depending on how you proceed."
+      subtitle="Estimate the cost of divorce in England & Wales, the £593 court fee plus solicitor and financial-order costs, depending on how you proceed."
       calcLabel="Estimate Divorce Cost"
       inputs={
         <Panel title="Your Divorce">
@@ -72,15 +72,15 @@ export default function DivorceCost() {
       results={
         <>
           <div className="grid grid-cols-2 gap-3">
-            <Stat label="Estimated Total" value={route === 'diy' && !financialOrder ? gbp(r.low) : `${gbp(r.low)}–${gbp(r.high)}`} sub="Court + legal fees" tone="dark" big />
+            <Stat label="Estimated Total" value={route === 'diy' && !financialOrder ? gbp(r.low) : `${gbp(r.low)}, ${gbp(r.high)}`} sub="Court + legal fees" tone="dark" big />
             <Stat label="Court Fee" value={gbp(COURT_FEE)} sub="Divorce application" tone="primary" />
-            <Stat label="Solicitor Fees" value={route === 'diy' ? '£0' : `${gbp(r.solLow)}–${gbp(r.solHigh)}`} sub={route === 'contested' ? 'Contested' : route === 'solicitor' ? 'Uncontested' : 'DIY'} tone="accent" />
+            <Stat label="Solicitor Fees" value={route === 'diy' ? '£0' : `${gbp(r.solLow)}, ${gbp(r.solHigh)}`} sub={route === 'contested' ? 'Contested' : route === 'solicitor' ? 'Uncontested' : 'DIY'} tone="accent" />
             <Stat label="Financial Order" value={financialOrder ? gbp(r.financial) + '+' : '£0'} sub={financialOrder ? 'Court fee + legal' : 'Not included'} />
           </div>
 
           {route === 'diy' && (
             <Callout tone="tip" title="DIY divorce is cheap but limited">
-              For a straightforward, agreed divorce you can apply online yourself for the £593 court fee. But always get a financial order — without one, your ex can make a financial claim against you years later.
+              For a straightforward, agreed divorce you can apply online yourself for the £593 court fee. But always get a financial order, without one, your ex can make a financial claim against you years later.
             </Callout>
           )}
           {route === 'contested' && (
@@ -95,7 +95,7 @@ export default function DivorceCost() {
     >
       <Guide
         title="How much does a divorce cost in the UK?"
-        intro="Since 2022, England and Wales have a 'no-fault' divorce process that's simpler and can be done online. The court fee is fixed at £593, but the real cost depends on whether you use a solicitor and — crucially — how you sort out money and children."
+        intro="Since 2022, England and Wales have a 'no-fault' divorce process that's simpler and can be done online. The court fee is fixed at £593, but the real cost depends on whether you use a solicitor and, crucially, how you sort out money and children."
       >
         <GuideSection kicker="The court fee" title="A fixed £593">
           <p>The divorce application fee in England and Wales is <strong>£593</strong>, paid to the court. It's the same whether you apply jointly or on your own, and whether or not you use a solicitor. If you're on a low income or certain benefits, the Help with Fees scheme may reduce or waive it.</p>
@@ -105,27 +105,27 @@ export default function DivorceCost() {
           <p>Legal fees are where divorces differ enormously:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>DIY:</strong> just the £593 fee if you complete the online process yourself.</li>
-            <li><strong>Uncontested with a solicitor:</strong> typically £600–£1,500 for guiding you through an amicable divorce.</li>
+            <li><strong>Uncontested with a solicitor:</strong> typically £600 to £1,500 for guiding you through an amicable divorce.</li>
             <li><strong>Contested or complex:</strong> disputes over money or children can run to many thousands of pounds each, sometimes far more.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Finances" title="Why you need a financial order">
-          <p>The divorce itself doesn't settle money. To make a financial agreement legally binding you need a <strong>financial (consent) order</strong>, which costs a £53 court fee plus any legal fees to draft it. Without one, a former spouse can bring a financial claim against you years later — even after the divorce is final. This is the single most important step many DIY divorcers skip.</p>
+          <p>The divorce itself doesn't settle money. To make a financial agreement legally binding you need a <strong>financial (consent) order</strong>, which costs a £53 court fee plus any legal fees to draft it. Without one, a former spouse can bring a financial claim against you years later, even after the divorce is final. This is the single most important step many DIY divorcers skip.</p>
           <Callout tone="warn" title="A clean break needs a court order">
             Only a sealed financial order can give you a 'clean break'. An informal agreement, however amicable, leaves the door open to future claims.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="An amicable divorce with a consent order">
-          <p>A couple divorcing amicably with a solicitor handling an uncontested case and drafting a consent order might pay: £593 court fee + roughly £1,000 solicitor for the divorce + £53 consent-order fee + about £600 to draft the order — around £2,250 in total, split between them or shared.</p>
+          <p>A couple divorcing amicably with a solicitor handling an uncontested case and drafting a consent order might pay: £593 court fee + roughly £1,000 solicitor for the divorce + £53 consent-order fee + about £600 to draft the order, around £2,250 in total, split between them or shared.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common divorce cost mistakes">
           <Mistakes items={[
             ['Skipping the financial order', 'Without a sealed consent order, financial claims can resurface years later.'],
             ['Litigating instead of mediating', 'Court battles are the most expensive route; mediation is usually far cheaper.'],
-            ['Forgetting to update your will', 'Divorce affects your will and beneficiaries — review it promptly.'],
+            ['Forgetting to update your will', 'Divorce affects your will and beneficiaries, review it promptly.'],
             ['Not checking Help with Fees', 'Low-income applicants may get the £593 fee reduced or waived.'],
           ]} />
         </GuideSection>

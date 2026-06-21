@@ -34,11 +34,11 @@ const SITE_URL = 'https://ukvisainfo.co.uk';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'UKDesk — UK Tools, Calculators & Guides for Money, Property, Visas',
+    default: 'UKDesk, UK Tools, Calculators & Guides for Money, Property, Visas',
     template: '%s · UKDesk',
   },
   description:
-    'UKDesk — free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
+    'UKDesk, free UK calculators and lookups in one place. Take-home pay, mortgage, stamp duty, council tax, postcode super-lookup, every UK visa route. Verified against gov.uk, HMRC and ONS.',
   applicationName: 'UKDesk',
   authors: [
     { name: PRIMARY_EDITOR.name, url: `${SITE_URL}${PRIMARY_EDITOR.profileUrl}` },
@@ -63,21 +63,21 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: SITE_URL,
     siteName: 'UKDesk',
-    title: 'UKDesk — Every UK Tool, Calculator and Guide in One Place',
+    title: 'UKDesk, Every UK Tool, Calculator and Guide in One Place',
     description:
       'Free UK calculators and lookups: take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     images: [
       {
         url: `${SITE_URL}/opengraph-image`,
         width: 1200, height: 630,
-        alt: 'UKDesk — UK tools & calculators',
+        alt: 'UKDesk, UK tools & calculators',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@ukdesk',
-    title: 'UKDesk — Every UK Tool, Calculator and Guide',
+    title: 'UKDesk, Every UK Tool, Calculator and Guide',
     description: 'Free UK calculators and lookups: pay, mortgage, SDLT, council tax, postcode, visas. 100% gov.uk sourced.',
     images: [`${SITE_URL}/opengraph-image`],
   },
@@ -111,7 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: 'UKDesk',
     alternateName: 'ukvisainfo.co.uk',
     url: SITE_URL,
-    description: 'Free UK calculators and lookups in one place — take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
+    description: 'Free UK calculators and lookups in one place, take-home pay, mortgage, stamp duty, council tax, postcode, every visa route. Verified against gov.uk, HMRC and ONS.',
     inLanguage: 'en-GB',
     potentialAction: {
       '@type': 'SearchAction',

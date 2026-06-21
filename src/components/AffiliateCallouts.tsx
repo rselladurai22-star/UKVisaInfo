@@ -2,7 +2,7 @@ import { ExternalLink, Tag } from 'lucide-react';
 import { pickAffiliates } from '../data/affiliates';
 
 /**
- * Renders 1–2 contextually relevant affiliate offers based on the article's
+ * Renders 1 to 2 contextually relevant affiliate offers based on the article's
  * tags. Marked with `rel="sponsored nofollow"` to comply with Google's
  * advertising-link guidelines and UK ASA disclosure rules.
  */
@@ -15,7 +15,7 @@ export default function AffiliateCallouts({ tags }: { tags: string[] }) {
       <div className="flex items-center gap-2 mb-4">
         <Tag className="w-4 h-4 text-secondary" />
         <h3 className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-          Recommended tools — sponsored
+          Recommended tools, sponsored
         </h3>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -41,7 +41,7 @@ export default function AffiliateCallouts({ tags }: { tags: string[] }) {
         ))}
       </div>
       <p className="text-[10px] text-on-surface-variant/60 mt-3 italic">
-        Some links are affiliate links — we may earn a small commission if you
+        Some links are affiliate links, we may earn a small commission if you
         sign up, at no extra cost to you. This never influences our editorial.
       </p>
     </aside>

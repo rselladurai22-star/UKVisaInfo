@@ -32,7 +32,7 @@ export default function FooterNewsletter() {
     return (
       <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#10b981]/15 border border-[#10b981]/30 text-[#34d399] text-[13px] font-semibold">
         <Check className="w-4 h-4" strokeWidth={3} />
-        Subscribed — see you Tuesday.
+        Subscribed, see you Tuesday.
       </div>
     );
   }

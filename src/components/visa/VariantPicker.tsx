@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * VariantPicker — sub-route picker (Editorial Premium)
+ * VariantPicker, sub-route picker (Editorial Premium)
  * White card on cream, Fraunces serif headlines, emerald accent.
  */
 

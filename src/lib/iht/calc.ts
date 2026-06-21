@@ -5,14 +5,14 @@
  *         gov.uk/inheritance-tax-residence-nil-rate-band
  *
  * Rules (2026):
- * - Nil-Rate Band (NRB): £325,000 — frozen until April 2030.
- * - Residence Nil-Rate Band (RNRB): £175,000 — applies when the family home
+ * - Nil-Rate Band (NRB): £325,000, frozen until April 2030.
+ * - Residence Nil-Rate Band (RNRB): £175,000, applies when the family home
  *   passes to direct descendants (children/grandchildren/step/adopted/foster).
  * - Spouse / civil-partner exemption: unlimited transfers between UK-domiciled
  *   spouses are IHT-free, AND any unused NRB / RNRB transfers (TNRB / TRNRB).
  * - Rate: 40% on the excess; reduced to 36% if 10%+ of the net estate is left
  *   to a registered charity.
- * - RNRB tapers £1 for every £2 the estate exceeds £2 million — fully lost
+ * - RNRB tapers £1 for every £2 the estate exceeds £2 million, fully lost
  *   above £2.35m (single) / £2.7m (couple with transferred RNRB).
  *
  * This calculator deliberately does NOT model: lifetime gifts (7-year taper),
@@ -71,7 +71,7 @@ export function calculateIHT(input: CalcInput): CalcResult {
   const taxableEstate = Math.max(0, netEstate - baseNrb - rnrbAfterTaper);
 
   /* Charity reduced rate test: charity gift must be ≥ 10% of the net estate
-     (estate after liabilities, exemptions and the NRB — known as the
+     (estate after liabilities, exemptions and the NRB, known as the
      "baseline amount"). We approximate against the post-exemption net estate. */
   const baseline = Math.max(1, netEstate - baseNrb - rnrbAfterTaper + charityExempt);
   const charityRateUsed = charityExempt / baseline >= CHARITY_THRESHOLD;

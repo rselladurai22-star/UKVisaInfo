@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Header v6 — "Clean Slate" chrome.
+ * Header v6, "Clean Slate" chrome.
  * Frosted glass bar that gains a soft shadow on scroll. One visual anchor on
  * the right: text nav with an animated underline + a single search affordance
  * (the site is search-first) wired to a real ⌘K shortcut. Mobile collapses to
@@ -110,7 +110,7 @@ export default function Header() {
             <Wordmark />
           </Link>
 
-          {/* desktop nav — plain links, animated underline */}
+          {/* desktop nav, plain links, animated underline */}
           <nav className="ml-auto hidden items-center gap-8 lg:flex">
             {NAV.map((n) => {
               const active = isActive(n.href);
@@ -232,7 +232,7 @@ export default function Header() {
             </Link>
 
             <p className="mt-8 text-xs leading-relaxed text-slate-500">
-              Free UK calculators &amp; guides — verified against GOV.UK, HMRC and ONS.
+              Free UK calculators &amp; guides, verified against GOV.UK, HMRC and ONS.
               No sign-up, nothing stored.
             </p>
           </nav>

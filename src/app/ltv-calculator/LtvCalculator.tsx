@@ -65,7 +65,7 @@ export default function LtvCalculator() {
                 <strong> {r.nextBand}%</strong> band and unlock a cheaper rate on the whole loan.
               </p>
             ) : (
-              <p className="mt-3 text-sm text-on-surface-variant">You&apos;re in the lowest mainstream band — further deposit gives little rate benefit.</p>
+              <p className="mt-3 text-sm text-on-surface-variant">You&apos;re in the lowest mainstream band, further deposit gives little rate benefit.</p>
             )}
           </Panel>
 
@@ -86,31 +86,31 @@ export default function LtvCalculator() {
         intro="LTV is the single number that most influences your mortgage rate. This guide explains what it means, why the bands behave like cliff-edges, and how to use a small overpayment or a higher valuation to land a cheaper deal."
       >
         <GuideSection kicker="Definition" title="What LTV actually measures">
-          <p>Loan-to-value is your mortgage as a percentage of the property&apos;s value. Borrow £238,000 against a £280,000 home and your LTV is 85% — the remaining 15% (£42,000) is your equity. Lower LTV means the lender is risking less of the property&apos;s worth, so they reward you with a cheaper rate.</p>
+          <p>Loan-to-value is your mortgage as a percentage of the property&apos;s value. Borrow £238,000 against a £280,000 home and your LTV is 85%, the remaining 15% (£42,000) is your equity. Lower LTV means the lender is risking less of the property&apos;s worth, so they reward you with a cheaper rate.</p>
           <div className="my-3 p-5 rounded-lg bg-surface-container text-center"><code className="text-sm sm:text-base font-semibold text-primary">LTV = mortgage ÷ property value × 100</code></div>
         </GuideSection>
         <GuideSection kicker="Why it matters" title="The cliff-edge bands">
-          <p>Lenders price in discrete bands — typically 95%, 90%, 85%, 80%, 75% and 60%. They&apos;re step changes, not a smooth slope: moving from 80.1% to 79.9% can unlock a noticeably lower rate on the <em>entire</em> loan, not just the part above the threshold. That makes a small overpayment near a boundary one of the highest-return moves in personal finance.</p>
+          <p>Lenders price in discrete bands, typically 95%, 90%, 85%, 80%, 75% and 60%. They&apos;re step changes, not a smooth slope: moving from 80.1% to 79.9% can unlock a noticeably lower rate on the <em>entire</em> loan, not just the part above the threshold. That makes a small overpayment near a boundary one of the highest-return moves in personal finance.</p>
           <Callout tone="tip" title="Tier-jumping">A modest top-up that nudges you into the next band down can produce an effective first-year return well into double digits, because the cheaper rate applies to the whole balance.</Callout>
         </GuideSection>
         <GuideSection kicker="Lower it" title="How to reduce your LTV">
-          <p>Two levers move LTV: a bigger deposit (or overpayment) shrinks the loan, and a higher valuation lifts the value. At remortgage, house-price growth since you bought can quietly drop your LTV into a cheaper band — always check before you assume you&apos;re stuck on your old rate. Below 60% LTV the rate benefit largely flattens, so further overpayments are better weighed against pensions and ISAs.</p>
+          <p>Two levers move LTV: a bigger deposit (or overpayment) shrinks the loan, and a higher valuation lifts the value. At remortgage, house-price growth since you bought can quietly drop your LTV into a cheaper band, always check before you assume you&apos;re stuck on your old rate. Below 60% LTV the rate benefit largely flattens, so further overpayments are better weighed against pensions and ISAs.</p>
         </GuideSection>
         <GuideSection kicker="Worked example" title="£280,000 home, 85% to 80%">
-          <p>With a £42,000 deposit you&apos;re at 85% LTV on a £280,000 home. To reach 80% you need the loan down to £224,000 — a deposit of £56,000, so £14,000 more. If that unlocks a rate cut of even 0.3% on a £224,000 loan, that&apos;s around £672 a year saved for the life of the deal, on top of the interest the extra deposit itself avoids.</p>
+          <p>With a £42,000 deposit you&apos;re at 85% LTV on a £280,000 home. To reach 80% you need the loan down to £224,000, a deposit of £56,000, so £14,000 more. If that unlocks a rate cut of even 0.3% on a £224,000 loan, that&apos;s around £672 a year saved for the life of the deal, on top of the interest the extra deposit itself avoids.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
-            ['Assuming the purchase price is the value', 'Lenders use their own valuation, which can be lower — pushing your real LTV up and the rate with it.'],
+            ['Assuming the purchase price is the value', 'Lenders use their own valuation, which can be lower, pushing your real LTV up and the rate with it.'],
             ['Ignoring growth at remortgage', 'Price rises since you bought may have lowered your LTV into a cheaper band. Check before re-fixing.'],
             ['Over-stretching to a round number', 'Don&apos;t drain emergency savings to hit a band; keep a cash buffer for moving and surprises.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'What is a good LTV?', a: 'Lower is better for your rate. 60% or below gets the cheapest deals; 90–95% is available but at higher rates. Most buyers aim for at least 10–15% deposit (85–90% LTV).' },
+            { q: 'What is a good LTV?', a: 'Lower is better for your rate. 60% or below gets the cheapest deals; 90 to 95% is available but at higher rates. Most buyers aim for at least 10 to 15% deposit (85 to 90% LTV).' },
             { q: 'Can I get a mortgage at 95% LTV?', a: 'Yes, 95% (5% deposit) mortgages exist, including under guarantee schemes, but rates are higher and the choice of lenders narrower.' },
-            { q: 'Does overpaying change my LTV?', a: 'Yes — overpayments reduce the loan, lowering LTV. Combined with any rise in value, this can move you into a cheaper band at your next remortgage.' },
+            { q: 'Does overpaying change my LTV?', a: 'Yes, overpayments reduce the loan, lowering LTV. Combined with any rise in value, this can move you into a cheaper band at your next remortgage.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators">

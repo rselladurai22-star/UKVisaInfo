@@ -3,7 +3,7 @@
  *
  * Affordability uses the standard UK lender heuristic: 4.5× annual income
  * (combined for joint applications) minus an adjustment for committed
- * outgoings. Lenders also stress-test at a higher rate — we use the FCA
+ * outgoings. Lenders also stress-test at a higher rate, we use the FCA
  * legacy buffer of +3% over the product rate.
  *
  * Monthly repayment uses standard repayment-mortgage formula:
@@ -52,7 +52,7 @@ const STRESS_BUFFER = 3.0;
 
 /**
  * Outgoings reduce borrowing roughly £100 of borrowing per £4-5 of monthly
- * committed credit — we use a 60× monthly multiplier as a reasonable
+ * committed credit, we use a 60× monthly multiplier as a reasonable
  * mainstream-lender heuristic.
  */
 const OUTGOINGS_MULTIPLIER = 60;

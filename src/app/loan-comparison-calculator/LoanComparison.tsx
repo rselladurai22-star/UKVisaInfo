@@ -60,7 +60,7 @@ export default function LoanComparison() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Loan Comparison' }]}
       title="Loan Comparison Calculator"
-      subtitle="Compare up to three personal loans side by side — monthly repayment, total interest and total cost — to find the cheapest deal."
+      subtitle="Compare up to three personal loans side by side, monthly repayment, total interest and total cost, to find the cheapest deal."
       calcLabel="Compare Loans"
       inputs={<div className="space-y-4">{loanPanel('Loan A', a, setA)}{loanPanel('Loan B', b, setB)}{loanPanel('Loan C', c, setC)}</div>}
       results={
@@ -97,9 +97,9 @@ export default function LoanComparison() {
         <GuideSection kicker="The basics" title="APR, term and total cost">
           <p>Three numbers shape every loan:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>APR</strong> — the annual cost of borrowing including compulsory fees, the fairest single comparison figure.</li>
-            <li><strong>Term</strong> — how long you repay over. Longer terms mean smaller monthly payments but more total interest.</li>
-            <li><strong>Total cost</strong> — the sum of all repayments, which reveals the true price of the loan.</li>
+            <li><strong>APR</strong>, the annual cost of borrowing including compulsory fees, the fairest single comparison figure.</li>
+            <li><strong>Term</strong>, how long you repay over. Longer terms mean smaller monthly payments but more total interest.</li>
+            <li><strong>Total cost</strong>, the sum of all repayments, which reveals the true price of the loan.</li>
           </ul>
         </GuideSection>
 
@@ -117,7 +117,7 @@ export default function LoanComparison() {
         <GuideSection kicker="Avoid these" title="Common loan comparison mistakes">
           <Mistakes items={[
             ['Comparing on monthly payment alone', 'A longer term lowers the monthly cost but raises total interest.'],
-            ['Ignoring fees', 'Arrangement fees and insurance add to the real cost — use the APR to capture them.'],
+            ['Ignoring fees', 'Arrangement fees and insurance add to the real cost, use the APR to capture them.'],
             ['Assuming you\'ll get the advertised rate', 'Representative APRs are only offered to most, not all, accepted applicants.'],
             ['Overlooking early-repayment charges', 'Some loans penalise overpayment; check before signing if you may repay early.'],
           ]} />
@@ -127,7 +127,7 @@ export default function LoanComparison() {
           <FAQ items={[
             { q: 'What is the difference between APR and interest rate?', a: 'The interest rate is the cost of the money; the APR also includes compulsory fees, making it a fairer comparison between loans.' },
             { q: 'Is a longer loan term cheaper?', a: 'It lowers the monthly payment but usually costs more in total interest, because you borrow for longer.' },
-            { q: 'Should I always pick the lowest APR?', a: 'Usually, for the same term, yes — but make sure the monthly payment is affordable and check for fees and flexibility.' },
+            { q: 'Should I always pick the lowest APR?', a: 'Usually, for the same term, yes, but make sure the monthly payment is affordable and check for fees and flexibility.' },
             { q: 'Will applying for several loans hurt my credit?', a: 'Multiple full applications can. Use eligibility checkers with soft searches to compare without harming your score.' },
           ]} />
         </GuideSection>

@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * calc-ui — shared premium UI kit for the flagship calculator pages.
+ * calc-ui, shared premium UI kit for the flagship calculator pages.
  *
  * Visual language (from the "Precision & Clarity" design system):
  *   - Deep navy primary, crimson accent, cool-grey scaffolding.
@@ -378,7 +378,7 @@ export interface ChartSeries {
   color: string;
   label: string;
   dashed?: boolean;
-  /** index where the line reaches zero (e.g. mortgage paid off) — gets a marker */
+  /** index where the line reaches zero (e.g. mortgage paid off), gets a marker */
   payoffIndex?: number;
 }
 
@@ -551,7 +551,7 @@ function FAQItem({ q, a }: { q: string; a: ReactNode }) {
 /* ── Advanced options disclosure ─────────────────────────────────
    Replaces Simple/Advanced/Expert mode tabs: mandatory inputs stay
    visible, optional inputs live behind this collapsible. Everything
-   remains accessible to power users — nothing is hidden behind a mode. */
+   remains accessible to power users, nothing is hidden behind a mode. */
 export function AdvancedOptions({
   children,
   label = 'Advanced options',

@@ -1,5 +1,5 @@
 /**
- * AffiliateDisclosure — single-line FTC/UK ASA-compliant disclosure.
+ * AffiliateDisclosure, single-line FTC/UK ASA-compliant disclosure.
  * Drop above any block containing affiliate links so the relationship
  * is obvious before the user clicks.
  *
@@ -16,9 +16,9 @@
 import { Info } from 'lucide-react';
 
 interface Props {
-  /** Compact variant — just shows "Ad · why" pill. */
+  /** Compact variant, just shows "Ad · why" pill. */
   compact?: boolean;
-  /** Layout variant — default is block, inline sits with surrounding text. */
+  /** Layout variant, default is block, inline sits with surrounding text. */
   variant?: 'block' | 'inline';
 }
 
@@ -35,7 +35,7 @@ export default function AffiliateDisclosure({ compact = false, variant = 'block'
           borderRadius: 6,
           letterSpacing: '0.04em',
         }}
-        title="Affiliate links on this page — we may earn a commission at no extra cost to you"
+        title="Affiliate links on this page, we may earn a commission at no extra cost to you"
       >
         Ad
       </span>
@@ -45,7 +45,7 @@ export default function AffiliateDisclosure({ compact = false, variant = 'block'
   if (variant === 'inline') {
     return (
       <span className="text-[11.5px] italic" style={{ color: '#697386' }}>
-        Some links below are affiliate links — we may earn a commission at no extra cost to you.
+        Some links below are affiliate links, we may earn a commission at no extra cost to you.
         This never influences our editorial.
       </span>
     );
@@ -72,7 +72,7 @@ export default function AffiliateDisclosure({ compact = false, variant = 'block'
       <span>
         <strong style={{ fontWeight: 600 }}>Affiliate disclosure:</strong>{' '}
         Some links on this page are affiliate links. If you sign up via these links we may
-        earn a small commission at no extra cost to you. This never influences our editorial —
+        earn a small commission at no extra cost to you. This never influences our editorial, 
         we only link to services we&apos;ve independently reviewed.
       </span>
     </div>

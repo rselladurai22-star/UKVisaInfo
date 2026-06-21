@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const { country } = await params;
   const c = getCountry(country);
   if (!c) return { title: 'Country guide not found', robots: { index: false, follow: true } };
-  const title = `UK Visa for ${c.demonym} Citizens — 2026 Complete Guide`;
-  const description = `Apply for a UK visa from ${c.name}. Visa routes, fees, document checklist, TB test requirements, biometrics and processing times — updated for 2026. 100% gov.uk sourced.`;
+  const title = `UK Visa for ${c.demonym} Citizens, 2026 Complete Guide`;
+  const description = `Apply for a UK visa from ${c.name}. Visa routes, fees, document checklist, TB test requirements, biometrics and processing times, updated for 2026. 100% gov.uk sourced.`;
   const ogImageUrl = `https://ukvisainfo.co.uk/og-default.png`;
   // Stub country pages don't carry enough unique editorial value to index.
   // They remain crawlable for users but are excluded from search results.
@@ -60,7 +60,7 @@ export default async function CountryPage({ params }: RouteParams) {
 
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: `UK Visa for ${c.demonym} Citizens — Complete Guide`,
+    headline: `UK Visa for ${c.demonym} Citizens, Complete Guide`,
     description: c.tagline,
     datePublished: '2026-04-01',
     dateModified: '2026-05-15',

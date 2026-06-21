@@ -54,7 +54,7 @@ export default function BalanceTransfer() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Balance Transfer' }]}
       title="Balance Transfer Calculator"
-      subtitle="See whether moving your credit card balance to a 0% deal saves money after the transfer fee — and how much interest you'll avoid."
+      subtitle="See whether moving your credit card balance to a 0% deal saves money after the transfer fee, and how much interest you'll avoid."
       calcLabel="Calculate Saving"
       inputs={
         <div className="space-y-4">
@@ -85,15 +85,15 @@ export default function BalanceTransfer() {
 
           <Panel title="Stay vs transfer">
             <div className="space-y-2 text-sm w-full">
-              <div className="flex justify-between"><span className="text-on-surface-variant font-medium">Stay — total interest</span><span className="font-semibold tabular-nums">{gbp(r.stay.interest)}</span></div>
-              <div className="flex justify-between"><span className="text-on-surface-variant font-medium">Transfer — interest + fee</span><span className="font-semibold tabular-nums">{gbp(r.transfer.interest + r.fee)}</span></div>
+              <div className="flex justify-between"><span className="text-on-surface-variant font-medium">Stay, total interest</span><span className="font-semibold tabular-nums">{gbp(r.stay.interest)}</span></div>
+              <div className="flex justify-between"><span className="text-on-surface-variant font-medium">Transfer, interest + fee</span><span className="font-semibold tabular-nums">{gbp(r.transfer.interest + r.fee)}</span></div>
               <div className="pt-2 border-t border-outline-variant flex justify-between"><span className="text-on-surface-variant font-bold">Net saving</span><span className="font-bold tabular-nums text-secondary text-base">{gbp(r.saving)}</span></div>
             </div>
           </Panel>
 
           {r.transfer.months <= introMonths ? (
             <Callout tone="tip" title="You'll clear it interest-free">
-              At this payment you repay the balance within the 0% period, so you pay only the {gbp(r.fee)} transfer fee — no interest at all.
+              At this payment you repay the balance within the 0% period, so you pay only the {gbp(r.fee)} transfer fee, no interest at all.
             </Callout>
           ) : (
             <Callout tone="warn" title="Aim to clear it before the 0% ends">
@@ -107,10 +107,10 @@ export default function BalanceTransfer() {
     >
       <Guide
         title="Are balance transfers worth it?"
-        intro="A 0% balance transfer moves expensive credit card debt onto a card charging no interest for an introductory period — for a one-off fee. Done right, it can save hundreds in interest. Done wrong, you pay a fee and still get charged. Here's how to tell which."
+        intro="A 0% balance transfer moves expensive credit card debt onto a card charging no interest for an introductory period, for a one-off fee. Done right, it can save hundreds in interest. Done wrong, you pay a fee and still get charged. Here's how to tell which."
       >
         <GuideSection kicker="The basics" title="0% interest for a fee">
-          <p>A balance transfer card charges <strong>0% interest</strong> on the transferred balance for a set period (often 12–30 months), in exchange for a one-off <strong>transfer fee</strong>, typically 1–3% of the balance. If you clear the debt within the 0% window, the fee is all you pay — far less than ongoing interest at 20–30%.</p>
+          <p>A balance transfer card charges <strong>0% interest</strong> on the transferred balance for a set period (often 12 to 30 months), in exchange for a one-off <strong>transfer fee</strong>, typically 1 to 3% of the balance. If you clear the debt within the 0% window, the fee is all you pay, far less than ongoing interest at 20 to 30%.</p>
         </GuideSection>
 
         <GuideSection kicker="The maths" title="Fee vs interest saved">
@@ -122,7 +122,7 @@ export default function BalanceTransfer() {
 
         <GuideSection kicker="The rules" title="What to watch out for">
           <ul className="list-disc pl-5 space-y-2">
-            <li>You must still make at least the minimum monthly payment — miss one and you can lose the 0% rate.</li>
+            <li>You must still make at least the minimum monthly payment, miss one and you can lose the 0% rate.</li>
             <li>New purchases usually aren't covered by the 0% and may be charged interest.</li>
             <li>You generally can't transfer between cards from the same bank.</li>
             <li>The 0% length you're offered depends on your credit profile.</li>
@@ -130,7 +130,7 @@ export default function BalanceTransfer() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="£5,000 at 24.9%">
-          <p>Paying £250 a month on a £5,000 balance at 24.9% costs a significant amount of interest over the time it takes to clear. Transferring to a 24-month 0% card with a 2.9% fee (£145) and paying the same £250 clears it inside the 0% period — so you pay only the £145 fee and save the rest.</p>
+          <p>Paying £250 a month on a £5,000 balance at 24.9% costs a significant amount of interest over the time it takes to clear. Transferring to a 24-month 0% card with a 2.9% fee (£145) and paying the same £250 clears it inside the 0% period, so you pay only the £145 fee and save the rest.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common balance transfer mistakes">
@@ -144,7 +144,7 @@ export default function BalanceTransfer() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'What is a balance transfer fee?', a: 'A one-off charge, usually 1–3% of the balance you move, for the 0% interest deal.' },
+            { q: 'What is a balance transfer fee?', a: 'A one-off charge, usually 1 to 3% of the balance you move, for the 0% interest deal.' },
             { q: 'Does a balance transfer hurt my credit score?', a: 'The application is a hard search and a new account, which can dip your score short-term, but reducing your debt helps over time.' },
             { q: 'Can I transfer more than once?', a: 'Yes, some people "rate tart" between 0% cards, but each application is a credit check and offers depend on your profile.' },
             { q: 'What happens at the end of the 0% period?', a: 'Any remaining balance starts accruing interest at the card\'s standard APR, so aim to clear it before then.' },

@@ -49,7 +49,7 @@ export default function FinancialSettlement() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Family Law', href: '/category/family-law' }, { label: 'Financial Settlement' }]}
       title="Divorce Financial Settlement Calculator"
-      subtitle="Get a rough starting-point estimate of how matrimonial assets might be split on divorce — the courts start at equality and adjust for needs."
+      subtitle="Get a rough starting-point estimate of how matrimonial assets might be split on divorce, the courts start at equality and adjust for needs."
       calcLabel="Estimate Settlement"
       inputs={
         <div className="space-y-4">
@@ -87,7 +87,7 @@ export default function FinancialSettlement() {
             <Stat label="Your Estimated Share" value={gbp(r.yours)} sub={pct(r.yourShare * 100)} tone="dark" big />
             <Stat label="Their Estimated Share" value={gbp(r.theirs)} sub={pct((1 - r.yourShare) * 100)} tone="primary" />
             <Stat label="Total Net Assets" value={gbp(r.netAssets)} sub="The matrimonial pot" tone="accent" />
-            <Stat label="Marriage Length" value={`${marriageYears} yrs`} sub={marriageYears >= 5 ? 'Equality starting point' : 'Short — may depart from 50/50'} />
+            <Stat label="Marriage Length" value={`${marriageYears} yrs`} sub={marriageYears >= 5 ? 'Equality starting point' : 'Short, may depart from 50/50'} />
           </div>
 
           <Panel title="The split">
@@ -102,7 +102,7 @@ export default function FinancialSettlement() {
           </Panel>
 
           <Callout tone="warn" title="This is only a starting point">
-            Real settlements depend heavily on each party's needs, earning capacity, contributions and the children's housing — there is no fixed formula. Always take legal advice and consider a court-sealed consent order.
+            Real settlements depend heavily on each party's needs, earning capacity, contributions and the children's housing, there is no fixed formula. Always take legal advice and consider a court-sealed consent order.
           </Callout>
 
           <p className="text-[11px] text-on-surface-variant">Very rough estimate for England & Wales. Courts start from equal sharing of matrimonial property and adjust for needs and fairness under s25 of the Matrimonial Causes Act. Pensions are often shared by a pension sharing order.</p>
@@ -114,7 +114,7 @@ export default function FinancialSettlement() {
         intro="There's no rigid formula for dividing money on divorce in England and Wales. Courts start from the principle of sharing matrimonial assets equally, then adjust for each person's needs and circumstances. This tool gives a rough starting point, not a prediction."
       >
         <GuideSection kicker="The principle" title="Equal sharing as a starting point">
-          <p>For longer marriages, the court's starting point is an <strong>equal (50/50) division</strong> of matrimonial assets — broadly, what was built up during the marriage. This is then adjusted to meet each party's needs, especially housing and the children's welfare, which is the court's first consideration.</p>
+          <p>For longer marriages, the court's starting point is an <strong>equal (50/50) division</strong> of matrimonial assets, broadly, what was built up during the marriage. This is then adjusted to meet each party's needs, especially housing and the children's welfare, which is the court's first consideration.</p>
         </GuideSection>
 
         <GuideSection kicker="The factors" title="What the court weighs (s25)">
@@ -136,24 +136,24 @@ export default function FinancialSettlement() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A 15-year marriage with children">
-          <p>A couple with £250,000 equity, £40,000 savings, £120,000 in pensions and £20,000 of other assets, less £15,000 debts, have a net pot of £415,000. Starting at 50/50 (£207,500 each), the court might shift more to the parent housing the children — perhaps 58/42 — so they can rehouse, while balancing the rest through pensions and savings.</p>
+          <p>A couple with £250,000 equity, £40,000 savings, £120,000 in pensions and £20,000 of other assets, less £15,000 debts, have a net pot of £415,000. Starting at 50/50 (£207,500 each), the court might shift more to the parent housing the children, perhaps 58/42, so they can rehouse, while balancing the rest through pensions and savings.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common settlement mistakes">
           <Mistakes items={[
             ['Ignoring pensions', 'They can be the largest asset; failing to address them can leave a spouse badly off in retirement.'],
             ['Hiding or guessing assets', 'Full financial disclosure is required; non-disclosure can unravel a settlement later.'],
-            ['Settling without a consent order', 'An informal deal is not binding — get it sealed by the court.'],
+            ['Settling without a consent order', 'An informal deal is not binding, get it sealed by the court.'],
             ['Assuming a fixed formula', 'There is no set percentage; outcomes turn on needs and fairness, so take advice.'],
           ]} />
         </GuideSection>
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Is everything split 50/50 in a divorce?', a: 'Not always. Equal sharing is the starting point for matrimonial assets, but the split is adjusted for needs — especially housing and children.' },
+            { q: 'Is everything split 50/50 in a divorce?', a: 'Not always. Equal sharing is the starting point for matrimonial assets, but the split is adjusted for needs, especially housing and children.' },
             { q: 'Are pensions included?', a: 'Yes. Pensions are matrimonial assets and are often shared via a pension sharing order, sometimes offset against other assets.' },
             { q: 'Does who caused the divorce matter?', a: 'Generally no. With no-fault divorce, conduct rarely affects the financial split unless it is extreme.' },
-            { q: 'Do I need a court order if we agree?', a: 'Yes — a sealed consent order makes the agreement binding and prevents future claims.' },
+            { q: 'Do I need a court order if we agree?', a: 'Yes, a sealed consent order makes the agreement binding and prevents future claims.' },
           ]} />
         </GuideSection>
         <RelatedGuides calc="/financial-settlement-calculator" />

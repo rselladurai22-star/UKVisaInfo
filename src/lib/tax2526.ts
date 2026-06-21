@@ -1,5 +1,5 @@
 /**
- * UK tax engine — 2025/26 (rest-of-UK / England, Wales & NI).
+ * UK tax engine, 2025/26 (rest-of-UK / England, Wales & NI).
  * Shared by the Tax & Income calculators. Figures are estimates; Scotland
  * has its own income-tax bands (see the Scottish income tax tool).
  */

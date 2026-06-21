@@ -1,16 +1,16 @@
 /**
- * UK Capital Gains Tax — 2026/27.
+ * UK Capital Gains Tax, 2026/27.
  *
  * Annual Exempt Amount (AEA): £3,000 (frozen from 2024/25).
- * Rates (from 30 Oct 2024 onwards — Autumn Budget 2024 alignment):
- *   – Basic rate band:   18% on all gains
- *   – Higher rate band:  24% on all gains
+ * Rates (from 30 Oct 2024 onwards, Autumn Budget 2024 alignment):
+ *, Basic rate band:   18% on all gains
+ *, Higher rate band:  24% on all gains
  * Residential property and non-property assets now share the same rates.
  *
  * The trick: gains stack on top of taxable income. Whatever basic-rate
  * band is unused gets taxed at 18%; the rest at 24%.
  *
- * Sources: HMRC CG manual, gov.uk – "Capital Gains Tax: rates and allowances".
+ * Sources: HMRC CG manual, gov.uk, "Capital Gains Tax: rates and allowances".
  */
 
 const PA_2026_27 = 12_570;

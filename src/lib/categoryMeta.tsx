@@ -5,7 +5,7 @@ import {
 import { APP_TILES, SUBCATEGORIES, type CategoryId, type IconComponent } from '../data/tools';
 import s from '../components/calc/calc.module.css';
 
-/** Maps each category to its --uk-cN brand colour index (1–8). */
+/** Maps each category to its --uk-cN brand colour index (1 to 8). */
 export const CAT_INDEX: Record<CategoryId, number> = {
   tax:         1,
   property:    2,
@@ -22,7 +22,7 @@ export const CAT_INDEX: Record<CategoryId, number> = {
   energy:      8,
 };
 
-/** Interactive visa tools that aren't in the APP_TILES registry — surfaced in the Immigration hub. */
+/** Interactive visa tools that aren't in the APP_TILES registry, surfaced in the Immigration hub. */
 export const VISA_TOOLS: { href: string; title: string; hint: string; icon: IconComponent; accent: string }[] = [
   { href: '/tools/salary-checker',   title: 'Skilled Worker salary checker', hint: 'Your salary vs the visa minimum + going rate, by SOC code', icon: BadgePoundSterling, accent: '#7C3AED' },
   { href: '/tools/sponsor-search',   title: 'Sponsor licence search',        hint: 'Find licensed UK employers by city, sector and rating',     icon: Search,             accent: '#2563EB' },
@@ -33,7 +33,7 @@ export const VISA_TOOLS: { href: string; title: string; hint: string; icon: Icon
 export const catVar = (c: number): CSSProperties =>
   ({ ['--tc']: `var(--uk-c${c})`, ['--tctx']: `var(--uk-c${c}-tx)` } as CSSProperties);
 
-/** Normalised card item — works for both AppTiles and standalone visa tools. */
+/** Normalised card item, works for both AppTiles and standalone visa tools. */
 export interface HubItem { href: string; label: string; hint: string; icon: IconComponent; accent: string; }
 export interface HubSection { id: string; label: string; title: string; description: string; items: HubItem[]; }
 

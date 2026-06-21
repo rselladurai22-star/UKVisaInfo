@@ -42,7 +42,7 @@ export default function CarersAllowance() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Benefits', href: '/category/benefits' }, { label: "Carer's Allowance" }]}
       title="Carer's Allowance Calculator"
-      subtitle="Check whether you qualify for Carer's Allowance in 2025/26 — £83.30 a week if you care 35+ hours and earn under £196 a week."
+      subtitle="Check whether you qualify for Carer's Allowance in 2025/26 to £83.30 a week if you care 35+ hours and earn under £196 a week."
       calcLabel="Check Eligibility"
       inputs={
         <Panel title="Your Caring & Income">
@@ -93,26 +93,26 @@ export default function CarersAllowance() {
         </GuideSection>
 
         <GuideSection kicker="Earnings" title="The cliff-edge earnings limit">
-          <p>The £{EARNINGS_LIMIT} limit is a hard cliff edge: earn £1 over and you lose the entire £{CA_WEEKLY.toFixed(2)}, not a tapered amount. You can reduce your countable earnings with allowable deductions — notably half of your pension contributions and some care costs that let you work. Watch this limit carefully around pay rises and bonuses.</p>
+          <p>The £{EARNINGS_LIMIT} limit is a hard cliff edge: earn £1 over and you lose the entire £{CA_WEEKLY.toFixed(2)}, not a tapered amount. You can reduce your countable earnings with allowable deductions, notably half of your pension contributions and some care costs that let you work. Watch this limit carefully around pay rises and bonuses.</p>
           <Callout tone="warn" title="Overpayments are common">
             Many carers have been hit with large repayment demands after small earnings breaches went unreported. Report any change in earnings immediately.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Overlapping benefits" title="Why you might not be paid it">
-          <p>Carer's Allowance overlaps with some other benefits. If you receive the State Pension or contributory benefits at the same or higher rate, you may not actually be paid the Carer's Allowance — though an "underlying entitlement" can still increase means-tested benefits like Pension Credit or Universal Credit's carer element.</p>
+          <p>Carer's Allowance overlaps with some other benefits. If you receive the State Pension or contributory benefits at the same or higher rate, you may not actually be paid the Carer's Allowance, though an "underlying entitlement" can still increase means-tested benefits like Pension Credit or Universal Credit's carer element.</p>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="Caring 35 hours, part-time job">
-          <p>Someone caring 40 hours a week for a parent on PIP daily living, earning £180 a week after tax with £10 of allowable pension deductions, has countable earnings of £170 — under the £{EARNINGS_LIMIT} limit. They qualify for the full £{CA_WEEKLY.toFixed(2)} a week, about £{Math.round(CA_WEEKLY * 52).toLocaleString()} a year, which is taxable.</p>
+          <p>Someone caring 40 hours a week for a parent on PIP daily living, earning £180 a week after tax with £10 of allowable pension deductions, has countable earnings of £170, under the £{EARNINGS_LIMIT} limit. They qualify for the full £{CA_WEEKLY.toFixed(2)} a week, about £{Math.round(CA_WEEKLY * 52).toLocaleString()} a year, which is taxable.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common Carer's Allowance mistakes">
           <Mistakes items={[
-            ['Breaching the earnings limit', 'It is a cliff edge — a small overshoot loses the whole payment and can create an overpayment.'],
+            ['Breaching the earnings limit', 'It is a cliff edge, a small overshoot loses the whole payment and can create an overpayment.'],
             ['Not claiming underlying entitlement', 'Even if overlapping benefits stop the payment, the entitlement can boost means-tested benefits.'],
             ['Forgetting it is taxable', 'Carer\'s Allowance counts as taxable income, which can matter alongside other earnings.'],
-            ['Affecting the cared-for person', 'Your claim can sometimes reduce a severe disability premium the person you care for receives — check first.'],
+            ['Affecting the cared-for person', 'Your claim can sometimes reduce a severe disability premium the person you care for receives, check first.'],
           ]} />
         </GuideSection>
 

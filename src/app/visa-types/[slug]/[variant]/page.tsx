@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const visa = VISA_DETAILS[slug as keyof typeof VISA_DETAILS];
   const v = getVariants(slug).find((x) => x.id === variant);
   if (!visa || !v) return { title: 'Sub-route not found' };
-  const title = `${visa.title} — ${v.label} (2026 Guide)`;
+  const title = `${visa.title}, ${v.label} (2026 Guide)`;
   const description = `Complete guide for ${v.label}. ${v.headline}. Eligibility, costs and how to apply. Updated April 2026, sourced from GOV.UK.`;
   return {
     title, description,
@@ -43,15 +43,15 @@ export default async function VariantPage({ params }: RouteParams) {
 
   const others = getVariants(slug).filter((x) => x.id !== variant);
   const feeStr = v.fee ?? (v.feeAmount ? `£${v.feeAmount.toLocaleString()}` : visa.fee);
-  const fee = shortFee(feeStr) ?? shortFee(visa.fee) ?? '—';
-  const ihs = v.ihsAdult ? `£${v.ihsAdult.toLocaleString()}` : (shortFee(visa.ihs) ?? '—');
+  const fee = shortFee(feeStr) ?? shortFee(visa.fee) ?? ', ';
+  const ihs = v.ihsAdult ? `£${v.ihsAdult.toLocaleString()}` : (shortFee(visa.ihs) ?? ', ');
   const dur = v.duration ?? visa.duration.split(/[·;]/)[0].trim();
-  const ilr = v.yearsToIlr ? `${v.yearsToIlr} yrs` : '—';
+  const ilr = v.yearsToIlr ? `${v.yearsToIlr} yrs` : ', ';
 
   const SITE = 'https://ukvisainfo.co.uk';
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: `${visa.title} — ${v.label}`, description: v.headline,
+    headline: `${visa.title}, ${v.label}`, description: v.headline,
     datePublished: '2026-04-08', dateModified: '2026-05-19',
     author: primaryEditorSchema(SITE),
     publisher: { '@type': 'Organization', name: 'UKDesk', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/icon.svg` } },
@@ -91,7 +91,7 @@ export default async function VariantPage({ params }: RouteParams) {
           <div className={s.content}>
             <div className={s.answer}>
               <span className={s.answerLbl}>The short answer</span>
-              <p>{v.label} is one way to qualify for the {visa.title}. The core rules of the {visa.title} apply — the specifics that set this route apart are below.</p>
+              <p>{v.label} is one way to qualify for the {visa.title}. The core rules of the {visa.title} apply, the specifics that set this route apart are below.</p>
             </div>
 
             <div className={s.facts}>
@@ -130,7 +130,7 @@ export default async function VariantPage({ params }: RouteParams) {
 
             <div className={s.srcline}>
               <ShieldCheck size={15} />
-              <span>Source: <a href={v.source} target="_blank" rel="noopener noreferrer">GOV.UK — {v.label}</a> · Last verified {visa.updated}</span>
+              <span>Source: <a href={v.source} target="_blank" rel="noopener noreferrer">GOV.UK, {v.label}</a> · Last verified {visa.updated}</span>
             </div>
             <div style={{ marginTop: 24 }}><EditorByline verified={visa.updated} prefix="Written & verified by" /></div>
           </div>

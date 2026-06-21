@@ -6,7 +6,7 @@
  *   - apply from inside the UK (switching / extending)
  *
  * Each URL below is the *first page of the actual application flow* on
- * gov.uk — the page with the green "Start now" button — not the generic
+ * gov.uk, the page with the green "Start now" button, not the generic
  * landing page. Verified 2026-05-19.
  */
 

@@ -29,7 +29,7 @@ export default function SickPay() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Employment', href: '/category/employment' }, { label: 'Statutory Sick Pay' }]}
       title="Statutory Sick Pay Calculator"
-      subtitle="Work out your Statutory Sick Pay (SSP) for 2025/26 — £118.75 a week after three waiting days, for up to 28 weeks."
+      subtitle="Work out your Statutory Sick Pay (SSP) for 2025/26 to £118.75 a week after three waiting days, for up to 28 weeks."
       calcLabel="Calculate Sick Pay"
       inputs={
         <Panel title="Your Sickness">
@@ -79,20 +79,20 @@ export default function SickPay() {
         <GuideSection kicker="The basics" title="Rate, waiting days and limit">
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>Rate:</strong> £{SSP_WEEKLY.toFixed(2)} a week from 6 April 2025.</li>
-            <li><strong>Waiting days:</strong> the first {WAITING_DAYS} qualifying days are unpaid — SSP starts on day 4.</li>
+            <li><strong>Waiting days:</strong> the first {WAITING_DAYS} qualifying days are unpaid, SSP starts on day 4.</li>
             <li><strong>Maximum:</strong> up to {MAX_WEEKS} weeks of SSP for any one period of sickness.</li>
           </ul>
           <p>The daily rate is the weekly rate divided by your number of working ("qualifying") days that week, so it's the same total however your week is split.</p>
         </GuideSection>
 
         <GuideSection kicker="Eligibility" title="Who qualifies">
-          <p>To get SSP you must be classed as an employee, have done some work, be off sick for at least four days in a row (including non-working days), and earn an average of at least <strong>£{LEL_WEEKLY}</strong> a week — the Lower Earnings Limit. You must also tell your employer within their deadline (or seven days if none is set).</p>
+          <p>To get SSP you must be classed as an employee, have done some work, be off sick for at least four days in a row (including non-working days), and earn an average of at least <strong>£{LEL_WEEKLY}</strong> a week, the Lower Earnings Limit. You must also tell your employer within their deadline (or seven days if none is set).</p>
         </GuideSection>
 
         <GuideSection kicker="Linked periods" title="When sickness joins up">
           <p>Two periods of sickness of four or more days that are eight weeks or less apart are "linked" and treated as one. That matters because the three waiting days only apply once across linked periods, and the 28-week limit runs across them.</p>
           <Callout tone="tip" title="Contractual sick pay can be more generous">
-            Many employers offer occupational sick pay above SSP — sometimes full pay for a set number of weeks. Check your contract; SSP is only the legal minimum.
+            Many employers offer occupational sick pay above SSP, sometimes full pay for a set number of weeks. Check your contract; SSP is only the legal minimum.
           </Callout>
         </GuideSection>
 

@@ -10,7 +10,7 @@ import { gbp } from '../../lib/tax2526';
 
 // CMS 2025 thresholds (gross weekly income)
 const FLAT_RATE = 7;
-const BASIC_RATE = { 1: 0.12, 2: 0.16, 3: 0.19 };       // £200–£800
+const BASIC_RATE = { 1: 0.12, 2: 0.16, 3: 0.19 };       // £200 to £800
 const REDUCED_RATE_ABOVE_800 = { 1: 0.09, 2: 0.12, 3: 0.15 };
 
 // shared care: nights per year → fraction reduction
@@ -73,7 +73,7 @@ export default function ChildMaintenance() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Family Law', href: '/category/family-law' }, { label: 'Child Maintenance' }]}
       title="Child Maintenance Calculator"
-      subtitle="Estimate child maintenance using the Child Maintenance Service (CMS) formula — gross income rates of 12/16/19%, with shared-care reductions."
+      subtitle="Estimate child maintenance using the Child Maintenance Service (CMS) formula, gross income rates of 12/16/19%, with shared-care reductions."
       calcLabel="Calculate Maintenance"
       inputs={
         <Panel title="Paying Parent's Details">
@@ -144,13 +144,13 @@ export default function ChildMaintenance() {
         <GuideSection kicker="Shared care" title="Nights reduce the bill">
           <p>If the child stays overnight with the paying parent, maintenance is reduced on a sliding scale:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>52–103 nights a year: reduced by 1/7.</li>
-            <li>104–155 nights: reduced by 2/7.</li>
-            <li>156–174 nights: reduced by 3/7.</li>
+            <li>52 to 103 nights a year: reduced by 1/7.</li>
+            <li>104 to 155 nights: reduced by 2/7.</li>
+            <li>156 to 174 nights: reduced by 3/7.</li>
             <li>175+ nights: reduced by half, plus a further small reduction.</li>
           </ul>
           <Callout tone="tip" title="Other children count too">
-            If the paying parent has other children living with them, their gross income is reduced before the percentage is applied — lowering the maintenance for the children in this calculation.
+            If the paying parent has other children living with them, their gross income is reduced before the percentage is applied, lowering the maintenance for the children in this calculation.
           </Callout>
         </GuideSection>
 
@@ -161,7 +161,7 @@ export default function ChildMaintenance() {
         <GuideSection kicker="Avoid these" title="Common child maintenance mistakes">
           <Mistakes items={[
             ['Forgetting pension contributions reduce income', 'The CMS uses gross income after pension contributions, which can lower the figure.'],
-            ['Ignoring shared-care nights', 'Overnight stays meaningfully reduce maintenance — keep an accurate record.'],
+            ['Ignoring shared-care nights', 'Overnight stays meaningfully reduce maintenance, keep an accurate record.'],
             ['Assuming the CMS is free', 'If the CMS collects and passes on payments, both parents pay collection fees; a direct arrangement avoids them.'],
             ['Overlooking the £3,000 cap', 'Very high earners are only assessed up to £3,000/week by the CMS; the rest needs a court top-up.'],
           ]} />
@@ -169,7 +169,7 @@ export default function ChildMaintenance() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Does child maintenance depend on the receiving parent\'s income?', a: 'No. The CMS formula is based only on the paying parent\'s gross income, the number of children and shared care — not the other parent\'s earnings.' },
+            { q: 'Does child maintenance depend on the receiving parent\'s income?', a: 'No. The CMS formula is based only on the paying parent\'s gross income, the number of children and shared care, not the other parent\'s earnings.' },
             { q: 'Can we agree our own amount?', a: 'Yes. A family-based arrangement avoids CMS fees. The CMS calculation is a helpful benchmark for what is fair.' },
             { q: 'Does maintenance stop at 16?', a: 'It usually continues while the child is in full-time non-advanced education (up to 20) or until they leave school.' },
             { q: 'What if the paying parent is self-employed?', a: 'The CMS uses their gross income from HMRC records; complex or disputed income can be investigated, but it can be harder to assess.' },

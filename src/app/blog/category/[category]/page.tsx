@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   if (!isCategory(category)) return { title: 'Category not found' };
   const meta = getCategoryMeta(category);
   return {
-    title: `${meta.label} Guides — UK 2025/26 | UKDesk`,
+    title: `${meta.label} Guides, UK 2025/26 | UKDesk`,
     description: meta.description,
     alternates: { canonical: `/blog/category/${meta.id}` },
     openGraph: {
-      title: `${meta.label} Guides — UK 2025/26`,
+      title: `${meta.label} Guides, UK 2025/26`,
       description: meta.description,
       url: `https://ukvisainfo.co.uk/blog/category/${meta.id}`,
       type: 'website',

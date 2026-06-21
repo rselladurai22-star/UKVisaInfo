@@ -10,7 +10,7 @@ import { TAX_RELATED } from '../take-home-pay/TakeHome';
 
 type Plan = Exclude<StudentPlan, 'none' | 'pg'>;
 const WRITEOFF: Record<Plan, number> = { plan1: 25, plan2: 30, plan4: 30, plan5: 40 };
-const PLAN_LABEL: Record<Plan, string> = { plan1: 'Plan 1 (pre-2012)', plan2: 'Plan 2 (2012–2023)', plan4: 'Plan 4 (Scotland)', plan5: 'Plan 5 (2023+)' };
+const PLAN_LABEL: Record<Plan, string> = { plan1: 'Plan 1 (pre-2012)', plan2: 'Plan 2 (2012 to 2023)', plan4: 'Plan 4 (Scotland)', plan5: 'Plan 5 (2023+)' };
 
 export default function StudentLoan() {
   const [salary, setSalary] = useState(32000);
@@ -40,7 +40,7 @@ export default function StudentLoan() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Tax', href: '/category/tax' }, { label: 'Student Loan' }]}
       title="Student Loan Repayment Calculator"
-      subtitle="See your annual and monthly student loan repayments by plan, and estimate whether you'll clear the balance or have it written off — on 2025/26 thresholds."
+      subtitle="See your annual and monthly student loan repayments by plan, and estimate whether you'll clear the balance or have it written off, on 2025/26 thresholds."
       calcLabel="Calculate repayments"
       inputs={
         <>
@@ -56,7 +56,7 @@ export default function StudentLoan() {
           <Panel title="Balance & interest (optional)">
             <div className="space-y-4">
               <Field label="Current balance"><MoneyInput value={balance} onChange={setBalance} step={1000} /></Field>
-              <Field label={`Interest rate — ${pct(interest, 1)}`}><Slider value={interest} onChange={setInterest} min={0} max={9} step={0.1} /></Field>
+              <Field label={`Interest rate, ${pct(interest, 1)}`}><Slider value={interest} onChange={setInterest} min={0} max={9} step={0.1} /></Field>
             </div>
           </Panel>
         </>
@@ -77,7 +77,7 @@ export default function StudentLoan() {
             </div>
           </Panel>
           <Callout tone="info" title="It's repaid like a tax, not a debt">
-            Repayments are 9% (6% postgraduate) of income above the threshold — regardless of the balance — and stop
+            Repayments are 9% (6% postgraduate) of income above the threshold, regardless of the balance, and stop
             when you earn under it. Anything left after the write-off period is cancelled, so many borrowers never
             repay it in full.
           </Callout>
@@ -86,24 +86,24 @@ export default function StudentLoan() {
     >
       <Guide
         title="How student loan repayments work"
-        intro="UK student loans behave more like a graduate tax than a normal debt. This guide explains the plans, thresholds, interest and the write-off — and why overpaying often doesn't pay."
+        intro="UK student loans behave more like a graduate tax than a normal debt. This guide explains the plans, thresholds, interest and the write-off, and why overpaying often doesn't pay."
       >
         <GuideSection kicker="The basics" title="9% above a threshold">
-          <p>You repay <strong>9%</strong> of everything you earn above your plan&apos;s threshold (6% for postgraduate loans, payable on top). It&apos;s collected automatically through PAYE or Self Assessment. If your income drops below the threshold, repayments stop. The balance and interest are largely irrelevant to what you pay each month — only your income matters, which is why it feels like a tax.</p>
+          <p>You repay <strong>9%</strong> of everything you earn above your plan&apos;s threshold (6% for postgraduate loans, payable on top). It&apos;s collected automatically through PAYE or Self Assessment. If your income drops below the threshold, repayments stop. The balance and interest are largely irrelevant to what you pay each month, only your income matters, which is why it feels like a tax.</p>
         </GuideSection>
         <GuideSection kicker="The plans" title="Which plan are you on?">
-          <p>Your plan depends on when and where you studied. Thresholds for 2025/26 are roughly: <strong>Plan 1</strong> £26,065, <strong>Plan 2</strong> (English/Welsh students 2012–2023) £28,470, <strong>Plan 4</strong> (Scotland) £32,745, and <strong>Plan 5</strong> (from 2023) £25,000. Postgraduate loans repay at 6% above £21,000. If you have both an undergraduate and postgraduate loan, you pay both simultaneously.</p>
+          <p>Your plan depends on when and where you studied. Thresholds for 2025/26 are roughly: <strong>Plan 1</strong> £26,065, <strong>Plan 2</strong> (English/Welsh students 2012 to 2023) £28,470, <strong>Plan 4</strong> (Scotland) £32,745, and <strong>Plan 5</strong> (from 2023) £25,000. Postgraduate loans repay at 6% above £21,000. If you have both an undergraduate and postgraduate loan, you pay both simultaneously.</p>
         </GuideSection>
         <GuideSection kicker="Write-off" title="When the loan is cancelled">
-          <p>Any remaining balance is written off after a set period: <strong>Plan 2</strong> 30 years after you became eligible to repay, <strong>Plan 5</strong> 40 years, <strong>Plan 1</strong> around 25 years (or age 65 for older loans), and Postgraduate 30 years. Many borrowers — especially lower and middle earners — never repay the full amount before it&apos;s cancelled, which changes the maths on overpaying.</p>
-          <Callout tone="warn" title="Overpaying often doesn't pay">If you&apos;re likely to have the loan written off before clearing it, voluntary overpayments are wasted — you&apos;d simply pay more than you otherwise would. Only high earners who&apos;ll clear it early tend to benefit from overpaying.</Callout>
+          <p>Any remaining balance is written off after a set period: <strong>Plan 2</strong> 30 years after you became eligible to repay, <strong>Plan 5</strong> 40 years, <strong>Plan 1</strong> around 25 years (or age 65 for older loans), and Postgraduate 30 years. Many borrowers, especially lower and middle earners, never repay the full amount before it&apos;s cancelled, which changes the maths on overpaying.</p>
+          <Callout tone="warn" title="Overpaying often doesn't pay">If you&apos;re likely to have the loan written off before clearing it, voluntary overpayments are wasted, you&apos;d simply pay more than you otherwise would. Only high earners who&apos;ll clear it early tend to benefit from overpaying.</Callout>
         </GuideSection>
         <GuideSection kicker="Interest" title="How interest is set">
-          <p>Interest varies by plan and is linked to RPI inflation (Plan 2 historically RPI plus up to 3% depending on income; Plan 1, 4 and 5 at lower rates). High interest can make the balance grow faster than repayments for some borrowers — but because of the write-off, that often doesn&apos;t increase what you actually pay. Focus on your repayment (income-driven), not the headline balance.</p>
+          <p>Interest varies by plan and is linked to RPI inflation (Plan 2 historically RPI plus up to 3% depending on income; Plan 1, 4 and 5 at lower rates). High interest can make the balance grow faster than repayments for some borrowers, but because of the write-off, that often doesn&apos;t increase what you actually pay. Focus on your repayment (income-driven), not the headline balance.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
-            ['Overpaying when you&apos;ll be written off', 'Most borrowers shouldn&apos;t overpay — it just costs more than the automatic deductions.'],
+            ['Overpaying when you&apos;ll be written off', 'Most borrowers shouldn&apos;t overpay, it just costs more than the automatic deductions.'],
             ['Worrying about the balance', 'What you pay depends on income, not balance. The balance only matters if you&apos;ll clear it early.'],
             ['Forgetting it stops below the threshold', 'Repayments pause automatically if your income falls below the plan threshold.'],
             ['Not checking your plan', 'Paying on the wrong plan threshold can over- or under-deduct. Confirm your plan with the SLC.'],

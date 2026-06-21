@@ -71,7 +71,7 @@ export default function CountryAutocomplete({
     setActive(0);
   }, [value]);
 
-  // Click outside closes — use mousedown so focus isn't stolen mid-type
+  // Click outside closes, use mousedown so focus isn't stolen mid-type
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {

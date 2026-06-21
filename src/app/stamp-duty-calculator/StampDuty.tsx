@@ -115,7 +115,7 @@ export default function StampDuty() {
           <Panel title="Rates apply to" >
             <p className="text-sm text-on-surface-variant">
               England &amp; Northern Ireland (SDLT). Scotland uses <strong>LBTT</strong> and Wales uses{' '}
-              <strong>LTT</strong>, which have different bands — this calculator does not cover those.
+              <strong>LTT</strong>, which have different bands, this calculator does not cover those.
             </p>
           </Panel>
           <CalcButton done={done} onClick={() => setDone(true)} />
@@ -139,7 +139,7 @@ export default function StampDuty() {
                   <div key={i}>
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-on-surface-variant">
-                        {gbp(row.from)} – {row.to === Infinity ? 'above' : gbp(row.to)} <span className="font-semibold text-on-surface">@ {pct(row.rate * 100, 0)}</span>
+                        {gbp(row.from)}, {row.to === Infinity ? 'above' : gbp(row.to)} <span className="font-semibold text-on-surface">@ {pct(row.rate * 100, 0)}</span>
                       </span>
                       <span className="font-bold tabular-nums">{gbp(row.tax)}</span>
                     </div>
@@ -160,7 +160,7 @@ export default function StampDuty() {
                     ? <p className="text-sm text-on-surface-variant">Relief applied. You save <strong className="text-secondary">{gbp(r.reliefSaving)}</strong> versus standard rates.</p>
                     : <p className="text-sm text-on-surface-variant">If you qualify as a first-time buyer, you&apos;d save <strong className="text-secondary">{gbp(r.reliefSaving)}</strong> here.</p>
                 ) : (
-                  <p className="text-sm text-on-surface-variant">Above £500,000 — first-time buyer relief is <strong>not available</strong>; standard rates apply to the whole price.</p>
+                  <p className="text-sm text-on-surface-variant">Above £500,000, first-time buyer relief is <strong>not available</strong>; standard rates apply to the whole price.</p>
                 )}
               </Panel>
               <Panel title={<span className="flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-secondary" /> Surcharges</span>}>
@@ -172,14 +172,14 @@ export default function StampDuty() {
               </Panel>
             </div>
 
-          <Panel title="Rate card — England & NI (from 1 Apr 2025)">
+          <Panel title="Rate card, England & NI (from 1 Apr 2025)">
               <div className="overflow-x-auto rounded-lg border border-outline-variant">
                 <table className="w-full text-sm">
                   <thead className="bg-surface-container-low text-left">
                     <tr><th className="px-3 py-2 font-bold">Band</th><th className="px-3 py-2 font-bold">Standard</th><th className="px-3 py-2 font-bold">Additional</th></tr>
                   </thead>
                   <tbody className="divide-y divide-outline-variant/60">
-                    {[['Up to £125,000', '0%', '5%'], ['£125,001–£250,000', '2%', '7%'], ['£250,001–£925,000', '5%', '10%'], ['£925,001–£1.5m', '10%', '15%'], ['Above £1.5m', '12%', '17%']].map((row) => (
+                    {[['Up to £125,000', '0%', '5%'], ['£125,001 to £250,000', '2%', '7%'], ['£250,001 to £925,000', '5%', '10%'], ['£925,001 to £1.5m', '10%', '15%'], ['Above £1.5m', '12%', '17%']].map((row) => (
                       <tr key={row[0]}><td className="px-3 py-2 text-on-surface-variant">{row[0]}</td><td className="px-3 py-2 font-semibold">{row[1]}</td><td className="px-3 py-2">{row[2]}</td></tr>
                     ))}
                   </tbody>
@@ -190,7 +190,7 @@ export default function StampDuty() {
 
           <p className="text-[11px] text-on-surface-variant">
             Estimates only, not tax advice. Special rules apply to mixed-use property, multiple dwellings, leases,
-            shared ownership and companies — confirm with your conveyancer.
+            shared ownership and companies, confirm with your conveyancer.
           </p>
           </>) : <ResultsPlaceholder />}
         </div>
@@ -212,18 +212,18 @@ function StampDutyGuide() {
         <p className="mt-3 text-on-surface-variant leading-relaxed">
           Stamp Duty Land Tax (SDLT) is usually the largest single tax in a home purchase. This guide explains
           exactly how it&apos;s calculated in England and Northern Ireland, who pays more, where the reliefs are,
-          and the traps that catch buyers out — all on the rates in force from 1 April 2025.
+          and the traps that catch buyers out, all on the rates in force from 1 April 2025.
         </p>
       </div>
 
       <div className="space-y-12">
         <section>
-          <GuideHeading kicker="The basics">How SDLT is calculated — the &quot;slice&quot; system</GuideHeading>
+          <GuideHeading kicker="The basics">How SDLT is calculated, the &quot;slice&quot; system</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             SDLT is a <strong>progressive, sliced tax</strong>: you pay each rate only on the portion of the price
-            that falls inside that band — not a single rate on the whole price. So on a £350,000 home a standard
+            that falls inside that band, not a single rate on the whole price. So on a £350,000 home a standard
             buyer pays 0% on the first £125,000, 2% on the slice to £250,000 (£2,500), and 5% on the remaining
-            £100,000 (£5,000) — £7,500 in total, an effective rate of about 2.1%. The calculator above shows this
+            £100,000 (£5,000), £7,500 in total, an effective rate of about 2.1%. The calculator above shows this
             band split live.
           </p>
           <Callout tone="info" title="England & NI only">
@@ -240,9 +240,9 @@ function StampDutyGuide() {
               <thead className="bg-surface-container-low text-left"><tr><th className="px-4 py-3 font-bold">Portion of price</th><th className="px-4 py-3 font-bold">Standard rate</th><th className="px-4 py-3 font-bold">Additional property</th></tr></thead>
               <tbody className="divide-y divide-outline-variant/60">
                 <tr><td className="px-4 py-3">Up to £125,000</td><td className="px-4 py-3 font-semibold">0%</td><td className="px-4 py-3">5%</td></tr>
-                <tr><td className="px-4 py-3">£125,001 – £250,000</td><td className="px-4 py-3 font-semibold">2%</td><td className="px-4 py-3">7%</td></tr>
-                <tr><td className="px-4 py-3">£250,001 – £925,000</td><td className="px-4 py-3 font-semibold">5%</td><td className="px-4 py-3">10%</td></tr>
-                <tr><td className="px-4 py-3">£925,001 – £1.5m</td><td className="px-4 py-3 font-semibold">10%</td><td className="px-4 py-3">15%</td></tr>
+                <tr><td className="px-4 py-3">£125,001 to £250,000</td><td className="px-4 py-3 font-semibold">2%</td><td className="px-4 py-3">7%</td></tr>
+                <tr><td className="px-4 py-3">£250,001 to £925,000</td><td className="px-4 py-3 font-semibold">5%</td><td className="px-4 py-3">10%</td></tr>
+                <tr><td className="px-4 py-3">£925,001 to £1.5m</td><td className="px-4 py-3 font-semibold">10%</td><td className="px-4 py-3">15%</td></tr>
                 <tr><td className="px-4 py-3">Above £1.5m</td><td className="px-4 py-3 font-semibold">12%</td><td className="px-4 py-3">17%</td></tr>
               </tbody>
             </table>
@@ -258,11 +258,11 @@ function StampDutyGuide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             First-time buyers pay <strong>0% up to £300,000</strong> and 5% on the portion from £300,001 to
             £500,000. Above a £500,000 purchase price the relief disappears entirely and standard rates apply to
-            the whole amount — a genuine cliff-edge. To qualify, every buyer must never have owned a residential
+            the whole amount, a genuine cliff-edge. To qualify, every buyer must never have owned a residential
             property anywhere in the world, and must intend to live in the property as their only or main home.
           </p>
           <Callout tone="warn" title="The £500,000 cliff-edge">
-            Buy at £500,000 as a first-time buyer and you pay £10,000. Buy at £500,001 and relief is lost — standard
+            Buy at £500,000 as a first-time buyer and you pay £10,000. Buy at £500,001 and relief is lost, standard
             rates apply, roughly doubling the bill. Negotiating just under the threshold can save thousands.
           </Callout>
         </section>
@@ -303,7 +303,7 @@ function StampDutyGuide() {
           </div>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             At £600,000 the first-time buyer gets no relief (above the £500,000 ceiling), so pays the same as a
-            home mover. The additional-property surcharge adds a flat 5% of the price — £30,000 — on top.
+            home mover. The additional-property surcharge adds a flat 5% of the price, £30,000, on top.
           </p>
         </section>
 
@@ -312,7 +312,7 @@ function StampDutyGuide() {
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             An SDLT return must be filed and the tax paid within <strong>14 days</strong> of completion. In
             practice your conveyancer files it and collects the money from you at completion, so you rarely deal
-            with HMRC directly — but you remain legally responsible for it being correct and on time. Keep evidence
+            with HMRC directly, but you remain legally responsible for it being correct and on time. Keep evidence
             of first-time buyer status or main-residence replacement in case of a later enquiry.
           </p>
         </section>
@@ -323,7 +323,7 @@ function StampDutyGuide() {
             Properties with both residential and commercial elements may be taxed at the lower non-residential
             rates. Multiple Dwellings Relief was <strong>abolished</strong> for most purchases from 1 June 2024.
             New leasehold purchases can attract SDLT on the rent (the &quot;net present value&quot;) as well as the
-            premium. These are specialist areas — take advice before relying on a cheaper treatment, as HMRC
+            premium. These are specialist areas, take advice before relying on a cheaper treatment, as HMRC
             scrutinises aggressive claims closely.
           </p>
         </section>
@@ -333,7 +333,7 @@ function StampDutyGuide() {
           <ul className="space-y-3 text-[15px] text-on-surface-variant">
             {[
               ['Assuming the old £250k threshold', 'The nil-rate band fell to £125,000 in April 2025. Older calculators understate the bill.'],
-              ['Forgetting the surcharge timing', 'Owning any other home at completion triggers the 5% surcharge — even briefly. Time your sale and purchase carefully.'],
+              ['Forgetting the surcharge timing', 'Owning any other home at completion triggers the 5% surcharge, even briefly. Time your sale and purchase carefully.'],
               ['Over-claiming first-time status', 'Previous ownership anywhere in the world (including inherited shares) disqualifies you.'],
               ['Budgeting only for the rate, not the cash', 'SDLT is payable in cash within 14 days and usually cannot be added to the mortgage. Plan for it upfront.'],
               ['Ignoring reclaim windows', 'Sold your old home after buying? You may reclaim the surcharge within 12 months of the sale (up to 36 months to sell).'],
@@ -346,11 +346,11 @@ function StampDutyGuide() {
         <section>
           <GuideHeading kicker="FAQ">Frequently asked questions</GuideHeading>
           <FAQ items={[
-            { q: 'Can I add stamp duty to my mortgage?', a: 'Not directly — SDLT is due in cash within 14 days of completion. You could borrow slightly more against the property (raising your LTV and deposit need), but most buyers budget for it as an upfront cash cost alongside the deposit and legal fees.' },
+            { q: 'Can I add stamp duty to my mortgage?', a: 'Not directly, SDLT is due in cash within 14 days of completion. You could borrow slightly more against the property (raising your LTV and deposit need), but most buyers budget for it as an upfront cash cost alongside the deposit and legal fees.' },
             { q: 'Do first-time buyers pay any stamp duty?', a: 'Not on the first £300,000, then 5% on the portion to £500,000. Above a £500,000 purchase price the relief is lost entirely and standard rates apply to the whole amount.' },
-            { q: 'I own a buy-to-let and am buying a home to live in — do I pay the surcharge?', a: 'If you are not replacing a main residence and will own two or more properties at completion, yes, the 5% surcharge applies to the new purchase. Whether a property counts as your main residence is a question of fact, not just intention.' },
+            { q: 'I own a buy-to-let and am buying a home to live in, do I pay the surcharge?', a: 'If you are not replacing a main residence and will own two or more properties at completion, yes, the 5% surcharge applies to the new purchase. Whether a property counts as your main residence is a question of fact, not just intention.' },
             { q: 'Is stamp duty different in Scotland and Wales?', a: 'Yes. Scotland charges LBTT and Wales charges LTT, with different thresholds and an additional-dwelling supplement of their own. This tool only covers SDLT for England and Northern Ireland.' },
-            { q: 'Can I reclaim the higher-rate surcharge?', a: 'If you paid the surcharge because you had not yet sold your previous main home, you can usually reclaim it if you sell that home within 36 months — the claim must normally be made within 12 months of the sale.' },
+            { q: 'Can I reclaim the higher-rate surcharge?', a: 'If you paid the surcharge because you had not yet sold your previous main home, you can usually reclaim it if you sell that home within 36 months, the claim must normally be made within 12 months of the sale.' },
           ]} />
         </section>
 

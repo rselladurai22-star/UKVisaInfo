@@ -77,7 +77,7 @@ export default function RentalYield() {
         </nav>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">Rental Yield Calculator</h1>
         <p className="mt-3 text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-          Work out gross and net rental yield, monthly cash flow and return on investment — and check whether a
+          Work out gross and net rental yield, monthly cash flow and return on investment, and check whether a
           buy-to-let passes the lender&apos;s ICR stress test before you commit. Includes the Section 24 tax impact
           for individual landlords.
         </p>
@@ -94,23 +94,23 @@ export default function RentalYield() {
               <Field label="Monthly rent">
                 <MoneyInput value={rent} onChange={setRent} step={25} />
               </Field>
-              <Field label={`Deposit — ${depositPct}%`}>
+              <Field label={`Deposit, ${depositPct}%`}>
                 <Slider value={depositPct} onChange={setDepositPct} min={5} max={100} step={1} />
               </Field>
-              <Field label={`Mortgage rate — ${pct(mortRate, 2)}`} hint="Interest-only basis (typical for BTL)">
+              <Field label={`Mortgage rate, ${pct(mortRate, 2)}`} hint="Interest-only basis (typical for BTL)">
                 <Slider value={mortRate} onChange={setMortRate} min={0} max={10} step={0.05} />
               </Field>
             </div>
           </Panel>
 
-          <AdvancedOptions label="Running costs & tax" hint="Pre-filled with typical figures — adjust to itemise costs and set your tax band">
-            <Field label={`Letting / management — ${mgmtPct}% of rent`}>
+          <AdvancedOptions label="Running costs & tax" hint="Pre-filled with typical figures, adjust to itemise costs and set your tax band">
+            <Field label={`Letting / management, ${mgmtPct}% of rent`}>
               <Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} />
             </Field>
-            <Field label={`Maintenance reserve — ${maintPct}% of rent`}>
+            <Field label={`Maintenance reserve, ${maintPct}% of rent`}>
               <Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} />
             </Field>
-            <Field label={`Void allowance — ${voidPct}% of rent`} hint="Weeks empty between tenants">
+            <Field label={`Void allowance, ${voidPct}% of rent`} hint="Weeks empty between tenants">
               <Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} />
             </Field>
             <div className="grid grid-cols-2 gap-3">
@@ -153,7 +153,7 @@ export default function RentalYield() {
             </div>
             <p className="mt-2 text-xs text-on-surface-variant">
               Under 3.5% net is thin once voids and rate rises bite; 5%+ net is generally considered healthy.
-              The UK average gross yield is roughly 5–6%, higher in the North, lower in London and the South East.
+              The UK average gross yield is roughly 5 to 6%, higher in the North, lower in London and the South East.
             </p>
           </Panel>
 
@@ -183,7 +183,7 @@ export default function RentalYield() {
           <Panel title="Lender ICR stress test" icon={<ShieldCheck className="h-4 w-4" />}>
               <div className="flex items-center gap-4">
                 <div className={`px-4 py-3 rounded-xl font-display font-bold text-lg ${r.icrPass ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-                  {isFinite(r.icr) ? pct(r.icr, 0) : '—'} ICR
+                  {isFinite(r.icr) ? pct(r.icr, 0) : ', '} ICR
                 </div>
                 <div className="text-sm">
                   <div className={`font-bold ${r.icrPass ? 'text-green-700' : 'text-red-700'}`}>{r.icrPass ? 'Likely to pass' : 'Likely to fail'}</div>
@@ -223,7 +223,7 @@ function RentalYieldGuide() {
         <span className="text-[11px] font-bold uppercase tracking-widest text-secondary">Complete guide</span>
         <h2 className="text-3xl sm:text-4xl font-display font-bold text-primary mt-1">Rental yield, cash flow and the real return on a buy-to-let</h2>
         <p className="mt-3 text-on-surface-variant leading-relaxed">
-          Yield is the headline number every landlord quotes — but gross yield alone has bankrupted plenty of
+          Yield is the headline number every landlord quotes, but gross yield alone has bankrupted plenty of
           investors. This guide explains gross vs net yield, the costs that quietly erode returns, the lender stress
           test that decides whether you even get the mortgage, and the Section 24 tax change that reshaped UK
           buy-to-let.
@@ -235,10 +235,10 @@ function RentalYieldGuide() {
           <GuideHeading kicker="Definitions">Gross yield vs net yield</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             <strong>Gross yield</strong> is annual rent divided by the property price. A £220,000 flat let at
-            £1,150/month produces £13,800 a year — a gross yield of about 6.3%. It&apos;s a useful first filter but
+            £1,150/month produces £13,800 a year, a gross yield of about 6.3%. It&apos;s a useful first filter but
             ignores every cost. <strong>Net yield</strong> subtracts running costs (management, maintenance,
             insurance, voids, service charges) before dividing by the price, and is far closer to reality. The gap
-            between the two is often 1.5–2.5 percentage points — the difference between a good investment and a
+            between the two is often 1.5 to 2.5 percentage points, the difference between a good investment and a
             money pit.
           </p>
           <div className="my-5 p-5 rounded-lg bg-surface-container text-center">
@@ -250,10 +250,10 @@ function RentalYieldGuide() {
           <GuideHeading kicker="Benchmarks">What counts as a good yield?</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Yields vary hugely by region. Northern English cities, parts of Scotland and Wales often deliver gross
-            yields of 6–8%+, while London and the South East can sit below 4% because capital values are so high
-            relative to rents. As a rule of thumb, a <strong>net</strong> yield of 5% or more is healthy, 3.5–5% is
+            yields of 6 to 8%+, while London and the South East can sit below 4% because capital values are so high
+            relative to rents. As a rule of thumb, a <strong>net</strong> yield of 5% or more is healthy, 3.5 to 5% is
             workable with the right strategy, and below 3.5% leaves little cushion for voids, repairs or rate rises.
-            Higher-yield areas often trade lower capital growth for stronger cash flow — your strategy should decide
+            Higher-yield areas often trade lower capital growth for stronger cash flow, your strategy should decide
             which you prioritise.
           </p>
         </section>
@@ -262,9 +262,9 @@ function RentalYieldGuide() {
           <GuideHeading kicker="Costs">The costs landlords forget</GuideHeading>
           <ul className="space-y-3 text-[15px] text-on-surface-variant">
             {[
-              ['Letting & management', 'A full management service is typically 10–15% of rent plus VAT; tenant-find only is cheaper but more hands-on.'],
+              ['Letting & management', 'A full management service is typically 10 to 15% of rent plus VAT; tenant-find only is cheaper but more hands-on.'],
               ['Maintenance reserve', 'Budget around 1% of the property value, or ~10% of rent, a year for repairs and wear.'],
-              ['Void periods', 'Even good tenants leave gaps. Modelling 2–4 weeks empty a year (roughly 4–8% of rent) keeps you honest.'],
+              ['Void periods', 'Even good tenants leave gaps. Modelling 2 to 4 weeks empty a year (roughly 4 to 8% of rent) keeps you honest.'],
               ['Insurance', 'Specialist landlord buildings and liability cover, plus optional rent-guarantee insurance.'],
               ['Compliance', 'Gas safety, EICR electrical checks, EPC, smoke and CO alarms, and licensing in some areas.'],
               ['Service charge & ground rent', 'On leasehold flats these can be substantial and rise over time.'],
@@ -281,12 +281,12 @@ function RentalYieldGuide() {
             multiple of the mortgage interest, calculated at a stressed rate (commonly around 5.5%). The required
             ICR is typically <strong>125% for basic-rate taxpayers</strong> and <strong>145% for higher and
             additional-rate</strong> landlords. If the rent doesn&apos;t clear that hurdle, no amount of income or
-            deposit will get you the loan at that level — you&apos;ll need a bigger deposit, a higher rent, or a
+            deposit will get you the loan at that level, you&apos;ll need a bigger deposit, a higher rent, or a
             cheaper property. The calculator shows a live pass/fail.
           </p>
           <Callout tone="warn" title="ICR before you offer">
             Check the ICR before making an offer. Many otherwise-sensible purchases fail the stress test at today&apos;s
-            rates, especially in low-yield areas — better to know before you&apos;re committed.
+            rates, especially in low-yield areas, better to know before you&apos;re committed.
           </Callout>
         </section>
 
@@ -298,18 +298,18 @@ function RentalYieldGuide() {
             receive only a flat <strong>20% tax credit</strong> on the interest. For basic-rate taxpayers the effect
             is broadly neutral; for higher and additional-rate landlords it can sharply cut net cash flow, and in
             highly leveraged cases push a paper profit into a real-terms loss. This is why many portfolio landlords
-            now buy through a limited company (SPV), where interest remains fully deductible — at the cost of higher
+            now buy through a limited company (SPV), where interest remains fully deductible, at the cost of higher
             mortgage rates and more admin.
           </p>
         </section>
 
         <section>
-          <GuideHeading kicker="Returns">Yield isn&apos;t the whole return — ROI and growth</GuideHeading>
+          <GuideHeading kicker="Returns">Yield isn&apos;t the whole return, ROI and growth</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Yield measures income against the property value, but as a leveraged investor your real return is on the
             <em> cash you put in</em>. <strong>Cash-on-cash ROI</strong> divides your annual post-tax cash flow by
             your actual cash invested (deposit plus buying costs), and a mortgage can amplify it well above the
-            headline yield. On top of that sits <strong>capital growth</strong> — if the property appreciates, your
+            headline yield. On top of that sits <strong>capital growth</strong>, if the property appreciates, your
             equity grows on the whole asset value, not just your deposit. A complete view weighs yield, ROI and
             expected growth together, against the risks of voids, rate rises and falling prices.
           </p>
@@ -319,10 +319,10 @@ function RentalYieldGuide() {
           <GuideHeading kicker="Worked example">£220,000 flat at £1,150/month</GuideHeading>
           <p className="text-[15px] leading-relaxed text-on-surface-variant">
             Annual rent is £13,800, a 6.3% gross yield. Knock off 10% management, an 8% maintenance reserve, a 5%
-            void allowance and £350 insurance — roughly £3,520 of costs — and net yield falls to about 4.7%. With a
+            void allowance and £350 insurance, roughly £3,520 of costs, and net yield falls to about 4.7%. With a
             75% loan at 5.2% interest-only, mortgage interest is about £8,580 a year, leaving pre-tax cash flow near
             £1,700. For a higher-rate landlord, Section 24 tax then takes a further bite. The lesson: a 6%+ gross
-            yield can become a thin net return once the real numbers land — model them all before committing.
+            yield can become a thin net return once the real numbers land, model them all before committing.
           </p>
         </section>
 
@@ -344,11 +344,11 @@ function RentalYieldGuide() {
         <section>
           <GuideHeading kicker="FAQ">Frequently asked questions</GuideHeading>
           <FAQ items={[
-            { q: 'What is a good rental yield in the UK?', a: 'A net yield of 5% or more is generally considered healthy. Gross yields of 6–8% are common in higher-yield northern cities, while London and the South East often sit below 4% gross due to high capital values.' },
+            { q: 'What is a good rental yield in the UK?', a: 'A net yield of 5% or more is generally considered healthy. Gross yields of 6 to 8% are common in higher-yield northern cities, while London and the South East often sit below 4% gross due to high capital values.' },
             { q: 'Should I buy through a limited company?', a: 'An SPV company keeps full mortgage-interest deductibility (avoiding Section 24) and can be efficient for higher-rate or portfolio landlords, but mortgage rates are usually higher and there is more admin and cost. It rarely pays for a single basic-rate landlord. Take accountancy advice.' },
-            { q: 'Does the ICR stress test use my actual mortgage rate?', a: 'No — lenders use a notional stressed rate (often around 5.5%) regardless of your actual product rate, so a cheap fixed deal does not help you pass. The required coverage is typically 125% (basic rate) or 145% (higher rate).' },
+            { q: 'Does the ICR stress test use my actual mortgage rate?', a: 'No, lenders use a notional stressed rate (often around 5.5%) regardless of your actual product rate, so a cheap fixed deal does not help you pass. The required coverage is typically 125% (basic rate) or 145% (higher rate).' },
             { q: 'Is rental income taxed?', a: 'Yes. Rental profit is taxed at your income-tax rate, with mortgage interest now only attracting a 20% tax credit for individuals rather than being a deductible expense. Allowable running costs are still deductible.' },
-            { q: 'How many weeks of voids should I assume?', a: 'A prudent figure is 2–4 weeks a year (roughly 4–8% of annual rent), more in slower lettings markets or for higher-turnover properties like student lets.' },
+            { q: 'How many weeks of voids should I assume?', a: 'A prudent figure is 2 to 4 weeks a year (roughly 4 to 8% of annual rent), more in slower lettings markets or for higher-turnover properties like student lets.' },
           ]} />
         </section>
 

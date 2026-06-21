@@ -1,10 +1,10 @@
 /**
- * UK Rental income tax calculator — Section 24 (finance cost restriction).
+ * UK Rental income tax calculator, Section 24 (finance cost restriction).
  *
  * Source: gov.uk/guidance/restricting-finance-cost-relief-for-individual-landlords
  *
  * Post Section 24 (fully phased from 6 April 2020):
- *   Mortgage interest is NOT deductible — landlord gets 20% tax credit instead.
+ *   Mortgage interest is NOT deductible, landlord gets 20% tax credit instead.
  *   Higher-rate taxpayers therefore pay 20% more tax on their interest costs.
  */
 

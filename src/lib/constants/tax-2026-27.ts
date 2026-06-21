@@ -1,5 +1,5 @@
 /**
- * UK tax constants — tax year 2026/27 (6 April 2026 – 5 April 2027).
+ * UK tax constants, tax year 2026/27 (6 April 2026 to 5 April 2027).
  *
  * Single source of truth. Every calculator imports from here.
  * Annual rebuild: rename to `tax-2027-28.ts`, update values from
@@ -32,7 +32,7 @@ export const RUK_BASIC_RATE       = 0.20;
 export const RUK_HIGHER_RATE      = 0.40;
 export const RUK_ADDITIONAL_RATE  = 0.45;
 
-/* ─── Income Tax — Scotland ────────────────────────────────── */
+/* ─── Income Tax, Scotland ────────────────────────────────── */
 export const SCO_STARTER_TOP      = 14876;   // 19%
 export const SCO_BASIC_TOP        = 26561;   // 20%
 export const SCO_INTERMEDIATE_TOP = 43662;   // 21%
@@ -45,19 +45,19 @@ export const SCO_HIGHER_RATE       = 0.42;
 export const SCO_ADVANCED_RATE     = 0.45;
 export const SCO_TOP_RATE          = 0.48;
 
-/* ─── National Insurance — Class 1 (employee) ──────────────── */
+/* ─── National Insurance, Class 1 (employee) ──────────────── */
 export const NI_PRIMARY_THRESHOLD    = 12570;
 export const NI_UPPER_EARNINGS_LIMIT = 50270;
 export const NI_MAIN_RATE            = 0.08;   // 8% from Apr 2024
 export const NI_ADDITIONAL_RATE      = 0.02;   // 2% above UEL
 
-/* ─── National Insurance — Class 4 (self-employed) ─────────── */
+/* ─── National Insurance, Class 4 (self-employed) ─────────── */
 export const NI_CLASS4_LOWER       = 12570;
 export const NI_CLASS4_UPPER       = 50270;
 export const NI_CLASS4_MAIN_RATE   = 0.06;   // 6% from Apr 2024
 export const NI_CLASS4_HIGHER_RATE = 0.02;   // 2% above upper limit
 
-/* ─── National Insurance — Class 1 (employer) ──────────────── */
+/* ─── National Insurance, Class 1 (employer) ──────────────── */
 export const NI_EMPLOYER_THRESHOLD = 5000;   // Secondary threshold reduced April 2025
 export const NI_EMPLOYER_RATE      = 0.15;   // Increased from 13.8% in April 2025
 
@@ -70,7 +70,7 @@ export const STUDENT_LOAN_PLANS: Record<Exclude<StudentLoanPlan, 'none'>, {
   label: string;
 }> = {
   plan1:    { threshold: 26065, rate: 0.09, label: 'Plan 1 (England/Wales pre-2012)' },
-  plan2:    { threshold: 28470, rate: 0.09, label: 'Plan 2 (England/Wales 2012–22)' },
+  plan2:    { threshold: 28470, rate: 0.09, label: 'Plan 2 (England/Wales 2012 to 22)' },
   plan4:    { threshold: 32745, rate: 0.09, label: 'Plan 4 (Scotland)' },
   plan5:    { threshold: 25000, rate: 0.09, label: 'Plan 5 (England 2023+)' },
   postgrad: { threshold: 21000, rate: 0.06, label: 'Postgraduate Loan' },
@@ -120,11 +120,11 @@ export const PENSION_LUMP_SUM_MAX       = 268275;   // Replaces LTA April 2024
 export const PENSION_LUMP_SUM_DEATH_MAX = 1073100;
 
 /* ─── State Pension ────────────────────────────────────────── */
-export const STATE_PENSION_FULL_WEEKLY  = 230.25;   // 2025/26 figure — update April 2026
+export const STATE_PENSION_FULL_WEEKLY  = 230.25;   // 2025/26 figure, update April 2026
 export const STATE_PENSION_FULL_ANNUAL  = 230.25 * 52;
 export const STATE_PENSION_QYRS_FULL    = 35;
 export const STATE_PENSION_QYRS_MIN     = 10;
-export const STATE_PENSION_AGE          = 66;        // 67 from 2026–28
+export const STATE_PENSION_AGE          = 66;        // 67 from 2026 to 28
 
 /* ─── High Income Child Benefit Charge (HICBC) ─────────────── */
 export const HICBC_LOWER = 60000;   // Reformed April 2024
@@ -150,7 +150,7 @@ export const VAT_DEREG_THRESHOLD   = 88000;
 export const VAT_FLAT_RATE_LIMIT   = 150000;
 export const VAT_CASH_ACCT_LIMIT   = 1350000;
 
-/* ─── SDLT (Stamp Duty Land Tax — England & NI) ────────────── */
+/* ─── SDLT (Stamp Duty Land Tax, England & NI) ────────────── */
 // Thresholds reduced from April 2025
 export const SDLT_NIL_BAND            = 125000;
 export const SDLT_FTB_NIL_BAND        = 300000;   // First-time buyer
@@ -167,29 +167,29 @@ export const SDLT_BANDS = [
 ] as const;
 
 /* ─── National Minimum/Living Wage (April 2026 rates) ──────── */
-export const NLW_21_PLUS    = 12.21;   // National Living Wage (April 2025 figure — verify April 2026)
+export const NLW_21_PLUS    = 12.21;   // National Living Wage (April 2025 figure, verify April 2026)
 export const NMW_18_20      = 10.00;
 export const NMW_UNDER_18   = 7.55;
 export const NMW_APPRENTICE = 7.55;
 
 /* ─── Statutory pay ────────────────────────────────────────── */
-export const SSP_WEEKLY               = 116.75;    // 2025/26 — update April 2026
+export const SSP_WEEKLY               = 116.75;    // 2025/26, update April 2026
 export const SSP_WAITING_DAYS         = 3;
 export const SSP_MAX_WEEKS            = 28;
 export const SMP_FIRST_6_WEEKS_PCT    = 0.90;      // 90% of average weekly earnings
-export const SMP_REMAINING_WEEKLY     = 187.18;    // 2025/26 — update April 2026
+export const SMP_REMAINING_WEEKLY     = 187.18;    // 2025/26, update April 2026
 export const SMP_WEEKS_TOTAL          = 39;
 export const SPP_WEEKLY               = 187.18;
 export const SAP_FIRST_6_WEEKS_PCT    = 0.90;
 export const SAP_REMAINING_WEEKLY     = 187.18;
 
 /* ─── Redundancy ───────────────────────────────────────────── */
-export const REDUNDANCY_WEEKLY_CAP    = 719;        // 2025/26 — update April 2026
+export const REDUNDANCY_WEEKLY_CAP    = 719;        // 2025/26, update April 2026
 export const REDUNDANCY_MAX_WEEKS     = 30;
 export const REDUNDANCY_MAX_SERVICE   = 20;         // Years counted
 export const REDUNDANCY_TAX_FREE_CAP  = 30000;
 
-/* ─── Pension / income tax — mileage allowance (AMAP) ─────── */
+/* ─── Pension / income tax, mileage allowance (AMAP) ─────── */
 export const MILEAGE_CAR_FIRST_10K    = 0.45;       // £/mile
 export const MILEAGE_CAR_OVER_10K     = 0.25;
 export const MILEAGE_MOTORCYCLE       = 0.24;

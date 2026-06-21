@@ -1,4 +1,4 @@
-// Visa switching matrix — from current UK visa → eligible target visas.
+// Visa switching matrix, from current UK visa → eligible target visas.
 // Used by /visa-switching page and the in-UK path on the ApplicationGuide.
 
 export interface SwitchOption {
@@ -25,11 +25,11 @@ export const FROM_VISAS: FromVisa[] = [
     switches: [
       { toSlug: 'graduate',       toTitle: 'Graduate visa',        category: 'Work',       difficulty: 'Common',      note: 'Once you complete your degree, switch to a 2-year (3-year PhD) unsponsored work visa. No employer needed.' },
       { toSlug: 'skilled-worker', toTitle: 'Skilled Worker visa',  category: 'Work',       difficulty: 'Common',      note: 'Available once you have a job offer from a licensed sponsor at RQF Level 6+ and meet salary thresholds.' },
-      { toSlug: 'health',         toTitle: 'Health & Care Worker', category: 'Work',       difficulty: 'Common',      note: 'For eligible NHS roles. IHS waived. Care worker recruitment closed to overseas since Jul 2025 — domestic only.' },
+      { toSlug: 'health',         toTitle: 'Health & Care Worker', category: 'Work',       difficulty: 'Common',      note: 'For eligible NHS roles. IHS waived. Care worker recruitment closed to overseas since Jul 2025, domestic only.' },
       { toSlug: 'family',         toTitle: 'Family / Partner visa',category: 'Family',     difficulty: 'Conditional', note: 'You can switch if you have a qualifying partner in the UK. Must meet £29,000 income threshold.' },
-      { toSlug: 'student',        toTitle: 'New Student visa',     category: 'Study',      difficulty: 'Common',      note: 'Change course or institution — need a new CAS from the new sponsor.' },
+      { toSlug: 'student',        toTitle: 'New Student visa',     category: 'Study',      difficulty: 'Common',      note: 'Change course or institution, need a new CAS from the new sponsor.' },
     ],
-    cannotSwitchInto: ['Visitor visa (not a switch — visit is short-term only)'],
+    cannotSwitchInto: ['Visitor visa (not a switch, visit is short-term only)'],
   },
   {
     id: 'graduate',
@@ -39,16 +39,16 @@ export const FROM_VISAS: FromVisa[] = [
       { toSlug: 'skilled-worker', toTitle: 'Skilled Worker visa',  category: 'Work',       difficulty: 'Common',      note: 'Most Graduate visa holders switch here once they secure sponsored employment.' },
       { toSlug: 'health',         toTitle: 'Health & Care Worker', category: 'Work',       difficulty: 'Common',      note: 'For NHS or eligible health/care roles. IHS waived.' },
       { toSlug: 'family',         toTitle: 'Family / Partner visa',category: 'Family',     difficulty: 'Conditional', note: 'If you have a qualifying UK partner and meet the financial requirement.' },
-      { toSlug: 'student',        toTitle: 'Student visa',         category: 'Study',      difficulty: 'Common',      note: 'To pursue further study — need a new CAS.' },
+      { toSlug: 'student',        toTitle: 'Student visa',         category: 'Study',      difficulty: 'Common',      note: 'To pursue further study, need a new CAS.' },
     ],
-    cannotSwitchInto: ['Graduate visa cannot be extended — single grant only'],
+    cannotSwitchInto: ['Graduate visa cannot be extended, single grant only'],
   },
   {
     id: 'skilled-worker',
     label: 'Skilled Worker visa',
     blurb: 'Holding a sponsored Skilled Worker visa',
     switches: [
-      { toSlug: 'skilled-worker', toTitle: 'New Skilled Worker (employer change)', category: 'Work', difficulty: 'Common', note: 'Changing employer requires a new CoS from the new sponsor — apply before changing jobs.' },
+      { toSlug: 'skilled-worker', toTitle: 'New Skilled Worker (employer change)', category: 'Work', difficulty: 'Common', note: 'Changing employer requires a new CoS from the new sponsor, apply before changing jobs.' },
       { toSlug: 'health',         toTitle: 'Health & Care Worker', category: 'Work',       difficulty: 'Common',      note: 'Move to an eligible NHS/health role. IHS waived. Reduced fees.' },
       { toSlug: 'family',         toTitle: 'Family / Partner visa',category: 'Family',     difficulty: 'Conditional', note: 'If you have a qualifying UK partner and meet income or savings.' },
       { toSlug: 'settlement-skilled-worker', toTitle: 'ILR (Skilled Worker)', category: 'Settlement', difficulty: 'Common', note: 'After 5 years of continuous sponsored residence, plus Life in the UK + English B1.' },
@@ -81,10 +81,10 @@ export const FROM_VISAS: FromVisa[] = [
     switches: [
       { toSlug: 'skilled-worker', toTitle: 'Skilled Worker visa',  category: 'Work',       difficulty: 'Common',      note: 'Switch with a qualifying sponsored job offer.' },
       { toSlug: 'health',         toTitle: 'Health & Care Worker', category: 'Work',       difficulty: 'Common',      note: 'If you secure a qualifying NHS/health role with a licensed sponsor.' },
-      { toSlug: 'family',         toTitle: 'Family / Partner visa',category: 'Family',     difficulty: 'Conditional', note: 'If you have a qualifying UK partner — meet income/savings and English requirements.' },
-      { toSlug: 'student',        toTitle: 'Student visa',         category: 'Study',      difficulty: 'Common',      note: 'For further study — need a CAS from a licensed sponsor.' },
+      { toSlug: 'family',         toTitle: 'Family / Partner visa',category: 'Family',     difficulty: 'Conditional', note: 'If you have a qualifying UK partner, meet income/savings and English requirements.' },
+      { toSlug: 'student',        toTitle: 'Student visa',         category: 'Study',      difficulty: 'Common',      note: 'For further study, need a CAS from a licensed sponsor.' },
     ],
-    cannotSwitchInto: ['YMS cannot be extended — single grant only'],
+    cannotSwitchInto: ['YMS cannot be extended, single grant only'],
   },
   {
     id: 'visitor',
@@ -92,11 +92,11 @@ export const FROM_VISAS: FromVisa[] = [
     blurb: 'Standard visitor visa (Standard, Marriage, Permitted-Paid)',
     switches: [],
     cannotSwitchInto: [
-      'Skilled Worker — must apply from outside UK',
-      'Student visa — must apply from outside UK',
-      'Family / Partner visa — must apply from outside UK',
-      'Health & Care — must apply from outside UK',
-      'Graduate visa — only available to current/recent Student visa holders',
+      'Skilled Worker, must apply from outside UK',
+      'Student visa, must apply from outside UK',
+      'Family / Partner visa, must apply from outside UK',
+      'Health & Care, must apply from outside UK',
+      'Graduate visa, only available to current/recent Student visa holders',
     ],
   },
   {

@@ -205,7 +205,7 @@ function OverviewTab({ visa }: { visa: VisaDetail }) {
             <p className="text-sm font-bold text-primary mb-1">Figures valid {visa.updated}</p>
             <p className="text-xs text-on-surface-variant leading-relaxed">
               Home Office fees are reviewed annually each April. Rules may change between announcement and
-              implementation — always verify on GOV.UK before applying.
+              implementation, always verify on GOV.UK before applying.
             </p>
           </div>
         </div>

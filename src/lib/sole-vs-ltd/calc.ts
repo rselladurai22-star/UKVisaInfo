@@ -1,5 +1,5 @@
 /**
- * UK Sole trader vs Limited company tax comparison — 2026/27.
+ * UK Sole trader vs Limited company tax comparison, 2026/27.
  *
  * Source: gov.uk/income-tax-rates
  *         gov.uk/self-employed-national-insurance-rates
@@ -15,11 +15,11 @@
  * Assumptions:
  * - England/Wales/NI bands (not Scotland).
  * - Director takes a salary at the NI Secondary Threshold (£5,000) to avoid
- *   employer NI but still secure a State Pension year — common tax planning.
+ *   employer NI but still secure a State Pension year, common tax planning.
  *   Optionally raise to Primary Threshold (£12,570) for fuller NI record.
  * - All remaining post-CT profit extracted as dividends.
  * - Personal Allowance taper applies above £100k.
- * - Class 2 NI is voluntary (abolished as mandatory April 2024) — ignored.
+ * - Class 2 NI is voluntary (abolished as mandatory April 2024), ignored.
  */
 
 import { calculateNI } from '../ni/calc';
@@ -102,7 +102,7 @@ function dividendTax(salary: number, dividends: number): number {
 export interface CalcInput {
   /** Annual business profit before any owner pay / corporation tax */
   profit: number;
-  /** Director's salary (for Ltd path) — typically 5,000 or 12,570 */
+  /** Director's salary (for Ltd path), typically 5,000 or 12,570 */
   directorSalary: 5000 | 12570;
 }
 

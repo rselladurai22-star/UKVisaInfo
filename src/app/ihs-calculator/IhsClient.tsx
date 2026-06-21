@@ -26,11 +26,11 @@ export default function IhsClient() {
           value={category}
           onChange={(v) => setCategory(v as VisaCategory)}
           options={[
-            { value: 'standard', label: 'Standard (Skilled Worker, Family, etc.) — £1,035/yr' },
-            { value: 'student', label: 'Student / Youth Mobility Scheme — £776/yr' },
+            { value: 'standard', label: 'Standard (Skilled Worker, Family, etc.), £1,035/yr' },
+            { value: 'student', label: 'Student / Youth Mobility Scheme, £776/yr' },
           ]}
         />
-        <NumberField label="Visa duration — years" value={years} onChange={setYears} suffix="years" />
+        <NumberField label="Visa duration, years" value={years} onChange={setYears} suffix="years" />
         <NumberField label="Additional months beyond whole years" value={months} onChange={setMonths} suffix="months" hint="E.g. 2 years 6 months = 2 years + 6 months" />
         <NumberField label="Total applicants (including dependants)" value={people} onChange={setPeople} hint="Main applicant + each dependant" />
       </div>

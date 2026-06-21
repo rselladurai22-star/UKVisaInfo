@@ -70,14 +70,14 @@ export default function BuyToLet() {
             <div className="space-y-4">
               <Field label="Purchase price"><MoneyInput value={price} onChange={setPrice} step={5000} /></Field>
               <Field label="Monthly rent"><MoneyInput value={rent} onChange={setRent} step={25} /></Field>
-              <Field label={`Deposit — ${depositPct}%`}><Slider value={depositPct} onChange={setDepositPct} min={20} max={100} step={1} /></Field>
-              <Field label={`Mortgage rate — ${pct(rate, 2)}`} hint="Interest-only (typical for BTL)"><Slider value={rate} onChange={setRate} min={0} max={10} step={0.05} /></Field>
+              <Field label={`Deposit, ${depositPct}%`}><Slider value={depositPct} onChange={setDepositPct} min={20} max={100} step={1} /></Field>
+              <Field label={`Mortgage rate, ${pct(rate, 2)}`} hint="Interest-only (typical for BTL)"><Slider value={rate} onChange={setRate} min={0} max={10} step={0.05} /></Field>
             </div>
           </Panel>
-          <AdvancedOptions label="Costs & tax" hint="Pre-filled with typical figures — adjust to itemise costs and set your tax band">
-            <Field label={`Management — ${mgmtPct}%`}><Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} /></Field>
-            <Field label={`Maintenance — ${maintPct}%`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} /></Field>
-            <Field label={`Voids — ${voidPct}%`}><Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} /></Field>
+          <AdvancedOptions label="Costs & tax" hint="Pre-filled with typical figures, adjust to itemise costs and set your tax band">
+            <Field label={`Management, ${mgmtPct}%`}><Slider value={mgmtPct} onChange={setMgmtPct} min={0} max={20} step={1} /></Field>
+            <Field label={`Maintenance, ${maintPct}%`}><Slider value={maintPct} onChange={setMaintPct} min={0} max={20} step={1} /></Field>
+            <Field label={`Voids, ${voidPct}%`}><Slider value={voidPct} onChange={setVoidPct} min={0} max={20} step={1} /></Field>
             <Field label="Insurance / yr"><MoneyInput value={insurance} onChange={setInsurance} step={50} /></Field>
             <Field label="Your income tax band">
               <Choice<Band> name="band" value={band} onChange={setBand} options={[
@@ -98,7 +98,7 @@ export default function BuyToLet() {
 
           <Panel title="Lender ICR stress test">
             <div className="flex items-center gap-4">
-              <div className={`px-4 py-3 rounded-xl font-display font-bold text-lg ${r.icrPass ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>{isFinite(r.icr) ? pct(r.icr, 0) : '—'}</div>
+              <div className={`px-4 py-3 rounded-xl font-display font-bold text-lg ${r.icrPass ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>{isFinite(r.icr) ? pct(r.icr, 0) : ', '}</div>
               <div className="text-sm">
                 <div className={`font-bold ${r.icrPass ? 'text-green-700' : 'text-red-700'}`}>{r.icrPass ? 'Likely to pass' : 'Likely to fail'}</div>
                 <div className="text-on-surface-variant text-xs">Needs ≥ {r.icrReq}% at a {pct(STRESS * 100, 1)} stress rate.</div>
@@ -136,24 +136,24 @@ export default function BuyToLet() {
           <p>Gross yield is annual rent over the purchase price; net yield subtracts running costs. But the figure that decides whether a property is viable is monthly <strong>cash flow</strong> after the mortgage and tax. With interest-only BTL mortgages at today&apos;s rates, many properties that look fine on gross yield barely break even once costs, interest and tax are counted. Always model the full picture before you buy.</p>
         </GuideSection>
         <GuideSection kicker="Financing" title="The ICR stress test">
-          <p>Buy-to-let lenders require the rent to cover a multiple of the mortgage interest at a stressed rate (around 5.5%) — typically <strong>125% for basic-rate</strong> and <strong>145% for higher-rate</strong> landlords. Fail it and you simply won&apos;t get the loan at that level; you&apos;ll need a bigger deposit, higher rent or a cheaper property. Check the ICR before you make an offer.</p>
-          <Callout tone="warn" title="ICR uses a notional rate">A cheap fixed deal doesn&apos;t help you pass — lenders stress at their own higher rate regardless of your actual product.</Callout>
+          <p>Buy-to-let lenders require the rent to cover a multiple of the mortgage interest at a stressed rate (around 5.5%), typically <strong>125% for basic-rate</strong> and <strong>145% for higher-rate</strong> landlords. Fail it and you simply won&apos;t get the loan at that level; you&apos;ll need a bigger deposit, higher rent or a cheaper property. Check the ICR before you make an offer.</p>
+          <Callout tone="warn" title="ICR uses a notional rate">A cheap fixed deal doesn&apos;t help you pass, lenders stress at their own higher rate regardless of your actual product.</Callout>
         </GuideSection>
         <GuideSection kicker="Tax" title="Section 24 and why higher-rate landlords keep less">
           <p>Since 2020, individual landlords can no longer deduct mortgage interest as an expense. Instead you&apos;re taxed on rent (after other costs) and get only a flat 20% tax credit on the interest. Basic-rate landlords are broadly unaffected; higher and additional-rate landlords pay materially more, and in highly leveraged cases can owe tax on a property that barely breaks even on cash. This single change is why portfolio landlords increasingly use companies.</p>
         </GuideSection>
         <GuideSection kicker="Structure" title="Personal vs limited company (SPV)">
-          <p>A special purpose vehicle (SPV) limited company keeps full mortgage-interest deductibility, paying corporation tax (19% up to £50,000 profit, rising to 25%) instead of income tax. For higher-rate or portfolio landlords this often leaves more profit in the business to reinvest. The trade-offs: BTL company mortgage rates are usually higher, there&apos;s annual accountancy cost and admin, and extracting profit (as dividends or salary) is taxed again. It rarely pays for a single basic-rate landlord — take advice.</p>
+          <p>A special purpose vehicle (SPV) limited company keeps full mortgage-interest deductibility, paying corporation tax (19% up to £50,000 profit, rising to 25%) instead of income tax. For higher-rate or portfolio landlords this often leaves more profit in the business to reinvest. The trade-offs: BTL company mortgage rates are usually higher, there&apos;s annual accountancy cost and admin, and extracting profit (as dividends or salary) is taxed again. It rarely pays for a single basic-rate landlord, take advice.</p>
         </GuideSection>
         <GuideSection kicker="Buying & selling" title="Stamp duty surcharge and CGT">
-          <p>Buying an additional property triggers a <strong>5% SDLT surcharge</strong> on every band on top of standard rates. When you sell, gains are taxed under <strong>capital gains tax</strong> at 18% (basic-rate band) and 24% (higher), after the annual exempt amount — higher than the rates on most other assets. Factor both the entry and exit taxes into your return, not just the rental yield.</p>
+          <p>Buying an additional property triggers a <strong>5% SDLT surcharge</strong> on every band on top of standard rates. When you sell, gains are taxed under <strong>capital gains tax</strong> at 18% (basic-rate band) and 24% (higher), after the annual exempt amount, higher than the rates on most other assets. Factor both the entry and exit taxes into your return, not just the rental yield.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
             ['Quoting gross yield only', 'Costs, voids, interest and tax can turn a 6% gross yield into thin or negative cash flow.'],
             ['Forgetting Section 24', 'Higher-rate landlords can owe tax even when cash flow is barely positive.'],
             ['Skipping the ICR check', 'A purchase that fails the stress test won&apos;t get the mortgage you assumed.'],
-            ['Incorporating without advice', 'A company isn&apos;t automatically better — higher rates, costs and extraction tax can outweigh the saving.'],
+            ['Incorporating without advice', 'A company isn&apos;t automatically better, higher rates, costs and extraction tax can outweigh the saving.'],
             ['Ignoring the SDLT surcharge and CGT', 'The 5% surcharge on entry and CGT on exit materially affect the real return.'],
           ]} />
         </GuideSection>

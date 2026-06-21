@@ -164,7 +164,7 @@ export const APP_TILES: AppTile[] = [
 
 
 /* ─────────────────────────────────────────────
-   TIER-3 SOON TOOLS (50) — launching next
+   TIER-3 SOON TOOLS (50), launching next
    These get full card treatment in Coming Soon
 ───────────────────────────────────────────── */
 export const SOON_TOOLS: SoonTool[] = [
@@ -236,7 +236,7 @@ export const SOON_TOOLS: SoonTool[] = [
 ];
 
 /* ─────────────────────────────────────────────
-   TIER-4 PLANNED TOOLS (100) — on the roadmap
+   TIER-4 PLANNED TOOLS (100), on the roadmap
    Shown as coming-soon placeholders with count
 ───────────────────────────────────────────── */
 export const PLANNED_TOOLS: PlannedTool[] = [
@@ -360,7 +360,7 @@ export const PLANNED_TOOLS: PlannedTool[] = [
   { label: 'Remote Worker Tax Guide',      hint: 'Dual tax treaty implications',            category: 'tax' },
   { label: 'Digital Nomad Visa Guide',     hint: 'UK options for remote workers',           category: 'immigration' },
 
-  // Retirement — extra (2)
+  // Retirement, extra (2)
   { label: 'SIPP Contribution Planner',    hint: 'Self-invested pension + relief',          category: 'savings' },
   { label: 'Pension Sharing Order',        hint: 'Divorce pension split calculator',        category: 'savings' },
 ];

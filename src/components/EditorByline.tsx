@@ -1,5 +1,5 @@
 /**
- * EditorByline — named-human byline shown on every YMYL article
+ * EditorByline, named-human byline shown on every YMYL article
  * (visa pages, blog posts, calculators with explanatory content).
  *
  * Surfaces: editor name + role + last-verified date + link to /about
@@ -23,7 +23,7 @@ const HAIR    = 'rgba(24,24,27,0.08)';
 interface Props {
   /** Human-readable last-verified label (e.g. "April 2026" or "19 May 2026"). */
   verified: string;
-  /** Optional override label for "By" — defaults to "Written & verified by". */
+  /** Optional override label for "By", defaults to "Written & verified by". */
   prefix?: string;
   /** Use a compact variant for sidebar use. */
   compact?: boolean;
@@ -65,7 +65,7 @@ export default function EditorByline({ verified, prefix = 'Written & verified by
           </p>
           <p className="text-[14.5px] font-semibold" style={{ color: INK }}>
             <Link href={e.profileUrl} className="hover:underline">{e.name}</Link>
-            <span className="font-normal" style={{ color: SLATE }}> — {e.role}</span>
+            <span className="font-normal" style={{ color: SLATE }}>, {e.role}</span>
           </p>
           <p className="mt-1.5 text-[12.5px] leading-[1.55]" style={{ color: SLATE }}>
             {e.scope}

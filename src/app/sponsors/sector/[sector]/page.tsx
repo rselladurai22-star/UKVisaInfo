@@ -11,7 +11,7 @@ import StickyMobileCta from '../../../../components/StickyMobileCta';
 
 interface RouteParams { params: Promise<{ sector: string }> }
 
-// ISR — noindexed filtered listings, rendered on-demand and cached.
+// ISR, noindexed filtered listings, rendered on-demand and cached.
 export const dynamicParams = true;
 export const revalidate = 86400;
 
@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const real = SPONSOR_SECTORS.find((s) => slugify(s) === sector);
   if (!real) return { title: 'Sector not found' };
   const sponsors = SPONSORS.filter((s) => s.sector === real);
-  const title = `${real} UK Sponsor Licence Holders — Skilled Worker 2026`;
+  const title = `${real} UK Sponsor Licence Holders, Skilled Worker 2026`;
   const description = `${sponsors.length} UK ${real.toLowerCase()} sector employers licensed to sponsor Skilled Worker visas in 2026. Filter by city and licence rating.`;
   return {
     title, description,
     alternates: { canonical: `/sponsors/sector/${sector}` },
     openGraph: { title, description, url: `https://ukvisainfo.co.uk/sponsors/sector/${sector}`, type: 'article' },
-    // Sector-filtered sponsor listing — data display, not editorial.
+    // Sector-filtered sponsor listing, data display, not editorial.
     robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
   };
 }

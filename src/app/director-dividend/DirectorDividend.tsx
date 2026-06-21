@@ -67,7 +67,7 @@ export default function DirectorDividend() {
           </Panel>
           <Callout tone="info" title="This is your personal tax only">
             It excludes Corporation Tax the company already paid on its profits before dividends. Dividends can only be
-            paid from post-tax profit — model the company side with the corporation tax tool.
+            paid from post-tax profit, model the company side with the corporation tax tool.
           </Callout>
         </>
       }
@@ -77,29 +77,29 @@ export default function DirectorDividend() {
         intro="Company directors usually pay themselves a small salary plus dividends. This guide explains dividend tax rates, the allowance, and why this mix is often more efficient than a large salary."
       >
         <GuideSection kicker="The basics" title="How dividends are taxed">
-          <p>Dividends are paid from a company&apos;s post-tax profit and taxed personally at lower rates than salary. Everyone gets a <strong>£500 dividend allowance</strong> (taxed at 0%). Above that, dividends are taxed at <strong>8.75%</strong> (basic rate), <strong>33.75%</strong> (higher rate) and <strong>39.35%</strong> (additional rate), depending on where they sit on top of your other income. Crucially, <strong>no National Insurance</strong> is due on dividends — a key reason directors favour them.</p>
+          <p>Dividends are paid from a company&apos;s post-tax profit and taxed personally at lower rates than salary. Everyone gets a <strong>£500 dividend allowance</strong> (taxed at 0%). Above that, dividends are taxed at <strong>8.75%</strong> (basic rate), <strong>33.75%</strong> (higher rate) and <strong>39.35%</strong> (additional rate), depending on where they sit on top of your other income. Crucially, <strong>no National Insurance</strong> is due on dividends, a key reason directors favour them.</p>
         </GuideSection>
         <GuideSection kicker="The strategy" title="Why a small salary plus dividends works">
-          <p>A common approach is a salary around the <strong>£12,570 personal allowance</strong> — enough to use the allowance and count as a qualifying year for the State Pension, while keeping NI low — topped up with dividends. The salary is a deductible company expense (reducing Corporation Tax), and dividends avoid NI. The optimal split depends on profit levels and Corporation Tax, so model both sides.</p>
-          <Callout tone="tip" title="Don't forget Corporation Tax">Dividends come from profit the company has already paid Corporation Tax on (19–25%). The headline dividend rates look low, but the combined company-plus-personal tax is what really matters.</Callout>
+          <p>A common approach is a salary around the <strong>£12,570 personal allowance</strong>, enough to use the allowance and count as a qualifying year for the State Pension, while keeping NI low, topped up with dividends. The salary is a deductible company expense (reducing Corporation Tax), and dividends avoid NI. The optimal split depends on profit levels and Corporation Tax, so model both sides.</p>
+          <Callout tone="tip" title="Don't forget Corporation Tax">Dividends come from profit the company has already paid Corporation Tax on (19 to 25%). The headline dividend rates look low, but the combined company-plus-personal tax is what really matters.</Callout>
         </GuideSection>
         <GuideSection kicker="Rules" title="Paying dividends correctly">
-          <p>Dividends can only be paid from <strong>retained profit</strong> — paying more than the company has made is an illegal dividend. You should record a board minute and issue a dividend voucher for each payment. Dividends are reported on your Self Assessment return, and the tax is due by 31 January. Taking dividends faster than profit allows, or mislabelling loans as dividends, can cause tax and legal problems.</p>
+          <p>Dividends can only be paid from <strong>retained profit</strong>, paying more than the company has made is an illegal dividend. You should record a board minute and issue a dividend voucher for each payment. Dividends are reported on your Self Assessment return, and the tax is due by 31 January. Taking dividends faster than profit allows, or mislabelling loans as dividends, can cause tax and legal problems.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
-            ['Paying dividends from insufficient profit', 'Only retained post-tax profit can be distributed — illegal dividends can be reclaimed and taxed.'],
-            ['Forgetting Corporation Tax', 'The company pays 19–25% before any dividend. Judge efficiency on combined tax, not the dividend rate alone.'],
-            ['Ignoring the shrinking allowance', 'The dividend allowance is just £500 now — far smaller than a few years ago, so more is taxable.'],
+            ['Paying dividends from insufficient profit', 'Only retained post-tax profit can be distributed, illegal dividends can be reclaimed and taxed.'],
+            ['Forgetting Corporation Tax', 'The company pays 19 to 25% before any dividend. Judge efficiency on combined tax, not the dividend rate alone.'],
+            ['Ignoring the shrinking allowance', 'The dividend allowance is just £500 now, far smaller than a few years ago, so more is taxable.'],
             ['No paperwork', 'Without board minutes and vouchers, HMRC can challenge the payments. Keep records.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How much dividend can I take tax-free?', a: 'The first £500 of dividends each year is tax-free (the dividend allowance), on top of any unused personal allowance. Beyond that, dividend tax applies.' },
-            { q: 'Do I pay National Insurance on dividends?', a: 'No — dividends are free of National Insurance, which is the main reason a salary-plus-dividends mix can be efficient for directors.' },
-            { q: 'What salary should a director take?', a: 'Often around the £12,570 personal allowance — enough to secure a State Pension qualifying year and use the allowance while keeping NI low — with the rest as dividends. The optimum varies; take advice.' },
-            { q: 'Is this my total tax?', a: 'No — this is your personal tax. The company also pays Corporation Tax on profits before dividends are paid. Consider both together.' },
+            { q: 'Do I pay National Insurance on dividends?', a: 'No, dividends are free of National Insurance, which is the main reason a salary-plus-dividends mix can be efficient for directors.' },
+            { q: 'What salary should a director take?', a: 'Often around the £12,570 personal allowance, enough to secure a State Pension qualifying year and use the allowance while keeping NI low, with the rest as dividends. The optimum varies; take advice.' },
+            { q: 'Is this my total tax?', a: 'No, this is your personal tax. The company also pays Corporation Tax on profits before dividends are paid. Consider both together.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={TAX_RELATED} /></GuideSection>

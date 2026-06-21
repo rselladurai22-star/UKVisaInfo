@@ -36,13 +36,13 @@ export default function PersonalLoan() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Personal Loan' }]}
       title="Personal Loan Calculator"
-      subtitle="Work out the monthly repayment, total interest and total cost of a UK personal loan — and see how the APR and term change what you pay."
+      subtitle="Work out the monthly repayment, total interest and total cost of a UK personal loan, and see how the APR and term change what you pay."
       calcLabel="Calculate repayment"
       inputs={
         <Panel title="Your loan">
           <div className="space-y-4">
             <Field label="Loan amount"><MoneyInput value={amount} onChange={setAmount} step={500} /></Field>
-            <Field label={`Representative APR — ${pct(apr, 1)}`}><Slider value={apr} onChange={setApr} min={2} max={40} step={0.1} /></Field>
+            <Field label={`Representative APR, ${pct(apr, 1)}`}><Slider value={apr} onChange={setApr} min={2} max={40} step={0.1} /></Field>
             <Field label="Term (years)"><NumberInput value={years} onChange={setYears} suffix="yrs" /></Field>
           </div>
         </Panel>
@@ -68,7 +68,7 @@ export default function PersonalLoan() {
             </div>
           </Panel>
           <Callout tone="info" title="Representative APR isn't guaranteed">
-            Lenders must advertise a rate that at least 51% of accepted applicants get — your actual rate depends on
+            Lenders must advertise a rate that at least 51% of accepted applicants get, your actual rate depends on
             your credit profile and could be higher. Always check your personalised rate (many lenders offer a
             soft-search quote that won&apos;t affect your credit score).
           </Callout>
@@ -80,19 +80,19 @@ export default function PersonalLoan() {
         intro="A personal loan is a fixed amount borrowed over a fixed term at a fixed monthly repayment. This guide explains APR, how the term changes the cost, and how to borrow as cheaply as possible."
       >
         <GuideSection kicker="The basics" title="Amount, term and APR">
-          <p>An unsecured personal loan gives you a lump sum you repay in equal monthly instalments over a set term — typically one to seven years. The cost is driven by the <strong>APR</strong> (annual percentage rate), which rolls the interest rate and any compulsory fees into one figure so you can compare deals fairly. A larger loan, a higher APR or a longer term all increase the total interest you pay.</p>
+          <p>An unsecured personal loan gives you a lump sum you repay in equal monthly instalments over a set term, typically one to seven years. The cost is driven by the <strong>APR</strong> (annual percentage rate), which rolls the interest rate and any compulsory fees into one figure so you can compare deals fairly. A larger loan, a higher APR or a longer term all increase the total interest you pay.</p>
         </GuideSection>
         <GuideSection kicker="The trade-off" title="Why a longer term costs more">
           <p>Spreading a loan over more years lowers the monthly payment but increases the total interest, because you owe the balance for longer. A £10,000 loan at 8.9% over 3 years costs far less in total than the same loan over 7 years, even though the monthly payment is higher. Borrow over the <strong>shortest term you can comfortably afford</strong> to minimise the total cost.</p>
-          <Callout tone="tip" title="Watch the £7,500–£15,000 sweet spot">UK loan rates are often lowest in the mid-size band (around £7,500–£15,000). Borrowing just under a threshold can mean a higher rate than borrowing slightly more — compare both.</Callout>
+          <Callout tone="tip" title="Watch the £7,500 to £15,000 sweet spot">UK loan rates are often lowest in the mid-size band (around £7,500 to £15,000). Borrowing just under a threshold can mean a higher rate than borrowing slightly more, compare both.</Callout>
         </GuideSection>
         <GuideSection kicker="Rates" title="Representative vs personalised APR">
-          <p>The advertised &quot;representative APR&quot; only has to be offered to 51% of accepted applicants — the rest can be charged more. Your personalised rate depends on your credit score, income and existing debts. Use lenders&apos; <strong>soft-search eligibility checkers</strong> to see your likely rate without leaving a hard footprint on your credit file.</p>
+          <p>The advertised &quot;representative APR&quot; only has to be offered to 51% of accepted applicants, the rest can be charged more. Your personalised rate depends on your credit score, income and existing debts. Use lenders&apos; <strong>soft-search eligibility checkers</strong> to see your likely rate without leaving a hard footprint on your credit file.</p>
         </GuideSection>
         <GuideSection kicker="Save money" title="Borrowing more cheaply">
           <ul className="space-y-3">
             {[
-              ['Check your credit file first', 'Correct errors and register to vote — small fixes can move you to a better rate band.'],
+              ['Check your credit file first', 'Correct errors and register to vote, small fixes can move you to a better rate band.'],
               ['Use soft-search checkers', 'Compare personalised rates without multiple hard searches denting your score.'],
               ['Borrow the right amount', 'Mid-size loans often have the lowest rates; avoid stretching the term unnecessarily.'],
               ['Check early-repayment terms', 'Most personal loans allow overpayment; the lender can charge up to ~58 days&apos; interest on early settlement.'],

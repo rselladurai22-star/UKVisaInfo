@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const cat = CATEGORIES.find((c) => c.id === category);
   if (!cat) return {};
   const count = APP_TILES.filter((t) => t.category === cat.id).length;
-  const title = `${cat.label} calculators & tools — free UK tools | UKDesk`;
+  const title = `${cat.label} calculators & tools, free UK tools | UKDesk`;
   const description = `${cat.description}. Free ${cat.label.toLowerCase()} calculators, each checked against GOV.UK, HMRC and ONS. No sign-up.${count ? '' : ''}`;
   return {
     title,

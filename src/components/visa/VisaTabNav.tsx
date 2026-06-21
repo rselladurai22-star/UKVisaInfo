@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * VisaTabNav — sticky section anchor nav (Editorial Premium)
+ * VisaTabNav, sticky section anchor nav (Editorial Premium)
  * Cream surface, hairline rule, ink labels, emerald active state.
  */
 

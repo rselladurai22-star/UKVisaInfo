@@ -1,10 +1,10 @@
 /**
- * UK postcode super-lookup — aggregates data from free official APIs.
+ * UK postcode super-lookup, aggregates data from free official APIs.
  *
  * Primary source: postcodes.io (open-source, no auth, unlimited).
  * MP source: members-api.parliament.uk (no auth).
  *
- * All data is cached for 24 hours via Next.js fetch revalidation —
+ * All data is cached for 24 hours via Next.js fetch revalidation, 
  * postcodes don't change often and electoral boundaries even less.
  */
 
@@ -15,7 +15,7 @@ export interface PostcodeData {
   outcode: string;
   incode: string;
 
-  /** Admin district (e.g. "Westminster") — usually the council */
+  /** Admin district (e.g. "Westminster"), usually the council */
   council: string;
   /** Electoral ward */
   ward: string;
@@ -47,12 +47,12 @@ export interface PostcodeData {
   latitude: number;
   longitude: number;
 
-  /** Lower-layer / Middle-layer SOA — used for ONS data lookups */
+  /** Lower-layer / Middle-layer SOA, used for ONS data lookups */
   lsoa: string;
   msoa: string;
 }
 
-/** Loose UK postcode regex — accepts with or without space, any case. */
+/** Loose UK postcode regex, accepts with or without space, any case. */
 const POSTCODE_RE = /^[A-Z]{1,2}[0-9R][0-9A-Z]?\s*[0-9][ABD-HJLNP-UW-Z]{2}$/i;
 
 /** Normalise input to canonical (no spaces, uppercase). */
@@ -110,7 +110,7 @@ export async function lookupPostcode(raw: string): Promise<PostcodeData | null> 
 
   if (!result) return null;
 
-  // Best-effort MP lookup — failure is non-fatal.
+  // Best-effort MP lookup, failure is non-fatal.
   let mp: string | undefined;
   let mpParty: string | undefined;
   let mpSince: string | undefined;

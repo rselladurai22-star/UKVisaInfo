@@ -45,7 +45,7 @@ export default function PowerOfAttorneyCost() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Estate', href: '/category/estate' }, { label: 'Power of Attorney Cost' }]}
       title="Power of Attorney Cost Calculator"
-      subtitle="Work out the cost of setting up Lasting Powers of Attorney (LPAs) in England & Wales for 2025/26 — the £82 registration fee plus any solicitor costs."
+      subtitle="Work out the cost of setting up Lasting Powers of Attorney (LPAs) in England & Wales for 2025/26, the £82 registration fee plus any solicitor costs."
       calcLabel="Estimate LPA Cost"
       inputs={
         <Panel title="Your LPAs">
@@ -84,13 +84,13 @@ export default function PowerOfAttorneyCost() {
           <div className="grid grid-cols-2 gap-3">
             <Stat label="Total Cost" value={gbp(r.total)} sub={`${r.totalLpas} LPA${r.totalLpas === 1 ? '' : 's'}`} tone="dark" big />
             <Stat label="Registration Fees" value={gbp(r.registrationFees)} sub={`${gbp(r.feePerLpa)} each`} tone="primary" />
-            <Stat label="Solicitor Fees" value={gbp(r.solicitorFees)} sub={useSolicitor ? `~${gbp(SOLICITOR_PER_LPA)} per LPA` : 'None — DIY'} tone="accent" />
+            <Stat label="Solicitor Fees" value={gbp(r.solicitorFees)} sub={useSolicitor ? `~${gbp(SOLICITOR_PER_LPA)} per LPA` : 'None, DIY'} tone="accent" />
             <Stat label="LPAs Needed" value={String(r.totalLpas)} sub="Types × people" />
           </div>
 
           {!useSolicitor && (
             <Callout tone="tip" title="You can apply yourself">
-              Most people set up LPAs themselves online or on paper through the Office of the Public Guardian, paying only the £82 registration fee per document — no solicitor required.
+              Most people set up LPAs themselves online or on paper through the Office of the Public Guardian, paying only the £82 registration fee per document, no solicitor required.
             </Callout>
           )}
           {help !== 'none' && (
@@ -99,7 +99,7 @@ export default function PowerOfAttorneyCost() {
             </Callout>
           )}
 
-          <p className="text-[11px] text-on-surface-variant">Estimate for England & Wales, 2025/26. Scotland and Northern Ireland have different systems and fees. Solicitor costs are indicative — get quotes.</p>
+          <p className="text-[11px] text-on-surface-variant">Estimate for England & Wales, 2025/26. Scotland and Northern Ireland have different systems and fees. Solicitor costs are indicative, get quotes.</p>
         </>
       }
     >
@@ -117,7 +117,7 @@ export default function PowerOfAttorneyCost() {
         </GuideSection>
 
         <GuideSection kicker="Do you need a solicitor?" title="DIY vs professional help">
-          <p>You can complete and register LPAs yourself through the Office of the Public Guardian (OPG), online or on paper, paying only the registration fee. A solicitor typically charges £150–£300 per LPA on top, which can be worth it for complex family situations, business interests, or to ensure the forms are watertight.</p>
+          <p>You can complete and register LPAs yourself through the Office of the Public Guardian (OPG), online or on paper, paying only the registration fee. A solicitor typically charges £150 to £300 per LPA on top, which can be worth it for complex family situations, business interests, or to ensure the forms are watertight.</p>
         </GuideSection>
 
         <GuideSection kicker="Paying less" title="Fee reductions and exemptions">
@@ -127,18 +127,18 @@ export default function PowerOfAttorneyCost() {
             <li><strong>Full exemption</strong> if you receive certain means-tested benefits such as Income Support, income-based ESA or Guarantee Pension Credit.</li>
           </ul>
           <Callout tone="warn" title="Register while you have capacity">
-            An LPA must be made and registered while you still have mental capacity. Leave it too late and your family may have to apply to the Court of Protection instead — far slower and more expensive.
+            An LPA must be made and registered while you still have mental capacity. Leave it too late and your family may have to apply to the Court of Protection instead, far slower and more expensive.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A couple setting up both LPAs">
-          <p>A married couple each want a Property &amp; Financial and a Health &amp; Welfare LPA — four LPAs in total. Doing it themselves, that is 4 × £82 = <strong>£328</strong> in registration fees and nothing else. Using a solicitor at around £200 per LPA would add about £800, taking the total to roughly £1,128.</p>
+          <p>A married couple each want a Property &amp; Financial and a Health &amp; Welfare LPA, four LPAs in total. Doing it themselves, that is 4 × £82 = <strong>£328</strong> in registration fees and nothing else. Using a solicitor at around £200 per LPA would add about £800, taking the total to roughly £1,128.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common LPA mistakes">
           <Mistakes items={[
             ['Leaving it too late', 'You can only make an LPA while you have capacity; after that it is the Court of Protection, which costs far more.'],
-            ['Only setting up one type', 'A financial LPA does not cover medical decisions, and vice versa — most people need both.'],
+            ['Only setting up one type', 'A financial LPA does not cover medical decisions, and vice versa, most people need both.'],
             ['Choosing the wrong attorney', 'Pick someone you trust completely; they will have significant control over your affairs.'],
             ['Not telling anyone it exists', 'Attorneys and family should know the LPA exists and where to find it.'],
           ]} />

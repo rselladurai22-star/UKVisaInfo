@@ -1,5 +1,5 @@
 /**
- * SettlementCostStack — visual cost breakdown (Editorial Premium)
+ * SettlementCostStack, visual cost breakdown (Editorial Premium)
  * Pure white card, Fraunces serif numbers, emerald bars, ink-on-cream total.
  */
 

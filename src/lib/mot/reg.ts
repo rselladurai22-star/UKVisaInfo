@@ -7,12 +7,12 @@
  *   memory tag + age identifier + random letters
  *
  * Age identifier:
- *   – First half (Mar–Aug) of year YY:  identifier = YY        (e.g. 24 = Mar 2024)
- *   – Second half (Sep–Feb) of year YY: identifier = YY + 50   (e.g. 74 = Sep 2024)
+ *, First half (Mar, Aug) of year YY:  identifier = YY        (e.g. 24 = Mar 2024)
+ *, Second half (Sep, Feb) of year YY: identifier = YY + 50   (e.g. 74 = Sep 2024)
  *
- * Pre-2001 (prefix or suffix style) we don't parse — just label "pre-2001".
+ * Pre-2001 (prefix or suffix style) we don't parse, just label "pre-2001".
  *
- * Source: DVLA – "Vehicle registration numbers and number plates".
+ * Source: DVLA, "Vehicle registration numbers and number plates".
  */
 
 const MODERN_PLATE = /^[A-Z]{2}\d{2}\s?[A-Z]{3}$/i;
@@ -38,10 +38,10 @@ export function inspectReg(input: string): RegInfo {
     let ageHint: string;
     if (id <= 50) {
       approxYear = 2000 + id;
-      ageHint = `March ${approxYear} – August ${approxYear}`;
+      ageHint = `March ${approxYear}, August ${approxYear}`;
     } else {
       approxYear = 2000 + (id - 50);
-      ageHint = `September ${approxYear} – February ${approxYear + 1}`;
+      ageHint = `September ${approxYear}, February ${approxYear + 1}`;
     }
     return {
       valid: true,
@@ -53,10 +53,10 @@ export function inspectReg(input: string): RegInfo {
   }
 
   if (PREFIX_PLATE.test(input.toUpperCase())) {
-    return { valid: true, normalised: raw, era: 'prefix', ageHint: '1983 – 2001 (prefix style)' };
+    return { valid: true, normalised: raw, era: 'prefix', ageHint: '1983 to 2001 (prefix style)' };
   }
   if (SUFFIX_PLATE.test(input.toUpperCase())) {
-    return { valid: true, normalised: raw, era: 'suffix', ageHint: '1963 – 1983 (suffix style)' };
+    return { valid: true, normalised: raw, era: 'suffix', ageHint: '1963 to 1983 (suffix style)' };
   }
 
   return { valid: false, normalised: raw, era: 'unknown' };

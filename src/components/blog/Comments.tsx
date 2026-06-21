@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Giscus comments — GitHub Discussions backed, free, no email harvesting.
+ * Giscus comments, GitHub Discussions backed, free, no email harvesting.
  *
  * Setup steps (one-time):
  *   1. Make the GitHub repo public (or use a separate public discussions repo).
@@ -12,7 +12,7 @@ import { useEffect, useRef } from 'react';
  *   4. Generate config at https://giscus.app and copy the four IDs into
  *      NEXT_PUBLIC_GISCUS_* env vars (.env.local / Vercel).
  *
- * Without env vars set, the component renders nothing — no broken state.
+ * Without env vars set, the component renders nothing, no broken state.
  */
 export default function Comments({ term }: { term: string }) {
   const ref = useRef<HTMLDivElement>(null);

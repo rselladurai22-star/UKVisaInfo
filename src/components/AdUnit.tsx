@@ -22,7 +22,7 @@ interface Props {
  *  3. A valid slot ID from your AdSense dashboard
  *
  * Use slot="responsive-default" as a placeholder until you create
- * real slots in the AdSense dashboard — the component renders nothing
+ * real slots in the AdSense dashboard, the component renders nothing
  * server-side, only pushing to adsbygoogle[] on mount.
  */
 export default function AdUnit({ slot, format = 'auto', className = '', label = true }: Props) {
@@ -32,11 +32,11 @@ export default function AdUnit({ slot, format = 'auto', className = '', label = 
   useEffect(() => {
     if (!CLIENT || !slot || pushed.current) return;
     try {
-      // @ts-expect-error — adsbygoogle is injected globally by the AdSense script
+      // @ts-expect-error, adsbygoogle is injected globally by the AdSense script
       (window.adsbygoogle = window.adsbygoogle || []).push({});
       pushed.current = true;
     } catch {
-      // silently ignore — ad blocker or script not yet loaded
+      // silently ignore, ad blocker or script not yet loaded
     }
   }, [slot]);
 

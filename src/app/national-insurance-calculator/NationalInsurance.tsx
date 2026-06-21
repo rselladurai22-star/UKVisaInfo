@@ -29,7 +29,7 @@ export default function NationalInsurance() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Tax', href: '/category/tax' }, { label: 'National Insurance' }]}
       title="National Insurance Calculator"
-      subtitle="Work out your National Insurance for 2025/26 — Class 1 if you're employed, Class 4 if you're self-employed — with a band-by-band breakdown."
+      subtitle="Work out your National Insurance for 2025/26, Class 1 if you're employed, Class 4 if you're self-employed, with a band-by-band breakdown."
       calcLabel="Calculate NI"
       inputs={
         <Panel title="Your earnings">
@@ -53,8 +53,8 @@ export default function NationalInsurance() {
           </div>
           <Panel title="Band breakdown">
             <div className="space-y-3 text-sm">
-              <div className="flex justify-between"><span className="text-on-surface-variant">£0 – £12,570 (0%)</span><span className="font-semibold">£0</span></div>
-              <div className="flex justify-between"><span className="text-on-surface-variant">£12,570 – £50,270 ({pct(r.rate1 * 100, 0)})</span><span className="font-semibold tabular-nums">{gbp(r.mainBand)}</span></div>
+              <div className="flex justify-between"><span className="text-on-surface-variant">£0 to £12,570 (0%)</span><span className="font-semibold">£0</span></div>
+              <div className="flex justify-between"><span className="text-on-surface-variant">£12,570 to £50,270 ({pct(r.rate1 * 100, 0)})</span><span className="font-semibold tabular-nums">{gbp(r.mainBand)}</span></div>
               <div className="flex justify-between"><span className="text-on-surface-variant">Above £50,270 (2%)</span><span className="font-semibold tabular-nums">{gbp(r.upperBand)}</span></div>
               <BarTrack segments={[{ value: r.mainBand, color: PRIMARY }, { value: r.upperBand, color: ACCENT }]} />
               <div className="flex justify-between pt-1 border-t border-outline-variant"><span className="text-on-surface-variant">Total NI</span><span className="font-bold tabular-nums">{gbp(r.ni)}</span></div>
@@ -72,26 +72,26 @@ export default function NationalInsurance() {
           <p>Employees pay <strong>Class 1</strong> NI through PAYE: <strong>8%</strong> on earnings between the primary threshold (£12,570) and the upper earnings limit (£50,270), then <strong>2%</strong> on everything above. Your employer also pays employer&apos;s NI on top (which doesn&apos;t come out of your pay but is a real cost of employing you). NI is usually calculated each pay period rather than annually, so an irregular month can look different.</p>
         </GuideSection>
         <GuideSection kicker="Self-employed" title="Class 4 (and Class 2)">
-          <p>Sole traders pay <strong>Class 4</strong> NI on profit: <strong>6%</strong> between £12,570 and £50,270, then 2% above, collected through Self Assessment. <strong>Class 2</strong> NI is now voluntary for most, but paying it (a small weekly amount) can protect your State Pension and benefit entitlement if your profits are low — often worth doing.</p>
+          <p>Sole traders pay <strong>Class 4</strong> NI on profit: <strong>6%</strong> between £12,570 and £50,270, then 2% above, collected through Self Assessment. <strong>Class 2</strong> NI is now voluntary for most, but paying it (a small weekly amount) can protect your State Pension and benefit entitlement if your profits are low, often worth doing.</p>
         </GuideSection>
         <GuideSection kicker="Why it matters" title="What NI buys you">
-          <p>Unlike Income Tax, NI builds entitlement: <strong>qualifying years</strong> count towards your State Pension (you need about 35 for the full amount) and some contributory benefits. If you have gaps — from time abroad, low earnings or caring — you can sometimes fill them with voluntary contributions, which can be excellent value for your future pension.</p>
-          <Callout tone="tip" title="Check your NI record">A quick look at your NI record on GOV.UK shows qualifying years and any gaps you could fill — small voluntary payments can add meaningfully to your State Pension.</Callout>
+          <p>Unlike Income Tax, NI builds entitlement: <strong>qualifying years</strong> count towards your State Pension (you need about 35 for the full amount) and some contributory benefits. If you have gaps, from time abroad, low earnings or caring, you can sometimes fill them with voluntary contributions, which can be excellent value for your future pension.</p>
+          <Callout tone="tip" title="Check your NI record">A quick look at your NI record on GOV.UK shows qualifying years and any gaps you could fill, small voluntary payments can add meaningfully to your State Pension.</Callout>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
-            ['Thinking NI is just another tax', 'It builds State Pension and benefit entitlement — qualifying years matter for retirement.'],
+            ['Thinking NI is just another tax', 'It builds State Pension and benefit entitlement, qualifying years matter for retirement.'],
             ['Ignoring voluntary Class 2', 'Low-profit sole traders can lose pension years by not paying the small voluntary contribution.'],
             ['Expecting a bonus to be taxed the same as salary', 'NI is period-based, so a bonus month can carry more NI than a steady salary.'],
-            ['Forgetting gaps can be filled', 'Past gaps can sometimes be paid up — check before the deadlines.'],
+            ['Forgetting gaps can be filled', 'Past gaps can sometimes be paid up, check before the deadlines.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How much National Insurance do I pay?', a: 'Employees pay 8% on earnings from £12,570 to £50,270 and 2% above. The self-employed pay Class 4 at 6% and 2%. The calculator shows your figure.' },
-            { q: 'Do I pay NI after State Pension age?', a: 'No — you stop paying NI once you reach State Pension age, even if you keep working (you should tell your employer).' },
+            { q: 'Do I pay NI after State Pension age?', a: 'No, you stop paying NI once you reach State Pension age, even if you keep working (you should tell your employer).' },
             { q: 'What is the difference between Class 1, 2 and 4?', a: 'Class 1 is for employees, Class 2 and Class 4 are for the self-employed (Class 2 now voluntary, Class 4 on profits). Different classes build different entitlements.' },
-            { q: 'Does NI count towards my pension?', a: 'Yes — qualifying NI years build your State Pension (around 35 for the full amount) and some benefits.' },
+            { q: 'Does NI count towards my pension?', a: 'Yes, qualifying NI years build your State Pension (around 35 for the full amount) and some benefits.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={TAX_RELATED} /></GuideSection>

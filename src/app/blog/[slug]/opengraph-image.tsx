@@ -5,7 +5,7 @@ import { getPost } from '../../../data/blog';
 // pulls in the full blog content. The edge bundle has a 1 MB limit that the
 // growing blog exceeded; the Node runtime has no such limit.
 export const runtime = 'nodejs';
-export const alt = 'UKDesk — article preview';
+export const alt = 'UKDesk, article preview';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

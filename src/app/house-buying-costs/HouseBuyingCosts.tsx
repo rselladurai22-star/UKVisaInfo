@@ -67,7 +67,7 @@ export default function HouseBuyingCosts() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Property', href: '/category/property' }, { label: 'House Buying Costs' }]}
       title="House Buying Costs Calculator"
-      subtitle="The deposit is only part of it. Add up every upfront cost of buying a home in England or Northern Ireland — stamp duty, legal fees, survey, searches and more — so you know the real cash you need."
+      subtitle="The deposit is only part of it. Add up every upfront cost of buying a home in England or Northern Ireland, stamp duty, legal fees, survey, searches and more, so you know the real cash you need."
       inputs={
         <>
           <Panel title="Purchase">
@@ -124,7 +124,7 @@ export default function HouseBuyingCosts() {
             properties carry a 5% surcharge. Use the Stamp Duty calculator for the full band breakdown.
           </Callout>
 
-          <p className="text-[11px] text-on-surface-variant">Estimates based on typical UK figures; your quotes will vary. SDLT shown is for England & NI — Scotland (LBTT) and Wales (LTT) differ.</p>
+          <p className="text-[11px] text-on-surface-variant">Estimates based on typical UK figures; your quotes will vary. SDLT shown is for England & NI, Scotland (LBTT) and Wales (LTT) differ.</p>
         </>
       }
     >
@@ -136,14 +136,14 @@ export default function HouseBuyingCosts() {
           <p>SDLT is usually the largest cost after the deposit. In England and Northern Ireland it&apos;s charged in slices: nothing up to £125,000, then 2%, 5%, 10% and 12% on higher portions. First-time buyers pay nothing up to £300,000 (and 5% to £500,000), while anyone buying an additional property pays a 5% surcharge on every band. Scotland and Wales have their own equivalents (LBTT and LTT).</p>
         </GuideSection>
         <GuideSection kicker="Legal" title="Conveyancing and searches">
-          <p>A conveyancer or solicitor handles the legal transfer, typically charging <strong>£1,000–£2,000</strong> including their fee and disbursements. On top sit local authority and other <strong>searches</strong> (around £250–£450) and the <strong>Land Registry</strong> fee, which scales with price. Buying a leasehold property usually costs a little more in legal work.</p>
+          <p>A conveyancer or solicitor handles the legal transfer, typically charging <strong>£1,000 to £2,000</strong> including their fee and disbursements. On top sit local authority and other <strong>searches</strong> (around £250 to £450) and the <strong>Land Registry</strong> fee, which scales with price. Buying a leasehold property usually costs a little more in legal work.</p>
         </GuideSection>
         <GuideSection kicker="Due diligence" title="Surveys">
-          <p>A survey is optional but strongly advised. A <strong>Level 1 (condition)</strong> report suits new or modern homes (~£400); a <strong>Level 2 (HomeBuyer)</strong> report is the common choice for standard properties (~£600–£700); and a <strong>Level 3 (building/structural)</strong> survey is best for older, larger or unusual homes (~£900+). Skipping a survey to save a few hundred pounds can cost thousands in undiscovered defects.</p>
-          <Callout tone="tip" title="A survey can pay for itself">Findings from a survey are powerful negotiating leverage — buyers often recover the survey cost many times over by renegotiating the price or asking the seller to fix issues.</Callout>
+          <p>A survey is optional but strongly advised. A <strong>Level 1 (condition)</strong> report suits new or modern homes (~£400); a <strong>Level 2 (HomeBuyer)</strong> report is the common choice for standard properties (~£600 to £700); and a <strong>Level 3 (building/structural)</strong> survey is best for older, larger or unusual homes (~£900+). Skipping a survey to save a few hundred pounds can cost thousands in undiscovered defects.</p>
+          <Callout tone="tip" title="A survey can pay for itself">Findings from a survey are powerful negotiating leverage, buyers often recover the survey cost many times over by renegotiating the price or asking the seller to fix issues.</Callout>
         </GuideSection>
         <GuideSection kicker="Mortgage" title="Lender and valuation fees">
-          <p>Many deals carry a <strong>product/arrangement fee</strong> (commonly £999–£1,499), which you can pay upfront or add to the loan (paying interest on it for the term). Lenders run their own <strong>valuation</strong> — often free on residential deals, occasionally chargeable. Factor the product fee into any rate comparison, as a low rate with a big fee can be worse than a slightly higher fee-free rate.</p>
+          <p>Many deals carry a <strong>product/arrangement fee</strong> (commonly £999 to £1,499), which you can pay upfront or add to the loan (paying interest on it for the term). Lenders run their own <strong>valuation</strong>, often free on residential deals, occasionally chargeable. Factor the product fee into any rate comparison, as a low rate with a big fee can be worse than a slightly higher fee-free rate.</p>
         </GuideSection>
         <GuideSection kicker="Moving" title="Removals and the rest">
           <p>Removals run from a few hundred pounds for a small flat to over £1,500 for a larger home with packing. Add the smaller extras: notice on your rental, mail redirection, new furniture and immediate repairs. It&apos;s wise to keep a contingency fund after completion rather than spending every last pound on the deposit.</p>
@@ -158,9 +158,9 @@ export default function HouseBuyingCosts() {
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How much are the total costs of buying a house?', a: 'Beyond the deposit, expect anywhere from a couple of thousand pounds to tens of thousands, driven mostly by stamp duty. On a typical £300,000 purchase, fees often total £3,000–£6,000 plus any SDLT.' },
+            { q: 'How much are the total costs of buying a house?', a: 'Beyond the deposit, expect anywhere from a couple of thousand pounds to tens of thousands, driven mostly by stamp duty. On a typical £300,000 purchase, fees often total £3,000 to £6,000 plus any SDLT.' },
             { q: 'Can any of these costs be added to the mortgage?', a: 'Generally only the mortgage product fee. Stamp duty, legal fees and the survey must be paid in cash, usually around completion.' },
-            { q: 'Do first-time buyers pay less?', a: 'Yes — first-time buyers benefit from stamp duty relief (nothing up to £300,000) and sometimes cheaper or incentivised mortgage deals, but still pay legal, survey and moving costs.' },
+            { q: 'Do first-time buyers pay less?', a: 'Yes, first-time buyers benefit from stamp duty relief (nothing up to £300,000) and sometimes cheaper or incentivised mortgage deals, but still pay legal, survey and moving costs.' },
             { q: 'Is a survey really necessary?', a: 'It is not legally required, but it is highly recommended. The lender&apos;s valuation is not a survey and won&apos;t flag defects that could cost you dearly.' },
           ]} />
         </GuideSection>

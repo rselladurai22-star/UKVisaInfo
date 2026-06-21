@@ -4,8 +4,8 @@ import { Calendar, ArrowRight, Newspaper } from 'lucide-react';
 import { NEWS_ITEMS } from '../../data/news';
 
 export const metadata: Metadata = {
-  title: 'UK Visa News — Rule Changes, Fee Updates & Processing 2026',
-  description: 'Latest UK immigration updates — fee uplifts, route changes, processing-time shifts and eVisa rollout. Sourced from gov.uk.',
+  title: 'UK Visa News, Rule Changes, Fee Updates & Processing 2026',
+  description: 'Latest UK immigration updates, fee uplifts, route changes, processing-time shifts and eVisa rollout. Sourced from gov.uk.',
   alternates: { canonical: '/news' },
 };
 
@@ -35,7 +35,7 @@ export default function NewsIndex() {
             UK visa news &amp; updates
           </h1>
           <p className="mt-4 max-w-2xl text-white/55 text-base leading-relaxed">
-            Short briefs on UK immigration changes — fee uplifts, route closures, processing-time shifts. Updated weekly. Subscribe to the newsletter to get them on Tuesdays.
+            Short briefs on UK immigration changes, fee uplifts, route closures, processing-time shifts. Updated weekly. Subscribe to the newsletter to get them on Tuesdays.
           </p>
         </div>
       </section>

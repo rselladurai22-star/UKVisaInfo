@@ -75,7 +75,7 @@ export default function SoleTraderVsLimited() {
             <Field label="Annual profit (before tax)" hint="Profit after business expenses but before any tax">
               <MoneyInput value={profit} onChange={setProfit} step={5000} />
             </Field>
-            <p className="text-[11px] text-on-surface-variant">The limited model assumes a director salary of £12,570 (the personal allowance) with the rest taken as dividends — the typical tax-efficient structure.</p>
+            <p className="text-[11px] text-on-surface-variant">The limited model assumes a director salary of £12,570 (the personal allowance) with the rest taken as dividends, the typical tax-efficient structure.</p>
           </div>
         </Panel>
       }
@@ -113,7 +113,7 @@ export default function SoleTraderVsLimited() {
     >
       <Guide
         title="Sole trader vs limited company (2025/26)"
-        intro="One of the biggest decisions for a UK business owner is whether to trade as a self-employed sole trader or incorporate a limited company. Tax is a major factor — but not the only one. This guide compares the take-home maths and the trade-offs."
+        intro="One of the biggest decisions for a UK business owner is whether to trade as a self-employed sole trader or incorporate a limited company. Tax is a major factor, but not the only one. This guide compares the take-home maths and the trade-offs."
       >
         <GuideSection kicker="Sole trader" title="How sole traders are taxed">
           <p>As a sole trader, you and the business are the same legal person. You pay <strong>income tax</strong> and <strong>Class 4 National Insurance</strong> on your profits through Self Assessment:</p>
@@ -122,20 +122,20 @@ export default function SoleTraderVsLimited() {
             <li>Class 4 NI: 6% on profits between £12,570 and £50,270, then 2% above.</li>
             <li>Class 2 NI is now voluntary for most, but still builds your State Pension record.</li>
           </ul>
-          <p>It's simple to run — no Companies House filing, no corporation tax, and your money is your own.</p>
+          <p>It's simple to run, no Companies House filing, no corporation tax, and your money is your own.</p>
         </GuideSection>
 
         <GuideSection kicker="Limited" title="How a limited company is taxed">
           <p>A limited company is a separate legal entity. The typical tax-efficient owner-director takes a small salary up to the personal allowance and draws the rest of the profit as dividends:</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>The company pays <strong>corporation tax</strong> (19%–25%) on its profits.</li>
+            <li>The company pays <strong>corporation tax</strong> (19%, 25%) on its profits.</li>
             <li>A modest director's salary is usually set at £12,570 to use the personal allowance.</li>
             <li>Remaining post-tax profit is paid as <strong>dividends</strong>, taxed at 8.75% / 33.75% / 39.35% after the £500 dividend allowance.</li>
           </ul>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="£60,000 profit compared">
-          <p>At £60,000 annual profit, the sole trader pays income tax and Class 4 NI on the lot, while the limited company splits a £12,570 salary and dividends, paying corporation tax first then dividend tax. In most cases at this level the limited company leaves a few thousand pounds more in your pocket — but that gap narrows once you factor in accountancy fees (often £1,000–£2,000 a year) and the extra admin.</p>
+          <p>At £60,000 annual profit, the sole trader pays income tax and Class 4 NI on the lot, while the limited company splits a £12,570 salary and dividends, paying corporation tax first then dividend tax. In most cases at this level the limited company leaves a few thousand pounds more in your pocket, but that gap narrows once you factor in accountancy fees (often £1,000 to £2,000 a year) and the extra admin.</p>
           <Callout tone="tip" title="The crossover point">
             Incorporation usually starts to pay once profits comfortably exceed the personal allowance and you don't need to draw every penny. Below roughly £30,000 profit, sole trading is often simpler and barely costs more in tax.
           </Callout>
@@ -155,7 +155,7 @@ export default function SoleTraderVsLimited() {
         <GuideSection kicker="Avoid these" title="Common mistakes when choosing">
           <Mistakes items={[
             ['Incorporating too early', 'At low profits the tax saving is small and easily wiped out by accountancy fees and admin.'],
-            ['Drawing dividends with no profit', 'Dividends can only be paid from retained post-tax profit — illegal dividends can be reclaimed by HMRC or a liquidator.'],
+            ['Drawing dividends with no profit', 'Dividends can only be paid from retained post-tax profit, illegal dividends can be reclaimed by HMRC or a liquidator.'],
             ['Forgetting the salary triggers employer NI', 'A director salary above £5,000 now attracts 15% employer NI, slightly denting the limited-company advantage.'],
             ['Ignoring the bigger picture', 'Liability, IR35, pensions and mortgage applications can matter more than a small tax saving.'],
           ]} />
@@ -163,7 +163,7 @@ export default function SoleTraderVsLimited() {
 
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'Can I switch from sole trader to limited later?', a: 'Yes — many businesses start as sole traders and incorporate once profits justify it. You transfer the trade and assets to the new company.' },
+            { q: 'Can I switch from sole trader to limited later?', a: 'Yes, many businesses start as sole traders and incorporate once profits justify it. You transfer the trade and assets to the new company.' },
             { q: 'Do I have to take dividends?', a: 'No. You can leave profit in the company (after corporation tax) and draw it in a later year, which can keep you out of higher-rate dividend tax.' },
             { q: 'Is a limited company always cheaper on tax?', a: 'No. The advantage grows with profit, but at lower profits the gap is small and can be outweighed by accountancy costs and admin.' },
             { q: 'What about IR35?', a: 'If you work like an employee through your own company for one client, the off-payroll (IR35) rules can remove most of the tax benefit. See our IR35 tools.' },

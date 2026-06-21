@@ -1,5 +1,5 @@
 /**
- * FaqJsonLd — emits FAQPage schema.org JSON-LD for any page with
+ * FaqJsonLd, emits FAQPage schema.org JSON-LD for any page with
  * a list of question/answer pairs. Server component, zero runtime cost.
  *
  * Pair with a visible FAQ accordion in the page body so the structured

@@ -23,7 +23,7 @@ export default function SpousalMaintenance() {
     const needsGap = Math.max(0, recipientNeeds - recipientNet);
     const payerSurplus = Math.max(0, payerNet - recipientNeeds); // very rough affordability proxy
     // Maintenance is the lower of the recipient's shortfall and what the payer can afford,
-    // and courts aim for a fair balance — cap at the payer's surplus.
+    // and courts aim for a fair balance, cap at the payer's surplus.
     const maintenance = Math.min(needsGap, payerSurplus);
     const payerAfter = payerNet - maintenance;
     const recipientAfter = recipientNet + maintenance;
@@ -71,25 +71,25 @@ export default function SpousalMaintenance() {
     >
       <Guide
         title="Spousal maintenance explained"
-        intro="Spousal maintenance is regular payment from one ex-spouse to the other after divorce, separate from child maintenance. There's no formula — it's based on need and affordability — and the modern trend is towards shorter, time-limited awards or a clean break. Here's how it works."
+        intro="Spousal maintenance is regular payment from one ex-spouse to the other after divorce, separate from child maintenance. There's no formula, it's based on need and affordability, and the modern trend is towards shorter, time-limited awards or a clean break. Here's how it works."
       >
         <GuideSection kicker="The basics" title="Need and ability to pay">
           <p>Spousal maintenance (technically "periodical payments") may be ordered where one spouse can't meet their reasonable needs from their own income and the other has the means to help. The two key questions are the recipient's <strong>needs</strong> and the payer's <strong>ability to pay</strong> after meeting their own.</p>
         </GuideSection>
 
         <GuideSection kicker="No formula" title="Why it's discretionary">
-          <p>Unlike child maintenance, there is no percentage formula. The court weighs the section 25 factors — incomes, earning capacity, length of marriage, standard of living, age and health. Two similar couples can get different outcomes, which is why early legal advice matters.</p>
+          <p>Unlike child maintenance, there is no percentage formula. The court weighs the section 25 factors, incomes, earning capacity, length of marriage, standard of living, age and health. Two similar couples can get different outcomes, which is why early legal advice matters.</p>
         </GuideSection>
 
         <GuideSection kicker="The modern trend" title="Clean breaks and time limits">
-          <p>Courts increasingly favour a <strong>clean break</strong> where possible — a one-off capital settlement instead of ongoing payments — or a <strong>time-limited</strong> order giving the recipient time to become financially independent (for example while children are young or they retrain). Lifelong "joint lives" orders are now rarer.</p>
+          <p>Courts increasingly favour a <strong>clean break</strong> where possible, a one-off capital settlement instead of ongoing payments, or a <strong>time-limited</strong> order giving the recipient time to become financially independent (for example while children are young or they retrain). Lifelong "joint lives" orders are now rarer.</p>
           <Callout tone="tip" title="Capitalisation is an option">
             Ongoing maintenance can sometimes be 'capitalised' into a larger lump sum, giving both parties certainty and a clean break rather than years of monthly payments.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="Bridging a needs gap">
-          <p>If the recipient needs £2,200 a month but only earns £1,200, there's a £1,000 shortfall. If the payer earns £3,500 net and can meet their own needs with room to spare, the court might order maintenance towards that gap — though it would also push the recipient to increase their own income over time, often via a time-limited order.</p>
+          <p>If the recipient needs £2,200 a month but only earns £1,200, there's a £1,000 shortfall. If the payer earns £3,500 net and can meet their own needs with room to spare, the court might order maintenance towards that gap, though it would also push the recipient to increase their own income over time, often via a time-limited order.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common spousal maintenance mistakes">
@@ -104,7 +104,7 @@ export default function SpousalMaintenance() {
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'Is there a formula for spousal maintenance?', a: 'No. It is discretionary and based on the recipient\'s needs and the payer\'s ability to pay, weighed against all the circumstances.' },
-            { q: 'How long does spousal maintenance last?', a: 'It varies — from a fixed term to (rarely) joint lives. Courts increasingly prefer time-limited orders or a clean break.' },
+            { q: 'How long does spousal maintenance last?', a: 'It varies, from a fixed term to (rarely) joint lives. Courts increasingly prefer time-limited orders or a clean break.' },
             { q: 'Does it stop if my ex remarries?', a: 'Spousal maintenance normally ends automatically on the recipient\'s remarriage, and can be reviewed if they cohabit.' },
             { q: 'Is spousal maintenance taxable?', a: 'No. Spousal maintenance payments are made from taxed income and are not taxable in the recipient\'s hands.' },
           ]} />

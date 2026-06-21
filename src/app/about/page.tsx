@@ -17,7 +17,7 @@ const HAIR    = 'rgba(11,15,25,0.08)';
 const SITE = 'https://ukvisainfo.co.uk';
 
 export const metadata: Metadata = {
-  title: 'About UKDesk — Who Writes &amp; Verifies the Content',
+  title: 'About UKDesk, Who Writes &amp; Verifies the Content',
   description:
     'About ukvisainfo.co.uk: the named editor behind the site, our source-first methodology, advertising disclosure, and how to reach us. Independent UK editorial.',
   alternates: { canonical: '/about' },
@@ -77,7 +77,7 @@ export default function AboutPage() {
           </p>
 
           {/* EDITOR PROFILES */}
-          <Section eyebrow="01 — The team" title="Who writes the content">
+          <Section eyebrow="01, The team" title="Who writes the content">
             {EDITORS.map((e) => (
               <article id={e.id} key={e.id} className="rounded-3xl p-6 md:p-7 mb-4 scroll-mt-32"
                        style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
@@ -147,25 +147,25 @@ export default function AboutPage() {
           </Section>
 
           {/* WHAT THIS SITE IS / ISN'T */}
-          <Section eyebrow="02 — Scope" title="What UKDesk is &amp; isn’t">
+          <Section eyebrow="02, Scope" title="What UKDesk is &amp; isn’t">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Card title="What UKDesk is" tone="emerald" icon={CheckCircle2} items={[
                 'Editorial research compiled by a named editor',
-                'Source-first — every figure links to its gov.uk page',
+                'Source-first, every figure links to its gov.uk page',
                 'Updated within 7 days of every fee uplift',
                 'Free to read; no paywall, no signup',
               ]} />
               <Card title="What UKDesk isn’t" tone="amber" icon={ShieldCheck} items={[
                 'Not the UK Home Office or gov.uk',
-                'Not legal advice — we are not OISC/SRA regulated',
-                'Not a paid-placement site — ads do not influence content',
-                'Not anonymous — the editor is named on every page',
+                'Not legal advice, we are not OISC/SRA regulated',
+                'Not a paid-placement site, ads do not influence content',
+                'Not anonymous, the editor is named on every page',
               ]} />
             </div>
           </Section>
 
           {/* METHODOLOGY */}
-          <Section eyebrow="03 — How we work" title="Editorial methodology, in short">
+          <Section eyebrow="03, How we work" title="Editorial methodology, in short">
             <ul className="space-y-3">
               <Bullet>
                 <strong style={{ color: INK }}>Source-first.</strong> Every fee,
@@ -180,7 +180,7 @@ export default function AboutPage() {
               </Bullet>
               <Bullet>
                 <strong style={{ color: INK }}>Plain English, not paraphrased.</strong>{' '}
-                We rewrite from the applicant&apos;s decision path — we do not
+                We rewrite from the applicant&apos;s decision path, we do not
                 copy or restate the gov.uk text verbatim.
               </Bullet>
               <Bullet>
@@ -189,7 +189,7 @@ export default function AboutPage() {
                 <a href={`mailto:${PRIMARY_EDITOR.email}?subject=Correction`} className="underline font-semibold" style={{ color: INK }}>
                   {PRIMARY_EDITOR.email}
                 </a>{' '}
-                — corrections within 48 hours for material errors.
+                corrections within 48 hours for material errors.
               </Bullet>
             </ul>
             <p className="mt-5">
@@ -202,7 +202,7 @@ export default function AboutPage() {
           </Section>
 
           {/* FUNDING */}
-          <Section eyebrow="04 — Independence" title="How UKDesk is funded">
+          <Section eyebrow="04, Independence" title="How UKDesk is funded">
             <p style={p()}>
               UKDesk is reader-supported through Google AdSense display ads and
               clearly-marked affiliate links to services applicants commonly need
@@ -218,11 +218,11 @@ export default function AboutPage() {
           </Section>
 
           {/* CONTACT BLOCK */}
-          <Section eyebrow="05 — Contact" title="Reach us">
+          <Section eyebrow="05, Contact" title="Reach us">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <ContactCard icon={Sparkles} label="Editorial queries &amp; corrections"
                            email="contact@ukvisainfo.co.uk"
-                           desc="Suggest a correction, propose a topic, or flag a stale figure. Responses within 48 hours (Mon–Fri, UK)." />
+                           desc="Suggest a correction, propose a topic, or flag a stale figure. Responses within 48 hours (Mon, Fri, UK)." />
               <ContactCard icon={Building2} label="Privacy &amp; data requests"
                            email="privacy@ukvisainfo.co.uk"
                            desc="UK GDPR subject-access requests, data-removal requests, advertising opt-outs." />

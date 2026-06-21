@@ -2,9 +2,9 @@
  * UK VAT calculator.
  *
  * UK VAT rates (HMRC, current):
- *   – Standard     20%
- *   – Reduced       5%   (domestic fuel, children's car seats, mobility aids, etc.)
- *   – Zero          0%   (most food, books, children's clothes, public transport)
+ *, Standard     20%
+ *, Reduced       5%   (domestic fuel, children's car seats, mobility aids, etc.)
+ *, Zero          0%   (most food, books, children's clothes, public transport)
  *
  * Source: HMRC VAT Notice 700; https://www.gov.uk/guidance/rates-of-vat-on-different-goods-and-services
  */

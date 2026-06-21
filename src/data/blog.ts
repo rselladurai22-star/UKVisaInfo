@@ -17,10 +17,11 @@ export interface BlogPost {
   description: string;
   date: string; // ISO
   updated: string; // ISO
-  readMinutes: number;
+  /** Reading time. Optional, auto-estimated from body word count when omitted. */
+  readMinutes?: number;
   tags: string[];
   body: string; // markdown
-  /** Topic silo. Optional on legacy posts — inferred as 'visa' if absent. */
+  /** Topic silo. Optional on legacy posts, inferred as 'visa' if absent. */
   category?: BlogCategory;
   /** Optional thumbnail override (path/URL). Falls back to the category
    *  image pool, then a generated SVG illustration. */
@@ -51,7 +52,7 @@ export const BLOG_CATEGORIES: BlogCategoryMeta[] = [
 export const getCategoryMeta = (id: BlogCategory): BlogCategoryMeta =>
   BLOG_CATEGORIES.find((c) => c.id === id) ?? BLOG_CATEGORIES[0];
 
-/** Category of a post — explicit field, or 'visa' for legacy visa posts. */
+/** Category of a post, explicit field, or 'visa' for legacy visa posts. */
 export const postCategory = (post: BlogPost): BlogCategory => post.category ?? 'visa';
 
 export const getPostsByCategory = (id: BlogCategory): BlogPost[] =>
@@ -64,7 +65,26 @@ import { VISA_POSTS } from './blogVisa';
 /** All blog posts, newest multi-category guides first, then visa archive.
  *  Post bodies live in blogGuides.ts / blogVisa.ts to keep each module a
  *  size the compiler handles; add new posts to blogGuides.ts. */
-export const BLOG_POSTS: BlogPost[] = [...GUIDE_POSTS, ...VISA_POSTS];
+/** Estimate reading time (minutes) from a markdown body at ~225 wpm. */
+export function estimateReadMinutes(body: string): number {
+  const words = body
+    .replace(/```[\s\S]*?```/g, ' ')         // code blocks
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')   // images
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // links → text
+    .replace(/[#>*_`~|-]+/g, ' ')            // markdown punctuation
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return Math.max(1, Math.round(words / 225));
+}
+
+/** Reading time for a post, its explicit value, or auto-estimated from body. */
+export const readingMinutes = (post: BlogPost): number =>
+  post.readMinutes ?? estimateReadMinutes(post.body);
+
+export const BLOG_POSTS: BlogPost[] = [...GUIDE_POSTS, ...VISA_POSTS].map((p) => ({
+  ...p,
+  readMinutes: readingMinutes(p),
+}));
 
 export function getPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);

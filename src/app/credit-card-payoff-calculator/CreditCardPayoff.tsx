@@ -58,13 +58,13 @@ export default function CreditCardPayoff() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Loans', href: '/category/loans' }, { label: 'Credit Card Payoff' }]}
       title="Credit Card Payoff Calculator"
-      subtitle="See how long it takes to clear a credit card and how much interest you'll pay at a fixed monthly amount — and how much longer (and dearer) paying only the minimum would be."
+      subtitle="See how long it takes to clear a credit card and how much interest you'll pay at a fixed monthly amount, and how much longer (and dearer) paying only the minimum would be."
       calcLabel="Calculate payoff"
       inputs={
         <Panel title="Your card">
           <div className="space-y-4">
             <Field label="Balance"><MoneyInput value={balance} onChange={setBalance} step={100} /></Field>
-            <Field label={`APR — ${pct(apr, 1)}`}><Slider value={apr} onChange={setApr} min={0} max={50} step={0.1} /></Field>
+            <Field label={`APR, ${pct(apr, 1)}`}><Slider value={apr} onChange={setApr} min={0} max={50} step={0.1} /></Field>
             <Field label="Fixed monthly payment"><MoneyInput value={payment} onChange={setPayment} step={25} /></Field>
           </div>
         </Panel>
@@ -91,12 +91,12 @@ export default function CreditCardPayoff() {
                 { points: r.fixed.yearly, color: PRIMARY, label: `Your payment (${fmtYM(r.fixed.months)})`, payoffIndex: r.neverClears ? undefined : r.fixed.yearly.length - 1 },
               ]} />
             <div className="mt-3 p-3 rounded-lg bg-secondary-soft/30 border border-secondary/20 text-sm">
-              Paying only the minimum would take <strong>{fmtYM(r.min.months)}</strong> and cost <strong className="text-secondary">{gbp(r.min.interest)}</strong> in interest — your fixed payment saves about <strong className="text-secondary">{gbp(Math.max(0, r.saved))}</strong>.
+              Paying only the minimum would take <strong>{fmtYM(r.min.months)}</strong> and cost <strong className="text-secondary">{gbp(r.min.interest)}</strong> in interest, your fixed payment saves about <strong className="text-secondary">{gbp(Math.max(0, r.saved))}</strong>.
             </div>
           </Panel>
 
           <Callout tone="info" title="The minimum-payment trap">
-            Minimum payments fall as the balance drops, so most of each payment goes on interest — stretching a debt
+            Minimum payments fall as the balance drops, so most of each payment goes on interest, stretching a debt
             over decades. Always pay a fixed amount (or more), not the minimum.
           </Callout>
         </>
@@ -107,13 +107,13 @@ export default function CreditCardPayoff() {
         intro="Credit cards are easy to spend on and slow to clear. This guide explains why minimum payments are a trap, how to pay off faster, and when a balance transfer or consolidation helps."
       >
         <GuideSection kicker="The trap" title="Why minimum payments cost so much">
-          <p>UK minimum payments are typically the greater of around 1% of the balance plus that month&apos;s interest, or a few pounds. Because the percentage shrinks as the balance falls, the payment gets smaller over time and most of it goes on interest. Paying only the minimum on a typical card can take <strong>decades</strong> and cost more in interest than the original balance. Card statements now show how long minimum-only repayment would take — it&apos;s usually a shock.</p>
+          <p>UK minimum payments are typically the greater of around 1% of the balance plus that month&apos;s interest, or a few pounds. Because the percentage shrinks as the balance falls, the payment gets smaller over time and most of it goes on interest. Paying only the minimum on a typical card can take <strong>decades</strong> and cost more in interest than the original balance. Card statements now show how long minimum-only repayment would take, it&apos;s usually a shock.</p>
         </GuideSection>
         <GuideSection kicker="The fix" title="Pay a fixed amount, not the minimum">
-          <p>The single most powerful move is to pay a <strong>fixed monthly amount</strong> rather than the shrinking minimum. Keeping the payment level means an ever-larger share clears the balance, and the debt falls away far faster. Even a modest increase over the minimum can cut years off the term — use the calculator to see your own numbers.</p>
+          <p>The single most powerful move is to pay a <strong>fixed monthly amount</strong> rather than the shrinking minimum. Keeping the payment level means an ever-larger share clears the balance, and the debt falls away far faster. Even a modest increase over the minimum can cut years off the term, use the calculator to see your own numbers.</p>
         </GuideSection>
         <GuideSection kicker="Go faster" title="Balance transfers and 0% deals">
-          <p>A <strong>0% balance transfer</strong> card moves your debt to a card charging no interest for a promotional period (often 12–30 months), usually for a one-off transfer fee of 1–3%. Every pound you pay then clears the balance instead of feeding interest. To benefit, clear (or move) the balance before the 0% period ends and avoid new spending on the card. It&apos;s one of the cheapest ways to attack expensive card debt.</p>
+          <p>A <strong>0% balance transfer</strong> card moves your debt to a card charging no interest for a promotional period (often 12 to 30 months), usually for a one-off transfer fee of 1 to 3%. Every pound you pay then clears the balance instead of feeding interest. To benefit, clear (or move) the balance before the 0% period ends and avoid new spending on the card. It&apos;s one of the cheapest ways to attack expensive card debt.</p>
           <Callout tone="tip" title="Clear it before the 0% ends">Set a standing order to clear the balance over the promo period. If you can&apos;t, plan another transfer before the rate jumps to the standard APR.</Callout>
         </GuideSection>
         <GuideSection kicker="Multiple cards" title="Snowball vs avalanche">
@@ -130,9 +130,9 @@ export default function CreditCardPayoff() {
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How long to pay off a credit card?', a: 'It depends on the balance, APR and your payment. Paying a fixed amount well above the minimum can clear a card in a year or two; minimum-only can take decades.' },
-            { q: 'Is a balance transfer worth it?', a: 'Usually yes for expensive debt — a 0% period lets every payment clear the balance, for a small transfer fee. Clear or move the balance before the 0% ends.' },
+            { q: 'Is a balance transfer worth it?', a: 'Usually yes for expensive debt, a 0% period lets every payment clear the balance, for a small transfer fee. Clear or move the balance before the 0% ends.' },
             { q: 'Will paying off a card help my credit score?', a: 'Yes. Lower credit utilisation (balance vs limit) and consistent payments improve your score over time.' },
-            { q: 'Should I close the card after clearing it?', a: 'Not necessarily — keeping it open (unused) lowers your overall utilisation, which can help your score. Just avoid running the balance back up.' },
+            { q: 'Should I close the card after clearing it?', a: 'Not necessarily, keeping it open (unused) lowers your overall utilisation, which can help your score. Just avoid running the balance back up.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={LOANS_RELATED} /></GuideSection>

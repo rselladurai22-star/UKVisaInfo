@@ -1,4 +1,4 @@
-// UK Tax Engine 2026/27 — shared calculation utilities
+// UK Tax Engine 2026/27, shared calculation utilities
 
 export const TAX_YEAR = '2026/27';
 
@@ -267,7 +267,7 @@ export function calcContractorComparison(
 ): ContractorResult[] {
   const annualContract = dailyRate * workingDays;
 
-  // Outside IR35 — Ltd company, salary £12,570 + dividends
+  // Outside IR35, Ltd company, salary £12,570 + dividends
   const corpTaxRate = annualContract > 50000 ? 0.25 : 0.19;
   const outDirectorSalary = 12570;
   const outRevenue = annualContract;
@@ -279,7 +279,7 @@ export function calcContractorComparison(
   const outNet = outProfit - outDivTax + outDirectorSalary;
   const outTotalTax = outCorpTax + outDivTax;
 
-  // Inside IR35 — umbrella/deemed salary
+  // Inside IR35, umbrella/deemed salary
   const insideGross = annualContract * 0.85; // 15% employer costs
   const insideTax = calcTax({ salary: insideGross });
   const insideNet = insideTax.net;

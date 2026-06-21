@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * VisaStickyBar — slides down from below the main nav after scroll.
+ * VisaStickyBar, slides down from below the main nav after scroll.
  * Editorial Premium: cream surface, Fraunces title, emerald accent dot,
  * ink-on-cream apply button.
  */

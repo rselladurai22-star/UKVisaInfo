@@ -33,15 +33,15 @@ export default function IsaCalculator() {
     <CalcShell
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Savings', href: '/category/savings' }, { label: 'ISA Calculator' }]}
       title="ISA Calculator"
-      subtitle="See how a Stocks & Shares or Cash ISA could grow tax-free over time from a lump sum and regular saving — all within the £20,000 annual ISA allowance."
+      subtitle="See how a Stocks & Shares or Cash ISA could grow tax-free over time from a lump sum and regular saving, all within the £20,000 annual ISA allowance."
       calcLabel="Calculate growth"
       inputs={
         <Panel title="Your ISA">
           <div className="space-y-4">
             <Field label="Starting balance"><MoneyInput value={initial} onChange={setInitial} step={500} /></Field>
             <Field label="Monthly contribution"><MoneyInput value={monthly} onChange={setMonthly} step={25} /></Field>
-            <Field label={`Annual return — ${pct(rate, 1)}`} hint="Cash ISA ~3–5%; investments vary"><Slider value={rate} onChange={setRate} min={0} max={10} step={0.1} /></Field>
-            <Field label={`Years — ${years}`}><Slider value={years} onChange={setYears} min={1} max={40} /></Field>
+            <Field label={`Annual return, ${pct(rate, 1)}`} hint="Cash ISA ~3 to 5%; investments vary"><Slider value={rate} onChange={setRate} min={0} max={10} step={0.1} /></Field>
+            <Field label={`Years, ${years}`}><Slider value={years} onChange={setYears} min={1} max={40} /></Field>
           </div>
         </Panel>
       }
@@ -81,7 +81,7 @@ export default function IsaCalculator() {
         intro="An ISA lets your savings and investments grow completely free of UK tax. This guide covers the types of ISA, the £20,000 allowance, and how to make the most of the tax-free wrapper."
       >
         <GuideSection kicker="The basics" title="What an ISA is">
-          <p>An Individual Savings Account (ISA) is a tax-free wrapper: any interest, dividends or capital gains earned inside it are completely free of UK tax, and you never declare it. You can pay in up to <strong>£20,000 per tax year</strong> (2025/26) across all your ISAs combined. There&apos;s no tax on the way out either — withdrawals are tax-free at any time (subject to each product&apos;s rules).</p>
+          <p>An Individual Savings Account (ISA) is a tax-free wrapper: any interest, dividends or capital gains earned inside it are completely free of UK tax, and you never declare it. You can pay in up to <strong>£20,000 per tax year</strong> (2025/26) across all your ISAs combined. There&apos;s no tax on the way out either, withdrawals are tax-free at any time (subject to each product&apos;s rules).</p>
         </GuideSection>
         <GuideSection kicker="Types" title="Cash, Stocks & Shares, LISA and more">
           <ul className="space-y-3">
@@ -96,11 +96,11 @@ export default function IsaCalculator() {
           </ul>
         </GuideSection>
         <GuideSection kicker="The allowance" title="Using your £20,000 wisely">
-          <p>The £20,000 allowance resets every 6 April and <strong>can&apos;t be carried over</strong> — use it or lose it. You can split it across different ISA types in the same year. Since April 2024 you can pay into multiple ISAs of the same type in one year, giving more flexibility to chase the best rates. A &quot;flexible&quot; ISA even lets you withdraw and replace money in the same tax year without losing the allowance.</p>
+          <p>The £20,000 allowance resets every 6 April and <strong>can&apos;t be carried over</strong>, use it or lose it. You can split it across different ISA types in the same year. Since April 2024 you can pay into multiple ISAs of the same type in one year, giving more flexibility to chase the best rates. A &quot;flexible&quot; ISA even lets you withdraw and replace money in the same tax year without losing the allowance.</p>
           <Callout tone="tip" title="Cash for soon, shares for later">Use a Cash ISA for money you&apos;ll need within a few years, and a Stocks & Shares ISA for long-term goals where time smooths out market ups and downs.</Callout>
         </GuideSection>
         <GuideSection kicker="Why it matters" title="The tax saving compounds">
-          <p>Outside an ISA, savings interest above your Personal Savings Allowance and investment gains above the annual exempt amount are taxable — and those allowances have shrunk. Inside an ISA, none of it is taxed, so more of your return stays invested and compounds. Over decades, sheltering growth from tax can add a substantial amount to your pot.</p>
+          <p>Outside an ISA, savings interest above your Personal Savings Allowance and investment gains above the annual exempt amount are taxable, and those allowances have shrunk. Inside an ISA, none of it is taxed, so more of your return stays invested and compounds. Over decades, sheltering growth from tax can add a substantial amount to your pot.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
@@ -113,9 +113,9 @@ export default function IsaCalculator() {
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How much can I put in an ISA?', a: '£20,000 per tax year across all your ISAs combined in 2025/26. The allowance resets on 6 April and cannot be carried forward.' },
-            { q: 'Is ISA growth really tax-free?', a: 'Yes — interest, dividends and capital gains inside an ISA are free of UK tax, and you don&apos;t declare them on a tax return.' },
+            { q: 'Is ISA growth really tax-free?', a: 'Yes, interest, dividends and capital gains inside an ISA are free of UK tax, and you don&apos;t declare them on a tax return.' },
             { q: 'Cash ISA or Stocks & Shares ISA?', a: 'Cash ISA suits short-term and emergency money; Stocks & Shares ISA suits long-term goals (5+ years) where higher expected returns outweigh short-term risk.' },
-            { q: 'Can I transfer an ISA?', a: 'Yes — always use the provider&apos;s transfer process to keep the tax-free status. Withdrawing and re-paying uses up your annual allowance.' },
+            { q: 'Can I transfer an ISA?', a: 'Yes, always use the provider&apos;s transfer process to keep the tax-free status. Withdrawing and re-paying uses up your annual allowance.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={SAVINGS_RELATED} /></GuideSection>

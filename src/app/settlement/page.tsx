@@ -11,12 +11,12 @@ import StickyMobileCta from '../../components/StickyMobileCta';
 import EditorByline from '../../components/EditorByline';
 
 export const metadata: Metadata = {
-  title: 'UK Settlement 2026 — ILR, Citizenship, EUSS, BNO, Long Residence, Ancestry',
+  title: 'UK Settlement 2026, ILR, Citizenship, EUSS, BNO, Long Residence, Ancestry',
   description: 'Compare every UK settlement route side-by-side. Verified gov.uk fees and rules for ILR, naturalisation, EU Settlement Scheme, Hong Kong BNO, 10-year long residence and UK Ancestry visa. Updated May 2026.',
   alternates: { canonical: '/settlement' },
   openGraph: {
     title: 'UK Settlement Routes Compared',
-    description: 'Side-by-side comparison of every UK route to ILR and citizenship — verified against gov.uk.',
+    description: 'Side-by-side comparison of every UK route to ILR and citizenship, verified against gov.uk.',
     url: 'https://ukvisainfo.co.uk/settlement',
     type: 'article',
   },
@@ -119,12 +119,12 @@ const ROWS: Row[] = [
   },
 ];
 
-const POUND = (n: number | null) => n === null ? '—' : (n === 0 ? 'Free' : '£' + n.toLocaleString('en-GB'));
+const POUND = (n: number | null) => n === null ? ', ' : (n === 0 ? 'Free' : '£' + n.toLocaleString('en-GB'));
 
 export default function SettlementHub() {
   return (
     <>
-      {/* Hero — v3 light editorial */}
+      {/* Hero, v3 light editorial */}
       <header className="bg-surface border-b border-border">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-12 sm:pb-12">
           <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -140,7 +140,7 @@ export default function SettlementHub() {
             Every UK settlement route in one view.
           </h1>
           <p className="mt-4 max-w-2xl text-slate-600 text-[clamp(15.5px,1.4vw,18px)] leading-relaxed">
-            6 routes to ILR or British citizenship — compared side-by-side on fees, time, English requirement, Life in the UK Test and best-fit profile. Every figure cited from gov.uk.
+            6 routes to ILR or British citizenship, compared side-by-side on fees, time, English requirement, Life in the UK Test and best-fit profile. Every figure cited from gov.uk.
           </p>
         </div>
       </header>
@@ -279,7 +279,7 @@ export default function SettlementHub() {
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div>
                         <div className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#9aa3b8]">
-                          {bd.title.replace(' for a single applicant', '').replace(' — single adult', '').replace(' for a single adult', '')}
+                          {bd.title.replace(' for a single applicant', '').replace(', single adult', '').replace(' for a single adult', '')}
                         </div>
                         <div className="mt-1 font-display font-bold text-[16px] text-[#0A2540] group-hover:text-[#2563eb] transition-colors duration-100 leading-tight">
                           {v?.title ?? slug}
@@ -372,7 +372,7 @@ export default function SettlementHub() {
                     Get an exact cost for your situation
                   </h3>
                   <p className="mt-2 text-white/55 text-[13.5px] leading-relaxed">
-                    Pick your route, add dependants, choose priority service — see the total live, with every line cited to gov.uk.
+                    Pick your route, add dependants, choose priority service, see the total live, with every line cited to gov.uk.
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-2 bg-white text-[#1e40af] font-bold px-5 py-3 rounded-xl text-sm group-hover:gap-3 transition-[gap] duration-100">

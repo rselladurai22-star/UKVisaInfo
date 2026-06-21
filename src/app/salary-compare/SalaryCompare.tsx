@@ -83,10 +83,10 @@ export default function SalaryCompare() {
     >
       <Guide
         title="Comparing salaries between UK cities"
-        intro="A £45,000 salary stretches very differently in London than in Manchester. This tool works out the 'equivalent salary' you'd need elsewhere to keep the same disposable income — your take-home pay after tax, minus typical local living costs."
+        intro="A £45,000 salary stretches very differently in London than in Manchester. This tool works out the 'equivalent salary' you'd need elsewhere to keep the same disposable income, your take-home pay after tax, minus typical local living costs."
       >
         <GuideSection kicker="The idea" title="Disposable income, not headline pay">
-          <p>Comparing gross salaries between cities is misleading because two things change: the tax you pay (Scotland has different bands) and your cost of living, dominated by rent. What actually matters is <strong>disposable income</strong> — what's left after tax and the basics. This calculator holds your disposable income constant and solves for the gross salary that delivers it in the new city.</p>
+          <p>Comparing gross salaries between cities is misleading because two things change: the tax you pay (Scotland has different bands) and your cost of living, dominated by rent. What actually matters is <strong>disposable income</strong>, what's left after tax and the basics. This calculator holds your disposable income constant and solves for the gross salary that delivers it in the new city.</p>
         </GuideSection>
 
         <GuideSection kicker="What drives the gap" title="Rent is the biggest factor">
@@ -96,12 +96,12 @@ export default function SalaryCompare() {
         <GuideSection kicker="Tax" title="Don't forget Scottish income tax">
           <p>If you move to or from Scotland, your income tax changes. Scotland has additional bands and different rates, so the same gross salary produces a different take-home. This tool applies Scottish rates automatically for Scottish cities.</p>
           <Callout tone="tip" title="Negotiate on disposable income">
-            When weighing a job offer in a pricier city, translate it into disposable income rather than the headline number — a 20% pay rise can still leave you worse off if rent doubles.
+            When weighing a job offer in a pricier city, translate it into disposable income rather than the headline number, a 20% pay rise can still leave you worse off if rent doubles.
           </Callout>
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="£45,000 Manchester to London">
-          <p>On £45,000 in Manchester, your take-home is your salary minus income tax, National Insurance and pension. Subtract Manchester's typical living costs and you have a disposable figure. London's higher rent means you'd need a noticeably higher gross — often several thousand pounds more — to be left with the same amount of spending money each year.</p>
+          <p>On £45,000 in Manchester, your take-home is your salary minus income tax, National Insurance and pension. Subtract Manchester's typical living costs and you have a disposable figure. London's higher rent means you'd need a noticeably higher gross, often several thousand pounds more, to be left with the same amount of spending money each year.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common city-comparison mistakes">
@@ -116,9 +116,9 @@ export default function SalaryCompare() {
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
             { q: 'How is the equivalent salary worked out?', a: 'We calculate your take-home pay after tax in the first city, subtract local living costs to get disposable income, then find the gross salary that gives the same disposable income in the second city.' },
-            { q: 'Are the cost-of-living figures exact?', a: 'No — they are indicative averages for a single adult. Your real costs depend on lifestyle, household size and neighbourhood.' },
+            { q: 'Are the cost-of-living figures exact?', a: 'No, they are indicative averages for a single adult. Your real costs depend on lifestyle, household size and neighbourhood.' },
             { q: 'Does it account for Scottish tax?', a: 'Yes. Scottish income tax bands are applied automatically when a Scottish city is selected.' },
-            { q: 'Should I only consider salary when moving?', a: 'No. Career opportunities, commute, family and quality of life matter too — disposable income is just one important input.' },
+            { q: 'Should I only consider salary when moving?', a: 'No. Career opportunities, commute, family and quality of life matter too, disposable income is just one important input.' },
           ]} />
         </GuideSection>
         <GuideSection title="Related calculators"><RelatedTools items={RELATED} /></GuideSection>

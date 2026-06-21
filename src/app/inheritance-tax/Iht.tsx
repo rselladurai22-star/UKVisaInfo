@@ -49,7 +49,7 @@ export default function Iht() {
           <div className="space-y-4">
             <Field label="Total estate value" hint="Property, savings, investments, possessions"><MoneyInput value={estate} onChange={setEstate} step={10000} /></Field>
             <Toggle checked={homeToKids} onChange={setHomeToKids} label="Leaving the home to children/grandchildren (+£175k band)" />
-            <Toggle checked={transferable} onChange={setTransferable} label="Widowed — inherited a late spouse's unused allowances (double)" />
+            <Toggle checked={transferable} onChange={setTransferable} label="Widowed, inherited a late spouse's unused allowances (double)" />
           </div>
         </Panel>
       }
@@ -90,27 +90,27 @@ export default function Iht() {
           <p>If you leave your home to direct descendants (children or grandchildren), an extra <strong>residence nil-rate band of £175,000</strong> applies. Combined with the standard band, an individual can pass on up to <strong>£500,000</strong> tax-free. The residence band <strong>tapers away</strong> for estates over £2 million, reducing by £1 for every £2 above that threshold.</p>
         </GuideSection>
         <GuideSection kicker="Couples" title="Transferable allowances">
-          <p>Anything left to a spouse or civil partner is exempt, and any <strong>unused allowances transfer</strong> to them. So a surviving spouse can have up to <strong>£650,000</strong> of nil-rate band and <strong>£350,000</strong> of residence band — a combined <strong>£1 million</strong> tax-free for a couple leaving their home to children. The calculator&apos;s &quot;widowed&quot; toggle doubles the allowances to reflect this.</p>
+          <p>Anything left to a spouse or civil partner is exempt, and any <strong>unused allowances transfer</strong> to them. So a surviving spouse can have up to <strong>£650,000</strong> of nil-rate band and <strong>£350,000</strong> of residence band, a combined <strong>£1 million</strong> tax-free for a couple leaving their home to children. The calculator&apos;s &quot;widowed&quot; toggle doubles the allowances to reflect this.</p>
           <Callout tone="tip" title="The £1m couple allowance">A married couple passing their home to children can typically leave up to £1,000,000 free of IHT. Planning around these bands is the foundation of most estate planning.</Callout>
         </GuideSection>
         <GuideSection kicker="Gifts" title="The 7-year rule">
-          <p>Gifts made more than <strong>7 years</strong> before death are usually free of IHT. Gifts within 7 years count against the nil-rate band, with <strong>taper relief</strong> reducing the tax on gifts made 3–7 years before death. You can also give away £3,000 a year (the annual exemption), small gifts, and regular gifts from surplus income, all IHT-free. Larger lifetime giving is a common way to reduce an eventual bill — but you must survive 7 years.</p>
+          <p>Gifts made more than <strong>7 years</strong> before death are usually free of IHT. Gifts within 7 years count against the nil-rate band, with <strong>taper relief</strong> reducing the tax on gifts made 3 to 7 years before death. You can also give away £3,000 a year (the annual exemption), small gifts, and regular gifts from surplus income, all IHT-free. Larger lifetime giving is a common way to reduce an eventual bill, but you must survive 7 years.</p>
         </GuideSection>
         <GuideSection kicker="Reduce it" title="Other reliefs and planning">
-          <p>Leaving 10% or more of the estate to charity cuts the IHT rate on the rest from 40% to <strong>36%</strong>. Business Relief and Agricultural Relief can remove qualifying assets from the estate (rules are changing from 2026). Pensions generally sit outside the estate. Trusts and whole-of-life policies written in trust are also used. IHT planning is complex and rules change — take professional advice.</p>
+          <p>Leaving 10% or more of the estate to charity cuts the IHT rate on the rest from 40% to <strong>36%</strong>. Business Relief and Agricultural Relief can remove qualifying assets from the estate (rules are changing from 2026). Pensions generally sit outside the estate. Trusts and whole-of-life policies written in trust are also used. IHT planning is complex and rules change, take professional advice.</p>
         </GuideSection>
         <GuideSection kicker="Avoid these" title="Common mistakes">
           <Mistakes items={[
             ['Assuming the estate is below the threshold', 'Property values push many estates over £325k. Add everything up, including the home.'],
-            ['Not using transferable allowances', 'A widow(er) can claim a late spouse&apos;s unused bands — worth up to £1m combined.'],
+            ['Not using transferable allowances', 'A widow(er) can claim a late spouse&apos;s unused bands, worth up to £1m combined.'],
             ['Leaving gifts too late', 'Gifts only fully escape IHT after 7 years. Plan early.'],
-            ['Ignoring the £2m taper', 'Large estates lose the residence band — factor this into planning.'],
+            ['Ignoring the £2m taper', 'Large estates lose the residence band, factor this into planning.'],
           ]} />
         </GuideSection>
         <GuideSection kicker="FAQ" title="Frequently asked questions">
           <FAQ items={[
-            { q: 'How much can I leave tax-free?', a: '£325,000 (nil-rate band), plus £175,000 if you leave your home to direct descendants — up to £500,000 per person, or £1m for a couple using transferable allowances.' },
-            { q: 'Is inheritance from a spouse taxed?', a: 'No — transfers between spouses and civil partners are exempt, and unused allowances pass to the survivor.' },
+            { q: 'How much can I leave tax-free?', a: '£325,000 (nil-rate band), plus £175,000 if you leave your home to direct descendants, up to £500,000 per person, or £1m for a couple using transferable allowances.' },
+            { q: 'Is inheritance from a spouse taxed?', a: 'No, transfers between spouses and civil partners are exempt, and unused allowances pass to the survivor.' },
             { q: 'Do gifts avoid Inheritance Tax?', a: 'Gifts made more than 7 years before death are usually exempt; within 7 years they count against the allowance, with taper relief after year 3. Annual and small-gift exemptions also apply.' },
             { q: 'Who pays the IHT bill?', a: 'It&apos;s normally paid from the estate by the executors before assets are distributed, due within 6 months of death.' },
           ]} />

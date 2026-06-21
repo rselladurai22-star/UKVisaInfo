@@ -2,7 +2,7 @@ import React from 'react';
 
 // Lightweight inline-markdown renderer for block components whose content
 // arrives as a raw string (callouts, key takeaways, steps). Handles **bold**
-// and [label](url) — the only inline syntax we use inside directive blocks.
+// and [label](url), the only inline syntax we use inside directive blocks.
 // Without this, authored `**bold**` and links render as literal characters.
 export function inlineMd(text: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = [];

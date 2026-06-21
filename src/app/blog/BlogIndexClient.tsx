@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Blog index — "Clean Slate" editorial library (rebuilt from scratch).
+ * Blog index, "Clean Slate" editorial library (rebuilt from scratch).
  * Ultra-modern: a compact editorial hero with command search, a sticky
  * accent-coded category bar, one cinematic featured story, then a responsive
  * card grid with real thumbnails and per-category cool accents. Closes on a
@@ -73,7 +73,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                 The UK rulebook, <span className="ink-cs">without the jargon.</span>
               </h1>
               <p className="cs-rise mt-4 max-w-xl text-[16px] leading-relaxed text-slate-600 sm:text-[17px]" style={{ ['--i' as string]: 3 }}>
-                Clear, no-nonsense guides to the money and visa thresholds, fees and tables that actually affect you — updated for the 2026/27 tax year and the latest Home Office rules.
+                Clear, no-nonsense guides to the money and visa thresholds, fees and tables that actually affect you, updated for the 2026/27 tax year and the latest Home Office rules.
               </p>
             </div>
             <div className="cs-rise w-full max-w-md lg:w-80" style={{ ['--i' as string]: 3 }}>
@@ -163,7 +163,7 @@ export default function BlogIndexClient({ posts }: { posts: BlogPost[] }) {
                   Get UK rule changes in plain English.
                 </h2>
                 <p className="mt-2.5 text-[14.5px] leading-relaxed text-slate-300">
-                  Join 12,000+ readers. Visa fee updates, HMRC thresholds and tax-year changes — no spam, unsubscribe anytime.
+                  Join 12,000+ readers. Visa fee updates, HMRC thresholds and tax-year changes, no spam, unsubscribe anytime.
                 </p>
               </div>
               <form className="mt-6 flex w-full max-w-sm gap-2 sm:mt-0" onSubmit={(e) => e.preventDefault()}>

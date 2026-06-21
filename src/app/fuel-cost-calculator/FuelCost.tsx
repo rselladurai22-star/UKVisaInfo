@@ -81,10 +81,10 @@ export default function FuelCost() {
           </div>
 
           <Callout tone="tip" title="MPG drops in the real world">
-            Official MPG figures are lab-tested. Real-world economy is often 10–20% lower, especially in town, with a full car, or in cold weather. Use your own brim-to-brim figure for accuracy.
+            Official MPG figures are lab-tested. Real-world economy is often 10 to 20% lower, especially in town, with a full car, or in cold weather. Use your own brim-to-brim figure for accuracy.
           </Callout>
 
-          <p className="text-[11px] text-on-surface-variant">Fuel-only estimate. 1 UK gallon = 4.546 litres. Doesn't include tax, insurance, servicing or depreciation — see the running-costs calculator for total cost.</p>
+          <p className="text-[11px] text-on-surface-variant">Fuel-only estimate. 1 UK gallon = 4.546 litres. Doesn't include tax, insurance, servicing or depreciation, see the running-costs calculator for total cost.</p>
         </>
       }
     >
@@ -102,12 +102,12 @@ export default function FuelCost() {
         </GuideSection>
 
         <GuideSection kicker="Real-world MPG" title="Why you rarely hit the official figure">
-          <p>Manufacturers' MPG figures come from standardised lab tests (WLTP). Real driving — town stop-start, motorway speeds, air-con, roof boxes, cold starts and a heavy right foot — typically knocks 10–20% off. For an accurate cost, measure your own MPG: fill to the brim, note the mileage, fill again next time and divide miles by gallons used.</p>
+          <p>Manufacturers' MPG figures come from standardised lab tests (WLTP). Real driving, town stop-start, motorway speeds, air-con, roof boxes, cold starts and a heavy right foot, typically knocks 10 to 20% off. For an accurate cost, measure your own MPG: fill to the brim, note the mileage, fill again next time and divide miles by gallons used.</p>
         </GuideSection>
 
         <GuideSection kicker="Cutting the bill" title="Practical ways to spend less">
           <ul className="list-disc pl-5 space-y-2">
-            <li>Keep tyres correctly inflated — under-inflation wastes fuel.</li>
+            <li>Keep tyres correctly inflated, under-inflation wastes fuel.</li>
             <li>Remove roof bars and clutter to cut drag and weight.</li>
             <li>Ease off: steady speeds and gentle acceleration beat hard driving.</li>
             <li>Use a fuel-price app to find the cheapest local pumps; supermarket fuel is often cheaper.</li>
@@ -118,12 +118,12 @@ export default function FuelCost() {
         </GuideSection>
 
         <GuideSection kicker="Worked example" title="A 9,000-mile year at 45 MPG">
-          <p>Driving 9,000 miles a year at 45 MPG and £1.40 a litre costs about 14.1p a mile, or roughly £1,270 a year — about £106 a month — on fuel alone. Improving real-world economy to 50 MPG would save around £125 a year at the same price.</p>
+          <p>Driving 9,000 miles a year at 45 MPG and £1.40 a litre costs about 14.1p a mile, or roughly £1,270 a year, about £106 a month, on fuel alone. Improving real-world economy to 50 MPG would save around £125 a year at the same price.</p>
         </GuideSection>
 
         <GuideSection kicker="Avoid these" title="Common fuel-cost mistakes">
           <Mistakes items={[
-            ['Trusting the official MPG', 'Real-world economy is usually 10–20% worse than the brochure figure.'],
+            ['Trusting the official MPG', 'Real-world economy is usually 10 to 20% worse than the brochure figure.'],
             ['Ignoring price per litre swings', 'A 10p/litre change moves a typical annual bill by around £90.'],
             ['Forgetting fuel is only part of the cost', 'Insurance, tax, servicing and depreciation often cost more than fuel.'],
             ['Confusing US and UK MPG', 'A UK gallon is 4.546 litres; US MPG figures are about 20% lower for the same car.'],
@@ -135,7 +135,7 @@ export default function FuelCost() {
             { q: 'How do I work out fuel cost per mile?', a: 'Divide 4.546 by your MPG to get litres per mile, then multiply by the price per litre. At 45 MPG and £1.40/litre that is about 14p a mile.' },
             { q: 'Is a UK gallon the same as a US gallon?', a: 'No. A UK gallon is 4.546 litres; a US gallon is 3.785 litres, so UK MPG figures look higher than US ones for the same car.' },
             { q: 'Why is my MPG worse than advertised?', a: 'Official figures are lab-tested. Town driving, cold weather, loads and driving style all reduce real-world economy.' },
-            { q: 'Does cruise control save fuel?', a: 'On flat motorways, yes — steady speeds are efficient. On hilly roads it can use more, so judge the terrain.' },
+            { q: 'Does cruise control save fuel?', a: 'On flat motorways, yes, steady speeds are efficient. On hilly roads it can use more, so judge the terrain.' },
           ]} />
         </GuideSection>
         <RelatedGuides calc="/fuel-cost-calculator" />

@@ -32,7 +32,7 @@ interface VisaRow {
 const VISAS: Record<string, VisaRow> = {
   'skilled-worker': {
     id: 'skilled-worker', name: 'Skilled Worker', icon: Briefcase, accent: '#0037b0',
-    fee: '£827', feeRange: '£827 – £1,636', ihs: '£1,035/year',
+    fee: '£827', feeRange: '£827 to £1,636', ihs: '£1,035/year',
     salaryMin: '£41,700 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out) / 8 weeks (in)', ihsExempt: false,
     sponsorRequired: true, dependantsAllowed: true, workRights: 'Sponsored only',
@@ -40,7 +40,7 @@ const VISAS: Record<string, VisaRow> = {
   },
   'health-care': {
     id: 'health-care', name: 'Health & Care', icon: Stethoscope, accent: '#0037b0',
-    fee: '£304', feeRange: '£304 – £590', ihs: 'Exempt (main)',
+    fee: '£304', feeRange: '£304 to £590', ihs: 'Exempt (main)',
     salaryMin: '£25,000 (or going rate)', duration: '3 or 5 years',
     processing: '3 weeks (out)', ihsExempt: true,
     sponsorRequired: true, dependantsAllowed: true, workRights: 'Sponsored only',
@@ -66,7 +66,7 @@ const VISAS: Record<string, VisaRow> = {
   },
   'family': {
     id: 'family', name: 'Family / Spouse', icon: Users, accent: '#4F46E5',
-    fee: '£1,938', feeRange: '£1,321 – £1,938', ihs: '£1,035/year',
+    fee: '£1,938', feeRange: '£1,321 to £1,938', ihs: '£1,035/year',
     salaryMin: '£29,000 (sponsor income)', duration: '30 months (renewable)',
     processing: '12 weeks', ihsExempt: false,
     sponsorRequired: false, dependantsAllowed: false,
@@ -75,7 +75,7 @@ const VISAS: Record<string, VisaRow> = {
   },
   'visitor': {
     id: 'visitor', name: 'Standard Visitor', icon: Plane, accent: '#0037b0',
-    fee: '£127', feeRange: '£127 – £963', ihs: 'None',
+    fee: '£127', feeRange: '£127 to £963', ihs: 'None',
     salaryMin: 'N/A', duration: 'Up to 6 months',
     processing: '3 weeks (out)', ihsExempt: true,
     sponsorRequired: false, dependantsAllowed: false,
@@ -84,7 +84,7 @@ const VISAS: Record<string, VisaRow> = {
   },
   'innovator-founder': {
     id: 'innovator-founder', name: 'Innovator Founder', icon: Rocket, accent: '#0037b0',
-    fee: '£1,191', feeRange: '£1,191 – £1,486', ihs: '£1,035/year',
+    fee: '£1,191', feeRange: '£1,191 to £1,486', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '3 years',
     processing: '3 weeks (out)', ihsExempt: false,
     sponsorRequired: false, dependantsAllowed: true,
@@ -129,7 +129,7 @@ const VISAS: Record<string, VisaRow> = {
   },
   'bno': {
     id: 'bno', name: 'Hong Kong BNO', icon: Flag, accent: '#0037b0',
-    fee: '£298', feeRange: '£180 (2.5y) – £298 (5y)', ihs: '£1,035/year',
+    fee: '£298', feeRange: '£180 (2.5y), £298 (5y)', ihs: '£1,035/year',
     salaryMin: 'N/A', duration: '2.5 or 5 years',
     processing: '12 weeks (out)', ihsExempt: false,
     sponsorRequired: false, dependantsAllowed: true,

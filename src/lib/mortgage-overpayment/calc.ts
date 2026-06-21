@@ -6,7 +6,7 @@
  *
  * Note: Many lenders cap annual overpayments at 10% of the outstanding balance
  * without an early repayment charge (ERC). This calculator does not enforce
- * that cap — users should check their specific mortgage terms.
+ * that cap, users should check their specific mortgage terms.
  */
 
 export interface CalcInput {

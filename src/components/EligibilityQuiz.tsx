@@ -104,14 +104,14 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
           applyUrl: 'https://www.gov.uk/indefinite-leave-to-remain',
           reasons: [
             { t: 'Long-term residence', d: 'You\'ve indicated 5+ years (or 10 years lawful) on a qualifying UK route.' },
-            { t: 'Absence rule', d: 'Stay under 180 days/year for 5-year routes — under 548 days total for the 10-year route.' },
+            { t: 'Absence rule', d: 'Stay under 180 days/year for 5-year routes, under 548 days total for the 10-year route.' },
             { t: 'B1 English + Life in the UK Test', d: '£3,226 application fee from 8 April 2026 (gov.uk verified).' }
           ]
         };
       case 'citizenship':
         return {
           title: 'British Citizenship (Naturalisation)',
-          desc: 'For ILR holders looking to become British citizens. 12 months on ILR required — or immediately if married to a British citizen.',
+          desc: 'For ILR holders looking to become British citizens. 12 months on ILR required, or immediately if married to a British citizen.',
           applyUrl: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain',
           reasons: [
             { t: 'Hold ILR', d: 'Standard route needs 12 months on ILR. British-spouse route: apply immediately on ILR.' },
@@ -262,10 +262,10 @@ export default function EligibilityWizard({ onCancel }: QuizProps) {
                     {[
                       { id: 'work', title: 'Work', desc: 'Skilled Worker, Health & Care, Global Talent, Innovator Founder.', icon: Briefcase },
                       { id: 'study', title: 'Study', desc: 'Student, Child Student or Graduate visa at a licensed sponsor.', icon: GraduationCap },
-                      { id: 'visit', title: 'Visit family or friends', desc: 'Standard Visitor visa or ETA — up to 6 months per visit.', icon: Plane },
+                      { id: 'visit', title: 'Visit family or friends', desc: 'Standard Visitor visa or ETA, up to 6 months per visit.', icon: Plane },
                       { id: 'join', title: 'Join family settled in the UK', desc: 'Partner, parent, child or Adult Dependent Relative of a UK resident.', icon: HomeIcon },
                       { id: 'settle', title: 'Settle (Indefinite Leave to Remain)', desc: '5 years on a qualifying visa or 10 years lawful UK residence.', icon: ShieldCheck },
-                      { id: 'citizenship', title: 'Become a British citizen', desc: 'Naturalise after 12 months on ILR — or immediately as a British spouse.', icon: Verified },
+                      { id: 'citizenship', title: 'Become a British citizen', desc: 'Naturalise after 12 months on ILR, or immediately as a British spouse.', icon: Verified },
                     ].map((item) => (
                       <button
                         key={item.id}

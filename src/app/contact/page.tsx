@@ -18,7 +18,7 @@ const HAIR    = 'rgba(11,15,25,0.08)';
 const SITE = 'https://ukvisainfo.co.uk';
 
 export const metadata: Metadata = {
-  title: 'Contact — UKDesk Editorial &amp; Privacy',
+  title: 'Contact, UKDesk Editorial &amp; Privacy',
   description:
     'How to reach UKDesk: editorial corrections, privacy &amp; data requests, advertising opt-outs. Response within 48 hours, Monday to Friday (UK time).',
   alternates: { canonical: '/contact' },
@@ -56,7 +56,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-[16.5px] leading-[1.6] mb-12" style={{ color: SLATE }}>
             UKDesk is a small, named editorial operation. There is no support
-            ticketing system, no chatbot, and no overseas call centre — emails
+            ticketing system, no chatbot, and no overseas call centre, emails
             go straight to the editor. Responses within 48 hours, Monday to
             Friday (UK time).
           </p>
@@ -90,7 +90,7 @@ export default function ContactPage() {
           </div>
 
           {/* WHO YOU WILL HEAR FROM */}
-          <Section eyebrow="01 — Who responds" title="Who you’ll hear from">
+          <Section eyebrow="01, Who responds" title="Who you’ll hear from">
             <div className="rounded-3xl p-6 flex items-start gap-5"
                  style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
               <span aria-hidden
@@ -126,7 +126,7 @@ export default function ContactPage() {
           </Section>
 
           {/* RESPONSE TIMES */}
-          <Section eyebrow="02 — Turnaround" title="How long we take">
+          <Section eyebrow="02, Turnaround" title="How long we take">
             <div className="rounded-3xl overflow-hidden"
                  style={{ background: PAPER, border: `1px solid ${HAIR}` }}>
               <Row icon={Clock} label="Material editorial errors (wrong fee, broken rule, missed gov.uk change)"
@@ -141,7 +141,7 @@ export default function ContactPage() {
           </Section>
 
           {/* WHAT WE CAN'T HELP WITH */}
-          <Section eyebrow="03 — Boundaries" title="What we can’t help with">
+          <Section eyebrow="03, Boundaries" title="What we can’t help with">
             <div className="rounded-2xl p-5 flex items-start gap-3 mb-4"
                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.28)' }}>
               <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#92400e' }} />
@@ -167,7 +167,7 @@ export default function ContactPage() {
           </Section>
 
           {/* MAILING / LEGAL ADDRESS */}
-          <Section eyebrow="04 — Postal contact" title="Where we’re based">
+          <Section eyebrow="04, Postal contact" title="Where we’re based">
             <p style={{ color: SLATE, fontSize: '14px', lineHeight: '1.7' }}>
               UKDesk operates from the United Kingdom. Editorial correspondence
               should be sent by email &mdash; postal mail is not routinely
@@ -180,7 +180,7 @@ export default function ContactPage() {
           </Section>
 
           {/* RESOURCES */}
-          <Section eyebrow="05 — Before you write" title="Quick links that often answer the question">
+          <Section eyebrow="05, Before you write" title="Quick links that often answer the question">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Quick href="/editorial-policy" icon={BookOpen}
                      title="Editorial policy"
